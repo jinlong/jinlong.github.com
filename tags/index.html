@@ -1,10 +1,10 @@
 
-  <!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   
-    <title>Category: Safari | Alon&#39;s Blog</title>
+    <title>Tag: undefined | Alon&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Alon Zhang">
@@ -63,55 +63,19 @@
 
       </header>
       <div id="container">
-        
-
+          
 <div class="archive-title" >
-  <h2 class="category-icon">Safari</h2>
-  
+<h2 class="tag-icon">标签</h2>
+
 </div>
-<div id="main" class="archive-part clearfix">
-  <div id="archive-page">
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/09/23/safari-ios7-html5-problems-apis-review/" title="iOS 7 的 Safari 和 HTML5：问题，变化和新 API" itemprop="url">
-  
-    <h1 itemprop="name">iOS 7 的 Safari 和 HTML5：问题，变化和新 API</h1>
-    
-    <time datetime="2013-09-23T15:32:00.000Z" itemprop="datePublished">9月 23 2013</time>
-  </a>
-</section>
-
-
-  </div>
+<div id="main" class="archive-part">
+<div class="all-list-box"></div>
 </div>
+
+
+
 
       </div>
-      <footer><div id="footer" >
-	
-	
-	<section class="info">
-		<p> Hi~ I&#39;m Alon Zhang, Doodler and Coder <br/>
-			忙时码代码，无事乱涂鸦</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		<a href="http://weibo.com/newwave" target="_blank" title="weibo"></a>
-		
-		
-		
-		<a href="https://github.com/jinlong" target="_blank" title="github"></a>
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
-		
-		<a href="http://jinlong.github.io" target="_blank" title="Alon Zhang">Alon Zhang</a>
-		
-		</p>
-</div>
-</footer>
       <script src="/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){ 
@@ -160,6 +124,24 @@ $(document).ready(function(){
 
 
 
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var list    = $('.archive-title a'),
+      box     = $('.all-list-box'),
+      first   = $('.archive-title a:first-of-type');
+      box.load(first.attr('data-src').toString()+' #archive-page');
+      first.addClass('current');
+  list.each(function(){
+    $(this).click(function(){
+      var listSrc=$(this).attr('data-src').toString()+' #archive-page';
+      box.load(listSrc);
+      list.removeClass('current');
+      $(this).addClass('current');
+     });  
+    });
+  }); 
+</script>
 
 
 
