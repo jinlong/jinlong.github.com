@@ -1,0 +1,447 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JavaScript Promises | Alon&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Alon Zhang">
+    
+    <meta name="description" content="原文：JavaScript Promises译者：涂鸦码龙
+
+不，我不是要谈论 JavaScript 会解决一切问题的承诺。我甚至也不相信这点 ;) 我想谈谈几个 JavaScript 库（包括 AngularJS，jQuery，Dojo 和 WinJS）用到的约定对象（promise object">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Alon&#39;s Blog" title="Alon&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Alon&#39;s Blog">Alon&#39;s Blog</a></h1>
+				<h2 class="blog-motto">一边翻译一边学习---涂鸦码龙</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:jinlong.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/08/13/javascript-promises/" title="JavaScript Promises" itemprop="url">JavaScript Promises</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://jinlong.github.io" title="Alon Zhang">Alon Zhang</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-08-13T05:13:00.000Z" itemprop="datePublished">8月 13 2013</time>
+    更新日期:<time datetime="2013-08-14T08:53:18.000Z" itemprop="dateModified">8月 14 2013</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<blockquote>
+<p>原文：<a href="http://wildermuth.com/2013/8/3/JavaScript_Promises" target="_blank">JavaScript Promises</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
+</blockquote>
+<p>不，我不是要谈论 JavaScript 会解决一切问题的承诺。我甚至也不相信这点 ;) 我想谈谈几个 JavaScript 库（包括 <a href="http://angularjs.org/" target="_blank">AngularJS</a>，<a href="http://jquery.com/" target="_blank">jQuery</a>，<a href="http://dojotoolkit.org/" target="_blank">Dojo</a> 和 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br229773.aspx" target="_blank">WinJS</a>）用到的约定对象（promise object）的概念。</p>
+<p>promise 是处理异步操作的模式。问题是当你开始一个异步操作，操作完成时需要执行一些代码。异步代码非常普遍，大部分的库已经找到了解决方案，传入回调函数。但是，每个库的作法很少有共性。让我们看看 jQuery 的例子：</p>
+<iframe width="100%" height="300" src="http://jsfiddle.net/cuXqF/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>此例中我们可以看到 jQuery 使用配置对象的 <code>success</code> 属性指定回调函数。这不是一个 promise，而是一种传入回调函数的方式。当 ajax 调用完成，它会调用 <code>success</code> 函数。依靠这个库做异步操作，你可能会传一组回调函数（比如 success 或者 failure）。有很多方法可以实现这一点。</p>
+<p>约定模式（promise pattern）着手简化这个过程。异步操作简单返回一个对象叫一个约定（promise） 。promise 允许你调用 <strong>then</strong> 方法，让你指定一个或多个回调函数。让我们看看如何用 jQuery 建立一个 promise：</p>
+<iframe width="100%" height="300" src="http://jsfiddle.net/FDg6d/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>比较有趣的是，<strong>ajax</strong> 返回 <strong>xhr</strong> 对象实现了 promise 模式，因此我们可以调用 <strong>then</strong> 。这样做的优势是你可以链式调用，实现独立操作，完成操作时调用 <strong>done</strong>，如下所示 ：</p>
+<iframe width="100%" height="300" src="http://jsfiddle.net/kWrpq/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>由于许多库开始着手实现 promise 模式，处理异步操作应该会更简单，不管你写什么代码（比如 NodeJS，in-browser JS 等）。promise 从另一个侧面看像什么呢？</p>
+<p>这个模式的关键点是 <strong>then</strong> 函数可以接收两个函数，第一个用于成功回调；第二个用于失败回调，像这样：</p>
+<iframe width="100%" height="300" src="http://jsfiddle.net/SwzkK/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>注意到我们用了 <strong>always</strong> 指定成功或失败时的回调函数。</p>
+<p>再看一个 AngularJS 的例子：</p>
+<iframe width="100%" height="300" src="http://jsfiddle.net/s35B9/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>AngularJS 使用 <code>$q</code> 变量，开始调用 <code>defer()</code>，返回对象包含成功或失败的条件，还有 promise 本身。注意 <code>_callMe</code> 函数，<code>d</code> 变量是调用 <code>$q.defer()</code> 创建的，<code>d.promise</code> 是函数返回的，因此调用者（caller） 可以调用 promise 方法（比如 <code>then</code>）。当真正的异步操作执行时（此时嘲笑一下 <code>setTimeout</code> ），我们可以在 d 对象使用 <code>resolve</code> 方法，告诉 promise 我们成功完成（因此在 <code>then</code> 方法后面调用第一个函数）。如果我们调用 <code>reject</code> ，第二个方法将被调用（失败回调）。</p>
+<p>你可以在 JSFiddle 里玩一下这些例子，看看会发生什么。Promises 的确是又简单又酷的处理异步操作的方式。我非常喜欢它，它可以简化你的代码。</p>
+<blockquote>
+<p>更多介绍：<a href="http://www.promisejs.org/" target="_blank">www.promisejs.org</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://jinlong.github.io/2013/08/13/javascript-promises/" data-title="JavaScript Promises | Alon&#39;s Blog" data-tsina="1608907662" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/08/13/centering-all-the-directions/" title="CSS 居中大全">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  CSS 居中大全</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/07/23/porting-chrome-extension-to-opera/"  title="移植 Chrome 扩展至 Opera">
+ <strong>NEXT:</strong><br/> 
+ <span>移植 Chrome 扩展至 Opera
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/AngularJS/" title="AngularJS">AngularJS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/Blink/" title="Blink">Blink<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/" title="CSS3">CSS3<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/" title="Chrome Extensions">Chrome Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/" title="Debug">Debug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/Express/" title="Express">Express<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/Firebug/" title="Firebug">Firebug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/Git/" title="Git">Git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/Github Pages/" title="Github Pages">Github Pages<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Grunt/" title="Grunt">Grunt<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/HTML5/" title="HTML5">HTML5<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+		
+			<li><a href="/categories/Javascript/" title="Javascript">Javascript<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Grunt/Nodejs/" title="Nodejs">Nodejs<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/" title="Octopress">Octopress<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Opera/" title="Opera">Opera<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/" title="Opera Extensions">Opera Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/" title="Safari">Safari<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/" title="WebKit">WebKit<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/" title="flexbox">flexbox<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/game/" title="game">game<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/" title="iOS7">iOS7<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/" title="jQuery">jQuery<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/" title="requestAnimationFrame">requestAnimationFrame<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/toString/" title="toString">toString<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/translate/" title="translate">translate<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/交互设计/" title="交互设计">交互设计<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/代码高亮/" title="代码高亮">代码高亮<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/入门/" title="入门">入门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/全文搜索/" title="全文搜索">全文搜索<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>3</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/垂直居中/" title="垂直居中">垂直居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/" title="居中">居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/开发工具/" title="开发工具">开发工具<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/" title="弹性布局">弹性布局<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/" title="水平居中">水平居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/" title="浏览器">浏览器<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/滑动门/" title="滑动门">滑动门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/" title="用户体验">用户体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/移动前端开发/" title="移动前端开发">移动前端开发<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/AngularJS/翻译/" title="翻译">翻译<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/面试/" title="面试">面试<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/newwave" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/jinlong" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://jinlong.github.io" target="_blank" title="Alon Zhang">Alon Zhang</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"jinlong"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

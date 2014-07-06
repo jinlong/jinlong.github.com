@@ -1,0 +1,647 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>AngularJS 新手指南1 | Alon&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Alon Zhang">
+    
+    <meta name="description" content="五一放假没干啥正事，想起鼓捣 AngularJS 了，把它的新手指南一口气翻了个遍，算是入了点门了。个人感觉这货挺适合做 web app 的（可能因为我没接触过别的 MVC 框架吧…），它的亮点是数据绑定，扩展 HTML，居然把 DOM 操作都替咱做了…
+话不多说，下面是我边看边记的笔记，自认为重点的记了下中文。   
+
+原文地址：AngularJS Tutorial笔记作者：涂鸦码龙
+
+搭环境
+
+安装 nodejs
+
+1
+node --version    //nodejs 版本
+
+
+
+安装 Git
+克隆 angular-phonecat 项目
+
+1
+git clone git://github.com/angular/angular-phonecat.git
+
+
+
+找到项目目录 
+
+1
+cd angular-phonecat
+
+
+
+起 http 服务器 
+
+1
+node scripts\web-server.js">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Alon&#39;s Blog" title="Alon&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Alon&#39;s Blog">Alon&#39;s Blog</a></h1>
+				<h2 class="blog-motto">一边翻译一边学习---涂鸦码龙</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:jinlong.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/05/02/angularjs-tutorial1/" title="AngularJS 新手指南1" itemprop="url">AngularJS 新手指南1</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://jinlong.github.io" title="Alon Zhang">Alon Zhang</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-05-02T15:18:00.000Z" itemprop="datePublished">5月 2 2013</time>
+    更新日期:<time datetime="2013-05-03T05:36:30.000Z" itemprop="dateModified">5月 3 2013</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 搭环境 "><span class="toc-number">1.</span> <span class="toc-text">搭环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 启动应用 "><span class="toc-number">2.</span> <span class="toc-text">启动应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Angular_ 模版 "><span class="toc-number">3.</span> <span class="toc-text">Angular 模版</span></a></li></ol>
+		</div>
+		
+		<p>五一放假没干啥正事，想起鼓捣 AngularJS 了，把它的新手指南一口气翻了个遍，算是入了点门了。个人感觉这货挺适合做 web app 的（可能因为我没接触过别的 MVC 框架吧…），它的亮点是数据绑定，扩展 HTML，居然把 DOM 操作都替咱做了…</p>
+<p>话不多说，下面是我边看边记的笔记，自认为重点的记了下中文。   </p>
+<blockquote>
+<p>原文地址：<a href="http://docs.angularjs.org/tutorial" target="_blank">AngularJS Tutorial</a><br>笔记作者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
+</blockquote>
+<h2 id=" 搭环境 ">搭环境</h2>
+<ul>
+<li>安装 nodejs</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>node --<span class="keyword">version</span>    <span class="comment">//nodejs 版本</span>
+</pre></td></tr></table></figure>
+
+<ul>
+<li>安装 Git</li>
+<li>克隆 angular-phonecat 项目</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>git <span class="keyword">clone</span> git:<span class="comment">//github.com/angular/angular-phonecat.git</span>
+</pre></td></tr></table></figure>
+
+<ul>
+<li>找到项目目录 </li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="built_in">cd</span> angular-phonecat
+</pre></td></tr></table></figure>
+
+<ul>
+<li>起 http 服务器 </li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>node scripts<span class="command">\web</span>-server.js
+</pre></td></tr></table></figure>
+
+<p><a id="more"></a></p>
+<h2 id=" 启动应用 ">启动应用</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>git checkout -f <span class="built_in">step</span>-<span class="number">0</span>（<span class="number">0</span>-<span class="number">11</span>） <span class="comment">// 重置每一步骤的 git 项目状态</span>
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">html</span> <span class="attribute">ng-app</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><strong><em>ng-app</em></strong> 属性代表 Angular 指令（<strong><em>ngApp</em></strong>；Angular 用名字 + 破折号作为属性名，驼峰写法作为对应的指令名），Angular 认为是 app 根元素。</p>
+<p><strong><em>引入 Angular ：</em></strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"lib/angular/angular.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>HTML 页面完全下载，注册一个回调函数，Angular 认出了 <a href="http://docs.angularjs.org/api/ng.directive:ngApp" target="_blank">ngApp</a> 指令。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>Nothing here &amp;<span class="string">#123</span>;&amp;<span class="string">#123</span>;<span class="string">'yet'</span> + <span class="string">'!'</span>}} 
+</pre></td></tr></table></figure>
+
+
+<p>双层大括号，Angular 模版，数据绑定</p>
+<p><strong><em>启动 Angular 应用</em></strong></p>
+<p>自动启动使用 <strong><em>ngApp</em></strong> 指令；</p>
+<p><a href="http://docs.angularjs.org/guide/bootstrap" target="_blank">手动启动</a>：</p>
+<figure class="highlight js"><figcaption><span>手动启动</span><a href="http://docs.angularjs.org/guide/bootstrap" target="_blank">Source</a></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>&lt;script&gt;
+angular.element(document).ready(<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+	angular.bootstrap(document);
+});
+<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span>
+</pre></td></tr></table></figure>
+
+<p>app 引导程序做了 2 件重要的事：   </p>
+<ol>
+<li><a href="http://docs.angularjs.org/api/AUTO.$injector" target="_blank">注入器</a>将用于相应的注入   </li>
+<li>注入器创建了<a href="http://docs.angularjs.org/api/ng.$rootScope" target="_blank">根作用域</a>，它将作为应用模型的上下文   </li>
+<li>Angular 将从 root 元素的 <strong><em>ngApp</em></strong> 开始编译，处理各种指令和绑定</li>
+</ol>
+<p>一旦应用启动，将等待引入的浏览器事件（mouse click, key press 或者 HTTP 相应），它们可能改变模型（model）。一旦事件触发，Angular 会探测模型改变，并会反映到视图（view）中，更新所有影响到的绑定。</p>
+<h2 id="Angular_ 模版 ">Angular 模版</h2>
+<p>MVC（<a href="http://en.wikipedia.org/wiki/Model%E2%80%93View%E2%80%93Controller" target="_blank">Model-View-Controller</a>  模型 - 视图 - 控制器）</p>
+<p><strong><em>View 和 Template</em></strong></p>
+<p>view 是 model 通过 HTML template 的映射，model 改变，Angular 刷新相应的绑定点，更新 view。</p>
+<p>Angular 通过这个模版构建 view 组件：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">html</span> <span class="attribute">ng-app</span>&gt;</span>
+<span class="tag">&lt;<span class="title">head</span>&gt;</span>
+  ...
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"lib/angular/angular.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span> <span class="attribute">ng-controller</span>=<span class="value">"PhoneListCtrl"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones"</span>&gt;</span>
+   &amp;#123;&amp;#123;phone.name}}
+   <span class="tag">&lt;<span class="title">p</span>&gt;</span>&amp;#123;&amp;#123;phone.snippet}}<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+   <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+
+<p><strong>ng-repeat=”phone in phones”</strong> 是 Angular repeater，以 &lt;li&gt; 为模版循环 phones 里的 phone。<br>&#123;&#123;phone.name}} 表示绑定，表达式关联到 PhoneListCtrl controller 定义的应用模型。</p>
+<p><img src="/images/post/tutorial_02.png" /></p>
+<p><strong><em>Model 和 Controller</em></strong></p>
+<p>数据模型（一个简单的手机数组）通过 PhoneListCtrl 控制器实例化：</p>
+<figure class="highlight js"><figcaption><span>app/js/controllers.js</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">PhoneListCtrl</span><span class="params">($scope)</span> {</span>
+  $scope.phones = [
+    {<span class="string">"name"</span>: <span class="string">"Nexus S"</span>,
+     <span class="string">"snippet"</span>: <span class="string">"Fast just got faster with Nexus S."</span>},
+    {<span class="string">"name"</span>: <span class="string">"Motorola XOOM™ with Wi-Fi"</span>,
+     <span class="string">"snippet"</span>: <span class="string">"The Next, Next Generation tablet."</span>},
+    {<span class="string">"name"</span>: <span class="string">"MOTOROLA XOOM™"</span>,
+     <span class="string">"snippet"</span>: <span class="string">"The Next, Next Generation tablet."</span>}
+  ];
+}
+</pre></td></tr></table></figure>
+
+<p>尽管控制器（controller ）还没做太多控制，但它扮演了重要的角色。它为我们的数据模型（model）提供上下文，控制器允许我们建立模型和视图（view）之间的数据绑定：</p>
+<p>PhoneListCtrl —— 控制器函数的名字（在 controller.js 里面），匹配 &lt;body&gt; 标签里面 <a href="http://docs.angularjs.org/api/ng.directive:ngController" target="_blank">ngController</a>（ng-controller=”PhoneListCtrl”）指令的名字。</p>
+<p>手机数据加到了作用域（</p>
+<figure class="highlight $scope```），注入到我们的控制器函数里。当应用启动时，控制器作用域被创建，它继承了根作用域。在 "><figcaption><span>&lt;body ng-controller="PhoneListCtrl"> 之间，控制器作用域对所有绑定有效。</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre>
+Angular 里面作用域的概念很重要；作用域可以看作胶，粘合模版（template ），模型（model）和控制器（controller）。Angular 把作用域，模版信息，数据模型和控制器一起使用，保持模型和视图的分离且同步。
+
+[<span class="link_label">Angular 作用域文档</span>](<span class="link_url">http://docs.angularjs.org/api/ng.$rootScope.Scope</span>)
+
+<span class="strong">*** 实验 **</span>*
+
+<span class="bullet">* </span>在 index.html 增加另一处绑定：
+
+
+<span class="xml"><span class="tag">&lt;<span class="title">hexoescape</span>&gt;</span></span>2<span class="xml"><span class="tag">&lt;/<span class="title">hexoescape</span>&gt;</span></span>
+
+
+<span class="bullet">* </span>在控制器里增加新的模型属性，然后绑定到模版里：
+
+<span class="code">```</span>js
+$scope.hello = "Hello, World!"
+</pre></td></tr></table></figure>
+
+<ul>
+<li>创建一个重复器（repeater），构造一个简单的表格：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>  <span class="tag">&lt;<span class="title">table</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">tr</span>&gt;</span><span class="tag">&lt;<span class="title">th</span>&gt;</span>row number<span class="tag">&lt;/<span class="title">th</span>&gt;</span><span class="tag">&lt;/<span class="title">tr</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">tr</span> <span class="attribute">ng-repeat</span>=<span class="value">"i in [0, 1, 2, 3, 4, 5, 6, 7]"</span>&gt;</span><span class="tag">&lt;<span class="title">td</span>&gt;</span>&amp;#123;&amp;#123;i+1}}<span class="tag">&lt;/<span class="title">td</span>&gt;</span><span class="tag">&lt;/<span class="title">tr</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">table</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>►<a class="article-category-link" href="/categories/AngularJS/翻译/">翻译</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://jinlong.github.io/2013/05/02/angularjs-tutorial1/" data-title="AngularJS 新手指南1 | Alon&#39;s Blog" data-tsina="1608907662" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/05/03/angularjs-tutorial2/" title="AngularJS 新手指南2">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  AngularJS 新手指南2</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/04/21/blink/"  title="Blink">
+ <strong>NEXT:</strong><br/> 
+ <span>Blink
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 搭环境 "><span class="toc-number">1.</span> <span class="toc-text">搭环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 启动应用 "><span class="toc-number">2.</span> <span class="toc-text">启动应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Angular_ 模版 "><span class="toc-number">3.</span> <span class="toc-text">Angular 模版</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/AngularJS/" title="AngularJS">AngularJS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/Blink/" title="Blink">Blink<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/" title="CSS3">CSS3<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/" title="Chrome Extensions">Chrome Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/" title="Debug">Debug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/Express/" title="Express">Express<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/Firebug/" title="Firebug">Firebug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/Git/" title="Git">Git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/Github Pages/" title="Github Pages">Github Pages<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Grunt/" title="Grunt">Grunt<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/HTML5/" title="HTML5">HTML5<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+		
+			<li><a href="/categories/Javascript/" title="Javascript">Javascript<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Grunt/Nodejs/" title="Nodejs">Nodejs<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/" title="Octopress">Octopress<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Opera/" title="Opera">Opera<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/" title="Opera Extensions">Opera Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/" title="Safari">Safari<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/" title="WebKit">WebKit<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/" title="flexbox">flexbox<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/game/" title="game">game<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/" title="iOS7">iOS7<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/" title="jQuery">jQuery<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/" title="requestAnimationFrame">requestAnimationFrame<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/toString/" title="toString">toString<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/translate/" title="translate">translate<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/交互设计/" title="交互设计">交互设计<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/代码高亮/" title="代码高亮">代码高亮<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/入门/" title="入门">入门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/全文搜索/" title="全文搜索">全文搜索<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>3</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/垂直居中/" title="垂直居中">垂直居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/" title="居中">居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/开发工具/" title="开发工具">开发工具<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/" title="弹性布局">弹性布局<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/" title="水平居中">水平居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/" title="浏览器">浏览器<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/滑动门/" title="滑动门">滑动门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/" title="用户体验">用户体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/移动前端开发/" title="移动前端开发">移动前端开发<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/AngularJS/翻译/" title="翻译">翻译<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/面试/" title="面试">面试<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/newwave" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/jinlong" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://jinlong.github.io" target="_blank" title="Alon Zhang">Alon Zhang</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"jinlong"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

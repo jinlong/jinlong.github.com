@@ -1,0 +1,719 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>AngularJS 新手指南4 | Alon&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Alon Zhang">
+    
+    <meta name="description" content="自定义过滤器
+创建 phonecatFilters 模块，用此模块注册自定义过滤器：
+app/js/filters.js:1
+2
+3
+4
+5
+angular.module(&#39;phonecatFilters&#39;, []).filter(&#39;checkmark&#39;, function() {
+  return function(input) {
+    return input ? &#39;\u2713&#39; : &#39;\u2718&#39;;
+  };
+});
+
+
+过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。
+我们需要给 phonecat 模块注册 phonecatFilters 模块。
+app/js/app.js:1
+2
+3
+...
+angular.module(&#39;phonecat&#39;, [&#39;phonecatFilters&#39;]).
+...
+
+
+模板
+我们需要引入 app/js/filters.js 文件
+app/index.html:1
+2
+3
+4
+...
+&amp;lt;script src=&quot;js/controllers.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&quot;js/filters.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+...
+
+
+Angular 模版使用过滤器的语法如下：
+&amp;#123;&amp;#123; expression | filter }}
+我们在手机详情模版使用此过滤器：
+app/partials/phone-detail.html:
+1
+2
+3
+4
+5
+6
+7
+8
+...
+    &amp;lt;dl&amp;gt;
+      &amp;lt;dt&amp;gt;Infrared&amp;lt;/dt&amp;gt;
+      &amp;lt;dd&amp;gt;&amp;amp;#123;&amp;amp;#123;phone.connectivity.infrared | checkmark}}&amp;lt;/dd&amp;gt;
+      &amp;lt;dt&amp;gt;GPS&amp;lt;/dt&amp;gt;
+      &amp;lt;dd&amp;gt;&amp;amp;#123;&amp;amp;#123;phone.connectivity.gps | checkmark}}&amp;lt;/dd&amp;gt;
+    &amp;lt;/dl&amp;gt;
+...">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Alon&#39;s Blog" title="Alon&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Alon&#39;s Blog">Alon&#39;s Blog</a></h1>
+				<h2 class="blog-motto">一边翻译一边学习---涂鸦码龙</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:jinlong.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/05/03/angularjs-tutorial4/" title="AngularJS 新手指南4" itemprop="url">AngularJS 新手指南4</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://jinlong.github.io" title="Alon Zhang">Alon Zhang</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-05-03T08:57:00.000Z" itemprop="datePublished">5月 3 2013</time>
+    更新日期:<time datetime="2013-05-03T09:36:43.000Z" itemprop="dateModified">5月 3 2013</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 自定义过滤器 "><span class="toc-number">1.</span> <span class="toc-text">自定义过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 事件处理 "><span class="toc-number">2.</span> <span class="toc-text">事件处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REST_ 和自定义服务 "><span class="toc-number">3.</span> <span class="toc-text">REST 和自定义服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 结语 "><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
+		</div>
+		
+		<h2 id=" 自定义过滤器 ">自定义过滤器</h2>
+<p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
+<figure class="highlight js"><figcaption><span>app/js/filters.js:</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>angular.module(<span class="string">'phonecatFilters'</span>, []).filter(<span class="string">'checkmark'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(input)</span> {</span>
+    <span class="keyword">return</span> input ? <span class="string">'\u2713'</span> : <span class="string">'\u2718'</span>;
+  };
+});
+</pre></td></tr></table></figure>
+
+<p>过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。</p>
+<p>我们需要给 phonecat 模块注册 phonecatFilters 模块。</p>
+<figure class="highlight js"><figcaption><span>app/js/app.js:</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>...
+angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>]).
+...
+</pre></td></tr></table></figure>
+
+<p><strong><em>模板</em></strong></p>
+<p>我们需要引入 app/js/filters.js 文件</p>
+<figure class="highlight html"><figcaption><span>app/index.html:</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>...
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/filters.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+...
+</pre></td></tr></table></figure>
+
+<p>Angular 模版使用过滤器的语法如下：</p>
+<p>&#123;&#123; expression | filter }}</p>
+<p>我们在手机详情模版使用此过滤器：</p>
+<p>app/partials/phone-detail.html:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="keyword">...</span>
+    &lt;dl&gt;
+      &lt;dt&gt;Infrared&lt;/dt&gt;
+      &lt;dd&gt;&amp;<span class="comment">#123;&amp;#123;phone.connectivity.infrared | checkmark}}&lt;/dd&gt;</span>
+      &lt;dt&gt;GPS&lt;/dt&gt;
+      &lt;dd&gt;&amp;<span class="comment">#123;&amp;#123;phone.connectivity.gps | checkmark}}&lt;/dd&gt;</span>
+    &lt;/dl&gt;
+<span class="keyword">...</span>
+</pre></td></tr></table></figure>
+
+
+<p><a id="more"></a><br><strong><em>实验</em></strong></p>
+<ul>
+<li>我们实验下 Angular 内建过滤器，在 index.html 添加以下绑定：</li>
+</ul>
+<p>&#123;&#123; “lower cap string” | uppercase }}<br>&#123;&#123; {foo: “bar”, baz: 23} | json }}<br>&#123;&#123; 1304375948024 | date }}<br>&#123;&#123; 1304375948024 | date:”MM/dd/yyyy @ h:mma” }}</p>
+<ul>
+<li>我们也可以创建带有输入元素的模型，把过滤器绑定和它联合起来。index.html 加以下代码试试：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="subst">&lt;</span>input ng<span class="attribute">-model</span><span class="subst">=</span><span class="string">"userInput"</span><span class="subst">&gt;</span> Uppercased: <span class="subst">&amp;</span><span class="variable">#123</span>;<span class="subst">&amp;</span><span class="variable">#123</span>; userInput <span class="subst">|</span> uppercase }}
+</pre></td></tr></table></figure>
+
+
+<h2 id=" 事件处理 ">事件处理</h2>
+<p>在手机详情页加个点击缩缩图切换对应大图的效果。</p>
+<p><strong><em>控制器</em></strong></p>
+<figure class="highlight js"><figcaption><span>app/js/controllers.js:</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre>...
+<span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span><span class="params">($scope, $routeParams, $http)</span> {</span>
+  $http.get(<span class="string">'phones/'</span> + $routeParams.phoneId + <span class="string">'.json'</span>).success(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
+    $scope.phone = data;
+    $scope.mainImageUrl = data.images[<span class="number">0</span>];
+  });
+
+  $scope.setImage = <span class="function"><span class="keyword">function</span><span class="params">(imageUrl)</span> {</span>
+    $scope.mainImageUrl = imageUrl;
+  }
+}
+
+<span class="comment">//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', '$http'];</span>
+</pre></td></tr></table></figure>
+
+<p>PhoneDetailCtrl 控制器，创建了 mainImageUrl 模型属性，默认值设为第一个手机图片的 URL。<br>我们也创建了 setImage 事件处理器，它将改变 mainImageUrl 的值。</p>
+<p><strong><em>模版</em></strong></p>
+<figure class="highlight html"><figcaption><span>app/partials/phone-detail.html:</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\{\{mainImageUrl}}"</span> <span class="attribute">class</span>=<span class="value">"phone"</span>&gt;</span>
+...
+<span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phone-thumbs"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"img in phone.images"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\{\{img}}"</span> <span class="attribute">ng-click</span>=<span class="value">"setImage(img)"</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+...
+</pre></td></tr></table></figure>
+
+<p>我们给大图绑定 ngSrc 指令，设为 mainImageUrl 属性，也给缩略图注册了 <a href="http://docs.angularjs.org/api/ng.directive:ngClick" target="_blank">ngClick</a> 事件。当点击缩略图时，setImage 事件处理器会把 mainImageUrl 属性的值改成缩略图的 URL 。</p>
+<p><strong><em>实验</em></strong></p>
+<p>让我们往 PhoneDetailCtrl  添加一个新的控制器方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>$scope.hello = <span class="function"><span class="keyword">function</span><span class="params">(name)</span> {</span>
+      alert(<span class="string">'Hello '</span> + (name || <span class="string">'world'</span>) + <span class="string">'!'</span>);
+  }
+</pre></td></tr></table></figure>
+
+<p>然后往 phone-details.html 模版添加以下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">button</span> <span class="attribute">ng-click</span>=<span class="value">"hello('Elmo')"</span>&gt;</span>Hello<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="REST_ 和自定义服务 ">REST 和自定义服务</h2>
+<p>最后为应用定义一个基于 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank">REST</a> 客户端的自定义服务，用此客户端我们可以更容易的发起 XHR 请求获取数据，不必使用底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank">$http</a> API，HTTP 方法和 URL。</p>
+<p><strong><em>模版</em></strong></p>
+<p>自定义服务定义到 app/js/services.js 中，我们把它引入到布局模版中。此外，需要加载 angular-resource.js 文件，此文件的 $resource 服务包含 ngResource 模块，我们马上要用：</p>
+<figure class="highlight html"><figcaption><span>app/index.html</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>...
+  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/services.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"lib/angular/angular-resource.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+...
+</pre></td></tr></table></figure>
+
+<p><strong><em>服务</em></strong></p>
+<figure class="highlight js"><figcaption><span>app/js/services.js</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>angular.module(<span class="string">'phonecatServices'</span>, [<span class="string">'ngResource'</span>]).
+    factory(<span class="string">'Phone'</span>, <span class="function"><span class="keyword">function</span><span class="params">($resource)</span>{</span>
+  <span class="keyword">return</span> $resource(<span class="string">'phones/:phoneId.json'</span>, {}, {
+    query: {method:<span class="string">'GET'</span>, params:{phoneId:<span class="string">'phones'</span>}, isArray:<span class="literal">true</span>}
+  });
+});
+</pre></td></tr></table></figure>
+
+<p>我们使用模块 API 注册自定义服务，用到了 factory（工厂） 函数。把 ‘Phone’ 服务名传到工厂函数里，工厂函数很像控制器的构造函数，都可以通过函数参数声明依赖。Phone 服务依赖于 $resource 服务。</p>
+<p><a href="http://docs.angularjs.org/api/ngResource.$resource" target="_blank">$resource</a> 服务几行代码就能创建一个 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank">REST</a> 客户端，此客户端可以取代底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank">$http</a>  服务。</p>
+<figure class="highlight js"><figcaption><span>app/js/app.js</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>...
+angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>, <span class="string">'phonecatServices'</span>]).
+...
+</pre></td></tr></table></figure>
+
+<p>我们需要给 ‘phonecat’ 应用添加数组形式的 ‘phonecatServices’。</p>
+<p><strong><em>控制器</em></strong></p>
+<p>我们简化了子控制器（PhoneListCtrl 和 PhoneDetailCtrl），用新的服务 Phone 取代底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank">$http</a> 服务。</p>
+<p>Angular 的 <a href="http://docs.angularjs.org/api/ngResource.$resource" target="_blank">$resource</a> 服务比 $http 更易用，代码也更容易理解。</p>
+<figure class="highlight js"><figcaption><span>app/js/controllers.js</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre>...
+
+<span class="function"><span class="keyword">function</span> <span class="title">PhoneListCtrl</span><span class="params">($scope, Phone)</span> {</span>
+  $scope.phones = Phone.query();
+  $scope.orderProp = <span class="string">'age'</span>;
+}
+
+<span class="comment">//PhoneListCtrl.$inject = ['$scope', 'Phone'];</span>
+
+
+<span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span><span class="params">($scope, $routeParams, Phone)</span> {</span>
+  $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, <span class="function"><span class="keyword">function</span><span class="params">(phone)</span> {</span>
+    $scope.mainImageUrl = phone.images[<span class="number">0</span>];
+  });
+
+  $scope.setImage = <span class="function"><span class="keyword">function</span><span class="params">(imageUrl)</span> {</span>
+    $scope.mainImageUrl = imageUrl;
+  }
+}
+
+<span class="comment">//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', 'Phone'];</span>
+</pre></td></tr></table></figure>
+
+<p>注意我们把：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>$http.get(<span class="string">'phones/phones.json'</span>).success(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
+  $scope.phones = data;
+});
+</pre></td></tr></table></figure>
+
+<p>换成了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$scope.phones = Phone.query();
+</pre></td></tr></table></figure>
+
+<p>非常值得注意的是，当调用 Phone 服务时， 我们没有传递回调函数。</p>
+<h2 id=" 结语 ">结语</h2>
+<p>我们的应用完成啦，<code>git checkout</code> 命令可以跳回原先的步骤。</p>
+<p><a href="http://docs.angularjs.org/guide/index" target="_blank">开发者指南</a> 有更多的例子和详细资料。</p>
+<p>更多代码实例，看 <a href="http://docs.angularjs.org/cookbook/index" target="_blank">Cookbook</a> 。</p>
+<p>当你准备用 Angular 开发项目时，推荐你使用 angular <a href="https://github.com/angular/angular-seed" target="_blank">种子</a> 引导开发。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>►<a class="article-category-link" href="/categories/AngularJS/翻译/">翻译</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://jinlong.github.io/2013/05/03/angularjs-tutorial4/" data-title="AngularJS 新手指南4 | Alon&#39;s Blog" data-tsina="1608907662" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/05/22/opera-14-for-android-is-out/" title="安卓版 Opera 14 新在哪？">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  安卓版 Opera 14 新在哪？</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/05/03/angularjs-tutorial3/"  title="AngularJS 新手指南3">
+ <strong>NEXT:</strong><br/> 
+ <span>AngularJS 新手指南3
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 自定义过滤器 "><span class="toc-number">1.</span> <span class="toc-text">自定义过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 事件处理 "><span class="toc-number">2.</span> <span class="toc-text">事件处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REST_ 和自定义服务 "><span class="toc-number">3.</span> <span class="toc-text">REST 和自定义服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 结语 "><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/AngularJS/" title="AngularJS">AngularJS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/Blink/" title="Blink">Blink<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/" title="CSS3">CSS3<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/" title="Chrome Extensions">Chrome Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/" title="Debug">Debug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/Express/" title="Express">Express<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/Firebug/" title="Firebug">Firebug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/Git/" title="Git">Git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/Github Pages/" title="Github Pages">Github Pages<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Grunt/" title="Grunt">Grunt<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/HTML5/" title="HTML5">HTML5<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+		
+			<li><a href="/categories/Javascript/" title="Javascript">Javascript<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Grunt/Nodejs/" title="Nodejs">Nodejs<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/" title="Octopress">Octopress<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Opera/" title="Opera">Opera<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/" title="Opera Extensions">Opera Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/" title="Safari">Safari<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/" title="WebKit">WebKit<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/" title="flexbox">flexbox<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/game/" title="game">game<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/" title="iOS7">iOS7<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/" title="jQuery">jQuery<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/" title="requestAnimationFrame">requestAnimationFrame<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/toString/" title="toString">toString<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/translate/" title="translate">translate<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/交互设计/" title="交互设计">交互设计<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/代码高亮/" title="代码高亮">代码高亮<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/入门/" title="入门">入门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/全文搜索/" title="全文搜索">全文搜索<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>3</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/垂直居中/" title="垂直居中">垂直居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/" title="居中">居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/开发工具/" title="开发工具">开发工具<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/" title="弹性布局">弹性布局<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/" title="水平居中">水平居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/" title="浏览器">浏览器<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/滑动门/" title="滑动门">滑动门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/" title="用户体验">用户体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/移动前端开发/" title="移动前端开发">移动前端开发<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/AngularJS/翻译/" title="翻译">翻译<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/面试/" title="面试">面试<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/newwave" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/jinlong" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://jinlong.github.io" target="_blank" title="Alon Zhang">Alon Zhang</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"jinlong"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

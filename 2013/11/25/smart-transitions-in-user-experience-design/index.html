@@ -1,0 +1,493 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>用户体验设计中的巧妙过渡 | Alon&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Alon Zhang">
+    
+    <meta name="description" content="原文：Smart Transitions In User Experience Design译者：涂鸦码龙
+
+一些网站不仅在内容，可用性，设计，功能等方面，让人耳目一新；交互设计细节和动画更是与众不同。我们将分享一些模型的经验，分析一下这些简单的模式为什么效果很好。
+当我们设计数码产品时，我们一般使用 Photoshop 和 Sketch 此类软件。大多数有数年行业经验的人显然明白设计不仅仅是视觉传达。尽管如此，有些人还是继续做静态设计。Steve Jobs 如此描述设计：
+
+“It’s not just what it looks like and feels like. Design is how it works.““设计不仅仅是看起来和感受到的样子。设计是如何工作。”
+
+我们对于产品的体验和印象来源于诸多因素的集合，交互扮演一个根基的角色。我们无法想象用户界面是静态设计，随后再添加交互魔法。相反，我们需要在早期加入交互特性，把它当成天然的组成部分。
+让我们看看一些巧妙的交互，它们是一些微妙的动画，优雅地改善了用户体验。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Alon&#39;s Blog" title="Alon&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Alon&#39;s Blog">Alon&#39;s Blog</a></h1>
+				<h2 class="blog-motto">一边翻译一边学习---涂鸦码龙</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:jinlong.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/11/25/smart-transitions-in-user-experience-design/" title="用户体验设计中的巧妙过渡" itemprop="url">用户体验设计中的巧妙过渡</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://jinlong.github.io" title="Alon Zhang">Alon Zhang</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-11-25T03:55:00.000Z" itemprop="datePublished">11月 25 2013</time>
+    更新日期:<time datetime="2013-11-25T04:33:34.000Z" itemprop="dateModified">11月 25 2013</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 动画滚动 "><span class="toc-number">1.</span> <span class="toc-text">动画滚动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 有状态的切换 "><span class="toc-number">2.</span> <span class="toc-text">有状态的切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 渐进呈现表单和评论 "><span class="toc-number">3.</span> <span class="toc-text">渐进呈现表单和评论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pull_To_Refresh_（拉动刷新）"><span class="toc-number">4.</span> <span class="toc-text">Pull To Refresh （拉动刷新）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sticky_Labels_（粘性标签）"><span class="toc-number">5.</span> <span class="toc-text">Sticky Labels （粘性标签）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Affordance_Transition_（自解释的过渡效果）"><span class="toc-number">6.</span> <span class="toc-text">Affordance Transition （自解释的过渡效果）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Context-Based_Hiding（基于上下文隐藏）"><span class="toc-number">7.</span> <span class="toc-text">Context-Based Hiding（基于上下文隐藏）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Focus_Transition（焦点过渡）"><span class="toc-number">8.</span> <span class="toc-text">Focus Transition（焦点过渡）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 总之 "><span class="toc-number">9.</span> <span class="toc-text">总之</span></a></li></ol>
+		</div>
+		
+		<blockquote>
+<p>原文：<a href="http://uxdesign.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/" target="_blank">Smart Transitions In User Experience Design</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
+</blockquote>
+<p>一些网站不仅在内容，可用性，设计，功能等方面，让人耳目一新；交互设计细节和动画更是与众不同。我们将分享一些模型的经验，分析一下这些简单的模式为什么效果很好。</p>
+<p>当我们设计数码产品时，我们一般使用 Photoshop 和 Sketch 此类软件。大多数有数年行业经验的人显然明白设计不仅仅是视觉传达。尽管如此，有些人还是继续做静态设计。<a href="http://www.nytimes.com/2003/11/30/magazine/30IPOD.html?pagewanted=all" target="_blank">Steve Jobs 如此描述设计</a>：</p>
+<blockquote>
+<p>“It’s not just what it looks like and feels like. Design is how it works.“<br>“设计不仅仅是看起来和感受到的样子。设计是如何工作。”</p>
+</blockquote>
+<p>我们对于产品的体验和印象来源于诸多因素的集合，交互扮演一个根基的角色。我们无法想象用户界面是静态设计，随后再添加交互魔法。相反，我们需要在早期加入交互特性，把它当成天然的组成部分。</p>
+<p>让我们看看一些巧妙的交互，它们是一些微妙的动画，优雅地改善了用户体验。<br><a id="more"></a></p>
+<h2 id=" 动画滚动 ">动画滚动</h2>
+<p>超链接总是褒贬不一，当点击一个链接时，可以生硬地跳转，结果是<strong>丢失上下文</strong>。</p>
+<p>对网站而言，特别是长网站，加一个线性滚动动画，可以改善用户体验：</p>
+<p><img src="/images/post/smart-transitions/ScrollingAnimated.gif"></p>
+<p>对比下面看看：</p>
+<p><img src="/images/post/smart-transitions/ScrollingNoAnimation.gif"></p>
+<p>对比下默认行为和动画行为，跳过内容不再是无意识的行为；它是一个决定。实际上，《<a href="http://hopelies.com/" target="_blank">Hope Lies at 24 Frames Per Second</a>》此文中的菜单按钮没有任何动画，它花了我 1 分多钟才明白确切发生了什么。</p>
+<p><strong>要点：</strong>界面的突然变化用户很难适应，总是告知他们发生了什么。</p>
+<h2 id=" 有状态的切换 ">有状态的切换</h2>
+<p>让我们看看另一个例子：切换菜单。用户点击“+”号增加内容或展开元素。通过旋转 45 度，加号变成了叉号，叉号大家广泛理解为“关闭”：</p>
+<p><img src="/images/post/smart-transitions/Stateful-toggle.gif"></p>
+<p>简单的变换完全改变了图标的意义。这个小细节比让用户猜测接下来发生什么，以及理解图标是什么意思容易多了。这个切换对用户非常友好。此外，加号旋转总是跟内容保持一个方向，加强了信息的流动。</p>
+<p><strong>要点：</strong>让网站元素的每个状态都可理解。</p>
+<h2 id=" 渐进呈现表单和评论 ">渐进呈现表单和评论</h2>
+<p>许多博客和新闻网站的评论表单不是很友好，当你准备发表评论时，你只想输入评论而不是干别的，典型的问题是，它会询问你各种其它的事情，好烦人呐。</p>
+<p>为了激发用户的评论热情，我们可以<strong>仅显示最重要的元素：评论框</strong>。当用户点击输入区域时，展开相应的表单。真实世界渐进展现的例子，可以看纽约时报的 beta 网站：</p>
+<p><img src="/images/post/smart-transitions/NY-Times.gif"></p>
+<p>你可以更进一步，当评论框获得焦点时展开表单。这么做有个问题，交互设计的基本原则提到：<strong>an action should always happen close to where the interaction occurs （一个行为总是发生在离交互点最近的地方）</strong>（关注焦点附近）。我们可以再进一步，给评论框添加动画引导用户：</p>
+<p><img src="/images/post/smart-transitions/ExpandingComments.gif"></p>
+<p>你还可以把评论框固定在顶部，在下面展开相应内容，显示附加字段。</p>
+<p>如你所见，这么做减少了混乱，令评论表单更吸引人。</p>
+<p>更好的做法是，当用户到达页面底部时自动加载评论。我们应该避免强迫用户去点击，除非有更好的理由。</p>
+<p><strong>要点：</strong>渐进展现为了减少 UI 组件的呈现，用户需要它们时再显示出来。</p>
+<h2 id="Pull_To_Refresh_（拉动刷新）">Pull To Refresh （拉动刷新）</h2>
+<p>最令人激动的交互之一是伴随着 iPhone 出现， Loren Brichter 倡导的 “拉动刷新”。用户可以更新可卷动的时序型内容。你可以在 Twitter 的应用中看到此效果。</p>
+<p><img src="/images/post/smart-transitions/Twitter.gif"></p>
+<p>为什么效果这么好？在拉动刷新出现之前，用户必须点击浏览器的刷新按钮加载更多内容。把用户发现更多内容的愿望和刷新行为联系起来，明确的点击行为变得好古板。</p>
+<p><strong>要点：</strong>连接意图和行为，体验变得更加无缝。</p>
+<h2 id="Sticky_Labels_（粘性标签）">Sticky Labels （粘性标签）</h2>
+<p>粘性标签是另一个微妙而实用的组合，它把用户界面与有意义的过渡结合起来。看看 <a href="http://edenspiekermann.com/projects" target="_blank">Edenspiekermann’s use of this technique</a> 的运用。</p>
+<p><img src="/images/post/smart-transitions/Sticky-Label.gif"></p>
+<p>项目标签一直固定在内容的左侧，直到下一个项目出现。这个效果类似 iOS 地址本，它为较长区域提供了上下文。过渡效果不仅增加了方向感，而且提供了基于上下文的描述。</p>
+<p><strong>要点：</strong>长区域中添加了有价值信息的摘要或者标题可以使用粘性标签。</p>
+<h2 id="Affordance_Transition_（自解释的过渡效果）">Affordance Transition （自解释的过渡效果）</h2>
+<p>自解释的概念源于认知心理学，指一个对象的特征，它用于引导用户。</p>
+<p>在用户界面设计的上下文，EU 网站的<a href="http://ec.europa.eu/regional_policy/archive/country/commu/docevent/26112008/5_doulgerof_glossary.pdf" target="_blank">可用性词汇</a>（PDF）中如此定义自解释性：</p>
+<blockquote>
+<p>“An affordance is a desirable property of a user interface — software which naturally leads people to take the correct steps to accomplish their goals.”<br>“自解释性是用户界面令人满意的特性 —— 软件很自然地引导用户，通过正确的步骤达到预期的目标。”</p>
+</blockquote>
+<p>Ridges（棱线）常常用于提高自解释性。按钮周围的棱线暗示按钮是可操作的。这种用户体验技术被 iOS 上的相机应用广泛推广。</p>
+<p><img src="/images/post/smart-transitions/iOS_Lockscreen-500-final.jpg"></p>
+<p>iOS 6 的锁屏旁边的相机图标，暗示可以拖动。Apple 在 iOS 7 里移除了它，显然是因为用户习惯让它看起来更像一个独立的图标。后来是怎么做的：当你拖动按钮，锁屏弹起，相机出现在下面。这是一项将用户指向功能的很好的技术。</p>
+<p><strong>要点：</strong>在界面上，给予元素高度自解释性，它会把用户指向功能。</p>
+<h2 id="Context-Based_Hiding（基于上下文隐藏）">Context-Based Hiding（基于上下文隐藏）</h2>
+<p>iOS 上的 Google Chrome 启动后有个基于上下文隐藏功能，见下图：</p>
+<p><img src="/images/post/smart-transitions/CBH.gif"></p>
+<p>基本理念是当用户向下滚动页面，浏览器导航面板自动隐藏。当用户再次向上滚动页面，控制面板出现。这种方法不仅改善了上下文体验（专注于内容本身），而且增加了屏幕可用空间。屏幕空间在移动设备尤为重要。</p>
+<p>首先假设<strong>用户将一直浏览关注的内容</strong>。当他们停止浏览，上下文可能改变；因此，导航面板需要重新出现。这一技术节省屏幕空间的同时，检查某种假设是否超出了你的测试用例。</p>
+<p>iOS 处理的更好，当到达页面的底部时，控制面板再次出现。这是一个动态整合用户需求的绝佳的例子。</p>
+<p><strong>要点：</strong>使用基于上下文的隐藏功能提高用户关注度，节省屏幕空间。</p>
+<h2 id="Focus_Transition（焦点过渡）">Focus Transition（焦点过渡）</h2>
+<p>当通过键盘导航时，用户按下 Tab 键，常常搞不清焦点移动到哪里了。通过动画指引他们到达页面指定位置。过渡是微妙的，但在指引用户方面影响巨大。</p>
+<p><strong>要点：</strong>为用户指明方向，不管他们如何导航。</p>
+<h2 id=" 总之 ">总之</h2>
+<p>这几个例子仅仅是九牛一毛罢了，本文要点不是秀一些最新最酷的交互技术，而是强调如何通过轻微的交互细节大大提高用户体验。</p>
+<p>如果我们想设计出更好的数字产品，我们需要挑战当前的信念，看看何种交互模式更能方便用户的使用。我没说要重复造轮子，但是不要停止探索。因此，走出你的安乐窝，保持探索，勇于尝试。</p>
+<p>如果你喜欢本文，可以在 Twitter 上<a href="http://www.twitter.com/webchaeschtli" target="_blank">关注我</a> ，或者到瑞士请我一块瑞士巧克力。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/用户体验/">用户体验</a>►<a class="article-category-link" href="/categories/用户体验/交互设计/">交互设计</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://jinlong.github.io/2013/11/25/smart-transitions-in-user-experience-design/" data-title="用户体验设计中的巧妙过渡 | Alon&#39;s Blog" data-tsina="1608907662" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/11/25/javascript-best-practices/" title="Javascript 最佳实践">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Javascript 最佳实践</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/10/20/ten-years-of-sliding-doors-of-css/"  title="CSS 滑动门十年纪念">
+ <strong>NEXT:</strong><br/> 
+ <span>CSS 滑动门十年纪念
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 动画滚动 "><span class="toc-number">1.</span> <span class="toc-text">动画滚动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 有状态的切换 "><span class="toc-number">2.</span> <span class="toc-text">有状态的切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 渐进呈现表单和评论 "><span class="toc-number">3.</span> <span class="toc-text">渐进呈现表单和评论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pull_To_Refresh_（拉动刷新）"><span class="toc-number">4.</span> <span class="toc-text">Pull To Refresh （拉动刷新）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sticky_Labels_（粘性标签）"><span class="toc-number">5.</span> <span class="toc-text">Sticky Labels （粘性标签）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Affordance_Transition_（自解释的过渡效果）"><span class="toc-number">6.</span> <span class="toc-text">Affordance Transition （自解释的过渡效果）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Context-Based_Hiding（基于上下文隐藏）"><span class="toc-number">7.</span> <span class="toc-text">Context-Based Hiding（基于上下文隐藏）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Focus_Transition（焦点过渡）"><span class="toc-number">8.</span> <span class="toc-text">Focus Transition（焦点过渡）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 总之 "><span class="toc-number">9.</span> <span class="toc-text">总之</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/AngularJS/" title="AngularJS">AngularJS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/Blink/" title="Blink">Blink<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/" title="CSS3">CSS3<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/" title="Chrome Extensions">Chrome Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/" title="Debug">Debug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/Express/" title="Express">Express<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/Firebug/" title="Firebug">Firebug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/Git/" title="Git">Git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/Github Pages/" title="Github Pages">Github Pages<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Grunt/" title="Grunt">Grunt<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/HTML5/" title="HTML5">HTML5<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+		
+			<li><a href="/categories/Javascript/" title="Javascript">Javascript<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Grunt/Nodejs/" title="Nodejs">Nodejs<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/" title="Octopress">Octopress<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Opera/" title="Opera">Opera<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/" title="Opera Extensions">Opera Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/" title="Safari">Safari<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/" title="WebKit">WebKit<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/" title="flexbox">flexbox<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/game/" title="game">game<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/" title="iOS7">iOS7<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/" title="jQuery">jQuery<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/" title="requestAnimationFrame">requestAnimationFrame<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/toString/" title="toString">toString<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/translate/" title="translate">translate<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/交互设计/" title="交互设计">交互设计<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/代码高亮/" title="代码高亮">代码高亮<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/入门/" title="入门">入门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/全文搜索/" title="全文搜索">全文搜索<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>3</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/垂直居中/" title="垂直居中">垂直居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/" title="居中">居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/开发工具/" title="开发工具">开发工具<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/" title="弹性布局">弹性布局<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/" title="水平居中">水平居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/" title="浏览器">浏览器<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/滑动门/" title="滑动门">滑动门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/" title="用户体验">用户体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/移动前端开发/" title="移动前端开发">移动前端开发<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/AngularJS/翻译/" title="翻译">翻译<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/面试/" title="面试">面试<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/newwave" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/jinlong" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://jinlong.github.io" target="_blank" title="Alon Zhang">Alon Zhang</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"jinlong"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

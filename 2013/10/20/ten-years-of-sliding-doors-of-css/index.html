@@ -1,0 +1,431 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>CSS 滑动门十年纪念 | Alon&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Alon Zhang">
+    
+    <meta name="description" content="看到这篇文章，真是让我心潮澎湃，仿佛看到刚接触前端的我，拿着本《CSS 设计彻底研究》慢慢的啃。当时看到前人发明的 CSS 滑动门，真是觉得相当惊艳，转眼间，这个技术距今已有 10 年。
+
+正是十年前的 2003 年 10 月 20 日，A List Apart 的文章《CSS 滑动门》。
+A Li">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Alon&#39;s Blog" title="Alon&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Alon&#39;s Blog">Alon&#39;s Blog</a></h1>
+				<h2 class="blog-motto">一边翻译一边学习---涂鸦码龙</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:jinlong.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/10/20/ten-years-of-sliding-doors-of-css/" title="CSS 滑动门十年纪念" itemprop="url">CSS 滑动门十年纪念</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://jinlong.github.io" title="Alon Zhang">Alon Zhang</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-10-20T10:24:00.000Z" itemprop="datePublished">10月 20 2013</time>
+    更新日期:<time datetime="2013-10-27T10:30:53.000Z" itemprop="dateModified">10月 27 2013</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<p><img src="/images/post/css-sliding-door/sliding_doors.png"></p>
+<blockquote>
+<p>看到这篇文章，真是让我心潮澎湃，仿佛看到刚接触前端的我，拿着本《<a href="http://www.amazon.cn/CSS%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6-%E6%B8%A9%E8%B0%A6/dp/B00139O3TG/ref=sr_1_1?ie=UTF8&amp;qid=1382869723&amp;sr=8-1&amp;keywords=css%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6" target="_blank">CSS 设计彻底研究</a>》慢慢的啃。当时看到前人发明的 CSS 滑动门，真是觉得相当惊艳，转眼间，这个技术距今已有 10 年。</p>
+</blockquote>
+<p>正是十年前的 2003 年 10 月 20 日，<a href="http://alistapart.com/ Doug Bowman http://twitter.com/stop" target="_blank">A List Apart</a> 的文章《<a href="http://alistapart.com/article/slidingdoors" target="_blank">CSS 滑动门</a>》。</p>
+<p>A List Apart 现在提醒读者“尽管它曾经辉煌，但此文不再代表当今的最佳实践”。的确是这样，但是让这个周年纪念悄悄过去心有不甘。</p>
+<p>可能许多人没有从事 web 工作，他们或许想知道为什么一篇如何把无序列表修饰成标签的文章怎么会如此重要，因为我们现在可以使用支持更好的 CSS 属性达到同样的效果。</p>
+<p>我们可以在单个元素使用多背景图片，而不是给列表项和锚点同时应用图片。我们可以使用圆角，多个内部盒子阴影（box shadow）创建时髦的 3d 标签。如果我们打算牺牲一点浏览器兼容性，甚至可以使用 CSS 渐变 。</p>
+<p>但是在 Doug 之前，毫不夸张地说，没有人想出如何用 CSS 制作圆角标签。这是 A List Apart 一系列开创性文章的伊始，它不仅打破了 CSS 的限制，而且改变了 web ，被众人熟知。如果你还没读过<a href="http://alistapart.com/article/slidingdoors" target="_blank">滑动门的文章</a>以及<a href="http://alistapart.com/article/slidingdoors2" target="_blank">后续文章</a>，现在可以品味下了。</p>
+<p>怀旧之情？是的，今天的我们是多么幸运，拥有成熟的 CSS 和浏览器兼容性，那些只是 2003 年时的梦想。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/CSS/">CSS</a>►<a class="article-category-link" href="/categories/CSS/滑动门/">滑动门</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://jinlong.github.io/2013/10/20/ten-years-of-sliding-doors-of-css/" data-title="CSS 滑动门十年纪念 | Alon&#39;s Blog" data-tsina="1608907662" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/11/25/smart-transitions-in-user-experience-design/" title="用户体验设计中的巧妙过渡">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  用户体验设计中的巧妙过渡</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/"  title="面向Node.js新手的7个技巧">
+ <strong>NEXT:</strong><br/> 
+ <span>面向Node.js新手的7个技巧
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/AngularJS/" title="AngularJS">AngularJS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/Blink/" title="Blink">Blink<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/" title="CSS3">CSS3<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/" title="Chrome Extensions">Chrome Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/" title="Debug">Debug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/Express/" title="Express">Express<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/Firebug/" title="Firebug">Firebug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/Git/" title="Git">Git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/Github Pages/" title="Github Pages">Github Pages<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Grunt/" title="Grunt">Grunt<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/HTML5/" title="HTML5">HTML5<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+		
+			<li><a href="/categories/Javascript/" title="Javascript">Javascript<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Grunt/Nodejs/" title="Nodejs">Nodejs<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/" title="Octopress">Octopress<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Opera/" title="Opera">Opera<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/" title="Opera Extensions">Opera Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/" title="Safari">Safari<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/" title="WebKit">WebKit<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/" title="flexbox">flexbox<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/game/" title="game">game<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/" title="iOS7">iOS7<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/" title="jQuery">jQuery<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/" title="requestAnimationFrame">requestAnimationFrame<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/toString/" title="toString">toString<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/translate/" title="translate">translate<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/交互设计/" title="交互设计">交互设计<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/代码高亮/" title="代码高亮">代码高亮<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/入门/" title="入门">入门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/全文搜索/" title="全文搜索">全文搜索<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>3</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/垂直居中/" title="垂直居中">垂直居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/" title="居中">居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/开发工具/" title="开发工具">开发工具<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/" title="弹性布局">弹性布局<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/" title="水平居中">水平居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/" title="浏览器">浏览器<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/滑动门/" title="滑动门">滑动门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/" title="用户体验">用户体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/移动前端开发/" title="移动前端开发">移动前端开发<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/AngularJS/翻译/" title="翻译">翻译<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/面试/" title="面试">面试<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/newwave" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/jinlong" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://jinlong.github.io" target="_blank" title="Alon Zhang">Alon Zhang</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"jinlong"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

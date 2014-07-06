@@ -1,0 +1,790 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>CSS 居中大全 | Alon&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Alon Zhang">
+    
+    <meta name="description" content="我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。
+&amp;lt;cent">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Alon&#39;s Blog" title="Alon&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Alon&#39;s Blog">Alon&#39;s Blog</a></h1>
+				<h2 class="blog-motto">一边翻译一边学习---涂鸦码龙</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:jinlong.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/08/13/centering-all-the-directions/" title="CSS 居中大全" itemprop="url">CSS 居中大全</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://jinlong.github.io" title="Alon Zhang">Alon Zhang</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-08-13T10:00:00.000Z" itemprop="datePublished">8月 13 2013</time>
+    更新日期:<time datetime="2013-08-14T08:30:23.000Z" itemprop="dateModified">8月 14 2013</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#&lt;center&gt;"><span class="toc-number">1.</span> <span class="toc-text">&lt;center&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-align:center"><span class="toc-number">2.</span> <span class="toc-text">text-align:center</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align:middle"><span class="toc-number">3.</span> <span class="toc-text">vertical-align:middle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hacks,_hacks（小技巧）"><span class="toc-number">4.</span> <span class="toc-text">hacks, hacks（小技巧）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#translate(-50%,-50%)"><span class="toc-number">5.</span> <span class="toc-text">translate(-50%,-50%)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="# 响应式 "><span class="toc-number">5.0.1.</span> <span class="toc-text">响应式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 偏移 "><span class="toc-number">5.0.2.</span> <span class="toc-text">偏移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 溢出 "><span class="toc-number">5.0.3.</span> <span class="toc-text">溢出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 调整尺寸 "><span class="toc-number">5.0.4.</span> <span class="toc-text">调整尺寸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 可变高度 "><span class="toc-number">5.0.5.</span> <span class="toc-text">可变高度</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 负 _margin"><span class="toc-number">6.</span> <span class="toc-text">负 margin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-Cell"><span class="toc-number">7.</span> <span class="toc-text">Table-Cell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FlexBox"><span class="toc-number">8.</span> <span class="toc-text">FlexBox</span></a></li></ol>
+		</div>
+		
+		<p>我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。<br>孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~<br>各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。</p>
+<h2 id="&lt;center&gt;">&lt;center&gt;</h2>
+<p>不建议用了。</p>
+<h2 id="text-align:center">text-align:center</h2>
+<p>在父容器里水平居中 inline 文字，或 inline 元素</p>
+<h2 id="vertical-align:middle">vertical-align:middle</h2>
+<p>垂直居中 inline 文字，inline 元素，配合</p>
+<figure class="highlight display:table```"><figcaption><span>，```display:table-cell```，有奇效。</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>
+##line-height
+
+与 height 联手，垂直居中文字
+
+##margin:auto
+
+示例：
+
+```html
+<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+  <span class="id">#ex2_container</span> <span class="rules">{ <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; <span class="rule">}</span></span>
+  <span class="id">#ex2_content</span> <span class="rules">{ <span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0</span>px auto</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">display</span>:<span class="value">table</span></span>; <span class="rule">}</span></span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="hacks,_hacks（小技巧）">hacks, hacks（小技巧）</h2>
+<p>有许多 <a href="http://blog.themeforest.net/tutorials/vertical-centering-with-css/" target="_blank">hacks</a> ，负 margin，<a href="http://css-tricks.com/centering-in-the-unknown/" target="_blank">影子元素</a> ::before 等。如果你的内容不是固定大小的话，它们大部分是很脆弱的。</p>
+<h2 id="translate(-50%,-50%)">translate(-50%,-50%)</h2>
+<p>用 position 加 translate<br>translate(-50%,-50%) 比较奇特，百分比计算不是以父元素为基准，而是以自己为基准。</p>
+<p>参考文章：<a href="http://jinlong.github.io/blog/2013/07/08/centering-percentage-widthheight-elements/">居中百分比宽高的元素</a></p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+  <span class="id">#ex3_container</span> <span class="rules">{ <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>; <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200</span>px</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>; <span class="rule">}</span></span>
+  <span class="id">#ex3_content</span> <span class="rules">{ <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>%</span></span>; <span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">50</span>%</span></span>; <span class="rule"><span class="attribute">transform</span>:<span class="value"><span class="function">translate(-<span class="number">50</span>%,-<span class="number">50</span>%)</span></span></span>; <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"><span class="function">translate(-<span class="number">50</span>%,-<span class="number">50</span>%)</span></span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">absolute</span></span>; <span class="rule">}</span></span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>这个技巧相当嚣张，同样适用于没固定大小的内容，</p>
+<figure class="highlight min-width```，```max-height```，```overflow:scroll```"><figcaption><span>等。</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>
+<span class="comment">&lt;!--more--&gt;</span>
+## 绝对定位居中
+
+父容器元素：```position: relative
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span> <span class="rules">{
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>** 注意：高度必须定义，建议加</p>
+<figure class="highlight overflow:"><figcaption><span>auto```，防止内容溢出。**</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>
+<span class="comment">#### 视口居中</span>
+
+内容元素：<span class="string">``</span><span class="string">`position: fixed`</span><span class="string">``</span>，<span class="string">``</span><span class="string">`z-index: 999`</span><span class="string">``</span>，记住父容器元素 <span class="string">``</span><span class="string">`position: relative</span>
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Fixed</span> <span class="rules">{
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;
+  <span class="rule"><span class="attribute">z-index</span>:<span class="value"> <span class="number">999</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p><a href="http://codepen.io/shshaw/full/gEiDt#Fixed" target="_blank">模态窗口实例</a></p>
+<h4 id=" 响应式 ">响应式</h4>
+<p>百分比宽高，最大、最小宽度均可以，加 padding 也可以</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Responsive</span> <span class="rules">{
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">60</span>%</span></span>; 
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">60</span>%</span></span>;
+  <span class="rule"><span class="attribute">min-width</span>:<span class="value"> <span class="number">400</span>px</span></span>;
+  <span class="rule"><span class="attribute">max-width</span>:<span class="value"> <span class="number">500</span>px</span></span>;
+  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">40</span>px</span></span>;
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h4 id=" 偏移 ">偏移</h4>
+<p>只要</p>
+<figure class="highlight margin:"><figcaption><span>auto;``` 在，内容块将垂直居中，top, left, bottom, right 可以设置偏移。</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>
+```<span class="tag">css</span>
+<span class="class">.Absolute-Center</span><span class="class">.is-Right</span> <span class="rules">{
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> auto</span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">20</span>px</span></span>;
+  <span class="rule"><span class="attribute">text-align</span>:<span class="value"> right</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h4 id=" 溢出 ">溢出</h4>
+<p>居中内容比父容器高时，防止溢出，加</p>
+<figure class="highlight overflow:"><figcaption><span>auto``` （没有任何 padding 时，也可以加 ```max-height: 100%;```）。</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>
+```<span class="tag">css</span>
+<span class="class">.Absolute-Center</span><span class="class">.is-Overflow</span> <span class="rules">{
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">300</span>px</span></span>;
+  <span class="rule"><span class="attribute">max-height</span>:<span class="value"> <span class="number">100</span>%</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h4 id=" 调整尺寸 ">调整尺寸</h4>
+<p><strong>resize</strong> 属性可以让尺寸可调。<br>设置 <strong>min- /max-</strong> 限制尺寸，确定加了</p>
+<figure class="highlight overflow:"><figcaption><span>auto``` 。</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>
+
+</pre></td></tr></table></figure>
+
+<p>.Absolute-Center.is-Resizable {<br>  min-width: 20%;<br>  max-width: 80%;<br>  min-height: 20%;<br>  max-height: 80%;<br>  resize: both;<br>  overflow: auto;<br>  margin: auto;<br>  position: absolute;<br>  top: 0; left: 0; bottom: 0; right: 0;<br>}</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>
+<span class="header">#### 图像</span>
+
+图像同样适用，设置 <span class="code">```</span>height: auto;
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Image</span> <span class="rules">{
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h4 id=" 可变高度 ">可变高度</h4>
+<p>高度必须定义，但可以是百分比或 max-height。不想定义高度的话，用</p>
+<figure class="highlight display:"><figcaption><span>table``` （需要考虑 Table-Cell 兼容性）。</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>
+```<span class="tag">css</span>
+<span class="class">.Absolute-Center</span><span class="class">.is-Variable</span> <span class="rules">{
+  <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h2 id=" 负 _margin">负 margin</h2>
+<p>确切知道宽高，负 margin 是宽和高的一半。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="class">.is-Negative</span> <span class="rules">{
+        <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300</span>px</span></span>;
+        <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">200</span>px</span></span>;
+        <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">20</span>px</span></span>;
+        <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+        <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50</span>%</span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+        <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> -<span class="number">170</span>px</span></span>; <span class="comment">/* (width + padding)/2 */</span>
+        <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> -<span class="number">120</span>px</span></span>; <span class="comment">/* (height + padding)/2 */</span>
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h2 id="Table-Cell">Table-Cell</h2>
+<p>参考文章：<a href="http://www.456bereastreet.com/archive/201103/flexible_height_vertical_centering_with_css_beyond_ie7/" target="_blank">Flexible height vertical centering with CSS, beyond IE7</a></p>
+<p>结构：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"Pos-Container is-Table"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"Table-Cell"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"Center-Block"</span>&gt;</span>
+    &lt!-- CONTENT --&gt;
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="class">.Pos-Container</span><span class="class">.is-Table</span> <span class="rules">{ <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>; <span class="rule">}</span></span>
+<span class="class">.is-Table</span> <span class="class">.Table-Cell</span> <span class="rules">{
+  <span class="rule"><span class="attribute">display</span>:<span class="value"> table-cell</span></span>;
+  <span class="rule"><span class="attribute">vertical-align</span>:<span class="value"> middle</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.is-Table</span> <span class="class">.Center-Block</span> <span class="rules">{
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">0</span> auto</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h2 id="FlexBox">FlexBox</h2>
+<p>参考文章：<a href="http://coding.smashingmagazine.com/2013/05/22/centering-elements-with-flexbox/" target="_blank">Designing CSS Layouts With Flexbox Is As Easy As Pie</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="class">.Pos-Container</span><span class="class">.is-Flexbox</span> <span class="rules">{
+  <span class="rule"><span class="attribute">display</span>:<span class="value"> -webkit-box</span></span>;
+  <span class="rule"><span class="attribute">display</span>:<span class="value"> -moz-box</span></span>;
+  <span class="rule"><span class="attribute">display</span>:<span class="value"> -ms-flexbox</span></span>;
+  <span class="rule"><span class="attribute">display</span>:<span class="value"> -webkit-flex</span></span>;
+  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;
+  <span class="rule"><span class="attribute">-webkit-box-align</span>:<span class="value"> center</span></span>;
+     <span class="rule"><span class="attribute">-moz-box-align</span>:<span class="value"> center</span></span>;
+     <span class="rule"><span class="attribute">-ms-flex-align</span>:<span class="value"> center</span></span>;
+  <span class="rule"><span class="attribute">-webkit-align-items</span>:<span class="value"> center</span></span>;
+          <span class="rule"><span class="attribute">align-items</span>:<span class="value"> center</span></span>;
+  <span class="rule"><span class="attribute">-webkit-box-pack</span>:<span class="value"> center</span></span>;
+     <span class="rule"><span class="attribute">-moz-box-pack</span>:<span class="value"> center</span></span>;
+     <span class="rule"><span class="attribute">-ms-flex-pack</span>:<span class="value"> center</span></span>;
+  <span class="rule"><span class="attribute">-webkit-justify-content</span>:<span class="value"> center</span></span>;
+          <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> center</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考资料：   </p>
+<ul>
+<li><a href="http://coding.smashingmagazine.com/2013/08/09/absolute-horizontal-vertical-centering-css/" target="_blank">Absolute Horizontal And Vertical Centering In CSS</a>   </li>
+<li><a href="http://codepen.io/shshaw/full/gEiDt" target="_blank">Absolute Centering in CSS</a>   </li>
+<li><a href="http://html5hub.com/centering-all-the-directions/#i.n590rnl9he4uud" target="_blank">CENTERING ALL THE DIRECTIONS</a>   </li>
+<li><a href="http://demosthenes.info/blog/723/Six-Ways-of-Centering-With-CSS" target="_blank">Seven Ways of Centering With CSS</a>   </li>
+<li><a href="http://designshack.net/articles/css/how-to-center-anything-with-css" target="_blank">How to Center Anything With CSS</a>   </li>
+<li><a href="http://blog.themeforest.net/tutorials/vertical-centering-with-css/" target="_blank">Vertical Centering With CSS</a></li>
+</ul>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/CSS/">CSS</a>►<a class="article-category-link" href="/categories/CSS/水平居中/">水平居中</a>►<a class="article-category-link" href="/categories/CSS/水平居中/垂直居中/">垂直居中</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://jinlong.github.io/2013/08/13/centering-all-the-directions/" data-title="CSS 居中大全 | Alon&#39;s Blog" data-tsina="1608907662" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/08/29/devtoolsecrets/" title="浏览器开发工具的秘密">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  浏览器开发工具的秘密</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/08/13/javascript-promises/"  title="JavaScript Promises">
+ <strong>NEXT:</strong><br/> 
+ <span>JavaScript Promises
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#&lt;center&gt;"><span class="toc-number">1.</span> <span class="toc-text">&lt;center&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-align:center"><span class="toc-number">2.</span> <span class="toc-text">text-align:center</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align:middle"><span class="toc-number">3.</span> <span class="toc-text">vertical-align:middle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hacks,_hacks（小技巧）"><span class="toc-number">4.</span> <span class="toc-text">hacks, hacks（小技巧）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#translate(-50%,-50%)"><span class="toc-number">5.</span> <span class="toc-text">translate(-50%,-50%)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="# 响应式 "><span class="toc-number">5.0.1.</span> <span class="toc-text">响应式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 偏移 "><span class="toc-number">5.0.2.</span> <span class="toc-text">偏移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 溢出 "><span class="toc-number">5.0.3.</span> <span class="toc-text">溢出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 调整尺寸 "><span class="toc-number">5.0.4.</span> <span class="toc-text">调整尺寸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 可变高度 "><span class="toc-number">5.0.5.</span> <span class="toc-text">可变高度</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 负 _margin"><span class="toc-number">6.</span> <span class="toc-text">负 margin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-Cell"><span class="toc-number">7.</span> <span class="toc-text">Table-Cell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FlexBox"><span class="toc-number">8.</span> <span class="toc-text">FlexBox</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/AngularJS/" title="AngularJS">AngularJS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/Blink/" title="Blink">Blink<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/" title="CSS3">CSS3<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/" title="Chrome Extensions">Chrome Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/" title="Debug">Debug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/Express/" title="Express">Express<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/Firebug/" title="Firebug">Firebug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/Git/" title="Git">Git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/Github Pages/" title="Github Pages">Github Pages<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Grunt/" title="Grunt">Grunt<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/HTML5/" title="HTML5">HTML5<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+		
+			<li><a href="/categories/Javascript/" title="Javascript">Javascript<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Grunt/Nodejs/" title="Nodejs">Nodejs<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/" title="Octopress">Octopress<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Opera/" title="Opera">Opera<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/" title="Opera Extensions">Opera Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/" title="Safari">Safari<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/" title="WebKit">WebKit<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/" title="flexbox">flexbox<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/game/" title="game">game<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/" title="iOS7">iOS7<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/" title="jQuery">jQuery<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/" title="requestAnimationFrame">requestAnimationFrame<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/toString/" title="toString">toString<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/translate/" title="translate">translate<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/交互设计/" title="交互设计">交互设计<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/代码高亮/" title="代码高亮">代码高亮<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/入门/" title="入门">入门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/全文搜索/" title="全文搜索">全文搜索<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>3</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/垂直居中/" title="垂直居中">垂直居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/" title="居中">居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/开发工具/" title="开发工具">开发工具<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/" title="弹性布局">弹性布局<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/" title="水平居中">水平居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/" title="浏览器">浏览器<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/滑动门/" title="滑动门">滑动门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/" title="用户体验">用户体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/移动前端开发/" title="移动前端开发">移动前端开发<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/AngularJS/翻译/" title="翻译">翻译<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/面试/" title="面试">面试<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/newwave" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/jinlong" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://jinlong.github.io" target="_blank" title="Alon Zhang">Alon Zhang</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"jinlong"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

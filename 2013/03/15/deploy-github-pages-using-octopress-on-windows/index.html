@@ -1,0 +1,590 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Deploy Github Pages using Octopress on Windows | Alon&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Alon Zhang">
+    
+    <meta name="description" content="官方文档 
+
+“Octopress is a blogging framework for hackers”Octopress 是黑客专属的博客框架，命令行可以搞定一切部署。
+
+前期准备
+
+安装 Git http://git-scm.com/ (需翻墙), google code 也提供下载  
+使用 rbenv 或 RVM 安装 Ruby 1.9.3这俩儿货我均搞不定，总是磕磕绊绊不顺利，最终发现了一个简单的套件 RailsInstaller  。这个相当爽啊，包含：Ruby 1.9.3-p125，Bundler 1.0.18，Git 1.7.6，DevKit 等工具，虽然有的用不着，但比起配置 Ruby 和一些插件痛快多了。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Alon&#39;s Blog" title="Alon&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Alon&#39;s Blog">Alon&#39;s Blog</a></h1>
+				<h2 class="blog-motto">一边翻译一边学习---涂鸦码龙</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:jinlong.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/03/15/deploy-github-pages-using-octopress-on-windows/" title="Deploy Github Pages using Octopress on Windows" itemprop="url">Deploy Github Pages using Octopress on Windows</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://jinlong.github.io" title="Alon Zhang">Alon Zhang</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-03-14T17:49:00.000Z" itemprop="datePublished">3月 15 2013</time>
+    更新日期:<time datetime="2013-03-30T06:35:32.000Z" itemprop="dateModified">3月 30 2013</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 前期准备 "><span class="toc-number">1.</span> <span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Octopress"><span class="toc-number">2.</span> <span class="toc-text">安装 Octopress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 部署到 _Github_Pages"><span class="toc-number">3.</span> <span class="toc-text">部署到 Github Pages</span></a></li></ol>
+		</div>
+		
+		<p><a href="http://octopress.org/docs/setup/" target="_blank">官方文档</a> </p>
+<blockquote>
+<p>“Octopress is a blogging framework for hackers”<br>Octopress 是黑客专属的博客框架，命令行可以搞定一切部署。</p>
+</blockquote>
+<h2 id=" 前期准备 ">前期准备</h2>
+<ol>
+<li>安装 Git <a href="http://git-scm.com/" target="_blank">http://git-scm.com/</a> (需翻墙), <a href="https://code.google.com/p/msysgit/" target="_blank">google code 也提供下载</a>  </li>
+<li>使用 <a href="http://octopress.org/docs/setup/rbenv" target="_blank">rbenv</a> 或 <a href="http://octopress.org/docs/setup/rvm" target="_blank">RVM</a> 安装 Ruby 1.9.3<br>这俩儿货我均搞不定，总是磕磕绊绊不顺利，最终发现了一个简单的套件 <a href="http://railsinstaller.org/" target="_blank">RailsInstaller</a>  。这个相当爽啊，包含：Ruby 1.9.3-p125，Bundler 1.0.18，Git 1.7.6，DevKit 等工具，虽然有的用不着，但比起配置 Ruby 和一些插件痛快多了。<br><a id="more"></a><h2 id=" 安装 _Octopress">安装 Octopress</h2>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>git <span class="keyword">clone</span> git:<span class="comment">//github.com/imathis/octopress.git octopress </span>
+cd octopress <span class="comment"># 如果你用的 RVM，将被问到是否信任.rvmrc 文件（答 yes）</span>
+ruby --version <span class="comment"># 应该显示 Ruby 1.9.3</span>
+</pre></td></tr></table></figure>
+
+<p>安装相关组件</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>gem <span class="keyword">install</span> bundler
+rbenv rehash    <span class="comment"># 如果你用的 rbenv，rehash 用来运行 bundle 命令</span>
+bundle <span class="keyword">install</span>
+</pre></td></tr></table></figure>
+
+<p>安装 Octopress 默认主题</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>rake <span class="keyword">install</span>
+</pre></td></tr></table></figure>
+
+<h2 id=" 部署到 _Github_Pages">部署到 Github Pages</h2>
+<p>新建 Github 仓库，一定要用你的用户名或组织名，例如：<code>username.github.com</code> 或 <code>organization.github.com</code>。你的博客将会<br>提交到 <code>http://username.github.com</code> 主分支，通过简单配置 Octopress 可以帮你做这些。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>rake setup_github_pages
+</pre></td></tr></table></figure>
+
+<ol>
+<li>会问你的 Github 仓库 url ，填上（例如：<code>git@github.com:jinlong/jinlong.github.com.git</code>）</li>
+<li>等命令跑完，会提示有个主分支放在了 _deploy 目录下等待部署</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>rake <span class="keyword">generate</span>
+</pre></td></tr></table></figure>
+
+<p>以上命令将生成你的博客，把生成的文件复制到 <code>_deploy</code> 目录</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>rake watch
+</pre></td></tr></table></figure>
+
+<p>这个货莫要乱试啊，要命啊，啥也没改一预览就 Auto-regeneration 自动编译，自动编译停不下来啊（Ctrl-C 不管用 ( ⊙ o ⊙ ) 啊！），我是被坑过了，不信试试。   </p>
+<p>反正翻了整个 Google 没找到停止</p>
+<figure class="highlight rake"><figcaption><span>watch``` ，停止 Auto-regeneration 的办法，无奈之下，自己瞎改代码吧。   </span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>
+我发现 Rakefile 配置文件有这 <span class="escape">``</span><span class="escape">`j</span>ekyll --auto<span class="escape">``</span><span class="escape">`：</span>  
+
+执行 <span class="escape">``</span><span class="escape">`r</span>ake preview<span class="escape">``</span><span class="escape">` </span>任务的时候也会带 <span class="escape">``</span><span class="escape">`j</span>ekyll --auto<span class="escape">``</span><span class="escape">`，</span>斗胆把 <span class="escape">``</span><span class="escape">`-</span>-auto<span class="escape">``</span><span class="escape">`去</span>了一试，果然又回到手动 generate 了，哈哈~~（改之前此文件备个份吧，万一哪天出岔子）
+</pre></td></tr></table></figure>
+
+<p>rake preview</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>
+浏览器访问 <span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">4000</span>（<span class="keyword">http</span>://localhost:<span class="number">4000</span> ）本地可预览调试页面
+</pre></td></tr></table></figure>
+
+<p>rake deploy</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>
+将 <span class="escape">`_</span>deploy<span class="escape">` </span> 的文件加到 git 里，并提交到主分支。过几秒你会收到
+Github 邮件说你的提交已经收到将发布你的站点（第一次创建）。
+
+别忘了提交源码到 github。
+</pre></td></tr></table></figure>
+
+<p>git add .<br>git commit -m ‘your message’<br>git push origin source</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>
+
+<span class="autohotkey">## 配置 Octopress 
+
+一般需要改 <span class="escape">`R</span>akefile<span class="escape">` </span>和 <span class="escape">`_</span>config.yml<span class="escape">` </span>文件</span>
+</pre></td></tr></table></figure>
+
+<p>_config.yml       # 主要配置 (Jekyll 的设置)<br>Rakefile          # 部署配置<br>config.rb         # Compass 配置<br>config.ru         # Rack 配置</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>
+<span class="emphasis">* 主要配置 *</span>（<span class="code">`_config.yml`</span>）
+</pre></td></tr></table></figure>
+
+<p>url:                # 博客地址<br>title:              # 大标题<br>subtitle:           # 子标题<br>author:             # 你的名字<br>simple_search:      # 搜索引擎<br>description:        # 站点的 meta 描述<br>date_format:        # 日期格式，默认 Ruby 日期格式<br>subscribe_rss:      # RSS 订阅，默认 /atom.xml </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>
+
+<span class="markdown">
+<span class="emphasis">*Jekyll & 插件 *</span></span>
+</pre></td></tr></table></figure>
+
+<p>root:               # 相对地址<br>permalink:          # 文章的链接结构<br>source:             # 资源文件目录<br>destination:        # 生成的站点文件目录<br>plugins:            # Jekyll 插件目录<br>code_dir:           # 引入的代码插件目录<br>category_dir:       # 生成的博客分类页<br>excerpt_link:        # 继续阅读，在文章里使用 &lt;!— more —&gt; 显示文章摘录</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>
+
+<span class="http">
+
+<span class="undefined">
+淘宝提供了 RubyGems 的国内镜像站点，这样我可以修改下载的 Octopress 目录下的 Gemfile 文件，把第一行改成</span></span>
+</pre></td></tr></table></figure>
+
+<p>source “<a href="http://ruby.taobao.org/" target="_blank">http://ruby.taobao.org/</a>“</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>
+
+<span class="undefined">
+不能使用中文，字符集不兼容</span>
+</pre></td></tr></table></figure>
+
+<p>cd ~<br>echo ‘export LC_ALL=zh_CN.UTF-8’ &gt;&gt; .bash_profile<br>echo ‘export LANG=zh_CN.UTF-8’ &gt;&gt; .bash_profile</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>
+切记运行下面命令：
+</pre></td></tr></table></figure>
+
+<p>source ~/.bash_profile</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>
+
+<span class="autohotkey">## 写博客
+
+博客都放在 <span class="escape">`s</span>ource/_posts<span class="escape">`目</span>录，根据 <span class="escape">`Y</span>YYY-MM-DD-post-title.markdown<span class="escape">` </span>格式命名，日期决定博客排序。</span>
+</pre></td></tr></table></figure>
+
+<p>rake new_post[“title”]<br>```</p>
+<p><em>参考文章：</em></p>
+<blockquote>
+<p><a href="http://www.xiaoche.me/blog/2012/01/18/install-octopress/" target="_blank">从零开始在 github 上安装 octopress</a><br><a href="Octopress http://sinosmond.github.com/blog/2012/03/12/install-and-deploy-octopress-to-github-on-windows7-from-scratch/">在 Windows7 下从头开始安装部署</a><br><a href="http://yanping.me/cn/blog/2011/12/26/octopress-on-windows/" target="_blank">Windows 下安装 Octopress</a><br><a href="http://clark1231.iteye.com/blog/1553939" target="_blank">像 hackers 一样写博客 (二)：Octopress 设置与增加微博的侧边栏</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Octopress/">Octopress</a>►<a class="article-category-link" href="/categories/Octopress/Github Pages/">Github Pages</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://jinlong.github.io/2013/03/15/deploy-github-pages-using-octopress-on-windows/" data-title="Deploy Github Pages using Octopress on Windows | Alon&#39;s Blog" data-tsina="1608907662" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/03/23/git-command/" title="git command">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  git command</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/03/15/previous-blogs/"  title="Previous Posts">
+ <strong>NEXT:</strong><br/> 
+ <span>Previous Posts
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 前期准备 "><span class="toc-number">1.</span> <span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Octopress"><span class="toc-number">2.</span> <span class="toc-text">安装 Octopress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 部署到 _Github_Pages"><span class="toc-number">3.</span> <span class="toc-text">部署到 Github Pages</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/AngularJS/" title="AngularJS">AngularJS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/Blink/" title="Blink">Blink<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/" title="CSS3">CSS3<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/" title="Chrome Extensions">Chrome Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/" title="Debug">Debug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/Express/" title="Express">Express<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/Chrome Extensions/Firebug/" title="Firebug">Firebug<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/Git/" title="Git">Git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/Github Pages/" title="Github Pages">Github Pages<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Grunt/" title="Grunt">Grunt<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/HTML5/" title="HTML5">HTML5<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+		
+			<li><a href="/categories/Javascript/" title="Javascript">Javascript<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Grunt/Nodejs/" title="Nodejs">Nodejs<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/" title="Octopress">Octopress<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Opera/" title="Opera">Opera<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Opera Extensions/" title="Opera Extensions">Opera Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/Safari/" title="Safari">Safari<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/" title="WebKit">WebKit<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/" title="flexbox">flexbox<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/game/" title="game">game<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS7/" title="iOS7">iOS7<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/" title="jQuery">jQuery<sup>1</sup></a></li>
+		
+			<li><a href="/categories/requestAnimationFrame/" title="requestAnimationFrame">requestAnimationFrame<sup>1</sup></a></li>
+		
+			<li><a href="/categories/JavaScript/toString/" title="toString">toString<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/translate/" title="translate">translate<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/交互设计/" title="交互设计">交互设计<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Octopress/代码高亮/" title="代码高亮">代码高亮<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Node.js/入门/" title="入门">入门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/全文搜索/" title="全文搜索">全文搜索<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>3</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/垂直居中/" title="垂直居中">垂直居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/居中/" title="居中">居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/开发工具/" title="开发工具">开发工具<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/" title="弹性布局">弹性布局<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/水平居中/" title="水平居中">水平居中<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Debug/浏览器/" title="浏览器">浏览器<sup>1</sup></a></li>
+		
+			<li><a href="/categories/CSS/滑动门/" title="滑动门">滑动门<sup>1</sup></a></li>
+		
+			<li><a href="/categories/用户体验/" title="用户体验">用户体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/移动前端开发/" title="移动前端开发">移动前端开发<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Blink/WebKit/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/AngularJS/翻译/" title="翻译">翻译<sup>4</sup></a></li>
+		
+			<li><a href="/categories/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/flexbox/弹性布局/CSS3/翻译/" title="翻译">翻译<sup>1</sup></a></li>
+		
+			<li><a href="/categories/jQuery/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/面试/" title="面试">面试<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/newwave" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/jinlong" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://jinlong.github.io" target="_blank" title="Alon Zhang">Alon Zhang</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"jinlong"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>
