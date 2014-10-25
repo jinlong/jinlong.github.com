@@ -639,7 +639,7 @@ header nav ul li a:hover {
   }
 }
 #main section.post a:hover {
-  border-left: 0.5em solid #ea6753;
+  border-left: 0.5em solid #4B77BE;
 }
 #main section.post a h1 {
   color: #2ca6cb;
@@ -672,7 +672,7 @@ header nav ul li a:hover {
 }
 #page-nav a:hover {
   background: #ccc;
-  color: #ea6753;
+  color: #4B77BE;
 }
 #page-nav .prev {
   float: left;
@@ -684,7 +684,7 @@ header nav ul li a:hover {
   transition: border-left 0.5s;
 }
 #page-nav .prev:hover {
-  border-left: 0.5em solid #ea6753;
+  border-left: 0.5em solid #4B77BE;
 }
 #page-nav .next {
   float: right;
@@ -759,7 +759,7 @@ header nav ul li a:hover {
   transition: color 0.5s;
 }
 .archive-title a:hover {
-  color: #ea6753;
+  color: #4B77BE;
   -webkit-transition: color 0.5s;
   -moz-transition: color 0.5s;
   -o-transition: color 0.5s;
@@ -767,7 +767,7 @@ header nav ul li a:hover {
   transition: color 0.5s;
 }
 .current {
-  color: #ea6753 !important;
+  color: #4B77BE !important;
 }
 @media only screen and (min-width: 768px) {
   .archive-part {
@@ -816,7 +816,7 @@ header nav ul li a:hover {
 }
 .post a:hover,
 .page a:hover {
-  color: #ea6753;
+  color: #4B77BE;
 }
 @media only screen and (min-width: 768px) {
   article header.article-info {
@@ -831,7 +831,7 @@ article header.article-info >h1 {
   word-break: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  border-left: 5px solid #ea6753;
+  border-left: 5px solid #4B77BE;
 }
 @media only screen and (min-width: 1024px) {
   article header.article-info >h1 {
@@ -933,7 +933,7 @@ article .article-content abbr {
   border-bottom: 1px dotted;
 }
 article .article-content blockquote {
-  border-left: 0.2em solid #ea6753;
+  border-left: 0.2em solid #4B77BE;
   margin: 0.65em 0 0.65em 4%;
   padding-left: 1%;
   line-height: 1.5;
@@ -1458,7 +1458,7 @@ section.comment {
   transition: color 1s ease-out;
 }
 #toc.toc-aside a:hover {
-  color: #ea6753;
+  color: #4B77BE;
   -webkit-transition: color 0.3s ease-out;
   -moz-transition: color 0.3s ease-out;
   -o-transition: color 0.3s ease-out;
@@ -1466,7 +1466,7 @@ section.comment {
   transition: color 0.3s ease-out;
 }
 .active {
-  color: #ea6753 !important;
+  color: #4B77BE !important;
 }
 .openaside {
   display: none;
@@ -1480,7 +1480,7 @@ section.comment {
   border: 1px solid #fff;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  background: #ea6753;
+  background: #4B77BE;
   padding: 0.2em 0.55em;
 }
 .openaside a::before {
@@ -1493,7 +1493,7 @@ section.comment {
   display: none;
 }
 .closeaside a {
-  color: #ea6753;
+  color: #4B77BE;
 }
 .closeaside a:hover {
   color: #2ca6cb;
@@ -1535,7 +1535,7 @@ section.comment {
   color: #2ca6cb;
 }
 .asidetitle a:hover {
-  color: #ea6753;
+  color: #4B77BE;
   -webkit-transition: color 0.5s;
   -moz-transition: color 0.5s;
   -o-transition: color 0.5s;
@@ -1564,7 +1564,7 @@ section.comment {
   padding: 0.5em 5%;
 }
 .categorieslist li a:hover {
-  color: #ea6753;
+  color: #4B77BE;
 }
 .tagslist {
   margin: 1em 0 0;
@@ -1596,11 +1596,11 @@ section.comment {
   background: #dbdbdb;
 }
 .tagslist ul li a:hover {
-  color: #ea6753;
+  color: #4B77BE;
   background: #e6e6e6;
 }
 .rsspart {
-  background: #ea6753;
+  background: #4B77BE;
   width: 100%;
 }
 @media only screen and (min-width: 768px) {
@@ -1624,7 +1624,7 @@ section.comment {
   text-align: center;
 }
 .rsspart a:hover {
-  color: #ea6753;
+  color: #4B77BE;
   background: #fafafa;
 }
 .rsspart a::before {
@@ -1656,7 +1656,7 @@ section.comment {
   padding: 0.5em;
 }
 .archiveslist li a:hover {
-  color: #ea6753;
+  color: #4B77BE;
   -webkit-transition: color 0.25s;
   -moz-transition: color 0.25s;
   -o-transition: color 0.25s;
@@ -1704,7 +1704,7 @@ section.comment {
   float: left;
 }
 .tagcloudlist .tagcloudlist a:hover {
-  color: #ea6753;
+  color: #4B77BE;
   -webkit-transition: color 0.25s;
   -moz-transition: color 0.25s;
   -o-transition: color 0.25s;
@@ -1738,7 +1738,7 @@ section.comment {
   padding: 0 3%;
 }
 .linkslist ul a:hover {
-  color: #ea6753;
+  color: #4B77BE;
   -webkit-transition: color 0.25s;
   -moz-transition: color 0.25s;
   -o-transition: color 0.25s;
@@ -2005,7 +2005,7 @@ footer {
   font-weight: normal;
 }
 .article-content .gist .gist-file .gist-meta a:hover {
-  color: #ea6753;
+  color: #4B77BE;
 }
 pre .comment {
   color: #969896;
@@ -2077,7 +2077,7 @@ pre .xml .cdata {
   color: #2ca6cb !important;
 }
 .ds-highlight:hover {
-  color: #ea6753 !important;
+  color: #4B77BE !important;
 }
 .ds-avatar {
   background: #fafafa !important;
