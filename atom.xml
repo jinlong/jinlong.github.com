@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2014-10-25T02:06:38.951Z</updated>
+  <updated>2014-10-25T02:45:40.275Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -682,7 +682,7 @@ template(data);
     <link href="http://jinlong.github.io/2014/01/07/introduction-to-express/"/>
     <id>http://jinlong.github.io/2014/01/07/introduction-to-express/</id>
     <published>2014-01-07T08:19:00.000Z</published>
-    <updated>2014-01-07T10:42:22.000Z</updated>
+    <updated>2014-10-25T02:43:59.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-express/" target="_blank">Introduction to Express</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
 </blockquote>
@@ -758,19 +758,12 @@ app.post(some url, <span class="keyword">do</span> more stuff);
 });
 </pre></td></tr></table></figure>
 
-<p>注意 Express 为 response 对象添加了</p>
-<figure class="highlight send()```"><figcaption><span>方法，一些模板代码可以处理响应。重启应用，访问 [http://localhost:3000/](http://localhost:3000/) 看看。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>注意 Express 为 response 对象添加了 <code>send()</code> 方法，一些模板代码可以处理响应。重启应用，访问 <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a> 看看。</p>
+<p><strong>request.send()</strong> API 智能处理不同类型的数据，假如你想为网站添加简单的基于 JSON 的 API ，Express 可以把返回结果转换成 JSON 并设置适当的响应头。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>
-**request.send()** API 智能处理不同类型的数据，假如你想为网站添加简单的基于 <span class="built_in">JSON</span> 的 API ，Express 可以把返回结果转换成 <span class="built_in">JSON</span> 并设置适当的响应头。
-
-```js
-app.get(<span class="string">'/api'</span>, <span class="function"><span class="keyword">function</span><span class="params">(request, response)</span> {</span>
+</pre></td><td class="code"><pre>app.get(<span class="string">'/api'</span>, <span class="function"><span class="keyword">function</span><span class="params">(request, response)</span> {</span>
    response.send({name:<span class="string">"Raymond"</span>,age:<span class="number">40</span>});
 });
 </pre></td></tr></table></figure>
@@ -885,8 +878,11 @@ app.get(<span class="string">'/article'</span>, <span class="function"><span cla
 app.listen(<span class="number">3000</span>);
 </pre></td></tr></table></figure>
 
-<p>为了使用 Handlebars ，我们通过 require 把 HBS 包装库引入，然后让 Express 使用它。<br>默认情况下，Handlebars 会解析包含了特定引擎扩展的文件，这里是</p>
-<figure class="highlight something.hbs```"><figcaption><span>。但也可以使用 “```view engine```”指令告诉 Express 动态解析 HTML 文件。这样我的编辑器可以提供良好的代码校验和语法高亮。通过 ```app.engine``` 真正加载引擎。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>为了使用 Handlebars ，我们通过 require 把 HBS 包装库引入，然后让 Express 使用它。<br>默认情况下，Handlebars 会解析包含了特定引擎扩展的文件，这里是 <code>something.hbs</code> 。但也可以使用 “<code>view engine</code>”指令告诉 Express 动态解析 HTML 文件。这样我的编辑器可以提供良好的代码校验和语法高亮。通过 <code>app.engine</code> 真正加载引擎。</p>
+<p>最终路由用了新的 <code>render</code> 方法，Express 默认使用 views 文件夹，因此我们可以省略。由于 Express 记住了我们要解析的扩展名，所以它也可以省略。<code>res.render(&#39;something&#39;)</code> 实际等于告诉 Express 查找 <code>views/something.html</code> 。Express 基于模板引擎规则解析它，并返回到浏览器。</p>
+<h3 id=" 主页显示博客条目 ">主页显示博客条目</h3>
+<p>我们可以连接到 MySQL 或者 Mongo，这里我们创建一个静态的数据集，取名 blog.js ，它提供获取一组条目和获取一个条目功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -902,36 +898,20 @@ app.listen(<span class="number">3000</span>);
 14
 15
 16
-17
-18
-19
-20
-21
-22
-23
-24
-</pre></td><td class="code"><pre>
-最终路由用了新的 <span class="escape">``</span><span class="escape">`r</span>ender<span class="escape">``</span><span class="escape">` </span>方法，Express 默认使用 views 文件夹，因此我们可以省略。由于 Express 记住了我们要解析的扩展名，所以它也可以省略。<span class="escape">``</span><span class="escape">`r</span>es.render('something')<span class="escape">``</span><span class="escape">` </span>实际等于告诉 Express 查找 <span class="escape">``</span><span class="escape">`v</span>iews/something.html<span class="escape">``</span><span class="escape">` </span>。Express 基于模板引擎规则解析它，并返回到浏览器。
-
-### 主页显示博客条目
-
-我们可以连接到 MySQL 或者 Mongo，这里我们创建一个静态的数据集，取名 blog.js ，它提供获取一组条目和获取一个条目功能。
-
-<span class="escape">``</span><span class="escape">`j</span>s
-var entries = [
+</pre></td><td class="code"><pre><span class="keyword">var</span> entries = [
 {<span class="string">"id"</span>:<span class="number">1</span>, <span class="string">"title"</span>:<span class="string">"Hello World!"</span>, <span class="string">"body"</span>:<span class="string">"This is the body of my blog entry. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/2/2013"</span>},
 {<span class="string">"id"</span>:<span class="number">2</span>, <span class="string">"title"</span>:<span class="string">"Eggs for Breakfast"</span>, <span class="string">"body"</span>:<span class="string">"Today I had eggs for breakfast. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/3/2013"</span>},
 {<span class="string">"id"</span>:<span class="number">3</span>, <span class="string">"title"</span>:<span class="string">"Beer is Good"</span>, <span class="string">"body"</span>:<span class="string">"News Flash! Beer is awesome!"</span>, <span class="string">"published"</span>:<span class="string">"6/4/2013"</span>},
 {<span class="string">"id"</span>:<span class="number">4</span>, <span class="string">"title"</span>:<span class="string">"Mean People Suck"</span>, <span class="string">"body"</span>:<span class="string">"People who are mean aren't nice or fun to hang around."</span>, <span class="string">"published"</span>:<span class="string">"6/5/2013"</span>},
 {<span class="string">"id"</span>:<span class="number">5</span>, <span class="string">"title"</span>:<span class="string">"I'm Leaving Technology X and You Care"</span>, <span class="string">"body"</span>:<span class="string">"Let me write some link bait about why I'm not using a particular technology anymore."</span>, <span class="string">"published"</span>:<span class="string">"6/10/2013"</span>},
-{<span class="string">"id"</span>:<span class="number">6</span>, <span class="string">"title"</span>:<span class="string">"Help My Kickstarter"</span>, <span class="string">"body"</span>:<span class="string">"I want a new XBox One. Please fund my Kickstarter."</span>, <span class="string">"published"</span>:<span class="string">"6/12/2013"</span>}]<span class="comment">;</span>
-exports.getBlogEntries = function() {
-   <span class="keyword">return</span> entries<span class="comment">;</span>
+{<span class="string">"id"</span>:<span class="number">6</span>, <span class="string">"title"</span>:<span class="string">"Help My Kickstarter"</span>, <span class="string">"body"</span>:<span class="string">"I want a new XBox One. Please fund my Kickstarter."</span>, <span class="string">"published"</span>:<span class="string">"6/12/2013"</span>}];
+exports.getBlogEntries = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+   <span class="keyword">return</span> entries;
 }
  
-exports.getBlogEntry = function(id) {
-   for(var i=<span class="number">0</span><span class="comment">; i &lt; entries.length; i++) {</span>
-      <span class="keyword">if</span>(entries[i].id == id) <span class="keyword">return</span> entries[i]<span class="comment">;</span>
+exports.getBlogEntry = <span class="function"><span class="keyword">function</span><span class="params">(id)</span> {</span>
+   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; entries.length; i++) {
+      <span class="keyword">if</span>(entries[i].id == id) <span class="keyword">return</span> entries[i];
    }
 }
 </pre></td></tr></table></figure>
@@ -989,39 +969,14 @@ app.get(<span class="string">'/article/:id'</span>, <span class="function"><span
 app.listen(<span class="number">3000</span>);
 </pre></td></tr></table></figure>
 
-<p>我们用</p>
-<figure class="highlight require```"><figcaption><span>引入数据集，如此可以调用它得到条目。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="code"><pre>
-在主页，我们给 <span class="code">```</span>render<span class="code">```</span> API 传两个参数，参数是一个对象，包含 <span class="code">```</span>title<span class="code">```</span> 和 <span class="code">```</span>entries<span class="code">```</span> 属性。title 的值时字符串，但是 entries 调用 <span class="code">```</span>blogEngine<span class="code">```</span> API 。我们传的任何数据将对模版生效，主页模版需要调整。
-
-[<span class="link_label">主页模版代码</span>](<span class="link_url">https://gist.github.com/jinlong/8297190#file-home-tpl-html</span>)
-
-即使你从没用过 Handlebars ，仍旧能猜到这里的含义。<span class="code">```</span>#each<span class="code">```</span> 指令将循环一个数组，&#123;&#123;&#125;&#125; 表示从博客条目列表取到的参数。
-
-<span class="header">### 创建一个布局</span>
-
-你肯定关心剩下的 HTML 怎么改，Express 用了模版引擎会自动支持布局。这意味着我可以创建通用的网站设计布局，Express 将利用它构造特定的页面。按照约定，它取名 <span class="code">```</span>layout.something<span class="code">```</span> ，“something”是你使用的特定扩展。我们用了 HTML ，它就是 <span class="code">```</span>layout.html<span class="code">```</span> 。
-
-[<span class="link_label">layout.html 代码</span>](<span class="link_url">https://gist.github.com/jinlong/8297190#file-layout-html</span>)
-
-关于页面没什么亮点，我们跳过，下面看文章路由。URL 现在包含了标记 <span class="code">```</span>:id<span class="code">```</span> ，Express 可以创建动态的 URL ，用于对应请求参数。我们定义的链接像这样：
-<span class="code">```</span>/article/
-</pre></td></tr></table></figure>
-
+<p>我们用 <code>require</code> 引入数据集，如此可以调用它得到条目。</p>
+<p>在主页，我们给 <code>render</code> API 传两个参数，参数是一个对象，包含 <code>title</code> 和 <code>entries</code> 属性。title 的值时字符串，但是 entries 调用 <code>blogEngine</code> API 。我们传的任何数据将对模版生效，主页模版需要调整。</p>
+<p><a href="https://gist.github.com/jinlong/8297190#file-home-tpl-html" target="_blank">主页模版代码</a></p>
+<p>即使你从没用过 Handlebars ，仍旧能猜到这里的含义。<code>#each</code> 指令将循环一个数组，&#123;&#123;&#125;&#125; 表示从博客条目列表取到的参数。</p>
+<h3 id=" 创建一个布局 ">创建一个布局</h3>
+<p>你肯定关心剩下的 HTML 怎么改，Express 用了模版引擎会自动支持布局。这意味着我可以创建通用的网站设计布局，Express 将利用它构造特定的页面。按照约定，它取名 <code>layout.something</code> ，“something”是你使用的特定扩展。我们用了 HTML ，它就是 <code>layout.html</code> 。</p>
+<p><a href="https://gist.github.com/jinlong/8297190#file-layout-html" target="_blank">layout.html 代码</a></p>
+<p>关于页面没什么亮点，我们跳过，下面看文章路由。URL 现在包含了标记 <code>:id</code> ，Express 可以创建动态的 URL ，用于对应请求参数。我们定义的链接像这样：<br><code>/article/</code></p>
 <p>理论上，每一个博客条目需要一个路由，但是创建一个抽象的路由匹配这些请求效果更好。 <code>bodyParser</code> （这一特性来源于 Connect 框架，的确对我很有帮助，它不仅支持查询字符串，而且支持表单主体，几乎每个 Express 应用都会用到它。）</p>
 <h3 id=" 显示个别文章 ">显示个别文章</h3>
 <p>由于 URL 结尾包含动态值，我们可以把它传给 <code>blogEngine</code> 对象，用得到的结果作为视图的变量。</p>
@@ -1032,7 +987,10 @@ app.listen(<span class="number">3000</span>);
 <p><img src="/images/post/exp-blog/express-blog3-article.jpg" /></p>
 <h2 id=" 润色！">润色！</h2>
 <p>我们加点基本的样式，让应用变好看点。Express 提供了简洁的方式添加图像，JavaScript 库和样式表之类的静态资源，简单定义一个静态文件夹，任何请求将从这个文件夹查找文件。</p>
-<p>app.use(express.static(‘public’));</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>app.use(express.static(<span class="string">'public'</span>));
+</pre></td></tr></table></figure>
+
 <p>此时，如果请求 /foo.css，public 文件夹存在 foo.css 文件，将返回它。我把 <a href="http://twitter.github.io/bootstrap/" target="_blank">Bootstrap</a> 和 jQuery 副本放到了 public 文件夹。</p>
 <p>然后在我的 layout.html ，我可以引用这些资源。这是链接 bootstrap.css 的例子：</p>
 <p><a href="https://gist.github.com/jinlong/8297190#file-layout1-html" target="_blank">代码实例</a></p>
@@ -1124,24 +1082,21 @@ app.post(some url, <span class="keyword">do</span> more stuff);
 });
 </pre></td></tr></table></figure>
 
-<p>注意 Express 为 response 对象添加了</p>
-<figure class="highlight send()```"><figcaption><span>方法，一些模板代码可以处理响应。重启应用，访问 [http://localhost:3000/](http://localhost:3000/) 看看。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>注意 Express 为 response 对象添加了 <code>send()</code> 方法，一些模板代码可以处理响应。重启应用，访问 <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a> 看看。</p>
+<p><strong>request.send()</strong> API 智能处理不同类型的数据，假如你想为网站添加简单的基于 JSON 的 API ，Express 可以把返回结果转换成 JSON 并设置适当的响应头。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>
-**request.send()** API 智能处理不同类型的数据，假如你想为网站添加简单的基于 <span class="built_in">JSON</span> 的 API ，Express 可以把返回结果转换成 <span class="built_in">JSON</span> 并设置适当的响应头。
-
-```js
-app.get(<span class="string">'/api'</span>, <span class="function"><span class="keyword">function</span><span class="params">(request, response)</span> {</span>
+</pre></td><td class="code"><pre>app.get(<span class="string">'/api'</span>, <span class="function"><span class="keyword">function</span><span class="params">(request, response)</span> {</span>
    response.send({name:<span class="string">"Raymond"</span>,age:<span class="number">40</span>});
 });
 </pre></td></tr></table></figure>
 
 <p>可想而知，添加更多的路由，并处理所需的响应，就可以构建一个应用。<br>]]></summary>
+    
+      <category term="Express" scheme="http://jinlong.github.io/tags/Express/"/>
+    
+      <category term="Node.js" scheme="http://jinlong.github.io/tags/Node.js/"/>
     
       <category term="Node.js" scheme="http://jinlong.github.io/categories/Node.js/"/>
     
@@ -1154,7 +1109,7 @@ app.get(<span class="string">'/api'</span>, <span class="function"><span class="
     <link href="http://jinlong.github.io/2013/12/22/grunt-for-fe/"/>
     <id>http://jinlong.github.io/2013/12/22/grunt-for-fe/</id>
     <published>2013-12-22T15:42:00.000Z</published>
-    <updated>2013-12-22T16:24:28.000Z</updated>
+    <updated>2014-10-25T02:19:54.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://24ways.org/2013/grunt-is-not-weird-and-hard/" target="_blank">Grunt for People Who Think Things Like Grunt are Weird and Hard</a><br>此篇笔记包含了个人的理解，只记录了文章的要点，并没有逐句翻译，如有不妥望指正。</p>
 </blockquote>
@@ -1458,6 +1413,8 @@ app.get(<span class="string">'/api'</span>, <span class="function"><span class="
 
 <p>]]></summary>
     
+      <category term="Grunt" scheme="http://jinlong.github.io/tags/Grunt/"/>
+    
       <category term="Grunt" scheme="http://jinlong.github.io/categories/Grunt/"/>
     
   </entry>
@@ -1467,7 +1424,7 @@ app.get(<span class="string">'/api'</span>, <span class="function"><span class="
     <link href="http://jinlong.github.io/2013/12/22/grunt-getting-started/"/>
     <id>http://jinlong.github.io/2013/12/22/grunt-getting-started/</id>
     <published>2013-12-22T09:03:00.000Z</published>
-    <updated>2013-12-22T15:44:47.000Z</updated>
+    <updated>2014-10-25T02:20:12.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文： <a href="http://gruntjs.com/getting-started" target="_blank">Getting started</a></p>
 </blockquote>
@@ -1582,6 +1539,10 @@ app.get(<span class="string">'/api'</span>, <span class="function"><span class="
 ]]></content>
     
     
+      <category term="Grunt" scheme="http://jinlong.github.io/tags/Grunt/"/>
+    
+      <category term="Node.js" scheme="http://jinlong.github.io/tags/Node.js/"/>
+    
       <category term="Grunt" scheme="http://jinlong.github.io/categories/Grunt/"/>
     
       <category term="Nodejs" scheme="http://jinlong.github.io/categories/Grunt/Nodejs/"/>
@@ -1593,7 +1554,7 @@ app.get(<span class="string">'/api'</span>, <span class="function"><span class="
     <link href="http://jinlong.github.io/2013/11/25/javascript-best-practices/"/>
     <id>http://jinlong.github.io/2013/11/25/javascript-best-practices/</id>
     <published>2013-11-25T05:12:00.000Z</published>
-    <updated>2013-11-25T07:25:31.000Z</updated>
+    <updated>2014-10-25T02:20:34.000Z</updated>
     <content type="html"><![CDATA[<p>本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 <a href="http://www.slideshare.net/cheilmann/javascript-best-practices-1041724" target="_blank">PPT</a> （需翻墙）</p>
 <blockquote>
 <p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/" target="_blank">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/" target="_blank">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
@@ -2393,6 +2354,8 @@ module.init();
 
 <p>]]></summary>
     
+      <category term="Javascript" scheme="http://jinlong.github.io/tags/Javascript/"/>
+    
       <category term="Javascript" scheme="http://jinlong.github.io/categories/Javascript/"/>
     
   </entry>
@@ -2402,7 +2365,7 @@ module.init();
     <link href="http://jinlong.github.io/2013/11/25/smart-transitions-in-user-experience-design/"/>
     <id>http://jinlong.github.io/2013/11/25/smart-transitions-in-user-experience-design/</id>
     <published>2013-11-25T03:55:00.000Z</published>
-    <updated>2013-11-25T04:33:34.000Z</updated>
+    <updated>2014-10-25T02:20:53.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://uxdesign.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/" target="_blank">Smart Transitions In User Experience Design</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
 </blockquote>
@@ -2482,6 +2445,10 @@ module.init();
 <p>我们对于产品的体验和印象来源于诸多因素的集合，交互扮演一个根基的角色。我们无法想象用户界面是静态设计，随后再添加交互魔法。相反，我们需要在早期加入交互特性，把它当成天然的组成部分。</p>
 <p>让我们看看一些巧妙的交互，它们是一些微妙的动画，优雅地改善了用户体验。<br>]]></summary>
     
+      <category term="用户体验" scheme="http://jinlong.github.io/tags/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/"/>
+    
+      <category term="交互设计" scheme="http://jinlong.github.io/tags/%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1/"/>
+    
       <category term="用户体验" scheme="http://jinlong.github.io/categories/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/"/>
     
       <category term="交互设计" scheme="http://jinlong.github.io/categories/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1/"/>
@@ -2493,7 +2460,7 @@ module.init();
     <link href="http://jinlong.github.io/2013/10/20/ten-years-of-sliding-doors-of-css/"/>
     <id>http://jinlong.github.io/2013/10/20/ten-years-of-sliding-doors-of-css/</id>
     <published>2013-10-20T10:24:00.000Z</published>
-    <updated>2013-10-27T10:30:53.000Z</updated>
+    <updated>2014-10-25T02:21:14.000Z</updated>
     <content type="html"><![CDATA[<p><img src="/images/post/css-sliding-door/sliding_doors.png"></p>
 <blockquote>
 <p>看到这篇文章，真是让我心潮澎湃，仿佛看到刚接触前端的我，拿着本《<a href="http://www.amazon.cn/CSS%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6-%E6%B8%A9%E8%B0%A6/dp/B00139O3TG/ref=sr_1_1?ie=UTF8&amp;qid=1382869723&amp;sr=8-1&amp;keywords=css%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6" target="_blank">CSS 设计彻底研究</a>》慢慢的啃。当时看到前人发明的 CSS 滑动门，真是觉得相当惊艳，转眼间，这个技术距今已有 10 年。</p>
@@ -2507,6 +2474,10 @@ module.init();
 ]]></content>
     
     
+      <category term="CSS" scheme="http://jinlong.github.io/tags/CSS/"/>
+    
+      <category term="滑动门" scheme="http://jinlong.github.io/tags/%E6%BB%91%E5%8A%A8%E9%97%A8/"/>
+    
       <category term="CSS" scheme="http://jinlong.github.io/categories/CSS/"/>
     
       <category term="滑动门" scheme="http://jinlong.github.io/categories/CSS/%E6%BB%91%E5%8A%A8%E9%97%A8/"/>
@@ -2518,7 +2489,7 @@ module.init();
     <link href="http://jinlong.github.io/2013/10/17/7-tips-for-a-node-dot-js-padawan/"/>
     <id>http://jinlong.github.io/2013/10/17/7-tips-for-a-node-dot-js-padawan/</id>
     <published>2013-10-17T09:38:00.000Z</published>
-    <updated>2013-10-27T10:18:20.000Z</updated>
+    <updated>2014-10-25T02:21:32.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="https://medium.com/tech-talk/e7c0b0e5ce3c" target="_blank">7 tips for a Node.js padawan</a><br>感谢 <a href="http://diwu.me/about/index.html" target="_blank">Di Wu</a> 同学，参考了他的译文《<a href="http://diwu.me/2013/09/24/7-tips-for-a-node-dot-js-padawan/" target="_blank">7 Tips for a Node.js Padawan</a>》，某些不妥的地方做了些许修改。</p>
 </blockquote>
@@ -2881,6 +2852,8 @@ callback(“good”);
 ]]></content>
     
     
+      <category term="Node.js" scheme="http://jinlong.github.io/tags/Node.js/"/>
+    
       <category term="Node.js" scheme="http://jinlong.github.io/categories/Node.js/"/>
     
       <category term="入门" scheme="http://jinlong.github.io/categories/Node.js/%E5%85%A5%E9%97%A8/"/>
@@ -2892,7 +2865,7 @@ callback(“good”);
     <link href="http://jinlong.github.io/2013/10/02/client-side-full-text-search-in-css/"/>
     <id>http://jinlong.github.io/2013/10/02/client-side-full-text-search-in-css/</id>
     <published>2013-10-02T09:04:00.000Z</published>
-    <updated>2013-10-27T09:30:43.000Z</updated>
+    <updated>2014-10-25T02:21:52.000Z</updated>
     <content type="html"><![CDATA[<p>前些天看到一篇文章《<a href="http://redotheweb.com/2013/05/15/client-side-full-text-search-in-css.html" target="_blank">Client-side full-text search in CSS</a>》，个人感觉思路比较巧，跟大家分享一下。</p>
 <p>总体思路：</p>
 <p>使用 <strong>data-</strong> 属性用于索引，带 <strong>CSS3 选择器</strong>的动态样式表用于检索，主要用 CSS 简单实现了客户端的全文搜索。</p>
@@ -2997,6 +2970,10 @@ document.getElementById(<span class="string">'search'</span>).addEventListener(<
 ]]></content>
     
     
+      <category term="CSS" scheme="http://jinlong.github.io/tags/CSS/"/>
+    
+      <category term="全文搜索" scheme="http://jinlong.github.io/tags/%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2/"/>
+    
       <category term="CSS" scheme="http://jinlong.github.io/categories/CSS/"/>
     
       <category term="全文搜索" scheme="http://jinlong.github.io/categories/CSS/%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2/"/>
@@ -3008,7 +2985,7 @@ document.getElementById(<span class="string">'search'</span>).addEventListener(<
     <link href="http://jinlong.github.io/2013/09/23/safari-ios7-html5-problems-apis-review/"/>
     <id>http://jinlong.github.io/2013/09/23/safari-ios7-html5-problems-apis-review/</id>
     <published>2013-09-23T15:32:00.000Z</published>
-    <updated>2013-09-24T05:08:03.000Z</updated>
+    <updated>2014-10-25T02:22:33.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review" target="_blank">Safari on iOS 7 and HTML5: problems, changes and new APIs</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a><br>感谢 <a href="http://weibo.com/cssmagic" target="_blank">CSS 魔法</a> 指正翻译问题</p>
 </blockquote>
@@ -3675,6 +3652,12 @@ speechSynthesis.speak(speech);
 ]]></content>
     
     
+      <category term="iOS7" scheme="http://jinlong.github.io/tags/iOS7/"/>
+    
+      <category term="Safari" scheme="http://jinlong.github.io/tags/Safari/"/>
+    
+      <category term="HTML5" scheme="http://jinlong.github.io/tags/HTML5/"/>
+    
       <category term="iOS7" scheme="http://jinlong.github.io/categories/iOS7/"/>
     
       <category term="Safari" scheme="http://jinlong.github.io/categories/iOS7/Safari/"/>
@@ -3688,7 +3671,7 @@ speechSynthesis.speak(speech);
     <link href="http://jinlong.github.io/2013/09/11/var-and-fun-hoisting/"/>
     <id>http://jinlong.github.io/2013/09/11/var-and-fun-hoisting/</id>
     <published>2013-09-11T03:12:00.000Z</published>
-    <updated>2013-09-11T03:23:05.000Z</updated>
+    <updated>2014-10-25T02:22:49.000Z</updated>
     <content type="html"><![CDATA[<p>直入主题，JavaScript 中的变量和函数提升，有时还是容易错的，记录一下。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -3879,6 +3862,8 @@ console.log(declaredLater);
 
 ]]></summary>
     
+      <category term="JavaScript" scheme="http://jinlong.github.io/tags/JavaScript/"/>
+    
       <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
     
   </entry>
@@ -3888,7 +3873,7 @@ console.log(declaredLater);
     <link href="http://jinlong.github.io/2013/08/29/devtoolsecrets/"/>
     <id>http://jinlong.github.io/2013/08/29/devtoolsecrets/</id>
     <published>2013-08-29T03:32:00.000Z</published>
-    <updated>2013-08-30T04:21:24.000Z</updated>
+    <updated>2014-10-25T02:23:27.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>源网站：<a href="http://devtoolsecrets.com/" target="_blank">Secrets of the Browser Developer Tools</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码农</a></p>
 </blockquote>
@@ -4887,6 +4872,12 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 </ul>
 ]]></summary>
     
+      <category term="Debug" scheme="http://jinlong.github.io/tags/Debug/"/>
+    
+      <category term="浏览器" scheme="http://jinlong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+      <category term="开发工具" scheme="http://jinlong.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+    
       <category term="Debug" scheme="http://jinlong.github.io/categories/Debug/"/>
     
       <category term="浏览器" scheme="http://jinlong.github.io/categories/Debug/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
@@ -4900,7 +4891,7 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
     <link href="http://jinlong.github.io/2013/08/13/centering-all-the-directions/"/>
     <id>http://jinlong.github.io/2013/08/13/centering-all-the-directions/</id>
     <published>2013-08-13T10:00:00.000Z</published>
-    <updated>2013-08-14T08:30:23.000Z</updated>
+    <updated>2014-10-25T02:24:40.000Z</updated>
     <content type="html"><![CDATA[<p>我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。<br>孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~<br>各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。</p>
 <h2 id="&lt;center&gt;">&lt;center&gt;</h2>
 <p>不建议用了。</p>
@@ -5275,6 +5266,12 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 ]]></content>
     
     
+      <category term="CSS" scheme="http://jinlong.github.io/tags/CSS/"/>
+    
+      <category term="水平居中" scheme="http://jinlong.github.io/tags/%E6%B0%B4%E5%B9%B3%E5%B1%85%E4%B8%AD/"/>
+    
+      <category term="垂直居中" scheme="http://jinlong.github.io/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/"/>
+    
       <category term="CSS" scheme="http://jinlong.github.io/categories/CSS/"/>
     
       <category term="水平居中" scheme="http://jinlong.github.io/categories/CSS/%E6%B0%B4%E5%B9%B3%E5%B1%85%E4%B8%AD/"/>
@@ -5288,7 +5285,7 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
     <link href="http://jinlong.github.io/2013/08/13/javascript-promises/"/>
     <id>http://jinlong.github.io/2013/08/13/javascript-promises/</id>
     <published>2013-08-13T05:13:00.000Z</published>
-    <updated>2013-08-14T08:53:18.000Z</updated>
+    <updated>2014-10-25T02:24:23.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://wildermuth.com/2013/8/3/JavaScript_Promises" target="_blank">JavaScript Promises</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
 </blockquote>
@@ -5319,6 +5316,8 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 ]]></content>
     
     
+      <category term="JavaScript" scheme="http://jinlong.github.io/tags/JavaScript/"/>
+    
       <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
     
   </entry>
@@ -5328,7 +5327,7 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
     <link href="http://jinlong.github.io/2013/07/23/porting-chrome-extension-to-opera/"/>
     <id>http://jinlong.github.io/2013/07/23/porting-chrome-extension-to-opera/</id>
     <published>2013-07-23T09:23:00.000Z</published>
-    <updated>2013-07-23T10:08:52.000Z</updated>
+    <updated>2014-10-25T02:25:02.000Z</updated>
     <content type="html"><![CDATA[<p><strong>准备工作：</strong></p>
 <p>下载：<a href="https://getfirebug.com/firebuglite" target="_blank">firebuglite 源码</a>   </p>
 <p>我下载的<a href="https://getfirebug.com/releases/lite/latest/firebug-lite.tar.tgz" target="_blank">稳定版</a></p>
@@ -5466,6 +5465,12 @@ content scripts 可以获取扩展 ID：
 ]]></content>
     
     
+      <category term="Opera Extensions" scheme="http://jinlong.github.io/tags/Opera%20Extensions/"/>
+    
+      <category term="Chrome Extensions" scheme="http://jinlong.github.io/tags/Chrome%20Extensions/"/>
+    
+      <category term="Firebug" scheme="http://jinlong.github.io/tags/Firebug/"/>
+    
       <category term="Opera Extensions" scheme="http://jinlong.github.io/categories/Opera%20Extensions/"/>
     
       <category term="Chrome Extensions" scheme="http://jinlong.github.io/categories/Opera%20Extensions/Chrome%20Extensions/"/>
@@ -5479,7 +5484,7 @@ content scripts 可以获取扩展 ID：
     <link href="http://jinlong.github.io/2013/07/08/centering-percentage-widthheight-elements/"/>
     <id>http://jinlong.github.io/2013/07/08/centering-percentage-widthheight-elements/</id>
     <published>2013-07-08T05:47:00.000Z</published>
-    <updated>2013-07-08T06:16:48.000Z</updated>
+    <updated>2014-10-25T02:25:40.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://css-tricks.com/centering-percentage-widthheight-elements/" target="_blank">Centering Percentage Width/Height Elements</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
 <p>如果知道该元素确切的宽高，居中它比较容易，可以<a href="http://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/" target="_blank">参考此文</a> ，</p>
@@ -5559,6 +5564,12 @@ content scripts 可以获取扩展 ID：
 ]]></content>
     
     
+      <category term="CSS" scheme="http://jinlong.github.io/tags/CSS/"/>
+    
+      <category term="居中" scheme="http://jinlong.github.io/tags/%E5%B1%85%E4%B8%AD/"/>
+    
+      <category term="translate" scheme="http://jinlong.github.io/tags/translate/"/>
+    
       <category term="CSS" scheme="http://jinlong.github.io/categories/CSS/"/>
     
       <category term="居中" scheme="http://jinlong.github.io/categories/CSS/%E5%B1%85%E4%B8%AD/"/>
@@ -5572,7 +5583,7 @@ content scripts 可以获取扩展 ID：
     <link href="http://jinlong.github.io/2013/07/06/using-javascripts-tostring-method/"/>
     <id>http://jinlong.github.io/2013/07/06/using-javascripts-tostring-method/</id>
     <published>2013-07-06T05:47:00.000Z</published>
-    <updated>2013-07-08T06:17:39.000Z</updated>
+    <updated>2014-10-25T02:25:22.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://designpepper.com/blog/drips/using-javascripts-tostring-method" target="_blank">Using JavaScript’s ‘toString’ Method</a> （需翻墙）<br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
 </blockquote>
@@ -5702,6 +5713,10 @@ console.log(<span class="keyword">message</span>);
 ]]></content>
     
     
+      <category term="JavaScript" scheme="http://jinlong.github.io/tags/JavaScript/"/>
+    
+      <category term="toString" scheme="http://jinlong.github.io/tags/toString/"/>
+    
       <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
     
       <category term="toString" scheme="http://jinlong.github.io/categories/JavaScript/toString/"/>
@@ -5713,7 +5728,7 @@ console.log(<span class="keyword">message</span>);
     <link href="http://jinlong.github.io/2013/06/24/better-performance-with-requestanimationframe/"/>
     <id>http://jinlong.github.io/2013/06/24/better-performance-with-requestanimationframe/</id>
     <published>2013-06-24T08:06:00.000Z</published>
-    <updated>2013-07-08T06:00:17.000Z</updated>
+    <updated>2014-10-25T02:25:58.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/" target="_blank">Better performance with requestAnimationFrame</a><br>作者：<a href="http://dev.opera.com/author/dropoutwannabe" target="_blank">Luz Caballero</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
 </blockquote>
@@ -5899,6 +5914,8 @@ function stop() {
 ]]></content>
     
     
+      <category term="requestAnimationFrame" scheme="http://jinlong.github.io/tags/requestAnimationFrame/"/>
+    
       <category term="requestAnimationFrame" scheme="http://jinlong.github.io/categories/requestAnimationFrame/"/>
     
       <category term="game" scheme="http://jinlong.github.io/categories/requestAnimationFrame/game/"/>
@@ -5910,7 +5927,7 @@ function stop() {
     <link href="http://jinlong.github.io/2013/06/05/the-design-of-code-organizing-javascript/"/>
     <id>http://jinlong.github.io/2013/06/05/the-design-of-code-organizing-javascript/</id>
     <published>2013-06-05T09:02:00.000Z</published>
-    <updated>2013-06-05T09:36:13.000Z</updated>
+    <updated>2014-10-25T02:26:17.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://alistapart.com/article/the-design-of-code-organizing-javascript" target="_blank">The Design of Code: Organizing JavaScript</a><br>作者：<a href="http://alistapart.com/author/acolangelo" target="_blank">Anthony Colangelo</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">@涂鸦码龙</a></p>
 </blockquote>
@@ -6192,6 +6209,10 @@ jpm.open( );
 <p>已有许多设计模式，同样有许多相关资源。<a href="https://twitter.com/addyosmani" target="_blank">Addy Osmani</a> 写了本关于 JavaScript 设计模式的书《<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/" target="_blank">令人惊奇的书（免费！）</a>》，我极力推荐给各个水平的开发者。</p>
 <p><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript" target="_blank">模块模式</a> 是一个简单的结构基础，它可以让你的代码保持干净和条例清晰。一个“模块”就是个标准的包含方法和属性的对象字面量，简单是这个模式的最大亮点：甚至一些不熟悉传统的软件设计模式的人，一看就能立刻明白代码是如何工作的。<br>]]></summary>
     
+      <category term="jQuery" scheme="http://jinlong.github.io/tags/jQuery/"/>
+    
+      <category term="设计模式" scheme="http://jinlong.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
       <category term="jQuery" scheme="http://jinlong.github.io/categories/jQuery/"/>
     
       <category term="设计模式" scheme="http://jinlong.github.io/categories/jQuery/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
@@ -6203,7 +6224,7 @@ jpm.open( );
     <link href="http://jinlong.github.io/2013/05/22/opera-14-for-android-is-out/"/>
     <id>http://jinlong.github.io/2013/05/22/opera-14-for-android-is-out/</id>
     <published>2013-05-22T11:56:00.000Z</published>
-    <updated>2013-05-22T12:30:26.000Z</updated>
+    <updated>2014-10-25T02:26:36.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>相关资料：<br><a href="http://my.opera.com/ODIN/blog/opera-14-for-android-is-out" target="_blank">Opera 14 for Android is out!</a><br><a href="http://my.opera.com/chooseopera/blog/opera-for-android-now-released" target="_blank">OUT TODAY: OPERA FOR ANDROID, FULL AND FINAL!</a><br>先唠一下 Opera 14 新功能哈，作为开发者可以直接移步<a href="#developer">这里</a>。</p>
 </blockquote>
@@ -6265,6 +6286,8 @@ jpm.open( );
 <p><strong>越野模式</strong></p>
 <p>启用越野模式即启用了 Opera Mini 功能，当您网络不佳时，压缩网页，提高速度，省钱省流量。</p>
 <p>]]></summary>
+    
+      <category term="Opera" scheme="http://jinlong.github.io/tags/Opera/"/>
     
       <category term="Opera" scheme="http://jinlong.github.io/categories/Opera/"/>
     
