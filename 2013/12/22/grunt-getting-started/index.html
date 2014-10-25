@@ -16,33 +16,20 @@
 npm install -g grunt-cli
 
 
-可以在任何路径运行
-命令1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
+可以在任何路径运行 grunt 命令
+通过 Gruntfile 文件运行某一版本 grunt ，允许多版本共存
+CLI 如何工作
+每次运行 grunt ，它会使用 node 的 require() 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。
+找到了本地安装的 Grunt ，CLI 加载本地安装的 Grunt 库，应用 Gruntfile 里的配置，执行预期的任务。
+想理解真正奥秘，可以读源码，它非常短。
+运行已存在的 Grunt 项目
+假设  Grunt CLI 已安装，项目已通过 package.json 和 Gruntfile 配置好，使用 Grunt 非常简单：
 
-通过 ```Gruntfile``">
+切换到项目的根目录   
+通过 npm install 安装项目依赖   
+通过 grunt 命令运行 Grunt 
+
+grunt --help 可以罗列已安装的 Grunt 任务列表，但是最好从项目文档开始。">
     
     
     
@@ -107,7 +94,7 @@ npm install -g grunt-cli
     </p>
   <p class="article-time">
     <time datetime="2013-12-22T09:03:00.000Z" itemprop="datePublished">12月 22 2013</time>
-    更新日期:<time datetime="2014-10-25T02:20:12.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-10-25T03:00:47.000Z" itemprop="dateModified">10月 25 2014</time>
     
   </p>
 </header>
@@ -116,7 +103,7 @@ npm install -g grunt-cli
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _CLI"><span class="toc-number">1.</span> <span class="toc-text">安装 CLI</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#package-json"><span class="toc-number">1.1.</span> <span class="toc-text">package.json</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Grunt_ 和 _gruntplugins"><span class="toc-number">2.</span> <span class="toc-text">安装 Grunt 和 gruntplugins</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gruntfile"><span class="toc-number">3.</span> <span class="toc-text">Gruntfile</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gruntfile_ 例子 "><span class="toc-number">3.1.</span> <span class="toc-text">Gruntfile 例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“_wrapper_ 包装”函数 "><span class="toc-number">3.2.</span> <span class="toc-text">“ wrapper 包装”函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 项目和任务配置 "><span class="toc-number">3.3.</span> <span class="toc-text">项目和任务配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 加载 _Grunt_ 插件和任务 "><span class="toc-number">3.4.</span> <span class="toc-text">加载 Grunt 插件和任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 自定义任务 "><span class="toc-number">3.5.</span> <span class="toc-text">自定义任务</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _CLI"><span class="toc-number">1.</span> <span class="toc-text">安装 CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CLI_ 如何工作 "><span class="toc-number">2.</span> <span class="toc-text">CLI 如何工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 运行已存在的 _Grunt_ 项目 "><span class="toc-number">3.</span> <span class="toc-text">运行已存在的 Grunt 项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 准备新的 _Grunt_ 项目 "><span class="toc-number">4.</span> <span class="toc-text">准备新的 Grunt 项目</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#package-json"><span class="toc-number">4.1.</span> <span class="toc-text">package.json</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Grunt_ 和 _gruntplugins"><span class="toc-number">5.</span> <span class="toc-text">安装 Grunt 和 gruntplugins</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gruntfile"><span class="toc-number">6.</span> <span class="toc-text">Gruntfile</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gruntfile_ 例子 "><span class="toc-number">6.1.</span> <span class="toc-text">Gruntfile 例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“_wrapper_ 包装”函数 "><span class="toc-number">6.2.</span> <span class="toc-text">“ wrapper 包装”函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 项目和任务配置 "><span class="toc-number">6.3.</span> <span class="toc-text">项目和任务配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 加载 _Grunt_ 插件和任务 "><span class="toc-number">6.4.</span> <span class="toc-text">加载 Grunt 插件和任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 自定义任务 "><span class="toc-number">6.5.</span> <span class="toc-text">自定义任务</span></a></li></ol>
 		</div>
 		
 		<blockquote>
@@ -127,57 +114,22 @@ npm install -g grunt-cli
 </pre></td><td class="code"><pre>npm install <span class="attribute">-g</span> grunt<span class="attribute">-cli</span>
 </pre></td></tr></table></figure>
 
-<p>可以在任何路径运行</p>
-<figure class="highlight grunt```"><figcaption><span>命令</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-</pre></td><td class="code"><pre>
-通过 <span class="escape">``</span><span class="escape">`G</span>runtfile<span class="escape">``</span><span class="escape">` </span>文件运行某一版本 grunt ，允许多版本共存
-
-##CLI 如何工作
-
-每次运行 grunt ，它会使用 node 的 <span class="escape">``</span><span class="escape">`r</span>equire()<span class="escape">``</span><span class="escape">` </span>查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。
-
-找到了本地安装的 Grunt ，CLI 加载本地安装的 Grunt 库，应用 <span class="escape">``</span><span class="escape">`G</span>runtfile<span class="escape">``</span><span class="escape">` </span>里的配置，执行预期的任务。
-
-<span class="label">想理解真正奥秘，可以 [读源码](https:</span>//github.com/gruntjs/grunt-cli/blob/master/bin/grunt)，它非常短。
-
-## 运行已存在的 Grunt 项目
-
-假设  Grunt CLI 已安装，项目已通过 <span class="escape">``</span><span class="escape">`p</span>ackage.json<span class="escape">``</span><span class="escape">` </span>和 <span class="escape">``</span><span class="escape">`G</span>runtfile<span class="escape">``</span><span class="escape">` </span>配置好，使用 Grunt 非常简单：
-
-<span class="number">1</span>. 切换到项目的根目录   
-<span class="number">2</span>. 通过 <span class="escape">``</span><span class="escape">`n</span>pm install<span class="escape">``</span><span class="escape">` </span>安装项目依赖   
-<span class="number">3</span>. 通过 <span class="escape">``</span><span class="escape">`g</span>runt<span class="escape">``</span><span class="escape">` </span>命令运行 Grunt 
-
-<span class="escape">``</span><span class="escape">`g</span>runt --help<span class="escape">``</span><span class="escape">` </span>可以罗列已安装的 Grunt 任务列表，但是最好从项目文档开始。
-&lt;!--more--&gt;
-## 准备新的 Grunt 项目
-
-典型安装是往项目中添加<span class="number">2</span>个文件：<span class="escape">``</span><span class="escape">`p</span>ackage.json<span class="escape">``</span><span class="escape">` </span>和 <span class="escape">``</span><span class="escape">`G</span>runtfile
-</pre></td></tr></table></figure>
-
+<p>可以在任何路径运行 <code>grunt</code> 命令</p>
+<p>通过 <code>Gruntfile</code> 文件运行某一版本 grunt ，允许多版本共存</p>
+<h2 id="CLI_ 如何工作 ">CLI 如何工作</h2>
+<p>每次运行 grunt ，它会使用 node 的 <code>require()</code> 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。</p>
+<p>找到了本地安装的 Grunt ，CLI 加载本地安装的 Grunt 库，应用 <code>Gruntfile</code> 里的配置，执行预期的任务。</p>
+<p>想理解真正奥秘，可以<a href="https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt" target="_blank">读源码</a>，它非常短。</p>
+<h2 id=" 运行已存在的 _Grunt_ 项目 ">运行已存在的 Grunt 项目</h2>
+<p>假设  Grunt CLI 已安装，项目已通过 <code>package.json</code> 和 <code>Gruntfile</code> 配置好，使用 Grunt 非常简单：</p>
+<ol>
+<li>切换到项目的根目录   </li>
+<li>通过 <code>npm install</code> 安装项目依赖   </li>
+<li>通过 <code>grunt</code> 命令运行 Grunt </li>
+</ol>
+<p><code>grunt --help</code> 可以罗列已安装的 Grunt 任务列表，但是最好从项目文档开始。<br><a id="more"></a></p>
+<h2 id=" 准备新的 _Grunt_ 项目 ">准备新的 Grunt 项目</h2>
+<p>典型安装是往项目中添加 2 个文件：<code>package.json</code> 和 <code>Gruntfile</code></p>
 <p><strong>package.json</strong>：存储作为 npm 发布模块的项目的元数据。你可以在 <a href="https://npmjs.org/doc/json.html#devDependencies" target="_blank">devDependencies</a> 一项列举项目的需要的 Grunt 插件。</p>
 <p><strong>Gruntfile</strong>：文件名是 <code>Gruntfile.js</code> 或者 <code>Gruntfile.coffee</code> ，用于配置或定义任务和加载 Grunt 插件。</p>
 <h3 id="package-json">package.json</h3>
@@ -215,7 +167,14 @@ npm install -g grunt-cli
 <p>既然已经见到了整个 Gruntfile ，下面继续看看它的组成部分。</p>
 <h3 id="“_wrapper_ 包装”函数 ">“ wrapper 包装”函数</h3>
 <p>所有的 Gruntfile （和 gruntplugin）使用这种基本格式，所有的 Grunt 代码必须放到特定的函数里面：</p>
-<p>module.exports = function(grunt) {<br>  // Do grunt-related things in here<br>};</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>module.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> {</span>
+  <span class="comment">// Do grunt-related things in here</span>
+};
+</pre></td></tr></table></figure>
+
 <h3 id=" 项目和任务配置 ">项目和任务配置</h3>
 <p>大部分的 Grunt 任务依赖于 <a href="http://gruntjs.com/grunt#grunt.initconfig" target="_blank">grunt.initConfig</a> 方法定义的配置数据。此例中，<strong>grunt.file.readJSON(‘package.json’)</strong> 把 package.json 中存储的 JSON 元数据导入到 grunt 配置中。因为 <strong>&lt;% %&gt;</strong> 模版字符串可能引用任何配置属性，像文件路径，文件列表之类的配置数据如此定义，为了避免重复代码。</p>
 <p>配置对象可以存储任意的数据，只要不跟任务需要的属性冲突即可，否则将被忽略。此外，由于这是 JavaScript 文件，所以不仅限于 JSON ；可以用合法的 JS 。<a href="http://github.com/gruntjs/grunt-contrib-uglify" target="_blank">grunt-contrib-uglify</a> 的 uglify 任务需要指定 <strong>uglify</strong> 属性。<strong>banner</strong> 选项需要指定注释内容，<strong>build</strong> 属性定义最小化的源文件和目标文件。</p>
@@ -226,7 +185,10 @@ npm install -g grunt-cli
 <h3 id=" 自定义任务 ">自定义任务</h3>
 <p>你可以配置 Grunt 默认执行一个或多个任务。以下例子，命令行运行 grunt，默认会执行 <strong>uglify</strong> 任务，等同于执行 <strong>grunt uglify</strong> 或者 <strong>grunt default</strong> 。多个任务（带或不带参数）需要放到数组里。</p>
 <p>// 默认任务</p>
-<p>grunt.registerTask(‘default’, [‘uglify’]);</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>]);
+</pre></td></tr></table></figure>
+
 <p>如果 Grunt 插件无法满足要求，你可以在 Gruntfile 定义自己的任务。例如，这个 Gruntfile 定义了自己的 default 任务，甚至没有利用任务配置：</p>
 <p><a href="https://gist.github.com/jinlong/8083660" target="_blank">https://gist.github.com/jinlong/8083660</a></p>
 <p>定制的项目专属任务不需要定义到 Gruntfile 中；可以在外部 <strong>.js</strong> 文件定义，通过 <a href="http://gruntjs.com/grunt#grunt.loadtasks" target="_blank">grunt.loadTasks</a> 方法加载。</p>
@@ -306,7 +268,7 @@ npm install -g grunt-cli
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _CLI"><span class="toc-number">1.</span> <span class="toc-text">安装 CLI</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#package-json"><span class="toc-number">1.1.</span> <span class="toc-text">package.json</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Grunt_ 和 _gruntplugins"><span class="toc-number">2.</span> <span class="toc-text">安装 Grunt 和 gruntplugins</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gruntfile"><span class="toc-number">3.</span> <span class="toc-text">Gruntfile</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gruntfile_ 例子 "><span class="toc-number">3.1.</span> <span class="toc-text">Gruntfile 例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“_wrapper_ 包装”函数 "><span class="toc-number">3.2.</span> <span class="toc-text">“ wrapper 包装”函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 项目和任务配置 "><span class="toc-number">3.3.</span> <span class="toc-text">项目和任务配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 加载 _Grunt_ 插件和任务 "><span class="toc-number">3.4.</span> <span class="toc-text">加载 Grunt 插件和任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 自定义任务 "><span class="toc-number">3.5.</span> <span class="toc-text">自定义任务</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _CLI"><span class="toc-number">1.</span> <span class="toc-text">安装 CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CLI_ 如何工作 "><span class="toc-number">2.</span> <span class="toc-text">CLI 如何工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 运行已存在的 _Grunt_ 项目 "><span class="toc-number">3.</span> <span class="toc-text">运行已存在的 Grunt 项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 准备新的 _Grunt_ 项目 "><span class="toc-number">4.</span> <span class="toc-text">准备新的 Grunt 项目</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#package-json"><span class="toc-number">4.1.</span> <span class="toc-text">package.json</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Grunt_ 和 _gruntplugins"><span class="toc-number">5.</span> <span class="toc-text">安装 Grunt 和 gruntplugins</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gruntfile"><span class="toc-number">6.</span> <span class="toc-text">Gruntfile</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gruntfile_ 例子 "><span class="toc-number">6.1.</span> <span class="toc-text">Gruntfile 例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“_wrapper_ 包装”函数 "><span class="toc-number">6.2.</span> <span class="toc-text">“ wrapper 包装”函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 项目和任务配置 "><span class="toc-number">6.3.</span> <span class="toc-text">项目和任务配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 加载 _Grunt_ 插件和任务 "><span class="toc-number">6.4.</span> <span class="toc-text">加载 Grunt 插件和任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 自定义任务 "><span class="toc-number">6.5.</span> <span class="toc-text">自定义任务</span></a></li></ol>
   </div>
 
 <div id="asidepart">
@@ -344,6 +306,8 @@ npm install -g grunt-cli
 		
 			<li><a href="/tags/Handlebars/" title="Handlebars">Handlebars<sup>1</sup></a></li>
 		
+			<li><a href="/tags/JSHint/" title="JSHint">JSHint<sup>1</sup></a></li>
+		
 			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
 		
 			<li><a href="/tags/Javascript/" title="Javascript">Javascript<sup>1</sup></a></li>
@@ -356,8 +320,6 @@ npm install -g grunt-cli
 		
 			<li><a href="/tags/Opera Extensions/" title="Opera Extensions">Opera Extensions<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Safari/" title="Safari">Safari<sup>1</sup></a></li>
-		
 		</ul>
 </div>
 
@@ -366,7 +328,7 @@ npm install -g grunt-cli
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/AngularJS/" style="font-size: 17.50px;">AngularJS</a><a href="/tags/Blink/" style="font-size: 10.00px;">Blink</a><a href="/tags/CSS/" style="font-size: 20.00px;">CSS</a><a href="/tags/CSS3/" style="font-size: 10.00px;">CSS3</a><a href="/tags/Chrome Extensions/" style="font-size: 10.00px;">Chrome Extensions</a><a href="/tags/Debug/" style="font-size: 10.00px;">Debug</a><a href="/tags/Express/" style="font-size: 10.00px;">Express</a><a href="/tags/Firebug/" style="font-size: 10.00px;">Firebug</a><a href="/tags/Git/" style="font-size: 10.00px;">Git</a><a href="/tags/Github Pages/" style="font-size: 10.00px;">Github Pages</a><a href="/tags/Grunt/" style="font-size: 12.50px;">Grunt</a><a href="/tags/HTML5/" style="font-size: 10.00px;">HTML5</a><a href="/tags/Handlebars/" style="font-size: 10.00px;">Handlebars</a><a href="/tags/JavaScript/" style="font-size: 15.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 10.00px;">Javascript</a><a href="/tags/Node.js/" style="font-size: 17.50px;">Node.js</a><a href="/tags/Octopress/" style="font-size: 12.50px;">Octopress</a><a href="/tags/Opera/" style="font-size: 10.00px;">Opera</a><a href="/tags/Opera Extensions/" style="font-size: 10.00px;">Opera Extensions</a><a href="/tags/Safari/" style="font-size: 10.00px;">Safari</a><a href="/tags/WebKit/" style="font-size: 10.00px;">WebKit</a><a href="/tags/flexbox/" style="font-size: 10.00px;">flexbox</a><a href="/tags/iOS7/" style="font-size: 10.00px;">iOS7</a><a href="/tags/jQuery/" style="font-size: 10.00px;">jQuery</a><a href="/tags/requestAnimationFrame/" style="font-size: 10.00px;">requestAnimationFrame</a><a href="/tags/toString/" style="font-size: 10.00px;">toString</a><a href="/tags/translate/" style="font-size: 10.00px;">translate</a><a href="/tags/交互设计/" style="font-size: 10.00px;">交互设计</a><a href="/tags/代码高亮/" style="font-size: 10.00px;">代码高亮</a><a href="/tags/全文搜索/" style="font-size: 10.00px;">全文搜索</a><a href="/tags/原创/" style="font-size: 15.00px;">原创</a><a href="/tags/垂直居中/" style="font-size: 10.00px;">垂直居中</a><a href="/tags/居中/" style="font-size: 10.00px;">居中</a><a href="/tags/开发工具/" style="font-size: 10.00px;">开发工具</a><a href="/tags/弹性布局/" style="font-size: 10.00px;">弹性布局</a><a href="/tags/水平居中/" style="font-size: 10.00px;">水平居中</a><a href="/tags/浏览器/" style="font-size: 10.00px;">浏览器</a><a href="/tags/滑动门/" style="font-size: 10.00px;">滑动门</a><a href="/tags/用户体验/" style="font-size: 10.00px;">用户体验</a><a href="/tags/移动前端开发/" style="font-size: 10.00px;">移动前端开发</a>
+       <a href="/tags/AngularJS/" style="font-size: 17.50px;">AngularJS</a><a href="/tags/Blink/" style="font-size: 10.00px;">Blink</a><a href="/tags/CSS/" style="font-size: 20.00px;">CSS</a><a href="/tags/CSS3/" style="font-size: 10.00px;">CSS3</a><a href="/tags/Chrome Extensions/" style="font-size: 10.00px;">Chrome Extensions</a><a href="/tags/Debug/" style="font-size: 10.00px;">Debug</a><a href="/tags/Express/" style="font-size: 10.00px;">Express</a><a href="/tags/Firebug/" style="font-size: 10.00px;">Firebug</a><a href="/tags/Git/" style="font-size: 10.00px;">Git</a><a href="/tags/Github Pages/" style="font-size: 10.00px;">Github Pages</a><a href="/tags/Grunt/" style="font-size: 12.50px;">Grunt</a><a href="/tags/HTML5/" style="font-size: 10.00px;">HTML5</a><a href="/tags/Handlebars/" style="font-size: 10.00px;">Handlebars</a><a href="/tags/JSHint/" style="font-size: 10.00px;">JSHint</a><a href="/tags/JavaScript/" style="font-size: 15.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 10.00px;">Javascript</a><a href="/tags/Node.js/" style="font-size: 17.50px;">Node.js</a><a href="/tags/Octopress/" style="font-size: 12.50px;">Octopress</a><a href="/tags/Opera/" style="font-size: 10.00px;">Opera</a><a href="/tags/Opera Extensions/" style="font-size: 10.00px;">Opera Extensions</a><a href="/tags/Safari/" style="font-size: 10.00px;">Safari</a><a href="/tags/WebKit/" style="font-size: 10.00px;">WebKit</a><a href="/tags/flexbox/" style="font-size: 10.00px;">flexbox</a><a href="/tags/iOS7/" style="font-size: 10.00px;">iOS7</a><a href="/tags/jQuery/" style="font-size: 10.00px;">jQuery</a><a href="/tags/requestAnimationFrame/" style="font-size: 10.00px;">requestAnimationFrame</a><a href="/tags/toString/" style="font-size: 10.00px;">toString</a><a href="/tags/translate/" style="font-size: 10.00px;">translate</a><a href="/tags/交互设计/" style="font-size: 10.00px;">交互设计</a><a href="/tags/代码高亮/" style="font-size: 10.00px;">代码高亮</a><a href="/tags/全文搜索/" style="font-size: 10.00px;">全文搜索</a><a href="/tags/原创/" style="font-size: 15.00px;">原创</a><a href="/tags/垂直居中/" style="font-size: 10.00px;">垂直居中</a><a href="/tags/居中/" style="font-size: 10.00px;">居中</a><a href="/tags/开发工具/" style="font-size: 10.00px;">开发工具</a><a href="/tags/弹性布局/" style="font-size: 10.00px;">弹性布局</a><a href="/tags/水平居中/" style="font-size: 10.00px;">水平居中</a><a href="/tags/浏览器/" style="font-size: 10.00px;">浏览器</a><a href="/tags/滑动门/" style="font-size: 10.00px;">滑动门</a><a href="/tags/用户体验/" style="font-size: 10.00px;">用户体验</a>
     </div>
   </div>
 

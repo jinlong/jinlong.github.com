@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2014-10-25T02:52:08.512Z</updated>
+  <updated>2014-10-25T03:22:06.733Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -13,6 +13,236 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[JSHint 配置浅析]]></title>
+    <link href="http://jinlong.github.io/2014/10/25/jshint-configuration/"/>
+    <id>http://jinlong.github.io/2014/10/25/jshint-configuration/</id>
+    <published>2014-10-25T03:05:14.000Z</published>
+    <updated>2014-10-25T03:20:55.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p><a href="http://www.jshint.com/" target="_blank">JSHint</a>，发现错误和潜在问题的社区驱动的工具<br><a href="http://jslinterrors.com/" target="_blank">JSLint 错误解析</a></p>
+</blockquote>
+<h2 id=" 单独安装 ">单独安装</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="variable">$ </span>npm install jshint -g
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>$ jshint myfile.js
+myfile.js: line <span class="number">10</span>, col <span class="number">39</span>, Octal literals are <span class="keyword">not</span> allowed <span class="keyword">in</span> <span class="keyword">strict</span> mode.
+
+<span class="number">1</span> <span class="keyword">error</span>
+</pre></td></tr></table></figure>
+
+<h2 id=" 编辑器和 IDE 插件 ">编辑器和 IDE 插件</h2>
+<p><a href="https://github.com/victorporof/Sublime-JSHint" target="_blank">Sublime-JSHint</a> </p>
+<h3 id=" 安装 ">安装</h3>
+<p><code>Ctrl+Shift+P</code> 或 <code>Cmd+Shift+P</code><br>输入 <code>install</code>，选择 <code>Package Control: Install Package</code><br>输入 <code>js gutter</code>，选择 <code>JSHint Gutter</code></p>
+<h3 id=" 使用方法：">使用方法：</h3>
+<p>Tools -&gt; Command Palette (<code>Ctrl+Shift+P</code> 或者 <code>Cmd+Shift+P</code>) 然后输入 <code>jshint</code></p>
+<p>— 或者 —</p>
+<p><code>Ctrl+Shift+J</code> (或者 Mac 使用 <code>Cmd+Shift+J</code>)</p>
+<p>— 或者 —</p>
+<p>当前文件右键选择 JSHint -&gt; Lint Code</p>
+<p>— 或者 —</p>
+<p>打开 JavaScript 文件，菜单 View -&gt; Show Console，然后输入 <code>view.run_command(&quot;jshint&quot;</code>)</p>
+<h3 id=" 编辑，加载或保存时自动检查 ">编辑，加载或保存时自动检查</h3>
+<p>右键 -&gt; JSHint -&gt; Set Plugin Options</p>
+<p>三项设置为 <code>true</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>{
+    <span class="string">"lint_on_edit"</span>: <span class="literal">true</span>,
+    <span class="string">"lint_on_load"</span>: <span class="literal">true</span>,
+    <span class="string">"lint_on_save"</span>: <span class="literal">true</span>
+}
+</pre></td></tr></table></figure>
+
+<h2 id=" 三种配置方式：">三种配置方式：</h2>
+<p>通过 <code>--config</code> 标记手动配置</p>
+<p>使用 <strong>.jshintrc</strong> 文件</p>
+<p>配置放到项目的 <strong>package.json</strong> 文件里面， <strong>jshintConfig</strong> 下面</p>
+<p><a href="http://www.jshint.com/docs/options/" target="_blank">自定义 <strong>.jshintrc</strong> 配置文件</a></p>
+<h2 id="JSHint_ 设置 ">JSHint 设置</h2>
+<h3 id=" 强制选项 ">强制选项</h3>
+<p>禁用位运算符，位运算符在 JavaScript 中使用较少，经常是把 &amp;&amp; 错输成 &amp;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">bitwise</span>: <span class="string">true</span>
+</pre></td></tr></table></figure>
+
+<p>循环或者条件语句必须使用花括号包围</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">curly</span>: <span class="string">true</span>
+</pre></td></tr></table></figure>
+
+<p>强制使用三等号</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">eqeqeq</span>: <span class="string">true</span>
+</pre></td></tr></table></figure>
+
+<p>兼容低级浏览器 IE 6/7/8/9</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">es3</span>: <span class="string">true</span>
+</pre></td></tr></table></figure>
+
+<p>禁止重写原生对象的原型，比如 <code>Array</code>，<code>Date</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">freeze</span>: <span class="string">true</span>
+</pre></td></tr></table></figure>
+
+<p>代码缩进</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">indent</span>: <span class="string">true</span>
+</pre></td></tr></table></figure>
+
+<p>禁止定义之前使用变量，忽略 <code>function</code> 函数声明</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">latedef</span>: <span class="string">"nofunc"</span>
+</pre></td></tr></table></figure>
+
+<p>构造器函数首字母大写</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">newcap</span>: <span class="string">true</span>
+</pre></td></tr></table></figure>
+
+<p>禁止使用 <code>arguments.caller</code> 和 <code>arguments.callee</code>，未来会被弃用， ECMAScript 5 禁止使用 <code>arguments.callee</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>noarg:<span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>为 <code>true</code> 时，禁止单引号和双引号混用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"quotmark"</span>: <span class="literal">false</span>
+</pre></td></tr></table></figure>
+
+<p>变量未定义</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"undef"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>变量未使用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"unused"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>严格模式</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">strict</span>:<span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>最多参数个数</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">maxparams</span>: <span class="string">4</span>
+</pre></td></tr></table></figure>
+
+<p>最大嵌套深度</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">maxdepth</span>: <span class="string">4</span>
+</pre></td></tr></table></figure>
+
+<p>复杂度检测</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>maxcomplexity:<span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>最大行数</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">maxlen</span>: <span class="string">600</span>
+</pre></td></tr></table></figure>
+
+<h3 id=" 宽松选项 ">宽松选项</h3>
+<p>控制“缺少分号”的警告</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="string">"asi"</span>: <span class="literal">true</span>
+<span class="string">"boss"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>忽略 <code>debugger</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"debug"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>控制 <code>eval</code> 使用警告</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"evil"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>检查一行代码最后声明后面的分号是否遗漏</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"lastsemic"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>检查不安全的折行，忽略逗号在最前面的编程风格</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"laxcomma"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>检查循环内嵌套 <code>function</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"loopfunc"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>检查多行字符串</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"multistr"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>检查无效的 <code>typeof</code> 操作符值</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"notypeof"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p><code>person[&#39;name&#39;]</code> vs. <code>person.name</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"sub"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p><code>new function () { ... }</code> 和 <code>new Object</code>;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"supernew"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>在非构造器函数中使用 <code>this</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"validthis"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<h3 id=" 环境 ">环境</h3>
+<p>预定义一些全局变量</p>
+<p>预定义全局变量 <code>document</code>，<code>navigator</code>，<code>FileReader</code> 等</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"browser"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>定义用于调试的全局变量：<code>console</code>，<code>alert</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">"devel"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+<p>定义全局变量</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="string">"jquery"</span>: <span class="literal">true</span>,
+  <span class="string">"node"</span>: <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+]]></content>
+    
+    
+      <category term="JSHint" scheme="http://jinlong.github.io/tags/JSHint/"/>
+    
+      <category term="JSHint" scheme="http://jinlong.github.io/categories/JSHint/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Handlebars 文档笔记]]></title>
@@ -1109,7 +1339,7 @@ app.post(some url, <span class="keyword">do</span> more stuff);
     <link href="http://jinlong.github.io/2013/12/22/grunt-for-fe/"/>
     <id>http://jinlong.github.io/2013/12/22/grunt-for-fe/</id>
     <published>2013-12-22T15:42:00.000Z</published>
-    <updated>2014-10-25T02:19:54.000Z</updated>
+    <updated>2014-10-25T02:55:52.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://24ways.org/2013/grunt-is-not-weird-and-hard/" target="_blank">Grunt for People Who Think Things Like Grunt are Weird and Hard</a><br>此篇笔记包含了个人的理解，只记录了文章的要点，并没有逐句翻译，如有不妥望指正。</p>
 </blockquote>
@@ -1270,43 +1500,21 @@ app.post(some url, <span class="keyword">do</span> more stuff);
 </pre></td><td class="code"><pre>grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'concat'</span>, <span class="string">'uglify'</span>]);
 </pre></td></tr></table></figure>
 
-<p>运行</p>
-<figure class="highlight grunt```"><figcaption><span>即可执行最小化任务</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/gruntForFE/uglify-code.gif"</span> /&gt;</span></span>
-
-<span class="header">## 优化图片</span>
-
-官方的图片优化插件 [<span class="link_label">grunt-contrib-imagemin</span>](<span class="link_url">https://github.com/gruntjs/grunt-contrib-imagemin</span>) 
-
-安装即可：
-</pre></td></tr></table></figure>
-
-<p>npm install grunt-contrib-imagemin —save-dev</p>
+<p>运行 <code>grunt</code> 即可执行最小化任务</p>
+<p><img src="/images/post/gruntForFE/uglify-code.gif" /></p>
+<h2 id=" 优化图片 ">优化图片</h2>
+<p>官方的图片优化插件 <a href="https://github.com/gruntjs/grunt-contrib-imagemin" target="_blank">grunt-contrib-imagemin</a> </p>
+<p>安装即可：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>
-修改 Gruntfile<span class="preprocessor">.js</span> 文件，加载此插件：
+</pre></td><td class="code"><pre>npm install grunt<span class="attribute">-contrib</span><span class="attribute">-imagemin</span> <span class="subst">--</span>save<span class="attribute">-dev</span>
 </pre></td></tr></table></figure>
 
-<p>grunt.loadNpmTasks(‘grunt-contrib-imagemin’);</p>
+<p>修改 Gruntfile.js 文件，加载此插件：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>添加配置：
+</pre></td><td class="code"><pre>grunt.loadNpmTasks(<span class="string">'grunt-contrib-imagemin'</span>);
 </pre></td></tr></table></figure>
 
-<p>imagemin: {<br>    dynamic: {<br>        files: [{<br>            expand: true,<br>            cwd: ‘images/‘,<br>            src: [‘<em>*/</em>.{png,jpg,gif}’],<br>            dest: ‘images/build/‘<br>        }]<br>    }<br>}</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>添加成默认任务
-</pre></td></tr></table></figure>
-
-<p>grunt.registerTask(‘default’, [‘concat’, ‘uglify’, ‘imagemin’]);</p>
+<p>添加配置：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -1317,33 +1525,57 @@ app.post(some url, <span class="keyword">do</span> more stuff);
 8
 9
 10
-11
-12
-13
-14
-15
-16
-17
-</pre></td><td class="code"><pre>运行 <span class="code">```</span>grunt<span class="code">```</span> 看奇迹发生
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/gruntForFE/squished-images.gif"</span> /&gt;</span></span>
-
-<span class="header">## 让任务更智能，更自动</span>
-
-<span class="bullet">1. </span>需要执行的时候自动执行   
-<span class="bullet">2. </span>一次执行一个任务   
-
-比如:
-
-<span class="bullet">1. </span>当 JS 修改了以后，合并，最小化文件   
-<span class="bullet">2. </span>当添加新图片，修改旧图片时优化图像   
-
-可以通过官方的  [<span class="link_label">grunt-contrib-watch</span>](<span class="link_url">https://github.com/gruntjs/grunt-contrib-watch</span>) 插件监视文件。
-
-照例安装插件，修改配置文件：
+</pre></td><td class="code"><pre><span class="tag">imagemin</span>: <span class="rules">{
+    <span class="rule"><span class="attribute">dynamic</span>:<span class="value"> {
+        files: [{
+            expand: true,
+            cwd: <span class="string">'images/'</span>,
+            src: [<span class="string">'**/*.{png,jpg,gif}'</span>],
+            dest: <span class="string">'images/build/'</span>
+        </span></span></span>}]
+    }
+}
 </pre></td></tr></table></figure>
 
-<p>watch: {<br>    scripts: {<br>        files: [‘js/*.js’],<br>        tasks: [‘concat’, ‘uglify’],<br>        options: {<br>            spawn: false,<br>        },<br>    }<br>}<br>```</p>
+<p>添加成默认任务</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'concat'</span>, <span class="string">'uglify'</span>, <span class="string">'imagemin'</span>]);
+</pre></td></tr></table></figure>
+
+<p>运行 <code>grunt</code> 看奇迹发生</p>
+<p><img src="/images/post/gruntForFE/squished-images.gif" /></p>
+<h2 id=" 让任务更智能，更自动 ">让任务更智能，更自动</h2>
+<ol>
+<li>需要执行的时候自动执行   </li>
+<li>一次执行一个任务   </li>
+</ol>
+<p>比如:</p>
+<ol>
+<li>当 JS 修改了以后，合并，最小化文件   </li>
+<li>当添加新图片，修改旧图片时优化图像   </li>
+</ol>
+<p>可以通过官方的  <a href="https://github.com/gruntjs/grunt-contrib-watch" target="_blank">grunt-contrib-watch</a> 插件监视文件。</p>
+<p>照例安装插件，修改配置文件：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="tag">watch</span>: <span class="rules">{
+    <span class="rule"><span class="attribute">scripts</span>:<span class="value"> {
+        files: [<span class="string">'js/*.js'</span>],
+        tasks: [<span class="string">'concat'</span>, <span class="string">'uglify'</span>],
+        options: {
+            spawn: false,
+        </span></span></span>},
+    } 
+}
+</pre></td></tr></table></figure>
+
 <p>出现错误的时候，命令行会有提示：</p>
 <p><img src="/images/post/gruntForFE/error-running-grunt.gif" /></p>
 <h2 id="Grunt_ 做我们的预处理器 ">Grunt 做我们的预处理器</h2>
@@ -1424,7 +1656,7 @@ app.post(some url, <span class="keyword">do</span> more stuff);
     <link href="http://jinlong.github.io/2013/12/22/grunt-getting-started/"/>
     <id>http://jinlong.github.io/2013/12/22/grunt-getting-started/</id>
     <published>2013-12-22T09:03:00.000Z</published>
-    <updated>2014-10-25T02:20:12.000Z</updated>
+    <updated>2014-10-25T03:00:47.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文： <a href="http://gruntjs.com/getting-started" target="_blank">Getting started</a></p>
 </blockquote>
@@ -1433,57 +1665,22 @@ app.post(some url, <span class="keyword">do</span> more stuff);
 </pre></td><td class="code"><pre>npm install <span class="attribute">-g</span> grunt<span class="attribute">-cli</span>
 </pre></td></tr></table></figure>
 
-<p>可以在任何路径运行</p>
-<figure class="highlight grunt```"><figcaption><span>命令</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-</pre></td><td class="code"><pre>
-通过 <span class="escape">``</span><span class="escape">`G</span>runtfile<span class="escape">``</span><span class="escape">` </span>文件运行某一版本 grunt ，允许多版本共存
-
-##CLI 如何工作
-
-每次运行 grunt ，它会使用 node 的 <span class="escape">``</span><span class="escape">`r</span>equire()<span class="escape">``</span><span class="escape">` </span>查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。
-
-找到了本地安装的 Grunt ，CLI 加载本地安装的 Grunt 库，应用 <span class="escape">``</span><span class="escape">`G</span>runtfile<span class="escape">``</span><span class="escape">` </span>里的配置，执行预期的任务。
-
-<span class="label">想理解真正奥秘，可以 [读源码](https:</span>//github.com/gruntjs/grunt-cli/blob/master/bin/grunt)，它非常短。
-
-## 运行已存在的 Grunt 项目
-
-假设  Grunt CLI 已安装，项目已通过 <span class="escape">``</span><span class="escape">`p</span>ackage.json<span class="escape">``</span><span class="escape">` </span>和 <span class="escape">``</span><span class="escape">`G</span>runtfile<span class="escape">``</span><span class="escape">` </span>配置好，使用 Grunt 非常简单：
-
-<span class="number">1</span>. 切换到项目的根目录   
-<span class="number">2</span>. 通过 <span class="escape">``</span><span class="escape">`n</span>pm install<span class="escape">``</span><span class="escape">` </span>安装项目依赖   
-<span class="number">3</span>. 通过 <span class="escape">``</span><span class="escape">`g</span>runt<span class="escape">``</span><span class="escape">` </span>命令运行 Grunt 
-
-<span class="escape">``</span><span class="escape">`g</span>runt --help<span class="escape">``</span><span class="escape">` </span>可以罗列已安装的 Grunt 任务列表，但是最好从项目文档开始。
-&lt;!--more--&gt;
-## 准备新的 Grunt 项目
-
-典型安装是往项目中添加<span class="number">2</span>个文件：<span class="escape">``</span><span class="escape">`p</span>ackage.json<span class="escape">``</span><span class="escape">` </span>和 <span class="escape">``</span><span class="escape">`G</span>runtfile
-</pre></td></tr></table></figure>
-
+<p>可以在任何路径运行 <code>grunt</code> 命令</p>
+<p>通过 <code>Gruntfile</code> 文件运行某一版本 grunt ，允许多版本共存</p>
+<h2 id="CLI_ 如何工作 ">CLI 如何工作</h2>
+<p>每次运行 grunt ，它会使用 node 的 <code>require()</code> 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。</p>
+<p>找到了本地安装的 Grunt ，CLI 加载本地安装的 Grunt 库，应用 <code>Gruntfile</code> 里的配置，执行预期的任务。</p>
+<p>想理解真正奥秘，可以<a href="https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt" target="_blank">读源码</a>，它非常短。</p>
+<h2 id=" 运行已存在的 _Grunt_ 项目 ">运行已存在的 Grunt 项目</h2>
+<p>假设  Grunt CLI 已安装，项目已通过 <code>package.json</code> 和 <code>Gruntfile</code> 配置好，使用 Grunt 非常简单：</p>
+<ol>
+<li>切换到项目的根目录   </li>
+<li>通过 <code>npm install</code> 安装项目依赖   </li>
+<li>通过 <code>grunt</code> 命令运行 Grunt </li>
+</ol>
+<p><code>grunt --help</code> 可以罗列已安装的 Grunt 任务列表，但是最好从项目文档开始。<br><a id="more"></a></p>
+<h2 id=" 准备新的 _Grunt_ 项目 ">准备新的 Grunt 项目</h2>
+<p>典型安装是往项目中添加 2 个文件：<code>package.json</code> 和 <code>Gruntfile</code></p>
 <p><strong>package.json</strong>：存储作为 npm 发布模块的项目的元数据。你可以在 <a href="https://npmjs.org/doc/json.html#devDependencies" target="_blank">devDependencies</a> 一项列举项目的需要的 Grunt 插件。</p>
 <p><strong>Gruntfile</strong>：文件名是 <code>Gruntfile.js</code> 或者 <code>Gruntfile.coffee</code> ，用于配置或定义任务和加载 Grunt 插件。</p>
 <h3 id="package-json">package.json</h3>
@@ -1521,7 +1718,14 @@ app.post(some url, <span class="keyword">do</span> more stuff);
 <p>既然已经见到了整个 Gruntfile ，下面继续看看它的组成部分。</p>
 <h3 id="“_wrapper_ 包装”函数 ">“ wrapper 包装”函数</h3>
 <p>所有的 Gruntfile （和 gruntplugin）使用这种基本格式，所有的 Grunt 代码必须放到特定的函数里面：</p>
-<p>module.exports = function(grunt) {<br>  // Do grunt-related things in here<br>};</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>module.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> {</span>
+  <span class="comment">// Do grunt-related things in here</span>
+};
+</pre></td></tr></table></figure>
+
 <h3 id=" 项目和任务配置 ">项目和任务配置</h3>
 <p>大部分的 Grunt 任务依赖于 <a href="http://gruntjs.com/grunt#grunt.initconfig" target="_blank">grunt.initConfig</a> 方法定义的配置数据。此例中，<strong>grunt.file.readJSON(‘package.json’)</strong> 把 package.json 中存储的 JSON 元数据导入到 grunt 配置中。因为 <strong>&lt;% %&gt;</strong> 模版字符串可能引用任何配置属性，像文件路径，文件列表之类的配置数据如此定义，为了避免重复代码。</p>
 <p>配置对象可以存储任意的数据，只要不跟任务需要的属性冲突即可，否则将被忽略。此外，由于这是 JavaScript 文件，所以不仅限于 JSON ；可以用合法的 JS 。<a href="http://github.com/gruntjs/grunt-contrib-uglify" target="_blank">grunt-contrib-uglify</a> 的 uglify 任务需要指定 <strong>uglify</strong> 属性。<strong>banner</strong> 选项需要指定注释内容，<strong>build</strong> 属性定义最小化的源文件和目标文件。</p>
@@ -1532,12 +1736,36 @@ app.post(some url, <span class="keyword">do</span> more stuff);
 <h3 id=" 自定义任务 ">自定义任务</h3>
 <p>你可以配置 Grunt 默认执行一个或多个任务。以下例子，命令行运行 grunt，默认会执行 <strong>uglify</strong> 任务，等同于执行 <strong>grunt uglify</strong> 或者 <strong>grunt default</strong> 。多个任务（带或不带参数）需要放到数组里。</p>
 <p>// 默认任务</p>
-<p>grunt.registerTask(‘default’, [‘uglify’]);</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>]);
+</pre></td></tr></table></figure>
+
 <p>如果 Grunt 插件无法满足要求，你可以在 Gruntfile 定义自己的任务。例如，这个 Gruntfile 定义了自己的 default 任务，甚至没有利用任务配置：</p>
 <p><a href="https://gist.github.com/jinlong/8083660" target="_blank">https://gist.github.com/jinlong/8083660</a></p>
 <p>定制的项目专属任务不需要定义到 Gruntfile 中；可以在外部 <strong>.js</strong> 文件定义，通过 <a href="http://gruntjs.com/grunt#grunt.loadtasks" target="_blank">grunt.loadTasks</a> 方法加载。</p>
 ]]></content>
-    
+    <summary type="html"><![CDATA[<blockquote>
+<p>原文： <a href="http://gruntjs.com/getting-started" target="_blank">Getting started</a></p>
+</blockquote>
+<h2 id=" 安装 _CLI">安装 CLI</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>npm install <span class="attribute">-g</span> grunt<span class="attribute">-cli</span>
+</pre></td></tr></table></figure>
+
+<p>可以在任何路径运行 <code>grunt</code> 命令</p>
+<p>通过 <code>Gruntfile</code> 文件运行某一版本 grunt ，允许多版本共存</p>
+<h2 id="CLI_ 如何工作 ">CLI 如何工作</h2>
+<p>每次运行 grunt ，它会使用 node 的 <code>require()</code> 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。</p>
+<p>找到了本地安装的 Grunt ，CLI 加载本地安装的 Grunt 库，应用 <code>Gruntfile</code> 里的配置，执行预期的任务。</p>
+<p>想理解真正奥秘，可以<a href="https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt" target="_blank">读源码</a>，它非常短。</p>
+<h2 id=" 运行已存在的 _Grunt_ 项目 ">运行已存在的 Grunt 项目</h2>
+<p>假设  Grunt CLI 已安装，项目已通过 <code>package.json</code> 和 <code>Gruntfile</code> 配置好，使用 Grunt 非常简单：</p>
+<ol>
+<li>切换到项目的根目录   </li>
+<li>通过 <code>npm install</code> 安装项目依赖   </li>
+<li>通过 <code>grunt</code> 命令运行 Grunt </li>
+</ol>
+<p><code>grunt --help</code> 可以罗列已安装的 Grunt 任务列表，但是最好从项目文档开始。<br>]]></summary>
     
       <category term="Grunt" scheme="http://jinlong.github.io/tags/Grunt/"/>
     
@@ -6216,80 +6444,6 @@ jpm.open( );
       <category term="jQuery" scheme="http://jinlong.github.io/categories/jQuery/"/>
     
       <category term="设计模式" scheme="http://jinlong.github.io/categories/jQuery/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[安卓版 Opera 14 新在哪？]]></title>
-    <link href="http://jinlong.github.io/2013/05/22/opera-14-for-android-is-out/"/>
-    <id>http://jinlong.github.io/2013/05/22/opera-14-for-android-is-out/</id>
-    <published>2013-05-22T11:56:00.000Z</published>
-    <updated>2014-10-25T02:26:36.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>相关资料：<br><a href="http://my.opera.com/ODIN/blog/opera-14-for-android-is-out" target="_blank">Opera 14 for Android is out!</a><br><a href="http://my.opera.com/chooseopera/blog/opera-for-android-now-released" target="_blank">OUT TODAY: OPERA FOR ANDROID, FULL AND FINAL!</a><br>先唠一下 Opera 14 新功能哈，作为开发者可以直接移步<a href="#developer">这里</a>。</p>
-</blockquote>
-<p>经过数月的努力，全新安卓版 Opera 面世了，许多新奇特性等你发现。等不及的话，这有下载链接 <a href="https://play.google.com/store/apps/details?id=com.opera.browser&amp;hl=en" target="_blank">Google Play</a> 或者手机访问 <a href="http://m.opera.com/" target="_blank">m.opera.com</a> 。</p>
-<p><strong>选项卡</strong></p>
-<p>从缩略视图到隐身标签，安卓版的选项卡非常适于浏览移动网页。把选项卡加入收藏也非常便捷，点击地址栏的星标。</p>
-<p><strong>快速拨号，彻底改造</strong></p>
-<p>如大家所愿，这版的快速拨号有文件夹了，可以自由整理，只需拖拽即可创建新文件夹。</p>
-<p><strong>发现，先人一步</strong></p>
-<p>获取最新最酷的内容，为你量身定制的发现特性。</p>
-<p><strong>越野模式</strong></p>
-<p>启用越野模式即启用了 Opera Mini 功能，当您网络不佳时，压缩网页，提高速度，省钱省流量。</p>
-<p><a id="more"></a><br><strong>下载管理</strong></p>
-<p>开始，暂停，恢复下载，重命名文件，您可以便利地下载保存电影，音乐和其它媒体文件。</p>
-<p><strong>文本自动折行</strong></p>
-<p>beta 测试期间，自动折行深受喜爱，正式版的来了。</p>
-<p><strong>可定制导航栏</strong></p>
-<p>设备和屏幕不同，导航栏在屏幕上方或下方，随您选择。</p>
-<p><strong>这仅仅是个开始</strong></p>
-<p>安卓版 Opera 支持姜饼（Android 2.3）及以上版本，即将支持平板。感谢所有帮我们测试 beta 版的同学，图文混排，全屏模式以及其它特性感谢您的反馈。</p>
-<p><a href="https://play.google.com/store/apps/details?id=com.opera.browser&amp;hl=en" target="_blank">Google Play 下载</a> </p>
-<hr>
-<p>———————以下面向开发者———————</p>
-<p><p id="developer"></p>安卓版 Opera 14 基于 <a href="http://www.chromium.org/" target="_blank">Chromium 26</a>，UI 更符合最新的安卓设计指南。<a href="https://play.google.com/store/apps/details?id=com.opera.browser" target="_blank">Google Play 下载</a> ，或者手机访问 <a href="http://m.opera.com/" target="_blank">m.opera.com</a> 。</p>
-<p><strong>面向 Android 2.3 +</strong></p>
-<p>由于 <a href="http://developer.android.com/about/dashboards/index.html" target="_blank">38.5% 的安卓用户还在用姜饼</a>，现在他们可以像更高版本的安卓用户一样，享受更好的浏览体验。</p>
-<p>面向平板的 Opera 14 不久就会发布，我们仍在着力优化各种平板特定 UI。</p>
-<p><strong>全新的引擎</strong></p>
-<p>Opera 14 基于 Chromium 26 ，但还没用 <a href="http://www.chromium.org/blink" target="_blank">Blink</a> 。我们增加 / 启用了一些标准实现：</p>
-<ol>
-<li><code>&lt;input type=color&gt;</code>已支持：试试<a href="http://jsbin.com/oxomam/1/" target="_blank">这个例子</a> </li>
-<li><a href="http://dev.opera.com/articles/view/an-introduction-to-webgl/" target="_blank">启用 WebGL 3D context</a> ：你可以试试我们的 <a href="http://operasoftware.github.io/Odin/mobile/" target="_blank">Odin demo</a>，<a href="http://dev.opera.com/articles/view/an-introduction-to-webgl/" target="_blank">还没开始玩 WebGL</a> ？</li>
-<li>支持 <a href="http://dev.opera.com/articles/view/native-css-feature-detection-via-the-supports-rule/" target="_blank">CSS3 @supports</a><br><a href="http://dev.oupeng.com/articles/css3-conditional-intro" target="_blank">《CSS3 Conditional 简介》</a>，可以用 CSS 做特性检测。</li>
-</ol>
-<p>我们处理 HTML5 audio 的方式更酷啦：如果你开始播放一首歌（例如在 SoundCloud 播放<a href="http://m.soundcloud.com/jamie-van-dyck/ugonnas-song-july-7th-8th-2012" target="_blank">这首歌</a>），你会看到一个“暂停按钮”出现在安卓通知栏。现在可以切换选项卡，甚至打开其它的应用，歌曲仍在后台播放，通知栏可以方便的控制音乐。</p>
-<p><strong><em>备注：有些功能暂不支持，包括自定义搜索，进入 about://flags。</em></strong></p>
-<p>我们也调整了 UA 字符串：很像 Chrome 的 UA 格式，这版在末尾加了 <code>OPR/14.0.1074.57453</code> 。当然，完全可以不关注这个，可以用特性检测。</p>
-<p><strong>新 UI 新特性</strong></p>
-<p>快速拨号重新设计，支持拖拽标签分组；导航栏再设计，可设置导航栏的位置；更多高级设置（比如分享，页内查找，下载等）可以看我们的<a href="http://www.opera.com/help/mobile" target="_blank">用户指南</a> 。</p>
-<p><strong>越野模式</strong></p>
-<p>特别提一下越野模式（Off-Road），启用它即通过 Opera Mini 服务加载页面，不再需要切换浏览器即可使用 Opera Mini 的数据压缩特性，现在合二为一啦~</p>
-<p>想了解更多关于 Opera Mini 和 Off-Road 模式的优化，参见 <a href="http://dev.oupeng.com/articles/opera-mini-and-javascript" target="_blank">Opera Mini 与 JavaScript</a>  。</p>
-<p>用户可以设置 Off-Road 模式的图片质量高低，甚至无图（<a href="http://httparchive.org/interesting.php#bytesperpage" target="_blank">图片占页面请求的大小超过 50%</a> ）。</p>
-<p><strong>文本自动折行</strong></p>
-<p>如果你访问<a href="http://en.wikipedia.org/w/index.php?title=Artichokes&amp;mobileaction=toggle_view_desktop" target="_blank">这页</a> ，看到有些文本变大啦，无需手动缩放更易读啦。设置里打开“自动折行”，不管如何放大页面，都不需要水平拖动了。</p>
-<p><strong>远程调试</strong></p>
-<p>作为开发者肯定需要用安卓版 Opera 14 调试，Windows，Mac 和 Linux 都是可以做到的，关于 Opera 远程调试可以看<a href="http://dev.opera.com/articles/view/remotely-debugging-opera-for-android/" target="_blank">这篇文章</a> （译者注：稍后我会翻译此篇）。</p>
-]]></content>
-    <summary type="html"><![CDATA[<blockquote>
-<p>相关资料：<br><a href="http://my.opera.com/ODIN/blog/opera-14-for-android-is-out" target="_blank">Opera 14 for Android is out!</a><br><a href="http://my.opera.com/chooseopera/blog/opera-for-android-now-released" target="_blank">OUT TODAY: OPERA FOR ANDROID, FULL AND FINAL!</a><br>先唠一下 Opera 14 新功能哈，作为开发者可以直接移步<a href="#developer">这里</a>。</p>
-</blockquote>
-<p>经过数月的努力，全新安卓版 Opera 面世了，许多新奇特性等你发现。等不及的话，这有下载链接 <a href="https://play.google.com/store/apps/details?id=com.opera.browser&amp;hl=en" target="_blank">Google Play</a> 或者手机访问 <a href="http://m.opera.com/" target="_blank">m.opera.com</a> 。</p>
-<p><strong>选项卡</strong></p>
-<p>从缩略视图到隐身标签，安卓版的选项卡非常适于浏览移动网页。把选项卡加入收藏也非常便捷，点击地址栏的星标。</p>
-<p><strong>快速拨号，彻底改造</strong></p>
-<p>如大家所愿，这版的快速拨号有文件夹了，可以自由整理，只需拖拽即可创建新文件夹。</p>
-<p><strong>发现，先人一步</strong></p>
-<p>获取最新最酷的内容，为你量身定制的发现特性。</p>
-<p><strong>越野模式</strong></p>
-<p>启用越野模式即启用了 Opera Mini 功能，当您网络不佳时，压缩网页，提高速度，省钱省流量。</p>
-<p>]]></summary>
-    
-      <category term="Opera" scheme="http://jinlong.github.io/tags/Opera/"/>
-    
-      <category term="Opera" scheme="http://jinlong.github.io/categories/Opera/"/>
     
   </entry>
   
