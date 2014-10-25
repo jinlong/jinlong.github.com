@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2014-07-06T17:34:53.063Z</updated>
+  <updated>2014-10-25T02:06:38.951Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -13,6 +13,669 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Handlebars 文档笔记]]></title>
+    <link href="http://jinlong.github.io/2014/10/19/handlebars-docs/"/>
+    <id>http://jinlong.github.io/2014/10/19/handlebars-docs/</id>
+    <published>2014-10-19T14:30:55.000Z</published>
+    <updated>2014-10-25T02:04:36.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>官方文档：<a href="http://handlebarsjs.com/" target="_blank">http://handlebarsjs.com/</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
+</blockquote>
+<p>Handlebars 兼容 <a href="https://github.com/janl/mustache.js" target="_blank">Mustache 模板</a>。</p>
+<p>对比了几个 Node.js 常用模板，什么 EJS 、Jade 等等，还是感觉 Handlebars 比较顺手，模板只做数据展示，前端逻辑的东西通过 helper 实现，HTML 中没有掺杂太多 JS 的东西，看起来整洁一些。</p>
+<p>Express 中引入 Handlebars 模板的话，需要引入<a href="https://github.com/donpark/hbs" target="_blank">hbs 模块</a></p>
+<hr>
+<p><strong>handlebars 表达式</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;title}}<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>在上下文中找 title 属性，获取它的值</p>
+<p><strong>点分割表达式</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;article.title}}<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>当前上下文找 article 属性，再找它的 title 属性</p>
+<p><em>标识符可以是除了以下字符以外的 unicode 字符</em><br>Whitespace ! “ # % &amp; ‘ ( ) * + , . / ; &lt; = &gt; @ [ \ ] ^ ` { | } ~</p>
+<p><strong>不合法的标识符用 “[]” 包装</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>&#123;&#123;#each articles.[10].[#comments]}}
+  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;subject}}<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span>&gt;</span>
+    &#123;&#123;body}}
+  <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+&#123;&#123;/each}}
+</pre></td></tr></table></figure>
+
+<p><strong>不转义</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;&#123;foo}}}
+</pre></td></tr></table></figure>
+
+<p><strong>Helpers</strong></p>
+<p>0 或多个参数，用空格分割，每个参数是个 handlebars 表达式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;&#123;link story}}}
+</pre></td></tr></table></figure>
+
+<p><em>link</em> 是 helper 名字，<em>story</em> 是 helper 参数。</p>
+<p><strong>注册 helper</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>Handlebars.registerHelper(<span class="string">'link'</span>, <span class="function"><span class="keyword">function</span><span class="params">(object)</span> {</span>
+  <span class="keyword">return</span> <span class="keyword">new</span> Handlebars.SafeString(
+    <span class="string">"&lt;a href='"</span> + object.url + <span class="string">"'&gt;"</span> + object.text + <span class="string">"&lt;/a&gt;"</span>
+  );
+});
+</pre></td></tr></table></figure>
+
+<p>helper 返回 HTML ，不想被转义，用 <code>Handlebars.SafeString()</code>。</p>
+<p>helper 把接收的上下文作为 <code>this</code> 上下文</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+  &#123;&#123;#each items}}
+  <span class="tag">&lt;<span class="title">li</span>&gt;</span>&#123;&#123;agree_button}}<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  &#123;&#123;/each}}
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><strong>上下文和 helper：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="keyword">var</span> context = {
+  items: [
+    {name: <span class="string">"Handlebars"</span>, emotion: <span class="string">"love"</span>},
+    {name: <span class="string">"Mustache"</span>, emotion: <span class="string">"enjoy"</span>},
+    {name: <span class="string">"Ember"</span>, emotion: <span class="string">"want to learn"</span>}
+  ]
+};
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>Handlebars.registerHelper(<span class="string">'agree_button'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  <span class="keyword">return</span> <span class="keyword">new</span> Handlebars.SafeString(
+    <span class="string">"&lt;button&gt;I agree. I "</span> + <span class="keyword">this</span>.emotion + <span class="string">" "</span> + <span class="keyword">this</span>.name + <span class="string">"&lt;/button&gt;"</span>
+  );
+});
+</pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">button</span>&gt;</span>I agree. I love Handlebars<span class="tag">&lt;/<span class="title">button</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">button</span>&gt;</span>I agree. I enjoy Mustache<span class="tag">&lt;/<span class="title">button</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">button</span>&gt;</span>I agree. I want to learn Ember<span class="tag">&lt;/<span class="title">button</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>也可以直接传字符串参数</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;&#123;link "See more..." story.url}}}
+</pre></td></tr></table></figure>
+
+<p>等价于</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;&#123;link story.text story.url}}}
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>Handlebars.registerHelper(<span class="string">'link'</span>, <span class="function"><span class="keyword">function</span><span class="params">(text, url)</span> {</span>
+  <span class="keyword">return</span> <span class="keyword">new</span> Handlebars.SafeString(
+    <span class="string">"&lt;a href='"</span> + url + <span class="string">"'&gt;"</span> + text + <span class="string">"&lt;/a&gt;"</span>
+  );
+});
+</pre></td></tr></table></figure>
+
+<p>helper 最后一个参数也可以接收可选的键值对序列（文档提到的 <strong>hash</strong> 参数）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;&#123;link "See more..." href=story.url class="story"}}}
+</pre></td></tr></table></figure>
+
+<p><strong>hash</strong> 参数的 <code>key</code> 必须是简单的标识符，<code>value</code> 是 Handlebars 表达式， <code>value</code> 可以是简单的标识符，路径，或者字符串。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>Handlebars.registerHelper(<span class="string">'link'</span>, <span class="function"><span class="keyword">function</span><span class="params">(text, options)</span> {</span>
+  <span class="keyword">var</span> attrs = [];
+
+  <span class="keyword">for</span>(<span class="keyword">var</span> prop <span class="keyword">in</span> options.hash) {
+    attrs.push(prop + <span class="string">'="'</span> + options.hash[prop] + <span class="string">'"'</span>);
+  }
+
+  <span class="keyword">return</span> <span class="keyword">new</span> Handlebars.SafeString(
+    <span class="string">"&lt;a "</span> + attrs.join(<span class="string">" "</span>) + <span class="string">"&gt;"</span> + text + <span class="string">"&lt;/a&gt;"</span>
+  );
+});
+</pre></td></tr></table></figure>
+
+<h1 id=" 基础 _Blocks">基础 Blocks</h1>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"entry"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;title}}<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"body"</span>&gt;</span>
+    &#123;&#123;#noop}}&#123;&#123;body}}&#123;&#123;/noop}}
+  <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>Handlebars.registerHelper(<span class="string">'noop'</span>, <span class="function"><span class="keyword">function</span><span class="params">(options)</span> {</span>
+  <span class="keyword">return</span> options.fn(<span class="keyword">this</span>);
+});
+</pre></td></tr></table></figure>
+
+<p>noop helper 实际跟没有 helper 类似，只是传递上下文，返回字符串。Handlebars 把当前的上下文作为 <code>this</code> 。</p>
+<h1 id=" 内建 _helper">内建 helper</h1>
+<h2 id="with_helper">with helper</h2>
+<p>根据模板传递的上下文解析模板</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"entry"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;title}}<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+  &#123;&#123;#with story}}
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"intro"</span>&gt;</span>&#123;&#123;{intro}}}<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"body"</span>&gt;</span>&#123;&#123;{body}}}<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+  &#123;&#123;/with}}
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>当 JSON 对象包含嵌套属性时，不必再三重复父属性的名字。比如以下数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>{
+  title: <span class="string">"First Post"</span>,
+  story: {
+    intro: <span class="string">"Before the jump"</span>,
+    body: <span class="string">"After the jump"</span>
+  }
+}
+</pre></td></tr></table></figure>
+
+<p>helper 接收参数，参数为 JSON 属性的 上下文。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>Handlebars.registerHelper(<span class="string">'with'</span>, <span class="function"><span class="keyword">function</span><span class="params">(context, options)</span> {</span>
+  <span class="keyword">return</span> options.fn(context);
+});
+</pre></td></tr></table></figure>
+
+<h2 id=" 简单迭代器 _each_helper">简单迭代器 each helper</h2>
+<p>Handlebars 内建了　<strong>each</strong>　迭代器</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"comments"</span>&gt;</span>
+  &#123;&#123;#each comments}}
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"comment"</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">h2</span>&gt;</span>&#123;&#123;subject}}<span class="tag">&lt;/<span class="title">h2</span>&gt;</span>
+      &#123;&#123;{body}}}
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+  &#123;&#123;/each}}
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>实现原理如下：　把 comments 数组的每一个元素作为上下文解析模板</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>Handlebars.registerHelper(<span class="string">'each'</span>, <span class="function"><span class="keyword">function</span><span class="params">(context, options)</span> {</span>
+  <span class="keyword">var</span> ret = <span class="string">""</span>;
+
+  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>, j=context.length; i&lt;j; i++) {
+    ret = ret + options.fn(context[i]);
+  }
+
+  <span class="keyword">return</span> ret;
+});
+</pre></td></tr></table></figure>
+
+<p>可以用 <code>this</code> 引用迭代元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"people_list"</span>&gt;</span>
+  &#123;&#123;#each people}}
+  <span class="tag">&lt;<span class="title">li</span>&gt;</span>&#123;&#123;this}}<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  &#123;&#123;/each}}
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>上下文：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>{
+  people: [
+    <span class="string">"Yehuda Katz"</span>,
+    <span class="string">"Alan Johnson"</span>,
+    <span class="string">"Charles Jolley"</span>
+  ]
+}
+</pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"people_list"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">li</span>&gt;</span>Yehuda Katz<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">li</span>&gt;</span>Alan Johnson<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">li</span>&gt;</span>Charles Jolley<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>当某一项为空时，可以用 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;else}}
+</pre></td></tr></table></figure>
+
+<p> 表达式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>&#123;&#123;#each paragraphs}}
+  <span class="tag">&lt;<span class="title">p</span>&gt;</span>&#123;&#123;this}}<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+&#123;&#123;else}}
+  <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"empty"</span>&gt;</span>No content<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+&#123;&#123;/each}}
+</pre></td></tr></table></figure>
+
+<p>通过 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;@index}}
+</pre></td></tr></table></figure>
+
+<p> 可以引用当前的循环索引</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>&#123;&#123;#each array}}
+  &#123;&#123;@index}}: &#123;&#123;this}}
+&#123;&#123;/each}}
+</pre></td></tr></table></figure>
+
+<p>用 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;@key}}
+</pre></td></tr></table></figure>
+
+<p>引用当前的键名：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>&#123;&#123;#each object}}
+  &#123;&#123;@key}}: &#123;&#123;this}}
+&#123;&#123;/each}}
+</pre></td></tr></table></figure>
+
+<p>数组迭代的第一步和最后一步用 <code>@first</code> 和 <code>@last</code> 变量表示， 对象迭代时仅 <code>@first</code> 可用。</p>
+<h2 id=" 条件语句 _if_helper">条件语句 if helper</h2>
+<p>如果条件参数返回 <code>false</code>, <code>undefined</code>, <code>null</code>, <code>&quot;&quot;</code> 或 <code>[]</code>（非真的值）时，Handlebars 将不渲染该块</p>
+<p>Handlebars 内建了 <code>if</code> 和 <code>unless</code> 语句</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>&#123;&#123;#if isActive}}
+  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"star.gif"</span> <span class="attribute">alt</span>=<span class="value">"Active"</span>&gt;</span>
+&#123;&#123;/if}}
+</pre></td></tr></table></figure>
+
+<p>实现原理：根据传入的条件参数，判断是否解析模板</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>Handlebars.registerHelper(<span class="string">'if'</span>, <span class="function"><span class="keyword">function</span><span class="params">(conditional, options)</span> {</span>
+  <span class="keyword">if</span>(conditional) {
+    <span class="keyword">return</span> options.fn(<span class="keyword">this</span>);
+  }
+});
+</pre></td></tr></table></figure>
+
+<p>Handlebars 还提供了 <code>else</code> 语句</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>&#123;&#123;#if isActive}}
+  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"star.gif"</span> <span class="attribute">alt</span>=<span class="value">"Active"</span>&gt;</span>
+&#123;&#123;else}}
+  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"cry.gif"</span> <span class="attribute">alt</span>=<span class="value">"Inactive"</span>&gt;</span>
+&#123;&#123;/if}}
+</pre></td></tr></table></figure>
+
+<h2 id="unless_helper">unless helper</h2>
+<p><code>unless</code> 跟 <code>if</code> 正好相反，如果表达式返回 false ，模板将被渲染。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"entry"</span>&gt;</span>
+  &#123;&#123;#unless license}}
+  <span class="tag">&lt;<span class="title">h3</span> <span class="attribute">class</span>=<span class="value">"warning"</span>&gt;</span>WARNING: This entry does not have a license!<span class="tag">&lt;/<span class="title">h3</span>&gt;</span>
+  &#123;&#123;/unless}}
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>当 license 返回 <code>false</code>，Handlebars 将渲染 warning 。</p>
+<h2 id="log_helper">log helper</h2>
+<p>记录上下文状态</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;log "Look at me!"}}
+</pre></td></tr></table></figure>
+
+<h1 id="JavaScript_ 编译模板 ">JavaScript 编译模板</h1>
+<p>模板可以包含在特殊的 <code>&lt;script&gt;</code> 里：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">id</span>=<span class="value">"entry-template"</span> <span class="attribute">type</span>=<span class="value">"text/x-handlebars-template"</span>&gt;</span><span class="javascript">
+  template content
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>然后用 <code>Handlebars.compile</code> 编译模板</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">var</span> source   = $(<span class="string">"#entry-template"</span>).html();
+<span class="keyword">var</span> template = Handlebars.compile(source);
+</pre></td></tr></table></figure>
+
+<p>获取编译后的 HTML 模板，用 JSON 数据填充模板</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">var</span> context = {title: <span class="string">"My New Post"</span>, body: <span class="string">"This is my first post!"</span>}
+<span class="keyword">var</span> html    = template(context);
+</pre></td></tr></table></figure>
+
+<p>最终结果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"entry"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>My New Post<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"body"</span>&gt;</span>
+    This is my first post!
+  <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="HTML_ 转义 ">HTML 转义</h2>
+<p>不想转义用 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;&#123;
+</pre></td></tr></table></figure>
+
+<p>模板：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"entry"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;title}}<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"body"</span>&gt;</span>
+    &#123;&#123;{body}}}
+  <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>上下文数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>{
+  title: <span class="string">"All about &lt;p&gt; Tags"</span>,
+  body: <span class="string">"&lt;p&gt;This is a post about &lt;p&gt; tags&lt;/p&gt;"</span>
+}
+</pre></td></tr></table></figure>
+
+<p>最终结果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"entry"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>All About &lt;p&gt; Tags<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"body"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">p</span>&gt;</span>This is a post about &lt;p&gt; tags<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p> <code>Handlebars.SafeString</code> 方法不做转义，通常返回 <code>new Handlebars.SafeString(result)</code>。此种情形，你可能想手动转义参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>Handlebars.registerHelper(<span class="string">'link'</span>, <span class="function"><span class="keyword">function</span><span class="params">(text, url)</span> {</span>
+  text = Handlebars.Utils.escapeExpression(text);
+  url  = Handlebars.Utils.escapeExpression(url);
+
+  <span class="keyword">var</span> result = <span class="string">'&lt;a href="'</span> + url + <span class="string">'"&gt;'</span> + text + <span class="string">'&lt;/a&gt;'</span>;
+
+  <span class="keyword">return</span> <span class="keyword">new</span> Handlebars.SafeString(result);
+});
+</pre></td></tr></table></figure>
+
+<p>模板注释 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;! }}
+</pre></td></tr></table></figure>
+
+<p>或者 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;!-- --}}
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"entry"</span>&gt;</span>
+  &#123;&#123;! only output this author names if an author exists }}
+  &#123;&#123;#if author}}
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;firstName}} &#123;&#123;lastName}}<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+  &#123;&#123;/if}}
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>模板注释不会输出，HTML 注释会输出</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"entry"</span>&gt;</span>
+  &#123;&#123;! This comment will not be in the output }}
+  <span class="comment">&lt;!-- This comment will be in the output --&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="Partials_ 局部模板 ">Partials 局部模板</h2>
+<p>用 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&#123;&#123;&gt; partialName}}
+</pre></td></tr></table></figure>
+
+<p>引入局部模板，局部模板可以使字符串，也可以是编译模板的函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> source = <span class="string">"&lt;ul&gt;&#123;&#123;#people}}&lt;li&gt;&#123;&#123;&gt; link}}&lt;/li&gt;&#123;&#123;/people}}&lt;/ul&gt;"</span>;
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>Handlebars.registerPartial(<span class="string">'link'</span>, <span class="string">'&lt;a href="/people/&#123;&#123;id}}"&gt;&#123;&#123;name}}&lt;/a&gt;'</span>)
+<span class="keyword">var</span> template = Handlebars.compile(source);
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="keyword">var</span> data = { <span class="string">"people"</span>: [
+    { <span class="string">"name"</span>: <span class="string">"Alan"</span>, <span class="string">"id"</span>: <span class="number">1</span> },
+    { <span class="string">"name"</span>: <span class="string">"Yehuda"</span>, <span class="string">"id"</span>: <span class="number">2</span> }
+  ]};
+
+template(data);
+
+<span class="comment">// Should render:</span>
+<span class="comment">// &lt;ul&gt;</span>
+<span class="comment">//   &lt;li&gt;&lt;a href="/people/1"&gt;Alan&lt;/a&gt;&lt;/li&gt;</span>
+<span class="comment">//   &lt;li&gt;&lt;a href="/people/2"&gt;Yehuda&lt;/a&gt;&lt;/li&gt;</span>
+<span class="comment">// &lt;/ul&gt;</span>
+</pre></td></tr></table></figure>
+
+<h1 id=" 内建工具 ">内建工具</h1>
+<h2 id=" 转义字符串 ">转义字符串</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>Handlebars.Utils.escapeExpression(string)
+</pre></td></tr></table></figure>
+
+<h2 id=" 判断空值 ">判断空值</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>Handlebars.Utils.isEmpty(value)
+</pre></td></tr></table></figure>
+
+<h2 id=" 扩展对象 ">扩展对象</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>Handlebars.Utils.extend(foo, {bar: <span class="literal">true</span>})
+</pre></td></tr></table></figure>
+
+<h2 id=" 转字符串 ">转字符串</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>Handlebars.Utils.toString(obj)
+</pre></td></tr></table></figure>
+
+<h2 id=" 判断数组 ">判断数组</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>Handlebars.Utils.isArray(obj)
+</pre></td></tr></table></figure>
+
+<h2 id=" 判断函数 ">判断函数</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>Handlebars.Utils.isFunction(obj)
+</pre></td></tr></table></figure>
+
+]]></content>
+    
+    
+      <category term="Handlebars" scheme="http://jinlong.github.io/tags/Handlebars/"/>
+    
+      <category term="Node.js" scheme="http://jinlong.github.io/tags/Node.js/"/>
+    
+      <category term="Node.js" scheme="http://jinlong.github.io/categories/Node.js/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Express 入门]]></title>
@@ -5604,326 +6267,6 @@ jpm.open( );
 <p>]]></summary>
     
       <category term="Opera" scheme="http://jinlong.github.io/categories/Opera/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[AngularJS 新手指南4]]></title>
-    <link href="http://jinlong.github.io/2013/05/03/angularjs-tutorial4/"/>
-    <id>http://jinlong.github.io/2013/05/03/angularjs-tutorial4/</id>
-    <published>2013-05-03T08:57:00.000Z</published>
-    <updated>2013-05-03T09:36:43.000Z</updated>
-    <content type="html"><![CDATA[<h2 id=" 自定义过滤器 ">自定义过滤器</h2>
-<p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
-<figure class="highlight js"><figcaption><span>app/js/filters.js:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>angular.module(<span class="string">'phonecatFilters'</span>, []).filter(<span class="string">'checkmark'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(input)</span> {</span>
-    <span class="keyword">return</span> input ? <span class="string">'\u2713'</span> : <span class="string">'\u2718'</span>;
-  };
-});
-</pre></td></tr></table></figure>
-
-<p>过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。</p>
-<p>我们需要给 phonecat 模块注册 phonecatFilters 模块。</p>
-<figure class="highlight js"><figcaption><span>app/js/app.js:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>...
-angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>]).
-...
-</pre></td></tr></table></figure>
-
-<p><strong><em>模板</em></strong></p>
-<p>我们需要引入 app/js/filters.js 文件</p>
-<figure class="highlight html"><figcaption><span>app/index.html:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>...
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/filters.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-...
-</pre></td></tr></table></figure>
-
-<p>Angular 模版使用过滤器的语法如下：</p>
-<p>&#123;&#123; expression | filter }}</p>
-<p>我们在手机详情模版使用此过滤器：</p>
-<p>app/partials/phone-detail.html:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre><span class="keyword">...</span>
-    &lt;dl&gt;
-      &lt;dt&gt;Infrared&lt;/dt&gt;
-      &lt;dd&gt;&amp;<span class="comment">#123;&amp;#123;phone.connectivity.infrared | checkmark}}&lt;/dd&gt;</span>
-      &lt;dt&gt;GPS&lt;/dt&gt;
-      &lt;dd&gt;&amp;<span class="comment">#123;&amp;#123;phone.connectivity.gps | checkmark}}&lt;/dd&gt;</span>
-    &lt;/dl&gt;
-<span class="keyword">...</span>
-</pre></td></tr></table></figure>
-
-
-<p><a id="more"></a><br><strong><em>实验</em></strong></p>
-<ul>
-<li>我们实验下 Angular 内建过滤器，在 index.html 添加以下绑定：</li>
-</ul>
-<p>&#123;&#123; “lower cap string” | uppercase }}<br>&#123;&#123; {foo: “bar”, baz: 23} | json }}<br>&#123;&#123; 1304375948024 | date }}<br>&#123;&#123; 1304375948024 | date:”MM/dd/yyyy @ h:mma” }}</p>
-<ul>
-<li>我们也可以创建带有输入元素的模型，把过滤器绑定和它联合起来。index.html 加以下代码试试：</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="subst">&lt;</span>input ng<span class="attribute">-model</span><span class="subst">=</span><span class="string">"userInput"</span><span class="subst">&gt;</span> Uppercased: <span class="subst">&amp;</span><span class="variable">#123</span>;<span class="subst">&amp;</span><span class="variable">#123</span>; userInput <span class="subst">|</span> uppercase }}
-</pre></td></tr></table></figure>
-
-
-<h2 id=" 事件处理 ">事件处理</h2>
-<p>在手机详情页加个点击缩缩图切换对应大图的效果。</p>
-<p><strong><em>控制器</em></strong></p>
-<figure class="highlight js"><figcaption><span>app/js/controllers.js:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="code"><pre>...
-<span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span><span class="params">($scope, $routeParams, $http)</span> {</span>
-  $http.get(<span class="string">'phones/'</span> + $routeParams.phoneId + <span class="string">'.json'</span>).success(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
-    $scope.phone = data;
-    $scope.mainImageUrl = data.images[<span class="number">0</span>];
-  });
-
-  $scope.setImage = <span class="function"><span class="keyword">function</span><span class="params">(imageUrl)</span> {</span>
-    $scope.mainImageUrl = imageUrl;
-  }
-}
-
-<span class="comment">//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', '$http'];</span>
-</pre></td></tr></table></figure>
-
-<p>PhoneDetailCtrl 控制器，创建了 mainImageUrl 模型属性，默认值设为第一个手机图片的 URL。<br>我们也创建了 setImage 事件处理器，它将改变 mainImageUrl 的值。</p>
-<p><strong><em>模版</em></strong></p>
-<figure class="highlight html"><figcaption><span>app/partials/phone-detail.html:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\{\{mainImageUrl}}"</span> <span class="attribute">class</span>=<span class="value">"phone"</span>&gt;</span>
-...
-<span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phone-thumbs"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"img in phone.images"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\{\{img}}"</span> <span class="attribute">ng-click</span>=<span class="value">"setImage(img)"</span>&gt;</span>
-  <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-...
-</pre></td></tr></table></figure>
-
-<p>我们给大图绑定 ngSrc 指令，设为 mainImageUrl 属性，也给缩略图注册了 <a href="http://docs.angularjs.org/api/ng.directive:ngClick" target="_blank">ngClick</a> 事件。当点击缩略图时，setImage 事件处理器会把 mainImageUrl 属性的值改成缩略图的 URL 。</p>
-<p><strong><em>实验</em></strong></p>
-<p>让我们往 PhoneDetailCtrl  添加一个新的控制器方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>$scope.hello = <span class="function"><span class="keyword">function</span><span class="params">(name)</span> {</span>
-      alert(<span class="string">'Hello '</span> + (name || <span class="string">'world'</span>) + <span class="string">'!'</span>);
-  }
-</pre></td></tr></table></figure>
-
-<p>然后往 phone-details.html 模版添加以下代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">button</span> <span class="attribute">ng-click</span>=<span class="value">"hello('Elmo')"</span>&gt;</span>Hello<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
-</pre></td></tr></table></figure>
-
-<h2 id="REST_ 和自定义服务 ">REST 和自定义服务</h2>
-<p>最后为应用定义一个基于 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank">REST</a> 客户端的自定义服务，用此客户端我们可以更容易的发起 XHR 请求获取数据，不必使用底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank">$http</a> API，HTTP 方法和 URL。</p>
-<p><strong><em>模版</em></strong></p>
-<p>自定义服务定义到 app/js/services.js 中，我们把它引入到布局模版中。此外，需要加载 angular-resource.js 文件，此文件的 $resource 服务包含 ngResource 模块，我们马上要用：</p>
-<figure class="highlight html"><figcaption><span>app/index.html</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>...
-  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/services.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"lib/angular/angular-resource.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-...
-</pre></td></tr></table></figure>
-
-<p><strong><em>服务</em></strong></p>
-<figure class="highlight js"><figcaption><span>app/js/services.js</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>angular.module(<span class="string">'phonecatServices'</span>, [<span class="string">'ngResource'</span>]).
-    factory(<span class="string">'Phone'</span>, <span class="function"><span class="keyword">function</span><span class="params">($resource)</span>{</span>
-  <span class="keyword">return</span> $resource(<span class="string">'phones/:phoneId.json'</span>, {}, {
-    query: {method:<span class="string">'GET'</span>, params:{phoneId:<span class="string">'phones'</span>}, isArray:<span class="literal">true</span>}
-  });
-});
-</pre></td></tr></table></figure>
-
-<p>我们使用模块 API 注册自定义服务，用到了 factory（工厂） 函数。把 ‘Phone’ 服务名传到工厂函数里，工厂函数很像控制器的构造函数，都可以通过函数参数声明依赖。Phone 服务依赖于 $resource 服务。</p>
-<p><a href="http://docs.angularjs.org/api/ngResource.$resource" target="_blank">$resource</a> 服务几行代码就能创建一个 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank">REST</a> 客户端，此客户端可以取代底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank">$http</a>  服务。</p>
-<figure class="highlight js"><figcaption><span>app/js/app.js</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>...
-angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>, <span class="string">'phonecatServices'</span>]).
-...
-</pre></td></tr></table></figure>
-
-<p>我们需要给 ‘phonecat’ 应用添加数组形式的 ‘phonecatServices’。</p>
-<p><strong><em>控制器</em></strong></p>
-<p>我们简化了子控制器（PhoneListCtrl 和 PhoneDetailCtrl），用新的服务 Phone 取代底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank">$http</a> 服务。</p>
-<p>Angular 的 <a href="http://docs.angularjs.org/api/ngResource.$resource" target="_blank">$resource</a> 服务比 $http 更易用，代码也更容易理解。</p>
-<figure class="highlight js"><figcaption><span>app/js/controllers.js</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="code"><pre>...
-
-<span class="function"><span class="keyword">function</span> <span class="title">PhoneListCtrl</span><span class="params">($scope, Phone)</span> {</span>
-  $scope.phones = Phone.query();
-  $scope.orderProp = <span class="string">'age'</span>;
-}
-
-<span class="comment">//PhoneListCtrl.$inject = ['$scope', 'Phone'];</span>
-
-
-<span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span><span class="params">($scope, $routeParams, Phone)</span> {</span>
-  $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, <span class="function"><span class="keyword">function</span><span class="params">(phone)</span> {</span>
-    $scope.mainImageUrl = phone.images[<span class="number">0</span>];
-  });
-
-  $scope.setImage = <span class="function"><span class="keyword">function</span><span class="params">(imageUrl)</span> {</span>
-    $scope.mainImageUrl = imageUrl;
-  }
-}
-
-<span class="comment">//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', 'Phone'];</span>
-</pre></td></tr></table></figure>
-
-<p>注意我们把：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>$http.get(<span class="string">'phones/phones.json'</span>).success(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
-  $scope.phones = data;
-});
-</pre></td></tr></table></figure>
-
-<p>换成了：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$scope.phones = Phone.query();
-</pre></td></tr></table></figure>
-
-<p>非常值得注意的是，当调用 Phone 服务时， 我们没有传递回调函数。</p>
-<h2 id=" 结语 ">结语</h2>
-<p>我们的应用完成啦，<code>git checkout</code> 命令可以跳回原先的步骤。</p>
-<p><a href="http://docs.angularjs.org/guide/index" target="_blank">开发者指南</a> 有更多的例子和详细资料。</p>
-<p>更多代码实例，看 <a href="http://docs.angularjs.org/cookbook/index" target="_blank">Cookbook</a> 。</p>
-<p>当你准备用 Angular 开发项目时，推荐你使用 angular <a href="https://github.com/angular/angular-seed" target="_blank">种子</a> 引导开发。</p>
-]]></content>
-    <summary type="html"><![CDATA[<h2 id=" 自定义过滤器 ">自定义过滤器</h2>
-<p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
-<figure class="highlight js"><figcaption><span>app/js/filters.js:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>angular.module(<span class="string">'phonecatFilters'</span>, []).filter(<span class="string">'checkmark'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(input)</span> {</span>
-    <span class="keyword">return</span> input ? <span class="string">'\u2713'</span> : <span class="string">'\u2718'</span>;
-  };
-});
-</pre></td></tr></table></figure>
-
-<p>过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。</p>
-<p>我们需要给 phonecat 模块注册 phonecatFilters 模块。</p>
-<figure class="highlight js"><figcaption><span>app/js/app.js:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>...
-angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>]).
-...
-</pre></td></tr></table></figure>
-
-<p><strong><em>模板</em></strong></p>
-<p>我们需要引入 app/js/filters.js 文件</p>
-<figure class="highlight html"><figcaption><span>app/index.html:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>...
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/filters.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-...
-</pre></td></tr></table></figure>
-
-<p>Angular 模版使用过滤器的语法如下：</p>
-<p>&#123;&#123; expression | filter }}</p>
-<p>我们在手机详情模版使用此过滤器：</p>
-<p>app/partials/phone-detail.html:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre><span class="keyword">...</span>
-    &lt;dl&gt;
-      &lt;dt&gt;Infrared&lt;/dt&gt;
-      &lt;dd&gt;&amp;<span class="comment">#123;&amp;#123;phone.connectivity.infrared | checkmark}}&lt;/dd&gt;</span>
-      &lt;dt&gt;GPS&lt;/dt&gt;
-      &lt;dd&gt;&amp;<span class="comment">#123;&amp;#123;phone.connectivity.gps | checkmark}}&lt;/dd&gt;</span>
-    &lt;/dl&gt;
-<span class="keyword">...</span>
-</pre></td></tr></table></figure>
-
-
-<p>]]></summary>
-    
-      <category term="AngularJS" scheme="http://jinlong.github.io/categories/AngularJS/"/>
-    
-      <category term="翻译" scheme="http://jinlong.github.io/categories/AngularJS/%E7%BF%BB%E8%AF%91/"/>
     
   </entry>
   
