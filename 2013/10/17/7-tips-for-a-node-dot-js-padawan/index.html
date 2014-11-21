@@ -12,7 +12,26 @@
     <meta name="description" content="原文：7 tips for a Node.js padawan感谢 Di Wu 同学，参考了他的译文《7 Tips for a Node.js Padawan》，某些不妥的地方做了些许修改。
 
 或许我刚入门时就想了解这些知识。
-Node.js 开发相当有趣，相当令人满足。它有 3 万 5 千多个模块">
+Node.js 开发相当有趣，相当令人满足。它有 3 万 5 千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。
+可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。
+技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2
+当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 node [file].js 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 control + C 。
+幸运的是我发现了一个非常棒的工具 Nodemon 。运行以下命令安装它：
+1
+npm install -g nodemon
+
+
+
+Nodemon 了不起呀，一旦全局安装了它，你可以通过 nodemon [file].js 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。
+生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？
+PM2 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。
+当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。
+1
+pm2 start app.js -i max
+
+
+
+-i 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 max 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！">
     
     
     
@@ -77,7 +96,7 @@ Node.js 开发相当有趣，相当令人满足。它有 3 万 5 千多个模块
     </p>
   <p class="article-time">
     <time datetime="2013-10-17T09:38:00.000Z" itemprop="datePublished">10月 17 2013</time>
-    更新日期:<time datetime="2014-10-25T02:21:32.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T07:17:04.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -86,7 +105,7 @@ Node.js 开发相当有趣，相当令人满足。它有 3 万 5 千多个模块
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="# 或许我刚入门时就想了解这些知识。"><span class="toc-number">1.</span> <span class="toc-text">或许我刚入门时就想了解这些知识。</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _1_：开发环境使用 _nodemon，生产环境使用 _pm2"><span class="toc-number"></span> <span class="toc-text">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _3_：轻松调试 _Node-js_ 应用 "><span class="toc-number"></span> <span class="toc-text">技巧 3 ：轻松调试 Node.js 应用</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="# 或许我刚入门时就想了解这些知识。"><span class="toc-number">1.</span> <span class="toc-text">或许我刚入门时就想了解这些知识。</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _1_：开发环境使用 _nodemon，生产环境使用 _pm2"><span class="toc-number"></span> <span class="toc-text">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _2_：Async_ 或者 _Q"><span class="toc-number"></span> <span class="toc-text">技巧 2 ：Async 或者 Q</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _3_：轻松调试 _Node-js_ 应用 "><span class="toc-number"></span> <span class="toc-text">技巧 3 ：轻松调试 Node.js 应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _4_：Nodefly"><span class="toc-number"></span> <span class="toc-text">技巧 4 ：Nodefly</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _5_：用 _NPM_ 管理模块 "><span class="toc-number"></span> <span class="toc-text">技巧 5 ：用 NPM 管理模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _6_：不要提交 _node_modules_ 文件夹 "><span class="toc-number"></span> <span class="toc-text">技巧 6 ：不要提交 node_modules 文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _7_：不要忘记 _return"><span class="toc-number"></span> <span class="toc-text">技巧 7 ：不要忘记 return</span></a></li></ol>
 		</div>
 		
 		<blockquote>
@@ -96,34 +115,26 @@ Node.js 开发相当有趣，相当令人满足。它有 3 万 5 千多个模块
 <p>Node.js 开发相当有趣，相当令人满足。它有 3 万 5 千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。</p>
 <p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
 <h2 id=" 技巧 _1_：开发环境使用 _nodemon，生产环境使用 _pm2">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</h2>
-<p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行</p>
-<figure class="highlight node"><figcaption><span>[file].js``` 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 ```control + C``` 。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre> 
-幸运的是我发现了一个非常棒的工具 [<span class="link_label">Nodemon</span>](<span class="link_url">https://github.com/remy/nodemon</span>) 。运行以下命令安装它：
+<p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
+<p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon" target="_blank">Nodemon</a> 。运行以下命令安装它：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>npm <span class="keyword">install</span> -g nodemon
 </pre></td></tr></table></figure>
 
-<p>npm install -g nodemon</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre> 
-Nodemon 了不起呀，一旦全局安装了它，你可以通过 <span class="code">```</span>nodemon [file].js<span class="code">```</span> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。
- 
-生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？
 
-[<span class="link_label">PM2</span>](<span class="link_url">https://github.com/Unitech/pm2</span>) 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。
- 
-当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。
+<p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
+<p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
+<p><a href="https://github.com/Unitech/pm2" target="_blank">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
+<p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>pm2 <span class="operator"><span class="keyword">start</span> app.js -i <span class="aggregate">max</span></span>
 </pre></td></tr></table></figure>
 
-<p>pm2 start app.js -i max</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
+
+<p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br><a id="more"></a></p>
+<h2 id=" 技巧 _2_：Async_ 或者 _Q">技巧 2 ：Async 或者 Q</h2>
+<p>越早写 node.js 应用，越会尽早领略回调地狱之痛。如果你没见过，这有一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -146,38 +157,22 @@ Nodemon 了不起呀，一旦全局安装了它，你可以通过 <span class="c
 21
 22
 23
-24
-25
-26
-27
-28
-29
-30
-31
-</pre></td><td class="code"><pre> 
-**-i** 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 **max** 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！
-&lt;!<span class="comment">--more--&gt;</span>
-## 技巧 <span class="number">2</span> ：Async 或者 Q
-
-越早写 node.js 应用，越会尽早领略回调地狱之痛。如果你没见过，这有一个例子：
-
-```js
-<span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">(name, password, cb)</span></span>{
-  checkIfNameExists(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span></span>{
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">(name, password, cb)</span>{</span>
+  checkIfNameExists(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span>{</span>
    <span class="keyword">if</span>(err){
-    <span class="keyword">return</span> cb(“<span class="built_in">error</span>”);
+    <span class="keyword">return</span> cb(“error”);
    }
-   checkIfPasswordGood(password, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span></span>{
+   checkIfPasswordGood(password, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span>{</span>
     <span class="keyword">if</span>(err){
-     <span class="keyword">return</span> cb(“<span class="built_in">error</span>”);
+     <span class="keyword">return</span> cb(“error”);
     }
  
-    createAccount(name,password, <span class="function"><span class="keyword">function</span><span class="params">(err,result)</span></span>{
+    createAccount(name,password, <span class="function"><span class="keyword">function</span><span class="params">(err,result)</span>{</span>
      <span class="keyword">if</span>(err){
-      <span class="keyword">return</span> cb(“<span class="built_in">error</span>”);
+      <span class="keyword">return</span> cb(“error”);
      }
-     createBlog(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span></span>{
-      sendEmail(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span></span>{
+     createBlog(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span>{</span>
+      sendEmail(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span>{</span>
        callback(result);
       });
      });
@@ -188,8 +183,11 @@ Nodemon 了不起呀，一旦全局安装了它，你可以通过 <span class="c
 </pre></td></tr></table></figure>
 
 <p>不怎么美的神奇代码的确存在，但你如何避免呢？</p>
-<p>一种简单的方式是用</p>
-<figure class="highlight events```"><figcaption><span>，我个人不建议这么做，它违背了一个函数的观点，可以用 ```events``` 调用只有一个用途的私有方法。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>一种简单的方式是用 <code>events</code> ，我个人不建议这么做，它违背了一个函数的观点，可以用 <code>events</code> 调用只有一个用途的私有方法。</p>
+<p>所以怎么做呢？有两个相互竞争的库：<code>async.js</code> 和 <code>Q</code> ，它们均可以避免回调地狱出现。</p>
+<p><a href="https://github.com/caolan/async" target="_blank">Async.js</a> 或者 “async”可以轻松执行连续或者平行的函数，不需要一层一层的嵌套。</p>
+<p>下面是 Async 支持的模式，readme 有记录。想了解 async 支持的所有模式，看看它们的代码仓库。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -221,81 +219,56 @@ Nodemon 了不起呀，一旦全局安装了它，你可以通过 <span class="c
 30
 31
 32
-33
-34
-35
-36
-37
-38
-39
-40
-</pre></td><td class="code"><pre> 
-所以怎么做呢？有两个相互竞争的库：`<span class="javascript"></span>``<span class="javascript">async.js</span>``<span class="javascript"></span>` 和 `<span class="javascript"></span>``<span class="javascript">Q</span>``<span class="javascript"></span>` ，它们均可以避免回调地狱出现。
- 
-[Async.js](<span class="attribute">https</span>:<span class="regexp">//gi</span>thub.com/caolan/async) 或者 “async”可以轻松执行连续或者平行的函数，不需要一层一层的嵌套。
- 
-下面是 Async 支持的模式，readme 有记录。想了解 async 支持的所有模式，看看它们的代码仓库。
-
-`<span class="javascript"></span>``<span class="javascript">js
-async.map([‘file1<span class="string">',’file2'</span>,’file3<span class="string">'], fs.stat, function(err, results){
+</pre></td><td class="code"><pre>async.map([‘file1',’file2',’file3'], fs.stat, function(err, results){
   // results is now an array of stats for each file
 });
  
-async.filter([‘file1'</span>,’file2<span class="string">',’file3'</span>], fs.exists, <span class="function"><span class="keyword">function</span><span class="params">(results)</span>{</span>
-<span class="comment">// results now equals an array of the existing files</span>
+async.filter([‘file1',’file2',’file3'], fs.exists, function(results){
+// results now equals an array of the existing files
 });
  
 async.parallel([
-  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span> … },
-  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span> … }
+  function(){ … },
+  function(){ … }
   ], callback);
  
 async.series([
-  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span> … },
-  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span> … }
+  function(){ … },
+  function(){ … }
   ]);
  
 async.waterfall([
-  <span class="function"><span class="keyword">function</span><span class="params">(callback)</span>{</span>
-   callback(<span class="literal">null</span>, ‘one’, ‘two’);
+  function(callback){
+   callback(null, ‘one’, ‘two’);
   },
-  <span class="function"><span class="keyword">function</span><span class="params">(arg1, arg2, callback)</span>{</span>
-   callback(<span class="literal">null</span>, ‘three’);
+  function(arg1, arg2, callback){
+   callback(null, ‘three’);
   },
-  <span class="function"><span class="keyword">function</span><span class="params">(arg1, callback)</span>{</span>
-<span class="comment">// arg1 now equals ‘three’</span>
-callback(<span class="literal">null</span>, ‘done’);
+  function(arg1, callback){
+// arg1 now equals ‘three’
+callback(null, ‘done’);
 }
-], <span class="function"><span class="keyword">function</span> <span class="params">(err, result)</span> {</span>
-<span class="comment">// result now equals ‘done’</span>
-});</span>
-</pre></td></tr></table></figure>
-
-<p>如果我们用 async 的</p>
-<figure class="highlight waterfall```"><figcaption><span>来修改之前的例子，代码将更加易读，再也不会涉及死亡金字塔了。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre> 
-另一个很好的库是 [<span class="link_label">Q</span>](<span class="link_url">https://github.com/kriskowal/q</span>) ，这个库用到了 promises 的概念。Promise 是一个含有‘promise’方法的返回对象，他提供了一个最终返回值，非常优雅的将 javascripts 的异步特性和 node.js 紧密联系起来。
- 
-从 Q 的代码仓库页拿来的例子。
-
-<span class="code">```</span>js
-promiseMeSomething()
-.then(function (value) {
-}, function (reason) {
+], function (err, result) {
+// result now equals ‘done’
 });
 </pre></td></tr></table></figure>
 
-<p>promise me 函数立刻返回一个对象，调用</p>
-<figure class="highlight then```"><figcaption><span>将返回传入 value 值的函数。它也带一个回调函数，处理未能返回值的情况。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>如果我们用 async 的 <code>waterfall</code> 来修改之前的例子，代码将更加易读，再也不会涉及死亡金字塔了。</p>
+<p>另一个很好的库是 <a href="https://github.com/kriskowal/q" target="_blank">Q</a> ，这个库用到了 promises 的概念。Promise 是一个含有‘promise’方法的返回对象，他提供了一个最终返回值，非常优雅的将 javascripts 的异步特性和 node.js 紧密联系起来。</p>
+<p>从 Q 的代码仓库页拿来的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>promiseMeSomething()
+.then(<span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+}, <span class="function"><span class="keyword">function</span> <span class="params">(reason)</span> {</span>
+});
+</pre></td></tr></table></figure>
+
+<p>promise me 函数立刻返回一个对象，调用 <code>then</code> 将返回传入 value 值的函数。它也带一个回调函数，处理未能返回值的情况。</p>
+<p>用非常整洁的方式避免了回调地狱。如果重写原来的例子，当 <code>then</code> 执行的时候才调用每个函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -306,22 +279,14 @@ promiseMeSomething()
 9
 10
 11
-12
-13
-14
-15
-</pre></td><td class="code"><pre> 
-用非常整洁的方式避免了回调地狱。如果重写原来的例子，当 ```<span class="keyword">then</span>``` 执行的时候才调用每个函数。
-
-```js
-<span class="transposed_variable">Q.</span>fcall(checkIfNameExists)
-.<span class="keyword">then</span>(checkIfPasswordIsGood)
-.<span class="keyword">then</span>(createAccount)
-.<span class="keyword">then</span>(createBlog)
-.<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span> <span class="params">(result)</span> {</span>
+</pre></td><td class="code"><pre>Q.fcall(checkIfNameExists)
+.then(checkIfPasswordIsGood)
+.then(createAccount)
+.then(createBlog)
+.then(<span class="function"><span class="keyword">function</span> <span class="params">(result)</span> {</span>
 <span class="comment">// Do something with the result</span>
 })
-.<span class="keyword">catch</span>(<span class="function"><span class="keyword">function</span> <span class="params">(error)</span> {</span>
+.catch(<span class="function"><span class="keyword">function</span> <span class="params">(error)</span> {</span>
 <span class="comment">// Handle any error from all above steps</span>
 })
 .done();
@@ -333,110 +298,45 @@ promiseMeSomething()
 <p>“我个人喜好？一直是 Q！”</p>
 </blockquote>
 <h2 id=" 技巧 _3_：轻松调试 _Node-js_ 应用 ">技巧 3 ：轻松调试 Node.js 应用</h2>
-<p>如果你从一个 IDE 重度集成的语言比如 java 或者 C# 转来调试 Node.js，你一定会感到很困扰。大多数新的 node 开发者采用 “flow”调试模式，你最好的帮手是</p>
-<figure class="highlight console.log```"><figcaption><span>。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-</pre></td><td class="code"><pre> 
-但是肯定有更便利的调试方式，Node.js 内置了一个调试器你可以叫它 node debug，不过我更喜欢的 <span class="code">```</span>node-inspector<span class="code">```</span> 。
- 
-它们的 github 仓库提到“Node Inspector 是使用了 Blink 开发工具的 node.js 调试工具界面（先前的 WebKit Web Inspector）。”
- 
-简而言之，无论你选择哪个编辑器和 chrome web tools ，node-inspector 都可以调试你的应用。多爽啊。
- 
-Node Inspector 可以做一些真正酷的东西，比如实时代码修改，单步调试，作用域注入和一堆很酷的功能。
- 
-它涉及到一些设置，可以按照 [<span class="link_label">这里</span>](<span class="link_url">https://github.com/node-inspector/node-inspector</span>) 的说明做。
-
-<span class="header">## 技巧 4 ：Nodefly</span>
-
-一旦你的应用正常运行，你可能会问自己，如何监控它的性能，如何通过分析确保它以最佳速度运行呢。最简单的回答是使用非常棒的 Nodefly 服务。
- 
-通过一行简单的代码，Nodefly 开始监控应用程序的内存泄露， 测量 redis 用了多久，mongo 查询和一堆其他很酷的东西。
- 
-[<span class="link_label">http://www.nodefly.com/</span>](<span class="link_url">http://www.nodefly.com/</span>)
-
-<span class="header">## 技巧 5 ：用 NPM 管理模块</span>
-
-node 最寻常的事情之一是通过 NPM 安装程序包。Node 有个神奇的包管理器，它会安装 package.json 清单文件里指定的模块。可是初学者都会遇到一件事情，package.json 文件中所有使用的模块如何保持最新。
- 
-总是打开 package.json 更新已安装模块的依赖属性似乎很痛苦，很多人不知道 npm 可以帮你做这些！
- 
-简单运行 npm install — save module_name ，npm 将自动更新带有正确模块和版本号的 package.json
+<p>如果你从一个 IDE 重度集成的语言比如 java 或者 C# 转来调试 Node.js，你一定会感到很困扰。大多数新的 node 开发者采用 “flow”调试模式，你最好的帮手是 <code>console.log</code> 。</p>
+<p>但是肯定有更便利的调试方式，Node.js 内置了一个调试器你可以叫它 node debug，不过我更喜欢的 <code>node-inspector</code> 。</p>
+<p>它们的 github 仓库提到“Node Inspector 是使用了 Blink 开发工具的 node.js 调试工具界面（先前的 WebKit Web Inspector）。”</p>
+<p>简而言之，无论你选择哪个编辑器和 chrome web tools ，node-inspector 都可以调试你的应用。多爽啊。</p>
+<p>Node Inspector 可以做一些真正酷的东西，比如实时代码修改，单步调试，作用域注入和一堆很酷的功能。</p>
+<p>它涉及到一些设置，可以按照<a href="https://github.com/node-inspector/node-inspector" target="_blank">这里</a> 的说明做。</p>
+<h2 id=" 技巧 _4_：Nodefly">技巧 4 ：Nodefly</h2>
+<p>一旦你的应用正常运行，你可能会问自己，如何监控它的性能，如何通过分析确保它以最佳速度运行呢。最简单的回答是使用非常棒的 Nodefly 服务。</p>
+<p>通过一行简单的代码，Nodefly 开始监控应用程序的内存泄露， 测量 redis 用了多久，mongo 查询和一堆其他很酷的东西。</p>
+<p><a href="http://www.nodefly.com/" target="_blank">http://www.nodefly.com/</a></p>
+<h2 id=" 技巧 _5_：用 _NPM_ 管理模块 ">技巧 5 ：用 NPM 管理模块</h2>
+<p>node 最寻常的事情之一是通过 NPM 安装程序包。Node 有个神奇的包管理器，它会安装 package.json 清单文件里指定的模块。可是初学者都会遇到一件事情，package.json 文件中所有使用的模块如何保持最新。</p>
+<p>总是打开 package.json 更新已安装模块的依赖属性似乎很痛苦，很多人不知道 npm 可以帮你做这些！</p>
+<p>简单运行 npm install — save module_name ，npm 将自动更新带有正确模块和版本号的 package.json </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>npm <span class="keyword">install</span> —save module_name
 </pre></td></tr></table></figure>
 
-<p>npm install —save module_name</p>
+<h2 id=" 技巧 _6_：不要提交 _node_modules_ 文件夹 ">技巧 6 ：不要提交 node_modules 文件夹</h2>
+<p>我们一直谈论模块和 npm ，还有人不知道不该提交 <code>node_modules</code> 文件夹，最大的原因是没有必要提交。当别人检出你的代码，他们可以用 npm 安装所需模块。</p>
+<p>你也许会说提交 node_modules 文件夹无伤大雅，但是如果检出你代码的人用跟你不同的操作系统呢，通过 npm 安装的模块是编译过的？你的应用会崩溃，检出你代码的人完全不知道为什么！</p>
+<p>举例来说，当你安装过 bcrypt 和 sentimental 模块后，它们在主机上是编译过的，因为它们的原始组件是用 C 写的。</p>
+<p>最优的作法是把 node_modules 文件夹加到 .gitignore 里，避免提交它。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre>
-<span class="comment">## 技巧 6 ：不要提交 node_modules 文件夹</span>
-
-我们一直谈论模块和 <span class="built_in">npm</span> ，还有人不知道不该提交 `<span class="javascript"></span>``<span class="javascript">node_modules</span>``<span class="javascript"></span>` 文件夹，最大的原因是没有必要提交。当别人检出你的代码，他们可以用 <span class="built_in">npm</span> 安装所需模块。
- 
-你也许会说提交 node_modules 文件夹无伤大雅，但是如果检出你代码的人用跟你不同的操作系统呢，通过 <span class="built_in">npm</span> 安装的模块是编译过的？你的应用会崩溃，检出你代码的人完全不知道为什么！
- 
-举例来说，当你安装过 bcrypt 和 sentimental 模块后，它们在主机上是编译过的，因为它们的原始组件是用 C 写的。
- 
-最优的作法是把 node_modules 文件夹加到 .gitignore 里，避免提交它。
+</pre></td><td class="code"><pre><span class="comment">// .gitignore node_modules/*</span>
 </pre></td></tr></table></figure>
 
-<p>// .gitignore node_modules/*</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<h2 id=" 技巧 _7_：不要忘记 _return">技巧 7 ：不要忘记 return</h2>
+<p>刚入门的 node 开发者通常容易犯个错误，callback 回调函数后面忘加 return 。虽然有时候没什么影响，多数情况你会遇到奇怪的问题，callback 回调执行了两次。</p>
+<p>看个简单的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>
-## 技巧 <span class="number">7</span> ：不要忘记 <span class="keyword">return</span>
-
-刚入门的 node 开发者通常容易犯个错误，callback 回调函数后面忘加 <span class="keyword">return</span> 。虽然有时候没什么影响，多数情况你会遇到奇怪的问题，callback 回调执行了两次。
- 
-看个简单的例子：
-
-```js
-<span class="function"><span class="keyword">function</span> <span class="title">do</span><span class="params">(err,result, callback)</span></span>{
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">do</span><span class="params">(err,result, callback)</span>{</span>
 <span class="keyword">if</span>(err){
-callback(“<span class="built_in">error</span>”);
+callback(“error”);
 }
 callback(“good”);
 }
@@ -524,7 +424,7 @@ callback(“good”);
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="# 或许我刚入门时就想了解这些知识。"><span class="toc-number">1.</span> <span class="toc-text">或许我刚入门时就想了解这些知识。</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _1_：开发环境使用 _nodemon，生产环境使用 _pm2"><span class="toc-number"></span> <span class="toc-text">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _3_：轻松调试 _Node-js_ 应用 "><span class="toc-number"></span> <span class="toc-text">技巧 3 ：轻松调试 Node.js 应用</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="# 或许我刚入门时就想了解这些知识。"><span class="toc-number">1.</span> <span class="toc-text">或许我刚入门时就想了解这些知识。</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _1_：开发环境使用 _nodemon，生产环境使用 _pm2"><span class="toc-number"></span> <span class="toc-text">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _2_：Async_ 或者 _Q"><span class="toc-number"></span> <span class="toc-text">技巧 2 ：Async 或者 Q</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _3_：轻松调试 _Node-js_ 应用 "><span class="toc-number"></span> <span class="toc-text">技巧 3 ：轻松调试 Node.js 应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _4_：Nodefly"><span class="toc-number"></span> <span class="toc-text">技巧 4 ：Nodefly</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _5_：用 _NPM_ 管理模块 "><span class="toc-number"></span> <span class="toc-text">技巧 5 ：用 NPM 管理模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _6_：不要提交 _node_modules_ 文件夹 "><span class="toc-number"></span> <span class="toc-text">技巧 6 ：不要提交 node_modules 文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 技巧 _7_：不要忘记 _return"><span class="toc-number"></span> <span class="toc-text">技巧 7 ：不要忘记 return</span></a></li></ol>
   </div>
 
 <div id="asidepart">

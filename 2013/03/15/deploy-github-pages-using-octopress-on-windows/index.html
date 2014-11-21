@@ -81,7 +81,7 @@
     </p>
   <p class="article-time">
     <time datetime="2013-03-14T17:49:00.000Z" itemprop="datePublished">3月 15 2013</time>
-    更新日期:<time datetime="2014-10-25T02:28:03.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T08:00:18.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -90,7 +90,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 前期准备 "><span class="toc-number">1.</span> <span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Octopress"><span class="toc-number">2.</span> <span class="toc-text">安装 Octopress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 部署到 _Github_Pages"><span class="toc-number">3.</span> <span class="toc-text">部署到 Github Pages</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 前期准备 "><span class="toc-number">1.</span> <span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Octopress"><span class="toc-number">2.</span> <span class="toc-text">安装 Octopress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 部署到 _Github_Pages"><span class="toc-number">3.</span> <span class="toc-text">部署到 Github Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 配置 _Octopress"><span class="toc-number">4.</span> <span class="toc-text">配置 Octopress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 写博客 "><span class="toc-number">5.</span> <span class="toc-text">写博客</span></a></li></ol>
 		</div>
 		
 		<p><a href="http://octopress.org/docs/setup/" target="_blank">官方文档</a> </p>
@@ -145,115 +145,103 @@ bundle <span class="keyword">install</span>
 </pre></td></tr></table></figure>
 
 <p>这个货莫要乱试啊，要命啊，啥也没改一预览就 Auto-regeneration 自动编译，自动编译停不下来啊（Ctrl-C 不管用 ( ⊙ o ⊙ ) 啊！），我是被坑过了，不信试试。   </p>
-<p>反正翻了整个 Google 没找到停止</p>
-<figure class="highlight rake"><figcaption><span>watch``` ，停止 Auto-regeneration 的办法，无奈之下，自己瞎改代码吧。   </span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>
-我发现 Rakefile 配置文件有这 <span class="escape">``</span><span class="escape">`j</span>ekyll --auto<span class="escape">``</span><span class="escape">`：</span>  
-
-执行 <span class="escape">``</span><span class="escape">`r</span>ake preview<span class="escape">``</span><span class="escape">` </span>任务的时候也会带 <span class="escape">``</span><span class="escape">`j</span>ekyll --auto<span class="escape">``</span><span class="escape">`，</span>斗胆把 <span class="escape">``</span><span class="escape">`-</span>-auto<span class="escape">``</span><span class="escape">`去</span>了一试，果然又回到手动 generate 了，哈哈~~（改之前此文件备个份吧，万一哪天出岔子）
-</pre></td></tr></table></figure>
-
-<p>rake preview</p>
+<p>反正翻了整个 Google 没找到停止 <code>rake watch</code> ，停止 Auto-regeneration 的办法，无奈之下，自己瞎改代码吧。   </p>
+<p>我发现 Rakefile 配置文件有这 <code>jekyll --auto</code>：  </p>
+<p>执行 <code>rake preview</code> 任务的时候也会带 <code>jekyll --auto</code>，斗胆把 <code>--auto</code>去了一试，果然又回到手动 generate 了，哈哈~~（改之前此文件备个份吧，万一哪天出岔子）</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>
-浏览器访问 <span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">4000</span>（<span class="keyword">http</span>://localhost:<span class="number">4000</span> ）本地可预览调试页面
+</pre></td><td class="code"><pre>rake preview
 </pre></td></tr></table></figure>
 
-<p>rake deploy</p>
+<p>浏览器访问 <a href="http://127.0.0.1:4000（http://localhost:4000" target="_blank">http://127.0.0.1:4000（http://localhost:4000</a> ）本地可预览调试页面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>rake deploy
+</pre></td></tr></table></figure>
+
+<p>将 <code>_deploy</code>  的文件加到 git 里，并提交到主分支。过几秒你会收到<br>Github 邮件说你的提交已经收到将发布你的站点（第一次创建）。</p>
+<p>别忘了提交源码到 github。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
-4
-5
-</pre></td><td class="code"><pre>
-将 <span class="escape">`_</span>deploy<span class="escape">` </span> 的文件加到 git 里，并提交到主分支。过几秒你会收到
-Github 邮件说你的提交已经收到将发布你的站点（第一次创建）。
-
-别忘了提交源码到 github。
+</pre></td><td class="code"><pre>git add .
+git commit -m <span class="string">'your message'</span>
+git push origin <span class="built_in">source</span>
 </pre></td></tr></table></figure>
 
-<p>git add .<br>git commit -m ‘your message’<br>git push origin source</p>
+<h2 id=" 配置 _Octopress">配置 Octopress</h2>
+<p>一般需要改 <code>Rakefile</code> 和 <code>_config.yml</code> 文件</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
-5
-</pre></td><td class="code"><pre>
-
-<span class="autohotkey">## 配置 Octopress 
-
-一般需要改 <span class="escape">`R</span>akefile<span class="escape">` </span>和 <span class="escape">`_</span>config.yml<span class="escape">` </span>文件</span>
+</pre></td><td class="code"><pre>_config<span class="preprocessor">.yml</span>       <span class="preprocessor"># 主要配置 (Jekyll 的设置)</span>
+Rakefile          <span class="preprocessor"># 部署配置</span>
+config<span class="preprocessor">.rb</span>         <span class="preprocessor"># Compass 配置</span>
+config<span class="preprocessor">.ru</span>         <span class="preprocessor"># Rack 配置</span>
 </pre></td></tr></table></figure>
 
-<p>_config.yml       # 主要配置 (Jekyll 的设置)<br>Rakefile          # 部署配置<br>config.rb         # Compass 配置<br>config.ru         # Rack 配置</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>
-<span class="emphasis">* 主要配置 *</span>（<span class="code">`_config.yml`</span>）
-</pre></td></tr></table></figure>
-
-<p>url:                # 博客地址<br>title:              # 大标题<br>subtitle:           # 子标题<br>author:             # 你的名字<br>simple_search:      # 搜索引擎<br>description:        # 站点的 meta 描述<br>date_format:        # 日期格式，默认 Ruby 日期格式<br>subscribe_rss:      # RSS 订阅，默认 /atom.xml </p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>
-
-<span class="markdown">
-<span class="emphasis">*Jekyll & 插件 *</span></span>
-</pre></td></tr></table></figure>
-
-<p>root:               # 相对地址<br>permalink:          # 文章的链接结构<br>source:             # 资源文件目录<br>destination:        # 生成的站点文件目录<br>plugins:            # Jekyll 插件目录<br>code_dir:           # 引入的代码插件目录<br>category_dir:       # 生成的博客分类页<br>excerpt_link:        # 继续阅读，在文章里使用 &lt;!— more —&gt; 显示文章摘录</p>
+<p><em>主要配置</em>（<code>_config.yml</code>）</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
-</pre></td><td class="code"><pre>
-
-<span class="http">
-
-<span class="undefined">
-淘宝提供了 RubyGems 的国内镜像站点，这样我可以修改下载的 Octopress 目录下的 Gemfile 文件，把第一行改成</span></span>
+7
+8
+</pre></td><td class="code"><pre><span class="attribute">url</span>: <span class="string">               # 博客地址</span>
+<span class="attribute">title</span>: <span class="string">             # 大标题</span>
+<span class="attribute">subtitle</span>: <span class="string">          # 子标题</span>
+<span class="attribute">author</span>: <span class="string">            # 你的名字</span>
+<span class="attribute">simple_search</span>: <span class="string">     # 搜索引擎</span>
+<span class="attribute">description</span>: <span class="string">       # 站点的 meta 描述</span>
+<span class="attribute">date_format</span>: <span class="string">       # 日期格式，默认 Ruby 日期格式</span>
+<span class="attribute">subscribe_rss</span>: <span class="string">     # RSS 订阅，默认 /atom.xml</span>
 </pre></td></tr></table></figure>
 
-<p>source “<a href="http://ruby.taobao.org/" target="_blank">http://ruby.taobao.org/</a>“</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>
-
-<span class="undefined">
-不能使用中文，字符集不兼容</span>
-</pre></td></tr></table></figure>
-
-<p>cd ~<br>echo ‘export LC_ALL=zh_CN.UTF-8’ &gt;&gt; .bash_profile<br>echo ‘export LANG=zh_CN.UTF-8’ &gt;&gt; .bash_profile</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>
-切记运行下面命令：
-</pre></td></tr></table></figure>
-
-<p>source ~/.bash_profile</p>
+<p><em>Jekyll &amp; 插件</em></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
-</pre></td><td class="code"><pre>
-
-<span class="autohotkey">## 写博客
-
-博客都放在 <span class="escape">`s</span>ource/_posts<span class="escape">`目</span>录，根据 <span class="escape">`Y</span>YYY-MM-DD-post-title.markdown<span class="escape">` </span>格式命名，日期决定博客排序。</span>
+6
+7
+8
+</pre></td><td class="code"><pre><span class="label">root:</span>               <span class="preprocessor"># 相对地址</span>
+<span class="label">permalink:</span>          <span class="preprocessor"># 文章的链接结构</span>
+<span class="label">source:</span>             <span class="preprocessor"># 资源文件目录</span>
+<span class="label">destination:</span>        <span class="preprocessor"># 生成的站点文件目录</span>
+<span class="label">plugins:</span>            <span class="preprocessor"># Jekyll 插件目录</span>
+<span class="label">code_dir:</span>           <span class="preprocessor"># 引入的代码插件目录</span>
+<span class="label">category_dir:</span>       <span class="preprocessor"># 生成的博客分类页</span>
+<span class="label">excerpt_link:</span>		<span class="preprocessor"># 继续阅读，在文章里使用 &lt;!-- more --&gt; 显示文章摘录</span>
 </pre></td></tr></table></figure>
 
-<p>rake new_post[“title”]<br>```</p>
+<p>淘宝提供了 RubyGems 的国内镜像站点，这样我可以修改下载的 Octopress 目录下的 Gemfile 文件，把第一行改成</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="built_in">source</span> <span class="string">"http://ruby.taobao.org/"</span>
+</pre></td></tr></table></figure>
+
+<p>不能使用中文，字符集不兼容</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="built_in">cd</span> ~
+<span class="built_in">echo</span> <span class="string">'export LC_ALL=zh_CN.UTF-8'</span> &gt;&gt; .bash_profile
+<span class="built_in">echo</span> <span class="string">'export LANG=zh_CN.UTF-8'</span> &gt;&gt; .bash_profile
+</pre></td></tr></table></figure>
+
+<p>切记运行下面命令： </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="built_in">source</span> ~/.bash_profile
+</pre></td></tr></table></figure>
+
+<h2 id=" 写博客 ">写博客</h2>
+<p>博客都放在 <code>source/_posts</code>目录，根据 <code>YYYY-MM-DD-post-title.markdown</code> 格式命名，日期决定博客排序。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>rake new_post[<span class="string">"title"</span>]
+</pre></td></tr></table></figure>
+
 <p><em>参考文章：</em></p>
 <blockquote>
 <p><a href="http://www.xiaoche.me/blog/2012/01/18/install-octopress/" target="_blank">从零开始在 github 上安装 octopress</a><br><a href="Octopress http://sinosmond.github.com/blog/2012/03/12/install-and-deploy-octopress-to-github-on-windows7-from-scratch/">在 Windows7 下从头开始安装部署</a><br><a href="http://yanping.me/cn/blog/2011/12/26/octopress-on-windows/" target="_blank">Windows 下安装 Octopress</a><br><a href="http://clark1231.iteye.com/blog/1553939" target="_blank">像 hackers 一样写博客 (二)：Octopress 设置与增加微博的侧边栏</a></p>
@@ -334,7 +322,7 @@ Github 邮件说你的提交已经收到将发布你的站点（第一次创建�
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 前期准备 "><span class="toc-number">1.</span> <span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Octopress"><span class="toc-number">2.</span> <span class="toc-text">安装 Octopress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 部署到 _Github_Pages"><span class="toc-number">3.</span> <span class="toc-text">部署到 Github Pages</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="# 前期准备 "><span class="toc-number">1.</span> <span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 安装 _Octopress"><span class="toc-number">2.</span> <span class="toc-text">安装 Octopress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 部署到 _Github_Pages"><span class="toc-number">3.</span> <span class="toc-text">部署到 Github Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 配置 _Octopress"><span class="toc-number">4.</span> <span class="toc-text">配置 Octopress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 写博客 "><span class="toc-number">5.</span> <span class="toc-text">写博客</span></a></li></ol>
   </div>
 
 <div id="asidepart">

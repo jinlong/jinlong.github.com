@@ -88,12 +88,13 @@
      
        <p itemprop="description" >自定义过滤器
 创建 phonecatFilters 模块，用此模块注册自定义过滤器：
-app/js/filters.js:1
+1
 2
 3
 4
 5
-angular.module(&#39;phonecatFilters&#39;, []).filter(&#39;checkmark&#39;, function() </p>
+angular.module(&#39;phonecatFilters&#39;, []).filter(&#39;checkmark&#39;, function() {
+  return functio</p>
       
     
     <time datetime="2013-05-03T08:57:00.000Z" itemprop="datePublished">5月 3 2013</time>
@@ -109,25 +110,18 @@ angular.module(&#39;phonecatFilters&#39;, []).filter(&#39;checkmark&#39;, functi
      
        <p itemprop="description" >模版链接和图片
 数据
-注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向
-路径：1
+注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 app/img/phones/ 路径：
+1
 2
 3
 4
 5
 6
 7
-8
-9
-10
-11
-12
-
-```js app/phones/phones.json (例子片段): 
 [
 {
-  ...
-  &quot;id&quot;: </p>
+  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,
+  &quot;imageUr</p>
       
     
     <time datetime="2013-05-03T07:58:00.000Z" itemprop="datePublished">5月 3 2013</time>
@@ -141,11 +135,11 @@ angular.module(&#39;phonecatFilters&#39;, []).filter(&#39;checkmark&#39;, functi
     <h1 itemprop="name">AngularJS 新手指南2</h1>
     
      
-           <p itemprop="description" >过滤
+       <p itemprop="description" >过滤
 Controller
 没作任何变化
 Template
-app/index.html:1
+1
 2
 3
 4
@@ -161,8 +155,9 @@ app/index.html:1
 14
 15
 &amp;lt;div class=&quot;container-fluid&quot;&amp;gt;
-  &amp;lt;div class=&quot;row-fl</p>
-        
+  &amp;lt;div class=&quot;row-fluid&quot;&amp;gt;
+  &amp;lt;</p>
+      
     
     <time datetime="2013-05-03T05:42:00.000Z" itemprop="datePublished">5月 3 2013</time>
   </a>
@@ -257,23 +252,12 @@ CSS 里有不少把长度作为值的属性，盒模型的属性就是明显的�
     <h1 itemprop="name">git command</h1>
     
      
-       <p itemprop="description" >最近项目中用到了
-branch``` 和 ```git submodule```，查阅了一些文章，总算有点头绪了，连同一些常用的 git 命令记录在此，以便查阅。1
-2
-3
-4
-5
-6
-7
-8
-9
-10
+       <p itemprop="description" >最近项目中用到了 git branch 和 git submodule，查阅了一些文章，总算有点头绪了，连同一些常用的 git 命令记录在此，以便查阅。
+git 常用命令
 
-##git 常用命令
+远程仓库相关命令
 
-* 远程仓库相关命令
-
-检出仓库：```$ git</p>
+检出仓库：$ git clone git://github.com/jquery/jq</p>
       
     
     <time datetime="2013-03-23T02:29:00.000Z" itemprop="datePublished">3月 23 2013</time>

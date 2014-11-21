@@ -11,44 +11,31 @@
     
     <meta name="description" content="模版链接和图片
 数据
-注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向
-路径：1
+注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 app/img/phones/ 路径：
+1
 2
 3
 4
 5
 6
 7
-8
-9
-10
-11
-12
-
-```js app/phones/phones.json (例子片段): 
 [
 {
-  ...
   &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,
   &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,
   &quot;name&quot;: &quot;Motorola DEFY\u2122 with MOTOBLUR\u2122&quot;,
-  ...
 },
-...
 ]
 
 
 模版
-app/index.html:1
+1
 2
 3
 4
 5
 6
 7
-8
-9
-...
         &amp;lt;ul class=&quot;phones&quot;&amp;gt;
           &amp;lt;li ng-repeat=&quot;phone in phones | filter:query | orderBy:orderProp&quot; class=&quot;thumbnail&quot;&amp;gt;
             &amp;lt;a href=&quot;#/phones/\{\{phone.id}}&quot; class=&quot;thumb&quot;&amp;gt;&amp;lt;img ng-src=&quot;\{\{phone.imageUrl}}&quot;&amp;gt;&amp;lt;/a&amp;gt;
@@ -56,7 +43,6 @@ app/index.html:1
             &amp;lt;p&amp;gt;\{\{phone.snippet}}&amp;lt;/p&amp;gt;
           &amp;lt;/li&amp;gt;
         &amp;lt;/ul&amp;gt;
-...
 
 
 image 标签用了 ngSrc  指令，这一指令阻止浏览器按字面意思对待 angular &amp;#123;&amp;#123; 表达式}}，阻止它请求一个无效的 url http://localhost:8000/app/&amp;#123;&amp;#123;phone.imageUrl}}。使用 ngSrc 指令阻止浏览器发起无效的 http 请求。
@@ -126,7 +112,7 @@ image 标签用了 ngSrc  指令，这一指令阻止浏览器按字面意思对
     </p>
   <p class="article-time">
     <time datetime="2013-05-03T07:58:00.000Z" itemprop="datePublished">5月 3 2013</time>
-    更新日期:<time datetime="2014-10-25T02:27:07.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T07:51:00.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -140,52 +126,38 @@ image 标签用了 ngSrc  指令，这一指令阻止浏览器按字面意思对
 		
 		<h2 id=" 模版链接和图片 ">模版链接和图片</h2>
 <p><strong><em>数据</em></strong></p>
-<p>注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向</p>
-<figure class="highlight app/img/phones/```"><figcaption><span>路径：</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 <code>app/img/phones/</code> 路径：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
 7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre>
-<span class="escape">``</span><span class="escape">`j</span>s app/phones/phones.json (例子片段): 
-[
+</pre></td><td class="code"><pre>[
 {
-  ...
   <span class="string">"id"</span>: <span class="string">"motorola-defy-with-motoblur"</span>,
   <span class="string">"imageUrl"</span>: <span class="string">"img/phones/motorola-defy-with-motoblur.0.jpg"</span>,
   <span class="string">"name"</span>: <span class="string">"Motorola DEFY\u2122 with MOTOBLUR\u2122"</span>,
-  ...
 },
-...
 ]
 </pre></td></tr></table></figure>
 
 <p><strong><em>模版</em></strong></p>
-<figure class="highlight html"><figcaption><span>app/index.html:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
 7
-8
-9
-</pre></td><td class="code"><pre>...
-        <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phones"</span>&gt;</span>
+</pre></td><td class="code"><pre>        <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phones"</span>&gt;</span>
           <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones | filter:query | orderBy:orderProp"</span> <span class="attribute">class</span>=<span class="value">"thumbnail"</span>&gt;</span>
             <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#/phones/\{\{phone.id}}"</span> <span class="attribute">class</span>=<span class="value">"thumb"</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\{\{phone.imageUrl}}"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span>
             <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#/phones/\{\{phone.id}}"</span>&gt;</span>\{\{phone.name}}<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
             <span class="tag">&lt;<span class="title">p</span>&gt;</span>\{\{phone.snippet}}<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
           <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
         <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-...
 </pre></td></tr></table></figure>
 
 <p>image 标签用了 <a href="http://docs.angularjs.org/api/ng.directive:ngSrc" target="_blank">ngSrc</a>  指令，这一指令阻止浏览器按字面意思对待 angular &#123;&#123; 表达式}}，阻止它请求一个无效的 url <a href="http://localhost:8000/app/&#123;&#123;phone.imageUrl}}。使用 " target="_blank">http://localhost:8000/app/&#123;&#123;phone.imageUrl}}。使用</a> ngSrc 指令阻止浏览器发起无效的 http 请求。</p>
@@ -200,7 +172,7 @@ image 标签用了 ngSrc  指令，这一指令阻止浏览器按字面意思对
 <p>提供者是提供（创建）服务的实例，暴露配置 API 的对象，它被用于控制服务的创建和运行时行为。比如 $route 服务，$routeProvider 暴露一些 API ，你可以用它为应用定义路径。</p>
 <p>Angular 模块删除了全局状态，提供配置注入器的方法。与 AMD 或 require.js 截然相反，Angular 模块不试图解决脚本加载顺序或脚本懒加载的问题。模块系统不但可以相互依存，还可实现各自的目标。</p>
 <p><strong><em>App 模块</em></strong></p>
-<figure class="highlight js"><figcaption><span>app/js/app.js:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -216,56 +188,31 @@ image 标签用了 ngSrc  指令，这一指令阻止浏览器按字面意思对
 }]);
 </pre></td></tr></table></figure>
 
-<p>为了配置应用的路径，我们需要创建一个模块，取名为 phonecat 。我们使用 config API 把</p>
-<figure class="highlight $routeProvider```"><figcaption><span>注入到我们的配置函数中，用 ```$routeProvider.when``` API 定义路径。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>为了配置应用的路径，我们需要创建一个模块，取名为 phonecat 。我们使用 config API 把 <code>$routeProvider</code> 注入到我们的配置函数中，用 <code>$routeProvider.when</code> API 定义路径。</p>
+<p>我们的应用路径定义：</p>
+<ul>
+<li><p>当 URL hash 为 /phones 时，手机列表视图将显示 。Angular 将用 phone-list.html 模版和 PhoneListCtrl 控制器构造手机列表视图。</p>
+</li>
+<li><p>当 URL hash 匹配 ‘/phones/:phoneId’（phoneId 是 URL 参数的一部分）时，手机详情视图将显示。Angular 将用 phone-detail.html 模版和 PhoneDetailCtrl 控制器构造手机详情视图。</p>
+</li>
+</ul>
+<p>我们复用以前创建的 PhoneListCtrl 控制器，在 app/js/controllers.js 文件增加新的 PhoneDetailCtrl 控制器。</p>
+<p>当浏览器地址没有匹配其它的路径时， $route.otherwise(&#123;redirectTo: ‘/phones’}) 声明把地址重定向到 /phones。</p>
+<p>注意第二个路径定义里 :phoneId 参数的使用，$route 服务用路径定义 —— ‘/phones/:phoneId’ —— 用来匹配当前的 URL。所有用冒号 （:）定义的参数被提取到<a href="http://docs.angularjs.org/api/ng.$routeParams" target="_blank">$routeParams</a> 对象。</p>
+<p>为了让应用以新建的模块启动，我们需要把 <a href="http://docs.angularjs.org/api/ng.directive:ngApp" target="_blank">ngApp</a> 的值改成新定义模块的名字。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-</pre></td><td class="code"><pre>
-我们的应用路径定义：
-
-<span class="bullet">* </span>当 URL hash 为 /phones 时，手机列表视图将显示 。Angular 将用 phone-list.html 模版和 PhoneListCtrl 控制器构造手机列表视图。
-
-<span class="bullet">* </span>当 URL hash 匹配 '/phones/:phoneId'（phoneId 是 URL 参数的一部分）时，手机详情视图将显示。Angular 将用 phone-detail.html 模版和 PhoneDetailCtrl 控制器构造手机详情视图。
-
-我们复用以前创建的 PhoneListCtrl 控制器，在 app/js/controllers.js 文件增加新的 PhoneDetailCtrl 控制器。
-
-当浏览器地址没有匹配其它的路径时， $route.otherwise(&#123;redirectTo: '/phones'}) 声明把地址重定向到 /phones。
-
-注意第二个路径定义里 :phoneId 参数的使用，$route 服务用路径定义 —— '/phones/:phoneId' —— 用来匹配当前的 URL。所有用冒号 （:）定义的参数被提取到 [<span class="link_label">$routeParams</span>](<span class="link_url">http://docs.angularjs.org/api/ng.$routeParams</span>) 对象。
-
-为了让应用以新建的模块启动，我们需要把 [<span class="link_label">ngApp</span>](<span class="link_url">http://docs.angularjs.org/api/ng.directive:ngApp</span>) 的值改成新定义模块的名字。
-
-<span class="code">```</span>html app/index.html:
-<span class="xml"><span class="doctype">&lt;!doctype html&gt;</span></span>
-<span class="xml"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span> <span class="attribute">ng-app</span>=<span class="value">"phonecat"</span>&gt;</span></span>
-...
+</pre></td><td class="code"><pre><span class="doctype">&lt;!doctype html&gt;</span>
+<span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span> <span class="attribute">ng-app</span>=<span class="value">"phonecat"</span>&gt;</span>
 </pre></td></tr></table></figure>
 
 <p><strong><em>控制器</em></strong></p>
-<figure class="highlight js"><figcaption><span>app/js/controllers.js:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
-6
-</pre></td><td class="code"><pre>...
-<span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span><span class="params">($scope, $routeParams)</span> {</span>
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span><span class="params">($scope, $routeParams)</span> {</span>
   $scope.phoneId = $routeParams.phoneId;
 }
 
@@ -274,7 +221,7 @@ image 标签用了 ngSrc  指令，这一指令阻止浏览器按字面意思对
 
 <p><strong><em>模板</em></strong></p>
 <p>$route 服务通常结合 <a href="http://docs.angularjs.org/api/ng.directive:ngView" target="_blank">ngView</a> 指令使用，ngView 指令为当前的路径把视图模版引入到布局模版中，它非常适合我们的 index.html 模版。</p>
-<figure class="highlight html"><figcaption><span>app/index.html:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -302,8 +249,8 @@ image 标签用了 ngSrc  指令，这一指令阻止浏览器按字面意思对
 <span class="tag">&lt;/<span class="title">html</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>注意到我们删除了 index.html 模板的大部分代码，换成了一个带有 ng-view 属性的 div。我们删除的代码放到了</p>
-<figure class="highlight phone-list.html```"><figcaption><span>模版。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>注意到我们删除了 index.html 模板的大部分代码，换成了一个带有 ng-view 属性的 div。我们删除的代码放到了 <code>phone-list.html</code> 模版。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -326,11 +273,7 @@ image 标签用了 ngSrc  指令，这一指令阻止浏览器按字面意思对
 21
 22
 23
-24
-25
-</pre></td><td class="code"><pre>
-```html app/partials/phone-list.html:
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container-fluid"</span>&gt;</span>
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container-fluid"</span>&gt;</span>
   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row-fluid"</span>&gt;</span>
     <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"span2"</span>&gt;</span>
       <span class="comment">&lt;!--Sidebar content--&gt;</span>
@@ -356,11 +299,9 @@ Search: <span class="tag">&lt;<span class="title">input</span> <span class="attr
 </pre></td></tr></table></figure>
 
 <p>我们也为手机详情视图新建了模版：</p>
-<p>app/partials/phone-detail.html:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>TBD: detail view <span class="keyword">for</span> &amp;<span class="string">#123</span>;&amp;<span class="string">#123</span>;phoneId}}
+</pre></td><td class="code"><pre>TBD: detail view <span class="keyword">for</span> &<span class="string">#123</span>;&<span class="string">#123</span>;phoneId}}
 </pre></td></tr></table></figure>
-
 
 <p>注意我们用的 phoneId 模型定义在 PhoneDetailCtrl 控制器。</p>
 <p><strong><em>实验</em></strong></p>
@@ -368,7 +309,7 @@ Search: <span class="tag">&lt;<span class="title">input</span> <span class="attr
 <h2 id=" 更多模版 ">更多模版</h2>
 <p><strong><em>数据</em></strong></p>
 <p>除了 phones.json 外，app/phones/ 路径新加了包含每一手机信息的 json 文件：</p>
-<figure class="highlight js"><figcaption><span>app/phones/nexus-s.json: (例子片段)</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -409,7 +350,7 @@ Search: <span class="tag">&lt;<span class="title">input</span> <span class="attr
 <p>每个文件用同样的数据结构，描述了手机的各种属性。</p>
 <p><strong><em>控制器</em></strong></p>
 <p>我们用 $http 服务扩展 PhoneDetailCtrl ，获取 json 文件。</p>
-<figure class="highlight js"><figcaption><span>app/js/controllers.js:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -428,7 +369,7 @@ Search: <span class="tag">&lt;<span class="title">input</span> <span class="attr
 <p>我们通过 $route 服务，使用 $routeParams.phoneId 提取当前路径构建 URL， 用于 HTTP 请求。</p>
 <p><strong><em>模版</em></strong></p>
 <p>我们用了 angular &#123;&#123; 表达式}} 和 ngRepeat 从模型获取手机数据，展现到视图中。</p>
-<figure class="highlight html"><figcaption><span>app/partials/phone-detail.html:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4

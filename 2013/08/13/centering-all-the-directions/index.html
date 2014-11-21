@@ -10,7 +10,47 @@
     <meta name="author" content="Alon Zhang">
     
     <meta name="description" content="我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。
-&amp;lt;cent">
+&amp;lt;center&amp;gt;
+不建议用了。
+text-align:center
+在父容器里水平居中 inline 文字，或 inline 元素
+vertical-align:middle
+垂直居中 inline 文字，inline 元素，配合 display:table ，display:table-cell，有奇效。
+line-height
+与 height 联手，垂直居中文字
+margin:auto
+示例：
+1
+2
+3
+4
+5
+&amp;lt;style&amp;gt;
+  #ex2_container { width:200px; background-color:yellow; }
+  #ex2_content { margin:0px auto; background-color:gray; color:white; display:table; }
+&amp;lt;/style&amp;gt;
+&amp;lt;div id=&quot;ex2_container&quot;&amp;gt;&amp;lt;div id=&quot;ex2_content&quot;&amp;gt;Hello World&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;
+
+
+hacks, hacks（小技巧）
+有许多 hacks ，负 margin，影子元素 ::before 等。如果你的内容不是固定大小的话，它们大部分是很脆弱的。
+translate(-50%,-50%)
+用 position 加 translatetranslate(-50%,-50%) 比较奇特，百分比计算不是以父元素为基准，而是以自己为基准。
+参考文章：居中百分比宽高的元素
+示例：
+1
+2
+3
+4
+5
+&amp;lt;style&amp;gt;
+  #ex3_container { width:200px; height:200px; background-color:yellow; position:relative; }
+  #ex3_content { left:50%; top:50%; transform:translate(-50%,-50%); -webkit-transform:translate(-50%,-50%); background-color:gray; color:white; position:absolute; }
+&amp;lt;/style&amp;gt;
+&amp;lt;div id=&quot;ex3_container&quot;&amp;gt;&amp;lt;div id=&quot;ex3_content&quot;&amp;gt;Hello World&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;
+
+
+这个技巧相当嚣张，同样适用于没固定大小的内容，min-width，max-height，overflow:scroll 等。">
     
     
     
@@ -75,7 +115,7 @@
     </p>
   <p class="article-time">
     <time datetime="2013-08-13T10:00:00.000Z" itemprop="datePublished">8月 13 2013</time>
-    更新日期:<time datetime="2014-10-25T02:24:40.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T07:36:14.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -84,7 +124,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#&lt;center&gt;"><span class="toc-number">1.</span> <span class="toc-text">&lt;center&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-align:center"><span class="toc-number">2.</span> <span class="toc-text">text-align:center</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align:middle"><span class="toc-number">3.</span> <span class="toc-text">vertical-align:middle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hacks,_hacks（小技巧）"><span class="toc-number">4.</span> <span class="toc-text">hacks, hacks（小技巧）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#translate(-50%,-50%)"><span class="toc-number">5.</span> <span class="toc-text">translate(-50%,-50%)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="# 响应式 "><span class="toc-number">5.0.1.</span> <span class="toc-text">响应式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 偏移 "><span class="toc-number">5.0.2.</span> <span class="toc-text">偏移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 溢出 "><span class="toc-number">5.0.3.</span> <span class="toc-text">溢出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 调整尺寸 "><span class="toc-number">5.0.4.</span> <span class="toc-text">调整尺寸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 可变高度 "><span class="toc-number">5.0.5.</span> <span class="toc-text">可变高度</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 负 _margin"><span class="toc-number">6.</span> <span class="toc-text">负 margin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-Cell"><span class="toc-number">7.</span> <span class="toc-text">Table-Cell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FlexBox"><span class="toc-number">8.</span> <span class="toc-text">FlexBox</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#&lt;center&gt;"><span class="toc-number">1.</span> <span class="toc-text">&lt;center&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-align:center"><span class="toc-number">2.</span> <span class="toc-text">text-align:center</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align:middle"><span class="toc-number">3.</span> <span class="toc-text">vertical-align:middle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height"><span class="toc-number">4.</span> <span class="toc-text">line-height</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#margin:auto"><span class="toc-number">5.</span> <span class="toc-text">margin:auto</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hacks,_hacks（小技巧）"><span class="toc-number">6.</span> <span class="toc-text">hacks, hacks（小技巧）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#translate(-50%,-50%)"><span class="toc-number">7.</span> <span class="toc-text">translate(-50%,-50%)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 绝对定位居中 "><span class="toc-number">8.</span> <span class="toc-text">绝对定位居中</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="# 视口居中 "><span class="toc-number">8.0.1.</span> <span class="toc-text">视口居中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 响应式 "><span class="toc-number">8.0.2.</span> <span class="toc-text">响应式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 偏移 "><span class="toc-number">8.0.3.</span> <span class="toc-text">偏移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 溢出 "><span class="toc-number">8.0.4.</span> <span class="toc-text">溢出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 调整尺寸 "><span class="toc-number">8.0.5.</span> <span class="toc-text">调整尺寸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 图像 "><span class="toc-number">8.0.6.</span> <span class="toc-text">图像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 可变高度 "><span class="toc-number">8.0.7.</span> <span class="toc-text">可变高度</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 负 _margin"><span class="toc-number">9.</span> <span class="toc-text">负 margin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-Cell"><span class="toc-number">10.</span> <span class="toc-text">Table-Cell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FlexBox"><span class="toc-number">11.</span> <span class="toc-text">FlexBox</span></a></li></ol>
 		</div>
 		
 		<p>我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。<br>孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~<br>各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。</p>
@@ -93,33 +133,17 @@
 <h2 id="text-align:center">text-align:center</h2>
 <p>在父容器里水平居中 inline 文字，或 inline 元素</p>
 <h2 id="vertical-align:middle">vertical-align:middle</h2>
-<p>垂直居中 inline 文字，inline 元素，配合</p>
-<figure class="highlight display:table```"><figcaption><span>，```display:table-cell```，有奇效。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>垂直居中 inline 文字，inline 元素，配合 <code>display:table</code> ，<code>display:table-cell</code>，有奇效。</p>
+<h2 id="line-height">line-height</h2>
+<p>与 height 联手，垂直居中文字</p>
+<h2 id="margin:auto">margin:auto</h2>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="code"><pre>
-##line-height
-
-与 height 联手，垂直居中文字
-
-##margin:auto
-
-示例：
-
-```html
-<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
   <span class="id">#ex2_container</span> <span class="rules">{ <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; <span class="rule">}</span></span>
   <span class="id">#ex2_content</span> <span class="rules">{ <span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0</span>px auto</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">display</span>:<span class="value">table</span></span>; <span class="rule">}</span></span>
 </span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
@@ -144,20 +168,10 @@
 <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>这个技巧相当嚣张，同样适用于没固定大小的内容，</p>
-<figure class="highlight min-width```，```max-height```，```overflow:scroll```"><figcaption><span>等。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>
-<span class="comment">&lt;!--more--&gt;</span>
-## 绝对定位居中
-
-父容器元素：```position: relative
-</pre></td></tr></table></figure>
-
-
+<p>这个技巧相当嚣张，同样适用于没固定大小的内容，<code>min-width</code>，<code>max-height</code>，<code>overflow:scroll</code> 等。</p>
+<p><a id="more"></a></p>
+<h2 id=" 绝对定位居中 ">绝对定位居中</h2>
+<p>父容器元素：<code>position: relative</code></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -176,18 +190,9 @@
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-<p>** 注意：高度必须定义，建议加</p>
-<figure class="highlight overflow:"><figcaption><span>auto```，防止内容溢出。**</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>
-<span class="comment">#### 视口居中</span>
-
-内容元素：<span class="string">``</span><span class="string">`position: fixed`</span><span class="string">``</span>，<span class="string">``</span><span class="string">`z-index: 999`</span><span class="string">``</span>，记住父容器元素 <span class="string">``</span><span class="string">`position: relative</span>
-</pre></td></tr></table></figure>
-
-
+<p><strong>注意：高度必须定义，建议加 <code>overflow: auto</code>，防止内容溢出。</strong></p>
+<h4 id=" 视口居中 ">视口居中</h4>
+<p>内容元素：<code>position: fixed</code>，<code>z-index: 999</code>，记住父容器元素 <code>position: relative</code></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -236,8 +241,8 @@
 </pre></td></tr></table></figure>
 
 <h4 id=" 偏移 ">偏移</h4>
-<p>只要</p>
-<figure class="highlight margin:"><figcaption><span>auto;``` 在，内容块将垂直居中，top, left, bottom, right 可以设置偏移。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>只要 <code>margin: auto;</code> 在，内容块将垂直居中，top, left, bottom, right 可以设置偏移。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -246,11 +251,7 @@
 7
 8
 9
-10
-11
-</pre></td><td class="code"><pre>
-```<span class="tag">css</span>
-<span class="class">.Absolute-Center</span><span class="class">.is-Right</span> <span class="rules">{
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Right</span> <span class="rules">{
   <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
   <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50</span>%</span></span>;
   <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
@@ -262,8 +263,8 @@
 </pre></td></tr></table></figure>
 
 <h4 id=" 溢出 ">溢出</h4>
-<p>居中内容比父容器高时，防止溢出，加</p>
-<figure class="highlight overflow:"><figcaption><span>auto``` （没有任何 padding 时，也可以加 ```max-height: 100%;```）。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>居中内容比父容器高时，防止溢出，加 <code>overflow: auto</code> （没有任何 padding 时，也可以加 <code>max-height: 100%;</code>）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -272,11 +273,7 @@
 7
 8
 9
-10
-11
-</pre></td><td class="code"><pre>
-```<span class="tag">css</span>
-<span class="class">.Absolute-Center</span><span class="class">.is-Overflow</span> <span class="rules">{
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Overflow</span> <span class="rules">{
   <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
   <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">300</span>px</span></span>;
   <span class="rule"><span class="attribute">max-height</span>:<span class="value"> <span class="number">100</span>%</span></span>;
@@ -288,25 +285,33 @@
 </pre></td></tr></table></figure>
 
 <h4 id=" 调整尺寸 ">调整尺寸</h4>
-<p><strong>resize</strong> 属性可以让尺寸可调。<br>设置 <strong>min- /max-</strong> 限制尺寸，确定加了</p>
-<figure class="highlight overflow:"><figcaption><span>auto``` 。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>
-
-</pre></td></tr></table></figure>
-
-<p>.Absolute-Center.is-Resizable {<br>  min-width: 20%;<br>  max-width: 80%;<br>  min-height: 20%;<br>  max-height: 80%;<br>  resize: both;<br>  overflow: auto;<br>  margin: auto;<br>  position: absolute;<br>  top: 0; left: 0; bottom: 0; right: 0;<br>}</p>
+<p><strong>resize</strong> 属性可以让尺寸可调。<br>设置 <strong>min- /max-</strong> 限制尺寸，确定加了 <code>overflow: auto</code> 。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
-</pre></td><td class="code"><pre>
-<span class="header">#### 图像</span>
-
-图像同样适用，设置 <span class="code">```</span>height: auto;
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Resizable</span> <span class="rules">{
+  <span class="rule"><span class="attribute">min-width</span>:<span class="value"> <span class="number">20</span>%</span></span>;
+  <span class="rule"><span class="attribute">max-width</span>:<span class="value"> <span class="number">80</span>%</span></span>;
+  <span class="rule"><span class="attribute">min-height</span>:<span class="value"> <span class="number">20</span>%</span></span>;
+  <span class="rule"><span class="attribute">max-height</span>:<span class="value"> <span class="number">80</span>%</span></span>;
+  <span class="rule"><span class="attribute">resize</span>:<span class="value"> both</span></span>;
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;
+<span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
+<h4 id=" 图像 ">图像</h4>
+<p>图像同样适用，设置 <code>height: auto;</code> </p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -324,8 +329,8 @@
 </pre></td></tr></table></figure>
 
 <h4 id=" 可变高度 ">可变高度</h4>
-<p>高度必须定义，但可以是百分比或 max-height。不想定义高度的话，用</p>
-<figure class="highlight display:"><figcaption><span>table``` （需要考虑 Table-Cell 兼容性）。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>高度必须定义，但可以是百分比或 max-height。不想定义高度的话，用 <code>display: table</code> （需要考虑 Table-Cell 兼容性）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -333,11 +338,7 @@
 6
 7
 8
-9
-10
-</pre></td><td class="code"><pre>
-```<span class="tag">css</span>
-<span class="class">.Absolute-Center</span><span class="class">.is-Variable</span> <span class="rules">{
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Variable</span> <span class="rules">{
   <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;
   <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
   <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
@@ -534,7 +535,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#&lt;center&gt;"><span class="toc-number">1.</span> <span class="toc-text">&lt;center&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-align:center"><span class="toc-number">2.</span> <span class="toc-text">text-align:center</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align:middle"><span class="toc-number">3.</span> <span class="toc-text">vertical-align:middle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hacks,_hacks（小技巧）"><span class="toc-number">4.</span> <span class="toc-text">hacks, hacks（小技巧）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#translate(-50%,-50%)"><span class="toc-number">5.</span> <span class="toc-text">translate(-50%,-50%)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="# 响应式 "><span class="toc-number">5.0.1.</span> <span class="toc-text">响应式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 偏移 "><span class="toc-number">5.0.2.</span> <span class="toc-text">偏移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 溢出 "><span class="toc-number">5.0.3.</span> <span class="toc-text">溢出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 调整尺寸 "><span class="toc-number">5.0.4.</span> <span class="toc-text">调整尺寸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 可变高度 "><span class="toc-number">5.0.5.</span> <span class="toc-text">可变高度</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 负 _margin"><span class="toc-number">6.</span> <span class="toc-text">负 margin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-Cell"><span class="toc-number">7.</span> <span class="toc-text">Table-Cell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FlexBox"><span class="toc-number">8.</span> <span class="toc-text">FlexBox</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#&lt;center&gt;"><span class="toc-number">1.</span> <span class="toc-text">&lt;center&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-align:center"><span class="toc-number">2.</span> <span class="toc-text">text-align:center</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align:middle"><span class="toc-number">3.</span> <span class="toc-text">vertical-align:middle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height"><span class="toc-number">4.</span> <span class="toc-text">line-height</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#margin:auto"><span class="toc-number">5.</span> <span class="toc-text">margin:auto</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hacks,_hacks（小技巧）"><span class="toc-number">6.</span> <span class="toc-text">hacks, hacks（小技巧）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#translate(-50%,-50%)"><span class="toc-number">7.</span> <span class="toc-text">translate(-50%,-50%)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="# 绝对定位居中 "><span class="toc-number">8.</span> <span class="toc-text">绝对定位居中</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="# 视口居中 "><span class="toc-number">8.0.1.</span> <span class="toc-text">视口居中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 响应式 "><span class="toc-number">8.0.2.</span> <span class="toc-text">响应式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 偏移 "><span class="toc-number">8.0.3.</span> <span class="toc-text">偏移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 溢出 "><span class="toc-number">8.0.4.</span> <span class="toc-text">溢出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 调整尺寸 "><span class="toc-number">8.0.5.</span> <span class="toc-text">调整尺寸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 图像 "><span class="toc-number">8.0.6.</span> <span class="toc-text">图像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="# 可变高度 "><span class="toc-number">8.0.7.</span> <span class="toc-text">可变高度</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="# 负 _margin"><span class="toc-number">9.</span> <span class="toc-text">负 margin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-Cell"><span class="toc-number">10.</span> <span class="toc-text">Table-Cell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FlexBox"><span class="toc-number">11.</span> <span class="toc-text">FlexBox</span></a></li></ol>
   </div>
 
 <div id="asidepart">

@@ -11,7 +11,7 @@
     
     <meta name="description" content="自定义过滤器
 创建 phonecatFilters 模块，用此模块注册自定义过滤器：
-app/js/filters.js:1
+1
 2
 3
 4
@@ -25,46 +25,33 @@ angular.module(&#39;phonecatFilters&#39;, []).filter(&#39;checkmark&#39;, functi
 
 过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。
 我们需要给 phonecat 模块注册 phonecatFilters 模块。
-app/js/app.js:1
-2
-3
-...
+1
 angular.module(&#39;phonecat&#39;, [&#39;phonecatFilters&#39;]).
-...
 
 
 模板
 我们需要引入 app/js/filters.js 文件
-app/index.html:1
+1
 2
-3
-4
-...
 &amp;lt;script src=&quot;js/controllers.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
 &amp;lt;script src=&quot;js/filters.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
-...
 
 
 Angular 模版使用过滤器的语法如下：
 &amp;#123;&amp;#123; expression | filter }}
 我们在手机详情模版使用此过滤器：
-app/partials/phone-detail.html:
 1
 2
 3
 4
 5
 6
-7
-8
-...
     &amp;lt;dl&amp;gt;
       &amp;lt;dt&amp;gt;Infrared&amp;lt;/dt&amp;gt;
-      &amp;lt;dd&amp;gt;&amp;amp;#123;&amp;amp;#123;phone.connectivity.infrared | checkmark}}&amp;lt;/dd&amp;gt;
+      &amp;lt;dd&amp;gt;&amp;#123;&amp;#123;phone.connectivity.infrared | checkmark}}&amp;lt;/dd&amp;gt;
       &amp;lt;dt&amp;gt;GPS&amp;lt;/dt&amp;gt;
-      &amp;lt;dd&amp;gt;&amp;amp;#123;&amp;amp;#123;phone.connectivity.gps | checkmark}}&amp;lt;/dd&amp;gt;
-    &amp;lt;/dl&amp;gt;
-...">
+      &amp;lt;dd&amp;gt;&amp;#123;&amp;#123;phone.connectivity.gps | checkmark}}&amp;lt;/dd&amp;gt;
+    &amp;lt;/dl&amp;gt;">
     
     
     
@@ -129,7 +116,7 @@ app/partials/phone-detail.html:
     </p>
   <p class="article-time">
     <time datetime="2013-05-03T08:57:00.000Z" itemprop="datePublished">5月 3 2013</time>
-    更新日期:<time datetime="2014-10-25T02:27:17.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T07:48:19.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -143,7 +130,7 @@ app/partials/phone-detail.html:
 		
 		<h2 id=" 自定义过滤器 ">自定义过滤器</h2>
 <p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
-<figure class="highlight js"><figcaption><span>app/js/filters.js:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -157,48 +144,34 @@ app/partials/phone-detail.html:
 
 <p>过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。</p>
 <p>我们需要给 phonecat 模块注册 phonecatFilters 模块。</p>
-<figure class="highlight js"><figcaption><span>app/js/app.js:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>...
-angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>]).
-...
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>]).
 </pre></td></tr></table></figure>
 
 <p><strong><em>模板</em></strong></p>
 <p>我们需要引入 app/js/filters.js 文件</p>
-<figure class="highlight html"><figcaption><span>app/index.html:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
-3
-4
-</pre></td><td class="code"><pre>...
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/filters.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-...
 </pre></td></tr></table></figure>
 
 <p>Angular 模版使用过滤器的语法如下：</p>
 <p>&#123;&#123; expression | filter }}</p>
 <p>我们在手机详情模版使用此过滤器：</p>
-<p>app/partials/phone-detail.html:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
-7
-8
-</pre></td><td class="code"><pre><span class="keyword">...</span>
-    &lt;dl&gt;
-      &lt;dt&gt;Infrared&lt;/dt&gt;
-      &lt;dd&gt;&amp;<span class="comment">#123;&amp;#123;phone.connectivity.infrared | checkmark}}&lt;/dd&gt;</span>
-      &lt;dt&gt;GPS&lt;/dt&gt;
-      &lt;dd&gt;&amp;<span class="comment">#123;&amp;#123;phone.connectivity.gps | checkmark}}&lt;/dd&gt;</span>
-    &lt;/dl&gt;
-<span class="keyword">...</span>
+</pre></td><td class="code"><pre>    <span class="tag">&lt;<span class="title">dl</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">dt</span>&gt;</span>Infrared<span class="tag">&lt;/<span class="title">dt</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">dd</span>&gt;</span>&#123;&#123;phone.connectivity.infrared | checkmark}}<span class="tag">&lt;/<span class="title">dd</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">dt</span>&gt;</span>GPS<span class="tag">&lt;/<span class="title">dt</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">dd</span>&gt;</span>&#123;&#123;phone.connectivity.gps | checkmark}}<span class="tag">&lt;/<span class="title">dd</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">dl</span>&gt;</span>
 </pre></td></tr></table></figure>
-
 
 <p><a id="more"></a><br><strong><em>实验</em></strong></p>
 <ul>
@@ -216,7 +189,7 @@ angular.module(<span class="string">'phonecat'</span>, [<span class="string">'ph
 <h2 id=" 事件处理 ">事件处理</h2>
 <p>在手机详情页加个点击缩缩图切换对应大图的效果。</p>
 <p><strong><em>控制器</em></strong></p>
-<figure class="highlight js"><figcaption><span>app/js/controllers.js:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -228,9 +201,7 @@ angular.module(<span class="string">'phonecat'</span>, [<span class="string">'ph
 10
 11
 12
-13
-</pre></td><td class="code"><pre>...
-<span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span><span class="params">($scope, $routeParams, $http)</span> {</span>
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span><span class="params">($scope, $routeParams, $http)</span> {</span>
   $http.get(<span class="string">'phones/'</span> + $routeParams.phoneId + <span class="string">'.json'</span>).success(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
     $scope.phone = data;
     $scope.mainImageUrl = data.images[<span class="number">0</span>];
@@ -246,22 +217,20 @@ angular.module(<span class="string">'phonecat'</span>, [<span class="string">'ph
 
 <p>PhoneDetailCtrl 控制器，创建了 mainImageUrl 模型属性，默认值设为第一个手机图片的 URL。<br>我们也创建了 setImage 事件处理器，它将改变 mainImageUrl 的值。</p>
 <p><strong><em>模版</em></strong></p>
-<figure class="highlight html"><figcaption><span>app/partials/phone-detail.html:</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
 7
-8
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\{\{mainImageUrl}}"</span> <span class="attribute">class</span>=<span class="value">"phone"</span>&gt;</span>
-...
+
 <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phone-thumbs"</span>&gt;</span>
   <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"img in phone.images"</span>&gt;</span>
     <span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\{\{img}}"</span> <span class="attribute">ng-click</span>=<span class="value">"setImage(img)"</span>&gt;</span>
   <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-...
 </pre></td></tr></table></figure>
 
 <p>我们给大图绑定 ngSrc 指令，设为 mainImageUrl 属性，也给缩略图注册了 <a href="http://docs.angularjs.org/api/ng.directive:ngClick" target="_blank">ngClick</a> 事件。当点击缩略图时，setImage 事件处理器会把 mainImageUrl 属性的值改成缩略图的 URL 。</p>
@@ -284,18 +253,14 @@ angular.module(<span class="string">'phonecat'</span>, [<span class="string">'ph
 <p>最后为应用定义一个基于 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank">REST</a> 客户端的自定义服务，用此客户端我们可以更容易的发起 XHR 请求获取数据，不必使用底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank">$http</a> API，HTTP 方法和 URL。</p>
 <p><strong><em>模版</em></strong></p>
 <p>自定义服务定义到 app/js/services.js 中，我们把它引入到布局模版中。此外，需要加载 angular-resource.js 文件，此文件的 $resource 服务包含 ngResource 模块，我们马上要用：</p>
-<figure class="highlight html"><figcaption><span>app/index.html</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
-3
-4
-</pre></td><td class="code"><pre>...
-  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/services.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</pre></td><td class="code"><pre>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/services.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
   <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"lib/angular/angular-resource.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-...
 </pre></td></tr></table></figure>
 
 <p><strong><em>服务</em></strong></p>
-<figure class="highlight js"><figcaption><span>app/js/services.js</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -311,19 +276,15 @@ angular.module(<span class="string">'phonecat'</span>, [<span class="string">'ph
 
 <p>我们使用模块 API 注册自定义服务，用到了 factory（工厂） 函数。把 ‘Phone’ 服务名传到工厂函数里，工厂函数很像控制器的构造函数，都可以通过函数参数声明依赖。Phone 服务依赖于 $resource 服务。</p>
 <p><a href="http://docs.angularjs.org/api/ngResource.$resource" target="_blank">$resource</a> 服务几行代码就能创建一个 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank">REST</a> 客户端，此客户端可以取代底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank">$http</a>  服务。</p>
-<figure class="highlight js"><figcaption><span>app/js/app.js</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>...
-angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>, <span class="string">'phonecatServices'</span>]).
-...
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>, <span class="string">'phonecatServices'</span>]).
 </pre></td></tr></table></figure>
 
 <p>我们需要给 ‘phonecat’ 应用添加数组形式的 ‘phonecatServices’。</p>
 <p><strong><em>控制器</em></strong></p>
 <p>我们简化了子控制器（PhoneListCtrl 和 PhoneDetailCtrl），用新的服务 Phone 取代底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank">$http</a> 服务。</p>
 <p>Angular 的 <a href="http://docs.angularjs.org/api/ngResource.$resource" target="_blank">$resource</a> 服务比 $http 更易用，代码也更容易理解。</p>
-<figure class="highlight js"><figcaption><span>app/js/controllers.js</span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -342,11 +303,7 @@ angular.module(<span class="string">'phonecat'</span>, [<span class="string">'ph
 17
 18
 19
-20
-21
-</pre></td><td class="code"><pre>...
-
-<span class="function"><span class="keyword">function</span> <span class="title">PhoneListCtrl</span><span class="params">($scope, Phone)</span> {</span>
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">PhoneListCtrl</span><span class="params">($scope, Phone)</span> {</span>
   $scope.phones = Phone.query();
   $scope.orderProp = <span class="string">'age'</span>;
 }

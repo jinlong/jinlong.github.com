@@ -106,7 +106,7 @@ node scripts\web-server.js">
     </p>
   <p class="article-time">
     <time datetime="2013-05-02T15:18:00.000Z" itemprop="datePublished">5月 2 2013</time>
-    更新日期:<time datetime="2014-10-25T02:27:11.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T07:52:12.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -180,7 +180,7 @@ node scripts\web-server.js">
 <p><strong><em>启动 Angular 应用</em></strong></p>
 <p>自动启动使用 <strong><em>ngApp</em></strong> 指令；</p>
 <p><a href="http://docs.angularjs.org/guide/bootstrap" target="_blank">手动启动</a>：</p>
-<figure class="highlight js"><figcaption><span>手动启动</span><a href="http://docs.angularjs.org/guide/bootstrap" target="_blank">Source</a></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -265,41 +265,23 @@ angular.element(document).ready(<span class="function"><span class="keyword">fun
 
 <p>尽管控制器（controller ）还没做太多控制，但它扮演了重要的角色。它为我们的数据模型（model）提供上下文，控制器允许我们建立模型和视图（view）之间的数据绑定：</p>
 <p>PhoneListCtrl —— 控制器函数的名字（在 controller.js 里面），匹配 &lt;body&gt; 标签里面 <a href="http://docs.angularjs.org/api/ng.directive:ngController" target="_blank">ngController</a>（ng-controller=”PhoneListCtrl”）指令的名字。</p>
-<p>手机数据加到了作用域（</p>
-<figure class="highlight $scope```），注入到我们的控制器函数里。当应用启动时，控制器作用域被创建，它继承了根作用域。在 "><figcaption><span>&lt;body ng-controller="PhoneListCtrl"> 之间，控制器作用域对所有绑定有效。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-</pre></td><td class="code"><pre>
-Angular 里面作用域的概念很重要；作用域可以看作胶，粘合模版（template ），模型（model）和控制器（controller）。Angular 把作用域，模版信息，数据模型和控制器一起使用，保持模型和视图的分离且同步。
-
-[<span class="link_label">Angular 作用域文档</span>](<span class="link_url">http://docs.angularjs.org/api/ng.$rootScope.Scope</span>)
-
-<span class="strong">*** 实验 **</span>*
-
-<span class="bullet">* </span>在 index.html 增加另一处绑定：
+<p>手机数据加到了作用域（<code>$scope</code>），注入到我们的控制器函数里。当应用启动时，控制器作用域被创建，它继承了根作用域。在 &lt;body ng-controller=”PhoneListCtrl”&gt; 之间，控制器作用域对所有绑定有效。</p>
+<p>Angular 里面作用域的概念很重要；作用域可以看作胶，粘合模版（template ），模型（model）和控制器（controller）。Angular 把作用域，模版信息，数据模型和控制器一起使用，保持模型和视图的分离且同步。</p>
+<p><a href="http://docs.angularjs.org/api/ng.$rootScope.Scope" target="_blank">Angular 作用域文档</a></p>
+<p><strong><em>实验</em></strong></p>
+<ul>
+<li>在 index.html 增加另一处绑定：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&lt;p&gt;Total <span class="built_in">number</span> <span class="operator">of</span> phones: &amp;<span class="comment">#123;&amp;#123;phones.length}}&lt;/p&gt;</span>
+</pre></td></tr></table></figure>
 
 
-<span class="xml"><span class="tag">&lt;<span class="title">hexoescape</span>&gt;</span></span>2<span class="xml"><span class="tag">&lt;/<span class="title">hexoescape</span>&gt;</span></span>
-
-
-<span class="bullet">* </span>在控制器里增加新的模型属性，然后绑定到模版里：
-
-<span class="code">```</span>js
-$scope.hello = "Hello, World!"
+<ul>
+<li>在控制器里增加新的模型属性，然后绑定到模版里：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$scope.hello = <span class="string">"Hello, World!"</span>
 </pre></td></tr></table></figure>
 
 <ul>

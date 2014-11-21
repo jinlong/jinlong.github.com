@@ -90,7 +90,7 @@
     </p>
   <p class="article-time">
     <time datetime="2013-06-05T09:02:00.000Z" itemprop="datePublished">6月 5 2013</time>
-    更新日期:<time datetime="2014-10-25T02:26:17.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T07:43:39.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -99,7 +99,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="# 模块模式 "><span class="toc-number">1.</span> <span class="toc-text">模块模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 创建一个模块 "><span class="toc-number">2.</span> <span class="toc-text">创建一个模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 选项设置 "><span class="toc-number">3.</span> <span class="toc-text">选项设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-number">4.</span> <span class="toc-text">API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 打磨开发者接口 "><span class="toc-number">5.</span> <span class="toc-text">打磨开发者接口</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="# 模块模式 "><span class="toc-number">1.</span> <span class="toc-text">模块模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 创建一个模块 "><span class="toc-number">2.</span> <span class="toc-text">创建一个模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jQuery_ 插件 "><span class="toc-number">3.</span> <span class="toc-text">jQuery 插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 选项设置 "><span class="toc-number">4.</span> <span class="toc-text">选项设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-number">5.</span> <span class="toc-text">API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 打磨开发者接口 "><span class="toc-number">6.</span> <span class="toc-text">打磨开发者接口</span></a></li></ol>
 		</div>
 		
 		<blockquote>
@@ -151,49 +151,24 @@
 };
 </pre></td></tr></table></figure>
 
-<p>这个想法把代码拆分到最小能复用的程度。我还可以写成一个</p>
-<figure class="highlight toggleMenu("><figcaption><span>)``` 方法，但是创建单独的 ```openMenu( )``` 和 ```closeMenu( )``` 更利于模块间的复用。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>这个想法把代码拆分到最小能复用的程度。我还可以写成一个 <code>toggleMenu( )</code> 方法，但是创建单独的 <code>openMenu( )</code> 和 <code>closeMenu( )</code> 更利于模块间的复用。</p>
+<p>注意到模块方法和属性的调用（例如 <code>setMenuStyle( )</code> 调用），用到了 <code>this</code> 关键字——模块通过它访问自己的成员。</p>
+<p>这是模块的基础结构。你可以继续添加需要的方法和属性，一点也不复杂。在基础结构就位后，复用层——选项和暴露 API ——可以在此基础上创建。</p>
+<h3 id="jQuery_ 插件 ">jQuery 插件</h3>
+<p>精心设计的第三方代码最关键的是：复用性。用原生的 JavaScript 同样可以实现重用组件，我更喜欢用 jQuery 插件做更复杂的事情，有以下几个原因。</p>
+<p>最重要的是，它是一个不显眼的沟通形式。如果你用 jQuery 创建一个组件，具体实现非常明确。构建一个组件作为 jQuery 插件等于说 jQuery 是必须的。</p>
+<p>此外，实现代码将与其余的基于 jQuery 的项目代码保持一致，意思是开发者不需要太多研究就可以学会与插件的交互。</p>
+<p>在你开始创建 jQuery 插件前，确保插件没有跟其他用 <code>$</code> 符号的 JavaScript 库冲突。非常简单——像这样包裹你的插件代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-</pre></td><td class="code"><pre>
-注意到模块方法和属性的调用（例如 <span class="escape">``</span><span class="escape">`s</span>etMenuStyle( )<span class="escape">``</span><span class="escape">` </span>调用），用到了 <span class="escape">``</span><span class="escape">`t</span>his<span class="escape">``</span><span class="escape">` </span>关键字——模块通过它访问自己的成员。
-
-这是模块的基础结构。你可以继续添加需要的方法和属性，一点也不复杂。在基础结构就位后，复用层——选项和暴露 API ——可以在此基础上创建。
-
-###jQuery 插件
-
-精心设计的第三方代码最关键的是：复用性。用原生的 JavaScript 同样可以实现重用组件，我更喜欢用 jQuery 插件做更复杂的事情，有以下几个原因。
-
-最重要的是，它是一个不显眼的沟通形式。如果你用 jQuery 创建一个组件，具体实现非常明确。构建一个组件作为 jQuery 插件等于说 jQuery 是必须的。
-
-此外，实现代码将与其余的基于 jQuery 的项目代码保持一致，意思是开发者不需要太多研究就可以学会与插件的交互。
-
-在你开始创建 jQuery 插件前，确保插件没有跟其他用 <span class="escape">``</span><span class="escape">`$</span><span class="escape">``</span><span class="escape">` </span>符号的 JavaScript 库冲突。非常简单——像这样包裹你的插件代码：
-
-<span class="escape">``</span><span class="escape">`j</span>s
-(function($) {
-    // jQuery plugin code here
-})(jQuery)<span class="comment">;</span>
+</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
+    <span class="comment">// jQuery plugin code here</span>
+})(jQuery);
 </pre></td></tr></table></figure>
 
-<p>下一步，我们设置插件，并把先前的模块代码放到里面。一个插件仅仅是定义在 jQuery</p>
-<figure class="highlight （$）```对象上的一个方法。"><table><tr><td class="gutter"><pre>1
+<p>下一步，我们设置插件，并把先前的模块代码放到里面。一个插件仅仅是定义在 jQuery <code>（$）</code>对象上的一个方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -209,11 +184,7 @@
 14
 15
 16
-17
-18
-</pre></td><td class="code"><pre>
-`<span class="javascript"></span>``<span class="javascript">js
-(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
+</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
     $.jPanelMenu = <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
         <span class="keyword">var</span> jpm = {
             animated: <span class="literal">true</span>,
@@ -228,7 +199,7 @@
             setMenuStyle: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span> … }
         };
     };
-})(jQuery);</span>
+})(jQuery);
 </pre></td></tr></table></figure>
 
 <p>使用插件时调用你创建的函数即可。</p>
@@ -287,8 +258,9 @@
 <h3 id="API">API</h3>
 <p>选项是自定义插件的好方法。另一方面， API 通过暴露属性和方法，启用扩展插件的功能。</p>
 <p>尽可能通过 API 暴露，外部不应该直接访问到所有内部的方法和属性。理想情况下，你应该仅公开使用的元素。</p>
-<p>我们的例子，暴露的 API 应该包含打开和关闭菜单，仅此而已。内部的</p>
-<figure class="highlight setMenuStyle("><figcaption><span>) ```方法在菜单打开和关闭的时候运行，但是全局不需要访问它。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>我们的例子，暴露的 API 应该包含打开和关闭菜单，仅此而已。内部的 <code>setMenuStyle( )</code>方法在菜单打开和关闭的时候运行，但是全局不需要访问它。</p>
+<p>为了公开 API，在插件代码最后，返回一个带有期望的方法和属性的对象。甚至可以把返回的属性和方法放到模块代码中——这是模块模式漂亮的组织形式的真正亮点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -313,15 +285,7 @@
 23
 24
 25
-26
-27
-28
-29
-</pre></td><td class="code"><pre>
-为了公开 API，在插件代码最后，返回一个带有期望的方法和属性的对象。甚至可以把返回的属性和方法放到模块代码中——这是模块模式漂亮的组织形式的真正亮点。
-
-`<span class="javascript"></span>``<span class="javascript">js
-(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
+</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
     $.jPanelMenu = <span class="function"><span class="keyword">function</span><span class="params">(options)</span> {</span>
         <span class="keyword">var</span> jpm = {
             options: $.extend({
@@ -345,7 +309,7 @@
             someComplexMethod: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span> … }
         };
     };
-})(jQuery);</span>
+})(jQuery);
 </pre></td></tr></table></figure>
 
 <p>通过对象的返回及插件的初始化，API 方法和属性将变得可用。</p>
@@ -439,7 +403,7 @@ jpm.open( );
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="# 模块模式 "><span class="toc-number">1.</span> <span class="toc-text">模块模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 创建一个模块 "><span class="toc-number">2.</span> <span class="toc-text">创建一个模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 选项设置 "><span class="toc-number">3.</span> <span class="toc-text">选项设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-number">4.</span> <span class="toc-text">API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 打磨开发者接口 "><span class="toc-number">5.</span> <span class="toc-text">打磨开发者接口</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="# 模块模式 "><span class="toc-number">1.</span> <span class="toc-text">模块模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 创建一个模块 "><span class="toc-number">2.</span> <span class="toc-text">创建一个模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jQuery_ 插件 "><span class="toc-number">3.</span> <span class="toc-text">jQuery 插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 选项设置 "><span class="toc-number">4.</span> <span class="toc-text">选项设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-number">5.</span> <span class="toc-text">API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="# 打磨开发者接口 "><span class="toc-number">6.</span> <span class="toc-text">打磨开发者接口</span></a></li></ol>
   </div>
 
 <div id="asidepart">

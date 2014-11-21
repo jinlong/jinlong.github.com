@@ -9,46 +9,19 @@
     
     <meta name="author" content="Alon Zhang">
     
-    <meta name="description" content="最近项目中用到了
-branch``` 和 ```git submodule```，查阅了一些文章，总算有点头绪了，连同一些常用的 git 命令记录在此，以便查阅。1
-2
-3
-4
-5
-6
-7
-8
-9
-10
+    <meta name="description" content="最近项目中用到了 git branch 和 git submodule，查阅了一些文章，总算有点头绪了，连同一些常用的 git 命令记录在此，以便查阅。
+git 常用命令
 
-##git 常用命令
+远程仓库相关命令
 
-* 远程仓库相关命令
-
-检出仓库：```$ git clone git://github.com/jquery/jquery.git```	
-
-查看远程仓库：```$ git remote -v```	
-
-添加远程仓库：```$ git remote add [name] [url]
-
-
-删除远程仓库：
-git remote rm [name]```	1
-2
-3
-4
-5
-6
-7
-8
-
-修改远程仓库：```$ git remote set-url --push [name] [newUrl]```	
-
-拉取远程仓库：```$ git pull [remoteName] [localBranchName]```	
-
-推送远程仓库：```$ git push [remoteName] [localBranchName]```	
-
-初始化仓库：```git init">
+检出仓库：$ git clone git://github.com/jquery/jquery.git    
+查看远程仓库：$ git remote -v    
+添加远程仓库：$ git remote add [name] [url]
+删除远程仓库：$ git remote rm [name]    
+修改远程仓库：$ git remote set-url --push [name] [newUrl]    
+拉取远程仓库：$ git pull [remoteName] [localBranchName]    
+推送远程仓库：$ git push [remoteName] [localBranchName]    
+初始化仓库：git init">
     
     
     
@@ -113,7 +86,7 @@ git remote rm [name]```	1
     </p>
   <p class="article-time">
     <time datetime="2013-03-23T02:29:00.000Z" itemprop="datePublished">3月 23 2013</time>
-    更新日期:<time datetime="2014-10-25T02:28:45.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T07:58:57.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -122,69 +95,31 @@ git remote rm [name]```	1
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git_submodule_ 子模块 "><span class="toc-number">1.</span> <span class="toc-text">git submodule 子模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_branch_ 分支操作 "><span class="toc-number">2.</span> <span class="toc-text">git branch 分支操作</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git_ 常用命令 "><span class="toc-number">1.</span> <span class="toc-text">git 常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_submodule_ 子模块 "><span class="toc-number">2.</span> <span class="toc-text">git submodule 子模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_branch_ 分支操作 "><span class="toc-number">3.</span> <span class="toc-text">git branch 分支操作</span></a></li></ol>
 		</div>
 		
-		<p>最近项目中用到了</p>
-<figure class="highlight git"><figcaption><span>branch``` 和 ```git submodule```，查阅了一些文章，总算有点头绪了，连同一些常用的 git 命令记录在此，以便查阅。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre>
-<span class="comment">##git 常用命令</span>
-
-* 远程仓库相关命令
-
-检出仓库：`<span class="javascript"></span>``<span class="javascript">$ git clone git:<span class="comment">//github.com/jquery/jquery.git</span></span>``<span class="javascript"></span>`	
-
-查看远程仓库：`<span class="javascript"></span>``<span class="javascript">$ git remote -v</span>``<span class="javascript"></span>`	
-
-添加远程仓库：`<span class="javascript"></span>``<span class="javascript">$ git remote add [name] [url]</span>
-</pre></td></tr></table></figure>
-
-<p>删除远程仓库：</p>
-<figure class="highlight $"><figcaption><span>git remote rm [name]```	</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>
-修改远程仓库：<span class="escape">``</span><span class="escape">`$</span> git remote set-url --push [name] [newUrl]<span class="escape">``</span><span class="escape">`	</span>
-
-拉取远程仓库：<span class="escape">``</span><span class="escape">`$</span> git pull [remoteName] [localBranchName]<span class="escape">``</span><span class="escape">`	</span>
-
-推送远程仓库：<span class="escape">``</span><span class="escape">`$</span> git push [remoteName] [localBranchName]<span class="escape">``</span><span class="escape">`	</span>
-
-初始化仓库：<span class="escape">``</span><span class="escape">`g</span>it init
-</pre></td></tr></table></figure>
-
-<p><a id="more"></a><br>配置信息：</p>
+		<p>最近项目中用到了 <code>git branch</code> 和 <code>git submodule</code>，查阅了一些文章，总算有点头绪了，连同一些常用的 git 命令记录在此，以便查阅。</p>
+<h2 id="git_ 常用命令 ">git 常用命令</h2>
+<ul>
+<li>远程仓库相关命令</li>
+</ul>
+<p>检出仓库：<code>$ git clone git://github.com/jquery/jquery.git</code>    </p>
+<p>查看远程仓库：<code>$ git remote -v</code>    </p>
+<p>添加远程仓库：<code>$ git remote add [name] [url]</code></p>
+<p>删除远程仓库：<code>$ git remote rm [name]</code>    </p>
+<p>修改远程仓库：<code>$ git remote set-url --push [name] [newUrl]</code>    </p>
+<p>拉取远程仓库：<code>$ git pull [remoteName] [localBranchName]</code>    </p>
+<p>推送远程仓库：<code>$ git push [remoteName] [localBranchName]</code>    </p>
+<p>初始化仓库：<code>git init</code><br><a id="more"></a><br>配置信息：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>git config --<span class="keyword">global</span> user.name <span class="string">"jinlongz"</span> 
 git config --<span class="keyword">global</span> user.email jinlongz<span class="decorator">@gmail.com</span>
 </pre></td></tr></table></figure>
 
-<p>查看本地修改与服务器的差异：</p>
-<figure class="highlight git"><figcaption><span>status```	</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>
-将这些差异文件添加，这样就可以提交了 <span class="escape">``</span><span class="escape">`g</span>it add .<span class="escape">``</span><span class="escape">`	</span>
-
-提交更改到服务器：<span class="escape">``</span><span class="escape">`g</span>it commit –m “这里是注释”
-</pre></td></tr></table></figure>
-
+<p>查看本地修改与服务器的差异：<code>git status</code>    </p>
+<p>将这些差异文件添加，这样就可以提交了 <code>git add .</code>    </p>
+<p>提交更改到服务器：<code>git commit –m “这里是注释”</code></p>
 <p>如果想把本地的某个分支 test 提交到远程仓库，并作为远程仓库的 master 分支，或者作为另外一个名叫 test 的分支，如下：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
@@ -195,11 +130,9 @@ $ git push origin test:test              <span class="comment">// 提交本地 t
 <ul>
 <li>使用 git rebase 避免无谓的 merge</li>
 </ul>
-<p>用</p>
-<figure class="highlight git"><figcaption><span>rebase``` 代替 ```git merge```</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>```
-<span class="tag">git</span> <span class="tag">pull</span> <span class="tag">--rebase</span> <span class="attr_selector">[remote name]</span> <span class="attr_selector">[branch name]</span>
+<p>用 <code>git rebase</code> 代替 <code>git merge</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">git</span> <span class="tag">pull</span> <span class="tag">--rebase</span> <span class="attr_selector">[remote name]</span> <span class="attr_selector">[branch name]</span>
 </pre></td></tr></table></figure>
 
 <p>或</p>
@@ -209,18 +142,14 @@ $ git push origin test:test              <span class="comment">// 提交本地 t
 git rebase origin
 </pre></td></tr></table></figure>
 
-<p>在 rebase 的过程中，也许会出现冲突。在这种情况，Git 会停止 rebase 并会让你去解决冲突；在解决完冲突后，用</p>
-<figure class="highlight git"><figcaption><span>add```命令去更新这些内容的索引, 然后，你无需执行 git commit, 只要执行:</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="escape">``</span><span class="escape">`
-</span>git rebase --<span class="keyword">continue</span>
+<p>在 rebase 的过程中，也许会出现冲突。在这种情况，Git 会停止 rebase 并会让你去解决冲突；在解决完冲突后，用<code>git add</code>命令去更新这些内容的索引, 然后，你无需执行 git commit, 只要执行:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>git rebase --<span class="keyword">continue</span>
 </pre></td></tr></table></figure>
 
-<p>这样 git 会继续 rebase。<br>在任何时候，你可以用</p>
-<figure class="highlight --abort```参数来终止 rebase 的行动，并且 "mywork" 分支会回到 rebase 开始前的状态。"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="escape">``</span><span class="escape">`
-</span>git rebase --abort
+<p>这样 git 会继续 rebase。<br>在任何时候，你可以用<code>--abort</code>参数来终止 rebase 的行动，并且”mywork”分支会回到 rebase 开始前的状态。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="comment">git</span> <span class="comment">rebase</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">abort</span>
 </pre></td></tr></table></figure>
 
 <h2 id="git_submodule_ 子模块 ">git submodule 子模块</h2>
@@ -228,11 +157,9 @@ git rebase origin
 <ul>
 <li>git submodule add</li>
 </ul>
-<p>使用</p>
-<figure class="highlight git"><figcaption><span>submodule add [仓库位置] [欲放置的位置]``` 增加一个新的子模块：</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>```
-$ git submodule <span class="keyword">add</span> git@github.com:josephj/javascript-<span class="keyword">platform</span>-yui.git <span class="keyword">static</span>/<span class="keyword">platform</span>
+<p>使用 <code>git submodule add [仓库位置] [欲放置的位置]</code> 增加一个新的子模块：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ git submodule <span class="keyword">add</span> git@github.com:josephj/javascript-<span class="keyword">platform</span>-yui.git <span class="keyword">static</span>/<span class="keyword">platform</span>
 </pre></td></tr></table></figure>
 
 <p><strong><em>需要注意</em></strong> [欲放置的位置] 不能以 / 结尾（会造成修改不生效），也不能已经是现有的路径（不能顺利 Clone）。</p>
@@ -357,21 +284,17 @@ git mergetool <span class="comment">#Git 默认图形化冲突解决工具</span
 <ul>
 <li>查看已和当前分支合并的分支</li>
 </ul>
-<p>可用</p>
-<figure class="highlight git"><figcaption><span>branch -d [name]``` 删掉未标星号的分支，因为已经合并了。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="escape">``</span><span class="escape">`
-</span>git branch --merged
+<p>可用<code>git branch -d [name]</code> 删掉未标星号的分支，因为已经合并了。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="comment">git</span> <span class="comment">branch</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">merged</span>
 </pre></td></tr></table></figure>
 
 <ul>
 <li>查看未和当前分支合并的分支</li>
 </ul>
-<p>强制删除未合并的分支</p>
-<figure class="highlight git"><figcaption><span>branch -D [name]```</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="escape">``</span><span class="escape">`
-</span>git branch --no-merged
+<p>强制删除未合并的分支<code>git branch -D [name]</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="comment">git</span> <span class="comment">branch</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">no</span><span class="literal">-</span><span class="comment">merged</span>
 </pre></td></tr></table></figure>
 
 <ul>
@@ -471,7 +394,7 @@ git rebase master <span class="comment"># 衍合 experiment 分支到主分支</
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git_submodule_ 子模块 "><span class="toc-number">1.</span> <span class="toc-text">git submodule 子模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_branch_ 分支操作 "><span class="toc-number">2.</span> <span class="toc-text">git branch 分支操作</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git_ 常用命令 "><span class="toc-number">1.</span> <span class="toc-text">git 常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_submodule_ 子模块 "><span class="toc-number">2.</span> <span class="toc-text">git submodule 子模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_branch_ 分支操作 "><span class="toc-number">3.</span> <span class="toc-text">git branch 分支操作</span></a></li></ol>
   </div>
 
 <div id="asidepart">

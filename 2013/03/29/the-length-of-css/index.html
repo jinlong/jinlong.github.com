@@ -14,13 +14,12 @@
 CSS 里有不少把长度作为值的属性，盒模型的属性就是明显的例子：width, height, margin, padding, border。还有其它例子：box-shadow的偏移和阴影半径，或者字体的大小和字间距。CSS 都有哪些可用的“长度单位”呢？已经相当多啦。
 绝对长度
 px
-CSS 1
+1
 2
 3
 .wrap {
   width: 400px; 
 }
-
 
 
 Pixel 可能是最容易想到的衡量“设备像素”的单位，它不需要对显示器上的屏幕像素做任何事。它的确是一个简单易用的度量尺寸。
@@ -90,7 +89,7 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
     </p>
   <p class="article-time">
     <time datetime="2013-03-29T14:29:00.000Z" itemprop="datePublished">3月 29 2013</time>
-    更新日期:<time datetime="2014-10-25T02:28:59.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T07:57:23.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -108,7 +107,7 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <p>CSS 里有不少把长度作为值的属性，盒模型的属性就是明显的例子：<a href="http://css-tricks.com/almanac/properties/w/width/" target="_blank">width</a>, <a href="http://css-tricks.com/almanac/properties/h/height/" target="_blank">height</a>, <a href="http://css-tricks.com/almanac/properties/m/margin/" target="_blank">margin</a>, <a href="http://css-tricks.com/almanac/properties/p/padding/" target="_blank">padding</a>, <a href="http://css-tricks.com/almanac/properties/b/border/" target="_blank">border</a>。还有其它例子：<a href="http://css-tricks.com/almanac/properties/b/box-shadow/" target="_blank">box-shadow</a>的偏移和阴影半径，或者字体的大小和字间距。CSS 都有哪些可用的“长度单位”呢？已经相当多啦。</p>
 <h2 id=" 绝对长度 ">绝对长度</h2>
 <h3 id="px">px</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -116,12 +115,11 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>Pixel 可能是最容易想到的衡量“设备像素”的单位，它不需要对显示器上的屏幕像素做任何事。它的确是<a href="http://inamidst.com/stuff/notes/csspx" target="_blank">一个简单易用的度量尺寸</a>。</p>
 <p>它被设想成一个跨设备和显示器的标准化的值，实际上这一设想越来越不成立。举例来说，在 iPad mini 和 iPad 上<a href="http://cdn.css-tricks.com/wp-content/uploads/2013/03/ipad-mini.png" target="_blank">渲染同一个网站</a>，如果长度单位都被设成 px ，按理说 iPad mini 上的网站会超出屏幕。</p>
 <p>px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许多其它的长度会直接换算成 px，JavaScript 就是用的 px 。<br><a id="more"></a></p>
 <h3 id="in">in</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -129,14 +127,13 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>英寸是物理尺寸，但是在 CSS 里，它直接换算成 px 。欢迎在评论里添加测试用例，我会把它加到文章中，我是一直没找到针对这些物理尺寸的可用的测试用例。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="number">1</span><span class="keyword">in</span> == <span class="number">96</span>px
 </pre></td></tr></table></figure>
 
 <h3 id="cm">cm</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -144,14 +141,13 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>众所周知，厘米是个熟悉且有用的物理尺寸。它们也被换算成 px：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="attribute">1cm =</span>=<span class="string"> 37.8px</span>
 </pre></td></tr></table></figure>
 
 <h3 id="mm">mm</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -166,7 +162,7 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 
 <h2 id=" 字体相对长度 ">字体相对长度</h2>
 <h3 id="Em">Em</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -174,19 +170,16 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
-<p>一个相对单位，基于当前字体中的大写字母“M”，起初是作为<a href="http://en.wikipedia.org/wiki/Em_(typography" target="_blank">排版尺寸</a>) 。尽管当你改变</p>
-<figure class="highlight font-family```"><figcaption><span>时长度没变，它的确是根据 ```font-size``` 变的。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>
-完全没有任何 CSS 的话，[<span class="link_label">1em 将是</span>](<span class="link_url">http://codepen.io/chriscoyier/pen/vnhup</span>)：
+<p>一个相对单位，基于当前字体中的大写字母“M”，起初是作为<a href="http://en.wikipedia.org/wiki/Em_(typography" target="_blank">排版尺寸</a>) 。尽管当你改变 <code>font-family</code> 时长度没变，它的确是根据 <code>font-size</code> 变的。</p>
+<p>完全没有任何 CSS 的话，<a href="http://codepen.io/chriscoyier/pen/vnhup" target="_blank">1em 将是</a>：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="number">1</span>em == <span class="number">16</span>px == <span class="number">0.17</span><span class="keyword">in</span> == <span class="number">12</span>pt == <span class="number">1</span>pc == <span class="number">4.2</span>mm == <span class="number">0.42</span>cm
 </pre></td></tr></table></figure>
 
-<p>1em == 16px == 0.17in == 12pt == 1pc == 4.2mm == 0.42cm<br>```</p>
 <p>如果任何 CSS 改变字体大小（在文档的任何层级），1em 将等于任何新的 <code>font-size</code> 值。</p>
 <p>应用了 <code>font-size</code> 的 em 单位会累乘，因此如果 3 个 font-size 是 1.1em 的元素嵌套，结果尺寸是 <code>1.1 X 1.1 X 1.1 = 1.331 rem（root em）</code>。意思是虽然一个元素被设定 10em，不是说它的宽度在任何位置都是一成不变的，如果 <code>font-size</code> 有变（译者注： 指该元素的父元素的 font-size 改变，如果 font-size : 20px，则 1em = 20px；font-size : 10px 则 1em = 10px。），它可能变宽或变窄（<a href="http://codepen.io/chriscoyier/pen/HizKe" target="_blank">看证据</a>）。</p>
 <h3 id="Rem">Rem</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -194,11 +187,10 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>像 em 的相对单位，但它总是相对于“root”元素（也就是 <code>:root{}</code>），而不像 em 是相对于级联元素。这就极大简化了相对单位的相关工作（译者注： 只需修改 :root{}里的 font-size 定义，然后应用 rem 的元素自动跟着变）。</p>
 <p><strong>值得注意的浏览器支持问题：</strong>IE 8，Safari 4，iOS 3.2 不支持。（译者注：<a href="http://caniuse.com/#search=rem" target="_blank">Can I use</a>）</p>
 <h3 id="Points">Points</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -206,12 +198,11 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>pt 是物理尺寸，<code>1pt = 1/72 英寸</code>。Points 主要用来定义打印字体的尺寸（很可能这就是 CSS 支持它的原因）。常常听到以下描述：“他们一定要把重要信息设成 很小的 8pt ！”。 </p>
 <p>pt 最大用途是在实体媒介参与的打印样式中定义字体，但是没人阻止你在屏幕媒介或其它媒介使用 pt ，只要它们支持这一尺寸。</p>
 <p><strong>值得注意的浏览器支持问题</strong>：在屏幕上呈现 pt 尺寸会有很大的差异。 这是 IE 6 和 Firefox（可能是 3.6）<a href="http://css-tricks.com/wp-content/csstricks-uploads/pointsizeonscreen.jpg" target="_blank">对照</a> </p>
 <h3 id="Pica">Pica</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -219,10 +210,9 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>跟 pt 一样，唯一不同的是 <code>1pc == 12pt</code>。</p>
 <h3 id="ex">ex</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -230,11 +220,10 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>这个尺寸基于当前字体的 x-height。有时基准来源于嵌入的字体信息，有时浏览器通过测量一个小写字型自己指定它，最糟的是，它被设定为 0.5em 。它取名“x”高度，可能当初想以 x 字母的高度为基准吧。了解一下 x-height ，考虑到有些小写字母像“d”有上半部分，x-height 没有上半部分，它是这些字母的下部的高度。</p>
 <p>不像 em，当你改变 font-family 时，em 大小不变，ex 单位会发生变化，ex 的值特别受字体的限制。（<a href="http://codepen.io/chriscoyier/pen/aDtdv" target="_blank">实例</a>）</p>
 <h3 id="ch">ch</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -242,12 +231,11 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>ch 很像 x-height，唯一区别是 ch 以零（0）字符的宽度为基准，font-family 改变它会随之改变。</p>
 <p><strong>值得注意的浏览器支持问题：</strong>在写这篇文章的时候，没有基于 WebKit 的浏览器支持。</p>
 <h2 id="Viewport_ 百分比长度 ">Viewport 百分比长度</h2>
 <h3 id="vw">vw</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -255,12 +243,11 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>这是“viewport（视口） 宽度”单位，1vw 等于 1% 的视口宽度。它跟百分比相似，不同点是这个值跟所有元素保持一致，不管它们的父元素或父元素宽度。有点像 rem 单位总是相对于 root 。</p>
 <p>控制打印字体是主要的用例，看这里 <a href="http://css-tricks.com/viewport-sized-typography/" target="_blank">Viewport Sized Typography</a>。</p>
 <p><strong>值得注意的浏览器支持问题：</strong>除了最新的 iOS 6 任何移动浏览器都不支持。它适用于所有视口相关的长度单位。</p>
 <h3 id="vh">vh</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -268,10 +255,9 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>跟 vw （viewport 宽度）单位相似，但它是基于 viewport 高度的。</p>
 <h3 id="vmin">vmin</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -279,10 +265,9 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>这个值取 vw 或 vh 中较小者。这个单位在打印字体中的作用比在屏幕显示中要大。</p>
 <h3 id="vmax">vmax</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
@@ -290,19 +275,17 @@ px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许�
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
 <p>这个值取 vw 或 vh 中较大者。</p>
 <p><strong>值得注意的浏览器支持问题：</strong>基于 WebKit 的浏览器支持 vmin 但还不支持 vmax 。Firefox 不支持 vmax。</p>
 <h2 id=" 特例出现 ">特例出现</h2>
 <h3 id=" 百分比 ">百分比</h3>
-<figure class="highlight css"><figcaption><span>CSS </span></figcaption><table><tr><td class="gutter"><pre>1
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="class">.wrap</span> <span class="rules">{
   <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>; 
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
-
 
 <p>长度设成百分比是基于父元素的同一属性的长度。比如，如果一个元素宽度 450px，宽度设成 50% 的子元素将是 225px 宽 <sup>[1]</sup>。</p>
 <p><strong>备注：</strong>严格来讲百分比不算一个长度单位，但我把它加进来了，因为比较相关。</p>

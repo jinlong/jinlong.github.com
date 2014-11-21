@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2014-10-25T03:22:06.733Z</updated>
+  <updated>2014-11-21T08:02:25.507Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -2717,7 +2717,7 @@ module.init();
     <link href="http://jinlong.github.io/2013/10/17/7-tips-for-a-node-dot-js-padawan/"/>
     <id>http://jinlong.github.io/2013/10/17/7-tips-for-a-node-dot-js-padawan/</id>
     <published>2013-10-17T09:38:00.000Z</published>
-    <updated>2014-10-25T02:21:32.000Z</updated>
+    <updated>2014-11-21T07:17:04.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="https://medium.com/tech-talk/e7c0b0e5ce3c" target="_blank">7 tips for a Node.js padawan</a><br>感谢 <a href="http://diwu.me/about/index.html" target="_blank">Di Wu</a> 同学，参考了他的译文《<a href="http://diwu.me/2013/09/24/7-tips-for-a-node-dot-js-padawan/" target="_blank">7 Tips for a Node.js Padawan</a>》，某些不妥的地方做了些许修改。</p>
 </blockquote>
@@ -2725,34 +2725,26 @@ module.init();
 <p>Node.js 开发相当有趣，相当令人满足。它有 3 万 5 千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。</p>
 <p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
 <h2 id=" 技巧 _1_：开发环境使用 _nodemon，生产环境使用 _pm2">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</h2>
-<p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行</p>
-<figure class="highlight node"><figcaption><span>[file].js``` 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 ```control + C``` 。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre> 
-幸运的是我发现了一个非常棒的工具 [<span class="link_label">Nodemon</span>](<span class="link_url">https://github.com/remy/nodemon</span>) 。运行以下命令安装它：
+<p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
+<p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon" target="_blank">Nodemon</a> 。运行以下命令安装它：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>npm <span class="keyword">install</span> -g nodemon
 </pre></td></tr></table></figure>
 
-<p>npm install -g nodemon</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre> 
-Nodemon 了不起呀，一旦全局安装了它，你可以通过 <span class="code">```</span>nodemon [file].js<span class="code">```</span> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。
- 
-生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？
 
-[<span class="link_label">PM2</span>](<span class="link_url">https://github.com/Unitech/pm2</span>) 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。
- 
-当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。
+<p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
+<p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
+<p><a href="https://github.com/Unitech/pm2" target="_blank">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
+<p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>pm2 <span class="operator"><span class="keyword">start</span> app.js -i <span class="aggregate">max</span></span>
 </pre></td></tr></table></figure>
 
-<p>pm2 start app.js -i max</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
+
+<p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br><a id="more"></a></p>
+<h2 id=" 技巧 _2_：Async_ 或者 _Q">技巧 2 ：Async 或者 Q</h2>
+<p>越早写 node.js 应用，越会尽早领略回调地狱之痛。如果你没见过，这有一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -2775,38 +2767,22 @@ Nodemon 了不起呀，一旦全局安装了它，你可以通过 <span class="c
 21
 22
 23
-24
-25
-26
-27
-28
-29
-30
-31
-</pre></td><td class="code"><pre> 
-**-i** 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 **max** 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！
-&lt;!<span class="comment">--more--&gt;</span>
-## 技巧 <span class="number">2</span> ：Async 或者 Q
-
-越早写 node.js 应用，越会尽早领略回调地狱之痛。如果你没见过，这有一个例子：
-
-```js
-<span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">(name, password, cb)</span></span>{
-  checkIfNameExists(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span></span>{
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">(name, password, cb)</span>{</span>
+  checkIfNameExists(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span>{</span>
    <span class="keyword">if</span>(err){
-    <span class="keyword">return</span> cb(“<span class="built_in">error</span>”);
+    <span class="keyword">return</span> cb(“error”);
    }
-   checkIfPasswordGood(password, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span></span>{
+   checkIfPasswordGood(password, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span>{</span>
     <span class="keyword">if</span>(err){
-     <span class="keyword">return</span> cb(“<span class="built_in">error</span>”);
+     <span class="keyword">return</span> cb(“error”);
     }
  
-    createAccount(name,password, <span class="function"><span class="keyword">function</span><span class="params">(err,result)</span></span>{
+    createAccount(name,password, <span class="function"><span class="keyword">function</span><span class="params">(err,result)</span>{</span>
      <span class="keyword">if</span>(err){
-      <span class="keyword">return</span> cb(“<span class="built_in">error</span>”);
+      <span class="keyword">return</span> cb(“error”);
      }
-     createBlog(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span></span>{
-      sendEmail(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span></span>{
+     createBlog(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span>{</span>
+      sendEmail(name, <span class="function"><span class="keyword">function</span><span class="params">(err, result)</span>{</span>
        callback(result);
       });
      });
@@ -2817,8 +2793,11 @@ Nodemon 了不起呀，一旦全局安装了它，你可以通过 <span class="c
 </pre></td></tr></table></figure>
 
 <p>不怎么美的神奇代码的确存在，但你如何避免呢？</p>
-<p>一种简单的方式是用</p>
-<figure class="highlight events```"><figcaption><span>，我个人不建议这么做，它违背了一个函数的观点，可以用 ```events``` 调用只有一个用途的私有方法。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>一种简单的方式是用 <code>events</code> ，我个人不建议这么做，它违背了一个函数的观点，可以用 <code>events</code> 调用只有一个用途的私有方法。</p>
+<p>所以怎么做呢？有两个相互竞争的库：<code>async.js</code> 和 <code>Q</code> ，它们均可以避免回调地狱出现。</p>
+<p><a href="https://github.com/caolan/async" target="_blank">Async.js</a> 或者 “async”可以轻松执行连续或者平行的函数，不需要一层一层的嵌套。</p>
+<p>下面是 Async 支持的模式，readme 有记录。想了解 async 支持的所有模式，看看它们的代码仓库。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -2850,81 +2829,56 @@ Nodemon 了不起呀，一旦全局安装了它，你可以通过 <span class="c
 30
 31
 32
-33
-34
-35
-36
-37
-38
-39
-40
-</pre></td><td class="code"><pre> 
-所以怎么做呢？有两个相互竞争的库：`<span class="javascript"></span>``<span class="javascript">async.js</span>``<span class="javascript"></span>` 和 `<span class="javascript"></span>``<span class="javascript">Q</span>``<span class="javascript"></span>` ，它们均可以避免回调地狱出现。
- 
-[Async.js](<span class="attribute">https</span>:<span class="regexp">//gi</span>thub.com/caolan/async) 或者 “async”可以轻松执行连续或者平行的函数，不需要一层一层的嵌套。
- 
-下面是 Async 支持的模式，readme 有记录。想了解 async 支持的所有模式，看看它们的代码仓库。
-
-`<span class="javascript"></span>``<span class="javascript">js
-async.map([‘file1<span class="string">',’file2'</span>,’file3<span class="string">'], fs.stat, function(err, results){
+</pre></td><td class="code"><pre>async.map([‘file1',’file2',’file3'], fs.stat, function(err, results){
   // results is now an array of stats for each file
 });
  
-async.filter([‘file1'</span>,’file2<span class="string">',’file3'</span>], fs.exists, <span class="function"><span class="keyword">function</span><span class="params">(results)</span>{</span>
-<span class="comment">// results now equals an array of the existing files</span>
+async.filter([‘file1',’file2',’file3'], fs.exists, function(results){
+// results now equals an array of the existing files
 });
  
 async.parallel([
-  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span> … },
-  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span> … }
+  function(){ … },
+  function(){ … }
   ], callback);
  
 async.series([
-  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span> … },
-  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span> … }
+  function(){ … },
+  function(){ … }
   ]);
  
 async.waterfall([
-  <span class="function"><span class="keyword">function</span><span class="params">(callback)</span>{</span>
-   callback(<span class="literal">null</span>, ‘one’, ‘two’);
+  function(callback){
+   callback(null, ‘one’, ‘two’);
   },
-  <span class="function"><span class="keyword">function</span><span class="params">(arg1, arg2, callback)</span>{</span>
-   callback(<span class="literal">null</span>, ‘three’);
+  function(arg1, arg2, callback){
+   callback(null, ‘three’);
   },
-  <span class="function"><span class="keyword">function</span><span class="params">(arg1, callback)</span>{</span>
-<span class="comment">// arg1 now equals ‘three’</span>
-callback(<span class="literal">null</span>, ‘done’);
+  function(arg1, callback){
+// arg1 now equals ‘three’
+callback(null, ‘done’);
 }
-], <span class="function"><span class="keyword">function</span> <span class="params">(err, result)</span> {</span>
-<span class="comment">// result now equals ‘done’</span>
-});</span>
-</pre></td></tr></table></figure>
-
-<p>如果我们用 async 的</p>
-<figure class="highlight waterfall```"><figcaption><span>来修改之前的例子，代码将更加易读，再也不会涉及死亡金字塔了。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre> 
-另一个很好的库是 [<span class="link_label">Q</span>](<span class="link_url">https://github.com/kriskowal/q</span>) ，这个库用到了 promises 的概念。Promise 是一个含有‘promise’方法的返回对象，他提供了一个最终返回值，非常优雅的将 javascripts 的异步特性和 node.js 紧密联系起来。
- 
-从 Q 的代码仓库页拿来的例子。
-
-<span class="code">```</span>js
-promiseMeSomething()
-.then(function (value) {
-}, function (reason) {
+], function (err, result) {
+// result now equals ‘done’
 });
 </pre></td></tr></table></figure>
 
-<p>promise me 函数立刻返回一个对象，调用</p>
-<figure class="highlight then```"><figcaption><span>将返回传入 value 值的函数。它也带一个回调函数，处理未能返回值的情况。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>如果我们用 async 的 <code>waterfall</code> 来修改之前的例子，代码将更加易读，再也不会涉及死亡金字塔了。</p>
+<p>另一个很好的库是 <a href="https://github.com/kriskowal/q" target="_blank">Q</a> ，这个库用到了 promises 的概念。Promise 是一个含有‘promise’方法的返回对象，他提供了一个最终返回值，非常优雅的将 javascripts 的异步特性和 node.js 紧密联系起来。</p>
+<p>从 Q 的代码仓库页拿来的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>promiseMeSomething()
+.then(<span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+}, <span class="function"><span class="keyword">function</span> <span class="params">(reason)</span> {</span>
+});
+</pre></td></tr></table></figure>
+
+<p>promise me 函数立刻返回一个对象，调用 <code>then</code> 将返回传入 value 值的函数。它也带一个回调函数，处理未能返回值的情况。</p>
+<p>用非常整洁的方式避免了回调地狱。如果重写原来的例子，当 <code>then</code> 执行的时候才调用每个函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -2935,22 +2889,14 @@ promiseMeSomething()
 9
 10
 11
-12
-13
-14
-15
-</pre></td><td class="code"><pre> 
-用非常整洁的方式避免了回调地狱。如果重写原来的例子，当 ```<span class="keyword">then</span>``` 执行的时候才调用每个函数。
-
-```js
-<span class="transposed_variable">Q.</span>fcall(checkIfNameExists)
-.<span class="keyword">then</span>(checkIfPasswordIsGood)
-.<span class="keyword">then</span>(createAccount)
-.<span class="keyword">then</span>(createBlog)
-.<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span> <span class="params">(result)</span> {</span>
+</pre></td><td class="code"><pre>Q.fcall(checkIfNameExists)
+.then(checkIfPasswordIsGood)
+.then(createAccount)
+.then(createBlog)
+.then(<span class="function"><span class="keyword">function</span> <span class="params">(result)</span> {</span>
 <span class="comment">// Do something with the result</span>
 })
-.<span class="keyword">catch</span>(<span class="function"><span class="keyword">function</span> <span class="params">(error)</span> {</span>
+.catch(<span class="function"><span class="keyword">function</span> <span class="params">(error)</span> {</span>
 <span class="comment">// Handle any error from all above steps</span>
 })
 .done();
@@ -2962,110 +2908,45 @@ promiseMeSomething()
 <p>“我个人喜好？一直是 Q！”</p>
 </blockquote>
 <h2 id=" 技巧 _3_：轻松调试 _Node-js_ 应用 ">技巧 3 ：轻松调试 Node.js 应用</h2>
-<p>如果你从一个 IDE 重度集成的语言比如 java 或者 C# 转来调试 Node.js，你一定会感到很困扰。大多数新的 node 开发者采用 “flow”调试模式，你最好的帮手是</p>
-<figure class="highlight console.log```"><figcaption><span>。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-</pre></td><td class="code"><pre> 
-但是肯定有更便利的调试方式，Node.js 内置了一个调试器你可以叫它 node debug，不过我更喜欢的 <span class="code">```</span>node-inspector<span class="code">```</span> 。
- 
-它们的 github 仓库提到“Node Inspector 是使用了 Blink 开发工具的 node.js 调试工具界面（先前的 WebKit Web Inspector）。”
- 
-简而言之，无论你选择哪个编辑器和 chrome web tools ，node-inspector 都可以调试你的应用。多爽啊。
- 
-Node Inspector 可以做一些真正酷的东西，比如实时代码修改，单步调试，作用域注入和一堆很酷的功能。
- 
-它涉及到一些设置，可以按照 [<span class="link_label">这里</span>](<span class="link_url">https://github.com/node-inspector/node-inspector</span>) 的说明做。
-
-<span class="header">## 技巧 4 ：Nodefly</span>
-
-一旦你的应用正常运行，你可能会问自己，如何监控它的性能，如何通过分析确保它以最佳速度运行呢。最简单的回答是使用非常棒的 Nodefly 服务。
- 
-通过一行简单的代码，Nodefly 开始监控应用程序的内存泄露， 测量 redis 用了多久，mongo 查询和一堆其他很酷的东西。
- 
-[<span class="link_label">http://www.nodefly.com/</span>](<span class="link_url">http://www.nodefly.com/</span>)
-
-<span class="header">## 技巧 5 ：用 NPM 管理模块</span>
-
-node 最寻常的事情之一是通过 NPM 安装程序包。Node 有个神奇的包管理器，它会安装 package.json 清单文件里指定的模块。可是初学者都会遇到一件事情，package.json 文件中所有使用的模块如何保持最新。
- 
-总是打开 package.json 更新已安装模块的依赖属性似乎很痛苦，很多人不知道 npm 可以帮你做这些！
- 
-简单运行 npm install — save module_name ，npm 将自动更新带有正确模块和版本号的 package.json
+<p>如果你从一个 IDE 重度集成的语言比如 java 或者 C# 转来调试 Node.js，你一定会感到很困扰。大多数新的 node 开发者采用 “flow”调试模式，你最好的帮手是 <code>console.log</code> 。</p>
+<p>但是肯定有更便利的调试方式，Node.js 内置了一个调试器你可以叫它 node debug，不过我更喜欢的 <code>node-inspector</code> 。</p>
+<p>它们的 github 仓库提到“Node Inspector 是使用了 Blink 开发工具的 node.js 调试工具界面（先前的 WebKit Web Inspector）。”</p>
+<p>简而言之，无论你选择哪个编辑器和 chrome web tools ，node-inspector 都可以调试你的应用。多爽啊。</p>
+<p>Node Inspector 可以做一些真正酷的东西，比如实时代码修改，单步调试，作用域注入和一堆很酷的功能。</p>
+<p>它涉及到一些设置，可以按照<a href="https://github.com/node-inspector/node-inspector" target="_blank">这里</a> 的说明做。</p>
+<h2 id=" 技巧 _4_：Nodefly">技巧 4 ：Nodefly</h2>
+<p>一旦你的应用正常运行，你可能会问自己，如何监控它的性能，如何通过分析确保它以最佳速度运行呢。最简单的回答是使用非常棒的 Nodefly 服务。</p>
+<p>通过一行简单的代码，Nodefly 开始监控应用程序的内存泄露， 测量 redis 用了多久，mongo 查询和一堆其他很酷的东西。</p>
+<p><a href="http://www.nodefly.com/" target="_blank">http://www.nodefly.com/</a></p>
+<h2 id=" 技巧 _5_：用 _NPM_ 管理模块 ">技巧 5 ：用 NPM 管理模块</h2>
+<p>node 最寻常的事情之一是通过 NPM 安装程序包。Node 有个神奇的包管理器，它会安装 package.json 清单文件里指定的模块。可是初学者都会遇到一件事情，package.json 文件中所有使用的模块如何保持最新。</p>
+<p>总是打开 package.json 更新已安装模块的依赖属性似乎很痛苦，很多人不知道 npm 可以帮你做这些！</p>
+<p>简单运行 npm install — save module_name ，npm 将自动更新带有正确模块和版本号的 package.json </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>npm <span class="keyword">install</span> —save module_name
 </pre></td></tr></table></figure>
 
-<p>npm install —save module_name</p>
+<h2 id=" 技巧 _6_：不要提交 _node_modules_ 文件夹 ">技巧 6 ：不要提交 node_modules 文件夹</h2>
+<p>我们一直谈论模块和 npm ，还有人不知道不该提交 <code>node_modules</code> 文件夹，最大的原因是没有必要提交。当别人检出你的代码，他们可以用 npm 安装所需模块。</p>
+<p>你也许会说提交 node_modules 文件夹无伤大雅，但是如果检出你代码的人用跟你不同的操作系统呢，通过 npm 安装的模块是编译过的？你的应用会崩溃，检出你代码的人完全不知道为什么！</p>
+<p>举例来说，当你安装过 bcrypt 和 sentimental 模块后，它们在主机上是编译过的，因为它们的原始组件是用 C 写的。</p>
+<p>最优的作法是把 node_modules 文件夹加到 .gitignore 里，避免提交它。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre>
-<span class="comment">## 技巧 6 ：不要提交 node_modules 文件夹</span>
-
-我们一直谈论模块和 <span class="built_in">npm</span> ，还有人不知道不该提交 `<span class="javascript"></span>``<span class="javascript">node_modules</span>``<span class="javascript"></span>` 文件夹，最大的原因是没有必要提交。当别人检出你的代码，他们可以用 <span class="built_in">npm</span> 安装所需模块。
- 
-你也许会说提交 node_modules 文件夹无伤大雅，但是如果检出你代码的人用跟你不同的操作系统呢，通过 <span class="built_in">npm</span> 安装的模块是编译过的？你的应用会崩溃，检出你代码的人完全不知道为什么！
- 
-举例来说，当你安装过 bcrypt 和 sentimental 模块后，它们在主机上是编译过的，因为它们的原始组件是用 C 写的。
- 
-最优的作法是把 node_modules 文件夹加到 .gitignore 里，避免提交它。
+</pre></td><td class="code"><pre><span class="comment">// .gitignore node_modules/*</span>
 </pre></td></tr></table></figure>
 
-<p>// .gitignore node_modules/*</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<h2 id=" 技巧 _7_：不要忘记 _return">技巧 7 ：不要忘记 return</h2>
+<p>刚入门的 node 开发者通常容易犯个错误，callback 回调函数后面忘加 return 。虽然有时候没什么影响，多数情况你会遇到奇怪的问题，callback 回调执行了两次。</p>
+<p>看个简单的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>
-## 技巧 <span class="number">7</span> ：不要忘记 <span class="keyword">return</span>
-
-刚入门的 node 开发者通常容易犯个错误，callback 回调函数后面忘加 <span class="keyword">return</span> 。虽然有时候没什么影响，多数情况你会遇到奇怪的问题，callback 回调执行了两次。
- 
-看个简单的例子：
-
-```js
-<span class="function"><span class="keyword">function</span> <span class="title">do</span><span class="params">(err,result, callback)</span></span>{
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">do</span><span class="params">(err,result, callback)</span>{</span>
 <span class="keyword">if</span>(err){
-callback(“<span class="built_in">error</span>”);
+callback(“error”);
 }
 callback(“good”);
 }
@@ -3078,7 +2959,30 @@ callback(“good”);
 <p>Node.js 是个很赞的开发平台，如果你谨记这 7 条技巧，开发，调试和部署到生产环境时，可以节省不少时间，防止头发尽早变灰白。</p>
 <p>需要 Node.js 咨询？联系 <a href="http://www.dynamatik.com/" target="_blank">Dynamatik</a> 吧。</p>
 ]]></content>
-    
+    <summary type="html"><![CDATA[<blockquote>
+<p>原文：<a href="https://medium.com/tech-talk/e7c0b0e5ce3c" target="_blank">7 tips for a Node.js padawan</a><br>感谢 <a href="http://diwu.me/about/index.html" target="_blank">Di Wu</a> 同学，参考了他的译文《<a href="http://diwu.me/2013/09/24/7-tips-for-a-node-dot-js-padawan/" target="_blank">7 Tips for a Node.js Padawan</a>》，某些不妥的地方做了些许修改。</p>
+</blockquote>
+<h4 id=" 或许我刚入门时就想了解这些知识。">或许我刚入门时就想了解这些知识。</h4>
+<p>Node.js 开发相当有趣，相当令人满足。它有 3 万 5 千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。</p>
+<p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
+<h2 id=" 技巧 _1_：开发环境使用 _nodemon，生产环境使用 _pm2">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</h2>
+<p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
+<p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon" target="_blank">Nodemon</a> 。运行以下命令安装它：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>npm <span class="keyword">install</span> -g nodemon
+</pre></td></tr></table></figure>
+
+
+<p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
+<p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
+<p><a href="https://github.com/Unitech/pm2" target="_blank">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
+<p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>pm2 <span class="operator"><span class="keyword">start</span> app.js -i <span class="aggregate">max</span></span>
+</pre></td></tr></table></figure>
+
+
+<p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br>]]></summary>
     
       <category term="Node.js" scheme="http://jinlong.github.io/tags/Node.js/"/>
     
@@ -3093,7 +2997,7 @@ callback(“good”);
     <link href="http://jinlong.github.io/2013/10/02/client-side-full-text-search-in-css/"/>
     <id>http://jinlong.github.io/2013/10/02/client-side-full-text-search-in-css/</id>
     <published>2013-10-02T09:04:00.000Z</published>
-    <updated>2014-10-25T02:21:52.000Z</updated>
+    <updated>2014-11-21T07:18:47.000Z</updated>
     <content type="html"><![CDATA[<p>前些天看到一篇文章《<a href="http://redotheweb.com/2013/05/15/client-side-full-text-search-in-css.html" target="_blank">Client-side full-text search in CSS</a>》，个人感觉思路比较巧，跟大家分享一下。</p>
 <p>总体思路：</p>
 <p>使用 <strong>data-</strong> 属性用于索引，带 <strong>CSS3 选择器</strong>的动态样式表用于检索，主要用 CSS 简单实现了客户端的全文搜索。</p>
@@ -3146,8 +3050,8 @@ callback(“good”);
 </pre></td></tr></table></figure>
 
 <p><a href="https://gist.github.com/fzaninotto/2da116a146457aa7e78c#file-full-text-search-css-html" target="_blank">搜索代码</a></p>
-<p>搜索非常简单：它利用了两个支持较好的 CSS3 选择器（</p>
-<figure class="highlight :not()```"><figcaption><span>和 ```[attr*=]```），每当检索字符改变时重写样式表：</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>搜索非常简单：它利用了两个支持较好的 CSS3 选择器（<code>:not()</code> 和 <code>[attr*=]</code>），每当检索字符改变时重写样式表：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -3161,11 +3065,7 @@ callback(“good”);
 12
 13
 14
-15
-16
-</pre></td><td class="code"><pre>
-```html
-<span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">placeholder</span>=<span class="value">"search"</span> <span class="attribute">id</span>=<span class="value">"search"</span>&gt;</span>
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">placeholder</span>=<span class="value">"search"</span> <span class="attribute">id</span>=<span class="value">"search"</span>&gt;</span>
 <span class="tag">&lt;<span class="title">style</span> <span class="attribute">id</span>=<span class="value">"search_style"</span>&gt;</span><span class="css"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
 <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
 <span class="keyword">var</span> searchStyle = document.getElementById(<span class="string">'search_style'</span>);
@@ -3213,7 +3113,7 @@ document.getElementById(<span class="string">'search'</span>).addEventListener(<
     <link href="http://jinlong.github.io/2013/09/23/safari-ios7-html5-problems-apis-review/"/>
     <id>http://jinlong.github.io/2013/09/23/safari-ios7-html5-problems-apis-review/</id>
     <published>2013-09-23T15:32:00.000Z</published>
-    <updated>2014-10-25T02:22:33.000Z</updated>
+    <updated>2014-11-21T07:23:39.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review" target="_blank">Safari on iOS 7 and HTML5: problems, changes and new APIs</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a><br>感谢 <a href="http://weibo.com/cssmagic" target="_blank">CSS 魔法</a> 指正翻译问题</p>
 </blockquote>
@@ -3221,58 +3121,29 @@ document.getElementById(<span class="string">'search'</span>).addEventListener(<
 <h2 id=" 简而言之 ">简而言之</h2>
 <p>没有时间读这篇长文？  </p>
 <ul>
-<li><strong>UI 变化</strong>：工具栏色彩，新的全屏导航问题，新的主屏图标尺寸；iPhone 未使用<figure class="highlight <title>```；可能与新手势冲突。"><table><tr><td class="gutter"><pre>1
+<li><strong>UI 变化</strong>：工具栏色彩，新的全屏导航问题，新的主屏图标尺寸；iPhone 未使用 <code>&lt;title&gt;</code>；可能与新手势冲突。    </li>
+<li><strong>新设备</strong>：对 web 开发者而言没有任何新东西，跟 iPhone 5 相同。    </li>
+<li><strong>HTML 5 标签</strong>：视频轨道，<code>&lt;progress&gt;</code>，移除对 <code>input type=datetime</code> 的支持。    </li>
+<li><strong>HTML 5 API</strong> ：Page Visibility（页面可见性），AirPlay API，canvas 增强，移除对共享 Workers 的支持，Web Speech 综合 API， 无前缀的 Web Audio 和 Animation Timing， Mutation Observer 和其它小调整。WebSQL 使用超过 5Mb 的大问题。    </li>
+<li><strong>CSS</strong> ：Regions，Sticky 定位， FlexBox，ClipPath，无前缀的 Transitions 和 其它优化。    </li>
+<li><strong>主屏 webapps</strong> ：一些严重的问题（比如，不支持 <code>alert</code> ！）    </li>
+<li><strong>原生 webapps</strong> ：Web View 分页，原生 app 的 JavaScript 运行时，以及视频播放新功能。<br><a id="more"></a><h2 id=" 新浏览器 ">新浏览器</h2>
+</li>
+</ul>
+<p>Safari ，像其它原生应用一样，在用户界面和体验方面已经迎来大幅更新。这些变化会影响用户与网站的交互，以及 webapp 的反应。</p>
+<h3 id=" 工具栏色彩 ">工具栏色彩</h3>
+<p>Safari 的工具栏已经着色（iPhone 上的 URL 条和底部工具条），颜色基于：<br>a) 加载页面时的背景色<br>b) 当滚动页面时，工具条后面的当前主色</p>
+<p>如果你想“hack”初始颜色，与 body 背景不同，并不需要往 HTML 里面加无用的东西（比如新容器），仅需使用下面的 CSS hack:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-</pre></td><td class="code"><pre><span class="bullet">* </span><span class="strong">** 新设备 **</span>：对 web 开发者而言没有任何新东西，跟 iPhone 5 相同。    
-<span class="bullet">* </span><span class="strong">**HTML 5 标签 **</span>：视频轨道，<span class="code">```</span><span class="xml"><span class="tag">&lt;<span class="title">progress</span>&gt;</span></span><span class="code">```</span>，移除对 <span class="code">```</span>input type=datetime<span class="code">```</span> 的支持。    
-<span class="bullet">* </span><span class="strong">**HTML 5 API**</span> ：Page Visibility（页面可见性），AirPlay API，canvas 增强，移除对共享 Workers 的支持，Web Speech 综合 API， 无前缀的 Web Audio 和 Animation Timing， Mutation Observer 和其它小调整。WebSQL 使用超过 5Mb 的大问题。    
-<span class="bullet">* </span><span class="strong">**CSS**</span> ：Regions，Sticky 定位， FlexBox，ClipPath，无前缀的 Transitions 和 其它优化。    
-<span class="bullet">* </span><span class="strong">** 主屏 webapps**</span> ：一些严重的问题（比如，不支持 <span class="code">```</span>alert<span class="code">```</span> ！）    
-<span class="bullet">* </span><span class="strong">** 原生 webapps**</span> ：Web View 分页，原生 app 的 JavaScript 运行时，以及视频播放新功能。
-<span class="xml"><span class="comment">&lt;!--more--&gt;</span></span>
-<span class="header">## 新浏览器</span>
-
-Safari ，像其它原生应用一样，在用户界面和体验方面已经迎来大幅更新。这些变化会影响用户与网站的交互，以及 webapp 的反应。
-
-<span class="header">### 工具栏色彩</span>
-
-Safari 的工具栏已经着色（iPhone 上的 URL 条和底部工具条），颜色基于：   
-a) 加载页面时的背景色   
-b) 当滚动页面时，工具条后面的当前主色
-
-如果你想“hack”初始颜色，与 body 背景不同，并不需要往 HTML 里面加无用的东西（比如新容器），仅需使用下面的 CSS hack:
-
-<span class="code">```</span>css
-body {
-background-color: blue; /<span class="bullet">* 用于着色 *</span>/
-background-image: linear-gradient(to bottom, green 0%, green 100%); /<span class="bullet">* 用于 body *</span>/
-}
+</pre></td><td class="code"><pre><span class="tag">body</span> <span class="rules">{
+<span class="rule"><span class="attribute">background-color</span>:<span class="value"> blue</span></span>; <span class="comment">/* 用于着色 */</span>
+<span class="rule"><span class="attribute">background-image</span>:<span class="value"> <span class="function">linear-gradient(to bottom, green <span class="number">0</span>%, green <span class="number">100</span>%)</span></span></span>; <span class="comment">/* 用于 body */</span>
+<span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-</li>
-</ul>
 <p>我们定义了背景色和背景图像；内容将用图像（本例是渐变，也可以是 data URI 1px 图像）。以下例子，前两个用了同样的颜色（仅用背景），最后一个工具栏颜色和 body 颜色不同。<br><img src="/images/post/ios7/tint.png" /></p>
 <h3 id=" 全屏和 _HTML_5_ 应用、游戏的大问题 ">全屏和 HTML 5 应用、游戏的大问题</h3>
 <p>如今 iPhone 和 iPod touch 上的网页浏览总是全屏。当用户在垂直模式（portrait ）滚动页面时，底部工具栏将消失，URL 栏变成一个小的半透明的条出现在顶部。水平模式（landscape），用户滚动页面底部工具栏和主域名栏同时消失，变成完整的全屏模式。</p>
@@ -3280,7 +3151,56 @@ background-image: linear-gradient(to bottom, green 0%, green 100%); /<span class
 <p>下面图片显示了水平和垂直模式，滚动页面前后的 UI 变化：<br><img src="/images/post/ios7/fullscreen2.png" /></p>
 <p>问题是：  </p>
 <ul>
-<li>当工具栏出现 / 消失时，<figure class="highlight resize```"><figcaption><span>事件不会触发   </span></figcaption><table><tr><td class="gutter"><pre>1
+<li>当工具栏出现 / 消失时，<code>resize</code> 事件不会触发   </li>
+<li>我们无法探测 JavaScript 或者 media queries 的变化    </li>
+<li>老技巧 <code>window.scrollTo</code> 隐藏地址栏不再工作；因此，没有用户介入滚动页面，没有办法隐藏地址栏或工具栏了。  </li>
+<li>如果没有使用原生的滚动，会遇到问题（细节见下面）。   </li>
+<li>9 月 19 日更新: canvas 底部无法交互（细节如下）</li>
+</ul>
+<p>如果你使用“非原生”的滚动布局，比如 iframe，<code>overflow:scroll</code> ，或者基于 JavaScript 的滚动组件，工具栏永远不会隐藏。更大的问题是，用户一旦进入全屏模式，将无法返回正常模式。比如，以水平模式看 Twitter 网站（使用 <code>overflow:scroll</code>），滚动区域少于屏幕的 50% 时，工具栏再也不会消失。</p>
+<p><img src="/images/post/ios7/twitter-300x171.png" /></p>
+<p>说实话，如果你从垂直模式切换到水平模式，有时会变成全屏无法滚动，但是你无法避免。你需要测试它们找到解决办法。</p>
+<p>滚动出现工具栏的问题同样出现在 HTML5 游戏。Beta 1 期间, Apple 论坛就有许多人反馈这个问题，比如：</p>
+<ul>
+<li><strong>Richard Davey</strong>：对我们而言这的确是个问题，我们 BBC 网站上的所有游戏显示都出了问题（试下上面的<a href="http://www.bbc.co.uk/cbeebies/" target="_blank">所有例子</a>）。移除了全屏按钮，废弃了’hack’，我们无法让游戏全屏。游戏挤在 iPhone 浏览器中间的一个小窗口。(…) 水平模式打开页面，仅有 2/3 的屏幕可用，控制区域占用了 1/3 的屏幕。(…) </li>
+<li><strong>TheFlashGuy</strong>：在水平模式，我们需要控制浏览器工具栏的显示 / 隐藏。用户点击屏幕顶部或底部，太容易进入这个模式了，此模式破坏了许多网站和 web app，因为它们主要的 ui 导航元素习惯放在内容区域的顶部或底部。</li>
+</ul>
+<blockquote>
+<p>“你的网站无法获得真正的全屏体验。这点反而成了 iOS 6 喜人的一面了，失去这点是主要的倒退。Richard Davey”</p>
+</blockquote>
+<p><img src="/images/post/ios7/catchme.png" /></p>
+<h2 id=" 底部工具栏和交互元素（9 月 19 日 _ 更新 _）">底部工具栏和交互元素（9 月 19 日 更新 ）</h2>
+<p>一旦进入全屏模式，页面底部就不可交互。此问题影响到全屏模式（滚动以后）视口底部的任何工具栏，链接或者表单项。比如，底部固定的工具栏。</p>
+<p>当你点击视口的这部分，仅仅触发了全屏驳回动作。因此，Safari 工具栏出现，需要再次点击交互项触发动作，因此两次点击才触发一个按钮。可以在<a href="http://view.jquerymobile.com/master/demos/widgets/fixed-toolbars/footer-persist-a.php" target="_blank">这</a> 测试，滚动然后点击底部工具栏。</p>
+<p>比如，你想点击相册下一张图片，仅仅打开了 Safari 工具栏，你需要再次点击相册执行相应操作。<br><img src="/images/post/ios7/bottom-toolbar.png" /></p>
+<h3 id=" 标题 ">标题</h3>
+<p>下一个巨大的变化是 iPhone 的 Safari UI 的 title 标题区域。iPhone 的页面标题被当前的域名取代（见下图），页面标题只在浏览选项卡时可用。<br><img src="/images/post/ios7/page-title.png" /></p>
+<blockquote>
+<p>“在 iPhone iOS 7 上，当用户浏览网页时，页面的 <code>&lt;title&gt;</code> 将被忽略。”</p>
+</blockquote>
+<p>iPad 没有全屏模式；工具栏和标题栏总是可见。</p>
+<h3 id=" 添加到主页按钮 ">添加到主页按钮</h3>
+<p><img src="/images/post/ios7/share.png" /></p>
+<p>整个 UI 已经改变，包括新图标取代<strong>分享图标</strong>，因此每个网站都推荐用户添加到书签，或者添加到主屏，它们需要更新图标。</p>
+<h3 id=" 手势 ">手势</h3>
+<p>操作系统和 Safari 如今提供新的手势，如果你自己检测手势的话，新手势可能影响你的网站。   </p>
+<p>A) <strong>控制中心</strong>：当你从屏幕底部向上滑时出现。这一版，由于全屏，屏幕底部可能是网站的一部分，而不是 Safari 工具栏。因此，<strong>建议用户从 canvas 的底部向上滑时，需要多加小心</strong>。<br>B) <strong>历史手势</strong>：第二个可能有问题的手势是从边界左滑，右滑；Safari 将触发浏览历史的后退和前进动作，像 Windows 8 模式的 IE。如果你引导用户左滑或右滑，并且边缘没有一点边距的话，历史手势可能与网站手势发生冲突（不过说实话，Chrome 存在同样的问题）。</p>
+<p>在单页 webapp （Safari 内）中，当使用 History API 或者 hash 技术管理应用状态时，此问题相当严重。当用户使用后退手势时，他将看到同一应用的两个图像，可是用户在同一个应用中。当你使用 side-by-side （并排）滚动手势时，比如 Yahoo! 主页，如果用户从边界触发手势（它甚至触发了 touch 事件），可能有使用问题 ：</p>
+<p><img src="/images/post/ios7/gestures.png" /></p>
+<p>当用户手势返回时，手势和回退动画（向右滑）也会跟一些 UI 框架发送冲突，比如 jQuery Mobile 或者 Sencha Touch，两种动画都会渲染（浏览器动画，然后是框架动画）。此外，当前一页在左侧并滚动到特定位置，滑动动画的快照是正常的，但是页面从顶部加载，并未保持原来的滚动位置。</p>
+<p>没有办法阻止这些手势，因为它们是由 OS （操作系统）或者浏览器自身管理的。</p>
+<p>非常希望，历史手势在主屏 webapp 或 UIWebViews （比如 PhoneGap 应用）上是禁用的。</p>
+<h3 id=" 图标尺寸 ">图标尺寸</h3>
+<p>在 7.0 中，新的系统图标比前一版本大 5% ，比如在 Retina iPhone 设备用 120x120 代替先前的 114x114 。如今，系统图标也变成扁平化，不再需要闪亮的效果，因此我们可能想更新图标匹配新设计。我们可以用同样的带新尺寸的 <strong>apple-touch-icon</strong> link 。</p>
+<p><strong>apple-touch-icon</strong> precomposed 版仍旧支持，只不过图标没有闪亮的效果了。如果我们定义两种，precomposed 版优先。</p>
+<p>iOS 7 可用的图标尺寸是：   </p>
+<ul>
+<li>iPhone / iPod Touch 视网膜屏: <strong>120x120</strong>    </li>
+<li>iPad 非视网膜屏（iPad 2 和 iPad mini）: <strong>76x76</strong>    </li>
+<li>iPad 视网膜屏: <strong>152x152</strong></li>
+</ul>
+<p>我们需要记住所有非视网膜屏的 iPhone- 因子设备无法使用 iOS 7 。如果我们没提供新的图标尺寸，设备还会用 iOS 6 相关的图标。如果我们想覆盖所有可能的 iOS 图标，使用下面的代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -3294,157 +3214,7 @@ background-image: linear-gradient(to bottom, green 0%, green 100%); /<span class
 12
 13
 14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-</pre></td><td class="code"><pre>* 我们无法探测 JavaScript 或者 media queries 的变化    
-* 老技巧 ```window.scrollTo``` 隐藏地址栏不再工作；因此，没有用户介入滚动页面，没有办法隐藏地址栏或工具栏了。  
-* 如果没有使用原生的滚动，会遇到问题（细节见下面）。   
-* 9 月 19 日更新: canvas 底部无法交互（细节如下）
-
-如果你使用“非原生”的滚动布局，比如 iframe，```overflow:scroll``` ，或者基于 JavaScript 的滚动组件，工具栏永远不会隐藏。更大的问题是，用户一旦进入全屏模式，将无法返回正常模式。比如，以水平模式看 Twitter 网站（使用 ```overflow:scroll```），滚动区域少于屏幕的 50% 时，工具栏再也不会消失。
-
-<span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/ios7/twitter-300x171.png"</span> /&gt;</span>
-
-说实话，如果你从垂直模式切换到水平模式，有时会变成全屏无法滚动，但是你无法避免。你需要测试它们找到解决办法。
-
-滚动出现工具栏的问题同样出现在 HTML5 游戏。Beta 1 期间, Apple 论坛就有许多人反馈这个问题，比如：
-
-* **Richard Davey**：对我们而言这的确是个问题，我们 BBC 网站上的所有游戏显示都出了问题（试下上面的 [所有例子](http://www.bbc.co.uk/cbeebies/)）。移除了全屏按钮，废弃了 'hack'，我们无法让游戏全屏。游戏挤在 iPhone 浏览器中间的一个小窗口。(...) 水平模式打开页面，仅有 2/3 的屏幕可用，控制区域占用了 1/3 的屏幕。(...) 
-* **TheFlashGuy**：在水平模式，我们需要控制浏览器工具栏的显示 / 隐藏。用户点击屏幕顶部或底部，太容易进入这个模式了，此模式破坏了许多网站和 web app，因为它们主要的 ui 导航元素习惯放在内容区域的顶部或底部。
-
-&gt;" 你的网站无法获得真正的全屏体验。这点反而成了 iOS 6 喜人的一面了，失去这点是主要的倒退。Richard Davey"
-
-<span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/ios7/catchme.png"</span> /&gt;</span>
-
-## 底部工具栏和交互元素（9 月 19 日 更新 ）
-
-一旦进入全屏模式，页面底部就不可交互。此问题影响到全屏模式（滚动以后）视口底部的任何工具栏，链接或者表单项。比如，底部固定的工具栏。
-
-当你点击视口的这部分，仅仅触发了全屏驳回动作。因此，Safari 工具栏出现，需要再次点击交互项触发动作，因此两次点击才触发一个按钮。可以在 [这](http://view.jquerymobile.com/master/demos/widgets/fixed-toolbars/footer-persist-a.php) 测试，滚动然后点击底部工具栏。
-
-比如，你想点击相册下一张图片，仅仅打开了 Safari 工具栏，你需要再次点击相册执行相应操作。
-<span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/ios7/bottom-toolbar.png"</span> /&gt;</span>
-
-### 标题
-
-下一个巨大的变化是 iPhone 的 Safari UI 的 title 标题区域。iPhone 的页面标题被当前的域名取代（见下图），页面标题只在浏览选项卡时可用。
-<span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/ios7/page-title.png"</span> /&gt;</span>
-
-&gt;" 在 iPhone iOS 7 上，当用户浏览网页时，页面的 ```<span class="tag">&lt;<span class="title">title</span>&gt;</span>``` 将被忽略。"
-
-iPad 没有全屏模式；工具栏和标题栏总是可见。
-
-### 添加到主页按钮
-
-<span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/ios7/share.png"</span> /&gt;</span>
-
-整个 UI 已经改变，包括新图标取代 ** 分享图标 **，因此每个网站都推荐用户添加到书签，或者添加到主屏，它们需要更新图标。
-
-### 手势
-
-操作系统和 Safari 如今提供新的手势，如果你自己检测手势的话，新手势可能影响你的网站。   
-
-A) ** 控制中心 **：当你从屏幕底部向上滑时出现。这一版，由于全屏，屏幕底部可能是网站的一部分，而不是 Safari 工具栏。因此，** 建议用户从 canvas 的底部向上滑时，需要多加小心 **。   
-B) ** 历史手势 **：第二个可能有问题的手势是从边界左滑，右滑；Safari 将触发浏览历史的后退和前进动作，像 Windows 8 模式的 IE。如果你引导用户左滑或右滑，并且边缘没有一点边距的话，历史手势可能与网站手势发生冲突（不过说实话，Chrome 存在同样的问题）。
-
-在单页 webapp （Safari 内）中，当使用 History API 或者 hash 技术管理应用状态时，此问题相当严重。当用户使用后退手势时，他将看到同一应用的两个图像，可是用户在同一个应用中。当你使用 side-by-side （并排）滚动手势时，比如 Yahoo! 主页，如果用户从边界触发手势（它甚至触发了 touch 事件），可能有使用问题 ：
-
-<span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/ios7/gestures.png"</span> /&gt;</span>
-
-当用户手势返回时，手势和回退动画（向右滑）也会跟一些 UI 框架发送冲突，比如 jQuery Mobile 或者 Sencha Touch，两种动画都会渲染（浏览器动画，然后是框架动画）。此外，当前一页在左侧并滚动到特定位置，滑动动画的快照是正常的，但是页面从顶部加载，并未保持原来的滚动位置。
-
-没有办法阻止这些手势，因为它们是由 OS （操作系统）或者浏览器自身管理的。
-
-非常希望，历史手势在主屏 webapp 或 UIWebViews （比如 PhoneGap 应用）上是禁用的。
-
-### 图标尺寸
-
-在 7.0 中，新的系统图标比前一版本大 5% ，比如在 Retina iPhone 设备用 120x120 代替先前的 114x114 。如今，系统图标也变成扁平化，不再需要闪亮的效果，因此我们可能想更新图标匹配新设计。我们可以用同样的带新尺寸的 **apple-touch-icon** link 。
-
-**apple-touch-icon** precomposed 版仍旧支持，只不过图标没有闪亮的效果了。如果我们定义两种，precomposed 版优先。
-
-iOS 7 可用的图标尺寸是：   
-* iPhone / iPod Touch 视网膜屏: **120x120**    
-* iPad 非视网膜屏（iPad 2 和 iPad mini）: **76x76**    
-* iPad 视网膜屏: **152x152**
-
-我们需要记住所有非视网膜屏的 iPhone- 因子设备无法使用 iOS 7 。如果我们没提供新的图标尺寸，设备还会用 iOS 6 相关的图标。如果我们想覆盖所有可能的 iOS 图标，使用下面的代码：
-
-```html
-<span class="comment">&lt;!-- 非视网膜 iPhone 低于 iOS 7 --&gt;</span>
+</pre></td><td class="code"><pre><span class="comment">&lt;!-- 非视网膜 iPhone 低于 iOS 7 --&gt;</span>
 <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon57.png"</span> <span class="attribute">sizes</span>=<span class="value">"57x57"</span>&gt;</span>
 <span class="comment">&lt;!-- 非视网膜 iPad 低于 iOS 7 --&gt;</span>
 <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon72.png"</span> <span class="attribute">sizes</span>=<span class="value">"72x72"</span>&gt;</span>
@@ -3460,8 +3230,6 @@ iOS 7 可用的图标尺寸是：
 <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon152.png"</span> <span class="attribute">sizes</span>=<span class="value">"152x152"</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-</li>
-</ul>
 <h3 id=" 书签和收藏夹 ">书签和收藏夹</h3>
 <p>书签也用了新图标（看下面左侧的图），貌似无法修改这些图标和文字。</p>
 <p>当你点击地址栏时出现收藏夹（下面右侧图），看起来像是用了 <strong>apple-touch-icon</strong> link ，但是没有遵循任何尺寸原则，并且我发现了怪异现象，比如一些带正确的 link 元素的网站，收藏夹却不显示图标。XXXX</p>
@@ -3473,103 +3241,54 @@ iOS 7 可用的图标尺寸是：
 <h3 id=" 视频轨道 ">视频轨道</h3>
 <p>HTML5 video 元素现在支持 <strong>track</strong> 子元素，用于 subtitles （字幕）或者关闭 captions （解说字幕）。支持多语言，可以通过视频播放器的一个选择器选择它。用户可以改变语言，或者在轨道选择器禁用 captions （解说字幕）。</p>
 <p><img src="/images/post/ios7/cc1.png" /></p>
-<p>对于所有可能的轨道类型（</p>
-<figure class="highlight kind```"><figcaption><span>属性），仅支持 captions（解说字幕） 和 subtitles（字幕），我们必须在 ```srclang``` 属性以 [ISO 格式](http://en.wikipedia.org/wiki/ISO_639-1) （比如 English 是 en）定义语言。当用户可以听到声音但不理解语言时，字幕非常有用。当用户无法听到声音时，解说字幕很有用，它包含了当前发生情况的额外信息（比如背景音乐正在播放）。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>
-&lt;img src=<span class="string">"/images/post/ios7/cc2ch.png"</span> /&gt;
-
-定义轨道的 <span class="escape">``</span><span class="escape">`l</span>abel<span class="escape">``</span><span class="escape">` </span>属性毫无价值，因为 iOS 忽视它，如果 kind 值使用 captions 代替 subtitles ，菜单中带有可选的 CC 后缀的语言名取代了 label。
-</pre></td></tr></table></figure>
-
-<video><br><source src="myvideo.mp4"><br><track kind="captions" src="my-captions-en.vtt" srclang="en"><br><track kind="subtitles" src="my-captions-fr.vtt" srclang="fr"><br></video>
-
+<p>对于所有可能的轨道类型（<code>kind</code> 属性），仅支持 captions（解说字幕） 和 subtitles（字幕），我们必须在 <code>srclang</code> 属性以 <a href="http://en.wikipedia.org/wiki/ISO_639-1" target="_blank">ISO 格式</a> （比如 English 是 en）定义语言。当用户可以听到声音但不理解语言时，字幕非常有用。当用户无法听到声音时，解说字幕很有用，它包含了当前发生情况的额外信息（比如背景音乐正在播放）。</p>
+<p><img src="/images/post/ios7/cc2ch.png" /></p>
+<p>定义轨道的 <code>label</code> 属性毫无价值，因为 iOS 忽视它，如果 kind 值使用 captions 代替 subtitles ，菜单中带有可选的 CC 后缀的语言名取代了 label。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
-6
-</pre></td><td class="code"><pre>可以通过 JavaScript API 访问轨道，我们可以遍历所有轨道文件。这点可能仅对 iPad 有用，在 iPad 上，我们可以在 web <span class="keyword">canvas</span> 里真正嵌入一段视频，iPhone 上永远是全屏模式。
-
-<span class="keyword">track</span> 元素遵循跨域策略，默认情况，视频和轨道必须是同源。使用 JavaScript 可以探测 <span class="keyword">track</span> 是否可用，用到 webkitHasClosedCaptions ：
-
-<span class="string">``</span><span class="string">`js
-var hasCC = document.querySelector("video").webkitHasClosedCaptions;</span>
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">video</span>&gt;</span>
+<span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"myvideo.mp4"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">track</span> <span class="attribute">kind</span>=<span class="value">"captions"</span> <span class="attribute">src</span>=<span class="value">"my-captions-en.vtt"</span> <span class="attribute">srclang</span>=<span class="value">"en"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">track</span> <span class="attribute">kind</span>=<span class="value">"subtitles"</span> <span class="attribute">src</span>=<span class="value">"my-captions-fr.vtt"</span> <span class="attribute">srclang</span>=<span class="value">"fr"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">video</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>还可以通过</p>
-<figure class="highlight webkitClosedCaptionsVisible```"><figcaption><span>（布尔属性）改变每个 video 元素的 captions （解说字幕）的可见性。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>
-字幕样式
+<p>可以通过 JavaScript API 访问轨道，我们可以遍历所有轨道文件。这点可能仅对 iPad 有用，在 iPad 上，我们可以在 web canvas 里真正嵌入一段视频，iPhone 上永远是全屏模式。</p>
+<p>track 元素遵循跨域策略，默认情况，视频和轨道必须是同源。使用 JavaScript 可以探测 track 是否可用，用到 webkitHasClosedCaptions ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> hasCC = document.querySelector(<span class="string">"video"</span>).webkitHasClosedCaptions;
+</pre></td></tr></table></figure>
 
-iOS 7 支持新的 *<span class="strong">*::cue*</span>* 伪元素，我们仅可以改变 text-shadow, opacity 和 outline。所有其它属性比如颜色和字体样式不支持。
-
-<span class="code">```</span>css
-<span class="attribute">::cue { opacity:</span> 0.8 }
+<p>还可以通过 <code>webkitClosedCaptionsVisible</code> （布尔属性）改变每个 video 元素的 captions （解说字幕）的可见性。</p>
+<p>字幕样式</p>
+<p>iOS 7 支持新的 <strong>::cue</strong> 伪元素，我们仅可以改变 text-shadow, opacity 和 outline。所有其它属性比如颜色和字体样式不支持。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="pseudo">::cue</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0.8</span> </span></span></span>}
 </pre></td></tr></table></figure>
 
 <p>更多关于 <a href="http://www.html5rocks.com/en/tutorials/track/basics/" target="_blank">Track 元素和 API</a> （记住 Safari 并非支持所有 API）。</p>
 <h3 id="PROGRESS_ 和 _OUTPUT_ 元素 ">PROGRESS 和 OUTPUT 元素</h3>
-<p>已支持</p>
-<figure class="highlight <progress>```"><figcaption><span>元素，基于 max 和 value 创建进度条。如同其它浏览器，不支持模糊进度，当我们知道明确的进度值时才适用。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>
-
+<p>已支持 <code>&lt;progress&gt;</code> 元素，基于 max 和 value 创建进度条。如同其它浏览器，不支持模糊进度，当我们知道明确的进度值时才适用。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&lt;progress <span class="built_in">max</span>=<span class="string">"100"</span> <span class="built_in">value</span>=<span class="string">"40"</span>&gt;
 </pre></td></tr></table></figure>
 
-<progress max="100" value="40">
-
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="code"><pre>
-已支持 <span class="string">``</span><span class="string">`&lt;output&gt;`</span><span class="string">``</span> 元素，没感觉有什么特别 :) 。
-
-貌似支持 <span class="string">``</span><span class="string">`&lt;meter&gt;`</span><span class="string">``</span> ，所有内容会被忽略，我感觉有 bug 。
-
-<span class="comment">### 移除：datetime input type</span>
-
-追随 Google Chrome ，iOS Safari <span class="variable">**</span>不再支持 datetime 的 input 类型<span class="variable">**</span>，它将退化成 text 。这个类型将被标准废弃，标准赞成使用两个 input ， date 和 <span class="keyword">time</span> 达到同样的目的。问题是 datetime 兼容 iOS <span class="number">5.0</span> 至 iOS <span class="number">6.1</span> ；如果使用它要多加小心！
-
-week input 类型仍没支持，回退成 text 类型，渲染成一个不可交互的控件。
-
-&lt;img src=<span class="string">"/images/post/ios7/datetime.png"</span> /&gt;
-
-&gt;<span class="string">" 如果你正在使用 input type='datetime' ，你应该马上采取行动，因为它被渲染成 text 类型。"</span>
-
-<span class="comment">### 无缝 iframe</span>
-
-在 iOS <span class="number">7</span> 上，新的布尔属性 <span class="string">``</span><span class="string">`seamless`</span><span class="string">``</span> 用于创建无边界的 iframe 。iframe 将没有滚动条，默认情况，它会取到内部内容的高度，作为 DOM 中其它块级元素的使用空间。
-
-<span class="string">``</span><span class="string">`html
-&lt;iframe seamless src="mypage.html"&gt;&lt;/iframe&gt;</span>
+<p>已支持 <code>&lt;output&gt;</code> 元素，没感觉有什么特别 :) 。</p>
+<p>貌似支持 <code>&lt;meter&gt;</code> ，所有内容会被忽略，我感觉有 bug 。</p>
+<h3 id=" 移除：datetime_input_type">移除：datetime input type</h3>
+<p>追随 Google Chrome ，iOS Safari <strong>不再支持 datetime 的 input 类型</strong>，它将退化成 text 。这个类型将被标准废弃，标准赞成使用两个 input ， date 和 time 达到同样的目的。问题是 datetime 兼容 iOS 5.0 至 iOS 6.1 ；如果使用它要多加小心！</p>
+<p>week input 类型仍没支持，回退成 text 类型，渲染成一个不可交互的控件。</p>
+<p><img src="/images/post/ios7/datetime.png" /></p>
+<blockquote>
+<p>“如果你正在使用 input type=’datetime’ ，你应该马上采取行动，因为它被渲染成 text 类型。”</p>
+</blockquote>
+<h3 id=" 无缝 _iframe">无缝 iframe</h3>
+<p>在 iOS 7 上，新的布尔属性 <code>seamless</code> 用于创建无边界的 iframe 。iframe 将没有滚动条，默认情况，它会取到内部内容的高度，作为 DOM 中其它块级元素的使用空间。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">seamless</span> <span class="attribute">src</span>=<span class="value">"mypage.html"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span>
 </pre></td></tr></table></figure>
 
 <h2 id="HTML5_JavaScript_API">HTML5 JavaScript API</h2>
@@ -3586,79 +3305,31 @@ week input 类型仍没支持，回退成 text 类型，渲染成一个不可交
 <li>WebSpeech 合成 API</li>
 </ul>
 <p>iOS 7 的 Page Visibility API 带有 -webkit- 前缀，用于探测 tab 标签在前台还是后台。你可以测试<a href="http://mobilexweb.com/ts/api/page.html" target="_blank">这个 demo</a> 。XMLHttpRequest 2.0 规范完全兼容意味着我们可以把 ‘<strong>blob</strong>‘ 作为响应。Video tracks API 已经快速覆盖，意味着我们可以检索和导航所有媒体元素的所有轨道内容。</p>
-<p>CSS Regions API 作为 CSS Regions 规范的一部分，主要带前缀的</p>
-<figure class="highlight webkitGetFlowByName```"><figcaption><span>函数对每个 DOM 元素都可用。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-</pre></td><td class="code"><pre>
-Canvas 2D Drawing API，canvas context 现在有 <span class="code">```</span>globalCompositeOperation<span class="code">```</span> 属性，当绘制不同的层时，我们可以定义混合模式（比如正片叠底）。已有新的 Path 构造器，在 canvas context 绘制的路径可以保存，用于后期使用，避免直接画在画布上。
-
-<span class="header">###AirPlay API</span>
-
-AirPlay API 需要解释。AirPlay 是 Apple 的无线流媒体解决方案，可以在不同设备间传递流媒体内容，Apple TV 已经使用。Safari 已经支持 <span class="strong">**x-webkit-airplay**</span> HTML 属性，用于定义是否使用 AirPlay ，之前我们无法通过 HTML5 定制体验。
-
-API 可以通过 AirPlay 定制播放器，获取流的内容和事件。每个 video 元素都有 <span class="strong">**webkitplaybacktargetavailabilitychanged**</span> 和 <span class="strong">**webkitcurrentplaybacktargetiswirelesschanged**</span> 。让我们见识下不用下划线，驼峰或者其它方式命名事件有多可怕 :S 。当新的 AirPlay 对象（比如 Apple TV）启用，或者禁用，第一个事件触发；当重放状态改变时，第二个事件触发。
-
-&gt;" 我认为 <span class="strong">**webkitcurrentplaybacktargetiswirelesschanged**</span> 创造了记录：迄今最长的 JavaScript 事件名。"
-
-如果有个流对象可用，我们可以提供一个按钮，选择后调用视频的 <span class="strong">**webkitShowPlaybackTargetPicker**</span> 函数。
-
-仍旧没有官方的 API 文档，你可以看这视频 [<span class="link_label">'What’s New in Safari and WebKit for Web Developers'</span>](<span class="link_url">https://developer.apple.com/wwdc/videos/index.php?id=600</span>) ，WWDC 会议的视频提到了这个话题。
-
-<span class="header">### 后台执行</span>
-
-有几个后台执行的用例：   
-
-<span class="bullet">* </span>如果用户切换了 tab （标签选择屏），你的代码仍旧执行，但是图像静止了   
-<span class="bullet">* </span>如果用户切换了应用（多任务模式），你的代码仍旧执行，图像更新   
-<span class="bullet">* </span>如果 Safari 在前台，你的网站在后端标签，你的代码冻结，Safari 有最新执行的快照用于 UI 显示   
-<span class="bullet">* </span>Safari 在后台你的代码冻结
-
-<span class="header">###WebSpeech 合成 API</span>
-
-9 月 19 日更新：API 能起作用，因此是官方支持。
-
-WebSpeech API 可以让网站记录和转录音频，还可以把文字合成到声音中，使用操作系统内部声音播放。
-
-iOS Safari 仅包含合成 API（文字到语音），没有从麦克风听音频的 API 。使用 <span class="code">```</span>speechSynthesis.getVoices()<span class="code">```</span> ，你可以在一个真实设备，查询所有不同语言的可用声音，它返回 36 种声音（有时刷新页面返回 0，感觉像 bug ）。在英语方面，使用 <span class="code">```</span>en-US<span class="code">```</span> 是女声，使用 <span class="code">```</span>en-GB<span class="code">```</span> 是男声。在语音识别方面我不是专家，但是感觉声音 API 不同于 Siri ，iOS 7 的 Siri 听起来更自然。
-
-让 JavaScript 通过你的网站开口说话，可以使用默认语言的快捷版，或者定义不同的属性像以下例子：
-
-<span class="code">```</span>js
-speechSynthesis.speak(new SpeechSynthesisUtterance("Hello, this is my voice on a webpage"));
+<p>CSS Regions API 作为 CSS Regions 规范的一部分，主要带前缀的 <code>webkitGetFlowByName</code> 函数对每个 DOM 元素都可用。</p>
+<p>Canvas 2D Drawing API，canvas context 现在有 <code>globalCompositeOperation</code> 属性，当绘制不同的层时，我们可以定义混合模式（比如正片叠底）。已有新的 Path 构造器，在 canvas context 绘制的路径可以保存，用于后期使用，避免直接画在画布上。</p>
+<h3 id="AirPlay_API">AirPlay API</h3>
+<p>AirPlay API 需要解释。AirPlay 是 Apple 的无线流媒体解决方案，可以在不同设备间传递流媒体内容，Apple TV 已经使用。Safari 已经支持 <strong>x-webkit-airplay</strong> HTML 属性，用于定义是否使用 AirPlay ，之前我们无法通过 HTML5 定制体验。</p>
+<p>API 可以通过 AirPlay 定制播放器，获取流的内容和事件。每个 video 元素都有 <strong>webkitplaybacktargetavailabilitychanged</strong> 和 <strong>webkitcurrentplaybacktargetiswirelesschanged</strong> 。让我们见识下不用下划线，驼峰或者其它方式命名事件有多可怕 :S 。当新的 AirPlay 对象（比如 Apple TV）启用，或者禁用，第一个事件触发；当重放状态改变时，第二个事件触发。</p>
+<blockquote>
+<p>“我认为 <strong>webkitcurrentplaybacktargetiswirelesschanged</strong> 创造了记录：迄今最长的 JavaScript 事件名。”</p>
+</blockquote>
+<p>如果有个流对象可用，我们可以提供一个按钮，选择后调用视频的 <strong>webkitShowPlaybackTargetPicker</strong> 函数。</p>
+<p>仍旧没有官方的 API 文档，你可以看这视频 <a href="https://developer.apple.com/wwdc/videos/index.php?id=600" target="_blank">‘What’s New in Safari and WebKit for Web Developers’</a> ，WWDC 会议的视频提到了这个话题。</p>
+<h3 id=" 后台执行 ">后台执行</h3>
+<p>有几个后台执行的用例：   </p>
+<ul>
+<li>如果用户切换了 tab （标签选择屏），你的代码仍旧执行，但是图像静止了   </li>
+<li>如果用户切换了应用（多任务模式），你的代码仍旧执行，图像更新   </li>
+<li>如果 Safari 在前台，你的网站在后端标签，你的代码冻结，Safari 有最新执行的快照用于 UI 显示   </li>
+<li>Safari 在后台你的代码冻结</li>
+</ul>
+<h3 id="WebSpeech_ 合成 _API">WebSpeech 合成 API</h3>
+<p>9 月 19 日更新：API 能起作用，因此是官方支持。</p>
+<p>WebSpeech API 可以让网站记录和转录音频，还可以把文字合成到声音中，使用操作系统内部声音播放。</p>
+<p>iOS Safari 仅包含合成 API（文字到语音），没有从麦克风听音频的 API 。使用 <code>speechSynthesis.getVoices()</code> ，你可以在一个真实设备，查询所有不同语言的可用声音，它返回 36 种声音（有时刷新页面返回 0，感觉像 bug ）。在英语方面，使用 <code>en-US</code> 是女声，使用 <code>en-GB</code> 是男声。在语音识别方面我不是专家，但是感觉声音 API 不同于 Siri ，iOS 7 的 Siri 听起来更自然。</p>
+<p>让 JavaScript 通过你的网站开口说话，可以使用默认语言的快捷版，或者定义不同的属性像以下例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>speechSynthesis.speak(<span class="keyword">new</span> SpeechSynthesisUtterance(<span class="string">"Hello, this is my voice on a webpage"</span>));
 </pre></td></tr></table></figure>
 
 
@@ -3678,36 +3349,17 @@ speech.lang = <span class="string">"en-US"</span>;
 speechSynthesis.speak(speech);
 </pre></td></tr></table></figure>
 
-<p>通过</p>
-<figure class="highlight SpeechSynthesisUtterance```"><figcaption><span>对象可以绑定一些事件，比如 start 和 end ，但是不要在事件内部用 alert ，你的 Safari 将未响应（不要问我为什么）。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="code"><pre>
-可以说出来的字符串可以是无格式的文本，标准也支持 [<span class="link_label">SSML 格式（语音合成标记语言）</span>](<span class="link_url">http://www.w3.org/TR/speech-synthesis/</span>)  的 XML 文档，iOS Safari 仅阅读 XML :) 。
-
-记住 <span class="strong">**Speech 合成 API 仅作用于用户明确的行为 **</span>，比如点击一个按钮，因此你不能在 onload 或者基于时间坐标发起语音。用 iOS 7 设备试试这个 [<span class="link_label">在线 demo</span>](<span class="link_url">http://mobilexweb.com/ts/api/speech.html</span>) 。
-
-<span class="header">### 其它变化</span>
-
-<span class="bullet">* </span>MutationObserver   
-<span class="bullet">* </span>无前缀的 Animation Timing API （也被称为 requestAnimationFrame）   
-<span class="bullet">* </span>无前缀的 <span class="strong">**transitionend**</span> 事件名    
-<span class="bullet">* </span>无前缀 URL（?）   
-<span class="bullet">* </span>无前缀 WebAudio API 及新的高级功能   
-<span class="bullet">* </span>新的 DOM 属性 <span class="code">```</span>hidden<span class="code">```</span> 和 <span class="code">```</span>visibilityState
-</pre></td></tr></table></figure>
-
+<p>通过 <code>SpeechSynthesisUtterance</code> 对象可以绑定一些事件，比如 start 和 end ，但是不要在事件内部用 alert ，你的 Safari 将未响应（不要问我为什么）。</p>
+<p>可以说出来的字符串可以是无格式的文本，标准也支持 <a href="http://www.w3.org/TR/speech-synthesis/" target="_blank">SSML 格式（语音合成标记语言）</a>  的 XML 文档，iOS Safari 仅阅读 XML :) 。</p>
+<p>记住 <strong>Speech 合成 API 仅作用于用户明确的行为</strong>，比如点击一个按钮，因此你不能在 onload 或者基于时间坐标发起语音。用 iOS 7 设备试试这个<a href="http://mobilexweb.com/ts/api/speech.html" target="_blank">在线 demo</a> 。</p>
+<h3 id=" 其它变化 ">其它变化</h3>
 <ul>
+<li>MutationObserver   </li>
+<li>无前缀的 Animation Timing API （也被称为 requestAnimationFrame）   </li>
+<li>无前缀的 <strong>transitionend</strong> 事件名    </li>
+<li>无前缀 URL（?）   </li>
+<li>无前缀 WebAudio API 及新的高级功能   </li>
+<li>新的 DOM 属性 <code>hidden</code> 和 <code>visibilityState</code></li>
 <li>支持 window.doNotTrack</li>
 </ul>
 <h3 id="WebSQL_bug">WebSQL bug</h3>
@@ -3750,111 +3402,51 @@ speechSynthesis.speak(speech);
 <p>media queries 的 <strong>resolution</strong> 属性还是没支持，有些新东西，比如可以查询 <strong>min-color-index</strong> 和 <strong>max-color-index</strong> ，虽然没什么用吧 :) </p>
 <p>还有一些次要更新，包括：</p>
 <ul>
-<li>无前缀的 CSS Transitions （和<figure class="highlight transitionend```"><figcaption><span>事件）   </span></figcaption><table><tr><td class="gutter"><pre>1
+<li>无前缀的 CSS Transitions （和 <code>transitionend</code> 事件）   </li>
+<li>CSS Clip Path 基于形状剪裁内容，包括圆形，矩形和多边形 </li>
+<li>字体的 Kerning 和 Ligatures 默认启用 </li>
+<li>Background  背景属性更兼容不同的值 </li>
+<li>box-decoration-break: slice/clone </li>
+<li>tab-size 样式 </li>
+<li>overflow-wrap: normal/hypernate/break-word </li>
+<li>支持 ch 和 vmax 单位 </li>
+<li>mask-type: alpha </li>
+<li>新的伪元素 ::cue 在 video 轨道部分已提到 </li>
+<li>-webkit-background-composite 属性（但是我试了不起作用）</li>
+</ul>
+<h2 id=" 主屏 _webapp">主屏 webapp</h2>
+<blockquote>
+<p>“如果你正在用主屏 webapp ，有个不幸的消息：此平台的此版本有太多 bug 了。”</p>
+</blockquote>
+<p>唯一的好消息是，当全屏时，貌似没有 WebSQL 存储限制了；不需要用户的许可。</p>
+<p>大问题<br>主屏 webapp 有不少大问题：</p>
+<ul>
+<li><strong>标准的对话框无法使用了</strong>，比如 <code>alert</code>, <code>confirm</code> 或 <code>prompt</code> 。 </li>
+<li><strong>webapp 无法打开外部的 URI</strong> ，比如 Safari 里的网站，打电话，打开 AppStore 等。任何 URI 都会忽略。 </li>
+<li><strong>如果安装超过 4 个 app ，主屏会发生奇怪的事情</strong>，比如一个 webapp 取代了另一个。你会看到同样 webapp 的副本。同一时间打开不同的 webapp 时也发生同样的事情。在你的设备试试访问 app.ft.com，安装 webapp ；到 pattern.dk/sun，安装 webapp ；重复操作几次，你会发现主屏乱了。重启设备貌似可以解决问题。 </li>
+<li>垂直模式输入文本，select 或者 日期控件获得焦点，media queries 将把方向变成水平，resize 事件触发。此情况出现在主屏 webapp 和 Web Views ，Safari 没事（bug?）。 </li>
+<li>9 月 19 日更新：如果使用 Application Cache ，通过 hash 或其它技术管理状态，历史对象将不保存你的导航历史，因此 <code>history.back()</code> 将不起作用，<code>history.length</code> 永远是 1 。（多谢 10+ 以上的人报告此问题！）</li>
+<li>9 月 19 日更新：当你安装图标到主屏，你的网站和 webapp 之间的 Cookies 无法互通（出于身份验证的目的）。直到 6.1 才有的功能现在没有了。（感谢 Joseph Pearson 报告此问题；<a href="http://test.monoclejs.com/test/bugs/ios-cookies/" target="_blank">测试用例在此</a> ）</li>
+</ul>
+<h3 id=" 状态栏 ">状态栏</h3>
+<p>如果你没有提供 <strong>apple-mobile-web-app-status-bar-style</strong> meta 标签，或者你提供了一个默认值，状态栏将变黑，因此… 屏幕只会有个黑色区域（一些设备仅有电池图标）。用户无法看到状态栏的时钟和其它图标。</p>
+<p>黑色值并不是 iOS 7 全屏模式的新样式，如果你定义 <strong>apple-mobile-web-app-status-bar-style</strong> 的值为 <strong>black-translucent</strong> ，它不再是黑的，遵循 app 全屏模式，它变得完全透明。不幸的是， 貌似没有办法定义背景清除还是黑色，因此我们需要测试图标和时间跟背景好不好区分。更新：文字貌似总是白的。</p>
+<p>下面的图片可以看到默认状态栏，black 值和 black-translucent 值在 iOS 7 的效果。<br><img src="/images/post/ios7/statusbar2.png" /></p>
+<h3 id=" 启动图片和多任务管理 ">启动图片和多任务管理</h3>
+<p>对于新的多任务系统，有主屏 webapp 时，系统用白色图片，而不是启动图片，并不是 app 当前状态的预览。唯一例外是，当 webapp 仍旧是激活状态时 ，你可以看正确的快照。以下例子，我们可以看到 Financial Times webapp 有白色快照，只有当它是激活状态时才有正确的启动图片。<br><img src="/images/post/ios7/multitask.png" /></p>
+<p>幸运的是 iPhone 5 的主屏 webapp 没 bug ，它们是 letterboxing 应用（它被发现后的一年）。我们不再需要视口 hack 解决方案了。</p>
+<h2 id=" 原生 _webapp_ 开发 ">原生 webapp 开发</h2>
+<p>如果你开发 hybrid 混合（原生 webapp ）应用，比如 Apache Cordova (PhoneGap) 应用，有一些消息告诉你。首先，还没有 Nitro 引擎。</p>
+<h3 id="Paginate_（随意翻阅）模式 ">Paginate （随意翻阅）模式</h3>
+<p>当在原生应用中，使用 UIWebView 实现丰富内容时，或者对于原生 webapp （hybrid），我们可以为了电子书阅读体验使用 <strong>Paginate</strong> （随意翻阅）特性，避免出现垂直滚动条（类似 Windows 8 应用体验）。如果应用显示动态加载内容，这一特性是完美的，我们不能预先优化分页。有不同的 Objective-C 属性配置分页过程。要启用它，需要这么做：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-</pre></td><td class="code"><pre><span class="bullet">* </span>CSS Clip Path 基于形状剪裁内容，包括圆形，矩形和多边形 
-<span class="bullet">* </span>字体的 Kerning 和 Ligatures 默认启用 
-<span class="bullet">* </span>Background  背景属性更兼容不同的值 
-<span class="bullet">* </span>box-decoration-break: slice/clone 
-<span class="bullet">* </span>tab-size 样式 
-<span class="bullet">* </span>overflow-wrap: normal/hypernate/break-word 
-<span class="bullet">* </span>支持 ch 和 vmax 单位 
-<span class="bullet">* </span>mask-type: alpha 
-<span class="bullet">* </span>新的伪元素 ::cue 在 video 轨道部分已提到 
-<span class="bullet">* </span>-webkit-background-composite 属性（但是我试了不起作用）
-
-<span class="header">## 主屏 webapp</span>
-
-&gt;" 如果你正在用主屏 webapp ，有个不幸的消息：此平台的此版本有太多 bug 了。"
-
-唯一的好消息是，当全屏时，貌似没有 WebSQL 存储限制了；不需要用户的许可。
-
-大问题
-主屏 webapp 有不少大问题：
-
-<span class="bullet">* </span><span class="strong">** 标准的对话框无法使用了 **</span>，比如 <span class="code">```</span>alert<span class="code">```</span>, <span class="code">```</span>confirm<span class="code">```</span> 或 <span class="code">```</span>prompt<span class="code">```</span> 。 
-<span class="bullet">* </span><span class="strong">**webapp 无法打开外部的 URI**</span> ，比如 Safari 里的网站，打电话，打开 AppStore 等。任何 URI 都会忽略。 
-<span class="bullet">* </span><span class="strong">** 如果安装超过 4 个 app ，主屏会发生奇怪的事情 **</span>，比如一个 webapp 取代了另一个。你会看到同样 webapp 的副本。同一时间打开不同的 webapp 时也发生同样的事情。在你的设备试试访问 app.ft.com，安装 webapp ；到 pattern.dk/sun，安装 webapp ；重复操作几次，你会发现主屏乱了。重启设备貌似可以解决问题。 
-<span class="bullet">* </span>垂直模式输入文本，select 或者 日期控件获得焦点，media queries 将把方向变成水平，resize 事件触发。此情况出现在主屏 webapp 和 Web Views ，Safari 没事（bug?）。 
-<span class="bullet">* </span>9 月 19 日更新：如果使用 Application Cache ，通过 hash 或其它技术管理状态，历史对象将不保存你的导航历史，因此 <span class="code">```</span>history.back()<span class="code">```</span> 将不起作用，<span class="code">```</span>history.length<span class="code">```</span> 永远是 1 。（多谢 10+ 以上的人报告此问题！）
-<span class="bullet">* </span>9 月 19 日更新：当你安装图标到主屏，你的网站和 webapp 之间的 Cookies 无法互通（出于身份验证的目的）。直到 6.1 才有的功能现在没有了。（感谢 Joseph Pearson 报告此问题；[<span class="link_label">测试用例在此</span>](<span class="link_url">http://test.monoclejs.com/test/bugs/ios-cookies/</span>) ）
-
-<span class="header">### 状态栏</span>
-
-如果你没有提供 <span class="strong">**apple-mobile-web-app-status-bar-style**</span> meta 标签，或者你提供了一个默认值，状态栏将变黑，因此... 屏幕只会有个黑色区域（一些设备仅有电池图标）。用户无法看到状态栏的时钟和其它图标。
-
-黑色值并不是 iOS 7 全屏模式的新样式，如果你定义 <span class="strong">**apple-mobile-web-app-status-bar-style**</span> 的值为 <span class="strong">**black-translucent**</span> ，它不再是黑的，遵循 app 全屏模式，它变得完全透明。不幸的是， 貌似没有办法定义背景清除还是黑色，因此我们需要测试图标和时间跟背景好不好区分。更新：文字貌似总是白的。
-
-下面的图片可以看到默认状态栏，black 值和 black-translucent 值在 iOS 7 的效果。
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/ios7/statusbar2.png"</span> /&gt;</span></span>
-
-<span class="header">### 启动图片和多任务管理</span>
-
-对于新的多任务系统，有主屏 webapp 时，系统用白色图片，而不是启动图片，并不是 app 当前状态的预览。唯一例外是，当 webapp 仍旧是激活状态时 ，你可以看正确的快照。以下例子，我们可以看到 Financial Times webapp 有白色快照，只有当它是激活状态时才有正确的启动图片。
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/ios7/multitask.png"</span> /&gt;</span></span>
-
-幸运的是 iPhone 5 的主屏 webapp 没 bug ，它们是 letterboxing 应用（它被发现后的一年）。我们不再需要视口 hack 解决方案了。
-
-<span class="header">## 原生 webapp 开发</span>
-
-如果你开发 hybrid 混合（原生 webapp ）应用，比如 Apache Cordova (PhoneGap) 应用，有一些消息告诉你。首先，还没有 Nitro 引擎。
-
-<span class="header">###Paginate （随意翻阅）模式</span>
-
-当在原生应用中，使用 UIWebView 实现丰富内容时，或者对于原生 webapp （hybrid），我们可以为了电子书阅读体验使用 <span class="strong">**Paginate**</span> （随意翻阅）特性，避免出现垂直滚动条（类似 Windows 8 应用体验）。如果应用显示动态加载内容，这一特性是完美的，我们不能预先优化分页。有不同的 Objective-C 属性配置分页过程。要启用它，需要这么做：
+</pre></td><td class="code"><pre>myWebView<span class="preprocessor">.paginationMode</span> = UIWebPaginationModeLeftToRight<span class="comment">;</span>
+myWebView<span class="preprocessor">.paginationBreakingMode</span> = UIWebPaginationBreakingModePage<span class="comment">;</span>
+myWebView<span class="preprocessor">.gapBetweenPages</span> = <span class="number">50</span><span class="comment">;</span>
 </pre></td></tr></table></figure>
 
-</li>
-</ul>
-<p>myWebView.paginationMode = UIWebPaginationModeLeftToRight;<br>myWebView.paginationBreakingMode = UIWebPaginationBreakingModePage;<br>myWebView.gapBetweenPages = 50;<br>```</p>
 <p>这些属性将把 web view 里的 HTML 文档转换成分页模式（分成水平方向页面）。</p>
 <h3 id=" 其它改进 ">其它改进</h3>
 <ul>
@@ -3878,7 +3470,20 @@ speechSynthesis.speak(speech);
 <p>本文大部分的 bug 和问题是数月前在私人论坛提出的，许多人已经发送 bug 报告，他们拼命在论坛找解决方案。难以置信 Apple 并没有给 web 开发者答复，他们没有执行一些基本的测试套件，从中发现一些 API bug 。</p>
 <p>你是否发现其它的 API 或支持情况？其它 bug ？欢迎在下方随意添加评论。</p>
 ]]></content>
-    
+    <summary type="html"><![CDATA[<blockquote>
+<p>原文：<a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review" target="_blank">Safari on iOS 7 and HTML5: problems, changes and new APIs</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a><br>感谢 <a href="http://weibo.com/cssmagic" target="_blank">CSS 魔法</a> 指正翻译问题</p>
+</blockquote>
+<p><img src="/images/post/ios7/safari.png" /><br>这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，<strong>bug 最多的 Safari 版本</strong>嘛。文本我将介绍新的 API 和特性，以及如果你有网站或 webapp ，马上需要处理的大多数问题。</p>
+<h2 id=" 简而言之 ">简而言之</h2>
+<p>没有时间读这篇长文？  </p>
+<ul>
+<li><strong>UI 变化</strong>：工具栏色彩，新的全屏导航问题，新的主屏图标尺寸；iPhone 未使用 <code>&lt;title&gt;</code>；可能与新手势冲突。    </li>
+<li><strong>新设备</strong>：对 web 开发者而言没有任何新东西，跟 iPhone 5 相同。    </li>
+<li><strong>HTML 5 标签</strong>：视频轨道，<code>&lt;progress&gt;</code>，移除对 <code>input type=datetime</code> 的支持。    </li>
+<li><strong>HTML 5 API</strong> ：Page Visibility（页面可见性），AirPlay API，canvas 增强，移除对共享 Workers 的支持，Web Speech 综合 API， 无前缀的 Web Audio 和 Animation Timing， Mutation Observer 和其它小调整。WebSQL 使用超过 5Mb 的大问题。    </li>
+<li><strong>CSS</strong> ：Regions，Sticky 定位， FlexBox，ClipPath，无前缀的 Transitions 和 其它优化。    </li>
+<li><strong>主屏 webapps</strong> ：一些严重的问题（比如，不支持 <code>alert</code> ！）    </li>
+<li><strong>原生 webapps</strong> ：Web View 分页，原生 app 的 JavaScript 运行时，以及视频播放新功能。<br>]]></summary>
     
       <category term="iOS7" scheme="http://jinlong.github.io/tags/iOS7/"/>
     
@@ -4101,7 +3706,7 @@ console.log(declaredLater);
     <link href="http://jinlong.github.io/2013/08/29/devtoolsecrets/"/>
     <id>http://jinlong.github.io/2013/08/29/devtoolsecrets/</id>
     <published>2013-08-29T03:32:00.000Z</published>
-    <updated>2014-10-25T02:23:27.000Z</updated>
+    <updated>2014-11-21T07:33:32.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>源网站：<a href="http://devtoolsecrets.com/" target="_blank">Secrets of the Browser Developer Tools</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码农</a></p>
 </blockquote>
@@ -4194,153 +3799,207 @@ console.log(declaredLater);
 </ul>
 <p><div id="latest"></div></p>
 <h3 id=" 用最新的开发版 ">用最新的开发版</h3>
-<p>开发工具会不断完善，在开发版可以体验。<br><a href="https://www.google.com/intl/zh-CN/chrome/browser/canary.html" target="_blank">Chrome Canary</a> 是 Chrome 实验版，Canary 和 Chrome 可以同时安装。<br>你可以通过</p>
-<figure class="highlight chrome://flags```"><figcaption><span>进一步加强你的 Chrome 开发工具 ，启用“Enable Developer Tools experiments （启用开发工具实验）”。不要忘了点击页面底部的“现在重启”按钮。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-</pre></td><td class="code"><pre>
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/devtoolsecrets/c.png"</span>&gt;</span></span>
-
-[<span class="link_label">Firefox Aurora</span>](<span class="link_url">http://www.mozilla.org/en-US/firefox/aurora/</span>) 提供 Firefox 最新特性预览。不幸的是，Aurora 不能和 Firefox 同时打开。
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/devtoolsecrets/f.png"</span>&gt;</span></span>
-
-[<span class="link_label">Webkit Nightly</span>](<span class="link_url">http://nightly.webkit.org/</span>)  是 Safari 测试版，因此有些不稳定。Webkit Nightly 可以和 Safari 同时运行。
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/devtoolsecrets/s.png"</span>&gt;</span></span>
-
-[<span class="link_label">Opera Next</span>](<span class="link_url">http://www.opera.com/zh-cn/computer/next</span>) 是 Opera 最新改良版，会提供一些新的功能和特性。
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/devtoolsecrets/o.png"</span>&gt;</span></span>
-
-现在浏览器的发布周期为 12 周，浏览器自动更新，变化是增量的。
-
-<span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"dockTools"</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span>
-<span class="header">### 移动开发工具位置</span>
-
-有时候不想让我们的工具在屏幕底部，大部分的开发工具提供了配置选项。
-
-Chrome 开发工具，左下角图标允许改变停靠设置。快速点击它，会在底部和右侧切换。长按可以选择停靠选项（独立窗口打开），你也可以点击并拖拽移动开发工具。
-
-Firefox 和 Safari 开发工具，停靠选项在右上角临近关闭按钮的位置，可以新窗口打开。
-
-要改变停靠位置，可点击左上角小虫子，选择 Firebug 界面位置（上 / 下 / 左 / 右）。Firebug 右上角可以快速选择：最小化，新窗口，关闭。
-
-<span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"debugRWD"</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span>
-<span class="header">### 开发工具调试响应式设计</span>
-
-当调试移动站点的时候，停靠在右侧可充分利用空间，并且可以快速调整浏览器视口和开发工具的宽度，调试不同网页宽度。
-
-在 Chrome 开发工具左下角，点击按钮可切换下侧或右侧停靠位置。
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/devtoolsecrets/dock.png"</span>&gt;</span></span>
-
-在 Chrome 开发工具右下角，点击并选择“General”标签，你可以改变工具的外观，停靠右侧时可以垂直显示面板。
-
-<span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"shortcut"</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span>
-<span class="header">### 学习快捷键</span>
-
-Chrome 的快捷键列在设置菜单里，点击右下“齿轮”图标，可以看到“Shortcuts”标签。
-
-IE 的快捷键是 [<span class="link_label">在线的</span>](<span class="link_url">http://msdn.microsoft.com/en-us/library/dd565630(v=vs.85</span>).aspx) 。
-
-Opera 的快捷键也在设置按钮里。
-
-<span class="header">##Console 控制台</span>
-
-<span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"console"</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span>
-<span class="header">###Log, Info, Debug, Warn, Error</span>
-
-不必用 alert 时，console.log() 是个极其有用的输出调试工具；
-
-console.log() 是 printf 风格，因此你可以这么做：<span class="code">```</span>console.log("%s is %d years old.", "Bob", 42)<span class="code">```</span>。
-
-可以用 <span class="code">```</span>console.info()<span class="code">```</span> 输出提示信息；<span class="code">```</span>console.debug()<span class="code">```</span> 输出调试信息；<span class="code">```</span>console.warn()<span class="code">```</span> 输出警示信息；<span class="code">```</span>console.error()<span class="code">```</span> 输出错误信息。
-
-你还可以用 %c 模式，把第二个变量作为样式格式参数。例如：
-</pre></td></tr></table></figure>
-
-<p>console.log(“%cThis is green text on a yellow background.”, “color:green; background-color:yellow”);</p>
+<p>开发工具会不断完善，在开发版可以体验。<br><a href="https://www.google.com/intl/zh-CN/chrome/browser/canary.html" target="_blank">Chrome Canary</a> 是 Chrome 实验版，Canary 和 Chrome 可以同时安装。<br>你可以通过 <code>chrome://flags</code> 进一步加强你的 Chrome 开发工具 ，启用“Enable Developer Tools experiments （启用开发工具实验）”。不要忘了点击页面底部的“现在重启”按钮。</p>
+<p><img src="/images/post/devtoolsecrets/c.png"></p>
+<p><a href="http://www.mozilla.org/en-US/firefox/aurora/" target="_blank">Firefox Aurora</a> 提供 Firefox 最新特性预览。不幸的是，Aurora 不能和 Firefox 同时打开。</p>
+<p><img src="/images/post/devtoolsecrets/f.png"></p>
+<p><a href="http://nightly.webkit.org/" target="_blank">Webkit Nightly</a>  是 Safari 测试版，因此有些不稳定。Webkit Nightly 可以和 Safari 同时运行。</p>
+<p><img src="/images/post/devtoolsecrets/s.png"></p>
+<p><a href="http://www.opera.com/zh-cn/computer/next" target="_blank">Opera Next</a> 是 Opera 最新改良版，会提供一些新的功能和特性。</p>
+<p><img src="/images/post/devtoolsecrets/o.png"></p>
+<p>现在浏览器的发布周期为 12 周，浏览器自动更新，变化是增量的。</p>
+<p><div id="dockTools"></div></p>
+<h3 id=" 移动开发工具位置 ">移动开发工具位置</h3>
+<p>有时候不想让我们的工具在屏幕底部，大部分的开发工具提供了配置选项。</p>
+<p>Chrome 开发工具，左下角图标允许改变停靠设置。快速点击它，会在底部和右侧切换。长按可以选择停靠选项（独立窗口打开），你也可以点击并拖拽移动开发工具。</p>
+<p>Firefox 和 Safari 开发工具，停靠选项在右上角临近关闭按钮的位置，可以新窗口打开。</p>
+<p>要改变停靠位置，可点击左上角小虫子，选择 Firebug 界面位置（上 / 下 / 左 / 右）。Firebug 右上角可以快速选择：最小化，新窗口，关闭。</p>
+<p><div id="debugRWD"></div></p>
+<h3 id=" 开发工具调试响应式设计 ">开发工具调试响应式设计</h3>
+<p>当调试移动站点的时候，停靠在右侧可充分利用空间，并且可以快速调整浏览器视口和开发工具的宽度，调试不同网页宽度。</p>
+<p>在 Chrome 开发工具左下角，点击按钮可切换下侧或右侧停靠位置。</p>
+<p><img src="/images/post/devtoolsecrets/dock.png"></p>
+<p>在 Chrome 开发工具右下角，点击并选择“General”标签，你可以改变工具的外观，停靠右侧时可以垂直显示面板。</p>
+<p><div id="shortcut"></div></p>
+<h3 id=" 学习快捷键 ">学习快捷键</h3>
+<p>Chrome 的快捷键列在设置菜单里，点击右下“齿轮”图标，可以看到“Shortcuts”标签。</p>
+<p>IE 的快捷键是<a href="http://msdn.microsoft.com/en-us/library/dd565630(v=vs.85" target="_blank">在线的</a>.aspx) 。</p>
+<p>Opera 的快捷键也在设置按钮里。</p>
+<h2 id="Console_ 控制台 ">Console 控制台</h2>
+<p><div id="console"></div></p>
+<h3 id="Log,_Info,_Debug,_Warn,_Error">Log, Info, Debug, Warn, Error</h3>
+<p>不必用 alert 时，console.log() 是个极其有用的输出调试工具；</p>
+<p>console.log() 是 printf 风格，因此你可以这么做：<code>console.log(&quot;%s is %d years old.&quot;, &quot;Bob&quot;, 42)</code>。</p>
+<p>可以用 <code>console.info()</code> 输出提示信息；<code>console.debug()</code> 输出调试信息；<code>console.warn()</code> 输出警示信息；<code>console.error()</code> 输出错误信息。</p>
+<p>你还可以用 %c 模式，把第二个变量作为样式格式参数。例如：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>
-Firebug 只不过显示的图标不同，消息的背景色是一致的。
-
-根据  MDN 的消息，他们不赞成使用 console.debug() ，因此没有图标标识，赞成用 console.log() 代替。
-
-Chrome 和 Safari（nightly）用 info 时不显示图标，用 debug 时显示蓝图标；用 warn 时显示黄图标；用 error 时显示红图标。
-
-你可以输出多个值，用逗号隔开即可，方便在同一行输出对象和数组，例如：<span class="smartquote">```console.log('</span>Kings: <span class="emphasis">', kings);</span>
+</pre></td><td class="code"><pre>console<span class="class">.log</span>("%cThis is green <span class="value">text</span> on <span class="tag">a</span> yellow <span class="attribute">background</span>.", "<span class="attribute">color</span><span class="value">:green;</span> <span class="attribute">background-color</span><span class="value">:yellow<span class="string">");</span></span>
 </pre></td></tr></table></figure>
 
+<p>Firebug 只不过显示的图标不同，消息的背景色是一致的。</p>
+<p>根据  MDN 的消息，他们不赞成使用 console.debug() ，因此没有图标标识，赞成用 console.log() 代替。</p>
+<p>Chrome 和 Safari（nightly）用 info 时不显示图标，用 debug 时显示蓝图标；用 warn 时显示黄图标；用 error 时显示红图标。</p>
+<p>你可以输出多个值，用逗号隔开即可，方便在同一行输出对象和数组，例如：<code>console.log(&#39;Kings: &#39;, kings);</code></p>
 <p><div id="consoleTable"></div></p>
 <h3 id=" 输出数据表格 ">输出数据表格</h3>
 <p>console.table() 可以用来输出数组或者对象列表，以一种合适的表格形式显示。</p>
-<p>例如：</p>
-<figure class="highlight console.table([[10,"><figcaption><span>true, "blue"],[5, false]])``` 将输出以下格式：</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>例如：<code>console.table([[10, true, &quot;blue&quot;],[5, false]])</code> 将输出以下格式：</p>
+<p><img src="/images/post/devtoolsecrets/chrome-table.png"></p>
+<p>如果元素的数量不匹配，表格将显示 <code>undefined</code> 表示没有数据。</p>
+<p>自定义列名，属性名必须在对象中指定元素。自定义（<code>index</code>）的值，可以给每个属性命名。</p>
+<p>第二个可选的变量允许你明确指定哪一列要输出。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>console.table({
+	<span class="string">"London"</span>:{population:8173194, country:<span class="string">"UK"</span>, elevation:<span class="string">"24m"</span>},
+	<span class="string">"New York"</span>:{population:8336697, country:<span class="string">"USA"</span>, elevation:<span class="string">"10m"</span>}},
+	[<span class="string">"population"</span>, <span class="string">"country"</span>])
+</pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="/images/post/devtoolsecrets/chrome-table-custom-headings.png"></p>
+<p><div id="assert"></div></p>
+<h3 id="Assert">Assert</h3>
+<p>console.assert() 用于测试表达式的真假。</p>
+<p>它有两个参数：表达式和显示信息。如果表达式是 FALSE 时，信息将会显示。</p>
+<p>例如：<code>console.assert(!true, &#39;This is not true&#39;);</code> 输出”This is not true”。<code>console.assert(true, &#39;This is not true&#39;);</code> 什么也不输出。</p>
+<p><div id="timer"></div></p>
+<h3 id=" 使用控制台定时器 ">使用控制台定时器</h3>
+<p>使用 <code>console.time(label)</code>，定时器在控制台启动。字符串 <code>label</code> 是必须的，我们想停止它时，有个定时器引用。调用 <code>console.timeEnd(label)</code> 定时器停止，控制台输出定时器执行的毫秒数（通过 label 识别）。</p>
+<p><div id="persistent"></div></p>
+<h3 id=" 持久控制台 ">持久控制台</h3>
+<p>有时页面加载时，你需要保留控制台信息。有时在点击或离开页面时，我们需要这个作为参考或者用来查看日志。</p>
+<p>在 Chrome 里，右键点击控制台，显示菜单里有“Preserve Log upon Navigation”，选择它将保存你的控制台内容。</p>
+<p>Firefox 默认会保存控制台信息。你可以点击右上角“清除”按钮清除控制台日志，或者打开 / 关闭工具。</p>
+<p>在 Firebug 里，有个显著的按钮用来保持控制台内容，就在控制台的上部。</p>
+<p>Opera 默认保存控制台内容，你可以右键选择“clear console”清除控制台日志或者重开工具。</p>
+<p><div id="rerun"></div></p>
+<h3 id=" 重新运行命令 ">重新运行命令</h3>
+<p>如果已经在 JavaScript 控制台输入过命令，你想重新运行它，简单点一下“上”箭头即可翻看原先的命令列表。</p>
+<p><div id="openConsole"></div></p>
+<h3 id=" 任意 _Tab_ 打开控制台 ">任意 Tab 打开控制台</h3>
+<p>在 Chrome ，尽管控制台有自己的 tab ，在任意 tab 按下“ESC”键即可打开控制台，因此不必切换 tab 了。</p>
+<p>Safari 控制台在开发工具的底部，“ESC”键用来切换控制台日志的可见性。在命令行执行一个命令也将打开控制台日志。</p>
+<p>在 Firefox ，快速切换到控制台：“Ctrl + Shift + K ”（Windows），“Cmd ⌘ + Option ⌥ + K ”（Mac）。</p>
+<p><div id="focusFrame"></div></p>
+<h3 id=" 改变框架焦点 ">改变框架焦点</h3>
+<p>用命令行运行 JavaScript 非常实用，但是如果页面有 iframe ，你又不知道如何定位框架，就不好办了。</p>
+<p>在 Firebug ，你可以用下面的命令聚焦框架：<br>cd(window.frames[‘frameName’]);</p>
+<p>Chrome 可以在控制台底部的下拉列表中改变框架。</p>
+<p>Opera 在“Console 控制台”和“Documents 文档” 有个改变框架的下拉菜单。</p>
+<p>你可以通过 <code>document.getElementsByTagName(&quot;iframe&quot;);</code> 获得 iframe 列表。</p>
+<p><div id="reference"></div></p>
+<h3 id=" 引用当前和前一个元素 ">引用当前和前一个元素</h3>
+<p>如果你的“Elements”标签选择了一个元素，你可以用 <code>$0</code> 调用它。输入 <code>$0.innerHTML</code> 试试看。</p>
+<p>在 Firebug 和 Opera，你可以用 <code>$1</code> 选择前一个元素。</p>
+<p>在 Chrome 和 Safari，你可以通过 <code>$1 - $4</code> 选择更靠前的元素。</p>
+<p>在 Firebug ，你可以通过 <code>$n(2) - $n(5)</code> 选择更靠前的元素。</p>
+<p><div id="eval"></div></p>
+<h3 id=" 最终求值表达式 ">最终求值表达式</h3>
+<p>如果你需要先前表达式的结果用于后面的求值，你可以使用便利 <code>$_</code> ，最终表达式结果自动展示给你。</p>
+<p>Firebug 1.12 开始支持。</p>
+<h2 id=" 检查 ">检查</h2>
+<p><div id="breadcrumb"></div></p>
+<h3 id=" 通过面包屑导航 _DOM">通过面包屑导航 DOM</h3>
+<p>当你检查 DOM 树的节点时，节点的 DOM 路径面包屑列表显示在开发工具里。</p>
+<p>Chrome 和 Opera，显示在 DOM 检查器的底部。</p>
+<p><img src="/images/post/devtoolsecrets/chrome-breadcrumbs.png"></p>
+<p>Firebug，Firefox 和 Safari，显示在 DOM 检查器的顶部。</p>
+<p><img src="/images/post/devtoolsecrets/firefox-breadcrumbs.png"></p>
+<p>你可以直接点击节点，或者按箭头键导航面包屑。按左箭头是父节点，按右箭头是第一个子项。上下箭头导航到下一个或前一个子节点。没有更多子节点，上下箭头导航回到 DOM 树。</p>
+<p>在 Firefox ，你可以右击面包屑看兄弟节点列表，可以快速导航到兄弟节点。</p>
+<p>在 Safari，你可以左击面包屑看兄弟节点。</p>
+<p><div id="searchDom"></div></p>
+<h3 id=" 搜索 _DOM_ 节点 ">搜索 DOM 节点</h3>
+<p>在 Firefox ，你可以在“检查器”面板搜索特别的节点。面包屑右边有个小的搜索框有同样作用。</p>
+<p><img src="/images/post/devtoolsecrets/firefox-inspect-search-for-dom-nodes-small.png"></p>
+<p>聚焦时搜索框变大。</p>
+<p><img src="/images/post/devtoolsecrets/firefox-inspect-search-for-dom-nodes-large.png"></p>
+<p>输入一个匹配的选择器， DOM 树将自动高亮它。</p>
+<p>在 Chrome ，你可以按 Ctrl-F 打开对话框，CSS 选择器如期工作。</p>
+<p><img src="/images/post/devtoolsecrets/L4xYPvn.png"></p>
+<p><div id="fonts"></div></p>
+<h3 id=" 检查字体 ">检查字体</h3>
+<p>Firefox 有个字体检查器，可以查看当前元素使用的字体。</p>
+<p><img src="/images/post/devtoolsecrets/firefox-inspect-fonts.png"></p>
+<p>你可以修改默认的“Abc”文字，在字体列表底部有个按钮，可以显示页面所有字体。</p>
+<p><div id="viewRWD"></div></p>
+<h3 id=" 浏览你的响应式网站 ">浏览你的响应式网站</h3>
+<p>在响应式设计时代，最重要的是如何在任意尺寸的设备查看我们的网站。尽管我们可以调整浏览器大小，开发工具里还是有一些其它的工具可用。</p>
+<p>在 Chrome 开发工具的“设置”面板（工具右下角点击齿轮），在“Overrides”标签，你会发现“Device Metrics 设备指标”选项，你可以指定宽度和高度，以及字体缩放尺寸。你可以把开发工具停靠在右侧，然后调整页面大小测试。</p>
+<p>Firefox 开发工具内置一个‘响应式设计模式’工具，此工具在开发工具的右上角。它包含一些预设的尺寸，你可以添加需要的尺寸。Firefox  也提供旋转的选项，你可以测试 landscape 和 portrait 模式。</p>
+<p><div id="3Dview"></div></p>
+<h3 id="3D_ 视图 ">3D 视图</h3>
+<p>Firefox 开发工具可以 3D 视图查看你的网站，可以方便地查看元素嵌套关系，点击开发工具右上角立方体图标可以启动它。</p>
+<h2 id=" 编辑 ">编辑</h2>
+<p><div id="changeVal"></div></p>
+<h3 id=" 改变 _CSS_ 值 ">改变 CSS 值</h3>
+<p>如果有个元素需要修改 margin，padding，width 或者 height，可以使用方向键增加 / 减少尺寸。简单使用上下方向键增加 / 减少 1 个单位。</p>
+<p>“Shift” + 上下方向键，可以增加 / 减少 10 个单位；“Alt” + 上下方向键，可以增加 / 减少 0.1 个单位。</p>
+<p>“Shift” + Page-Up / Page-Down，可以增加 / 减少 100 个单位。</p>
+<p>当你矫正尺寸时，这些快捷键非常实用。</p>
+<p><div id="changeSta"></div></p>
+<h3 id=" 改变 _:active，_:hover，_:focus，_:visited_ 状态样式 ">改变 :active， :hover， :focus， :visited 状态样式</h3>
+<p>在开发工具里修改 CSS 非常爽，但是碰到 hover 之类的伪类就有点挠头了。恰好有解决方案。</p>
+<p>Chrome 有个按钮是干这用的，在“Elements”标签右手边看到一个虚线框和光标在一起的图标，它可以切换其它状态。</p>
+<p><img src="/images/post/devtoolsecrets/chrome-active-hover-focus-visited.png"></p>
+<p>Firebug 的 HTML 标签右侧，点击样式小箭头，可以选择想要的状态。Firebug 并没提供 :visited 状态选项。</p>
+<p><img src="/images/post/devtoolsecrets/firebug-active-hover-focus-visited.png"></p>
+<p>Firefox 为你选择的  DOM 元素提供一个下拉菜单，右键选择“查看元素”可以看到它，Firefox 同样没提供 :visited 状态选项。</p>
+<p><img src="/images/post/devtoolsecrets/firefox-active-hover-focus-visited.png"></p>
+<p>在 Opera，“样式”标签有个像列表的图标，Opera 提供了 :link 和 ::selection 选项。在新版 Opera ，位置跟 Chrome 一致了。</p>
+<p><img src="/images/post/devtoolsecrets/opera-active-hover-focus-visited.png"></p>
+<p>在 Safari，DOM 上右击一个元素，显示一个菜单，里面有“Force Psuedo-Classes”选项。</p>
+<p><img src="/images/post/devtoolsecrets/safari-active-hover-focus-visited.png"></p>
+<p><div id="dragEl"></div></p>
+<h3 id=" 拖拽重排元素 ">拖拽重排元素</h3>
+<p>在 Chrome 和 Safari 里，，“Elements”标签下，可以拖拽重排元素顺序。简单点击拖动元素即可，目标位置会出现一条线。</p>
+<p><div id="sass"></div></p>
+<h3 id=" 使用 _SASS_Source_Maps">使用 SASS Source Maps</h3>
+<p>使用 CSS 预处理器有许多优势，但是在浏览器开发工具中修改比较困难。例如，当你再次运行 SASS 时， 在开发工具中保存的编译后 CSS 可能被覆盖，不太理想。SASS 3.3 以上（可以安装使用‘sass gem install sass —pre’），为 SASS 文件创建映射很容易，你可以很容易的保存修改。</p>
+<p>首先，为 SASS watch 命令增加 <code>--sourcemap</code> ，像这样：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="comment">sass</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">watch</span> <span class="comment">scss/devtoolsecrets</span><span class="string">.</span><span class="comment">scss:css/devtoolsecrets</span><span class="string">.</span><span class="comment">min</span><span class="string">.</span><span class="comment">css</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">style</span> <span class="comment">compressed</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">sourcemap</span>
+</pre></td></tr></table></figure>
+
+<p>然后在 SASS 文件底部添加映射文件的名字（sourceMappingURL）：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>/*@ <span class="built_in">source</span>MappingURL=devtoolsecrets.css.map */
+</pre></td></tr></table></figure>
+
+<p>然后，你需要启用“Experiments 实验”。地址栏输入 <strong>chrome://flags</strong> 启用“启用开发者工具实验”选项，点击页面底部“马上重启”按钮应用改变。在 Chrome 开发工具的右下角，点击齿轮按钮打开“设置”面板。</p>
+<p>点击“General 常规”标签，激活“Enable Source Maps 启用 Source Maps”。点击“Experiments 实验”标签，检查“Support for SASS 支持 SASS ”选项。</p>
+<p>重启浏览器，你可以直接查看 SASS 文件的行号了。</p>
+<h2 id=" 调试 ">调试</h2>
+<p><div id="debugger"></div></p>
+<h3 id=" 用 _debugger;_ 调试 ">用 debugger; 调试</h3>
+<p>添加此行代码：<code>debugger;</code> 可以自动创建断点，当开发工具打开时运行，断点会自动创建。</p>
+<p>尽管快速添加断点很方便，不用在开发工具一行一行找，小心不要把 debugger; 提交到线上环境。</p>
+<p><div id="conditional"></div></p>
+<h3 id=" 条件断点 ">条件断点</h3>
+<p>不必每次生效时，条件断点很有用。例如，你知道你的代码在最后一项有 bug，你可以用条件判断在最后一项时激活 debugger。条件满足，断点触发。</p>
+<p>在 Chrome 中创建条件断点，先创建个正常的断点，然后右击断点选择“编辑断点”添加条件。</p>
+<p>在 Firebug ，先创建常规断点，然后右击出现输入框，可以添加条件。</p>
+<p>在 Firefox ，右击想创建断点的行，选择“增加条件断点”。</p>
+<p>在 IE，先创建常规断点，然后右击断点，选择“条件…”。</p>
+<p>在 Opera，先创建常规断点，然后右击断点，选择“添加条件”。</p>
+<p>在 Safari，确保脚本和“调试器”面板都打开，创建一个断点，然后在“调试器”面板右击同样的断点，选择“编辑断点”。</p>
+<p><div id="domBreakpoint"></div></p>
+<h3 id="DOM_ 断点 ">DOM 断点</h3>
+<p>如果特定的 DOM 改变，你的页面会被破坏，或者你只想找出元素属性或子元素改变，哪些代码生效，Chrome 和 Firebug 均可以在 DOM 修改时设置断点，你可以找到代码问题的根源。简单点击你想监控的元素，右击选择“break on”选项。</p>
+<p><div id="xhr"></div></p>
+<h3 id="XHR_ 断点 ">XHR 断点</h3>
+<p>在 Chrome ，可以为 XmlHttpRequest 设置断点，你可以调试 AJAX 请求。到“Sources”标签选择“XHR 断点”，点击右侧加号图标，输入部分或所有你想添加断点的 URL 。一旦请求返回，断点将生效，你可以看到返回的数据，并可单步调试后续操作。</p>
+<p>取消勾选可以关掉断点，右键选择“Delete Breakpoint 删除断点”删除断点。</p>
+<p>在 Firebug ，到网络标签选择“在 XHR 时中断”按钮，或者右键选择“在 XHR 时中断”，你也可以随意选择中断条件。</p>
+<p><div id="breakpointScope"></div></p>
+<h3 id=" 检查断点的作用域 ">检查断点的作用域</h3>
+<p>在 Chrome ，Javascript 在断点处暂停时，你可以查看当前作用域的所有变量和对象，既可以悬浮查看，也可以通过控制台查看。</p>
+<p>Firebug 有同样的选项，但是需要在 DOM 菜单选择“show closures”。<br>如果断点设置恰当，这个强大的属性让你很容易查看闭包里的变量。</p>
+<p>Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包变量。看此例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -4348,535 +4007,14 @@ Chrome 和 Safari（nightly）用 info 时不显示图标，用 debug 时显示�
 6
 7
 8
-</pre></td><td class="code"><pre>
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/chrome-table.png"</span>&gt;
-
-如果元素的数量不匹配，表格将显示 <span class="escape">``</span><span class="escape">`u</span>ndefined<span class="escape">``</span><span class="escape">` </span>表示没有数据。
-
-自定义列名，属性名必须在对象中指定元素。自定义（<span class="escape">``</span><span class="escape">`i</span>ndex<span class="escape">``</span><span class="escape">`）</span>的值，可以给每个属性命名。
-
-第二个可选的变量允许你明确指定哪一列要输出。
-</pre></td></tr></table></figure>
-
-<p>console.table({<br>    “London”:{population:8173194, country:”UK”, elevation:”24m”},<br>    “New York”:{population:8336697, country:”USA”, elevation:”10m”}},<br>    [“population”, “country”])</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-</pre></td><td class="code"><pre>
-结果如下：
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/chrome-table-custom-headings.png"</span>&gt;
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"assert"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">###Assert </span>
-
-console.assert() 用于测试表达式的真假。
-
-它有两个参数：表达式和显示信息。如果表达式是 FALSE 时，信息将会显示。
-
-例如：```console.assert(!<span class="constant">true</span>, 'This <span class="keyword">is</span> <span class="keyword">not</span> <span class="constant">true</span>');``` 输出<span class="string">"This is not true"</span>。```console.assert(<span class="constant">true</span>, 'This <span class="keyword">is</span> <span class="keyword">not</span> <span class="constant">true</span>');``` 什么也不输出。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"timer"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 使用控制台定时器</span>
-
-使用 ```console.<span class="property">time</span>(label)```，定时器在控制台启动。字符串 ```label``` 是必须的，我们想停止它时，有个定时器引用。调用 ```console.timeEnd(label)``` 定时器停止，控制台输出定时器执行的毫秒数（通过 label 识别）。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"persistent"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 持久控制台</span>
-
-有时页面加载时，你需要保留控制台信息。有时在点击或离开页面时，我们需要这个作为参考或者用来查看日志。
-
-在 Chrome 里，右键点击控制台，显示菜单里有“Preserve Log upon Navigation”，选择它将保存你的控制台内容。
-
-Firefox 默认会保存控制台信息。你可以点击右上角“清除”按钮清除控制台日志，或者打开 / 关闭工具。
-
-在 Firebug 里，有个显著的按钮用来保持控制台内容，就在控制台的上部。
-
-Opera 默认保存控制台内容，你可以右键选择“clear console”清除控制台日志或者重开工具。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"rerun"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 重新运行命令</span>
-
-如果已经在 JavaScript 控制台输入过命令，你想重新运行它，简单点一下“上”箭头即可翻看原先的命令列表。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"openConsole"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 任意 Tab 打开控制台</span>
-
-在 Chrome ，尽管控制台有自己的 <span class="constant">tab</span> ，在任意 <span class="constant">tab</span> 按下“ESC”键即可打开控制台，因此不必切换 <span class="constant">tab</span> 了。
-
-Safari 控制台在开发工具的底部，“ESC”键用来切换控制台日志的可见性。在命令行执行一个命令也将打开控制台日志。
-
-在 Firefox ，快速切换到控制台：“Ctrl + Shift + K ”（Windows），“Cmd ⌘ + Option ⌥ + K ”（Mac）。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"focusFrame"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 改变框架焦点</span>
-
-用命令行运行 JavaScript 非常实用，但是如果页面有 iframe ，你又不知道如何定位框架，就不好办了。
-
-在 Firebug ，你可以用下面的命令聚焦框架：
-cd(window.frames['frameName']);
-
-Chrome 可以在控制台底部的下拉列表中改变框架。
-
-Opera 在“Console 控制台”和“Documents 文档” 有个改变框架的下拉菜单。
-
-你可以通过 ```document.getElementsByTagName(<span class="string">"iframe"</span>);``` 获得 iframe 列表。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"reference"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 引用当前和前一个元素</span>
-
-如果你的“Elements”标签选择了一个元素，你可以用 ```$<span class="number">0</span>``` 调用它。输入 ```$<span class="number">0.</span>innerHTML``` 试试看。
-
-在 Firebug 和 Opera，你可以用 ```$<span class="number">1</span>``` 选择前一个元素。
-
-在 Chrome 和 Safari，你可以通过 ```$<span class="number">1</span> - $<span class="number">4</span>``` 选择更靠前的元素。
-
-在 Firebug ，你可以通过 ```$n(<span class="number">2</span>) - $n(<span class="number">5</span>)``` 选择更靠前的元素。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"eval"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 最终求值表达式</span>
-
-如果你需要先前表达式的结果用于后面的求值，你可以使用便利 ```$_``` ，最终表达式结果自动展示给你。
-
-Firebug <span class="number">1.12</span> 开始支持。
-
-<span class="comment">## 检查</span>
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"breadcrumb"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 通过面包屑导航 DOM</span>
-
-当你检查 DOM 树的节点时，节点的 DOM 路径面包屑列表显示在开发工具里。
-
-Chrome 和 Opera，显示在 DOM 检查器的底部。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/chrome-breadcrumbs.png"</span>&gt;
-
-Firebug，Firefox 和 Safari，显示在 DOM 检查器的顶部。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/firefox-breadcrumbs.png"</span>&gt;
-
-你可以直接点击节点，或者按箭头键导航面包屑。按左箭头是父节点，按右箭头是第一个子项。上下箭头导航到下一个或前一个子节点。没有更多子节点，上下箭头导航回到 DOM 树。
-
-在 Firefox ，你可以右击面包屑看兄弟节点列表，可以快速导航到兄弟节点。
-
-在 Safari，你可以左击面包屑看兄弟节点。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"searchDom"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 搜索 DOM 节点</span>
-
-在 Firefox ，你可以在“检查器”面板搜索特别的节点。面包屑右边有个小的搜索框有同样作用。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/firefox-inspect-search-for-dom-nodes-small.png"</span>&gt;
-
-聚焦时搜索框变大。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/firefox-inspect-search-for-dom-nodes-large.png"</span>&gt;
-
-输入一个匹配的选择器， DOM 树将自动高亮它。
-
-在 Chrome ，你可以按 Ctrl-F 打开对话框，CSS 选择器如期工作。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/L4xYPvn.png"</span>&gt;
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"fonts"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 检查字体</span>
-
-Firefox 有个字体检查器，可以查看当前元素使用的字体。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/firefox-inspect-fonts.png"</span>&gt;
-
-你可以修改默认的“Abc”文字，在字体列表底部有个按钮，可以显示页面所有字体。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"viewRWD"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 浏览你的响应式网站</span>
-
-在响应式设计时代，最重要的是如何在任意尺寸的设备查看我们的网站。尽管我们可以调整浏览器大小，开发工具里还是有一些其它的工具可用。
-
-在 Chrome 开发工具的“设置”面板（工具右下角点击齿轮），在“Overrides”标签，你会发现“Device Metrics 设备指标”选项，你可以指定宽度和高度，以及字体缩放尺寸。你可以把开发工具停靠在右侧，然后调整页面大小测试。
-
-Firefox 开发工具内置一个‘响应式设计模式’工具，此工具在开发工具的右上角。它包含一些预设的尺寸，你可以添加需要的尺寸。Firefox  也提供旋转的选项，你可以测试 landscape 和 portrait 模式。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"3Dview"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">###3D 视图</span>
-
-Firefox 开发工具可以 <span class="number">3</span>D 视图查看你的网站，可以方便地查看元素嵌套关系，点击开发工具右上角立方体图标可以启动它。
-
-<span class="comment">## 编辑</span>
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"changeVal"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 改变 CSS 值</span>
-
-如果有个元素需要修改 margin，padding，width 或者 height，可以使用方向键增加 / 减少尺寸。简单使用上下方向键增加 / 减少<span class="number">1</span>个单位。
-
-“Shift” + 上下方向键，可以增加 / 减少<span class="number">10</span>个单位；“Alt” + 上下方向键，可以增加 / 减少<span class="number">0.1</span>个单位。
-
-“Shift” + Page-Up / Page-Down，可以增加 / 减少<span class="number">100</span>个单位。
-
-当你矫正尺寸时，这些快捷键非常实用。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"changeSta"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 改变 :active， :hover， :focus， :visited 状态样式</span>
-
-在开发工具里修改 CSS 非常爽，但是碰到 hover 之类的伪类就有点挠头了。恰好有解决方案。
-
-Chrome 有个按钮是干这用的，在“Elements”标签右手边看到一个虚线框和光标在一起的图标，它可以切换其它状态。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/chrome-active-hover-focus-visited.png"</span>&gt;
-
-Firebug 的 HTML 标签右侧，点击样式小箭头，可以选择想要的状态。Firebug 并没提供 :visited 状态选项。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/firebug-active-hover-focus-visited.png"</span>&gt;
-
-Firefox 为你选择的  DOM 元素提供一个下拉菜单，右键选择“查看元素”可以看到它，Firefox 同样没提供 :visited 状态选项。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/firefox-active-hover-focus-visited.png"</span>&gt;
-
-在 Opera，“样式”标签有个像列表的图标，Opera 提供了 :link 和 ::selection 选项。在新版 Opera ，位置跟 Chrome 一致了。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/opera-active-hover-focus-visited.png"</span>&gt;
-
-在 Safari，DOM 上右击一个元素，显示一个菜单，里面有“Force Psuedo-Classes”选项。
-
-&lt;img src=<span class="string">"/images/post/devtoolsecrets/safari-active-hover-focus-visited.png"</span>&gt;
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"dragEl"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 拖拽重排元素</span>
-
-在 Chrome 和 Safari 里，，“Elements”标签下，可以拖拽重排元素顺序。简单点击拖动元素即可，目标位置会出现一条线。
-
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"sass"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-<span class="comment">### 使用 SASS Source Maps</span>
-
-使用 CSS 预处理器有许多优势，但是在浏览器开发工具中修改比较困难。例如，当你再次运行 SASS 时， 在开发工具中保存的编译后 CSS 可能被覆盖，不太理想。SASS <span class="number">3.3</span> 以上（可以安装使用‘sass gem install sass <span class="comment">--pre’），为 SASS 文件创建映射很容易，你可以很容易的保存修改。</span>
-
-首先，为 SASS watch 命令增加 ```<span class="comment">--sourcemap``` ，像这样：</span>
-</pre></td></tr></table></figure>
-
-<p>sass —watch scss/devtoolsecrets.scss:css/devtoolsecrets.min.css —style compressed —sourcemap</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>
-然后在 SASS 文件底部添加映射文件的名字（<span class="built_in">source</span>MappingURL）：
-</pre></td></tr></table></figure>
-
-<p>/<em>@ sourceMappingURL=devtoolsecrets.css.map </em>/</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-</pre></td><td class="code"><pre>
-然后，你需要启用“Experiments 实验”。地址栏输入 **chrome://flags** 启用“启用开发者工具实验”选项，点击页面底部“马上重启”按钮应用改变。在 Chrome 开发工具的右下角，点击齿轮按钮打开“设置”面板。
-
-点击“General 常规”标签，激活“Enable Source Maps 启用 Source Maps”。点击“Experiments 实验”标签，检查“Support <span class="keyword">for</span> SASS 支持 SASS ”选项。
-
-重启浏览器，你可以直接查看 SASS 文件的行号了。
-
-<span class="comment">## 调试</span>
-
-&lt;<span class="operator">div</span> id=<span class="string">"debugger"</span>&gt;&lt;/<span class="operator">div</span>&gt;
-<span class="comment">### 用 debugger; 调试</span>
-
-添加此行代码：```debugger;``` 可以自动创建断点，当开发工具打开时运行，断点会自动创建。
-
-尽管快速添加断点很方便，不用在开发工具一行一行找，小心不要把 debugger; 提交到线上环境。
-
-&lt;<span class="operator">div</span> id=<span class="string">"conditional"</span>&gt;&lt;/<span class="operator">div</span>&gt;
-<span class="comment">### 条件断点</span>
-
-不必每次生效时，条件断点很有用。例如，你知道你的代码在最后一项有 bug，你可以用条件判断在最后一项时激活 debugger。条件满足，断点触发。
-
-在 Chrome 中创建条件断点，先创建个正常的断点，然后右击断点选择“编辑断点”添加条件。
-
-在 Firebug ，先创建常规断点，然后右击出现输入框，可以添加条件。
-
-在 Firefox ，右击想创建断点的行，选择“增加条件断点”。
-
-在 IE，先创建常规断点，然后右击断点，选择“条件...”。
-
-在 Opera，先创建常规断点，然后右击断点，选择“添加条件”。
-
-在 Safari，确保脚本和“调试器”面板都打开，创建一个断点，然后在“调试器”面板右击同样的断点，选择“编辑断点”。
-
-&lt;<span class="operator">div</span> id=<span class="string">"domBreakpoint"</span>&gt;&lt;/<span class="operator">div</span>&gt;
-<span class="comment">###DOM 断点</span>
-
-如果特定的 DOM 改变，你的页面会被破坏，或者你只想找出元素属性或子元素改变，哪些代码生效，Chrome 和 Firebug 均可以在 DOM 修改时设置断点，你可以找到代码问题的根源。简单点击你想监控的元素，右击选择“break <span class="command"><span class="keyword">on</span>”选项。</span>
-
-&lt;<span class="operator">div</span> id=<span class="string">"xhr"</span>&gt;&lt;/<span class="operator">div</span>&gt;
-<span class="comment">###XHR 断点</span>
-
-在 Chrome ，可以为 XmlHttpRequest 设置断点，你可以调试 AJAX 请求。到“Sources”标签选择“XHR 断点”，点击右侧加号图标，输入部分或所有你想添加断点的 <span class="built_in">URL</span> 。一旦请求返回，断点将生效，你可以看到返回的数据，并可单步调试后续操作。
-
-取消勾选可以关掉断点，右键选择“Delete Breakpoint 删除断点”删除断点。
-
-在 Firebug ，到网络标签选择“在 XHR 时中断”按钮，或者右键选择“在 XHR 时中断”，你也可以随意选择中断条件。
-
-&lt;<span class="operator">div</span> id=<span class="string">"breakpointScope"</span>&gt;&lt;/<span class="operator">div</span>&gt;
-<span class="comment">### 检查断点的作用域 </span>
-
-在 Chrome ，Javascript 在断点处暂停时，你可以查看当前作用域的所有变量和对象，既可以悬浮查看，也可以通过控制台查看。
-
-Firebug 有同样的选项，但是需要在 DOM 菜单选择“show closures”。
-如果断点设置恰当，这个强大的属性让你很容易查看闭包里的变量。
-
-Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包变量。看此例：
-
-```js
-<span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="title">name</span>) { </span>
-	this.introduce = <span class="function"><span class="keyword">function</span>() { </span>
-		console.<span class="built_in">log</span>(<span class="string">"Hello, my name is %s"</span>, name); 
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span> {</span> 
+	<span class="keyword">this</span>.introduce = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> 
+		console.log(<span class="string">"Hello, my name is %s"</span>, name); 
 	} 
-} <span class="comment">
-// create an instance of Person: var someone = new Person("Arthur"); </span><span class="comment">
-// we call a closure! someone.introduce(); </span><span class="comment">
-// prints "Hello, my name is Arthur"</span>
+} 
+<span class="comment">// create an instance of Person: var someone = new Person("Arthur"); </span>
+<span class="comment">// we call a closure! someone.introduce(); </span>
+<span class="comment">// prints "Hello, my name is Arthur"</span>
 </pre></td></tr></table></figure>
 
 <p>代码访问以下闭包变量：<br><strong>closure.%variable</strong><br>以上例子，你将用这个表达式访问 name：<br><strong>someone.introduce.%name // ==&gt; “Arthur”</strong><br>注意你也可以改变值：</p>
@@ -5119,40 +4257,24 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
     <link href="http://jinlong.github.io/2013/08/13/centering-all-the-directions/"/>
     <id>http://jinlong.github.io/2013/08/13/centering-all-the-directions/</id>
     <published>2013-08-13T10:00:00.000Z</published>
-    <updated>2014-10-25T02:24:40.000Z</updated>
+    <updated>2014-11-21T07:36:14.000Z</updated>
     <content type="html"><![CDATA[<p>我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。<br>孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~<br>各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。</p>
 <h2 id="&lt;center&gt;">&lt;center&gt;</h2>
 <p>不建议用了。</p>
 <h2 id="text-align:center">text-align:center</h2>
 <p>在父容器里水平居中 inline 文字，或 inline 元素</p>
 <h2 id="vertical-align:middle">vertical-align:middle</h2>
-<p>垂直居中 inline 文字，inline 元素，配合</p>
-<figure class="highlight display:table```"><figcaption><span>，```display:table-cell```，有奇效。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>垂直居中 inline 文字，inline 元素，配合 <code>display:table</code> ，<code>display:table-cell</code>，有奇效。</p>
+<h2 id="line-height">line-height</h2>
+<p>与 height 联手，垂直居中文字</p>
+<h2 id="margin:auto">margin:auto</h2>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="code"><pre>
-##line-height
-
-与 height 联手，垂直居中文字
-
-##margin:auto
-
-示例：
-
-```html
-<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
   <span class="id">#ex2_container</span> <span class="rules">{ <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; <span class="rule">}</span></span>
   <span class="id">#ex2_content</span> <span class="rules">{ <span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0</span>px auto</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">display</span>:<span class="value">table</span></span>; <span class="rule">}</span></span>
 </span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
@@ -5177,20 +4299,10 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>这个技巧相当嚣张，同样适用于没固定大小的内容，</p>
-<figure class="highlight min-width```，```max-height```，```overflow:scroll```"><figcaption><span>等。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>
-<span class="comment">&lt;!--more--&gt;</span>
-## 绝对定位居中
-
-父容器元素：```position: relative
-</pre></td></tr></table></figure>
-
-
+<p>这个技巧相当嚣张，同样适用于没固定大小的内容，<code>min-width</code>，<code>max-height</code>，<code>overflow:scroll</code> 等。</p>
+<p><a id="more"></a></p>
+<h2 id=" 绝对定位居中 ">绝对定位居中</h2>
+<p>父容器元素：<code>position: relative</code></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -5209,18 +4321,9 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 <span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-<p>** 注意：高度必须定义，建议加</p>
-<figure class="highlight overflow:"><figcaption><span>auto```，防止内容溢出。**</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>
-<span class="comment">#### 视口居中</span>
-
-内容元素：<span class="string">``</span><span class="string">`position: fixed`</span><span class="string">``</span>，<span class="string">``</span><span class="string">`z-index: 999`</span><span class="string">``</span>，记住父容器元素 <span class="string">``</span><span class="string">`position: relative</span>
-</pre></td></tr></table></figure>
-
-
+<p><strong>注意：高度必须定义，建议加 <code>overflow: auto</code>，防止内容溢出。</strong></p>
+<h4 id=" 视口居中 ">视口居中</h4>
+<p>内容元素：<code>position: fixed</code>，<code>z-index: 999</code>，记住父容器元素 <code>position: relative</code></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -5269,8 +4372,8 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 </pre></td></tr></table></figure>
 
 <h4 id=" 偏移 ">偏移</h4>
-<p>只要</p>
-<figure class="highlight margin:"><figcaption><span>auto;``` 在，内容块将垂直居中，top, left, bottom, right 可以设置偏移。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>只要 <code>margin: auto;</code> 在，内容块将垂直居中，top, left, bottom, right 可以设置偏移。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -5279,11 +4382,7 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 7
 8
 9
-10
-11
-</pre></td><td class="code"><pre>
-```<span class="tag">css</span>
-<span class="class">.Absolute-Center</span><span class="class">.is-Right</span> <span class="rules">{
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Right</span> <span class="rules">{
   <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
   <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50</span>%</span></span>;
   <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
@@ -5295,8 +4394,8 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 </pre></td></tr></table></figure>
 
 <h4 id=" 溢出 ">溢出</h4>
-<p>居中内容比父容器高时，防止溢出，加</p>
-<figure class="highlight overflow:"><figcaption><span>auto``` （没有任何 padding 时，也可以加 ```max-height: 100%;```）。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>居中内容比父容器高时，防止溢出，加 <code>overflow: auto</code> （没有任何 padding 时，也可以加 <code>max-height: 100%;</code>）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -5305,11 +4404,7 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 7
 8
 9
-10
-11
-</pre></td><td class="code"><pre>
-```<span class="tag">css</span>
-<span class="class">.Absolute-Center</span><span class="class">.is-Overflow</span> <span class="rules">{
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Overflow</span> <span class="rules">{
   <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
   <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">300</span>px</span></span>;
   <span class="rule"><span class="attribute">max-height</span>:<span class="value"> <span class="number">100</span>%</span></span>;
@@ -5321,25 +4416,33 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 </pre></td></tr></table></figure>
 
 <h4 id=" 调整尺寸 ">调整尺寸</h4>
-<p><strong>resize</strong> 属性可以让尺寸可调。<br>设置 <strong>min- /max-</strong> 限制尺寸，确定加了</p>
-<figure class="highlight overflow:"><figcaption><span>auto``` 。</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>
-
-</pre></td></tr></table></figure>
-
-<p>.Absolute-Center.is-Resizable {<br>  min-width: 20%;<br>  max-width: 80%;<br>  min-height: 20%;<br>  max-height: 80%;<br>  resize: both;<br>  overflow: auto;<br>  margin: auto;<br>  position: absolute;<br>  top: 0; left: 0; bottom: 0; right: 0;<br>}</p>
+<p><strong>resize</strong> 属性可以让尺寸可调。<br>设置 <strong>min- /max-</strong> 限制尺寸，确定加了 <code>overflow: auto</code> 。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
-</pre></td><td class="code"><pre>
-<span class="header">#### 图像</span>
-
-图像同样适用，设置 <span class="code">```</span>height: auto;
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Resizable</span> <span class="rules">{
+  <span class="rule"><span class="attribute">min-width</span>:<span class="value"> <span class="number">20</span>%</span></span>;
+  <span class="rule"><span class="attribute">max-width</span>:<span class="value"> <span class="number">80</span>%</span></span>;
+  <span class="rule"><span class="attribute">min-height</span>:<span class="value"> <span class="number">20</span>%</span></span>;
+  <span class="rule"><span class="attribute">max-height</span>:<span class="value"> <span class="number">80</span>%</span></span>;
+  <span class="rule"><span class="attribute">resize</span>:<span class="value"> both</span></span>;
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;
+<span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-
+<h4 id=" 图像 ">图像</h4>
+<p>图像同样适用，设置 <code>height: auto;</code> </p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -5357,8 +4460,8 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 </pre></td></tr></table></figure>
 
 <h4 id=" 可变高度 ">可变高度</h4>
-<p>高度必须定义，但可以是百分比或 max-height。不想定义高度的话，用</p>
-<figure class="highlight display:"><figcaption><span>table``` （需要考虑 Table-Cell 兼容性）。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>高度必须定义，但可以是百分比或 max-height。不想定义高度的话，用 <code>display: table</code> （需要考虑 Table-Cell 兼容性）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -5366,11 +4469,7 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 6
 7
 8
-9
-10
-</pre></td><td class="code"><pre>
-```<span class="tag">css</span>
-<span class="class">.Absolute-Center</span><span class="class">.is-Variable</span> <span class="rules">{
+</pre></td><td class="code"><pre><span class="class">.Absolute-Center</span><span class="class">.is-Variable</span> <span class="rules">{
   <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;
   <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50</span>%</span></span>;
   <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;
@@ -5492,7 +4591,49 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
 </ul>
 </blockquote>
 ]]></content>
-    
+    <summary type="html"><![CDATA[<p>我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。<br>孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~<br>各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。</p>
+<h2 id="&lt;center&gt;">&lt;center&gt;</h2>
+<p>不建议用了。</p>
+<h2 id="text-align:center">text-align:center</h2>
+<p>在父容器里水平居中 inline 文字，或 inline 元素</p>
+<h2 id="vertical-align:middle">vertical-align:middle</h2>
+<p>垂直居中 inline 文字，inline 元素，配合 <code>display:table</code> ，<code>display:table-cell</code>，有奇效。</p>
+<h2 id="line-height">line-height</h2>
+<p>与 height 联手，垂直居中文字</p>
+<h2 id="margin:auto">margin:auto</h2>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+  <span class="id">#ex2_container</span> <span class="rules">{ <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; <span class="rule">}</span></span>
+  <span class="id">#ex2_content</span> <span class="rules">{ <span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0</span>px auto</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">display</span>:<span class="value">table</span></span>; <span class="rule">}</span></span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="hacks,_hacks（小技巧）">hacks, hacks（小技巧）</h2>
+<p>有许多 <a href="http://blog.themeforest.net/tutorials/vertical-centering-with-css/" target="_blank">hacks</a> ，负 margin，<a href="http://css-tricks.com/centering-in-the-unknown/" target="_blank">影子元素</a> ::before 等。如果你的内容不是固定大小的话，它们大部分是很脆弱的。</p>
+<h2 id="translate(-50%,-50%)">translate(-50%,-50%)</h2>
+<p>用 position 加 translate<br>translate(-50%,-50%) 比较奇特，百分比计算不是以父元素为基准，而是以自己为基准。</p>
+<p>参考文章：<a href="http://jinlong.github.io/blog/2013/07/08/centering-percentage-widthheight-elements/">居中百分比宽高的元素</a></p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+  <span class="id">#ex3_container</span> <span class="rules">{ <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>; <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200</span>px</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>; <span class="rule">}</span></span>
+  <span class="id">#ex3_content</span> <span class="rules">{ <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>%</span></span>; <span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">50</span>%</span></span>; <span class="rule"><span class="attribute">transform</span>:<span class="value"><span class="function">translate(-<span class="number">50</span>%,-<span class="number">50</span>%)</span></span></span>; <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"><span class="function">translate(-<span class="number">50</span>%,-<span class="number">50</span>%)</span></span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">absolute</span></span>; <span class="rule">}</span></span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>这个技巧相当嚣张，同样适用于没固定大小的内容，<code>min-width</code>，<code>max-height</code>，<code>overflow:scroll</code> 等。</p>
+<p>]]></summary>
     
       <category term="CSS" scheme="http://jinlong.github.io/tags/CSS/"/>
     
@@ -5555,143 +4696,60 @@ Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包
     <link href="http://jinlong.github.io/2013/07/23/porting-chrome-extension-to-opera/"/>
     <id>http://jinlong.github.io/2013/07/23/porting-chrome-extension-to-opera/</id>
     <published>2013-07-23T09:23:00.000Z</published>
-    <updated>2014-10-25T02:25:02.000Z</updated>
+    <updated>2014-11-21T07:38:33.000Z</updated>
     <content type="html"><![CDATA[<p><strong>准备工作：</strong></p>
 <p>下载：<a href="https://getfirebug.com/firebuglite" target="_blank">firebuglite 源码</a>   </p>
 <p>我下载的<a href="https://getfirebug.com/releases/lite/latest/firebug-lite.tar.tgz" target="_blank">稳定版</a></p>
-<p>解压源码，找到</p>
-<figure class="highlight firebug-lite/build/chrome-extension```"><figcaption><span>目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来......</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-</pre></td><td class="code"><pre>
-我感觉原因可能是：
-
-<span class="bullet">1. </span>[<span class="link_label">Opera extension API</span>](<span class="link_url">http://dev.opera.com/extension-docs/</span>) 暂时没有 [<span class="link_label">Chrome extension API</span>](<span class="link_url">https://developer.chrome.com/extensions/api_index.html</span>) 支持的多
-<span class="bullet">2. </span>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新
-
-下面记录移植过程的一些要点：
-
-地址栏输入 <span class="code">```</span>opera:opera://extensions<span class="code">```</span> 或者 “<span class="strong">**Ctrl + Shift + E**</span><span class="code">```</span>”打开扩展页，右上角点击“<span class="strong">** 开发者模式 **</span>”；
-
-点击“<span class="strong">** 载入解压后的扩展...**</span>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；
-
-哈，第一个报错来了：
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/1.png"</span> /&gt;</span></span>
-
-意思是说“<span class="code">```</span>manifest<span class="emphasis">_version```”值必须是 2 ，不能有引号，解释参见 [这里](http://dev.opera.com/extension-docs/manifest.html#manifest_</span>version) 。
-<span class="xml"><span class="comment">&lt;!--more--&gt;</span></span>
-扩展目录找到“<span class="strong">**manifest.json**</span>”文件，加入“<span class="code">```</span>"manifest_version": 2,<span class="code">```</span>”。
-
-再加载扩展目录试试，扩展加进来了，可是又报错了......
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/2.png"</span> /&gt;</span></span>
-
-“<span class="strong">**manifest.json**</span>”文件里的“<span class="code">```</span>background_page<span class="code">```</span>”项替换成 <span class="code">```</span>"background": {"scripts": ["background.js"]}<span class="code">```</span> ，<span class="strong">**background.html**</span> 转换成 <span class="strong">**background.js**</span> 格式，删除没用的 <span class="code">```</span><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></span><span class="code">```</span> 标签。
-
-点击“重新载入”试试，(⊙o⊙) 哦，不报错啦？打开个网页测试一下，打开 Chrome devTools ，看看 console 吧：
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/3.png"</span> /&gt;</span></span>
-
-果然不出所料，还是报错，好事是浏览器右上角出现“小虫子”啦，嚯嚯~~
-
-有事问 Google ，找啊找，看到 [<span class="link_label">一篇帖子</span>](<span class="link_url">http://stackoverflow.com/questions/9106519/port-error-could-not-establish-connection-receiving-end-does-not-exist-in-chr</span>) ，很像我遇到的问题。
-
-找到“<span class="code">```</span>contentScript.js<span class="code">```</span>”文件，把所有 “<span class="code">```</span>sendRequest()<span class="code">```</span>”替换成“<span class="code">```</span>sendMessage()<span class="code">```</span>”，所有“<span class="code">```</span>onRequest<span class="code">```</span>”替换成“<span class="code">```</span>onMessage<span class="code">```</span>”，原因是原来的 API 已过时，[<span class="link_label">详细见文档</span>](<span class="link_url">http://dev.opera.com/extension-docs/tut_message_passing.html</span>)。
-
-“重新载入”扩展再试，有报错，关键的 “<span class="code">```</span>firebug-lite.js<span class="code">```</span>”没加载成功，要命：
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/4.png"</span> /&gt;</span></span>
-
-继续问谷哥，见到 [<span class="link_label">一篇帖子</span>](<span class="link_url">http://stackoverflow.com/questions/10527625/google-chrome-extension-script-injections</span>)
-
-在 “<span class="strong">**manifest.json**</span>”里增加：“<span class="code">```</span>"web<span class="emphasis">_accessible_</span>resources": [<span class="link_label">"firebug-lite.js"</span>]<span class="code">```</span>”，大概意思是资源可以通过“<span class="code">```</span>opera-extension://[<span class="link_label">PACKAGE ID</span>]/[<span class="link_label">PATH</span>]<span class="code">```</span>”取到啦，[<span class="link_label">详细见文档</span>](<span class="link_url">http://dev.opera.com/extension-docs/manifest.html#web_accessible_resources</span>)。
-
-再“重新载入”扩展试一试，激动啊...... “<span class="strong">**F12**</span>”Firebug 神奇的出现了，哈哈。
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/5.png"</span> /&gt;</span></span>
-
-不过还是有错，一些小图标资源加载不出来......
-
-坑爹的，找了半天原因，发现“<span class="code">```</span>firebug-lite.js<span class="code">```</span>”文件中，图标的目录有错误“chrome-extension://bmagokdooijbeehmkpknfglimnifench/skin/xp/sprite.png”。把乱码“bmagokdooijbeehmkpknfglimnifench”批量替换成你的扩展 ID 即可。
-
-艾玛，眼泪哗哗的...... 经过不懈的折腾，终于看到 “firebug-lite”出现在 Opera 15 中了，哈哈哈（不会觉得我无聊吧......）。
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/6.png"</span> /&gt;</span></span>
-
-正当狂喜之际，打包时遇到问题，JS 文件需要加载本地图片，需要用到扩展 ID（随机生成），本地测试好的扩展 ID 跟打包完的不一致，导致图片资源加载不出来。
-
-content scripts 可以获取扩展 ID：
-
-<span class="code">```</span>chrome.i18n.getMessage('@@extension_id');
-</pre></td></tr></table></figure>
-
-
-<figure class="highlight chrome.runtime.id```"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>获取相对路径： <span class="escape">``</span><span class="escape">`c</span>hrome.extension.getURL(<span class="string">""</span>)
-</pre></td></tr></table></figure>
-
+<p>解压源码，找到 <code>firebug-lite/build/chrome-extension</code> 目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来……</p>
+<p>我感觉原因可能是：</p>
+<ol>
+<li><a href="http://dev.opera.com/extension-docs/" target="_blank">Opera extension API</a> 暂时没有 <a href="https://developer.chrome.com/extensions/api_index.html" target="_blank">Chrome extension API</a> 支持的多</li>
+<li>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新</li>
+</ol>
+<p>下面记录移植过程的一些要点：</p>
+<p>地址栏输入 <code>opera:opera://extensions</code> 或者 “<strong>Ctrl + Shift + E</strong>`”打开扩展页，右上角点击“<strong>开发者模式</strong>”；</p>
+<p>点击“<strong>载入解压后的扩展…</strong>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；</p>
+<p>哈，第一个报错来了：</p>
+<p><img src="/images/post/firebuglite/1.png" /></p>
+<p>意思是说“<code>manifest_version</code>”值必须是 2 ，不能有引号，解释参见<a href="http://dev.opera.com/extension-docs/manifest.html#manifest_version" target="_blank">这里</a> 。<br><a id="more"></a><br>扩展目录找到“<strong>manifest.json</strong>”文件，加入“<code>&quot;manifest_version&quot;: 2,</code>”。</p>
+<p>再加载扩展目录试试，扩展加进来了，可是又报错了……</p>
+<p><img src="/images/post/firebuglite/2.png" /></p>
+<p>“<strong>manifest.json</strong>”文件里的“<code>background_page</code>”项替换成 <code>&quot;background&quot;: {&quot;scripts&quot;: [&quot;background.js&quot;]}</code> ，<strong>background.html</strong> 转换成 <strong>background.js</strong> 格式，删除没用的 <code>&lt;script&gt;</code> 标签。</p>
+<p>点击“重新载入”试试，(⊙o⊙) 哦，不报错啦？打开个网页测试一下，打开 Chrome devTools ，看看 console 吧：</p>
+<p><img src="/images/post/firebuglite/3.png" /></p>
+<p>果然不出所料，还是报错，好事是浏览器右上角出现“小虫子”啦，嚯嚯~~</p>
+<p>有事问 Google ，找啊找，看到<a href="http://stackoverflow.com/questions/9106519/port-error-could-not-establish-connection-receiving-end-does-not-exist-in-chr" target="_blank">一篇帖子</a> ，很像我遇到的问题。</p>
+<p>找到“<code>contentScript.js</code>”文件，把所有 “<code>sendRequest()</code>”替换成“<code>sendMessage()</code>”，所有“<code>onRequest</code>”替换成“<code>onMessage</code>”，原因是原来的 API 已过时，<a href="http://dev.opera.com/extension-docs/tut_message_passing.html" target="_blank">详细见文档</a>。</p>
+<p>“重新载入”扩展再试，有报错，关键的 “<code>firebug-lite.js</code>”没加载成功，要命：</p>
+<p><img src="/images/post/firebuglite/4.png" /></p>
+<p>继续问谷哥，见到<a href="http://stackoverflow.com/questions/10527625/google-chrome-extension-script-injections" target="_blank">一篇帖子</a></p>
+<p>在 “<strong>manifest.json</strong>”里增加：“<code>&quot;web_accessible_resources&quot;: [&quot;firebug-lite.js&quot;]</code>”，大概意思是资源可以通过“<code>opera-extension://[PACKAGE ID]/[PATH]</code>”取到啦，<a href="http://dev.opera.com/extension-docs/manifest.html#web_accessible_resources" target="_blank">详细见文档</a>。</p>
+<p>再“重新载入”扩展试一试，激动啊…… “<strong>F12</strong>”Firebug 神奇的出现了，哈哈。</p>
+<p><img src="/images/post/firebuglite/5.png" /></p>
+<p>不过还是有错，一些小图标资源加载不出来……</p>
+<p>坑爹的，找了半天原因，发现“<code>firebug-lite.js</code>”文件中，图标的目录有错误“chrome-extension://bmagokdooijbeehmkpknfglimnifench/skin/xp/sprite.png”。把乱码“bmagokdooijbeehmkpknfglimnifench”批量替换成你的扩展 ID 即可。</p>
+<p>艾玛，眼泪哗哗的……经过不懈的折腾，终于看到 “firebug-lite”出现在 Opera 15 中了，哈哈哈（不会觉得我无聊吧……）。</p>
+<p><img src="/images/post/firebuglite/6.png" /></p>
+<p>正当狂喜之际，打包时遇到问题，JS 文件需要加载本地图片，需要用到扩展 ID（随机生成），本地测试好的扩展 ID 跟打包完的不一致，导致图片资源加载不出来。</p>
+<p>content scripts 可以获取扩展 ID：</p>
+<p><code>chrome.i18n.getMessage(&#39;@@extension_id&#39;);</code><br><code>chrome.runtime.id</code><br>获取相对路径： <code>chrome.extension.getURL(&quot;&quot;)</code></p>
 <p>我把动态获取的扩展 ID 存到 <code>localStorage</code> 里，然后在注入的其它 JS 可以调用这个扩展 ID 了，搞定收工。</p>
 ]]></content>
-    
+    <summary type="html"><![CDATA[<p><strong>准备工作：</strong></p>
+<p>下载：<a href="https://getfirebug.com/firebuglite" target="_blank">firebuglite 源码</a>   </p>
+<p>我下载的<a href="https://getfirebug.com/releases/lite/latest/firebug-lite.tar.tgz" target="_blank">稳定版</a></p>
+<p>解压源码，找到 <code>firebug-lite/build/chrome-extension</code> 目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来……</p>
+<p>我感觉原因可能是：</p>
+<ol>
+<li><a href="http://dev.opera.com/extension-docs/" target="_blank">Opera extension API</a> 暂时没有 <a href="https://developer.chrome.com/extensions/api_index.html" target="_blank">Chrome extension API</a> 支持的多</li>
+<li>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新</li>
+</ol>
+<p>下面记录移植过程的一些要点：</p>
+<p>地址栏输入 <code>opera:opera://extensions</code> 或者 “<strong>Ctrl + Shift + E</strong>`”打开扩展页，右上角点击“<strong>开发者模式</strong>”；</p>
+<p>点击“<strong>载入解压后的扩展…</strong>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；</p>
+<p>哈，第一个报错来了：</p>
+<p><img src="/images/post/firebuglite/1.png" /></p>
+<p>意思是说“<code>manifest_version</code>”值必须是 2 ，不能有引号，解释参见<a href="http://dev.opera.com/extension-docs/manifest.html#manifest_version" target="_blank">这里</a> 。<br>]]></summary>
     
       <category term="Opera Extensions" scheme="http://jinlong.github.io/tags/Opera%20Extensions/"/>
     
@@ -5712,11 +4770,16 @@ content scripts 可以获取扩展 ID：
     <link href="http://jinlong.github.io/2013/07/08/centering-percentage-widthheight-elements/"/>
     <id>http://jinlong.github.io/2013/07/08/centering-percentage-widthheight-elements/</id>
     <published>2013-07-08T05:47:00.000Z</published>
-    <updated>2014-10-25T02:25:40.000Z</updated>
+    <updated>2014-11-21T07:39:39.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://css-tricks.com/centering-percentage-widthheight-elements/" target="_blank">Centering Percentage Width/Height Elements</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
-<p>如果知道该元素确切的宽高，居中它比较容易，可以<a href="http://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/" target="_blank">参考此文</a> ，</p>
-<figure class="highlight top```"><figcaption><span>和 ```left``` 设成 50%，负 ```margin``` 分别设置该元素宽，高的一半。如果明确知道该元素的宽高，用此法居中很容易，如果它的宽高是百分比呢？</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>如果知道该元素确切的宽高，居中它比较容易，可以<a href="http://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/" target="_blank">参考此文</a> ，<code>top</code> 和 <code>left</code> 设成 50%，负 <code>margin</code> 分别设置该元素宽，高的一半。如果明确知道该元素的宽高，用此法居中很容易，如果它的宽高是百分比呢？</p>
+</blockquote>
+<p>你可能认为负的百分比 margin 可以搞定，它适用于水平的 margin，但是 margin 基于宽度（垂直 margin 也是）（译者注：margin 是百分比的话，跟此元素的包含块的宽度有关，<a href="http://www.w3.org/TR/CSS2/box.html#margin-properties" target="_blank">见规范</a>），因此当你用负的 top margin 时，失败了。</p>
+<p>有个<a href="http://css-tricks.com/centering-in-the-unknown/" target="_blank">小技巧</a> ，用一个“ghost”伪元素（看不见的伪元素）和 <code>inline-block</code> / <code>vertical-align</code> 可以搞定居中，非常巧妙。但是这个方法要求待居中的元素是 <code>inline-block</code>，不是一个真正通用的方案。可能你想居中一个模态窗口，受小屏幕 / 响应式设计所限，你很可能会把对话框设计成百分比宽度（或者其它未知情况，比如仅有 <code>max-width</code> 最大宽度。）</p>
+<p>有一种方案！Mary Lou 在 Codrops 用到的，她的文章 / 示例：<a href="http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/" target="_blank">漂亮的模态窗口效果</a> 。</p>
+<p>不能用负的 margin ，可以用负的 <code>translate()</code> 代替。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -5739,52 +4802,31 @@ content scripts 可以获取扩展 ID：
 21
 22
 23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-</pre></td><td class="code"><pre>
-你可能认为负的百分比 margin 可以搞定，它适用于水平的 margin，但是 margin 基于宽度（垂直 margin 也是）（译者注：margin 是百分比的话，跟此元素的包含块的宽度有关，[<span class="link_label">见规范</span>](<span class="link_url">http://www.w3.org/TR/CSS2/box.html#margin-properties</span>)），因此当你用负的 top margin 时，失败了。
+</pre></td><td class="code"><pre><span class="class">.center</span> <span class="rules">{
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+  <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50</span>%</span></span>;
 
-有个 [<span class="link_label">小技巧</span>](<span class="link_url">http://css-tricks.com/centering-in-the-unknown/</span>) ，用一个“ghost”伪元素（看不见的伪元素）和 <span class="code">```</span>inline-block<span class="code">```</span> / <span class="code">```</span>vertical-align<span class="code">```</span> 可以搞定居中，非常巧妙。但是这个方法要求待居中的元素是 <span class="code">```</span>inline-block<span class="code">```</span>，不是一个真正通用的方案。可能你想居中一个模态窗口，受小屏幕 / 响应式设计所限，你很可能会把对话框设计成百分比宽度（或者其它未知情况，比如仅有 <span class="code">```</span>max-width<span class="code">```</span> 最大宽度。）
-
-有一种方案！Mary Lou 在 Codrops 用到的，她的文章 / 示例：[<span class="link_label">漂亮的模态窗口效果</span>](<span class="link_url">http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/</span>) 。
-
-不能用负的 margin ，可以用负的 <span class="code">```</span>translate()<span class="code">```</span> 代替。
-
-<span class="code">```</span>css
-.center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  /*
+  <span class="comment">/*
   不是 =(
   margin-left: -25%;
   margin-top: -25%;
-  */
+  */</span>
 
-  /* 
+  <span class="comment">/* 
   而是!
-  */
-  transform: translate(-50%, -50%);
+  */</span>
+  <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate(-<span class="number">50</span>%, -<span class="number">50</span>%)</span></span></span>;
 
-  /*
+  <span class="comment">/*
   甚至不要定义 
   比如：Height 可以缺省!
-  */
-  width: 40%;
-  height: 50%;
-}
+  */</span>
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">40</span>%</span></span>;
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50</span>%</span></span>;
+<span class="rule">}</span></span>
 </pre></td></tr></table></figure>
 
-</blockquote>
 <p>加上所有需要的前缀。</p>
 <p>最终效果实例：</p>
 <p><pre class="codepen" data-height="300" data-type="result" data-href="BvdgL" data-user="chriscoyier" data-safe="false"><code></code><a href="http://codepen.io/chriscoyier/pen/BvdgL" target="_blank">Check out this Pen!</a></pre></p>
@@ -5811,12 +4853,13 @@ content scripts 可以获取扩展 ID：
     <link href="http://jinlong.github.io/2013/07/06/using-javascripts-tostring-method/"/>
     <id>http://jinlong.github.io/2013/07/06/using-javascripts-tostring-method/</id>
     <published>2013-07-06T05:47:00.000Z</published>
-    <updated>2014-10-25T02:25:22.000Z</updated>
+    <updated>2014-11-21T07:40:39.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://designpepper.com/blog/drips/using-javascripts-tostring-method" target="_blank">Using JavaScript’s ‘toString’ Method</a> （需翻墙）<br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
 </blockquote>
-<p>是否想知道为什么</p>
-<figure class="highlight alert```"><figcaption><span>一个 JavaScript 对象，得到“[object Object]”文本？缘于 JavaScript 内置 ```toString``` 方法。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>是否想知道为什么 <code>alert</code> 一个 JavaScript 对象，得到“[object Object]”文本？缘于 JavaScript 内置 <code>toString</code> 方法。</p>
+<p><strong><em>注意：例子有些地方用了 <code>alert</code> ，没用 <code>console.log</code> ，是为了绕开 console 对 Object 的特殊处理。</em></strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -5826,15 +4869,7 @@ content scripts 可以获取扩展 ID：
 8
 9
 10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>
-*** 注意：例子有些地方用了 `<span class="javascript"></span>``<span class="javascript">alert</span>``<span class="javascript"></span>` ，没用 `<span class="javascript"></span>``<span class="javascript">console.log</span>``<span class="javascript"></span>` ，是为了绕开 <span class="built_in">console</span> 对 Object 的特殊处理。***
-
-`<span class="javascript"></span>``<span class="javascript">js
-<span class="comment">// Alerts: '[object Object]'</span>
+</pre></td><td class="code"><pre><span class="comment">// Alerts: '[object Object]'</span>
 alert({});
 
 <span class="comment">// Outputs: "function() {}"</span>
@@ -5843,12 +4878,13 @@ console.log(<span class="function"><span class="keyword">function</span><span cl
 <span class="comment">// Outputs:</span>
 <span class="comment">// "Thu Oct 11 1962 00:00:00 GMT-0400 (Eastern Daylight Time)"</span>
 <span class="comment">// May vary depending on your clock settings</span>
-console.log(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"October 11, 1962"</span>));</span>
+console.log(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"October 11, 1962"</span>));
 </pre></td></tr></table></figure>
 
 <p>以上这些有什么共同点？每一个都提供字符串代表它们的值，但是内部的值差异很大。比如，内部的 Date 以毫秒衡量。</p>
-<p>这些对象如何提供字符串作代表？它们均有个 prototype 方法：</p>
-<figure class="highlight toString```，它会把内部的值转换成字符串。"><table><tr><td class="gutter"><pre>1
+<p>这些对象如何提供字符串作代表？它们均有个 prototype 方法：<code>toString</code>，它会把内部的值转换成字符串。</p>
+<p>假如我们想创建一个新对象，让它返回字符串代表它的值，不用 <code>toString</code> 的话，代码像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -5859,15 +4895,7 @@ console.log(<span class="keyword">new</span> <span class="built_in">Date</span>(
 9
 10
 11
-12
-13
-14
-15
-</pre></td><td class="code"><pre>
-假如我们想创建一个新对象，让它返回字符串代表它的值，不用 `<span class="javascript"></span>``<span class="javascript">toString</span>``<span class="javascript"></span>` 的话，代码像这样：
-
-`<span class="javascript"></span>``<span class="javascript">js
-<span class="function"><span class="keyword">function</span> <span class="title">Color</span> <span class="params">(r, g, b)</span> {</span>
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">Color</span> <span class="params">(r, g, b)</span> {</span>
     <span class="keyword">this</span>.r = r;
     <span class="keyword">this</span>.g = g;
     <span class="keyword">this</span>.b = b;
@@ -5877,11 +4905,12 @@ console.log(<span class="keyword">new</span> <span class="built_in">Date</span>(
 <span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);
 
 <span class="comment">// Outputs: "rgb(255, 0, 0)"</span>
-alert(red.text);</span>
+alert(red.text);
 </pre></td></tr></table></figure>
 
-<p>有几个问题，首先，</p>
-<figure class="highlight text```"><figcaption><span>属性跟实际的值不同步（如果改变 r, g, b 的值）；其次，必须明确调用 ```red.text``` ，不能直接用 red 的值。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>有几个问题，首先，<code>text</code> 属性跟实际的值不同步（如果改变 r, g, b 的值）；其次，必须明确调用 <code>red.text</code> ，不能直接用 red 的值。</p>
+<p>用 <code>toString</code> 方法重写一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -5897,15 +4926,7 @@ alert(red.text);</span>
 14
 15
 16
-17
-18
-19
-20
-</pre></td><td class="code"><pre>
-用 `<span class="javascript"></span>``<span class="javascript">toString</span>``<span class="javascript"></span>` 方法重写一下：
-
-`<span class="javascript"></span>``<span class="javascript">js
-<span class="function"><span class="keyword">function</span> <span class="title">Color</span> <span class="params">(r, g, b)</span> {</span>
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">Color</span> <span class="params">(r, g, b)</span> {</span>
     <span class="keyword">this</span>.r = r;
     <span class="keyword">this</span>.g = g;
     <span class="keyword">this</span>.b = b;
@@ -5920,22 +4941,18 @@ Color.prototype.toString = <span class="function"><span class="keyword">function
 <span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);
 
 <span class="comment">// Alerts: "rgb(255, 0, 0)"</span>
-alert(red);</span>
+alert(red);
 </pre></td></tr></table></figure>
 
-<p>把要返回的字符串放到 prototype 的</p>
-<figure class="highlight toString```"><figcaption><span>里面有两个好处：字符串始终与真正的值保持同步，我们可以随时取用字符串的值， JavaScript 解释器会隐含调用 ```toString``` 方法。比如：</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>把要返回的字符串放到 prototype 的 <code>toString</code> 里面有两个好处：字符串始终与真正的值保持同步，我们可以随时取用字符串的值， JavaScript 解释器会隐含调用 <code>toString</code> 方法。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
-5
-6
-</pre></td><td class="code"><pre>
-```js
-var <span class="keyword">message</span> = <span class="string">"Red is: "</span> + red;
+</pre></td><td class="code"><pre><span class="keyword">var</span> message = <span class="string">"Red is: "</span> + red;
 
-// Outputs: <span class="string">"Red is: rgb(255, 0, 0)"</span>
-console.log(<span class="keyword">message</span>);
+<span class="comment">// Outputs: "Red is: rgb(255, 0, 0)"</span>
+console.log(message);
 </pre></td></tr></table></figure>
 
 ]]></content>
@@ -5956,13 +4973,55 @@ console.log(<span class="keyword">message</span>);
     <link href="http://jinlong.github.io/2013/06/24/better-performance-with-requestanimationframe/"/>
     <id>http://jinlong.github.io/2013/06/24/better-performance-with-requestanimationframe/</id>
     <published>2013-06-24T08:06:00.000Z</published>
-    <updated>2014-10-25T02:25:58.000Z</updated>
+    <updated>2014-11-21T07:42:02.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/" target="_blank">Better performance with requestAnimationFrame</a><br>作者：<a href="http://dev.opera.com/author/dropoutwannabe" target="_blank">Luz Caballero</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
 </blockquote>
 <h2 id=" 介绍 ">介绍</h2>
-<p>本文讨论如何使用 <strong>requestAnimationFrame</strong> API 代替旧的</p>
-<figure class="highlight setInterval"><figcaption><span>/ setTimeout``` 方法，从而提高动画的性能。当然，我们会演示 [代码实例](http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/raf-demo.html)。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>本文讨论如何使用 <strong>requestAnimationFrame</strong> API 代替旧的 <code>setInterval / setTimeout</code> 方法，从而提高动画的性能。当然，我们会演示<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/raf-demo.html" target="_blank">代码实例</a>。</p>
+<p>当前<a href="http://caniuse.com/requestanimationframe" target="_blank">几乎所有的主流浏览器都支持</a> requestAnimationFrame ，尽管有的还带前缀。Erik Möller 已经写了个 <a href="http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating" target="_blank">polyfill</a> ，加上这个应该可以支持所有浏览器啦。一言难尽，让我们从头说来…</p>
+<h2 id=" 老方法不太好 ">老方法不太好</h2>
+<p>在表彰 <strong>requestAnimationFrame</strong> 之前，我们先看看用老方法是怎么实现动画的。我确定没必要提很久以前 Mozilla 第一个实现了 <code>mozRequestAnimationFrame</code> ，你可能已经用 <code>setTimeout</code> 和 <code>setInterval</code> 创建了动画。假定你已经熟悉这两个方法，我不再赘述。如果你想了解更多，可以看 John Resig 的精彩文章，深度解析 <a href="http://ejohn.org/blog/how-javascript-timers-work/" target="_blank">JavaScript 计时器如何工作</a> 。</p>
+<p>我并不是轻视这些老方法，它们的确有一些缺点。首先，当相应的浏览器窗口最小化，JavaScript 计时器在背景标签仍然持续运行。因此，浏览器继续运行看不见的动画，导致不必要的 CPU 和电池寿命的消耗。在移动设备尤其严重。</p>
+<p>其次，不仅计时器持续运行看不见的动画，而且当时间到了，仍会排队执行它们的回调函数。让我解释下为什么这样会出问题 —— 比如说由于某些原因，回调函数占用太多时间，比你设定的时间要长。一旦计时器时间到了，它将排队执行 “下一次” 回调函数，甚至前一个还没执行完。这一过程不断重复，很快排队了几乎无数的计时器代码，导致浏览器不堪重负。图 1 说明这一情况。<br><a id="more"></a><br><img src="/images/post/req/figure1.png"></p>
+<p><em>图 1：假如你的回调函数执行时间比设定时间更长，多个回调函数排队会阻塞浏览器。</em></p>
+<p>假如你的回调函数执行时间没比设定时间长，<code>setTimeout</code> 和 <code>setInterval</code> 仍不是最理想的。两者只能以固定的频率重绘动画，为了让动画更平滑，我们谨慎起见，选择比屏幕刷新率略高的频率。这样导致不必要的绘制，在屏幕刷新率准备绘制动画结果之前，一些帧已经画过了，因此它们被丢弃了。图 2 说明此问题。</p>
+<p><img src="/images/post/req/figure2.png"></p>
+<p><em>图 2：跳帧会导致较高的 CPU 占用和电池消耗，有时甚至导致动画不平稳。</em></p>
+<p>当用这些方法实现循环动画时，缺点更加突出，比如用于游戏或疯狂的实验（像我的 <a href="http://shinydemos.com/hipster-dog/" target="_blank">hipster dog</a>），这种情况，循环的动画保证不间断地排队执行新的回调函数。如果你想了解更多关于循环动画的历史，以及使用 <code>setTimeout</code> 和 <code>setInterval</code> 时，循环动画表现如何；以及 <strong>requestAnimationFrame</strong> 如何改变我们的编码形式，我强烈建议阅读 Nicholas Zakas 写的“<a href="http://www.nczonline.net/blog/2011/05/03/better-javascript-animations-with-requestanimationframe/" target="_blank">用 requestAnimationFrame 实现更好的 JavaScript 动画</a> ”，他的见解深刻。</p>
+<h2 id=" 介绍 _requestAnimationFrame">介绍 requestAnimationFrame</h2>
+<p><strong>requestAnimationFrame</strong> API 的确如你所愿：它把绘制动画的任务直接交给浏览器，浏览器可以做的更好。</p>
+<p><strong>requestAnimationFrame</strong> 是 W3C <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html" target="_blank">基于脚本动画的定时控制</a> API 的一部分。</p>
+<h2 id="requestAnimationFrame_ 做了什么 ">requestAnimationFrame 做了什么</h2>
+<p>浏览器了解标签和窗口的状态，页面哪部分可见或不可见，了解当浏览器准备绘制时，其它的动画也在运行。<strong>requestAnimationFrame</strong> 让浏览器负责，允许它使用这些信息优化动画的调度，解决了我们先前讨论的 JavaScript 计时器问题。<strong>requestAnimationFrame</strong> 的流程像这样：</p>
+<ul>
+<li>首先，它仅仅绘制用户可见的动画。这意味着没把 CPU 或电池寿命浪费在绘制处于背景标签，最小化窗口，或者页面隐藏区域的动画上。</li>
+<li>第二，当浏览器准备好绘制时（空闲时），才绘制一帧，此时没有等待中的帧。意味着用 <strong>requestAnimationFrame</strong> 绘制动画不可能出现多个排队的回调函数，或者阻塞浏览器。</li>
+<li>第三，由于浏览器准备好时（空闲时）才绘制帧，不会有等待绘制的帧，没有多余的帧绘制。因此动画更平滑，CPU 和电池使用被进一步优化。</li>
+</ul>
+<blockquote>
+<p>我只是说直到当前的帧绘制完成，都没有额外的回调函数在排队。如果你多次调用 requestAnimationFrame() ，每次调用都有回调函数在排队。</p>
+</blockquote>
+<p> 另外，浏览器可以把同一页面的多处动画，保持在单一的回流和重绘周期里。</p>
+<h2 id="requestAnimationFrame_ 没做什么 ">requestAnimationFrame 没做什么</h2>
+<ul>
+<li>创建一个连续的动画；它仅安排单独的更新，通过一个返回的 <strong>id</strong> 号识别。如果还有后续的动画帧，<strong>requestAnimationFrame</strong> 将在回调函数里再次被调用。如果需要停止动画，使用 <code>cancelAnimationFrame(id)</code> 。</li>
+<li>确保真正需要时再绘制。</li>
+<li>保证动画的同步性。如果你同时开始两个动画，但是一个在可见区域，另一个不是，第一个动画将执行，另一个则不会；当第二个变得可见时，它们也许不同步了。如果你关心这个，在写动画代码的时候要注意， 指定一个参数确保所有需要同步的动画状态，不受可见程度的影响（如一组动画从开始以来经过的时间），而不是根据每个动画的前一帧。</li>
+<li>即使你尝试用任何方法，触发回调中间的回流（像 <code>getComputedStyle()</code> ，正常情况下，可以触发回流和重绘），它也会等到回调函数执行完毕才绘制。</li>
+</ul>
+<h2 id=" 如何使用 _requestAnimationFrame">如何使用 requestAnimationFrame</h2>
+<p><a href="http://caniuse.com/requestanimationframe" target="_blank">主流浏览器都支持</a> <strong>requestAnimationFrame</strong> ，但是有的仍需前缀。写本文的时候，加前缀的情况如下：</p>
+<ul>
+<li>Opera: Opera 15 以后无前缀</li>
+<li>Chrome: Chrome 24+ 无前缀</li>
+<li>Safari: 有前缀</li>
+<li>Firefox: 有前缀，Firefox 23+ 无前缀</li>
+<li>IE: IE 10 以后无前缀</li>
+</ul>
+<p>为了确保你的代码万无一失，应该使用 <a href="http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating" target="_blank">Erik Möller’s polyfill</a> （它提供了健全的跨浏览器支持），这是在 <a href="http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/" target="_blank">Paul Irish 的这篇文章</a> 的代码基础上改进而来的。</p>
+<p>这是我们的青蛙实例中处理动画的简单代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -5982,151 +5041,25 @@ console.log(<span class="keyword">message</span>);
 18
 19
 20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-</pre></td><td class="code"><pre>
-当前 [<span class="link_label">几乎所有的主流浏览器都支持</span>](<span class="link_url">http://caniuse.com/requestanimationframe</span>) requestAnimationFrame ，尽管有的还带前缀。Erik Möller 已经写了个 [<span class="link_label">polyfill</span>](<span class="link_url">http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating</span>) ，加上这个应该可以支持所有浏览器啦。一言难尽，让我们从头说来...
+</pre></td><td class="code"><pre><span class="keyword">var</span> requestId = <span class="number">0</span>;
+<span class="keyword">var</span> animationStartTime = <span class="number">0</span>;
 
-<span class="header">## 老方法不太好</span>
-
-在表彰 <span class="strong">**requestAnimationFrame**</span> 之前，我们先看看用老方法是怎么实现动画的。我确定没必要提很久以前 Mozilla 第一个实现了 <span class="code">```</span>mozRequestAnimationFrame<span class="code">```</span> ，你可能已经用 <span class="code">```</span>setTimeout<span class="code">```</span> 和 <span class="code">```</span>setInterval<span class="code">```</span> 创建了动画。假定你已经熟悉这两个方法，我不再赘述。如果你想了解更多，可以看 John Resig 的精彩文章，深度解析 [<span class="link_label">JavaScript 计时器如何工作</span>](<span class="link_url">http://ejohn.org/blog/how-javascript-timers-work/</span>) 。
-
-我并不是轻视这些老方法，它们的确有一些缺点。首先，当相应的浏览器窗口最小化，JavaScript 计时器在背景标签仍然持续运行。因此，浏览器继续运行看不见的动画，导致不必要的 CPU 和电池寿命的消耗。在移动设备尤其严重。
-
-其次，不仅计时器持续运行看不见的动画，而且当时间到了，仍会排队执行它们的回调函数。让我解释下为什么这样会出问题 —— 比如说由于某些原因，回调函数占用太多时间，比你设定的时间要长。一旦计时器时间到了，它将排队执行 " 下一次 " 回调函数，甚至前一个还没执行完。这一过程不断重复，很快排队了几乎无数的计时器代码，导致浏览器不堪重负。图 1 说明这一情况。
-<span class="xml"><span class="comment">&lt;!--more--&gt;</span></span>
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/req/figure1.png"</span>&gt;</span></span>
-
-<span class="emphasis">* 图 1：假如你的回调函数执行时间比设定时间更长，多个回调函数排队会阻塞浏览器。*</span>
-
-假如你的回调函数执行时间没比设定时间长，<span class="code">```</span>setTimeout<span class="code">```</span> 和 <span class="code">```</span>setInterval<span class="code">```</span> 仍不是最理想的。两者只能以固定的频率重绘动画，为了让动画更平滑，我们谨慎起见，选择比屏幕刷新率略高的频率。这样导致不必要的绘制，在屏幕刷新率准备绘制动画结果之前，一些帧已经画过了，因此它们被丢弃了。图 2 说明此问题。
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/req/figure2.png"</span>&gt;</span></span>
-
-<span class="emphasis">* 图 2：跳帧会导致较高的 CPU 占用和电池消耗，有时甚至导致动画不平稳。*</span>
-
-当用这些方法实现循环动画时，缺点更加突出，比如用于游戏或疯狂的实验（像我的 [<span class="link_label">hipster dog</span>](<span class="link_url">http://shinydemos.com/hipster-dog/</span>)），这种情况，循环的动画保证不间断地排队执行新的回调函数。如果你想了解更多关于循环动画的历史，以及使用 <span class="code">```</span>setTimeout<span class="code">```</span> 和 <span class="code">```</span>setInterval<span class="code">```</span> 时，循环动画表现如何；以及 <span class="strong">**requestAnimationFrame**</span> 如何改变我们的编码形式，我强烈建议阅读 Nicholas Zakas 写的“[<span class="link_label">用 requestAnimationFrame 实现更好的 JavaScript 动画</span>](<span class="link_url">http://www.nczonline.net/blog/2011/05/03/better-javascript-animations-with-requestanimationframe/</span>) ”，他的见解深刻。
-
-<span class="header">## 介绍 requestAnimationFrame </span>
-
-<span class="strong">**requestAnimationFrame**</span> API 的确如你所愿：它把绘制动画的任务直接交给浏览器，浏览器可以做的更好。
-
-<span class="strong">**requestAnimationFrame**</span> 是 W3C [<span class="link_label">基于脚本动画的定时控制</span>](<span class="link_url">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html</span>) API 的一部分。
-
-<span class="header">##requestAnimationFrame 做了什么</span>
-
-浏览器了解标签和窗口的状态，页面哪部分可见或不可见，了解当浏览器准备绘制时，其它的动画也在运行。<span class="strong">**requestAnimationFrame**</span> 让浏览器负责，允许它使用这些信息优化动画的调度，解决了我们先前讨论的 JavaScript 计时器问题。<span class="strong">**requestAnimationFrame**</span> 的流程像这样：
-
-<span class="bullet">* </span>首先，它仅仅绘制用户可见的动画。这意味着没把 CPU 或电池寿命浪费在绘制处于背景标签，最小化窗口，或者页面隐藏区域的动画上。
-<span class="bullet">* </span>第二，当浏览器准备好绘制时（空闲时），才绘制一帧，此时没有等待中的帧。意味着用 <span class="strong">**requestAnimationFrame**</span> 绘制动画不可能出现多个排队的回调函数，或者阻塞浏览器。
-<span class="bullet">* </span>第三，由于浏览器准备好时（空闲时）才绘制帧，不会有等待绘制的帧，没有多余的帧绘制。因此动画更平滑，CPU 和电池使用被进一步优化。
-
-&gt; 我只是说直到当前的帧绘制完成，都没有额外的回调函数在排队。如果你多次调用 requestAnimationFrame() ，每次调用都有回调函数在排队。
-
- 另外，浏览器可以把同一页面的多处动画，保持在单一的回流和重绘周期里。
-
-<span class="header">##requestAnimationFrame 没做什么</span>
-
-<span class="bullet">* </span>创建一个连续的动画；它仅安排单独的更新，通过一个返回的 <span class="strong">**id**</span> 号识别。如果还有后续的动画帧，<span class="strong">**requestAnimationFrame**</span> 将在回调函数里再次被调用。如果需要停止动画，使用 <span class="code">```</span>cancelAnimationFrame(id)<span class="code">```</span> 。
-<span class="bullet">* </span>确保真正需要时再绘制。
-<span class="bullet">* </span>保证动画的同步性。如果你同时开始两个动画，但是一个在可见区域，另一个不是，第一个动画将执行，另一个则不会；当第二个变得可见时，它们也许不同步了。如果你关心这个，在写动画代码的时候要注意， 指定一个参数确保所有需要同步的动画状态，不受可见程度的影响（如一组动画从开始以来经过的时间），而不是根据每个动画的前一帧。
-<span class="bullet">* </span>即使你尝试用任何方法，触发回调中间的回流（像 <span class="code">```</span>getComputedStyle()<span class="code">```</span> ，正常情况下，可以触发回流和重绘），它也会等到回调函数执行完毕才绘制。
-
-<span class="header">## 如何使用 requestAnimationFrame </span>
-
-[<span class="link_label">主流浏览器都支持</span>](<span class="link_url">http://caniuse.com/requestanimationframe</span>) <span class="strong">**requestAnimationFrame**</span> ，但是有的仍需前缀。写本文的时候，加前缀的情况如下：
-
-<span class="bullet">* </span>Opera: Opera 15 以后无前缀
-<span class="bullet">* </span>Chrome: Chrome 24+ 无前缀
-<span class="bullet">* </span>Safari: 有前缀
-<span class="bullet">* </span>Firefox: 有前缀，Firefox 23+ 无前缀
-<span class="bullet">* </span>IE: IE 10 以后无前缀
-
-为了确保你的代码万无一失，应该使用 [<span class="link_label">Erik Möller's polyfill</span>](<span class="link_url">http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating</span>) （它提供了健全的跨浏览器支持），这是在 [<span class="link_label">Paul Irish 的这篇文章</span>](<span class="link_url">http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/</span>) 的代码基础上改进而来的。
-
-这是我们的青蛙实例中处理动画的简单代码：
-
-<span class="code">```</span>js
-var requestId = 0;
-var animationStartTime = 0;
-
-function animate(time) {
-  var frog = document.getElementById("animated");
-  frog.style.left = (50 + (time - animationStartTime)/10 % 300) + "px";
-  frog.style.top = (185 - 10 <span class="bullet">* ((time - animationStartTime)/100 % 10) + ((time - animationStartTime)/100 % 10) *</span> ((time - animationStartTime)/100 % 10) ) + "px";
-  var t = (time - animationStartTime)/10 % 100;
-  frog.style.backgroundPosition = - Math.floor(t / (100/2)) * 60+ "px";
+<span class="function"><span class="keyword">function</span> <span class="title">animate</span><span class="params">(time)</span> {</span>
+  <span class="keyword">var</span> frog = document.getElementById(<span class="string">"animated"</span>);
+  frog.style.left = (<span class="number">50</span> + (time - animationStartTime)/<span class="number">10</span> % <span class="number">300</span>) + <span class="string">"px"</span>;
+  frog.style.top = (<span class="number">185</span> - <span class="number">10</span> * ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) + ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) * ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) ) + <span class="string">"px"</span>;
+  <span class="keyword">var</span> t = (time - animationStartTime)/<span class="number">10</span> % <span class="number">100</span>;
+  frog.style.backgroundPosition = - <span class="built_in">Math</span>.floor(t / (<span class="number">100</span>/<span class="number">2</span>)) * <span class="number">60</span>+ <span class="string">"px"</span>;
   requestId = window.requestAnimationFrame(animate);
 }
-function start() {
+<span class="function"><span class="keyword">function</span> <span class="title">start</span><span class="params">()</span> {</span>
   animationStartTime = window.performance.now();
   requestId = window.requestAnimationFrame(animate);
 }
-function stop() {
-  if (requestId)
-<span class="code">    window.cancelAnimationFrame(requestId);</span>
-  requestId = 0;
+<span class="function"><span class="keyword">function</span> <span class="title">stop</span><span class="params">()</span> {</span>
+  <span class="keyword">if</span> (requestId)
+    window.cancelAnimationFrame(requestId);
+  requestId = <span class="number">0</span>;
 }
 </pre></td></tr></table></figure>
 
@@ -6140,7 +5073,16 @@ function stop() {
 <p>总结</p>
 <p>本文我们讨论了如何通过 <strong>requestAnimationFrame</strong> 提高 JavaScript 动画的性能，以及如何在所有浏览器中成功使用它。我希望通过此文激发你去尝试一些很酷的动画实验 —— 你可能已经着手改造旧的动画代码了吧！</p>
 ]]></content>
-    
+    <summary type="html"><![CDATA[<blockquote>
+<p>原文：<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/" target="_blank">Better performance with requestAnimationFrame</a><br>作者：<a href="http://dev.opera.com/author/dropoutwannabe" target="_blank">Luz Caballero</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
+</blockquote>
+<h2 id=" 介绍 ">介绍</h2>
+<p>本文讨论如何使用 <strong>requestAnimationFrame</strong> API 代替旧的 <code>setInterval / setTimeout</code> 方法，从而提高动画的性能。当然，我们会演示<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/raf-demo.html" target="_blank">代码实例</a>。</p>
+<p>当前<a href="http://caniuse.com/requestanimationframe" target="_blank">几乎所有的主流浏览器都支持</a> requestAnimationFrame ，尽管有的还带前缀。Erik Möller 已经写了个 <a href="http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating" target="_blank">polyfill</a> ，加上这个应该可以支持所有浏览器啦。一言难尽，让我们从头说来…</p>
+<h2 id=" 老方法不太好 ">老方法不太好</h2>
+<p>在表彰 <strong>requestAnimationFrame</strong> 之前，我们先看看用老方法是怎么实现动画的。我确定没必要提很久以前 Mozilla 第一个实现了 <code>mozRequestAnimationFrame</code> ，你可能已经用 <code>setTimeout</code> 和 <code>setInterval</code> 创建了动画。假定你已经熟悉这两个方法，我不再赘述。如果你想了解更多，可以看 John Resig 的精彩文章，深度解析 <a href="http://ejohn.org/blog/how-javascript-timers-work/" target="_blank">JavaScript 计时器如何工作</a> 。</p>
+<p>我并不是轻视这些老方法，它们的确有一些缺点。首先，当相应的浏览器窗口最小化，JavaScript 计时器在背景标签仍然持续运行。因此，浏览器继续运行看不见的动画，导致不必要的 CPU 和电池寿命的消耗。在移动设备尤其严重。</p>
+<p>其次，不仅计时器持续运行看不见的动画，而且当时间到了，仍会排队执行它们的回调函数。让我解释下为什么这样会出问题 —— 比如说由于某些原因，回调函数占用太多时间，比你设定的时间要长。一旦计时器时间到了，它将排队执行 “下一次” 回调函数，甚至前一个还没执行完。这一过程不断重复，很快排队了几乎无数的计时器代码，导致浏览器不堪重负。图 1 说明这一情况。<br>]]></summary>
     
       <category term="requestAnimationFrame" scheme="http://jinlong.github.io/tags/requestAnimationFrame/"/>
     
@@ -6155,7 +5097,7 @@ function stop() {
     <link href="http://jinlong.github.io/2013/06/05/the-design-of-code-organizing-javascript/"/>
     <id>http://jinlong.github.io/2013/06/05/the-design-of-code-organizing-javascript/</id>
     <published>2013-06-05T09:02:00.000Z</published>
-    <updated>2014-10-25T02:26:17.000Z</updated>
+    <updated>2014-11-21T07:43:39.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://alistapart.com/article/the-design-of-code-organizing-javascript" target="_blank">The Design of Code: Organizing JavaScript</a><br>作者：<a href="http://alistapart.com/author/acolangelo" target="_blank">Anthony Colangelo</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">@涂鸦码龙</a></p>
 </blockquote>
@@ -6205,49 +5147,24 @@ function stop() {
 };
 </pre></td></tr></table></figure>
 
-<p>这个想法把代码拆分到最小能复用的程度。我还可以写成一个</p>
-<figure class="highlight toggleMenu("><figcaption><span>)``` 方法，但是创建单独的 ```openMenu( )``` 和 ```closeMenu( )``` 更利于模块间的复用。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>这个想法把代码拆分到最小能复用的程度。我还可以写成一个 <code>toggleMenu( )</code> 方法，但是创建单独的 <code>openMenu( )</code> 和 <code>closeMenu( )</code> 更利于模块间的复用。</p>
+<p>注意到模块方法和属性的调用（例如 <code>setMenuStyle( )</code> 调用），用到了 <code>this</code> 关键字——模块通过它访问自己的成员。</p>
+<p>这是模块的基础结构。你可以继续添加需要的方法和属性，一点也不复杂。在基础结构就位后，复用层——选项和暴露 API ——可以在此基础上创建。</p>
+<h3 id="jQuery_ 插件 ">jQuery 插件</h3>
+<p>精心设计的第三方代码最关键的是：复用性。用原生的 JavaScript 同样可以实现重用组件，我更喜欢用 jQuery 插件做更复杂的事情，有以下几个原因。</p>
+<p>最重要的是，它是一个不显眼的沟通形式。如果你用 jQuery 创建一个组件，具体实现非常明确。构建一个组件作为 jQuery 插件等于说 jQuery 是必须的。</p>
+<p>此外，实现代码将与其余的基于 jQuery 的项目代码保持一致，意思是开发者不需要太多研究就可以学会与插件的交互。</p>
+<p>在你开始创建 jQuery 插件前，确保插件没有跟其他用 <code>$</code> 符号的 JavaScript 库冲突。非常简单——像这样包裹你的插件代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-</pre></td><td class="code"><pre>
-注意到模块方法和属性的调用（例如 <span class="escape">``</span><span class="escape">`s</span>etMenuStyle( )<span class="escape">``</span><span class="escape">` </span>调用），用到了 <span class="escape">``</span><span class="escape">`t</span>his<span class="escape">``</span><span class="escape">` </span>关键字——模块通过它访问自己的成员。
-
-这是模块的基础结构。你可以继续添加需要的方法和属性，一点也不复杂。在基础结构就位后，复用层——选项和暴露 API ——可以在此基础上创建。
-
-###jQuery 插件
-
-精心设计的第三方代码最关键的是：复用性。用原生的 JavaScript 同样可以实现重用组件，我更喜欢用 jQuery 插件做更复杂的事情，有以下几个原因。
-
-最重要的是，它是一个不显眼的沟通形式。如果你用 jQuery 创建一个组件，具体实现非常明确。构建一个组件作为 jQuery 插件等于说 jQuery 是必须的。
-
-此外，实现代码将与其余的基于 jQuery 的项目代码保持一致，意思是开发者不需要太多研究就可以学会与插件的交互。
-
-在你开始创建 jQuery 插件前，确保插件没有跟其他用 <span class="escape">``</span><span class="escape">`$</span><span class="escape">``</span><span class="escape">` </span>符号的 JavaScript 库冲突。非常简单——像这样包裹你的插件代码：
-
-<span class="escape">``</span><span class="escape">`j</span>s
-(function($) {
-    // jQuery plugin code here
-})(jQuery)<span class="comment">;</span>
+</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
+    <span class="comment">// jQuery plugin code here</span>
+})(jQuery);
 </pre></td></tr></table></figure>
 
-<p>下一步，我们设置插件，并把先前的模块代码放到里面。一个插件仅仅是定义在 jQuery</p>
-<figure class="highlight （$）```对象上的一个方法。"><table><tr><td class="gutter"><pre>1
+<p>下一步，我们设置插件，并把先前的模块代码放到里面。一个插件仅仅是定义在 jQuery <code>（$）</code>对象上的一个方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -6263,11 +5180,7 @@ function stop() {
 14
 15
 16
-17
-18
-</pre></td><td class="code"><pre>
-`<span class="javascript"></span>``<span class="javascript">js
-(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
+</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
     $.jPanelMenu = <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
         <span class="keyword">var</span> jpm = {
             animated: <span class="literal">true</span>,
@@ -6282,7 +5195,7 @@ function stop() {
             setMenuStyle: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span> … }
         };
     };
-})(jQuery);</span>
+})(jQuery);
 </pre></td></tr></table></figure>
 
 <p>使用插件时调用你创建的函数即可。</p>
@@ -6341,8 +5254,9 @@ function stop() {
 <h3 id="API">API</h3>
 <p>选项是自定义插件的好方法。另一方面， API 通过暴露属性和方法，启用扩展插件的功能。</p>
 <p>尽可能通过 API 暴露，外部不应该直接访问到所有内部的方法和属性。理想情况下，你应该仅公开使用的元素。</p>
-<p>我们的例子，暴露的 API 应该包含打开和关闭菜单，仅此而已。内部的</p>
-<figure class="highlight setMenuStyle("><figcaption><span>) ```方法在菜单打开和关闭的时候运行，但是全局不需要访问它。</span></figcaption><table><tr><td class="gutter"><pre>1
+<p>我们的例子，暴露的 API 应该包含打开和关闭菜单，仅此而已。内部的 <code>setMenuStyle( )</code>方法在菜单打开和关闭的时候运行，但是全局不需要访问它。</p>
+<p>为了公开 API，在插件代码最后，返回一个带有期望的方法和属性的对象。甚至可以把返回的属性和方法放到模块代码中——这是模块模式漂亮的组织形式的真正亮点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -6367,15 +5281,7 @@ function stop() {
 23
 24
 25
-26
-27
-28
-29
-</pre></td><td class="code"><pre>
-为了公开 API，在插件代码最后，返回一个带有期望的方法和属性的对象。甚至可以把返回的属性和方法放到模块代码中——这是模块模式漂亮的组织形式的真正亮点。
-
-`<span class="javascript"></span>``<span class="javascript">js
-(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
+</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
     $.jPanelMenu = <span class="function"><span class="keyword">function</span><span class="params">(options)</span> {</span>
         <span class="keyword">var</span> jpm = {
             options: $.extend({
@@ -6399,7 +5305,7 @@ function stop() {
             someComplexMethod: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span> … }
         };
     };
-})(jQuery);</span>
+})(jQuery);
 </pre></td></tr></table></figure>
 
 <p>通过对象的返回及插件的初始化，API 方法和属性将变得可用。</p>

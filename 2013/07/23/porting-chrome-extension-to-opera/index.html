@@ -12,14 +12,18 @@
     <meta name="description" content="准备工作：
 下载：firebuglite 源码   
 我下载的稳定版
-解压源码，找到
-目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来......1
-2
-3
-4
-5
-6
-">
+解压源码，找到 firebug-lite/build/chrome-extension 目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来……
+我感觉原因可能是：
+
+Opera extension API 暂时没有 Chrome extension API 支持的多
+firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新
+
+下面记录移植过程的一些要点：
+地址栏输入 opera:opera://extensions 或者 “Ctrl + Shift + E`”打开扩展页，右上角点击“开发者模式”；
+点击“载入解压后的扩展…”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；
+哈，第一个报错来了：
+
+意思是说“manifest_version”值必须是 2 ，不能有引号，解释参见这里 。">
     
     
     
@@ -84,7 +88,7 @@
     </p>
   <p class="article-time">
     <time datetime="2013-07-23T09:23:00.000Z" itemprop="datePublished">7月 23 2013</time>
-    更新日期:<time datetime="2014-10-25T02:25:02.000Z" itemprop="dateModified">10月 25 2014</time>
+    更新日期:<time datetime="2014-11-21T07:38:33.000Z" itemprop="dateModified">11月 21 2014</time>
     
   </p>
 </header>
@@ -99,136 +103,39 @@
 		<p><strong>准备工作：</strong></p>
 <p>下载：<a href="https://getfirebug.com/firebuglite" target="_blank">firebuglite 源码</a>   </p>
 <p>我下载的<a href="https://getfirebug.com/releases/lite/latest/firebug-lite.tar.tgz" target="_blank">稳定版</a></p>
-<p>解压源码，找到</p>
-<figure class="highlight firebug-lite/build/chrome-extension```"><figcaption><span>目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来......</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-</pre></td><td class="code"><pre>
-我感觉原因可能是：
-
-<span class="bullet">1. </span>[<span class="link_label">Opera extension API</span>](<span class="link_url">http://dev.opera.com/extension-docs/</span>) 暂时没有 [<span class="link_label">Chrome extension API</span>](<span class="link_url">https://developer.chrome.com/extensions/api_index.html</span>) 支持的多
-<span class="bullet">2. </span>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新
-
-下面记录移植过程的一些要点：
-
-地址栏输入 <span class="code">```</span>opera:opera://extensions<span class="code">```</span> 或者 “<span class="strong">**Ctrl + Shift + E**</span><span class="code">```</span>”打开扩展页，右上角点击“<span class="strong">** 开发者模式 **</span>”；
-
-点击“<span class="strong">** 载入解压后的扩展...**</span>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；
-
-哈，第一个报错来了：
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/1.png"</span> /&gt;</span></span>
-
-意思是说“<span class="code">```</span>manifest<span class="emphasis">_version```”值必须是 2 ，不能有引号，解释参见 [这里](http://dev.opera.com/extension-docs/manifest.html#manifest_</span>version) 。
-<span class="xml"><span class="comment">&lt;!--more--&gt;</span></span>
-扩展目录找到“<span class="strong">**manifest.json**</span>”文件，加入“<span class="code">```</span>"manifest_version": 2,<span class="code">```</span>”。
-
-再加载扩展目录试试，扩展加进来了，可是又报错了......
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/2.png"</span> /&gt;</span></span>
-
-“<span class="strong">**manifest.json**</span>”文件里的“<span class="code">```</span>background_page<span class="code">```</span>”项替换成 <span class="code">```</span>"background": {"scripts": ["background.js"]}<span class="code">```</span> ，<span class="strong">**background.html**</span> 转换成 <span class="strong">**background.js**</span> 格式，删除没用的 <span class="code">```</span><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></span><span class="code">```</span> 标签。
-
-点击“重新载入”试试，(⊙o⊙) 哦，不报错啦？打开个网页测试一下，打开 Chrome devTools ，看看 console 吧：
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/3.png"</span> /&gt;</span></span>
-
-果然不出所料，还是报错，好事是浏览器右上角出现“小虫子”啦，嚯嚯~~
-
-有事问 Google ，找啊找，看到 [<span class="link_label">一篇帖子</span>](<span class="link_url">http://stackoverflow.com/questions/9106519/port-error-could-not-establish-connection-receiving-end-does-not-exist-in-chr</span>) ，很像我遇到的问题。
-
-找到“<span class="code">```</span>contentScript.js<span class="code">```</span>”文件，把所有 “<span class="code">```</span>sendRequest()<span class="code">```</span>”替换成“<span class="code">```</span>sendMessage()<span class="code">```</span>”，所有“<span class="code">```</span>onRequest<span class="code">```</span>”替换成“<span class="code">```</span>onMessage<span class="code">```</span>”，原因是原来的 API 已过时，[<span class="link_label">详细见文档</span>](<span class="link_url">http://dev.opera.com/extension-docs/tut_message_passing.html</span>)。
-
-“重新载入”扩展再试，有报错，关键的 “<span class="code">```</span>firebug-lite.js<span class="code">```</span>”没加载成功，要命：
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/4.png"</span> /&gt;</span></span>
-
-继续问谷哥，见到 [<span class="link_label">一篇帖子</span>](<span class="link_url">http://stackoverflow.com/questions/10527625/google-chrome-extension-script-injections</span>)
-
-在 “<span class="strong">**manifest.json**</span>”里增加：“<span class="code">```</span>"web<span class="emphasis">_accessible_</span>resources": [<span class="link_label">"firebug-lite.js"</span>]<span class="code">```</span>”，大概意思是资源可以通过“<span class="code">```</span>opera-extension://[<span class="link_label">PACKAGE ID</span>]/[<span class="link_label">PATH</span>]<span class="code">```</span>”取到啦，[<span class="link_label">详细见文档</span>](<span class="link_url">http://dev.opera.com/extension-docs/manifest.html#web_accessible_resources</span>)。
-
-再“重新载入”扩展试一试，激动啊...... “<span class="strong">**F12**</span>”Firebug 神奇的出现了，哈哈。
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/5.png"</span> /&gt;</span></span>
-
-不过还是有错，一些小图标资源加载不出来......
-
-坑爹的，找了半天原因，发现“<span class="code">```</span>firebug-lite.js<span class="code">```</span>”文件中，图标的目录有错误“chrome-extension://bmagokdooijbeehmkpknfglimnifench/skin/xp/sprite.png”。把乱码“bmagokdooijbeehmkpknfglimnifench”批量替换成你的扩展 ID 即可。
-
-艾玛，眼泪哗哗的...... 经过不懈的折腾，终于看到 “firebug-lite”出现在 Opera 15 中了，哈哈哈（不会觉得我无聊吧......）。
-
-<span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/post/firebuglite/6.png"</span> /&gt;</span></span>
-
-正当狂喜之际，打包时遇到问题，JS 文件需要加载本地图片，需要用到扩展 ID（随机生成），本地测试好的扩展 ID 跟打包完的不一致，导致图片资源加载不出来。
-
-content scripts 可以获取扩展 ID：
-
-<span class="code">```</span>chrome.i18n.getMessage('@@extension_id');
-</pre></td></tr></table></figure>
-
-
-<figure class="highlight chrome.runtime.id```"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>获取相对路径： <span class="escape">``</span><span class="escape">`c</span>hrome.extension.getURL(<span class="string">""</span>)
-</pre></td></tr></table></figure>
-
+<p>解压源码，找到 <code>firebug-lite/build/chrome-extension</code> 目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来……</p>
+<p>我感觉原因可能是：</p>
+<ol>
+<li><a href="http://dev.opera.com/extension-docs/" target="_blank">Opera extension API</a> 暂时没有 <a href="https://developer.chrome.com/extensions/api_index.html" target="_blank">Chrome extension API</a> 支持的多</li>
+<li>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新</li>
+</ol>
+<p>下面记录移植过程的一些要点：</p>
+<p>地址栏输入 <code>opera:opera://extensions</code> 或者 “<strong>Ctrl + Shift + E</strong>`”打开扩展页，右上角点击“<strong>开发者模式</strong>”；</p>
+<p>点击“<strong>载入解压后的扩展…</strong>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；</p>
+<p>哈，第一个报错来了：</p>
+<p><img src="/images/post/firebuglite/1.png" /></p>
+<p>意思是说“<code>manifest_version</code>”值必须是 2 ，不能有引号，解释参见<a href="http://dev.opera.com/extension-docs/manifest.html#manifest_version" target="_blank">这里</a> 。<br><a id="more"></a><br>扩展目录找到“<strong>manifest.json</strong>”文件，加入“<code>&quot;manifest_version&quot;: 2,</code>”。</p>
+<p>再加载扩展目录试试，扩展加进来了，可是又报错了……</p>
+<p><img src="/images/post/firebuglite/2.png" /></p>
+<p>“<strong>manifest.json</strong>”文件里的“<code>background_page</code>”项替换成 <code>&quot;background&quot;: {&quot;scripts&quot;: [&quot;background.js&quot;]}</code> ，<strong>background.html</strong> 转换成 <strong>background.js</strong> 格式，删除没用的 <code>&lt;script&gt;</code> 标签。</p>
+<p>点击“重新载入”试试，(⊙o⊙) 哦，不报错啦？打开个网页测试一下，打开 Chrome devTools ，看看 console 吧：</p>
+<p><img src="/images/post/firebuglite/3.png" /></p>
+<p>果然不出所料，还是报错，好事是浏览器右上角出现“小虫子”啦，嚯嚯~~</p>
+<p>有事问 Google ，找啊找，看到<a href="http://stackoverflow.com/questions/9106519/port-error-could-not-establish-connection-receiving-end-does-not-exist-in-chr" target="_blank">一篇帖子</a> ，很像我遇到的问题。</p>
+<p>找到“<code>contentScript.js</code>”文件，把所有 “<code>sendRequest()</code>”替换成“<code>sendMessage()</code>”，所有“<code>onRequest</code>”替换成“<code>onMessage</code>”，原因是原来的 API 已过时，<a href="http://dev.opera.com/extension-docs/tut_message_passing.html" target="_blank">详细见文档</a>。</p>
+<p>“重新载入”扩展再试，有报错，关键的 “<code>firebug-lite.js</code>”没加载成功，要命：</p>
+<p><img src="/images/post/firebuglite/4.png" /></p>
+<p>继续问谷哥，见到<a href="http://stackoverflow.com/questions/10527625/google-chrome-extension-script-injections" target="_blank">一篇帖子</a></p>
+<p>在 “<strong>manifest.json</strong>”里增加：“<code>&quot;web_accessible_resources&quot;: [&quot;firebug-lite.js&quot;]</code>”，大概意思是资源可以通过“<code>opera-extension://[PACKAGE ID]/[PATH]</code>”取到啦，<a href="http://dev.opera.com/extension-docs/manifest.html#web_accessible_resources" target="_blank">详细见文档</a>。</p>
+<p>再“重新载入”扩展试一试，激动啊…… “<strong>F12</strong>”Firebug 神奇的出现了，哈哈。</p>
+<p><img src="/images/post/firebuglite/5.png" /></p>
+<p>不过还是有错，一些小图标资源加载不出来……</p>
+<p>坑爹的，找了半天原因，发现“<code>firebug-lite.js</code>”文件中，图标的目录有错误“chrome-extension://bmagokdooijbeehmkpknfglimnifench/skin/xp/sprite.png”。把乱码“bmagokdooijbeehmkpknfglimnifench”批量替换成你的扩展 ID 即可。</p>
+<p>艾玛，眼泪哗哗的……经过不懈的折腾，终于看到 “firebug-lite”出现在 Opera 15 中了，哈哈哈（不会觉得我无聊吧……）。</p>
+<p><img src="/images/post/firebuglite/6.png" /></p>
+<p>正当狂喜之际，打包时遇到问题，JS 文件需要加载本地图片，需要用到扩展 ID（随机生成），本地测试好的扩展 ID 跟打包完的不一致，导致图片资源加载不出来。</p>
+<p>content scripts 可以获取扩展 ID：</p>
+<p><code>chrome.i18n.getMessage(&#39;@@extension_id&#39;);</code><br><code>chrome.runtime.id</code><br>获取相对路径： <code>chrome.extension.getURL(&quot;&quot;)</code></p>
 <p>我把动态获取的扩展 ID 存到 <code>localStorage</code> 里，然后在注入的其它 JS 可以调用这个扩展 ID 了，搞定收工。</p>
   
 	</div>
