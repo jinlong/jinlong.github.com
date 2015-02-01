@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2015-01-31T06:08:03.646Z</updated>
+  <updated>2015-02-01T14:36:12.958Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -13,6 +13,144 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[JavaScript 错误以及如何修复]]></title>
+    <link href="http://jinlong.github.io/2015/02/01/javascript-errors-and-how-to-fix-them/"/>
+    <id>http://jinlong.github.io/2015/02/01/javascript-errors-and-how-to-fix-them/</id>
+    <published>2015-02-01T14:09:27.000Z</published>
+    <updated>2015-02-01T14:34:51.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>原文《<a href="http://davidwalsh.name/fix-javascript-errors" target="_blank">JavaScript Errors and How to Fix Them</a>》<br>作者：Jani Hartikainen<br>翻译：<a href="http://weibo.com/newwave" target="_blank">涂鸦码农</a></p>
+</blockquote>
+<p>JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？</p>
+<p>以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。</p>
+<h3 id=" 如何读懂错误？">如何读懂错误？</h3>
+<p>首先，让我们快速看下错误信息的结构。理解结构有助于理解错误，如果遇到列表之外的错误会减少麻烦。</p>
+<p>Chrome 中典型的错误像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>Uncaught <span class="built_in">TypeError</span>: <span class="literal">undefined</span> is not a <span class="function"><span class="keyword">function</span></span>
+</pre></td></tr></table></figure>
+
+<p>错误的结构如下：</p>
+<ol>
+<li><p><strong>Uncaught TypeError：</strong>这部分信息通常不是很有用。<code>Uncaught</code> 表示错误没有被 <code>catch</code> 语句捕获，<code>TypeError</code> 是错误的名字。</p>
+</li>
+<li><p><strong>undefined is not a function:</strong> 这部分信息，你必须逐字阅读。比如这里表示代码尝试使用 <code>undefined</code> ，把它当做一个函数。</p>
+</li>
+</ol>
+<p>其它基于 webkit 的浏览器，比如 Safari ，给出的错误格式跟 Chrome 很类似。Firefox 也类似，但是不总包含第一部分，最新版本的 IE 也给出比 Chrome 简单的错误 - 但是在这里，简单并不总代表好。</p>
+<p>以下是真正的错误。</p>
+<h3 id="Uncaught_TypeError:_undefined_is_not_a_function">Uncaught TypeError: undefined is not a function</h3>
+<p><strong>相关错误：</strong>number is not a function, object is not a function, string is not a function, Unhandled Error: ‘foo’ is not a function, Function Expected</p>
+<p>当尝试调用一个像方法的值时，这个值并不是一个方法。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">var</span> foo = <span class="literal">undefined</span>;
+foo();
+</pre></td></tr></table></figure>
+
+<p>如果你尝试调用一个对象的方法时，你输错了名字，这个典型的错误很容易发生。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> x = document.getElementByID(<span class="string">'foo'</span>);
+</pre></td></tr></table></figure>
+
+<p>由于对象的属性不存在，默认是 <code>undefined</code> ，以上代码将导致这个错误。</p>
+<p>尝试调用一个像方法的数字，“number is not a function” 错误出现。</p>
+<p><strong>如何修复错误：</strong>确保方法名正确。这个错误的行号将指出正确的位置。</p>
+<h3 id="Uncaught_ReferenceError:_Invalid_left-hand_side_in_assignment">Uncaught ReferenceError: Invalid left-hand side in assignment</h3>
+<p><strong>相关错误：</strong>Uncaught exception: ReferenceError: Cannot assign to ‘functionCall()’, Uncaught exception: ReferenceError: Cannot assign to ‘this’</p>
+<p>尝试给不能赋值的东西赋值，引起这个错误。</p>
+<p>这个错误最常见的例子出现在 if 语句使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">if</span>(doSomething() = <span class="string">'somevalue'</span>)
+</pre></td></tr></table></figure>
+
+<p>此例中，程序员意外地使用了单个等号，而不是双等号。“left-hand side in assignment” 提及了等号左手边的部分，因此你可以看到以上例子，左手边包含不能赋值的东西，导致这个错误。</p>
+<p><strong>如何修复错误：</strong>确保没有给函数结果赋值，或者给 <code>this</code> 关键字赋值。</p>
+<h3 id="Uncaught_TypeError:_Converting_circular_structure_to_JSON">Uncaught TypeError: Converting circular structure to JSON</h3>
+<p><strong>相关错误：</strong>Uncaught exception: TypeError: JSON.stringify: Not an acyclic Object, TypeError: cyclic object value, Circular reference in value argument not supported</p>
+<p>把循环引用的对象，传给 <code>JSON.stringify</code> 总会引起错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="keyword">var</span> a = { };
+<span class="keyword">var</span> b = { a: a };
+a.b = b;
+<span class="built_in">JSON</span>.stringify(a);
+</pre></td></tr></table></figure>
+
+<p>由于以上的 <code>a</code> 和 <code>b</code> 循环引用彼此，结果对象无法转换成 JSON。</p>
+<p><strong>如何修复错误：</strong>移除任何想转换成 JSON 的对象中的循环引用。</p>
+<h3 id="Unexpected_token_;">Unexpected token ;</h3>
+<p><strong>相关错误：</strong>Expected ), missing ) after argument list</p>
+<p>JavaScript 解释器预期的东西没有被包含。不匹配的圆括号或方括号通常引起这个错误。</p>
+<p>错误信息可能有所不同 - “Unexpected token ]” 或者 “Expected {” 等。</p>
+<p><strong>如何修复错误：</strong>有时错误出现的行号并不准确，因此很难修复。</p>
+<ul>
+<li>[ ] { } ( ) 这几个符号不配对常常导致出错。检查所有的圆括号和方括号是否配对。行号指出的不仅是问题字符。</li>
+<li>Unexpected / 跟正则表达式有关。此时行号通常是正确的。</li>
+<li>Unexpected ;  对象或者数组字面量里面有个 ; 通常引起这个错误，或者函数调用的参数列表里有个分号。此时的行号通常也是正确的。</li>
+</ul>
+<h3 id="Uncaught_SyntaxError:_Unexpected_token_ILLEGAL">Uncaught SyntaxError: Unexpected token ILLEGAL</h3>
+<p><strong>相关错误：</strong>Unterminated String Literal, Invalid Line Terminator</p>
+<p>一个字符串字面量少了结尾的引号。</p>
+<p><strong>如何修复错误：</strong>确保所有的字符串都有结束的引号。</p>
+<h3 id="Uncaught_TypeError:_Cannot_read_property_‘foo’_of_null,_Uncaught_TypeError:_Cannot_read_property_‘foo’_of_undefined">Uncaught TypeError: Cannot read property ‘foo’ of null, Uncaught TypeError: Cannot read property ‘foo’ of undefined</h3>
+<p><strong>相关错误：</strong>TypeError: someVal is null, Unable to get property ‘foo’ of undefined or null reference</p>
+<p>尝试读取 <code>null</code> 或者 <code>undefined</code> ，把它当成了对象。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">var</span> someVal = <span class="literal">null</span>;
+console.log(someVal.foo);
+</pre></td></tr></table></figure>
+
+<p><strong>如何修复错误：</strong>通常由于拼写错误导致。检查错误指出的行号附近使用的变量名是否正确。</p>
+<h3 id="Uncaught_TypeError:_Cannot_set_property_‘foo’_of_null,_Uncaught_TypeError:_Cannot_set_property_‘foo’_of_undefined">Uncaught TypeError: Cannot set property ‘foo’ of null, Uncaught TypeError: Cannot set property ‘foo’ of undefined</h3>
+<p><strong>相关错误：</strong>TypeError: someVal is undefined, Unable to set property ‘foo’ of undefined or null reference</p>
+<p>尝试写入 <strong>null</strong> 或者 <strong>undefined</strong> ，把它当成了一个对象。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">var</span> someVal = <span class="literal">null</span>;
+someVal.foo = <span class="number">1</span>;
+</pre></td></tr></table></figure>
+
+<p><strong>如何修复错误：</strong>也是由于拼写错误所致。检查错误指出的行号附近的变量名。</p>
+<h3 id="Uncaught_RangeError:_Maximum_call_stack_size_exceeded">Uncaught RangeError: Maximum call stack size exceeded</h3>
+<p><strong>相关错误：</strong>Related errors: Uncaught exception: RangeError: Maximum recursion depth exceeded, too much recursion, Stack overflow</p>
+<p>通常由程序逻辑 bug 引起，导致函数的无限递归调用。</p>
+<p><strong>如何修复错误：</strong>检查递归函数中可能导致无限循环 的 bug 。</p>
+<h3 id="Uncaught_URIError:_URI_malformed">Uncaught URIError: URI malformed</h3>
+<p><strong>相关错误：</strong>URIError: malformed URI sequence</p>
+<p>无效的 decodeURIComponent 调用所致。</p>
+<p><strong>如何修复错误：</strong>按照错误指出的行号，检查 <code>decodeURIComponent</code> 调用，它是正确的。</p>
+<h3 id="XMLHttpRequest_cannot_load_http://some/url/-_No_‘Access-Control-Allow-Origin’_header_is_present_on_the_requested_resource">XMLHttpRequest cannot load <a href="http://some/url/" target="_blank">http://some/url/</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource</h3>
+<p><strong>相关错误：</strong>Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at<br><a href="http://some/url/" target="_blank">http://some/url/</a></p>
+<p>错误肯定是使用 XMLHttpRequest 引起的。</p>
+<p><strong>如何修复：</strong>确保请求的 URL 是正确的，它遵循<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank">同源策略</a> 。最好的方法是从代码中找到错误信息指出的 URL 。</p>
+<h3 id="InvalidStateError:_An_attempt_was_made_to_use_an_object_that_is_not,_or_is_no_longer,_usable">InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable</h3>
+<p><strong>相关错误：</strong>InvalidStateError, DOMException code 11</p>
+<p>代码调用的方法在当前状态无法调用。通常由 <code>XMLHttpRequest</code> 引起，在方法准备完毕之前调用它会引起错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();
+xhr.setRequestHeader(<span class="string">'Some-Header'</span>, <span class="string">'val'</span>);
+</pre></td></tr></table></figure>
+
+<p>这时就会出错，因为 <code>setRequestHeader</code> 方法只能在 <code>xhr.open</code> 方法之后调用。</p>
+<p><strong>如何修复：</strong>查看错误指出的行号，确保代码运行的时机正确，或者在它（例如 <strong>xhr.open</strong><br>）之前添加了不必要的调用</p>
+<h3 id=" 结论 ">结论</h3>
+<p>我看过不少无用的 JavaScript 错误，比如 PHP 中声名狼藉的异常 <code>Expected T_PAAMAYIM_NEKUDOTAYIM</code> 。抛出更熟悉的错误才更有意义。现代浏览器不再抛出完全无用的错误，才会更有帮助。</p>
+<p>你看到的最令人困惑的错误是什么？在评论中分享一下呗。</p>
+]]></content>
+    
+    
+      <category term="JavaScript" scheme="http://jinlong.github.io/tags/JavaScript/"/>
+    
+      <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[JSHint 配置浅析]]></title>
@@ -5089,267 +5227,6 @@ console.log(message);
       <category term="requestAnimationFrame" scheme="http://jinlong.github.io/categories/requestAnimationFrame/"/>
     
       <category term="game" scheme="http://jinlong.github.io/categories/requestAnimationFrame/game/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[代码设计：组织 JavaScript]]></title>
-    <link href="http://jinlong.github.io/2013/06/05/the-design-of-code-organizing-javascript/"/>
-    <id>http://jinlong.github.io/2013/06/05/the-design-of-code-organizing-javascript/</id>
-    <published>2013-06-05T09:02:00.000Z</published>
-    <updated>2014-11-21T07:43:39.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>原文：<a href="http://alistapart.com/article/the-design-of-code-organizing-javascript" target="_blank">The Design of Code: Organizing JavaScript</a><br>作者：<a href="http://alistapart.com/author/acolangelo" target="_blank">Anthony Colangelo</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">@涂鸦码龙</a></p>
-</blockquote>
-<p>伟大的设计是一个产品应该关注和重视的点，这样才能造就一个可用的，好理解的，精美的用户界面。千万不要认为设计仅仅是设计师的事。</p>
-<p>代码里面有好多种设计，我不是指代码构建了用户界面——我是指代码的设计。</p>
-<p>精心设计的代码更易于维护，优化和扩展，能使开发者更高效。这意味着更多的注意力和精力可以花在构建伟大的事情上，每个人都很愉快——用户，开发者和利益相关者。</p>
-<p>有 3 个高级的，跟语言无关的点，对代码设计十分重要。</p>
-<ol>
-<li>系统架构——代码库的基础设计。控制各种组件的规则，例如模块（models），视图（views）和控制器（controllers），以及之间的相互作用。   </li>
-<li>可维护性——如何更好地改进和扩展代码？   </li>
-<li>复用性——应用组件如何复用？每个组件的实例如何简便地个性定制？   </li>
-</ol>
-<p>比较宽松的语言，特别是 JavaScript ，需要一些规矩才能写好——代码设计。JavaScript 环境非常宽松，随处扔些代码片段，就可能起作用。早点确立系统架构（然后遵守它！）对你的代码库提供制约，确保自始至终的一致性。</p>
-<p>我比较喜欢的一个方法由久经考验的软件设计模式组成——模块模式，可扩展的结构使它成为可靠的系统架构，和可维护的代码库。我喜欢在一个 jQuery 插件里面构建模块，有漂亮的复用性，提供强健的选项设置，暴露一些精心设计的 API。</p>
-<p>下面，我将逐步讲解如何精心设计你的代码，把它变成结构良好的组件，从而在项目中复用。</p>
-<h3 id=" 模块模式 ">模块模式</h3>
-<p>已有许多设计模式，同样有许多相关资源。<a href="https://twitter.com/addyosmani" target="_blank">Addy Osmani</a> 写了本关于 JavaScript 设计模式的书《<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/" target="_blank">令人惊奇的书（免费！）</a>》，我极力推荐给各个水平的开发者。</p>
-<p><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript" target="_blank">模块模式</a> 是一个简单的结构基础，它可以让你的代码保持干净和条例清晰。一个“模块”就是个标准的包含方法和属性的对象字面量，简单是这个模式的最大亮点：甚至一些不熟悉传统的软件设计模式的人，一看就能立刻明白代码是如何工作的。<br><a id="more"></a><br>用此模式的应用，每个组件有它独立的模块。例如，创建自动完成功能，你要写个模块用于文本区域，一个模块用于结果列表。两个模块相互工作，但是文本区域代码不会触及结果列表代码，反之亦然。</p>
-<p>模块解耦是模块模式非常适于构建可靠的系统架构的原因。应用间的关系是明确定义的；任何关系到文本区域的事情被文本区域模块管理，并不是散落在代码库中——代码整洁。</p>
-<p>模块化组织的另一个好处是固有的可维护性。模块可以独立地改进和优化，不会影响应用的任何其它部分。</p>
-<p>我的 <a href="http://jpanelmenu.com/" target="_blank">jPanelMenu</a> 用到了模块模式，我创建此 jQuery 插件用于关闭画布（off-canvas）的菜单系统。我将用这个例子演示创建模块的过程。</p>
-<h3 id=" 创建一个模块 ">创建一个模块</h3>
-<p>首先，我定义三个方法和一个属性，用于管理菜单系统的交互。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre><span class="keyword">var</span> jpm = {
-    animated: <span class="literal">true</span>,
-    openMenu: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
-        …
-        <span class="keyword">this</span>.setMenuStyle( );
-    },
-    closeMenu: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
-        …
-        <span class="keyword">this</span>.setMenuStyle( );
-    },
-    setMenuStyle: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span> … }
-};
-</pre></td></tr></table></figure>
-
-<p>这个想法把代码拆分到最小能复用的程度。我还可以写成一个 <code>toggleMenu( )</code> 方法，但是创建单独的 <code>openMenu( )</code> 和 <code>closeMenu( )</code> 更利于模块间的复用。</p>
-<p>注意到模块方法和属性的调用（例如 <code>setMenuStyle( )</code> 调用），用到了 <code>this</code> 关键字——模块通过它访问自己的成员。</p>
-<p>这是模块的基础结构。你可以继续添加需要的方法和属性，一点也不复杂。在基础结构就位后，复用层——选项和暴露 API ——可以在此基础上创建。</p>
-<h3 id="jQuery_ 插件 ">jQuery 插件</h3>
-<p>精心设计的第三方代码最关键的是：复用性。用原生的 JavaScript 同样可以实现重用组件，我更喜欢用 jQuery 插件做更复杂的事情，有以下几个原因。</p>
-<p>最重要的是，它是一个不显眼的沟通形式。如果你用 jQuery 创建一个组件，具体实现非常明确。构建一个组件作为 jQuery 插件等于说 jQuery 是必须的。</p>
-<p>此外，实现代码将与其余的基于 jQuery 的项目代码保持一致，意思是开发者不需要太多研究就可以学会与插件的交互。</p>
-<p>在你开始创建 jQuery 插件前，确保插件没有跟其他用 <code>$</code> 符号的 JavaScript 库冲突。非常简单——像这样包裹你的插件代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
-    <span class="comment">// jQuery plugin code here</span>
-})(jQuery);
-</pre></td></tr></table></figure>
-
-<p>下一步，我们设置插件，并把先前的模块代码放到里面。一个插件仅仅是定义在 jQuery <code>（$）</code>对象上的一个方法。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
-    $.jPanelMenu = <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
-        <span class="keyword">var</span> jpm = {
-            animated: <span class="literal">true</span>,
-            openMenu: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
-                …
-                <span class="keyword">this</span>.setMenuStyle( );
-            },
-            closeMenu: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
-                …
-                <span class="keyword">this</span>.setMenuStyle( );
-            },
-            setMenuStyle: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span> … }
-        };
-    };
-})(jQuery);
-</pre></td></tr></table></figure>
-
-<p>使用插件时调用你创建的函数即可。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> jpm = $.jPanelMenu( );
-</pre></td></tr></table></figure>
-
-<h3 id=" 选项设置 ">选项设置</h3>
-<p>选项设置是任何可复用的插件所必须的，因为它允许自定义。每一个项目都带来了一系列的设计风格、交互类型和内容结构。自定义选项帮助插件去适应项目的约束。</p>
-<p>最佳实践是为选项提供合适的默认值。最容易的方式是用 jQuery 的 $.extend( ) 方法，它接收（至少）两个参数。</p>
-<p>$.extend( )  的第一个参数，定义一个对象包含所有可用的选项，以及默认值。第二个参数传入选项。它将合并两个对象，传入选项时会覆盖默认值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
-    $.jPanelMenu = <span class="function"><span class="keyword">function</span><span class="params">(options)</span> {</span>
-        <span class="keyword">var</span> jpm = {
-            options: $.extend({
-                <span class="string">'animated'</span>: <span class="literal">true</span>,
-                <span class="string">'duration'</span>: <span class="number">500</span>,
-                <span class="string">'direction'</span>: <span class="string">'left'</span>
-            }, options),
-            openMenu: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
-                …
-                <span class="keyword">this</span>.setMenuStyle( );
-            },
-            closeMenu: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
-                …
-                <span class="keyword">this</span>.setMenuStyle( );
-            },
-            setMenuStyle: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span> … }
-        };
-    };
-})(jQuery);
-</pre></td></tr></table></figure>
-
-<p>除了提供默认值，选项几乎可以自我说明——人们看代码时立刻看到了所有可用的选项。</p>
-<p>暴露尽可能多的选项是可行的，将有助于在未来实现定制和灵活性。</p>
-<h3 id="API">API</h3>
-<p>选项是自定义插件的好方法。另一方面， API 通过暴露属性和方法，启用扩展插件的功能。</p>
-<p>尽可能通过 API 暴露，外部不应该直接访问到所有内部的方法和属性。理想情况下，你应该仅公开使用的元素。</p>
-<p>我们的例子，暴露的 API 应该包含打开和关闭菜单，仅此而已。内部的 <code>setMenuStyle( )</code>方法在菜单打开和关闭的时候运行，但是全局不需要访问它。</p>
-<p>为了公开 API，在插件代码最后，返回一个带有期望的方法和属性的对象。甚至可以把返回的属性和方法放到模块代码中——这是模块模式漂亮的组织形式的真正亮点。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span><span class="params">($)</span> {</span>
-    $.jPanelMenu = <span class="function"><span class="keyword">function</span><span class="params">(options)</span> {</span>
-        <span class="keyword">var</span> jpm = {
-            options: $.extend({
-                <span class="string">'animated'</span>: <span class="literal">true</span>,
-                <span class="string">'duration'</span>: <span class="number">500</span>,
-                <span class="string">'direction'</span>: <span class="string">'left'</span>
-            }, options),
-            openMenu: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
-                …
-                <span class="keyword">this</span>.setMenuStyle( );
-            },
-            closeMenu: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span>
-                …
-                <span class="keyword">this</span>.setMenuStyle( );
-            },
-            setMenuStyle: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span> … }
-        };
-        <span class="keyword">return</span> {
-            open: jpm.openMenu,
-            close: jpm.closeMenu,
-            someComplexMethod: <span class="function"><span class="keyword">function</span><span class="params">( )</span> {</span> … }
-        };
-    };
-})(jQuery);
-</pre></td></tr></table></figure>
-
-<p>通过对象的返回及插件的初始化，API 方法和属性将变得可用。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="keyword">var</span> jpm = $.jPanelMenu({
-    duration: <span class="number">1000</span>,
-    …
-});
-jpm.open( );
-</pre></td></tr></table></figure>
-
-<h3 id=" 打磨开发者接口 ">打磨开发者接口</h3>
-<p>通过几个简单的步骤和指导，我们已经构建了可复用，可扩展的插件。实验一下这一架构是否适合你，你的团队，以及你的工作流程。</p>
-]]></content>
-    <summary type="html"><![CDATA[<blockquote>
-<p>原文：<a href="http://alistapart.com/article/the-design-of-code-organizing-javascript" target="_blank">The Design of Code: Organizing JavaScript</a><br>作者：<a href="http://alistapart.com/author/acolangelo" target="_blank">Anthony Colangelo</a><br>译者：<a href="http://weibo.com/newwave" target="_blank">@涂鸦码龙</a></p>
-</blockquote>
-<p>伟大的设计是一个产品应该关注和重视的点，这样才能造就一个可用的，好理解的，精美的用户界面。千万不要认为设计仅仅是设计师的事。</p>
-<p>代码里面有好多种设计，我不是指代码构建了用户界面——我是指代码的设计。</p>
-<p>精心设计的代码更易于维护，优化和扩展，能使开发者更高效。这意味着更多的注意力和精力可以花在构建伟大的事情上，每个人都很愉快——用户，开发者和利益相关者。</p>
-<p>有 3 个高级的，跟语言无关的点，对代码设计十分重要。</p>
-<ol>
-<li>系统架构——代码库的基础设计。控制各种组件的规则，例如模块（models），视图（views）和控制器（controllers），以及之间的相互作用。   </li>
-<li>可维护性——如何更好地改进和扩展代码？   </li>
-<li>复用性——应用组件如何复用？每个组件的实例如何简便地个性定制？   </li>
-</ol>
-<p>比较宽松的语言，特别是 JavaScript ，需要一些规矩才能写好——代码设计。JavaScript 环境非常宽松，随处扔些代码片段，就可能起作用。早点确立系统架构（然后遵守它！）对你的代码库提供制约，确保自始至终的一致性。</p>
-<p>我比较喜欢的一个方法由久经考验的软件设计模式组成——模块模式，可扩展的结构使它成为可靠的系统架构，和可维护的代码库。我喜欢在一个 jQuery 插件里面构建模块，有漂亮的复用性，提供强健的选项设置，暴露一些精心设计的 API。</p>
-<p>下面，我将逐步讲解如何精心设计你的代码，把它变成结构良好的组件，从而在项目中复用。</p>
-<h3 id=" 模块模式 ">模块模式</h3>
-<p>已有许多设计模式，同样有许多相关资源。<a href="https://twitter.com/addyosmani" target="_blank">Addy Osmani</a> 写了本关于 JavaScript 设计模式的书《<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/" target="_blank">令人惊奇的书（免费！）</a>》，我极力推荐给各个水平的开发者。</p>
-<p><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript" target="_blank">模块模式</a> 是一个简单的结构基础，它可以让你的代码保持干净和条例清晰。一个“模块”就是个标准的包含方法和属性的对象字面量，简单是这个模式的最大亮点：甚至一些不熟悉传统的软件设计模式的人，一看就能立刻明白代码是如何工作的。<br>]]></summary>
-    
-      <category term="jQuery" scheme="http://jinlong.github.io/tags/jQuery/"/>
-    
-      <category term="设计模式" scheme="http://jinlong.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="jQuery" scheme="http://jinlong.github.io/categories/jQuery/"/>
-    
-      <category term="设计模式" scheme="http://jinlong.github.io/categories/jQuery/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
