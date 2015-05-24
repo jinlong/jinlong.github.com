@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2015-05-24T10:51:11.106Z</updated>
+  <updated>2015-05-24T10:59:17.620Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -256,7 +256,7 @@
     <link href="http://jinlong.github.io/2015/05/21/eliminate-javascript-code-smells/"/>
     <id>http://jinlong.github.io/2015/05/21/eliminate-javascript-code-smells/</id>
     <published>2015-05-21T15:06:21.000Z</published>
-    <updated>2015-05-21T17:06:04.000Z</updated>
+    <updated>2015-05-24T10:59:01.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：《<a href="http://elijahmanor.github.io/talks/js-smells/#/" target="_blank">ELIMINATE JAVASCRIPT CODE SMELLS</a>》<br>作者：<a href="http://elijahmanor.com" target="_blank">@elijahmanor</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank">涂鸦码农</a></p>
 </blockquote>
@@ -655,7 +655,7 @@ getArea(<span class="string">'Rectangle'</span>, { width: <span class="number">1
 getArea(<span class="string">'Bogus'</span>);
 </pre></td></tr></table></figure>
 
-<h2 id=" 为毛是这个味？违背“打开 / 关闭原则”">为毛是这个味？违背“<a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design" target="_blank">打开 / 关闭原则</a>”</h2>
+<h2 id=" 为毛是这个味？违背“开放 / 封闭原则”">为毛是这个味？违背“<a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design" target="_blank">开放 / 封闭原则</a>”</h2>
 <p>增加个新形状</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
