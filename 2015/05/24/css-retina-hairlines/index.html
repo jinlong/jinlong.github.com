@@ -1,0 +1,593 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Retina屏的移动设备如何实现真正1px的线？ | Alon&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Alon Zhang">
+    
+    <meta name="description" content="前些日子总被人问起 iOS Retina 屏，设置 1px 边框，实际显示 2px，如何解决？原来一直没在意，源于自己根本不是像素眼……今天仔细瞅了瞅原生实现的边框和 CSS 设置的边框，确实差距不小……
+
+上图是原生实现，下图是 CSS 边框，手机上对比更加明显
+然后，如何解决呢？搜遍整个谷歌，发">
+    
+    
+    
+    
+    <link rel="alternative" href="atom.xml" title="Alon&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Alon&#39;s Blog">Alon&#39;s Blog</a></h1>
+				<h2 class="blog-motto">一边翻译一边学习---涂鸦码龙</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="http://jinlongz.lofter.com/">涂鸦志</a></li>
+					
+						<li><a href="/doT">doT文档</a></li>
+					
+						<li><a href="/archives">存档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:jinlong.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/24/css-retina-hairlines/" title="Retina屏的移动设备如何实现真正1px的线？" itemprop="url">Retina屏的移动设备如何实现真正1px的线？</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://jinlong.github.io" title="Alon Zhang">Alon Zhang</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-05-24T10:02:35.000Z" itemprop="datePublished">5月 24 2015</time>
+    更新日期:<time datetime="2015-05-24T10:47:26.000Z" itemprop="dateModified">5月 24 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="# 有说用 _0-5px_ 解决的 "><span class="toc-number">1.</span> <span class="toc-text">有说用 0.5px 解决的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 还有用图片实现 _border_ 的 "><span class="toc-number">2.</span> <span class="toc-text">还有用图片实现 border 的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 还有用多背景渐变实现的 "><span class="toc-number">3.</span> <span class="toc-text">还有用多背景渐变实现的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 还有用 _box-shadow_ 模拟边框的 "><span class="toc-number">4.</span> <span class="toc-text">还有用 box-shadow 模拟边框的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 淘宝 M 站是通过 _viewport_+_rem_ 实现的 "><span class="toc-number">5.</span> <span class="toc-text">是通过 viewport + rem 实现的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 最后找到一个还算好用的方法：伪类 _+_transform"><span class="toc-number">6.</span> <span class="toc-text">最后找到一个还算好用的方法：伪类  + transform</span></a></li></ol>
+		</div>
+		
+		<blockquote>
+<p>前些日子总被人问起 iOS Retina 屏，设置 1px 边框，实际显示 2px，如何解决？<br>原来一直没在意，源于自己根本不是像素眼……<br>今天仔细瞅了瞅原生实现的边框和 CSS 设置的边框，确实差距不小……</p>
+</blockquote>
+<p>上图是原生实现，下图是 CSS 边框，手机上对比更加明显<br><img src="/image/css-retina-1px/native.jpg" /><img src="/image/css-retina-1px/css.jpg" /></p>
+<p>然后，如何解决呢？搜遍整个谷歌，发现好多人早已开始研究解决方案了。到底有哪些方案，到底好不好用呢？试过才知道，把我试过的结论记录一下。</p>
+<h1 id=" 有说用 _0-5px_ 解决的 ">有说用 0.5px 解决的</h1>
+<p>在 2014 年的 WWDC，“设计响应的 Web 体验” 一讲中，Ted O’Connor 讲到关于“retina<br> hairlines”（retina 极细的线）：在 retina 屏上仅仅显示 1 物理像素的边框，开发者应该如何处理呢。</p>
+<p>他们曾介绍到 iOS 8 和 OS X Yosemite 即将支持 0.5px 的边框：</p>
+<p><img src="/image/css-retina-1px/hairline.jpg" /></p>
+<p>额的神呐！so easy! 果真如此吗？</p>
+<p>这样还不够（WWDC 幻灯片通常是“唬人”的），但是相差不多。</p>
+<p>问题是 retina 屏的浏览器可能不认识 0.5px 的边框，将会把它解释成 0px，没有边框。包括 iOS 7 和 之前版本，OS X Mavericks 及以前版本，还有 Android 设备。</p>
+<p><strong>解决方案</strong></p>
+<p>解决方案是通过 JavaScript 检测浏览器能否处理 0.5px 的边框，如果可以，给<code>&lt;html&gt;</code>元素添加个<code>class</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="keyword">if</span> (window.devicePixelRatio && devicePixelRatio &gt;= <span class="number">2</span>) {
+  <span class="keyword">var</span> testElem = document.createElement(<span class="string">'div'</span>);
+  testElem.style.border = <span class="string">'.5px solid transparent'</span>;
+  document.body.appendChild(testElem);
+  <span class="keyword">if</span> (testElem.offsetHeight == <span class="number">1</span>)
+  {
+    document.querySelector(<span class="string">'html'</span>).classList.add(<span class="string">'hairlines'</span>);
+  }
+  document.body.removeChild(testElem);
+}
+<span class="comment">// 脚本应该放在 &lt;body&gt; 内， 如果在 &lt;head&gt; 里面运行，需要包装 $(document).ready(function() {   })</span>
+</pre></td></tr></table></figure>
+
+<p>然后，极细的边框样式就容易了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="tag">div</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#bbb</span></span></span>;
+<span class="rule">}</span></span>
+ 
+<span class="class">.hairlines</span> <span class="tag">div</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border-width</span>:<span class="value"> <span class="number">0.5</span>px</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p><strong>看起来是个解决方案，可是我要兼容安卓设备，和 iOS 8 以下设备怎么办？这个思路行不通。</strong></p>
+<h1 id=" 还有用图片实现 _border_ 的 ">还有用图片实现 border 的</h1>
+<p>6x6 的 一张图片</p>
+<p><img src="/image/css-retina-1px/border.png"></p>
+<p>可以用 gif，png，或 base64 图片</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="class">.border</span><span class="rules">{
+    <span class="rule"><span class="attribute">border-width</span>:<span class="value"> <span class="number">1</span>px</span></span>;
+    <span class="rule"><span class="attribute">border-image</span>:<span class="value"> <span class="function">url(border.gif)</span> <span class="number">2</span> repeat</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p><strong>缺点是改边框颜色时要改图片，不是很方便。</strong></p>
+<h1 id=" 还有用多背景渐变实现的 ">还有用多背景渐变实现的</h1>
+<p>设置 1px 的渐变背景，50% 有颜色，50% 透明</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="class">.border</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background</span>:<span class="value">
+    <span class="function">linear-gradient(<span class="number">180</span>deg, black, black <span class="number">50</span>%, transparent <span class="number">50</span>%)</span> top    left  / <span class="number">100</span>% <span class="number">1</span>px no-repeat,
+    <span class="function">linear-gradient(<span class="number">90</span>deg,  black, black <span class="number">50</span>%, transparent <span class="number">50</span>%)</span> top    right / <span class="number">1</span>px <span class="number">100</span>% no-repeat,
+    <span class="function">linear-gradient(<span class="number">0</span>,      black, black <span class="number">50</span>%, transparent <span class="number">50</span>%)</span> bottom right / <span class="number">100</span>% <span class="number">1</span>px no-repeat,
+    <span class="function">linear-gradient(-<span class="number">90</span>deg, black, black <span class="number">50</span>%, transparent <span class="number">50</span>%)</span> bottom left  / <span class="number">1</span>px <span class="number">100</span>% no-repeat</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p><strong>多写了不少代码，圆角也没法实现，也是不太好用。</strong></p>
+<h1 id=" 还有用 _box-shadow_ 模拟边框的 ">还有用 box-shadow 模拟边框的</h1>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="class">.hairlines</span> <span class="tag">li</span> <span class="rules">{
+    <span class="rule"><span class="attribute">border</span>:<span class="value"> none</span></span>;
+    <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> <span class="number">0</span> <span class="number">1</span>px <span class="number">1</span>px -<span class="number">1</span>px <span class="function">rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>)</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p><strong>试了下不太好用，颜色不好处理，有阴影出现。</strong></p>
+<h1 id=" 淘宝 M 站是通过 _viewport_+_rem_ 实现的 "><a href="http://m.taobao.com/" target="_blank">淘宝 M 站</a>是通过 viewport + rem 实现的</h1>
+<p>在<code>devicePixelRatio = 2</code> 时，输出 viewport</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no"</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>在<code>devicePixelRatio = 3</code> 时，输出 viewport</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no"</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>同时通过设置对应 viewport 的 rem 基准值，这种方式就可以像以前一样轻松愉快的写 1px 了。</p>
+<p><strong>个人感觉为了做个 border 多准备两套样式，还得动态改变 viewport ，有点费劲。</strong></p>
+<h1 id=" 最后找到一个还算好用的方法：伪类 _+_transform">最后找到一个还算好用的方法：伪类  + transform</h1>
+<p>原理是把原先元素的 border 去掉，然后利用 <code>:before</code> 或者 <code>:after</code> 重做 border ，并 transform 的 scale 缩小一半，原先的元素相对定位，新做的 border 绝对定位</p>
+<ul>
+<li>单条 border</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="class">.hairlines</span> <span class="tag">li</span><span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;
+    <span class="rule"><span class="attribute">border</span>:<span class="value">none</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.hairlines</span> <span class="tag">li</span><span class="pseudo">:after</span><span class="rules">{
+    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">''</span></span></span>;
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100</span>%</span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">1</span>px</span></span>;
+    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">scaleY(<span class="number">0.5</span>)</span></span></span>;
+            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">scaleY(<span class="number">0.5</span>)</span></span></span>;
+    <span class="rule"><span class="attribute">-webkit-transform-origin</span>:<span class="value"> <span class="number">0</span> <span class="number">0</span></span></span>;
+            <span class="rule"><span class="attribute">transform-origin</span>:<span class="value"> <span class="number">0</span> <span class="number">0</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<ul>
+<li>四条 border</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="class">.hairlines</span> <span class="tag">li</span><span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;
+    <span class="rule"><span class="attribute">margin-bottom</span>:<span class="value"> <span class="number">20</span>px</span></span>;
+    <span class="rule"><span class="attribute">border</span>:<span class="value">none</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.hairlines</span> <span class="tag">li</span><span class="pseudo">:after</span><span class="rules">{
+    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">''</span></span></span>;
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#000</span></span></span>;
+    <span class="rule"><span class="attribute">-webkit-box-sizing</span>:<span class="value"> border-box</span></span>;
+    <span class="rule"><span class="attribute">box-sizing</span>:<span class="value"> border-box</span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">200</span>%</span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">200</span>%</span></span>;
+    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">scale(<span class="number">0.5</span>)</span></span></span>;
+    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">scale(<span class="number">0.5</span>)</span></span></span>;
+    <span class="rule"><span class="attribute">-webkit-transform-origin</span>:<span class="value"> left top</span></span>;
+    <span class="rule"><span class="attribute">transform-origin</span>:<span class="value"> left top</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>样式使用的时候，也要结合 JS 代码，判断是否 Retina 屏</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="keyword">if</span>(window.devicePixelRatio && devicePixelRatio &gt;= <span class="number">2</span>){
+    document.querySelector(<span class="string">'ul'</span>).className = <span class="string">'hairlines'</span>;
+}
+</pre></td></tr></table></figure>
+
+<p>可以支持圆角，唯一的一点小缺陷是 <code>&lt;td&gt;</code> 用不了。</p>
+<blockquote>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://dieulot.net/css-retina-hairline" target="_blank">CSS retina hairline, the easy way.</a></li>
+<li><a href="http://www.ghugo.com/css-retina-hairline/" target="_blank">再谈 mobile web retina 下 1px 边框解决方案</a></li>
+<li><a href="https://51bits.com/writing/half-point-css-borders-in-ios/" target="_blank">Half-Point CSS Borders in iOS</a></li>
+<li><a href="http://n12v.com/css-retina-and-physical-pixels/" target="_blank">CSS, Retina, and Physical Pixels</a></li>
+</ul>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CSS/">CSS</a><a href="/tags/Retina/">Retina</a><a href="/tags/1px线/">1px线</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/CSS/">CSS</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  
+<div class="jiathis_style">
+    <span class="jiathis_txt">分享到：</span>
+    <a class="jiathis_button_tsina">新浪微博</a>
+    <a class="jiathis_button_weixin">微信</a>
+    <a class="jiathis_button_twitter">Twitter</a>
+    <a class="jiathis_button_evernote">EverNote</a>
+    <a href="http://www.jiathis.com/share?uid=1501277" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+     ralateuid:{"tsina":"1608907662"},hideMore:false}
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+1359953759521102" charset="utf-8"></script>      
+
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/05/21/eliminate-javascript-code-smells/"  title="去除 JavaScript 代码的怪味">
+ <strong>NEXT:</strong><br/> 
+ <span>去除 JavaScript 代码的怪味
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="# 有说用 _0-5px_ 解决的 "><span class="toc-number">1.</span> <span class="toc-text">有说用 0.5px 解决的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 还有用图片实现 _border_ 的 "><span class="toc-number">2.</span> <span class="toc-text">还有用图片实现 border 的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 还有用多背景渐变实现的 "><span class="toc-number">3.</span> <span class="toc-text">还有用多背景渐变实现的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 还有用 _box-shadow_ 模拟边框的 "><span class="toc-number">4.</span> <span class="toc-text">还有用 box-shadow 模拟边框的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 淘宝 M 站是通过 _viewport_+_rem_ 实现的 "><span class="toc-number">5.</span> <span class="toc-text">是通过 viewport + rem 实现的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="# 最后找到一个还算好用的方法：伪类 _+_transform"><span class="toc-number">6.</span> <span class="toc-text">最后找到一个还算好用的方法：伪类  + transform</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/1px线/" title="1px线">1px线<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AngularJS/" title="AngularJS">AngularJS<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Blink/" title="Blink">Blink<sup>1</sup></a></li>
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+		
+			<li><a href="/tags/CSS3/" title="CSS3">CSS3<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Chrome Extensions/" title="Chrome Extensions">Chrome Extensions<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Debug/" title="Debug">Debug<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Express/" title="Express">Express<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Firebug/" title="Firebug">Firebug<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Github Pages/" title="Github Pages">Github Pages<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>2</sup></a></li>
+		
+			<li><a href="/tags/HTML5/" title="HTML5">HTML5<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Handlebars/" title="Handlebars">Handlebars<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JSHint/" title="JSHint">JSHint<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>5</sup></a></li>
+		
+			<li><a href="/tags/Javascript/" title="Javascript">Javascript<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Octopress/" title="Octopress">Octopress<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/1px线/" style="font-size: 10.00px;">1px线</a><a href="/tags/AngularJS/" style="font-size: 16.00px;">AngularJS</a><a href="/tags/Blink/" style="font-size: 10.00px;">Blink</a><a href="/tags/CSS/" style="font-size: 20.00px;">CSS</a><a href="/tags/CSS3/" style="font-size: 10.00px;">CSS3</a><a href="/tags/Chrome Extensions/" style="font-size: 10.00px;">Chrome Extensions</a><a href="/tags/Debug/" style="font-size: 10.00px;">Debug</a><a href="/tags/ES6/" style="font-size: 10.00px;">ES6</a><a href="/tags/Express/" style="font-size: 10.00px;">Express</a><a href="/tags/Firebug/" style="font-size: 10.00px;">Firebug</a><a href="/tags/Git/" style="font-size: 10.00px;">Git</a><a href="/tags/Github Pages/" style="font-size: 10.00px;">Github Pages</a><a href="/tags/Grunt/" style="font-size: 12.00px;">Grunt</a><a href="/tags/HTML5/" style="font-size: 10.00px;">HTML5</a><a href="/tags/Handlebars/" style="font-size: 10.00px;">Handlebars</a><a href="/tags/JSHint/" style="font-size: 10.00px;">JSHint</a><a href="/tags/JavaScript/" style="font-size: 18.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 10.00px;">Javascript</a><a href="/tags/Node.js/" style="font-size: 16.00px;">Node.js</a><a href="/tags/Octopress/" style="font-size: 12.00px;">Octopress</a><a href="/tags/Opera/" style="font-size: 10.00px;">Opera</a><a href="/tags/Opera Extensions/" style="font-size: 10.00px;">Opera Extensions</a><a href="/tags/Retina/" style="font-size: 10.00px;">Retina</a><a href="/tags/Safari/" style="font-size: 10.00px;">Safari</a><a href="/tags/WebKit/" style="font-size: 10.00px;">WebKit</a><a href="/tags/flexbox/" style="font-size: 10.00px;">flexbox</a><a href="/tags/iOS7/" style="font-size: 10.00px;">iOS7</a><a href="/tags/jQuery/" style="font-size: 10.00px;">jQuery</a><a href="/tags/requestAnimationFrame/" style="font-size: 10.00px;">requestAnimationFrame</a><a href="/tags/toString/" style="font-size: 10.00px;">toString</a><a href="/tags/translate/" style="font-size: 10.00px;">translate</a><a href="/tags/交互设计/" style="font-size: 10.00px;">交互设计</a><a href="/tags/代码高亮/" style="font-size: 10.00px;">代码高亮</a><a href="/tags/全文搜索/" style="font-size: 10.00px;">全文搜索</a><a href="/tags/原创/" style="font-size: 14.00px;">原创</a><a href="/tags/垂直居中/" style="font-size: 10.00px;">垂直居中</a><a href="/tags/居中/" style="font-size: 10.00px;">居中</a><a href="/tags/开发工具/" style="font-size: 10.00px;">开发工具</a><a href="/tags/弹性布局/" style="font-size: 10.00px;">弹性布局</a><a href="/tags/水平居中/" style="font-size: 10.00px;">水平居中</a>
+    </div>
+  </div>
+
+
+  <div class="rsspart">
+	<a href="atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.gaiyong.me/" target="_blank">[低调的产品经理] <strong>敏感的胖子</strong></a></li>
+      <li><a href="http://www.xcodezone.com/" target="_blank">[PHP架构师] <strong>jiangfeng3</strong></a></li>
+      <li><a href="http://www.stylejar.com/" target="_blank">[热衷IOS的 PHP Coder] <strong>c小淡</strong></a></li>
+      <li><a href="http://yangjian.me" target="_blank" title="YangJian">Alimon's Blog</a></li>
+      <li><a href="http://hexo.io/" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+		<p> Hi~ I&#39;m Alon Zhang, Doodler and Coder <br/>
+			忙时码代码，无事乱涂鸦</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/newwave" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/jinlong" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://jinlong.github.io" target="_blank" title="Alon Zhang">Alon Zhang</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"jinlong"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2bd777ce3d5910b5c44deb753c24f3e3' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  </body>
+</html>

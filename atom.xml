@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2015-05-21T17:18:08.741Z</updated>
+  <updated>2015-05-24T10:51:11.106Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -13,6 +13,243 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Retina屏的移动设备如何实现真正1px的线？]]></title>
+    <link href="http://jinlong.github.io/2015/05/24/css-retina-hairlines/"/>
+    <id>http://jinlong.github.io/2015/05/24/css-retina-hairlines/</id>
+    <published>2015-05-24T10:02:35.000Z</published>
+    <updated>2015-05-24T10:47:26.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>前些日子总被人问起 iOS Retina 屏，设置 1px 边框，实际显示 2px，如何解决？<br>原来一直没在意，源于自己根本不是像素眼……<br>今天仔细瞅了瞅原生实现的边框和 CSS 设置的边框，确实差距不小……</p>
+</blockquote>
+<p>上图是原生实现，下图是 CSS 边框，手机上对比更加明显<br><img src="/image/css-retina-1px/native.jpg" /><img src="/image/css-retina-1px/css.jpg" /></p>
+<p>然后，如何解决呢？搜遍整个谷歌，发现好多人早已开始研究解决方案了。到底有哪些方案，到底好不好用呢？试过才知道，把我试过的结论记录一下。</p>
+<h1 id=" 有说用 _0-5px_ 解决的 ">有说用 0.5px 解决的</h1>
+<p>在 2014 年的 WWDC，“设计响应的 Web 体验” 一讲中，Ted O’Connor 讲到关于“retina<br> hairlines”（retina 极细的线）：在 retina 屏上仅仅显示 1 物理像素的边框，开发者应该如何处理呢。</p>
+<p>他们曾介绍到 iOS 8 和 OS X Yosemite 即将支持 0.5px 的边框：</p>
+<p><img src="/image/css-retina-1px/hairline.jpg" /></p>
+<p>额的神呐！so easy! 果真如此吗？</p>
+<p>这样还不够（WWDC 幻灯片通常是“唬人”的），但是相差不多。</p>
+<p>问题是 retina 屏的浏览器可能不认识 0.5px 的边框，将会把它解释成 0px，没有边框。包括 iOS 7 和 之前版本，OS X Mavericks 及以前版本，还有 Android 设备。</p>
+<p><strong>解决方案</strong></p>
+<p>解决方案是通过 JavaScript 检测浏览器能否处理 0.5px 的边框，如果可以，给<code>&lt;html&gt;</code>元素添加个<code>class</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="keyword">if</span> (window.devicePixelRatio && devicePixelRatio &gt;= <span class="number">2</span>) {
+  <span class="keyword">var</span> testElem = document.createElement(<span class="string">'div'</span>);
+  testElem.style.border = <span class="string">'.5px solid transparent'</span>;
+  document.body.appendChild(testElem);
+  <span class="keyword">if</span> (testElem.offsetHeight == <span class="number">1</span>)
+  {
+    document.querySelector(<span class="string">'html'</span>).classList.add(<span class="string">'hairlines'</span>);
+  }
+  document.body.removeChild(testElem);
+}
+<span class="comment">// 脚本应该放在 &lt;body&gt; 内， 如果在 &lt;head&gt; 里面运行，需要包装 $(document).ready(function() {   })</span>
+</pre></td></tr></table></figure>
+
+<p>然后，极细的边框样式就容易了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="tag">div</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#bbb</span></span></span>;
+<span class="rule">}</span></span>
+ 
+<span class="class">.hairlines</span> <span class="tag">div</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border-width</span>:<span class="value"> <span class="number">0.5</span>px</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p><strong>看起来是个解决方案，可是我要兼容安卓设备，和 iOS 8 以下设备怎么办？这个思路行不通。</strong></p>
+<h1 id=" 还有用图片实现 _border_ 的 ">还有用图片实现 border 的</h1>
+<p>6x6 的 一张图片</p>
+<p><img src="/image/css-retina-1px/border.png"></p>
+<p>可以用 gif，png，或 base64 图片</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="class">.border</span><span class="rules">{
+    <span class="rule"><span class="attribute">border-width</span>:<span class="value"> <span class="number">1</span>px</span></span>;
+    <span class="rule"><span class="attribute">border-image</span>:<span class="value"> <span class="function">url(border.gif)</span> <span class="number">2</span> repeat</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p><strong>缺点是改边框颜色时要改图片，不是很方便。</strong></p>
+<h1 id=" 还有用多背景渐变实现的 ">还有用多背景渐变实现的</h1>
+<p>设置 1px 的渐变背景，50% 有颜色，50% 透明</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="class">.border</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background</span>:<span class="value">
+    <span class="function">linear-gradient(<span class="number">180</span>deg, black, black <span class="number">50</span>%, transparent <span class="number">50</span>%)</span> top    left  / <span class="number">100</span>% <span class="number">1</span>px no-repeat,
+    <span class="function">linear-gradient(<span class="number">90</span>deg,  black, black <span class="number">50</span>%, transparent <span class="number">50</span>%)</span> top    right / <span class="number">1</span>px <span class="number">100</span>% no-repeat,
+    <span class="function">linear-gradient(<span class="number">0</span>,      black, black <span class="number">50</span>%, transparent <span class="number">50</span>%)</span> bottom right / <span class="number">100</span>% <span class="number">1</span>px no-repeat,
+    <span class="function">linear-gradient(-<span class="number">90</span>deg, black, black <span class="number">50</span>%, transparent <span class="number">50</span>%)</span> bottom left  / <span class="number">1</span>px <span class="number">100</span>% no-repeat</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p><strong>多写了不少代码，圆角也没法实现，也是不太好用。</strong></p>
+<h1 id=" 还有用 _box-shadow_ 模拟边框的 ">还有用 box-shadow 模拟边框的</h1>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="class">.hairlines</span> <span class="tag">li</span> <span class="rules">{
+    <span class="rule"><span class="attribute">border</span>:<span class="value"> none</span></span>;
+    <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> <span class="number">0</span> <span class="number">1</span>px <span class="number">1</span>px -<span class="number">1</span>px <span class="function">rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>)</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p><strong>试了下不太好用，颜色不好处理，有阴影出现。</strong></p>
+<h1 id=" 淘宝 M 站是通过 _viewport_+_rem_ 实现的 "><a href="http://m.taobao.com/" target="_blank">淘宝 M 站</a>是通过 viewport + rem 实现的</h1>
+<p>在<code>devicePixelRatio = 2</code> 时，输出 viewport</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no"</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>在<code>devicePixelRatio = 3</code> 时，输出 viewport</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no"</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>同时通过设置对应 viewport 的 rem 基准值，这种方式就可以像以前一样轻松愉快的写 1px 了。</p>
+<p><strong>个人感觉为了做个 border 多准备两套样式，还得动态改变 viewport ，有点费劲。</strong></p>
+<h1 id=" 最后找到一个还算好用的方法：伪类 _+_transform">最后找到一个还算好用的方法：伪类  + transform</h1>
+<p>原理是把原先元素的 border 去掉，然后利用 <code>:before</code> 或者 <code>:after</code> 重做 border ，并 transform 的 scale 缩小一半，原先的元素相对定位，新做的 border 绝对定位</p>
+<ul>
+<li>单条 border</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="class">.hairlines</span> <span class="tag">li</span><span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;
+    <span class="rule"><span class="attribute">border</span>:<span class="value">none</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.hairlines</span> <span class="tag">li</span><span class="pseudo">:after</span><span class="rules">{
+    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">''</span></span></span>;
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100</span>%</span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">1</span>px</span></span>;
+    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">scaleY(<span class="number">0.5</span>)</span></span></span>;
+            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">scaleY(<span class="number">0.5</span>)</span></span></span>;
+    <span class="rule"><span class="attribute">-webkit-transform-origin</span>:<span class="value"> <span class="number">0</span> <span class="number">0</span></span></span>;
+            <span class="rule"><span class="attribute">transform-origin</span>:<span class="value"> <span class="number">0</span> <span class="number">0</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<ul>
+<li>四条 border</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="class">.hairlines</span> <span class="tag">li</span><span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;
+    <span class="rule"><span class="attribute">margin-bottom</span>:<span class="value"> <span class="number">20</span>px</span></span>;
+    <span class="rule"><span class="attribute">border</span>:<span class="value">none</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.hairlines</span> <span class="tag">li</span><span class="pseudo">:after</span><span class="rules">{
+    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">''</span></span></span>;
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#000</span></span></span>;
+    <span class="rule"><span class="attribute">-webkit-box-sizing</span>:<span class="value"> border-box</span></span>;
+    <span class="rule"><span class="attribute">box-sizing</span>:<span class="value"> border-box</span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">200</span>%</span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">200</span>%</span></span>;
+    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">scale(<span class="number">0.5</span>)</span></span></span>;
+    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">scale(<span class="number">0.5</span>)</span></span></span>;
+    <span class="rule"><span class="attribute">-webkit-transform-origin</span>:<span class="value"> left top</span></span>;
+    <span class="rule"><span class="attribute">transform-origin</span>:<span class="value"> left top</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>样式使用的时候，也要结合 JS 代码，判断是否 Retina 屏</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="keyword">if</span>(window.devicePixelRatio && devicePixelRatio &gt;= <span class="number">2</span>){
+    document.querySelector(<span class="string">'ul'</span>).className = <span class="string">'hairlines'</span>;
+}
+</pre></td></tr></table></figure>
+
+<p>可以支持圆角，唯一的一点小缺陷是 <code>&lt;td&gt;</code> 用不了。</p>
+<blockquote>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://dieulot.net/css-retina-hairline" target="_blank">CSS retina hairline, the easy way.</a></li>
+<li><a href="http://www.ghugo.com/css-retina-hairline/" target="_blank">再谈 mobile web retina 下 1px 边框解决方案</a></li>
+<li><a href="https://51bits.com/writing/half-point-css-borders-in-ios/" target="_blank">Half-Point CSS Borders in iOS</a></li>
+<li><a href="http://n12v.com/css-retina-and-physical-pixels/" target="_blank">CSS, Retina, and Physical Pixels</a></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    
+      <category term="CSS" scheme="http://jinlong.github.io/tags/CSS/"/>
+    
+      <category term="Retina" scheme="http://jinlong.github.io/tags/Retina/"/>
+    
+      <category term="1px线" scheme="http://jinlong.github.io/tags/1px%E7%BA%BF/"/>
+    
+      <category term="CSS" scheme="http://jinlong.github.io/categories/CSS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[去除 JavaScript 代码的怪味]]></title>
@@ -6379,126 +6616,6 @@ console.log(declaredLater);
       <category term="居中" scheme="http://jinlong.github.io/categories/CSS/%E5%B1%85%E4%B8%AD/"/>
     
       <category term="translate" scheme="http://jinlong.github.io/categories/CSS/%E5%B1%85%E4%B8%AD/translate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[使用 JavaScript 的 toString 方法]]></title>
-    <link href="http://jinlong.github.io/2013/07/06/using-javascripts-tostring-method/"/>
-    <id>http://jinlong.github.io/2013/07/06/using-javascripts-tostring-method/</id>
-    <published>2013-07-06T05:47:00.000Z</published>
-    <updated>2014-11-21T07:40:39.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>原文：<a href="http://designpepper.com/blog/drips/using-javascripts-tostring-method" target="_blank">Using JavaScript’s ‘toString’ Method</a> （需翻墙）<br>译者：<a href="http://weibo.com/newwave" target="_blank">涂鸦码龙</a></p>
-</blockquote>
-<p>是否想知道为什么 <code>alert</code> 一个 JavaScript 对象，得到“[object Object]”文本？缘于 JavaScript 内置 <code>toString</code> 方法。</p>
-<p><strong><em>注意：例子有些地方用了 <code>alert</code> ，没用 <code>console.log</code> ，是为了绕开 console 对 Object 的特殊处理。</em></strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre><span class="comment">// Alerts: '[object Object]'</span>
-alert({});
-
-<span class="comment">// Outputs: "function() {}"</span>
-console.log(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>});
-
-<span class="comment">// Outputs:</span>
-<span class="comment">// "Thu Oct 11 1962 00:00:00 GMT-0400 (Eastern Daylight Time)"</span>
-<span class="comment">// May vary depending on your clock settings</span>
-console.log(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"October 11, 1962"</span>));
-</pre></td></tr></table></figure>
-
-<p>以上这些有什么共同点？每一个都提供字符串代表它们的值，但是内部的值差异很大。比如，内部的 Date 以毫秒衡量。</p>
-<p>这些对象如何提供字符串作代表？它们均有个 prototype 方法：<code>toString</code>，它会把内部的值转换成字符串。</p>
-<p>假如我们想创建一个新对象，让它返回字符串代表它的值，不用 <code>toString</code> 的话，代码像这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">Color</span> <span class="params">(r, g, b)</span> {</span>
-    <span class="keyword">this</span>.r = r;
-    <span class="keyword">this</span>.g = g;
-    <span class="keyword">this</span>.b = b;
-    <span class="keyword">this</span>.text = <span class="string">"rgb("</span> + r + <span class="string">", "</span> + g + <span class="string">", "</span> + b + <span class="string">")"</span>;
-}
-
-<span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);
-
-<span class="comment">// Outputs: "rgb(255, 0, 0)"</span>
-alert(red.text);
-</pre></td></tr></table></figure>
-
-<p>有几个问题，首先，<code>text</code> 属性跟实际的值不同步（如果改变 r, g, b 的值）；其次，必须明确调用 <code>red.text</code> ，不能直接用 red 的值。</p>
-<p>用 <code>toString</code> 方法重写一下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">Color</span> <span class="params">(r, g, b)</span> {</span>
-    <span class="keyword">this</span>.r = r;
-    <span class="keyword">this</span>.g = g;
-    <span class="keyword">this</span>.b = b;
-}
-
-Color.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="keyword">return</span> <span class="string">"rgb("</span> + <span class="keyword">this</span>.r + <span class="string">", "</span> +
-                    <span class="keyword">this</span>.g + <span class="string">", "</span> +
-                    <span class="keyword">this</span>.b + <span class="string">")"</span>;
-};
-
-<span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);
-
-<span class="comment">// Alerts: "rgb(255, 0, 0)"</span>
-alert(red);
-</pre></td></tr></table></figure>
-
-<p>把要返回的字符串放到 prototype 的 <code>toString</code> 里面有两个好处：字符串始终与真正的值保持同步，我们可以随时取用字符串的值， JavaScript 解释器会隐含调用 <code>toString</code> 方法。比如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="keyword">var</span> message = <span class="string">"Red is: "</span> + red;
-
-<span class="comment">// Outputs: "Red is: rgb(255, 0, 0)"</span>
-console.log(message);
-</pre></td></tr></table></figure>
-
-]]></content>
-    
-    
-      <category term="JavaScript" scheme="http://jinlong.github.io/tags/JavaScript/"/>
-    
-      <category term="toString" scheme="http://jinlong.github.io/tags/toString/"/>
-    
-      <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
-    
-      <category term="toString" scheme="http://jinlong.github.io/categories/JavaScript/toString/"/>
     
   </entry>
   
