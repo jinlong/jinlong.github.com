@@ -1,0 +1,1302 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alon's Blog">
+<meta property="og:url" content="http://jinlong.github.io/page/4/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Alon's Blog">
+<meta name="twitter:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/04/20/advanced-cross-browser-flexbox/" itemprop="url">
+                  跨浏览器弹性布局进阶教程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-04-20T16:22:00+08:00" content="2013-04-20">
+              2013-04-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/flexbox/" itemprop="url" rel="index">
+                    <span itemprop="name">flexbox</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/flexbox/弹性布局/" itemprop="url" rel="index">
+                    <span itemprop="name">弹性布局</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/flexbox/弹性布局/CSS3/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS3</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/flexbox/弹性布局/CSS3/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/04/20/advanced-cross-browser-flexbox/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/04/20/advanced-cross-browser-flexbox/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>原文作者：<a href="http://dev.opera.com/author/chrismills" target="_blank" rel="external">Chris Mills</a><br>原文链接：<a href="http://dev.opera.com/articles/view/advanced-cross-browser-flexbox/" target="_blank" rel="external">Advanced cross-browser flexbox</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>##引言</p>
+<p><a href="http://www.w3.org/TR/css3-flexbox/" target="_blank" rel="external">CSS3 弹性布局模块</a> —— 短命名叫 Flexbox —— 为我们的 web 开发带来了许多能量和令人兴奋的畅想空间，我们可以快速轻松地搭建复杂的网站布局，摒弃一些我们惯常使用的不合理的 hacks 和 补丁。我的文章 《<a href="http://dev.oupeng.com/articles/flexbox-basics" target="_blank" rel="external">伸缩布局 — 打开布局天堂之门？</a>》讲述了一些 Flexbox 的基础，本文将是进阶教程，我会带大家看一些高级点的例子，使用 Modernizr 为那些参差不齐的 flexbox 支持情况提供不同的样式，以便提供当前可用的最优的跨浏览器方案。</p>
+<p>##看下面例子</p>
+<p>我为文章做的例子如图1：</p>
+<p><img src="/images/post/figure1.jpg"></p>
+<p><strong><em>图1：最终布局例子的截图</em></strong></p>
+<p>实例包含多层 flexbox 容器，比较急切的话可以先<a href="http://dev.opera.com/static/articles/2013/flexbox-case-study/flexbox-modernizr.html" target="_blank" rel="external">看看最终效果</a>，然后继续探索代码细节。  </p>
+<p>您对此篇文章感兴趣的话，欢迎到我们的<a href="http://dev.oupeng.com/articles/advanced-cross-browser-flexbox" target="_blank" rel="external">欧朋技术博客</a>看全文，这里没有复制全文，见谅见谅~</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/03/30/octopress-syntax-highlight/" itemprop="url">
+                  踩中Octopress代码高亮的坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-03-30T14:40:00+08:00" content="2013-03-30">
+              2013-03-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Octopress/" itemprop="url" rel="index">
+                    <span itemprop="name">Octopress</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Octopress/代码高亮/" itemprop="url" rel="index">
+                    <span itemprop="name">代码高亮</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/03/30/octopress-syntax-highlight/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/03/30/octopress-syntax-highlight/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>先啰嗦啰嗦，吐槽几句，木有同感可以略过……</p>
+<p>“尼玛，真是应了 Octopress 那句口号：黑客专用博客框架，一般人想搞定它真不易啊！自从决定用 Octopress 起就开始处处踩坑，基本木有顺利的时候。就想用用Markdown ，体验一下所谓的畅快淋漓的写作快感，只想少花时间折腾博客样式，容易嘛……”</p>
+<p>开始选的 <a href="http://jekyllbootstrap.com/">jekyllbootstrap</a> 按照教程步骤一步步来，安个 Ruby 费了老鼻子劲，最后卡在 <code>jekyll --server</code> 上，死活在本地无法预览，写个博客，做点改动都要传到 Github 看效果，实在忍受不了…… 放弃!</p>
+<p>不破不立，正当我打算放弃折腾 Jekyll 这破玩意儿的时候，发现了 Octopress ，它真像黑夜里的一盏明灯啊，让我又燃起了希望~~~</p>
+<p>果不其然，Octopress 配置起来容易许多，再加我有了一些折腾 Jekyll 的经验，虽然过程有点小坎坷，但在 Google 的帮助下总算搭起了环境。</p>
+<p>Google 的文章一大把，但适合自己最重要，还是把配置 Octopress 的过程总结了一篇博文留念<a href="http://jinlong.github.com/blog/2013/03/15/deploy-github-pages-using-octopress-on-windows/">《Deploy Github Pages Using Octopress on Windows》</a> </p>
+<h2 id="<!-more->">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/03/30/octopress-syntax-highlight/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/03/29/the-length-of-css/" itemprop="url">
+                  CSS 的长度
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-03-29T22:29:00+08:00" content="2013-03-29">
+              2013-03-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/翻译/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/03/29/the-length-of-css/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/03/29/the-length-of-css/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文地址：<a href="http://css-tricks.com/the-lengths-of-css/">http://css-tricks.com/the-lengths-of-css/</a><br>原文作者：<a href="http://css-tricks.com/">CHRIS COYIER</a><br>译者：张金龙 <a href="http://weibo.com/newwave">@金龙Along</a></p>
+</blockquote>
+<p>CSS 里有不少把长度作为值的属性，盒模型的属性就是明显的例子：<a href="http://css-tricks.com/almanac/properties/w/width/">width</a>, <a href="http://css-tricks.com/almanac/properties/h/height/">height</a>, <a href="http://css-tricks.com/almanac/properties/m/margin/">margin</a>, <a href="http://css-tricks.com/almanac/properties/p/padding/">padding</a>, <a href="http://css-tricks.com/almanac/properties/b/border/">border</a>。还有其它例子：<a href="http://css-tricks.com/almanac/properties/b/box-shadow/">box-shadow</a>的偏移和阴影半径，或者字体的大小和字间距。CSS 都有哪些可用的“长度单位”呢？已经相当多啦。</p>
+<p>##绝对长度</p>
+<p>###px</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.wrap</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">400px</span></span></span>; </span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>Pixel 可能是最容易想到的衡量“设备像素”的单位，它不需要对显示器上的屏幕像素做任何事。它的确是<a href="http://inamidst.com/stuff/notes/csspx">一个简单易用的度量尺寸</a>。</p>
+<p>它被设想成一个跨设备和显示器的标准化的值，实际上这一设想越来越不成立。举例来说，在 iPad mini 和 iPad 上<a href="http://cdn.css-tricks.com/wp-content/uploads/2013/03/ipad-mini.png">渲染同一个网站</a>，如果长度单位都被设成 px ，按理说 iPad mini 上的网站会超出屏幕。</p>
+<p>px 尽管一直有些缺点，它仍然是网络上典型的度量单位。许多其它的长度会直接换算成 px，JavaScript 就是用的 px 。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/03/29/the-length-of-css/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/03/23/git-command/" itemprop="url">
+                  git command
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-03-23T10:29:00+08:00" content="2013-03-23">
+              2013-03-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/原创/" itemprop="url" rel="index">
+                    <span itemprop="name">原创</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/原创/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/03/23/git-command/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/03/23/git-command/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>最近项目中用到了 <code>git branch</code> 和 <code>git submodule</code>，查阅了一些文章，总算有点头绪了，连同一些常用的 git 命令记录在此，以便查阅。</p>
+<p>##git 常用命令</p>
+<ul>
+<li>远程仓库相关命令</li>
+</ul>
+<p>检出仓库：<code>$ git clone git://github.com/jquery/jquery.git</code>    </p>
+<p>查看远程仓库：<code>$ git remote -v</code>    </p>
+<p>添加远程仓库：<code>$ git remote add [name] [url]</code></p>
+<p>删除远程仓库：<code>$ git remote rm [name]</code>    </p>
+<p>修改远程仓库：<code>$ git remote set-url --push [name] [newUrl]</code>    </p>
+<p>拉取远程仓库：<code>$ git pull [remoteName] [localBranchName]</code>    </p>
+<p>推送远程仓库：<code>$ git push [remoteName] [localBranchName]</code>    </p>
+<p>初始化仓库：<code>git init</code><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/03/23/git-command/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/03/15/deploy-github-pages-using-octopress-on-windows/" itemprop="url">
+                  Deploy Github Pages using Octopress on Windows
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-03-15T01:49:00+08:00" content="2013-03-15">
+              2013-03-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Octopress/" itemprop="url" rel="index">
+                    <span itemprop="name">Octopress</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Octopress/Github-Pages/" itemprop="url" rel="index">
+                    <span itemprop="name">Github Pages</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/03/15/deploy-github-pages-using-octopress-on-windows/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/03/15/deploy-github-pages-using-octopress-on-windows/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><a href="http://octopress.org/docs/setup/">官方文档</a> </p>
+<blockquote>
+<p>“Octopress is a blogging framework for hackers”<br>Octopress 是黑客专属的博客框架，命令行可以搞定一切部署。</p>
+</blockquote>
+<p>##前期准备</p>
+<ol>
+<li>安装 Git <a href="http://git-scm.com/">http://git-scm.com/</a> (需翻墙), <a href="https://code.google.com/p/msysgit/">google code 也提供下载</a>  </li>
+<li>使用 <a href="http://octopress.org/docs/setup/rbenv">rbenv</a> 或 <a href="http://octopress.org/docs/setup/rvm">RVM</a> 安装 Ruby 1.9.3<br>这俩儿货我均搞不定，总是磕磕绊绊不顺利，最终发现了一个简单的套件 <a href="http://railsinstaller.org/">RailsInstaller</a>  。这个相当爽啊，包含：Ruby 1.9.3-p125，Bundler 1.0.18，Git 1.7.6，DevKit等工具，虽然有的用不着，但比起配置 Ruby 和一些插件痛快多了。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/03/15/deploy-github-pages-using-octopress-on-windows/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/03/15/previous-blogs/" itemprop="url">
+                  Previous Posts
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-03-15T00:57:00+08:00" content="2013-03-15">
+              2013-03-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/原创/" itemprop="url" rel="index">
+                    <span itemprop="name">原创</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/原创/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/原创/翻译/移动前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">移动前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/03/15/previous-blogs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/03/15/previous-blogs/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>这里记录我原创的一些文章，有翻译的，有自己写的，算是一点积淀吧。旧的文章已放到了其它博客上，这里只列出了链接；以后新的文章会在此博客更新。</p>
+</blockquote>
+<ul>
+<li><p>《翻译：WebKit for Developers》</p>
+<p><a href="http://ux.etao.com/posts/715">http://ux.etao.com/posts/715</a><br><a href="http://ued.taobao.com/blog/2013/03/webkit-for-developers/">http://ued.taobao.com/blog/2013/03/webkit-for-developers/</a></p>
+</li>
+</ul>
+<ul>
+<li><p>《WebKit for Developers（WebKit 之于开发者）》 初稿 WebKit for Developers（WebKit 之于开发者）.zip</p>
+</li>
+<li><p><a href="http://vdisk.weibo.com/s/mtPit">《移动前端开发兼容细节》</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/03/15/previous-blogs/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/03/13/FE-Interview/" itemprop="url">
+                  FE Interview
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-03-13T10:57:00+08:00" content="2013-03-13">
+              2013-03-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/原创/" itemprop="url" rel="index">
+                    <span itemprop="name">原创</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/原创/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/03/13/FE-Interview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/03/13/FE-Interview/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="憋考死牛"><del>憋</del>考死牛</h2><blockquote>
+<p>总结了古今中外一些“优秀”面试题的精髓，希望对大家的面试有帮助。</p>
+<p>真实目的：立志考倒各种资深前端、架构师、专家，为博大家一乐，不要当真，呵呵~</p>
+<p>面试题总分100分，初始分值100分，请谨慎作答。</p>
+</blockquote>
+<p>##一般问题</p>
+<ol>
+<li><p>你用 Twitter ，Facebook 吗，都关注哪些人？</p>
+<p>参考答案：<br>不用，登不上去啊（作为资深前端，不会翻墙可不行 -1分）<br>用，关注苍老师，**萝拉，吉泽**等娱乐明星，同时关注 Nicholas C. Zakas，Douglas Crockford，John Resig 等技术大牛。（诚实可信，不扣分） </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/03/13/FE-Interview/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
+
+
+        </div>
+
+        
+
+
+        
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

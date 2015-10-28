@@ -1,0 +1,901 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="原创,面试," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="憋考死牛
+总结了古今中外一些“优秀”面试题的精髓，希望对大家的面试有帮助。
+真实目的：立志考倒各种资深前端、架构师、专家，为博大家一乐，不要当真，呵呵~
+面试题总分100分，初始分值100分，请谨慎作答。
+
+##一般问题
+
+你用 Twitter ，Facebook 吗，都关注哪些人？
+参考答案：不用，登不上去啊（作为资深前端，不会翻墙可不行 -1分）用，关注苍老师，**萝拉，吉泽**等娱乐明星，同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FE Interview">
+<meta property="og:url" content="http://jinlong.github.io/2013/03/13/FE-Interview/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="憋考死牛
+总结了古今中外一些“优秀”面试题的精髓，希望对大家的面试有帮助。
+真实目的：立志考倒各种资深前端、架构师、专家，为博大家一乐，不要当真，呵呵~
+面试题总分100分，初始分值100分，请谨慎作答。
+
+##一般问题
+
+你用 Twitter ，Facebook 吗，都关注哪些人？
+参考答案：不用，登不上去啊（作为资深前端，不会翻墙可不行 -1分）用，关注苍老师，**萝拉，吉泽**等娱乐明星，同">
+<meta property="og:image" content="http://jinlong.github.io/images/post/fe-Interview/matrix.png">
+<meta property="og:updated_time" content="2014-10-25T02:19:36.208Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FE Interview">
+<meta name="twitter:description" content="憋考死牛
+总结了古今中外一些“优秀”面试题的精髓，希望对大家的面试有帮助。
+真实目的：立志考倒各种资深前端、架构师、专家，为博大家一乐，不要当真，呵呵~
+面试题总分100分，初始分值100分，请谨慎作答。
+
+##一般问题
+
+你用 Twitter ，Facebook 吗，都关注哪些人？
+参考答案：不用，登不上去啊（作为资深前端，不会翻墙可不行 -1分）用，关注苍老师，**萝拉，吉泽**等娱乐明星，同">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> FE Interview | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                FE Interview
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-03-13T10:57:00+08:00" content="2013-03-13">
+              2013-03-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/原创/" itemprop="url" rel="index">
+                    <span itemprop="name">原创</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/原创/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/03/13/FE-Interview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/03/13/FE-Interview/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="憋考死牛"><del>憋</del>考死牛</h2><blockquote>
+<p>总结了古今中外一些“优秀”面试题的精髓，希望对大家的面试有帮助。</p>
+<p>真实目的：立志考倒各种资深前端、架构师、专家，为博大家一乐，不要当真，呵呵~</p>
+<p>面试题总分100分，初始分值100分，请谨慎作答。</p>
+</blockquote>
+<p>##一般问题</p>
+<ol>
+<li><p>你用 Twitter ，Facebook 吗，都关注哪些人？</p>
+<p>参考答案：<br>不用，登不上去啊（作为资深前端，不会翻墙可不行 -1分）<br>用，关注苍老师，**萝拉，吉泽**等娱乐明星，同时关注 Nicholas C. Zakas，Douglas Crockford，John Resig 等技术大牛。（诚实可信，不扣分） </p>
+<a id="more"></a>   </li>
+<li><p>使用过那些版本管理工具，说出几种名字？</p>
+<p>参考答案：<br>CVS，TortoiseSVN，Git 等，发音准确就算过，不扣分<br>参考 <a href="http://coolshell.cn/articles/3288.html" target="_blank" rel="external">http://coolshell.cn/articles/3288.html</a>     </p>
+</li>
+<li><p>用过哪些编码工具（IDE），最喜欢哪一种？TAB 键是怎么设置的，1个空格，2个空格，还是4个空格？</p>
+<p>参考答案：自由回答</p>
+</li>
+<li><p>平时用什么牌子电脑？ThinkPad，Mac 还是其它？</p>
+<p>参考答案：考官根据自己的电脑档次和面试者的电脑档次酌情给分。   </p>
+</li>
+<li><p>平时喜欢用什么浏览器开发调试，简单说一下各浏览器的市场份额吧？</p>
+<p>参考答案：google 一下最新市场份额</p>
+</li>
+<li><p>你能描述一下设计，制作，调试，发布一个网页的简单工作流程吗？</p>
+<p>参考答案：要求太高了吧…</p>
+</li>
+<li><p>你能描述一下“渐进增强”和“优雅降级”用英文怎么写吗?</p>
+<p>参考答案：有道词典翻译，如果提到了“特性检测”，同时问“特性检测”英文怎么写。</p>
+</li>
+<li><p>跟产品经理和其它合作人员的关系怎样？</p>
+<p>参考答案：没打过他们…（打过产品经理的 -10 分）</p>
+</li>
+</ol>
+<p>##HTML 相关问题</p>
+<ol>
+<li><p>完整写出几种常用的 DOCTYPE？<br>比如：</p>
+<pre><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+</code></pre>
+
+<p>参考答案：（平时都是复制粘贴或自动生成的吧？哈哈）答不上来不扣分</p>
+</li>
+<li><p>了解 HTML5 吗，请说一下 HTML5 以及之前的 HTML 的变迁史？</p>
+<p>参考答案：每本技术书前面都有好几章介绍历史（说不上来 -1 分）</p>
+</li>
+<li><p>HTML5 更注重语义化，请说说 HTML5 总共增加了哪些标签，及其语义。</p>
+<p>参考答案：答不全 -1 分</p>
+</li>
+<li><p>写一个最简洁，最兼容的 HTML 结构。</p>
+<p>参考答案：<code>&lt;html&gt;&lt;/html&gt;</code></p>
+</li>
+</ol>
+<p>##CSS 相关问题</p>
+<ol>
+<li><p>你用过几种 IE，如何兼容 IE 5.5 及以下版本？</p>
+<p>参考答案：擦，直接减分吧……</p>
+</li>
+<li><p>简单说下清除浮动的 N 种理由和 N 种方法的其中一种。</p>
+</li>
+</ol>
+<ol>
+<li><p>说说你不会的 CSS hacks 吧。</p>
+<p>参考答案：…放弃（-1 分）</p>
+</li>
+<li><p>传说多少个 Class 可以干掉一个 Id?</p>
+<p>参考答案：256 <a href="http://www.thecssninja.com/css/extreme-specificity" target="_blank" rel="external">Extreme specificity overriding a CSS ID with 256 chained Classes</a></p>
+</li>
+<li><p>说说在 IE6 中如何模拟 CSS3 的一些高级效果（要求一模一样）。</p>
+<p>参考答案：放弃（-1 分）</p>
+</li>
+<li><p>根据你掌握的 CSS 定位知识连线。</p>
+<p>绝对定位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>position : relative;</code> </p>
+<p>相对定位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>float : left;</code> </p>
+<p>浮动定位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>position : fixed;</code> </p>
+<p>固定定位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>position : absolute;</code></p>
+</li>
+</ol>
+<p>##JavaScript 相关问题</p>
+<ol>
+<li><p>你使用过哪些 JavaScript 库，它们的作者是谁？</p>
+<p>参考答案：不会 -1 分</p>
+</li>
+<li><p>请描述下 JavaScript 与 JAVA 的区别，为什么前端工程师得会 JAVA？</p>
+<p>参考答案：</p>
+</li>
+<li><p>跟女友约会的时候会不会“面向对象”编程？</p>
+<p>参考答案：会（-10 分）</p>
+</li>
+<li><p>谈一下你了解的设计模式，平常喜欢玩哪种模式，新手模式，普通模式，困难模式，还是专家模式？</p>
+<p>参考答案：地狱模式（1条命，死了重玩啊……）</p>
+</li>
+<li><p>矩阵问题：3秒内说出矩阵内有多少个0，多少个1？</p>
+<p><img src="/images/post/fe-Interview/matrix.png"></p>
+</li>
+<li><p>你都使用哪些工具测试代码的性能？</p>
+<p>参考答案：催着上线，用户反馈测试吧（有时候也挨骂…）</p>
+</li>
+<li><p>完型填空： Brendan Eich and Doug Crockford are JavaScript’s <strong><em>__</em></strong>。</p>
+</li>
+</ol>
+<p>##综合题</p>
+<ol>
+<li><p>请说出 N 种降低页面加载时间的方法。</p>
+<p>参考答案：N 可以等于1（说10种以上 -1 分）</p>
+</li>
+<li><p>用 JavaScript，CSS，HTML 等所学的前端知识，描述一下氢气加氧气生成水的过程。<br>参考公式：H2 + O2 = H2O</p>
+<p>参考答案：用 HTML 语义写出 H2 + O2 = H2O，再加点 CSS3 动画。（不会 -1 分）</p>
+</li>
+<li><p>请写一个简单的幻灯片效果。</p>
+<p>参考答案：如果不使用 JS 完成，可以加 10 分；不用 JS 和 CSS 完成，加 20 分；不用 JS，CSS，HTML 完成加 100 分。</p>
+</li>
+<li><p>浅析下“响应式设计”与“不响应设计”。</p>
+<p>参考答案：“不响应设计”是因为 JavaScript 被禁用了。</p>
+</li>
+</ol>
+<p>###总结<br>……做题结束，得了100分，以为面试妥妥的了，“回去等消息吧”（面试还是讲究眼缘，讲究彼此感觉，跟找对象类似…）</p>
+<hr>
+<p><strong>正经的面试参考：</strong><br><a href="https://github.com/darcyclarke/Front-end-Developer-Interview-Questions" title="Front-end Job Interview Questions" target="_blank" rel="external">Front-end Job Interview Questions</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/原创/" rel="tag">#原创</a>
+          
+            <a href="/tags/面试/" rel="tag">#面试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/03/15/previous-blogs/" rel="prev" title="Previous Posts">
+                Previous Posts <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/03/13/FE-Interview/"
+     data-title="FE Interview"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/03/13/FE-Interview/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/03/13/FE-Interview/"
+           data-title="FE Interview" data-url="http://jinlong.github.io/2013/03/13/FE-Interview/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#憋考死牛"><span class="nav-number">1.</span> <span class="nav-text">憋考死牛</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

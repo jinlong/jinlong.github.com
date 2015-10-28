@@ -1,0 +1,859 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Express,Node.js," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：Introduction to Express笔记：涂鸦码龙
+
+##安装
+package.json 中手动添加 Express 依赖
+12345678&amp;#123;   &quot;name&quot;: &quot;demo1&quot;,   &quot;description&quot;: &quot;First Express app&quot;,   &quot;version&quot;: &quot;0.0.1&quot;,   &quot;dependencies&quot;: &amp;#123;      &quot;expre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express 入门">
+<meta property="og:url" content="http://jinlong.github.io/2014/01/07/introduction-to-express/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：Introduction to Express笔记：涂鸦码龙
+
+##安装
+package.json 中手动添加 Express 依赖
+12345678&amp;#123;   &quot;name&quot;: &quot;demo1&quot;,   &quot;description&quot;: &quot;First Express app&quot;,   &quot;version&quot;: &quot;0.0.1&quot;,   &quot;dependencies&quot;: &amp;#123;      &quot;expre">
+<meta property="og:image" content="http://jinlong.github.io/images/post/exp-blog/express-blog3-home.jpg">
+<meta property="og:image" content="http://jinlong.github.io/images/post/exp-blog/express-blog3-article.jpg">
+<meta property="og:image" content="http://jinlong.github.io/images/post/exp-blog/express-blog4-home.jpg">
+<meta property="og:image" content="http://jinlong.github.io/images/post/exp-blog/express-blog4-article.jpg">
+<meta property="og:updated_time" content="2015-10-28T14:37:46.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Express 入门">
+<meta name="twitter:description" content="原文：Introduction to Express笔记：涂鸦码龙
+
+##安装
+package.json 中手动添加 Express 依赖
+12345678&amp;#123;   &quot;name&quot;: &quot;demo1&quot;,   &quot;description&quot;: &quot;First Express app&quot;,   &quot;version&quot;: &quot;0.0.1&quot;,   &quot;dependencies&quot;: &amp;#123;      &quot;expre">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Express 入门 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Express 入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2014-01-07T16:19:00+08:00" content="2014-01-07">
+              2014-01-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/Express/" itemprop="url" rel="index">
+                    <span itemprop="name">Express</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/01/07/introduction-to-express/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/07/introduction-to-express/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：<a href="http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-express/" target="_blank" rel="external">Introduction to Express</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>##安装</p>
+<p>package.json 中手动添加 Express 依赖</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="string">"name"</span>: <span class="string">"demo1"</span>,</span><br><span class="line">   <span class="string">"description"</span>: <span class="string">"First Express app"</span>,</span><br><span class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</span><br><span class="line">   <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相同的目录运行：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+<p>命令行安装 Express 直接运行：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> express</span></span><br></pre></td></tr></table></figure>
+<p>安装完后可以用 express 在命令行生成应用。</p>
+<p>添加 app.js 文件，写个最简单的应用，创建一个 Express 实例，开始监听特定的端口 ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>运行 <code>node app</code> 没发生任何事情。</p>
+<a id="more"></a>
+<p>##定义路由</p>
+<p>我们给应用添加一些简单的路由，Express 可以响应各种 HTTP 请求：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Regular HTTP get</span></span><br><span class="line">app.get(some url, <span class="keyword">do</span> something);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//Some other page</span></span><br><span class="line">app.get(some other url, <span class="keyword">do</span> something <span class="keyword">else</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//I can respond to a form post</span></span><br><span class="line">app.post(some url, <span class="keyword">do</span> more stuff);</span><br></pre></td></tr></table></figure>
+<p>我们写个真实的例子，给应用添加主页：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">   response.send(<span class="string">"This would be some HTML"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>注意 Express 为 response 对象添加了 <code>send()</code> 方法，一些模板代码可以处理响应。重启应用，访问 <a href="http://localhost:3000/" target="_blank" rel="external">http://localhost:3000/</a> 看看。</p>
+<p><strong>request.send()</strong> API 智能处理不同类型的数据，假如你想为网站添加简单的基于 JSON 的 API ，Express 可以把返回结果转换成 JSON 并设置适当的响应头。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/api'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">   response.send(&#123;name:<span class="string">"Raymond"</span>,age:<span class="number">40</span>&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>可想而知，添加更多的路由，并处理所需的响应，就可以构建一个应用。<br><!--more--></p>
+<p>##通用的博客应用</p>
+<p>跳过 package.json 文件，因为除了 name 属性不一样，其它项都一样。来看 app.js 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.sendfile(<span class="string">'./views/index.html'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.sendfile(<span class="string">'./views/about.html'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/article'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.sendfile(<span class="string">'./views/article.html'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>我们把 <strong>send</strong> 换成了 <strong>sendfile</strong> 。与其把大段的 HTML 字符串放到 app.js 文件里，不如增加三个路由，主页，关于页，文章页。</p>
+<p>###添加 HTML</p>
+<p>主页：</p>
+<p><a href="https://gist.github.com/jinlong/8297190#file-home-html" target="_blank" rel="external">HTML 代码</a></p>
+<p>这里并没什么特别的，Express 将返回纯静态的 HTML 。关于页和文章页只不过把 title 和 h1 值改了。</p>
+<p>###由静态到动态</p>
+<p>Express 支持各种模板引擎，express 命令行可以添加对 Jade，EJS，JSHTML 和 Hogan 的支持。根据 Express 文档，任何模版引擎只要符合特定的签名就可以生效。推荐从 <a href="https://github.com/visionmedia/consolidate.js" target="_blank" rel="external">consolidate.js</a> 库（模版引擎集合）里面查找喜欢的模版引擎。</p>
+<p>我是 <a href="http://handlebarsjs.com/" target="_blank" rel="external">Handlebars</a> 的超级粉，我的许多客户端应用都用它，服务器端自然也少不了它。要用 Handlebars 还需要安装包装库 <a href="https://github.com/donpark/hbs" target="_blank" rel="external">hbs</a> 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="string">"name"</span>: <span class="string">"blog2"</span>,</span><br><span class="line">   <span class="string">"description"</span>: <span class="string">"Blog app"</span>,</span><br><span class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</span><br><span class="line">   <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span>,</span><br><span class="line">      <span class="string">"hbs"</span>:<span class="string">"*"</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后更新 app.js 使用此引擎：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> hbs = <span class="built_in">require</span>(<span class="string">'hbs'</span>);</span><br><span class="line"> </span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'html'</span>);</span><br><span class="line">app.engine(<span class="string">'html'</span>, hbs.__express);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'index'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'about'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/article'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'article'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>为了使用 Handlebars ，我们通过 require 把 HBS 包装库引入，然后让 Express 使用它。<br>默认情况下，Handlebars 会解析包含了特定引擎扩展的文件，这里是 <code>something.hbs</code> 。但也可以使用 “<code>view engine</code>”指令告诉 Express 动态解析 HTML 文件。这样我的编辑器可以提供良好的代码校验和语法高亮。通过 <code>app.engine</code> 真正加载引擎。</p>
+<p>最终路由用了新的 <code>render</code> 方法，Express 默认使用 views 文件夹，因此我们可以省略。由于 Express 记住了我们要解析的扩展名，所以它也可以省略。<code>res.render(&#39;something&#39;)</code> 实际等于告诉 Express 查找 <code>views/something.html</code> 。Express 基于模板引擎规则解析它，并返回到浏览器。</p>
+<p>###主页显示博客条目</p>
+<p>我们可以连接到 MySQL 或者 Mongo，这里我们创建一个静态的数据集，取名 blog.js ，它提供获取一组条目和获取一个条目功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> entries = [</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">1</span>, <span class="string">"title"</span>:<span class="string">"Hello World!"</span>, <span class="string">"body"</span>:<span class="string">"This is the body of my blog entry. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/2/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">2</span>, <span class="string">"title"</span>:<span class="string">"Eggs for Breakfast"</span>, <span class="string">"body"</span>:<span class="string">"Today I had eggs for breakfast. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/3/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">3</span>, <span class="string">"title"</span>:<span class="string">"Beer is Good"</span>, <span class="string">"body"</span>:<span class="string">"News Flash! Beer is awesome!"</span>, <span class="string">"published"</span>:<span class="string">"6/4/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">4</span>, <span class="string">"title"</span>:<span class="string">"Mean People Suck"</span>, <span class="string">"body"</span>:<span class="string">"People who are mean aren't nice or fun to hang around."</span>, <span class="string">"published"</span>:<span class="string">"6/5/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">5</span>, <span class="string">"title"</span>:<span class="string">"I'm Leaving Technology X and You Care"</span>, <span class="string">"body"</span>:<span class="string">"Let me write some link bait about why I'm not using a particular technology anymore."</span>, <span class="string">"published"</span>:<span class="string">"6/10/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">6</span>, <span class="string">"title"</span>:<span class="string">"Help My Kickstarter"</span>, <span class="string">"body"</span>:<span class="string">"I want a new XBox One. Please fund my Kickstarter."</span>, <span class="string">"published"</span>:<span class="string">"6/12/2013"</span>&#125;];</span><br><span class="line">exports.getBlogEntries = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> entries;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">exports.getBlogEntry = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; entries.length; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span>(entries[i].id == id) <span class="keyword">return</span> entries[i];</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们还可以提供添加，编辑和删除，这里到此为止。再更新下 app.js ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> hbs = <span class="built_in">require</span>(<span class="string">'hbs'</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> blogEngine = <span class="built_in">require</span>(<span class="string">'./blog'</span>);</span><br><span class="line"> </span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'html'</span>);</span><br><span class="line">app.engine(<span class="string">'html'</span>, hbs.__express);</span><br><span class="line">app.use(express.bodyParser());</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'index'</span>,&#123;title:<span class="string">"My Blog"</span>, entries:blogEngine.getBlogEntries()&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'about'</span>, &#123;title:<span class="string">"About Me"</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/article/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> entry = blogEngine.getBlogEntry(req.params.id);</span><br><span class="line">   res.render(<span class="string">'article'</span>,&#123;title:entry.title, blog:entry&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>我们用 <code>require</code> 引入数据集，如此可以调用它得到条目。</p>
+<p>在主页，我们给 <code>render</code> API 传两个参数，参数是一个对象，包含 <code>title</code> 和 <code>entries</code> 属性。title 的值时字符串，但是 entries 调用 <code>blogEngine</code> API 。我们传的任何数据将对模版生效，主页模版需要调整。</p>
+<p><a href="https://gist.github.com/jinlong/8297190#file-home-tpl-html" target="_blank" rel="external">主页模版代码</a></p>
+<p>即使你从没用过 Handlebars ，仍旧能猜到这里的含义。<code>#each</code> 指令将循环一个数组，&#123;&#123;&#125;&#125; 表示从博客条目列表取到的参数。</p>
+<p>###创建一个布局</p>
+<p>你肯定关心剩下的 HTML 怎么改，Express 用了模版引擎会自动支持布局。这意味着我可以创建通用的网站设计布局，Express 将利用它构造特定的页面。按照约定，它取名 <code>layout.something</code> ，“something”是你使用的特定扩展。我们用了 HTML ，它就是 <code>layout.html</code> 。</p>
+<p><a href="https://gist.github.com/jinlong/8297190#file-layout-html" target="_blank" rel="external">layout.html 代码</a></p>
+<p>关于页面没什么亮点，我们跳过，下面看文章路由。URL 现在包含了标记 <code>:id</code> ，Express 可以创建动态的 URL ，用于对应请求参数。我们定义的链接像这样：<br><code>/article/</code></p>
+<p>理论上，每一个博客条目需要一个路由，但是创建一个抽象的路由匹配这些请求效果更好。 <code>bodyParser</code> （这一特性来源于 Connect 框架，的确对我很有帮助，它不仅支持查询字符串，而且支持表单主体，几乎每个 Express 应用都会用到它。）</p>
+<p>###显示个别文章</p>
+<p>由于 URL 结尾包含动态值，我们可以把它传给 <code>blogEngine</code> 对象，用得到的结果作为视图的变量。</p>
+<p><a href="https://gist.github.com/jinlong/8297190#file-article-html" target="_blank" rel="external">article.html 文件</a></p>
+<p>现在我们创建了一个真正动态，但是难看的应用，这是新主页：</p>
+<p><img src="/images/post/exp-blog/express-blog3-home.jpg"></p>
+<p>这是特定的博客条目：</p>
+<p><img src="/images/post/exp-blog/express-blog3-article.jpg"></p>
+<p>##润色！</p>
+<p>我们加点基本的样式，让应用变好看点。Express 提供了简洁的方式添加图像，JavaScript 库和样式表之类的静态资源，简单定义一个静态文件夹，任何请求将从这个文件夹查找文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(<span class="string">'public'</span>));</span><br></pre></td></tr></table></figure>
+<p>此时，如果请求 /foo.css，public 文件夹存在 foo.css 文件，将返回它。我把 <a href="http://twitter.github.io/bootstrap/" target="_blank" rel="external">Bootstrap</a> 和 jQuery 副本放到了 public 文件夹。</p>
+<p>然后在我的 layout.html ，我可以引用这些资源。这是链接 bootstrap.css 的例子：</p>
+<p><a href="https://gist.github.com/jinlong/8297190#file-layout1-html" target="_blank" rel="external">代码实例</a></p>
+<p>Express 将自动检查 public 文件夹，可以有多个静态文件夹，甚至可以自定义 URL 前缀。最终效果是极好的。</p>
+<p>主页：</p>
+<p><img src="/images/post/exp-blog/express-blog4-home.jpg"></p>
+<p>文章页：</p>
+<p><img src="/images/post/exp-blog/express-blog4-article.jpg"></p>
+<p>##进阶？</p>
+<p>延伸阅读：</p>
+<ul>
+<li><a href="http://expressjs.com/" target="_blank" rel="external">Express homepage</a>    </li>
+<li><a href="https://groups.google.com/forum/?fromgroups#!forum/express-js" target="_blank" rel="external">Google group</a>   </li>
+<li><a href="https://github.com/visionmedia/express/tree/master/examples" target="_blank" rel="external">Express 实例</a></li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Express/" rel="tag">#Express</a>
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/12/22/grunt-for-fe/" rel="next" title="Grunt-前端利器">
+                <i class="fa fa-chevron-left"></i> Grunt-前端利器
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/10/19/handlebars-docs/" rel="prev" title="Handlebars 文档笔记">
+                Handlebars 文档笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2014/01/07/introduction-to-express/"
+     data-title="Express 入门"
+     data-content=""
+     data-url="http://jinlong.github.io/2014/01/07/introduction-to-express/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/01/07/introduction-to-express/"
+           data-title="Express 入门" data-url="http://jinlong.github.io/2014/01/07/introduction-to-express/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

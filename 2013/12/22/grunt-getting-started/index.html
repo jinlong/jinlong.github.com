@@ -1,0 +1,862 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Grunt,Node.js," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文： Getting started
+
+##安装 CLI
+1npm install -g grunt-cli
+可以在任何路径运行 grunt 命令
+通过 Gruntfile 文件运行某一版本 grunt ，允许多版本共存
+##CLI 如何工作
+每次运行 grunt ，它会使用 node 的 require() 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。
+找到了本地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grunt 入门笔记">
+<meta property="og:url" content="http://jinlong.github.io/2013/12/22/grunt-getting-started/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文： Getting started
+
+##安装 CLI
+1npm install -g grunt-cli
+可以在任何路径运行 grunt 命令
+通过 Gruntfile 文件运行某一版本 grunt ，允许多版本共存
+##CLI 如何工作
+每次运行 grunt ，它会使用 node 的 require() 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。
+找到了本地">
+<meta property="og:updated_time" content="2015-10-28T14:38:26.312Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Grunt 入门笔记">
+<meta name="twitter:description" content="原文： Getting started
+
+##安装 CLI
+1npm install -g grunt-cli
+可以在任何路径运行 grunt 命令
+通过 Gruntfile 文件运行某一版本 grunt ，允许多版本共存
+##CLI 如何工作
+每次运行 grunt ，它会使用 node 的 require() 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。
+找到了本地">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Grunt 入门笔记 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Grunt 入门笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-12-22T17:03:00+08:00" content="2013-12-22">
+              2013-12-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Grunt/" itemprop="url" rel="index">
+                    <span itemprop="name">Grunt</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Grunt/Nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">Nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/12/22/grunt-getting-started/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/12/22/grunt-getting-started/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文： <a href="http://gruntjs.com/getting-started" target="_blank" rel="external">Getting started</a></p>
+</blockquote>
+<p>##安装 CLI</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> grunt-cli</span></span><br></pre></td></tr></table></figure>
+<p>可以在任何路径运行 <code>grunt</code> 命令</p>
+<p>通过 <code>Gruntfile</code> 文件运行某一版本 grunt ，允许多版本共存</p>
+<p>##CLI 如何工作</p>
+<p>每次运行 grunt ，它会使用 node 的 <code>require()</code> 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。</p>
+<p>找到了本地安装的 Grunt ，CLI 加载本地安装的 Grunt 库，应用 <code>Gruntfile</code> 里的配置，执行预期的任务。</p>
+<p>想理解真正奥秘，可以<a href="https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt" target="_blank" rel="external">读源码</a>，它非常短。</p>
+<p>##运行已存在的 Grunt 项目</p>
+<p>假设  Grunt CLI 已安装，项目已通过 <code>package.json</code> 和 <code>Gruntfile</code> 配置好，使用 Grunt 非常简单：</p>
+<ol>
+<li>切换到项目的根目录   </li>
+<li>通过 <code>npm install</code> 安装项目依赖   </li>
+<li>通过 <code>grunt</code> 命令运行 Grunt </li>
+</ol>
+<p><code>grunt --help</code> 可以罗列已安装的 Grunt 任务列表，但是最好从项目文档开始。</p>
+<a id="more"></a>
+<p>##准备新的 Grunt 项目</p>
+<p>典型安装是往项目中添加2个文件：<code>package.json</code> 和 <code>Gruntfile</code></p>
+<p><strong>package.json</strong>：存储作为 npm 发布模块的项目的元数据。你可以在 <a href="https://npmjs.org/doc/json.html#devDependencies" target="_blank" rel="external">devDependencies</a> 一项列举项目的需要的 Grunt 插件。</p>
+<p><strong>Gruntfile</strong>：文件名是 <code>Gruntfile.js</code> 或者 <code>Gruntfile.coffee</code> ，用于配置或定义任务和加载 Grunt 插件。</p>
+<p>###package.json</p>
+<p><strong>package.json</strong> 应该在项目的根目录，跟 <strong>Gruntfile</strong> 同目录，应该把它提交到项目源码中。在 package.json 同一文件夹中运行 <strong>npm install</strong>，将安装里面列举的每个依赖的正确版本。</p>
+<p>有几种创建 package.json 的方式：</p>
+<p>1.大部分 <a href="http://gruntjs.com/project-scaffolding" target="_blank" rel="external">grunt-init</a> 模版会自动创建项目专属的 package.json 文件</p>
+<p>安装 </p>
+<p><strong>npm install -g grunt-init</strong></p>
+<p>安装模版</p>
+<p><strong>git clone <a href="https://github.com/gruntjs/grunt-init-gruntfile.git" target="_blank" rel="external">https://github.com/gruntjs/grunt-init-gruntfile.git</a> ~/.grunt-init/gruntfile</strong></p>
+<p>使用</p>
+<p><strong>grunt-init gruntfile</strong></p>
+<p>2.<a href="https://npmjs.org/doc/init.html" target="_blank" rel="external">npm init</a> 命令将创建基本的 package.json 文件。</p>
+<p>3.从以下例子开始，扩展需要的内容，遵循<a href="https://npmjs.org/doc/json.html" target="_blank" rel="external">这个规范</a></p>
+<p>例子地址：<a href="https://gist.github.com/jinlong/8083660" target="_blank" rel="external">https://gist.github.com/jinlong/8083660</a></p>
+<p>##安装 Grunt 和 gruntplugins</p>
+<p>往已存在的 package.json 中添加 Grunt 和 gruntplugins 最简单的方式是通过命令：</p>
+<p><strong>npm install <module> –save-dev</module></strong></p>
+<p>不仅会本地安装 &lt;module&gt;，而且自动把它们添加到 <a href="https://npmjs.org/doc/json.html#devDependencies" target="_blank" rel="external">devDependencies</a> 部分。</p>
+<p>例如，下面将往项目目录安装最新版的 Grunt ，并把它添加到 devDependencies ：</p>
+<p><strong>npm install grunt –save-dev</strong></p>
+<p>gruntplugins 同理。确保把更新后的 package.json 提交到项目里。</p>
+<p>##Gruntfile</p>
+<p><strong>Gruntfile.js</strong> 或 <strong>Gruntfile.coffee</strong> 是有效的 JavaScript 或者 CoffeeScript 文件，放在项目的根目录，跟 package.json 同目录，需要提交到项目源码中。</p>
+<p>Gruntfile 由下面几部分组成：</p>
+<ul>
+<li>“wrapper 包装”函数   </li>
+<li>项目和任务配置   </li>
+<li>加载 Grunt 插件和任务   </li>
+<li>自定义任务</li>
+</ul>
+<p>###Gruntfile 例子</p>
+<p>以下的 Gruntfile 中，项目元数据从项目的 package.json 文件导入到 Grunt 配置，<a href="http://github.com/gruntjs/grunt-contrib-uglify" target="_blank" rel="external">grunt-contrib-uglify</a> 插件的 <strong>uglify</strong> 任务会最小化源文件，并利用元数据动态生成注释。当在命令行运行 <strong>grunt</strong> 时，<strong>uglify</strong> 任务默认启动。</p>
+<p>例子地址：<a href="https://gist.github.com/jinlong/8083660" target="_blank" rel="external">https://gist.github.com/jinlong/8083660</a></p>
+<p>既然已经见到了整个 Gruntfile ，下面继续看看它的组成部分。</p>
+<p>###“ wrapper 包装”函数</p>
+<p>所有的 Gruntfile （和 gruntplugin）使用这种基本格式，所有的 Grunt 代码必须放到特定的函数里面：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Do grunt-related things in here</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>###项目和任务配置</p>
+<p>大部分的 Grunt 任务依赖于 <a href="http://gruntjs.com/grunt#grunt.initconfig" target="_blank" rel="external">grunt.initConfig</a> 方法定义的配置数据。此例中，<strong>grunt.file.readJSON(‘package.json’)</strong> 把 package.json 中存储的 JSON 元数据导入到 grunt 配置中。因为 <strong>&lt;% %&gt;</strong> 模版字符串可能引用任何配置属性，像文件路径，文件列表之类的配置数据如此定义，为了避免重复代码。</p>
+<p>配置对象可以存储任意的数据，只要不跟任务需要的属性冲突即可，否则将被忽略。此外，由于这是 JavaScript 文件，所以不仅限于 JSON ；可以用合法的 JS 。<a href="http://github.com/gruntjs/grunt-contrib-uglify" target="_blank" rel="external">grunt-contrib-uglify</a> 的 uglify 任务需要指定 <strong>uglify</strong> 属性。<strong>banner</strong> 选项需要指定注释内容，<strong>build</strong> 属性定义最小化的源文件和目标文件。</p>
+<p>###加载 Grunt 插件和任务</p>
+<p>像<a href="https://github.com/gruntjs/grunt-contrib-concat" target="_blank" rel="external">合并多个文件</a> ，<a href="http://github.com/gruntjs/grunt-contrib-uglify" target="_blank" rel="external">最小化文件</a> ，和<a href="https://github.com/gruntjs/grunt-contrib-jshint" target="_blank" rel="external">验证 JS 文件</a> 都有了 <a href="https://github.com/gruntjs" target="_blank" rel="external">grunt 插件</a> 。只要在 <strong>package.json</strong> 里面定义插件，通过 <strong>npm install</strong> 即可安装，通过简单的命令即可在 Gruntfile 里面启用它：</p>
+<p>// 加载提供 “uglify” 任务的插件<br>grunt.loadNpmTasks(‘grunt-contrib-uglify’);</p>
+<p>注意：<strong>grunt –help</strong> 命令会列出所有可用任务。</p>
+<p>###自定义任务</p>
+<p>你可以配置 Grunt 默认执行一个或多个任务。以下例子，命令行运行 grunt，默认会执行 <strong>uglify</strong> 任务，等同于执行 <strong>grunt uglify</strong> 或者 <strong>grunt default</strong> 。多个任务（带或不带参数）需要放到数组里。</p>
+<p>// 默认任务</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>]);</span><br></pre></td></tr></table></figure>
+<p>如果 Grunt 插件无法满足要求，你可以在 Gruntfile 定义自己的任务。例如，这个 Gruntfile 定义了自己的 default 任务，甚至没有利用任务配置：</p>
+<p><a href="https://gist.github.com/jinlong/8083660" target="_blank" rel="external">https://gist.github.com/jinlong/8083660</a></p>
+<p>定制的项目专属任务不需要定义到 Gruntfile 中；可以在外部 <strong>.js</strong> 文件定义，通过 <a href="http://gruntjs.com/grunt#grunt.loadtasks" target="_blank" rel="external">grunt.loadTasks</a> 方法加载。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grunt/" rel="tag">#Grunt</a>
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/11/25/javascript-best-practices/" rel="next" title="Javascript 最佳实践">
+                <i class="fa fa-chevron-left"></i> Javascript 最佳实践
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/12/22/grunt-for-fe/" rel="prev" title="Grunt-前端利器">
+                Grunt-前端利器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/12/22/grunt-getting-started/"
+     data-title="Grunt 入门笔记"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/12/22/grunt-getting-started/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/12/22/grunt-getting-started/"
+           data-title="Grunt 入门笔记" data-url="http://jinlong.github.io/2013/12/22/grunt-getting-started/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="AngularJS,翻译," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="##自定义过滤器
+创建 phonecatFilters 模块，用此模块注册自定义过滤器：
+12345angular.module(&apos;phonecatFilters&apos;, []).filter(&apos;checkmark&apos;, function() &amp;#123;  return function(input) &amp;#123;    return input ? &apos;\u2713&apos; : &apos;\u2718&apos;;  &amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS 新手指南4">
+<meta property="og:url" content="http://jinlong.github.io/2013/05/03/angularjs-tutorial4/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="##自定义过滤器
+创建 phonecatFilters 模块，用此模块注册自定义过滤器：
+12345angular.module(&apos;phonecatFilters&apos;, []).filter(&apos;checkmark&apos;, function() &amp;#123;  return function(input) &amp;#123;    return input ? &apos;\u2713&apos; : &apos;\u2718&apos;;  &amp;#1">
+<meta property="og:updated_time" content="2014-11-21T07:48:19.221Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS 新手指南4">
+<meta name="twitter:description" content="##自定义过滤器
+创建 phonecatFilters 模块，用此模块注册自定义过滤器：
+12345angular.module(&apos;phonecatFilters&apos;, []).filter(&apos;checkmark&apos;, function() &amp;#123;  return function(input) &amp;#123;    return input ? &apos;\u2713&apos; : &apos;\u2718&apos;;  &amp;#1">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> AngularJS 新手指南4 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                AngularJS 新手指南4
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-05-03T16:57:00+08:00" content="2013-05-03">
+              2013-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
+                    <span itemprop="name">AngularJS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/05/03/angularjs-tutorial4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/03/angularjs-tutorial4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>##自定义过滤器</p>
+<p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'phonecatFilters'</span>, []).filter(<span class="string">'checkmark'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> input ? <span class="string">'\u2713'</span> : <span class="string">'\u2718'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。</p>
+<p>我们需要给 phonecat 模块注册 phonecatFilters 模块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>]).</span><br></pre></td></tr></table></figure>
+<p><strong><em>模板</em></strong></p>
+<p>我们需要引入 app/js/filters.js 文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/filters.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Angular 模版使用过滤器的语法如下：</p>
+<p>&#123;&#123; expression | filter }}</p>
+<p>我们在手机详情模版使用此过滤器：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dl</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dt</span>&gt;</span>Infrared<span class="tag">&lt;/<span class="title">dt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dd</span>&gt;</span>&amp;#123;&amp;#123;phone.connectivity.infrared | checkmark&#125;&#125;<span class="tag">&lt;/<span class="title">dd</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dt</span>&gt;</span>GPS<span class="tag">&lt;/<span class="title">dt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dd</span>&gt;</span>&amp;#123;&amp;#123;phone.connectivity.gps | checkmark&#125;&#125;<span class="tag">&lt;/<span class="title">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dl</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong><em>实验</em></strong></p>
+<ul>
+<li>我们实验下 Angular 内建过滤器，在 index.html 添加以下绑定：</li>
+</ul>
+<p>&#123;&#123; “lower cap string” | uppercase }}<br>&#123;&#123; {foo: “bar”, baz: 23} | json }}<br>&#123;&#123; 1304375948024 | date }}<br>&#123;&#123; 1304375948024 | date:”MM/dd/yyyy @ h:mma” }}</p>
+<ul>
+<li>我们也可以创建带有输入元素的模型，把过滤器绑定和它联合起来。index.html 加以下代码试试：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input ng-model=<span class="string">"userInput"</span>&gt; Uppercased: &amp;<span class="preprocessor">#<span class="number">123</span>;&amp;#<span class="number">123</span>; userInput | uppercase &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>##事件处理</p>
+<p>在手机详情页加个点击缩缩图切换对应大图的效果。</p>
+<p><strong><em>控制器</em></strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span>(<span class="params">$scope, $routeParams, $http</span>) </span>&#123;</span><br><span class="line">  $http.get(<span class="string">'phones/'</span> + $routeParams.phoneId + <span class="string">'.json'</span>).success(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    $scope.phone = data;</span><br><span class="line">    $scope.mainImageUrl = data.images[<span class="number">0</span>];</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  $scope.setImage = <span class="function"><span class="keyword">function</span>(<span class="params">imageUrl</span>) </span>&#123;</span><br><span class="line">    $scope.mainImageUrl = imageUrl;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', '$http'];</span></span><br></pre></td></tr></table></figure>
+<p>PhoneDetailCtrl 控制器，创建了 mainImageUrl 模型属性，默认值设为第一个手机图片的 URL。<br>我们也创建了 setImage 事件处理器，它将改变 mainImageUrl 的值。</p>
+<p><strong><em>模版</em></strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\&#123;\&#123;mainImageUrl&#125;&#125;"</span> <span class="attribute">class</span>=<span class="value">"phone"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phone-thumbs"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"img in phone.images"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\&#123;\&#123;img&#125;&#125;"</span> <span class="attribute">ng-click</span>=<span class="value">"setImage(img)"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们给大图绑定 ngSrc 指令，设为 mainImageUrl 属性，也给缩略图注册了 <a href="http://docs.angularjs.org/api/ng.directive:ngClick" target="_blank" rel="external">ngClick</a> 事件。当点击缩略图时，setImage 事件处理器会把 mainImageUrl 属性的值改成缩略图的 URL 。</p>
+<p><strong><em>实验</em></strong></p>
+<p>让我们往 PhoneDetailCtrl  添加一个新的控制器方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$scope.hello = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'Hello '</span> + (name || <span class="string">'world'</span>) + <span class="string">'!'</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>然后往 phone-details.html 模版添加以下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">ng-click</span>=<span class="value">"hello('Elmo')"</span>&gt;</span>Hello<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>##REST 和自定义服务</p>
+<p>最后为应用定义一个基于 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank" rel="external">REST</a> 客户端的自定义服务，用此客户端我们可以更容易的发起 XHR 请求获取数据，不必使用底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank" rel="external">$http</a> API，HTTP 方法和 URL。</p>
+<p><strong><em>模版</em></strong></p>
+<p>自定义服务定义到 app/js/services.js 中，我们把它引入到布局模版中。此外，需要加载 angular-resource.js 文件，此文件的 $resource 服务包含 ngResource 模块，我们马上要用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/services.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"lib/angular/angular-resource.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong><em>服务</em></strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'phonecatServices'</span>, [<span class="string">'ngResource'</span>]).</span><br><span class="line">    factory(<span class="string">'Phone'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$resource</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> $resource(<span class="string">'phones/:phoneId.json'</span>, &#123;&#125;, &#123;</span><br><span class="line">    query: &#123;method:<span class="string">'GET'</span>, params:&#123;phoneId:<span class="string">'phones'</span>&#125;, isArray:<span class="literal">true</span>&#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们使用模块 API 注册自定义服务，用到了 factory（工厂） 函数。把 ‘Phone’ 服务名传到工厂函数里，工厂函数很像控制器的构造函数，都可以通过函数参数声明依赖。Phone 服务依赖于 $resource 服务。</p>
+<p><a href="http://docs.angularjs.org/api/ngResource.$resource" target="_blank" rel="external">$resource</a> 服务几行代码就能创建一个 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank" rel="external">REST</a> 客户端，此客户端可以取代底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank" rel="external">$http</a>  服务。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>, <span class="string">'phonecatServices'</span>]).</span><br></pre></td></tr></table></figure>
+<p>我们需要给 ‘phonecat’ 应用添加数组形式的 ‘phonecatServices’。</p>
+<p><strong><em>控制器</em></strong></p>
+<p>我们简化了子控制器（PhoneListCtrl 和 PhoneDetailCtrl），用新的服务 Phone 取代底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank" rel="external">$http</a> 服务。</p>
+<p>Angular 的 <a href="http://docs.angularjs.org/api/ngResource.$resource" target="_blank" rel="external">$resource</a> 服务比 $http 更易用，代码也更容易理解。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PhoneListCtrl</span>(<span class="params">$scope, Phone</span>) </span>&#123;</span><br><span class="line">  $scope.phones = Phone.query();</span><br><span class="line">  $scope.orderProp = <span class="string">'age'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//PhoneListCtrl.$inject = ['$scope', 'Phone'];</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span>(<span class="params">$scope, $routeParams, Phone</span>) </span>&#123;</span><br><span class="line">  $scope.phone = Phone.get(&#123;phoneId: $routeParams.phoneId&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">phone</span>) </span>&#123;</span><br><span class="line">    $scope.mainImageUrl = phone.images[<span class="number">0</span>];</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  $scope.setImage = <span class="function"><span class="keyword">function</span>(<span class="params">imageUrl</span>) </span>&#123;</span><br><span class="line">    $scope.mainImageUrl = imageUrl;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', 'Phone'];</span></span><br></pre></td></tr></table></figure>
+<p>注意我们把：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$http.get(<span class="string">'phones/phones.json'</span>).success(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  $scope.phones = data;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>换成了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scope.phones = Phone.query();</span><br></pre></td></tr></table></figure>
+<p>非常值得注意的是，当调用 Phone 服务时， 我们没有传递回调函数。</p>
+<p>##结语</p>
+<p>我们的应用完成啦，<code>git checkout</code> 命令可以跳回原先的步骤。</p>
+<p><a href="http://docs.angularjs.org/guide/index" target="_blank" rel="external">开发者指南</a> 有更多的例子和详细资料。</p>
+<p>更多代码实例，看 <a href="http://docs.angularjs.org/cookbook/index" target="_blank" rel="external">Cookbook</a> 。</p>
+<p>当你准备用 Angular 开发项目时，推荐你使用 angular <a href="https://github.com/angular/angular-seed" target="_blank" rel="external">种子</a> 引导开发。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AngularJS/" rel="tag">#AngularJS</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/05/03/angularjs-tutorial3/" rel="next" title="AngularJS 新手指南3">
+                <i class="fa fa-chevron-left"></i> AngularJS 新手指南3
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/05/22/opera-14-for-android-is-out/" rel="prev" title="安卓版 Opera 14 新在哪？">
+                安卓版 Opera 14 新在哪？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/05/03/angularjs-tutorial4/"
+     data-title="AngularJS 新手指南4"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/05/03/angularjs-tutorial4/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/05/03/angularjs-tutorial4/"
+           data-title="AngularJS 新手指南4" data-url="http://jinlong.github.io/2013/05/03/angularjs-tutorial4/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

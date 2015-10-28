@@ -1,0 +1,1648 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alon's Blog">
+<meta property="og:url" content="http://jinlong.github.io/page/3/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Alon's Blog">
+<meta name="twitter:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/07/08/centering-percentage-widthheight-elements/" itemprop="url">
+                  居中百分比宽高的元素
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-07-08T13:47:00+08:00" content="2013-07-08">
+              2013-07-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/居中/" itemprop="url" rel="index">
+                    <span itemprop="name">居中</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/居中/translate/" itemprop="url" rel="index">
+                    <span itemprop="name">translate</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/07/08/centering-percentage-widthheight-elements/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/08/centering-percentage-widthheight-elements/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>原文：<a href="http://css-tricks.com/centering-percentage-widthheight-elements/" target="_blank" rel="external">Centering Percentage Width/Height Elements</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+<p>如果知道该元素确切的宽高，居中它比较容易，可以<a href="http://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/" target="_blank" rel="external">参考此文</a> ，<code>top</code> 和 <code>left</code> 设成 50%，负 <code>margin</code> 分别设置该元素宽，高的一半。如果明确知道该元素的宽高，用此法居中很容易，如果它的宽高是百分比呢？</p>
+</blockquote>
+<p>你可能认为负的百分比 margin 可以搞定，它适用于水平的 margin，但是 margin 基于宽度（垂直 margin 也是）（译者注：margin 是百分比的话，跟此元素的包含块的宽度有关，<a href="http://www.w3.org/TR/CSS2/box.html#margin-properties" target="_blank" rel="external">见规范</a>），因此当你用负的 top margin 时，失败了。</p>
+<p>有个<a href="http://css-tricks.com/centering-in-the-unknown/" target="_blank" rel="external">小技巧</a> ，用一个“ghost”伪元素（看不见的伪元素）和 <code>inline-block</code> / <code>vertical-align</code> 可以搞定居中，非常巧妙。但是这个方法要求待居中的元素是 <code>inline-block</code>，不是一个真正通用的方案。可能你想居中一个模态窗口，受小屏幕 / 响应式设计所限，你很可能会把对话框设计成百分比宽度（或者其它未知情况，比如仅有 <code>max-width</code> 最大宽度。）</p>
+<p>有一种方案！Mary Lou 在 Codrops 用到的，她的文章 / 示例：<a href="http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/" target="_blank" rel="external">漂亮的模态窗口效果</a> 。</p>
+<p>不能用负的 margin ，可以用负的 <code>translate()</code> 代替。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.center</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span><br><span class="line">  不是 =(</span><br><span class="line">  margin-left: -25%;</span><br><span class="line">  margin-top: -25%;</span><br><span class="line">  */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* </span><br><span class="line">  而是!</span><br><span class="line">  */</span></span><br><span class="line">  <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span><br><span class="line">  甚至不要定义 </span><br><span class="line">  比如：Height 可以缺省!</span><br><span class="line">  */</span></span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">40%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>加上所有需要的前缀。</p>
+<p>最终效果实例：</p>
+<p><pre class="codepen" data-height="300" data-type="result" data-href="BvdgL" data-user="chriscoyier" data-safe="false"><code></code><a href="http://codepen.io/chriscoyier/pen/BvdgL" target="_blank" rel="external">Check out this Pen!</a></pre></p>
+<script async src="http://codepen.io/assets/embed/ei.js"></script>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/07/06/using-javascripts-tostring-method/" itemprop="url">
+                  使用 JavaScript 的 toString 方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-07-06T13:47:00+08:00" content="2013-07-06">
+              2013-07-06
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/07/06/using-javascripts-tostring-method/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/06/using-javascripts-tostring-method/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>原文：<a href="http://designpepper.com/blog/drips/using-javascripts-tostring-method" target="_blank" rel="external">Using JavaScript’s ‘toString’ Method</a> （需翻墙）<br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>是否想知道为什么 <code>alert</code> 一个 JavaScript 对象，得到“[object Object]”文本？缘于 JavaScript 内置 <code>toString</code> 方法。</p>
+<p><strong><em>注意：例子有些地方用了 <code>alert</code> ，没用 <code>console.log</code> ，是为了绕开 console 对 Object 的特殊处理。</em></strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Alerts: '[object Object]'</span></span><br><span class="line">alert(&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "function() &#123;&#125;"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs:</span></span><br><span class="line"><span class="comment">// "Thu Oct 11 1962 00:00:00 GMT-0400 (Eastern Daylight Time)"</span></span><br><span class="line"><span class="comment">// May vary depending on your clock settings</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"October 11, 1962"</span>));</span><br></pre></td></tr></table></figure>
+<p>以上这些有什么共同点？每一个都提供字符串代表它们的值，但是内部的值差异很大。比如，内部的 Date 以毫秒衡量。</p>
+<p>这些对象如何提供字符串作代表？它们均有个 prototype 方法：<code>toString</code>，它会把内部的值转换成字符串。</p>
+<p>假如我们想创建一个新对象，让它返回字符串代表它的值，不用 <code>toString</code> 的话，代码像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Color</span> (<span class="params">r, g, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.r = r;</span><br><span class="line">    <span class="keyword">this</span>.g = g;</span><br><span class="line">    <span class="keyword">this</span>.b = b;</span><br><span class="line">    <span class="keyword">this</span>.text = <span class="string">"rgb("</span> + r + <span class="string">", "</span> + g + <span class="string">", "</span> + b + <span class="string">")"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "rgb(255, 0, 0)"</span></span><br><span class="line">alert(red.text);</span><br></pre></td></tr></table></figure>
+<p>有几个问题，首先，<code>text</code> 属性跟实际的值不同步（如果改变r, g, b 的值）；其次，必须明确调用 <code>red.text</code> ，不能直接用 red 的值。</p>
+<p>用 <code>toString</code> 方法重写一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Color</span> (<span class="params">r, g, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.r = r;</span><br><span class="line">    <span class="keyword">this</span>.g = g;</span><br><span class="line">    <span class="keyword">this</span>.b = b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Color.prototype.toString = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"rgb("</span> + <span class="keyword">this</span>.r + <span class="string">", "</span> +</span><br><span class="line">                    <span class="keyword">this</span>.g + <span class="string">", "</span> +</span><br><span class="line">                    <span class="keyword">this</span>.b + <span class="string">")"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Alerts: "rgb(255, 0, 0)"</span></span><br><span class="line">alert(red);</span><br></pre></td></tr></table></figure>
+<p>把要返回的字符串放到 prototype 的 <code>toString</code> 里面有两个好处：字符串始终与真正的值保持同步，我们可以随时取用字符串的值， JavaScript 解释器会隐含调用 <code>toString</code> 方法。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"Red is: "</span> + red;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "Red is: rgb(255, 0, 0)"</span></span><br><span class="line"><span class="built_in">console</span>.log(message);</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/06/24/better-performance-with-requestanimationframe/" itemprop="url">
+                  requestAnimationFrame 性能更好
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-06-24T16:06:00+08:00" content="2013-06-24">
+              2013-06-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/requestAnimationFrame/" itemprop="url" rel="index">
+                    <span itemprop="name">requestAnimationFrame</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/requestAnimationFrame/game/" itemprop="url" rel="index">
+                    <span itemprop="name">game</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/06/24/better-performance-with-requestanimationframe/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/06/24/better-performance-with-requestanimationframe/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/">Better performance with requestAnimationFrame</a><br>作者：<a href="http://dev.opera.com/author/dropoutwannabe">Luz Caballero</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>##介绍</p>
+<p>本文讨论如何使用 <strong>requestAnimationFrame</strong> API 代替旧的 <code>setInterval / setTimeout</code> 方法，从而提高动画的性能。当然，我们会演示<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/raf-demo.html">代码实例</a>。</p>
+<p>当前<a href="http://caniuse.com/requestanimationframe">几乎所有的主流浏览器都支持</a> requestAnimationFrame ，尽管有的还带前缀。Erik Möller 已经写了个 <a href="http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating">polyfill</a> ，加上这个应该可以支持所有浏览器啦。一言难尽，让我们从头说来…</p>
+<p>##老方法不太好</p>
+<p>在表彰 <strong>requestAnimationFrame</strong> 之前，我们先看看用老方法是怎么实现动画的。我确定没必要提很久以前 Mozilla 第一个实现了 <code>mozRequestAnimationFrame</code> ，你可能已经用 <code>setTimeout</code> 和 <code>setInterval</code> 创建了动画。假定你已经熟悉这两个方法，我不再赘述。如果你想了解更多，可以看 John Resig 的精彩文章，深度解析 <a href="http://ejohn.org/blog/how-javascript-timers-work/">JavaScript 计时器如何工作</a> 。</p>
+<p>我并不是轻视这些老方法，它们的确有一些缺点。首先，当相应的浏览器窗口最小化，JavaScript 计时器在背景标签仍然持续运行。因此，浏览器继续运行看不见的动画，导致不必要的 CPU 和电池寿命的消耗。在移动设备尤其严重。</p>
+<p>其次，不仅计时器持续运行看不见的动画，而且当时间到了，仍会排队执行它们的回调函数。让我解释下为什么这样会出问题 —— 比如说由于某些原因，回调函数占用太多时间，比你设定的时间要长。一旦计时器时间到了，它将排队执行 “下一次” 回调函数，甚至前一个还没执行完。这一过程不断重复，很快排队了几乎无数的计时器代码，导致浏览器不堪重负。图1 说明这一情况。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/06/24/better-performance-with-requestanimationframe/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/06/05/the-design-of-code-organizing-javascript/" itemprop="url">
+                  代码设计：组织 JavaScript
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-06-05T17:02:00+08:00" content="2013-06-05">
+              2013-06-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jQuery/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/06/05/the-design-of-code-organizing-javascript/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/06/05/the-design-of-code-organizing-javascript/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://alistapart.com/article/the-design-of-code-organizing-javascript">The Design of Code: Organizing JavaScript</a><br>作者：<a href="http://alistapart.com/author/acolangelo">Anthony Colangelo</a><br>译者：<a href="http://weibo.com/newwave">@涂鸦码龙</a></p>
+</blockquote>
+<p>伟大的设计是一个产品应该关注和重视的点，这样才能造就一个可用的，好理解的，精美的用户界面。千万不要认为设计仅仅是设计师的事。</p>
+<p>代码里面有好多种设计，我不是指代码构建了用户界面——我是指代码的设计。</p>
+<p>精心设计的代码更易于维护，优化和扩展，能使开发者更高效。这意味着更多的注意力和精力可以花在构建伟大的事情上，每个人都很愉快——用户，开发者和利益相关者。</p>
+<p>有3个高级的，跟语言无关的点，对代码设计十分重要。</p>
+<ol>
+<li>系统架构——代码库的基础设计。控制各种组件的规则，例如模块（models），视图（views）和控制器（controllers），以及之间的相互作用。   </li>
+<li>可维护性——如何更好地改进和扩展代码？   </li>
+<li>复用性——应用组件如何复用？每个组件的实例如何简便地个性定制？   </li>
+</ol>
+<p>比较宽松的语言，特别是 JavaScript ，需要一些规矩才能写好——代码设计。JavaScript 环境非常宽松，随处扔些代码片段，就可能起作用。早点确立系统架构（然后遵守它！）对你的代码库提供制约，确保自始至终的一致性。</p>
+<p>我比较喜欢的一个方法由久经考验的软件设计模式组成——模块模式，可扩展的结构使它成为可靠的系统架构，和可维护的代码库。我喜欢在一个 jQuery 插件里面构建模块，有漂亮的复用性，提供强健的选项设置，暴露一些精心设计的 API。</p>
+<p>下面，我将逐步讲解如何精心设计你的代码，把它变成结构良好的组件，从而在项目中复用。</p>
+<p>###模块模式</p>
+<p>已有许多设计模式，同样有许多相关资源。<a href="https://twitter.com/addyosmani">Addy Osmani</a> 写了本关于 JavaScript 设计模式的书《<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">令人惊奇的书（免费！）</a>》，我极力推荐给各个水平的开发者。</p>
+<p><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">模块模式</a> 是一个简单的结构基础，它可以让你的代码保持干净和条例清晰。一个“模块”就是个标准的包含方法和属性的对象字面量，简单是这个模式的最大亮点：甚至一些不熟悉传统的软件设计模式的人，一看就能立刻明白代码是如何工作的。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/06/05/the-design-of-code-organizing-javascript/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/05/22/opera-14-for-android-is-out/" itemprop="url">
+                  安卓版 Opera 14 新在哪？
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-05-22T19:56:00+08:00" content="2013-05-22">
+              2013-05-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Opera/" itemprop="url" rel="index">
+                    <span itemprop="name">Opera</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/05/22/opera-14-for-android-is-out/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/22/opera-14-for-android-is-out/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>相关资料：<br><a href="http://my.opera.com/ODIN/blog/opera-14-for-android-is-out">Opera 14 for Android is out!</a><br><a href="http://my.opera.com/chooseopera/blog/opera-for-android-now-released">OUT TODAY: OPERA FOR ANDROID, FULL AND FINAL!</a><br>先唠一下 Opera 14 新功能哈，作为开发者可以直接移步<a href="#developer">这里</a>。</p>
+</blockquote>
+<p>经过数月的努力，全新安卓版 Opera 面世了，许多新奇特性等你发现。等不及的话，这有下载链接 <a href="https://play.google.com/store/apps/details?id=com.opera.browser&amp;hl=en">Google Play</a> 或者手机访问 <a href="http://m.opera.com/">m.opera.com</a> 。</p>
+<p><strong>选项卡</strong></p>
+<p>从缩略视图到隐身标签，安卓版的选项卡非常适于浏览移动网页。把选项卡加入收藏也非常便捷，点击地址栏的星标。</p>
+<p><strong>快速拨号，彻底改造</strong></p>
+<p>如大家所愿，这版的快速拨号有文件夹了，可以自由整理，只需拖拽即可创建新文件夹。</p>
+<p><strong>发现，先人一步</strong></p>
+<p>获取最新最酷的内容，为你量身定制的发现特性。</p>
+<p><strong>越野模式</strong></p>
+<p>启用越野模式即启用了 Opera Mini 功能，当您网络不佳时，压缩网页，提高速度，省钱省流量。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/05/22/opera-14-for-android-is-out/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/05/03/angularjs-tutorial4/" itemprop="url">
+                  AngularJS 新手指南4
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-05-03T16:57:00+08:00" content="2013-05-03">
+              2013-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
+                    <span itemprop="name">AngularJS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/05/03/angularjs-tutorial4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/03/angularjs-tutorial4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>##自定义过滤器</p>
+<p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'phonecatFilters'</span>, []).filter(<span class="string">'checkmark'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> input ? <span class="string">'\u2713'</span> : <span class="string">'\u2718'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。</p>
+<p>我们需要给 phonecat 模块注册 phonecatFilters 模块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'phonecat'</span>, [<span class="string">'phonecatFilters'</span>]).</span><br></pre></td></tr></table></figure>
+<p><strong><em>模板</em></strong></p>
+<p>我们需要引入 app/js/filters.js 文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/filters.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Angular 模版使用过滤器的语法如下：</p>
+<p>&#123;&#123; expression | filter }}</p>
+<p>我们在手机详情模版使用此过滤器：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dl</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dt</span>&gt;</span>Infrared<span class="tag">&lt;/<span class="title">dt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dd</span>&gt;</span>&amp;#123;&amp;#123;phone.connectivity.infrared | checkmark&#125;&#125;<span class="tag">&lt;/<span class="title">dd</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dt</span>&gt;</span>GPS<span class="tag">&lt;/<span class="title">dt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dd</span>&gt;</span>&amp;#123;&amp;#123;phone.connectivity.gps | checkmark&#125;&#125;<span class="tag">&lt;/<span class="title">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dl</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/05/03/angularjs-tutorial4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/05/03/angularjs-tutorial3/" itemprop="url">
+                  AngularJS 新手指南3
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-05-03T15:58:00+08:00" content="2013-05-03">
+              2013-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
+                    <span itemprop="name">AngularJS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/05/03/angularjs-tutorial3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/03/angularjs-tutorial3/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>##模版链接和图片</p>
+<p><strong><em>数据</em></strong></p>
+<p>注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 <code>app/img/phones/</code> 路径：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"id"</span>: <span class="string">"motorola-defy-with-motoblur"</span>,</span><br><span class="line">  <span class="string">"imageUrl"</span>: <span class="string">"img/phones/motorola-defy-with-motoblur.0.jpg"</span>,</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Motorola DEFY\u2122 with MOTOBLUR\u2122"</span>,</span><br><span class="line">&#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><strong><em>模版</em></strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phones"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones | filter:query | orderBy:orderProp"</span> <span class="attribute">class</span>=<span class="value">"thumbnail"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#/phones/\&#123;\&#123;phone.id&#125;&#125;"</span> <span class="attribute">class</span>=<span class="value">"thumb"</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\&#123;\&#123;phone.imageUrl&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#/phones/\&#123;\&#123;phone.id&#125;&#125;"</span>&gt;</span>\&#123;\&#123;phone.name&#125;&#125;<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">p</span>&gt;</span>\&#123;\&#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>image 标签用了 <a href="http://docs.angularjs.org/api/ng.directive:ngSrc">ngSrc</a>  指令，这一指令阻止浏览器按字面意思对待 angular &#123;&#123;表达式}}，阻止它请求一个无效的 url <a href="http://localhost:8000/app/&#123;&#123;phone.imageUrl}}。使用">http://localhost:8000/app/&#123;&#123;phone.imageUrl}}。使用</a> ngSrc 指令阻止浏览器发起无效的 http 请求。</p>
+<p><strong><em>实验</em></strong></p>
+<p>把 ngSrc 换成 src 属性，用 Firebug 之类的工具查看服务器访问日志，确认应用发起了无关的请求 /app/%7B%7Bphone.imageUrl%7D%7D (或 /app/&#123;&#123;phone.imageUrl}})。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/05/03/angularjs-tutorial3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/05/03/angularjs-tutorial2/" itemprop="url">
+                  AngularJS 新手指南2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-05-03T13:42:00+08:00" content="2013-05-03">
+              2013-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
+                    <span itemprop="name">AngularJS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/05/03/angularjs-tutorial2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/03/angularjs-tutorial2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>##过滤</p>
+<p><strong><em>Controller</em></strong></p>
+<p>没作任何变化</p>
+<p><strong><em>Template</em></strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container-fluid"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row-fluid"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"span2"</span>&gt;</span></span><br><span class="line">Search: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">ng-model</span>=<span class="value">"query"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"span10"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phones"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones | filter:query"</span>&gt;</span></span><br><span class="line">      \&#123;\&#123;phone.name&#125;&#125;</span><br><span class="line">      <span class="tag">&lt;<span class="title">p</span>&gt;</span>\&#123;\&#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>加个标准的 &lt;input&gt; 标签，使用 Angular 的 <a href="http://docs.angularjs.org/api/ng.filter:filter">$filter</a> 函数为 <a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ngRepeat</a> 指令处理输入内容。</p>
+<p>原理说明如下：</p>
+<ul>
+<li><p>数据绑定：Angular 的核心特色之一。页面加载时，Angular 把输入框的名字和数据模型的同名变量绑定，保持两者同步。<br>用户在输入框输入内容（取名 query），立即作为手机列表的过滤器（<code>phone in phones | filter:query</code>）</p>
+</li>
+<li><p>过滤器（filter ）的使用：<a href="http://docs.angularjs.org/api/ng.filter:filter">filter</a> 函数利用 query 值创建一个匹配 <code>query</code> 结果的新数组。<br>ngRepeat 自动更新视图，通过过滤器改变手机的数量。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/05/03/angularjs-tutorial2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/05/02/angularjs-tutorial1/" itemprop="url">
+                  AngularJS 新手指南1
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-05-02T23:18:00+08:00" content="2013-05-02">
+              2013-05-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
+                    <span itemprop="name">AngularJS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/05/02/angularjs-tutorial1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/02/angularjs-tutorial1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>五一放假没干啥正事，想起鼓捣 AngularJS 了，把它的新手指南一口气翻了个遍，算是入了点门了。个人感觉这货挺适合做 web app 的（可能因为我没接触过别的 MVC 框架吧…），它的亮点是数据绑定，扩展 HTML，居然把 DOM 操作都替咱做了…</p>
+<p>话不多说，下面是我边看边记的笔记，自认为重点的记了下中文。   </p>
+<blockquote>
+<p>原文地址：<a href="http://docs.angularjs.org/tutorial">AngularJS Tutorial</a><br>笔记作者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>##搭环境</p>
+<ul>
+<li><p>安装nodejs</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span><span class="identifier"> </span><span class="title">--version</span>    //nodejs 版本</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 Git</p>
+</li>
+<li><p>克隆 angular-phonecat 项目</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>://github.com/angular/angular-phonecat.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>找到项目目录 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> angular-phonecat</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>起 http 服务器 </p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span><span class="identifier"> </span><span class="title">scripts</span>\web-server.js</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/05/02/angularjs-tutorial1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/04/21/blink/" itemprop="url">
+                  Blink
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-04-21T20:48:00+08:00" content="2013-04-21">
+              2013-04-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Blink/" itemprop="url" rel="index">
+                    <span itemprop="name">Blink</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Blink/WebKit/" itemprop="url" rel="index">
+                    <span itemprop="name">WebKit</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Blink/WebKit/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/04/21/blink/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/04/21/blink/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原作者：<a href="http://www.quirksmode.org/about/">Peter-Paul Koch(PPK)</a><br>原文链接：<a href="http://www.quirksmode.org/blog/archives/2013/04/blink.html">Blink</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>Google 为 Chrome 和 Opera  <a href="http://blog.chromium.org/2013/04/blink-rendering-engine-for-chromium.html">创建了</a> 新的渲染引擎 Blink。其中有没有天大的秘密，影响又是怎样的呢？</p>
+<p>这儿有一些值得关注的 Blink 资源，我把它作为综述：</p>
+<ul>
+<li><a href="http://www.chromium.org/blink">Blink 主页</a> 和 <a href="http://www.chromium.org/blink/developer-faq">开发者常见问题</a> 。 </li>
+<li><a href="http://www.chromestatus.com/features">Chromium 特性仪表盘</a>，在这里你可以看到那些正要添加的新特性。可用的接口升级；当前还不是很易读。 </li>
+<li><a href="http://infrequently.org/2013/04/probably-wrong/">Alex Russell</a> 关于 Blink 的文章 。 </li>
+<li><a href="https://plus.google.com/116237864387312784020/posts/d62jMDKXcLb">Jake Archibald</a> 关于 Blink 的文章 。 </li>
+<li><a href="http://www.brucelawson.co.uk/2013/hello-blink/">Bruce Lawson</a> 关于 Opera 采用 Blink 的文章。</li>
+</ul>
+<p>除了这些之外，<a href="http://peter.sh/">Peter Beverloo</a> 非常热心地通过电子邮件发了我一些信息。</p>
+<p>##Blink 是什么？</p>
+<p>Blink 是一个新的渲染引擎，这意味着它对 CSS 和 JavaScript 的解析将与 WebKit （Gecko 或者 Trident） 有所不同。它将驱动所有使用 Chromium 的浏览器（Google 的开源浏览器）。</p>
+<p>Blink 已成为 WebKit 的分支，这意味着当前它跟 WebKit 几乎一样。不过，WebKit 本身不是一个单一的实体；正如我<a href="http://www.quirksmode.org/compatibility.html">原先的研究成果</a> ，一款基于 WebKit 的浏览器对 CSS 和 JavaScript 的支持并不完全一致。如今，Blink 作为一种 WebKit 不足为奇。</p>
+<p>将来这些会改变，从现在开始，WebKit 和 Blink 将带着不同的目标和不同的支持特性分道扬镳。当前 Blink 和 WebKit 的代码共享存在可行性，但是，久而久之，两者差异越来越大时，共享变得不那么容易。</p>
+<p>因此，Blink 已成为一个 WebKit  版本，久而久之，它会像其它分支一样，离 WebKit 越来越远，越来越远……<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/04/21/blink/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+        </div>
+
+        
+
+
+        
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

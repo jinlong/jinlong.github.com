@@ -1,0 +1,857 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="API Design,JavaScript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="前段时间组织优化我们的原生模块 API（iOS、Android 模块封装成 JavaScript 接口），于是学习了几篇 JavaScript API 设计的文章，尽管是旧文，但受益匪浅，这里记录一下。
+
+好的 API 设计：在自描述的同时，达到抽象的目标。
+设计良好的 API ，开发者可以快速上手，没必要经常抱着手册和文档，也没必要频繁光顾技术支持社区。
+#流畅的接口
+方法链：流畅易读，更易理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript API 设计原则">
+<meta property="og:url" content="http://jinlong.github.io/2015/08/31/secrets-of-awesome-javascript-api-design/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="前段时间组织优化我们的原生模块 API（iOS、Android 模块封装成 JavaScript 接口），于是学习了几篇 JavaScript API 设计的文章，尽管是旧文，但受益匪浅，这里记录一下。
+
+好的 API 设计：在自描述的同时，达到抽象的目标。
+设计良好的 API ，开发者可以快速上手，没必要经常抱着手册和文档，也没必要频繁光顾技术支持社区。
+#流畅的接口
+方法链：流畅易读，更易理解">
+<meta property="og:updated_time" content="2015-10-28T14:31:33.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript API 设计原则">
+<meta name="twitter:description" content="前段时间组织优化我们的原生模块 API（iOS、Android 模块封装成 JavaScript 接口），于是学习了几篇 JavaScript API 设计的文章，尽管是旧文，但受益匪浅，这里记录一下。
+
+好的 API 设计：在自描述的同时，达到抽象的目标。
+设计良好的 API ，开发者可以快速上手，没必要经常抱着手册和文档，也没必要频繁光顾技术支持社区。
+#流畅的接口
+方法链：流畅易读，更易理解">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> JavaScript API 设计原则 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript API 设计原则
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-08-31T21:45:36+08:00" content="2015-08-31">
+              2015-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/31/secrets-of-awesome-javascript-api-design/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/31/secrets-of-awesome-javascript-api-design/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>前段时间组织优化我们的原生模块 API（iOS、Android 模块封装成 JavaScript 接口），于是学习了几篇 JavaScript API 设计的文章，尽管是旧文，但受益匪浅，这里记录一下。</p>
+<hr>
+<p>好的 API 设计：在自描述的同时，达到抽象的目标。</p>
+<p>设计良好的 API ，开发者可以快速上手，没必要经常抱着手册和文档，也没必要频繁光顾技术支持社区。</p>
+<p>#流畅的接口</p>
+<p><strong><a href="https://en.wikipedia.org/wiki/Method_chaining" target="_blank" rel="external">方法链</a>：流畅易读，更易理解</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//常见的 API 调用方式：改变一些颜色，添加事件监听</span></span><br><span class="line"><span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"foobar"</span>);</span><br><span class="line">elem.style.background = <span class="string">"red"</span>;</span><br><span class="line">elem.style.color = <span class="string">"green"</span>;</span><br><span class="line">elem.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">"hello world!"</span>);</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//（设想的）方法链 API</span></span><br><span class="line">DOMHelper.getElementById(<span class="string">'foobar'</span>)</span><br><span class="line">  .setStyle(<span class="string">"background"</span>, <span class="string">"red"</span>)</span><br><span class="line">  .setStyle(<span class="string">"color"</span>, <span class="string">"green"</span>)</span><br><span class="line">  .addEvent(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"hello world"</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>设置和获取操作，可以合二为一；方法越多，文档可能越难写</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $elem = jQuery(<span class="string">"#foobar"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//setter</span></span><br><span class="line">$elem.setCss(<span class="string">"background"</span>, <span class="string">"green"</span>);</span><br><span class="line"><span class="comment">//getter</span></span><br><span class="line">$elem.getCss(<span class="string">"color"</span>) === <span class="string">"red"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//getter, setter 合二为一</span></span><br><span class="line">$elem.css(<span class="string">"background"</span>, <span class="string">"green"</span>);</span><br><span class="line">$elem.css(<span class="string">"color"</span>) === <span class="string">"red"</span>;</span><br></pre></td></tr></table></figure>
+<p>#一致性</p>
+<p>相关的接口保持一致的风格，一整套 API 如果传递一种熟悉和舒适的感觉，会大大减轻开发者对新工具的适应性。   </p>
+<p>命名这点事：既要短，又要自描述，最重要的是保持一致性</p>
+<blockquote>
+<p>“There are only two hard problems in computer science: cache-invalidation and naming things.”<br>“在计算机科学界只有两件头疼的事：缓存失效和命名问题”<br>— Phil Karlton</p>
+</blockquote>
+<p>选择一个你喜欢的措辞，然后持续使用。选择一种风格，然后保持这种风格。</p>
+<p>#处理参数</p>
+<p>需要考虑大家如何使用你提供的方法，是否会重复调用？为何会重复调用？你的 API 如何帮助开发者减少重复的调用？<br>接收map映射参数，回调或者序列化的属性名，不仅让你的 API 更干净，而且使用起来更舒服、高效。</p>
+<p>jQuery 的 <code>css()</code> 方法可以给 DOM 元素设置样式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jQuery(<span class="string">"#some-selector"</span>)</span><br><span class="line">  .css(<span class="string">"background"</span>, <span class="string">"red"</span>)</span><br><span class="line">  .css(<span class="string">"color"</span>, <span class="string">"white"</span>)</span><br><span class="line">  .css(<span class="string">"font-weight"</span>, <span class="string">"bold"</span>)</span><br><span class="line">  .css(<span class="string">"padding"</span>, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>这个方法可以接受一个 JSON 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">jQuery(<span class="string">"#some-selector"</span>).css(&#123;</span><br><span class="line">  <span class="string">"background"</span> : <span class="string">"red"</span>,</span><br><span class="line">  <span class="string">"color"</span> : <span class="string">"white"</span>,</span><br><span class="line">  <span class="string">"font-weight"</span> : <span class="string">"bold"</span>,</span><br><span class="line">  <span class="string">"padding"</span> : <span class="number">10</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过传一个 map 映射绑定事件</span></span><br><span class="line">jQuery(<span class="string">"#some-selector"</span>).on(&#123;</span><br><span class="line">  <span class="string">"click"</span> : myClickHandler,</span><br><span class="line">  <span class="string">"keyup"</span> : myKeyupHandler,</span><br><span class="line">  <span class="string">"change"</span> : myChangeHandler</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//为多个事件绑定同一个处理函数</span></span><br><span class="line">jQuery(<span class="string">"#some-selector"</span>).on(<span class="string">"click keyup change"</span>, myEventHandler);</span><br></pre></td></tr></table></figure>
+<p>##处理类型</p>
+<p>定义方法的时候，需要决定它可以接收什么样的参数。我们不清楚人们如何使用我们的代码，但可以更有远见，考虑支持哪些参数类型。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原来的代码</span></span><br><span class="line">DateInterval.prototype.days = <span class="function"><span class="keyword">function</span>(<span class="params">start, end</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor((end - start) / <span class="number">86400000</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//修改后的代码</span></span><br><span class="line">DateInterval.prototype.days = <span class="function"><span class="keyword">function</span>(<span class="params">start, end</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!(start <span class="keyword">instanceof</span> <span class="built_in">Date</span>)) &#123;</span><br><span class="line">    start = <span class="keyword">new</span> <span class="built_in">Date</span>(start);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (!(end <span class="keyword">instanceof</span> <span class="built_in">Date</span>)) &#123;</span><br><span class="line">    end = <span class="keyword">new</span> <span class="built_in">Date</span>(end);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor((end.getTime() - start.getTime()) / <span class="number">86400000</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>加了短短的6行代码，我们的方法强大到可以接收 <code>Date</code> 对象，数字的时间戳，甚至像 <code>Sat Sep 08 2012 15:34:35 GMT+0200 (CEST)</code> 这样的字符串</p>
+<p>如果你需要确保传入的参数类型（字符串，数字，布尔），可以这样转换：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">castaway</span>(<span class="params">some_string, some_integer, some_boolean</span>) </span>&#123;</span><br><span class="line">  some_string += <span class="string">""</span>;</span><br><span class="line">  some_integer += <span class="number">0</span>; <span class="comment">// parseInt(some_integer, 10) 更安全些</span></span><br><span class="line">  some_boolean = !!some_boolean;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##处理 undefined</p>
+<p>为了使你的 API 更健壮，需要鉴别是否真正的 <code>undefined</code> 值被传递进来，可以检查 <code>arguments</code> 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testUndefined</span>(<span class="params">expecting, someArgument</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (someArgument === <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"someArgument 是 undefined"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">arguments</span>.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"然而它实际是传进来的"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testUndefined(<span class="string">"foo"</span>);</span><br><span class="line"><span class="comment">// 结果: someArgument 是 undefined</span></span><br><span class="line">testUndefined(<span class="string">"foo"</span>, <span class="literal">undefined</span>);</span><br><span class="line"><span class="comment">// 结果:  someArgument 是 undefined , 然而它实际是传进来的</span></span><br></pre></td></tr></table></figure>
+<p>##给参数命名</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">event.initMouseEvent(</span><br><span class="line">  <span class="string">"click"</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="built_in">window</span>,</span><br><span class="line">  <span class="number">123</span>, <span class="number">101</span>, <span class="number">202</span>, <span class="number">101</span>, <span class="number">202</span>,</span><br><span class="line">  <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>,</span><br><span class="line">  <span class="number">1</span>, <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/en-US/docs/DOM/event.initMouseEvent" target="_blank" rel="external">Event.initMouseEvent</a> 这个方法简直丧心病狂，不看文档的话，谁能说出每个参数是什么意思？ </p>
+<p>给每个参数起个名字，赋个默认值，可好</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">event.initMouseEvent(</span><br><span class="line">  type=<span class="string">"click"</span>,</span><br><span class="line">  canBubble=<span class="literal">true</span>,</span><br><span class="line">  cancelable=<span class="literal">true</span>,</span><br><span class="line">  view=<span class="built_in">window</span>,</span><br><span class="line">  detail=<span class="number">123</span>,</span><br><span class="line">  screenX=<span class="number">101</span>,</span><br><span class="line">  screenY=<span class="number">202</span>,</span><br><span class="line">  clientX=<span class="number">101</span>,</span><br><span class="line">  clientY=<span class="number">202</span>,</span><br><span class="line">  ctrlKey=<span class="literal">true</span>,</span><br><span class="line">  altKey=<span class="literal">false</span>,</span><br><span class="line">  shiftKey=<span class="literal">false</span>,</span><br><span class="line">  metaKey=<span class="literal">false</span>,</span><br><span class="line">  button=<span class="number">1</span>,</span><br><span class="line">  relatedTarget=<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<p>ES6, 或者 Harmony 就有 <a href="http://wiki.ecmascript.org/doku.php?id=harmony:parameter_default_values" target="_blank" rel="external">默认参数值</a> 和 <a href="http://wiki.ecmascript.org/doku.php?id=harmony:rest_parameters" target="_blank" rel="external">rest 参数</a> 了。</p>
+<p>##参数接收 JSON 对象</p>
+<p>与其接收一堆参数，不如接收一个 JSON 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nightmare</span>(<span class="params">accepts, async, beforeSend, cache, complete, <span class="comment">/* 等28个参数 */</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (accepts === <span class="string">"text"</span>) &#123;</span><br><span class="line">    <span class="comment">// 准备接收纯文本</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dream</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  options = options || &#123;&#125;;</span><br><span class="line">  <span class="keyword">if</span> (options.accepts === <span class="string">"text"</span>) &#123;</span><br><span class="line">    <span class="comment">// 准备接收纯文本</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用起来也更简单了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nightmare(<span class="string">"text"</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">false</span>, <span class="literal">undefined</span>, <span class="comment">/* 等28个参数 */</span>);</span><br><span class="line"></span><br><span class="line">dream(&#123;</span><br><span class="line">  accepts: <span class="string">"text"</span>,</span><br><span class="line">  <span class="keyword">async</span>: <span class="literal">true</span>,</span><br><span class="line">  cache: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>##参数默认值</p>
+<p>参数最好有默认值，通过 <a href="http://api.jquery.com/jQuery.extend/  , _.extend(" target="_blank" rel="external">jQuery.extend()</a> <a href="http://underscorejs.org/#extend" target="_blank" rel="external">http://underscorejs.org/#extend</a>) 和 Protoype 的 <a href="http://api.prototypejs.org/language/Object/extend/" target="_blank" rel="external">Object.extend</a> ，可以覆盖预设的默认值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> default_options = &#123;</span><br><span class="line">  accepts: <span class="string">"text"</span>,</span><br><span class="line">  <span class="keyword">async</span>: <span class="literal">true</span>,</span><br><span class="line">  beforeSend: <span class="literal">null</span>,</span><br><span class="line">  cache: <span class="literal">false</span>,</span><br><span class="line">  complete: <span class="literal">null</span>,</span><br><span class="line">  <span class="comment">// …</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dream</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> o = jQuery.extend(&#123;&#125;, default_options, options || &#123;&#125;);</span><br><span class="line">  <span class="built_in">console</span>.log(o.accepts);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dream(&#123; <span class="keyword">async</span>: <span class="literal">false</span> &#125;);</span><br><span class="line"><span class="comment">// prints: "text"</span></span><br></pre></td></tr></table></figure>
+<p>#扩展性</p>
+<p>##回调（callbacks）</p>
+<p>通过回调， API 用户可以覆盖你的某一部分代码。把一些需要自定义的功能开放成可配置的回调函数，允许 API 用户轻松覆盖你的默认代码。</p>
+<p>API 接口一旦接收回调，确保在文档中加以说明，并提供代码示例。</p>
+<p>##事件（events）</p>
+<p>事件接口最好见名知意，可以自由选择事件名字，避免与<a href="https://developer.mozilla.org/en-US/docs/DOM/DOM_event_reference" target="_blank" rel="external">原生事件</a> 重名。</p>
+<p>#处理错误</p>
+<p>不是所有的错误都对开发者调试代码有用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery 允许这么写</span></span><br><span class="line">$(<span class="built_in">document</span>.body).on(<span class="string">'click'</span>, &#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 点击时报错</span></span><br><span class="line"><span class="comment">//   TypeError: ((p.event.special[l.origType] || &#123;&#125;).handle || l.handler).apply is not a function</span></span><br><span class="line"><span class="comment">//   in jQuery.min.js on Line 3</span></span><br></pre></td></tr></table></figure>
+<p>这样的错误调试起来很痛苦，不要浪费开发者的时间，直接告诉他们犯了什么错：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">Object</span>.prototype.toString.call(callback) !== <span class="string">'[object Function]'</span>) &#123; <span class="comment">// 看备注</span></span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"callback is not a function!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>备注：<code>typeof callback === &quot;function&quot;</code> 在老的浏览器上会有问题，<code>object</code> 会当成个 <code>function</code> 。</p>
+</blockquote>
+<p>#可预测性</p>
+<p>好的 API 具有可预测性，开发者可以根据例子推断它的用法。</p>
+<p><a href="http://modernizr.com/docs/#howitworks" target="_blank" rel="external">Modernizr’s 特性检测</a> 是个例子：</p>
+<p>a) 它使用的属性名完全与 HTML5、CSS 概念和 API 相匹配</p>
+<p>b) 每一个单独的检测一致地返回 true 或 false 值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 所有这些属性都返回 'true' 或 'false'</span></span><br><span class="line">Modernizr.geolocation</span><br><span class="line">Modernizr.localstorage</span><br><span class="line">Modernizr.webworkers</span><br><span class="line">Modernizr.canvas</span><br><span class="line">Modernizr.borderradius</span><br><span class="line">Modernizr.boxshadow</span><br><span class="line">Modernizr.flexbox</span><br></pre></td></tr></table></figure>
+<p>依赖于开发者已熟悉的概念也可以达到可预测的目的。</p>
+<p><a href="http://api.jquery.com/category/selectors/" target="_blank" rel="external">jQuery’s 选择器语法</a> 就是一个显著的例子，CSS1-CSS3 的选择器可直接用于它的 DOM 选择器引擎。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#grid"</span>) <span class="comment">// Selects by ID</span></span><br><span class="line">$(<span class="string">"ul.nav &gt; li"</span>) <span class="comment">// All LIs for the UL with class "nav"</span></span><br><span class="line">$(<span class="string">"ul li:nth-child(2)"</span>) <span class="comment">// Second item in each list</span></span><br></pre></td></tr></table></figure>
+<p>#比例协调</p>
+<p>好的 API 并不一定是小的 API，API 的体积大小要跟它的功能相称。</p>
+<p>比如 <a href="http://momentjs.com/" target="_blank" rel="external">Moment.js</a> ，著名的日期解析和格式化的库，可以称之为均衡，它的 API 既简洁又功能明确。</p>
+<p>像 Moment.js 这样特定功能的库，确保 API 的专注和小巧非常重要。</p>
+<p>#编写 API 文档</p>
+<p>软件开发最艰难的任务之一是写文档，实际上每个人都恨写文档，怨声载道的是没有一个好用的文档工具。</p>
+<p>以下是一些文档自动生成工具：</p>
+<ul>
+<li><a href="http://yui.github.com/yuidoc/" target="_blank" rel="external">YUIDoc</a> (requires Node.js, npm)</li>
+<li><a href="https://github.com/p120ph37/node-jsdoc-toolkit" target="_blank" rel="external">JsDoc Toolkit</a> (requires Node.js, npm)</li>
+<li><a href="https://github.com/cbou/markdox" target="_blank" rel="external">Markdox</a> (requires Node.js, npm)</li>
+<li><a href="https://github.com/visionmedia/dox" target="_blank" rel="external">Dox</a> (requires Node.js, npm)</li>
+<li><a href="http://jashkenas.github.com/docco/" target="_blank" rel="external">Docco</a> (requires Node.js, Python, CoffeeScript)</li>
+<li><a href="https://github.com/senchalabs/jsduck" target="_blank" rel="external">JSDuck</a> (reqires Ruby, gem)</li>
+<li><a href="https://github.com/jsdoc3/jsdoc" target="_blank" rel="external">JSDoc 3</a> (requires Java)</li>
+</ul>
+<p><strong>最重要的是：确保文档跟代码同步更新。</strong></p>
+<blockquote>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://reeze.cn/2014/02/07/what-makes-a-good-api/" target="_blank" rel="external">好的 API 设计</a></li>
+<li><a href="http://www.smashingmagazine.com/2012/10/09/designing-javascript-apis-usability/" target="_blank" rel="external">Designing Better JavaScript APIs</a></li>
+<li><a href="http://webstandardssherpa.com/reviews/secrets-of-awesome-javascript-api-design/" target="_blank" rel="external">Secrets of Awesome JavaScript API Design</a></li>
+</ul>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/API-Design/" rel="tag">#API Design</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/24/css-retina-hairlines/" rel="next" title="Retina屏的移动设备如何实现真正1px的线？">
+                <i class="fa fa-chevron-left"></i> Retina屏的移动设备如何实现真正1px的线？
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/08/31/secrets-of-awesome-javascript-api-design/"
+     data-title="JavaScript API 设计原则"
+     data-content=""
+     data-url="http://jinlong.github.io/2015/08/31/secrets-of-awesome-javascript-api-design/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/31/secrets-of-awesome-javascript-api-design/"
+           data-title="JavaScript API 设计原则" data-url="http://jinlong.github.io/2015/08/31/secrets-of-awesome-javascript-api-design/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

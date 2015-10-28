@@ -1,0 +1,848 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Blink,WebKit,翻译," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原作者：Peter-Paul Koch(PPK)原文链接：Blink翻译：涂鸦码龙
+
+Google 为 Chrome 和 Opera  创建了 新的渲染引擎 Blink。其中有没有天大的秘密，影响又是怎样的呢？
+这儿有一些值得关注的 Blink 资源，我把它作为综述：
+
+Blink 主页 和 开发者常见问题 。 
+Chromium 特性仪表盘，在这里你可以看到那些正要添加的新特性。可用的接口升级；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blink">
+<meta property="og:url" content="http://jinlong.github.io/2013/04/21/blink/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原作者：Peter-Paul Koch(PPK)原文链接：Blink翻译：涂鸦码龙
+
+Google 为 Chrome 和 Opera  创建了 新的渲染引擎 Blink。其中有没有天大的秘密，影响又是怎样的呢？
+这儿有一些值得关注的 Blink 资源，我把它作为综述：
+
+Blink 主页 和 开发者常见问题 。 
+Chromium 特性仪表盘，在这里你可以看到那些正要添加的新特性。可用的接口升级；">
+<meta property="og:updated_time" content="2014-10-25T02:27:51.335Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Blink">
+<meta name="twitter:description" content="原作者：Peter-Paul Koch(PPK)原文链接：Blink翻译：涂鸦码龙
+
+Google 为 Chrome 和 Opera  创建了 新的渲染引擎 Blink。其中有没有天大的秘密，影响又是怎样的呢？
+这儿有一些值得关注的 Blink 资源，我把它作为综述：
+
+Blink 主页 和 开发者常见问题 。 
+Chromium 特性仪表盘，在这里你可以看到那些正要添加的新特性。可用的接口升级；">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Blink | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Blink
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-04-21T20:48:00+08:00" content="2013-04-21">
+              2013-04-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Blink/" itemprop="url" rel="index">
+                    <span itemprop="name">Blink</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Blink/WebKit/" itemprop="url" rel="index">
+                    <span itemprop="name">WebKit</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Blink/WebKit/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/04/21/blink/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/04/21/blink/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原作者：<a href="http://www.quirksmode.org/about/" target="_blank" rel="external">Peter-Paul Koch(PPK)</a><br>原文链接：<a href="http://www.quirksmode.org/blog/archives/2013/04/blink.html" target="_blank" rel="external">Blink</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>Google 为 Chrome 和 Opera  <a href="http://blog.chromium.org/2013/04/blink-rendering-engine-for-chromium.html" target="_blank" rel="external">创建了</a> 新的渲染引擎 Blink。其中有没有天大的秘密，影响又是怎样的呢？</p>
+<p>这儿有一些值得关注的 Blink 资源，我把它作为综述：</p>
+<ul>
+<li><a href="http://www.chromium.org/blink" target="_blank" rel="external">Blink 主页</a> 和 <a href="http://www.chromium.org/blink/developer-faq" target="_blank" rel="external">开发者常见问题</a> 。 </li>
+<li><a href="http://www.chromestatus.com/features" target="_blank" rel="external">Chromium 特性仪表盘</a>，在这里你可以看到那些正要添加的新特性。可用的接口升级；当前还不是很易读。 </li>
+<li><a href="http://infrequently.org/2013/04/probably-wrong/" target="_blank" rel="external">Alex Russell</a> 关于 Blink 的文章 。 </li>
+<li><a href="https://plus.google.com/116237864387312784020/posts/d62jMDKXcLb" target="_blank" rel="external">Jake Archibald</a> 关于 Blink 的文章 。 </li>
+<li><a href="http://www.brucelawson.co.uk/2013/hello-blink/" target="_blank" rel="external">Bruce Lawson</a> 关于 Opera 采用 Blink 的文章。</li>
+</ul>
+<p>除了这些之外，<a href="http://peter.sh/" target="_blank" rel="external">Peter Beverloo</a> 非常热心地通过电子邮件发了我一些信息。</p>
+<p>##Blink 是什么？</p>
+<p>Blink 是一个新的渲染引擎，这意味着它对 CSS 和 JavaScript 的解析将与 WebKit （Gecko 或者 Trident） 有所不同。它将驱动所有使用 Chromium 的浏览器（Google 的开源浏览器）。</p>
+<p>Blink 已成为 WebKit 的分支，这意味着当前它跟 WebKit 几乎一样。不过，WebKit 本身不是一个单一的实体；正如我<a href="http://www.quirksmode.org/compatibility.html" target="_blank" rel="external">原先的研究成果</a> ，一款基于 WebKit 的浏览器对 CSS 和 JavaScript 的支持并不完全一致。如今，Blink 作为一种 WebKit 不足为奇。</p>
+<p>将来这些会改变，从现在开始，WebKit 和 Blink 将带着不同的目标和不同的支持特性分道扬镳。当前 Blink 和 WebKit 的代码共享存在可行性，但是，久而久之，两者差异越来越大时，共享变得不那么容易。</p>
+<p>因此，Blink 已成为一个 WebKit  版本，久而久之，它会像其它分支一样，离 WebKit 越来越远，越来越远……<br><a id="more"></a></p>
+<p>##为什么是 Blink ？</p>
+<p>Google 对 WebKit 项目缺乏进展很不爽。这种缺乏主要缘于实际的 WebKit 渲染引擎与实现细节纠缠不清，这些细节仅对一个平台比较重要 —— 同时需要支持的平台数量又在不断增长，尤其是移动端。</p>
+<p>因此 Google 决定从 WebKit  移除特定平台的代码，重补安全模型，作一些其它的改变，将会在 CSS 和 JavaScript 支持方面加快步伐。</p>
+<p>如果你坚持认为 Google 是魔鬼，不会相信这些说辞。</p>
+<p>##哪些浏览器会用 Blink 呢？</p>
+<p>Blink 已经添加到 Chromium（Google 的开源浏览器） 里了。Chrome 用的 Chromium ，Yandex 浏览器也是。Opera 将从 14 开始也用 Chromium 。因此这些浏览器将来会用 Blink 。</p>
+<p>Chrome 28 将是第一款使用 Blink 的稳定版本；早期版本还是 WebKit 。Opera 和 Yandex 从使用 Chromium 28 时起，将开始用 Blink 。</p>
+<p>当前 Chromium 适用于 Windows ，Mac，桌面版 Linux，Android 平台。Google 似乎没有进一步移植的迹象，其他人可能会。</p>
+<p>Skia 绘图引擎是 Chromium 的一个重要的组件。BlackBerry 黑莓已经<a href="https://github.com/blackberry/Skia" target="_blank" rel="external">移植了它</a> ，意味着黑莓在参与 Chromium 方面比其它 WebKit 用户更胜一筹。无论黑莓或其它组织，真正作出转变可能不是技术问题，而是政策问题。</p>
+<p>理论上可以脱离 Chromium 使用 Blink ，实际上基本不可能，相互依赖太强。</p>
+<p>##作为 web 开发者的我，应该做何改变呢？</p>
+<p>如今，对 web 开发者而言无需做何改变。从 WebKit 到 Blink 的转变基本感觉不到 —— 甚至浏览器的 UA 字符近期也不会变。当然，你还是要在 Chrome 和 Safari，Opera，IE，Firefox，一堆移动端 WebKit 等浏览器上测试你的网站。你已经这么做啦 —— 是嘛？</p>
+<p>我比较欣赏的一点改变是 Blink 对供应商前缀的处理，借鉴了 Firefox 的方法。从 WebKit 复制当前现存的 <code>-webkit-</code> 前缀，以后不会增加新的，然后在合适的时期，逐步移除那些老旧的。它将用标识代替前缀：如果你想启用一个实验性功能，在 about:flags 里设置合适的标识。（同时意味着，对一般用户而言，没有设置任何标识的话，有前缀的实验性 CSS 特性将无法使用。）</p>
+<p>##interoperable implementations（互通实现）会怎么样？</p>
+<p>W3C 规定任何新的标准都需要两个不同的（引擎）实现。我担心 Presto 消逝，渲染引擎的数量减少到3个了。</p>
+<p>现在渲染引擎的数量又回到4个了，任何 WebKit 特性自动被 WebKit 和 Blink（彼此协作实现） 支持。</p>
+<p>##Google 是魔鬼吗？</p>
+<p>但是… 但是… 这是不是一个<a href="http://prng.net/blink-faq.html" target="_blank" rel="external">愤世嫉俗的举动</a>？是不是开发性的东西都是假的？难道 Google 不想把流行的渲染引擎给 Apple ，想锁定那些 Chromium 使用商？</p>
+<p>如果你相信 Chrome 团队行行事乖戾，我也拦不住你。我是不会相信的。</p>
+<p>当然，也会带一点政治色彩。Google 希望其它的浏览器厂商从 WebKit 切换到 Blink，也许会施加一点压力。</p>
+<p>此外，Google 的工程师也不再贡献 WebKit ，再过几个月其它的 WebKit 用户可能会感觉到阵痛。理论上也有可能苹果和黑莓，三星以及其它厂商接管 Google 的摊子。如果它们不接管… 你认为谁会接管呢？</p>
+<p>此外，Google 留给我们一个工具测量它的邪恶：Blink 主页的<a href="http://www.chromium.org/blink#compatibility" target="_blank" rel="external">兼容性部分</a> 。基本上，如果有强力的浏览器支持，或者接近完成的规范，或者适度的浏览器支持加工作草案，就会添加这个特性。</p>
+<p>这个政策可以作为显著的证据：一旦我们看到其它浏览器不支持，且标准没说明的特性在 Blink 出现时，我们知道 Google 已经走向黑暗面。没出现这些特性的话，我们可以断定 Google 不是魔鬼了。</p>
+<p>##怎么看待分裂？</p>
+<p>有一种想法，Blink 将加剧 web 的分裂：我还没有看到这种迹象。</p>
+<p>Chrome 当前的 WebKit 实现不同于其它的（包括 Android 的 WebKit ），新的渲染引擎不会改变这一点。</p>
+<p>基于 Blink 的浏览器将更像基于 WebKit 的浏览器。使用 Chromium 是使用 Blink 的必要条件，从而标准化了许多额外的工作，比如网络和绘图。</p>
+<p>在基于 WebKit 的浏览器这些工作交给特定组件，各个浏览器厂商还要自己写（这部分应该属于 WebKit 本身）。Blink 与 WebKit 的许多差异都缘于此，Blink 不会那么脆弱。此外，Google 有兴趣与各种 Chromium ports （译者注：基于 Chromium 的浏览器）看齐。</p>
+<p>因此，我希望 Chrome 和 Opera 更多地融合，这样将确切地减少分裂。如果更多的浏览器厂商切换到 Blink ，分裂将会更少。</p>
+<p>对于一个公司或团体，更少的分裂意味着更多的统一，无论多么开明，都意味着准独裁的权力。问题是 Google 的批评者似乎两者都不想要，这是不可能的。你不能同时反对分裂和统一。你必须选择两者之一来抱怨。</p>
+<p>##Blink </p>
+<p>总之我很看好这些变化。Blink 有可能会真正地加快步伐，正如 Chrome 团队的宣称，它不会加剧分裂，对 web 开发者而言，短期内不需要什么改变。有什么理由不喜欢呢？</p>
+<p>还有一件事，Blink 团队有义务实现 <code>text-decoration: blink</code>。</p>
+<p>这里有<a href="http://www.quirksmode.org/blog/archives/2013/04/blinkbait.html" target="_blank" rel="external">更多的笔记和链接</a> 。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Blink/" rel="tag">#Blink</a>
+          
+            <a href="/tags/WebKit/" rel="tag">#WebKit</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/04/20/advanced-cross-browser-flexbox/" rel="next" title="跨浏览器弹性布局进阶教程">
+                <i class="fa fa-chevron-left"></i> 跨浏览器弹性布局进阶教程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/05/02/angularjs-tutorial1/" rel="prev" title="AngularJS 新手指南1">
+                AngularJS 新手指南1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/04/21/blink/"
+     data-title="Blink"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/04/21/blink/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/04/21/blink/"
+           data-title="Blink" data-url="http://jinlong.github.io/2013/04/21/blink/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

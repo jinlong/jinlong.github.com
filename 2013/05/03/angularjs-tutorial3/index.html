@@ -1,0 +1,829 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="AngularJS,翻译," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="##模版链接和图片
+数据
+注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 app/img/phones/ 路径：
+1234567[&amp;#123;  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,  &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,  &quot;name&quot;: &quot;M">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS 新手指南3">
+<meta property="og:url" content="http://jinlong.github.io/2013/05/03/angularjs-tutorial3/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="##模版链接和图片
+数据
+注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 app/img/phones/ 路径：
+1234567[&amp;#123;  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,  &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,  &quot;name&quot;: &quot;M">
+<meta property="og:updated_time" content="2014-11-21T07:51:00.125Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS 新手指南3">
+<meta name="twitter:description" content="##模版链接和图片
+数据
+注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 app/img/phones/ 路径：
+1234567[&amp;#123;  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,  &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,  &quot;name&quot;: &quot;M">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> AngularJS 新手指南3 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                AngularJS 新手指南3
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-05-03T15:58:00+08:00" content="2013-05-03">
+              2013-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
+                    <span itemprop="name">AngularJS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/05/03/angularjs-tutorial3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/03/angularjs-tutorial3/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>##模版链接和图片</p>
+<p><strong><em>数据</em></strong></p>
+<p>注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 <code>app/img/phones/</code> 路径：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"id"</span>: <span class="string">"motorola-defy-with-motoblur"</span>,</span><br><span class="line">  <span class="string">"imageUrl"</span>: <span class="string">"img/phones/motorola-defy-with-motoblur.0.jpg"</span>,</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Motorola DEFY\u2122 with MOTOBLUR\u2122"</span>,</span><br><span class="line">&#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><strong><em>模版</em></strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phones"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones | filter:query | orderBy:orderProp"</span> <span class="attribute">class</span>=<span class="value">"thumbnail"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#/phones/\&#123;\&#123;phone.id&#125;&#125;"</span> <span class="attribute">class</span>=<span class="value">"thumb"</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\&#123;\&#123;phone.imageUrl&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#/phones/\&#123;\&#123;phone.id&#125;&#125;"</span>&gt;</span>\&#123;\&#123;phone.name&#125;&#125;<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">p</span>&gt;</span>\&#123;\&#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>image 标签用了 <a href="http://docs.angularjs.org/api/ng.directive:ngSrc" target="_blank" rel="external">ngSrc</a>  指令，这一指令阻止浏览器按字面意思对待 angular &#123;&#123;表达式}}，阻止它请求一个无效的 url <a href="http://localhost:8000/app/&#123;&#123;phone.imageUrl}}。使用" target="_blank" rel="external">http://localhost:8000/app/&#123;&#123;phone.imageUrl}}。使用</a> ngSrc 指令阻止浏览器发起无效的 http 请求。</p>
+<p><strong><em>实验</em></strong></p>
+<p>把 ngSrc 换成 src 属性，用 Firebug 之类的工具查看服务器访问日志，确认应用发起了无关的请求 /app/%7B%7Bphone.imageUrl%7D%7D (或 /app/&#123;&#123;phone.imageUrl}})。</p>
+<a id="more"></a>
+<p>##多视图，路径规划和布局模版</p>
+<p>我们准备把 index.html 变成整体布局模版，它将用于所有视图。其它具体的模版根据当前的“路径”—— 当前展示给用户的视图，包含在布局模版中。应用的路径通过 <a href="http://docs.angularjs.org/api/ng.$routeProvider" target="_blank" rel="external">$routeProvider</a> 定义，$routeProvider 是 <a href="http://docs.angularjs.org/api/ng.$route" target="_blank" rel="external">$route 服务</a> 的提供者。这一服务让你很轻松地把控制器，视图模版和当前的 URL 地址联系在一起。使用此特性，我们可以实现<a href="http://en.wikipedia.org/wiki/Deep_linking" target="_blank" rel="external">深层链接</a>，通过深层链接可以利用浏览器的历史（后退前进导航）和书签。</p>
+<p><strong><em>DI，注入器和提供者笔记</em></strong></p>
+<p>如你所想，<a href="http://docs.angularjs.org/guide/di" target="_blank" rel="external">依赖注入</a> （DI）是 AngularJS 的核心特性，因此理解它的原理非常重要。</p>
+<p>当应用启动时，Angular 创建了用于所有 DI 的注入器。注入器对 $http 或 $route 全然不知，实际上，它甚至不知道这些服务的存在，除非它被配置在合适的模块定义中。注入器的唯一责任是加载特定的模块定义，注册所有模块已定义的服务提供者，当被问及注入一个相关的特定函数时，它通过提供者实例化。</p>
+<p>提供者是提供（创建）服务的实例，暴露配置 API的对象，它被用于控制服务的创建和运行时行为。比如 $route 服务，$routeProvider 暴露一些 API ，你可以用它为应用定义路径。</p>
+<p>Angular 模块删除了全局状态，提供配置注入器的方法。与 AMD 或 require.js 截然相反，Angular 模块不试图解决脚本加载顺序或脚本懒加载的问题。模块系统不但可以相互依存，还可实现各自的目标。</p>
+<p><strong><em>App 模块</em></strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'phonecat'</span>, []).</span><br><span class="line">  config([<span class="string">'$routeProvider'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$routeProvider</span>) </span>&#123;</span><br><span class="line">  $routeProvider.</span><br><span class="line">      when(<span class="string">'/phones'</span>, &#123;templateUrl: <span class="string">'partials/phone-list.html'</span>,   controller: PhoneListCtrl&#125;).</span><br><span class="line">      when(<span class="string">'/phones/:phoneId'</span>, &#123;templateUrl: <span class="string">'partials/phone-detail.html'</span>, controller: PhoneDetailCtrl&#125;).</span><br><span class="line">      otherwise(&#123;redirectTo: <span class="string">'/phones'</span>&#125;);</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+<p>为了配置应用的路径，我们需要创建一个模块，取名为 phonecat 。我们使用 config API 把 <code>$routeProvider</code> 注入到我们的配置函数中，用 <code>$routeProvider.when</code> API 定义路径。</p>
+<p>我们的应用路径定义：</p>
+<ul>
+<li><p>当 URL hash 为 /phones 时，手机列表视图将显示 。Angular 将用 phone-list.html 模版和 PhoneListCtrl 控制器构造手机列表视图。</p>
+</li>
+<li><p>当 URL hash 匹配 ‘/phones/:phoneId’（phoneId 是URL 参数的一部分）时，手机详情视图将显示。Angular 将用 phone-detail.html 模版和 PhoneDetailCtrl 控制器构造手机详情视图。</p>
+</li>
+</ul>
+<p>我们复用以前创建的 PhoneListCtrl 控制器，在 app/js/controllers.js 文件增加新的 PhoneDetailCtrl 控制器。</p>
+<p>当浏览器地址没有匹配其它的路径时， $route.otherwise(&#123;redirectTo: ‘/phones’}) 声明把地址重定向到 /phones。</p>
+<p>注意第二个路径定义里 :phoneId 参数的使用，$route 服务用路径定义 —— ‘/phones/:phoneId’ —— 用来匹配当前的 URL。所有用冒号 （:）定义的参数被提取到<a href="http://docs.angularjs.org/api/ng.$routeParams" target="_blank" rel="external">$routeParams</a> 对象。</p>
+<p>为了让应用以新建的模块启动，我们需要把 <a href="http://docs.angularjs.org/api/ng.directive:ngApp" target="_blank" rel="external">ngApp</a> 的值改成新定义模块的名字。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span> <span class="attribute">ng-app</span>=<span class="value">"phonecat"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong><em>控制器</em></strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span>(<span class="params">$scope, $routeParams</span>) </span>&#123;</span><br><span class="line">  $scope.phoneId = $routeParams.phoneId;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//PhoneDetailCtrl.$inject = ['$scope', '$routeParams'];</span></span><br></pre></td></tr></table></figure>
+<p><strong><em>模板</em></strong></p>
+<p>$route 服务通常结合 <a href="http://docs.angularjs.org/api/ng.directive:ngView" target="_blank" rel="external">ngView</a> 指令使用，ngView 指令为当前的路径把视图模版引入到布局模版中，它非常适合我们的 index.html 模版。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span> <span class="attribute">ng-app</span>=<span class="value">"phonecat"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"lib/angular/angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/app.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">ng-view</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意到我们删除了 index.html 模板的大部分代码，换成了一个带有 ng-view 属性的 div。我们删除的代码放到了 <code>phone-list.html</code> 模版。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container-fluid"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row-fluid"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"span2"</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--Sidebar content--&gt;</span></span><br><span class="line">Search: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">ng-model</span>=<span class="value">"query"</span>&gt;</span></span><br><span class="line">      Sort by:</span><br><span class="line">      <span class="tag">&lt;<span class="title">select</span> <span class="attribute">ng-model</span>=<span class="value">"orderProp"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"name"</span>&gt;</span>Alphabetical<span class="tag">&lt;/<span class="title">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"age"</span>&gt;</span>Newest<span class="tag">&lt;/<span class="title">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"span10"</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--Body content--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phones"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones | filter:query | orderBy:orderProp"</span> <span class="attribute">class</span>=<span class="value">"thumbnail"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#/phones/\&#123;\&#123;phone.id&#125;&#125;"</span> <span class="attribute">class</span>=<span class="value">"thumb"</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\&#123;\&#123;phone.imageUrl&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#/phones/\&#123;\&#123;phone.id&#125;&#125;"</span>&gt;</span>\&#123;\&#123;phone.name&#125;&#125;<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">p</span>&gt;</span>\&#123;\&#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们也为手机详情视图新建了模版：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TBD: detail view <span class="keyword">for</span> &amp;<span class="preprocessor">#<span class="number">123</span>;&amp;#<span class="number">123</span>;phoneId&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>注意我们用的 phoneId 模型定义在 PhoneDetailCtrl 控制器。</p>
+<p><strong><em>实验</em></strong></p>
+<p>试着在 index.html 添加一个 &#123;&#123;orderProp}} 绑定，你到手机列表视图时，什么也不会发生，因为 orderProp 模型仅在 PhoneListCtrl 管理的作用域有效，它与 &lt;div ng-view&gt; 元素相关。如果往 phone-list.html 里面添加同样的绑定，绑定将生效。</p>
+<p>##更多模版</p>
+<p><strong><em>数据</em></strong></p>
+<p>除了 phones.json 外，app/phones/ 路径新加了包含每一手机信息的 json 文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"additionalFeatures"</span>: <span class="string">"Contour Display, Near Field Communications (NFC),..."</span>,</span><br><span class="line">  <span class="string">"android"</span>: &#123;</span><br><span class="line">      <span class="string">"os"</span>: <span class="string">"Android 2.3"</span>,</span><br><span class="line">      <span class="string">"ui"</span>: <span class="string">"Android"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  <span class="string">"images"</span>: [</span><br><span class="line">      <span class="string">"img/phones/nexus-s.0.jpg"</span>,</span><br><span class="line">      <span class="string">"img/phones/nexus-s.1.jpg"</span>,</span><br><span class="line">      <span class="string">"img/phones/nexus-s.2.jpg"</span>,</span><br><span class="line">      <span class="string">"img/phones/nexus-s.3.jpg"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"storage"</span>: &#123;</span><br><span class="line">      <span class="string">"flash"</span>: <span class="string">"16384MB"</span>,</span><br><span class="line">      <span class="string">"ram"</span>: <span class="string">"512MB"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个文件用同样的数据结构，描述了手机的各种属性。</p>
+<p><strong><em>控制器</em></strong></p>
+<p>我们用 $http 服务扩展 PhoneDetailCtrl ，获取 json 文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span>(<span class="params">$scope, $routeParams, $http</span>) </span>&#123;</span><br><span class="line">  $http.get(<span class="string">'phones/'</span> + $routeParams.phoneId + <span class="string">'.json'</span>).success(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    $scope.phone = data;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', '$http'];</span></span><br></pre></td></tr></table></figure>
+<p>我们通过 $route 服务，使用 $routeParams.phoneId 提取当前路径构建 URL， 用于 HTTP 请求。</p>
+<p><strong><em>模版</em></strong></p>
+<p>我们用了 angular &#123;&#123;表达式}} 和 ngRepeat 从模型获取手机数据，展现到视图中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\&#123;\&#123;phone.images[0]&#125;&#125;"</span> <span class="attribute">class</span>=<span class="value">"phone"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>\&#123;\&#123;phone.name&#125;&#125;<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span>\&#123;\&#123;phone.description&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phone-thumbs"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"img in phone.images"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">ng-src</span>=<span class="value">"\&#123;\&#123;img&#125;&#125;"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"specs"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">span</span>&gt;</span>Availability and Networks<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dl</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">dt</span>&gt;</span>Availability<span class="tag">&lt;/<span class="title">dt</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">dd</span> <span class="attribute">ng-repeat</span>=<span class="value">"availability in phone.availability"</span>&gt;</span>\&#123;\&#123;availability&#125;&#125;<span class="tag">&lt;/<span class="title">dd</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dl</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">span</span>&gt;</span>Additional Features<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dd</span>&gt;</span>\&#123;\&#123;phone.additionalFeatures&#125;&#125;<span class="tag">&lt;/<span class="title">dd</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AngularJS/" rel="tag">#AngularJS</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/05/03/angularjs-tutorial2/" rel="next" title="AngularJS 新手指南2">
+                <i class="fa fa-chevron-left"></i> AngularJS 新手指南2
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/05/03/angularjs-tutorial4/" rel="prev" title="AngularJS 新手指南4">
+                AngularJS 新手指南4 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/05/03/angularjs-tutorial3/"
+     data-title="AngularJS 新手指南3"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/05/03/angularjs-tutorial3/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/05/03/angularjs-tutorial3/"
+           data-title="AngularJS 新手指南3" data-url="http://jinlong.github.io/2013/05/03/angularjs-tutorial3/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

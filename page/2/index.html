@@ -1,0 +1,1722 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alon's Blog">
+<meta property="og:url" content="http://jinlong.github.io/page/2/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Alon's Blog">
+<meta name="twitter:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/11/25/smart-transitions-in-user-experience-design/" itemprop="url">
+                  用户体验设计中的巧妙过渡
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-11-25T11:55:00+08:00" content="2013-11-25">
+              2013-11-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/用户体验/" itemprop="url" rel="index">
+                    <span itemprop="name">用户体验</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/用户体验/交互设计/" itemprop="url" rel="index">
+                    <span itemprop="name">交互设计</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/11/25/smart-transitions-in-user-experience-design/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/11/25/smart-transitions-in-user-experience-design/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://uxdesign.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/">Smart Transitions In User Experience Design</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>一些网站不仅在内容，可用性，设计，功能等方面，让人耳目一新；交互设计细节和动画更是与众不同。我们将分享一些模型的经验，分析一下这些简单的模式为什么效果很好。</p>
+<p>当我们设计数码产品时，我们一般使用 Photoshop 和 Sketch 此类软件。大多数有数年行业经验的人显然明白设计不仅仅是视觉传达。尽管如此，有些人还是继续做静态设计。<a href="http://www.nytimes.com/2003/11/30/magazine/30IPOD.html?pagewanted=all">Steve Jobs 如此描述设计</a>：</p>
+<blockquote>
+<p>“It’s not just what it looks like and feels like. Design is how it works.“<br>“设计不仅仅是看起来和感受到的样子。设计是如何工作。”</p>
+</blockquote>
+<p>我们对于产品的体验和印象来源于诸多因素的集合，交互扮演一个根基的角色。我们无法想象用户界面是静态设计，随后再添加交互魔法。相反，我们需要在早期加入交互特性，把它当成天然的组成部分。</p>
+<p>让我们看看一些巧妙的交互，它们是一些微妙的动画，优雅地改善了用户体验。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/11/25/smart-transitions-in-user-experience-design/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/10/20/ten-years-of-sliding-doors-of-css/" itemprop="url">
+                  CSS 滑动门十年纪念
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-10-20T18:24:00+08:00" content="2013-10-20">
+              2013-10-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/滑动门/" itemprop="url" rel="index">
+                    <span itemprop="name">滑动门</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/10/20/ten-years-of-sliding-doors-of-css/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/10/20/ten-years-of-sliding-doors-of-css/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p><img src="/images/post/css-sliding-door/sliding_doors.png"></p>
+<blockquote>
+<p>看到这篇文章，真是让我心潮澎湃，仿佛看到刚接触前端的我，拿着本《<a href="http://www.amazon.cn/CSS%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6-%E6%B8%A9%E8%B0%A6/dp/B00139O3TG/ref=sr_1_1?ie=UTF8&amp;qid=1382869723&amp;sr=8-1&amp;keywords=css%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6" target="_blank" rel="external">CSS设计彻底研究</a>》慢慢的啃。当时看到前人发明的 CSS 滑动门，真是觉得相当惊艳，转眼间，这个技术距今已有10年。</p>
+</blockquote>
+<p>正是十年前的 2003年10月20日，<a href="http://alistapart.com/ Doug Bowman http://twitter.com/stop" target="_blank" rel="external">A List Apart</a> 的文章《<a href="http://alistapart.com/article/slidingdoors" target="_blank" rel="external">CSS 滑动门</a>》。</p>
+<p>A List Apart 现在提醒读者“尽管它曾经辉煌，但此文不再代表当今的最佳实践”。的确是这样，但是让这个周年纪念悄悄过去心有不甘。</p>
+<p>可能许多人没有从事 web 工作，他们或许想知道为什么一篇如何把无序列表修饰成标签的文章怎么会如此重要，因为我们现在可以使用支持更好的 CSS 属性达到同样的效果。</p>
+<p>我们可以在单个元素使用多背景图片，而不是给列表项和锚点同时应用图片。我们可以使用圆角，多个内部盒子阴影（box shadow）创建时髦的 3d 标签。如果我们打算牺牲一点浏览器兼容性，甚至可以使用 CSS 渐变 。</p>
+<p>但是在 Doug 之前，毫不夸张地说，没有人想出如何用 CSS 制作圆角标签。这是 A List Apart 一系列开创性文章的伊始，它不仅打破了 CSS 的限制，而且改变了 web ，被众人熟知。如果你还没读过<a href="http://alistapart.com/article/slidingdoors" target="_blank" rel="external">滑动门的文章</a>以及<a href="http://alistapart.com/article/slidingdoors2" target="_blank" rel="external">后续文章</a>，现在可以品味下了。</p>
+<p>怀旧之情？是的，今天的我们是多么幸运，拥有成熟的 CSS 和浏览器兼容性，那些只是 2003 年时的梦想。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/" itemprop="url">
+                  面向Node.js新手的7个技巧
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-10-17T17:38:00+08:00" content="2013-10-17">
+              2013-10-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/入门/" itemprop="url" rel="index">
+                    <span itemprop="name">入门</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/10/17/7-tips-for-a-node-dot-js-padawan/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="https://medium.com/tech-talk/e7c0b0e5ce3c">7 tips for a Node.js padawan</a><br>感谢 <a href="http://diwu.me/about/index.html">Di Wu</a> 同学，参考了他的译文《<a href="http://diwu.me/2013/09/24/7-tips-for-a-node-dot-js-padawan/">7 Tips for a Node.js Padawan</a>》，某些不妥的地方做了些许修改。</p>
+</blockquote>
+<p>####或许我刚入门时就想了解这些知识。</p>
+<p>Node.js 开发相当有趣，相当令人满足。它有3万5千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。</p>
+<p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
+<p>##技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</p>
+<p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
+<p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon">Nodemon</a> 。运行以下命令安装它：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> nodemon</span></span><br></pre></td></tr></table></figure>
+<p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
+<p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
+<p><a href="https://github.com/Unitech/pm2">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
+<p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app<span class="class">.js</span> -<span class="tag">i</span> max</span><br></pre></td></tr></table></figure>
+<p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/10/02/client-side-full-text-search-in-css/" itemprop="url">
+                  用 CSS 实现客户端全文搜索
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-10-02T17:04:00+08:00" content="2013-10-02">
+              2013-10-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/全文搜索/" itemprop="url" rel="index">
+                    <span itemprop="name">全文搜索</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/10/02/client-side-full-text-search-in-css/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/10/02/client-side-full-text-search-in-css/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>前些天看到一篇文章《<a href="http://redotheweb.com/2013/05/15/client-side-full-text-search-in-css.html">Client-side full-text search in CSS</a>》，个人感觉思路比较巧，跟大家分享一下。</p>
+<p>总体思路：</p>
+<p>使用 <strong>data-</strong> 属性用于索引，带 <strong>CSS3 选择器</strong>的动态样式表用于检索，主要用 CSS 简单实现了客户端的全文搜索。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/10/02/client-side-full-text-search-in-css/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/09/23/safari-ios7-html5-problems-apis-review/" itemprop="url">
+                  iOS 7 的 Safari 和 HTML5：问题，变化和新 API
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-09-23T23:32:00+08:00" content="2013-09-23">
+              2013-09-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS7/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS7</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS7/Safari/" itemprop="url" rel="index">
+                    <span itemprop="name">Safari</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS7/Safari/HTML5/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML5</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/09/23/safari-ios7-html5-problems-apis-review/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/09/23/safari-ios7-html5-problems-apis-review/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review">Safari on iOS 7 and HTML5: problems, changes and new APIs</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a><br>感谢 <a href="http://weibo.com/cssmagic">CSS魔法</a> 指正翻译问题</p>
+</blockquote>
+<p><img src="/images/post/ios7/safari.png" /><br>这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，<strong>bug 最多的 Safari 版本</strong>嘛。文本我将介绍新的 API 和特性，以及如果你有网站或 webapp ，马上需要处理的大多数问题。</p>
+<p>##简而言之</p>
+<p>没有时间读这篇长文？  </p>
+<ul>
+<li><strong>UI 变化</strong>：工具栏色彩，新的全屏导航问题，新的主屏图标尺寸；iPhone 未使用 <code>&lt;title&gt;</code>；可能与新手势冲突。    </li>
+<li><strong>新设备</strong>：对 web 开发者而言没有任何新东西，跟 iPhone 5 相同。    </li>
+<li><strong>HTML 5 标签</strong>：视频轨道，<code>&lt;progress&gt;</code>，移除对 <code>input type=datetime</code> 的支持。    </li>
+<li><strong>HTML 5 API</strong> ：Page Visibility（页面可见性），AirPlay API，canvas 增强，移除对共享 Workers 的支持，Web Speech 综合 API， 无前缀的 Web Audio 和 Animation Timing， Mutation Observer 和其它小调整。WebSQL 使用超过 5Mb 的大问题。    </li>
+<li><strong>CSS</strong> ：Regions，Sticky 定位， FlexBox，ClipPath，无前缀的 Transitions 和 其它优化。    </li>
+<li><strong>主屏 webapps</strong> ：一些严重的问题（比如，不支持 <code>alert</code> ！）    </li>
+<li><strong>原生 webapps</strong> ：Web View 分页，原生 app 的 JavaScript 运行时，以及视频播放新功能。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/09/23/safari-ios7-html5-problems-apis-review/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/09/11/var-and-fun-hoisting/" itemprop="url">
+                  JavaScript 中的变量和函数提升
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-09-11T11:12:00+08:00" content="2013-09-11">
+              2013-09-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/09/11/var-and-fun-hoisting/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/09/11/var-and-fun-hoisting/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>直入主题，JavaScript 中的变量和函数提升，有时还是容易错的，记录一下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ReferenceError: noSuchVariable is not defined</span></span><br><span class="line"><span class="built_in">console</span>.log(noSuchVariable);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Outputs: undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(declaredLater);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> declaredLater = <span class="string">"Now it's defined!"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "Now it's defined!"</span></span><br><span class="line"><span class="built_in">console</span>.log(declaredLater);</span><br></pre></td></tr></table></figure>
+<p>JavaScript 解释器“前瞻性”查找所有变量定义，把它们“提升”到函数顶部。等价于：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> declaredLater;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(declaredLater);</span><br><span class="line"></span><br><span class="line">declaredLater = <span class="string">"Now it's defined!"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "Now it's defined!"</span></span><br><span class="line"><span class="built_in">console</span>.log(declaredLater);</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/09/11/var-and-fun-hoisting/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/08/29/devtoolsecrets/" itemprop="url">
+                  浏览器开发工具的秘密
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-08-29T11:32:00+08:00" content="2013-08-29">
+              2013-08-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Debug/" itemprop="url" rel="index">
+                    <span itemprop="name">Debug</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Debug/浏览器/" itemprop="url" rel="index">
+                    <span itemprop="name">浏览器</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Debug/浏览器/开发工具/" itemprop="url" rel="index">
+                    <span itemprop="name">开发工具</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/08/29/devtoolsecrets/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/08/29/devtoolsecrets/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>源网站：<a href="http://devtoolsecrets.com/">Secrets of the Browser Developer Tools</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码农</a></p>
+</blockquote>
+<p>##目录</p>
+<ul>
+<li>常规<ol>
+<li><a href="#findDevTools">找到开发工具</a></li>
+<li><a href="#latest">用最新的开发版</a></li>
+<li><a href="#dockTools">移动开发工具位置</a></li>
+<li><a href="#debugRWD">开发工具调试响应式设计</a></li>
+<li><a href="#shortcut">学习快捷键</a></li>
+</ol>
+</li>
+<li>Console 控制台<ol>
+<li><a href="#console">Log, Info, Debug, Warn, Error</a></li>
+<li><a href="#consoleTable">输出数据表格</a></li>
+<li><a href="#assert">Assert</a> </li>
+<li><a href="#timer">使用控制台定时器</a></li>
+<li><a href="#persistent">持久控制台</a></li>
+<li><a href="#rerun">重新运行命令</a></li>
+<li><a href="#openConsole">任意 Tab 打开控制台</a></li>
+<li><a href="#focusFrame">改变框架焦点</a></li>
+<li><a href="#reference">引用当前和前一个元素</a></li>
+<li><a href="#eval">最终求值表达式</a></li>
+</ol>
+</li>
+<li>检查<ol>
+<li><a href="#breadcrumb">通过面包屑导航 DOM</a></li>
+<li><a href="#searchDom">搜索 DOM 节点</a></li>
+<li><a href="#fonts">检查字体</a></li>
+<li><a href="#viewRWD">浏览你的响应式网站</a></li>
+<li><a href="#3Dview">3D 视图</a></li>
+</ol>
+</li>
+<li>编辑<ol>
+<li><a href="#changeVal">改变 CSS 值</a></li>
+<li><a href="#changeSta">改变 :active， :hover， :focus， :visited 状态样式</a></li>
+<li><a href="#dragEl">拖拽重排元素</a></li>
+<li><a href="#sass">使用 SASS Source Maps</a></li>
+</ol>
+</li>
+<li>调试<ol>
+<li><a href="#debugger">用 debugger; 调试</a></li>
+<li><a href="#conditional">条件断点</a></li>
+<li><a href="#domBreakpoint">DOM 断点</a></li>
+<li><a href="#xhr">XHR 断点</a></li>
+<li><a href="#breakpointScope">检查断点的作用域</a> </li>
+<li><a href="#inspectVal">监控值</a></li>
+<li><a href="#minimize">调试压缩后的 JavaScript</a> </li>
+<li><a href="#sourceMap">使用 JavaScript Source Maps</a></li>
+<li><a href="#useragent">模拟User Agent</a></li>
+<li><a href="#emulateTouch">模拟触控设备</a></li>
+<li><a href="#geo">覆盖地理位置</a></li>
+<li><a href="#orientation">重写设备方向</a></li>
+<li><a href="#canvasDebug">调试 Canvas 元素</a></li>
+<li><a href="#snippet">运行代码片段</a></li>
+</ol>
+</li>
+<li>性能<ol>
+<li><a href="#disableCache">禁用浏览器缓存</a></li>
+<li><a href="#networkBottleneck">排序网络请求找到瓶颈</a></li>
+<li><a href="#harFile">网络时间轴导出为 HAR 文件</a></li>
+<li><a href="#loadEvent">检查 DOMContentLoad 和 Load 事件</a></li>
+<li><a href="#resendXHR">重发送 XHR 请求</a></li>
+<li><a href="#fps">测量渲染性能和 FPS</a></li>
+</ol>
+</li>
+<li>移动端<ol>
+<li><a href="#devIOS">开发工具调试 IOS</a> </li>
+<li><a href="#devAndroid">开发工具调试 Android</a> </li>
+</ol>
+</li>
+<li>扩展<ol>
+<li><a href="#geoPlugin">覆盖地理位置</a></li>
+</ol>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/08/29/devtoolsecrets/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/08/13/centering-all-the-directions/" itemprop="url">
+                  CSS 居中大全
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-08-13T18:00:00+08:00" content="2013-08-13">
+              2013-08-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/水平居中/" itemprop="url" rel="index">
+                    <span itemprop="name">水平居中</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/水平居中/垂直居中/" itemprop="url" rel="index">
+                    <span itemprop="name">垂直居中</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/08/13/centering-all-the-directions/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/08/13/centering-all-the-directions/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。<br>孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~<br>各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。</p>
+<p>##&lt;center&gt;</p>
+<p>不建议用了。</p>
+<p>##text-align:center</p>
+<p>在父容器里水平居中 inline 文字，或 inline 元素</p>
+<p>##vertical-align:middle</p>
+<p>垂直居中 inline 文字，inline 元素，配合 <code>display:table</code> ，<code>display:table-cell</code>，有奇效。</p>
+<p>##line-height</p>
+<p>与 height 联手，垂直居中文字</p>
+<p>##margin:auto</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css"></span><br><span class="line">  <span class="id">#ex2_container</span> <span class="rules">&#123; <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200px</span></span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; &#125;</span></span><br><span class="line">  <span class="id">#ex2_content</span> <span class="rules">&#123; <span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0px</span> auto</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">display</span>:<span class="value">table</span></span>; &#125;</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>##hacks, hacks（小技巧）</p>
+<p>有许多 <a href="http://blog.themeforest.net/tutorials/vertical-centering-with-css/">hacks</a> ，负 margin，<a href="http://css-tricks.com/centering-in-the-unknown/">影子元素</a> ::before 等。如果你的内容不是固定大小的话，它们大部分是很脆弱的。</p>
+<p>##translate(-50%,-50%)</p>
+<p>用 position 加 translate<br>translate(-50%,-50%) 比较奇特，百分比计算不是以父元素为基准，而是以自己为基准。</p>
+<p>参考文章：<a href="http://jinlong.github.io/blog/2013/07/08/centering-percentage-widthheight-elements/">居中百分比宽高的元素</a></p>
+<p>示例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css"></span><br><span class="line">  <span class="id">#ex3_container</span> <span class="rules">&#123; <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200px</span></span></span>; <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>; &#125;</span></span><br><span class="line">  <span class="id">#ex3_content</span> <span class="rules">&#123; <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50%</span></span></span>; <span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">50%</span></span></span>; <span class="rule"><span class="attribute">transform</span>:<span class="value"><span class="function">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>)</span></span>; <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"><span class="function">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>)</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">absolute</span></span>; &#125;</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这个技巧相当嚣张，同样适用于没固定大小的内容，<code>min-width</code>，<code>max-height</code>，<code>overflow:scroll</code> 等。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/08/13/centering-all-the-directions/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/08/13/javascript-promises/" itemprop="url">
+                  JavaScript Promises
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-08-13T13:13:00+08:00" content="2013-08-13">
+              2013-08-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/08/13/javascript-promises/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/08/13/javascript-promises/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://wildermuth.com/2013/8/3/JavaScript_Promises">JavaScript Promises</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>不，我不是要谈论 JavaScript 会解决一切问题的承诺。我甚至也不相信这点;) 我想谈谈几个JavaScript 库（包括 <a href="http://angularjs.org/">AngularJS</a>，<a href="http://jquery.com/">jQuery</a>，<a href="http://dojotoolkit.org/">Dojo</a> 和 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br229773.aspx">WinJS</a>）用到的约定对象（promise object）的概念。</p>
+<p>promise 是处理异步操作的模式。问题是当你开始一个异步操作，操作完成时需要执行一些代码。异步代码非常普遍，大部分的库已经找到了解决方案，传入回调函数。但是，每个库的作法很少有共性。让我们看看 jQuery 的例子：</p>
+<iframe width="100%" height="300" src="http://jsfiddle.net/cuXqF/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/08/13/javascript-promises/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/07/23/porting-chrome-extension-to-opera/" itemprop="url">
+                  移植 Chrome 扩展至 Opera
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-07-23T17:23:00+08:00" content="2013-07-23">
+              2013-07-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Opera-Extensions/" itemprop="url" rel="index">
+                    <span itemprop="name">Opera Extensions</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Opera-Extensions/Chrome-Extensions/" itemprop="url" rel="index">
+                    <span itemprop="name">Chrome Extensions</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Opera-Extensions/Chrome-Extensions/Firebug/" itemprop="url" rel="index">
+                    <span itemprop="name">Firebug</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/07/23/porting-chrome-extension-to-opera/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/23/porting-chrome-extension-to-opera/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><strong>准备工作：</strong></p>
+<p>下载：<a href="https://getfirebug.com/firebuglite">firebuglite 源码</a>   </p>
+<p>我下载的<a href="https://getfirebug.com/releases/lite/latest/firebug-lite.tar.tgz">稳定版</a></p>
+<p>解压源码，找到 <code>firebug-lite/build/chrome-extension</code> 目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来……</p>
+<p>我感觉原因可能是：</p>
+<ol>
+<li><a href="http://dev.opera.com/extension-docs/">Opera extension API</a> 暂时没有 <a href="https://developer.chrome.com/extensions/api_index.html">Chrome extension API</a> 支持的多</li>
+<li>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新</li>
+</ol>
+<p>下面记录移植过程的一些要点：</p>
+<p>地址栏输入 <code>opera:opera://extensions</code> 或者 “<strong>Ctrl + Shift + E</strong>`”打开扩展页，右上角点击“<strong>开发者模式</strong>”；</p>
+<p>点击“<strong>载入解压后的扩展…</strong>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；</p>
+<p>哈，第一个报错来了：</p>
+<p><img src="/images/post/firebuglite/1.png" /></p>
+<p>意思是说“<code>manifest_version</code>”值必须是 2 ，不能有引号，解释参见<a href="http://dev.opera.com/extension-docs/manifest.html#manifest_version">这里</a> 。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/07/23/porting-chrome-extension-to-opera/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+        </div>
+
+        
+
+
+        
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

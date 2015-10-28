@@ -1,0 +1,859 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="CSS,垂直居中,水平居中," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。
+##&amp;lt;center&amp;gt;
+不建议用了。
+##text-align:center
+在父容器里水平居中 inli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 居中大全">
+<meta property="og:url" content="http://jinlong.github.io/2013/08/13/centering-all-the-directions/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。
+##&amp;lt;center&amp;gt;
+不建议用了。
+##text-align:center
+在父容器里水平居中 inli">
+<meta property="og:updated_time" content="2014-11-21T07:36:14.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS 居中大全">
+<meta name="twitter:description" content="我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。
+##&amp;lt;center&amp;gt;
+不建议用了。
+##text-align:center
+在父容器里水平居中 inli">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> CSS 居中大全 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS 居中大全
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-08-13T18:00:00+08:00" content="2013-08-13">
+              2013-08-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/水平居中/" itemprop="url" rel="index">
+                    <span itemprop="name">水平居中</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/水平居中/垂直居中/" itemprop="url" rel="index">
+                    <span itemprop="name">垂直居中</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/08/13/centering-all-the-directions/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/08/13/centering-all-the-directions/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。<br>孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~<br>各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。</p>
+<p>##&lt;center&gt;</p>
+<p>不建议用了。</p>
+<p>##text-align:center</p>
+<p>在父容器里水平居中 inline 文字，或 inline 元素</p>
+<p>##vertical-align:middle</p>
+<p>垂直居中 inline 文字，inline 元素，配合 <code>display:table</code> ，<code>display:table-cell</code>，有奇效。</p>
+<p>##line-height</p>
+<p>与 height 联手，垂直居中文字</p>
+<p>##margin:auto</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css"></span><br><span class="line">  <span class="id">#ex2_container</span> <span class="rules">&#123; <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200px</span></span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; &#125;</span></span><br><span class="line">  <span class="id">#ex2_content</span> <span class="rules">&#123; <span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0px</span> auto</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">display</span>:<span class="value">table</span></span>; &#125;</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>##hacks, hacks（小技巧）</p>
+<p>有许多 <a href="http://blog.themeforest.net/tutorials/vertical-centering-with-css/" target="_blank" rel="external">hacks</a> ，负 margin，<a href="http://css-tricks.com/centering-in-the-unknown/" target="_blank" rel="external">影子元素</a> ::before 等。如果你的内容不是固定大小的话，它们大部分是很脆弱的。</p>
+<p>##translate(-50%,-50%)</p>
+<p>用 position 加 translate<br>translate(-50%,-50%) 比较奇特，百分比计算不是以父元素为基准，而是以自己为基准。</p>
+<p>参考文章：<a href="http://jinlong.github.io/blog/2013/07/08/centering-percentage-widthheight-elements/">居中百分比宽高的元素</a></p>
+<p>示例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css"></span><br><span class="line">  <span class="id">#ex3_container</span> <span class="rules">&#123; <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200px</span></span></span>; <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>; &#125;</span></span><br><span class="line">  <span class="id">#ex3_content</span> <span class="rules">&#123; <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50%</span></span></span>; <span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">50%</span></span></span>; <span class="rule"><span class="attribute">transform</span>:<span class="value"><span class="function">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>)</span></span>; <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"><span class="function">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>)</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">absolute</span></span>; &#125;</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这个技巧相当嚣张，同样适用于没固定大小的内容，<code>min-width</code>，<code>max-height</code>，<code>overflow:scroll</code> 等。</p>
+<a id="more"></a>
+<p>##绝对定位居中</p>
+<p>父容器元素：<code>position: relative</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Absolute-Center</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：高度必须定义，建议加 <code>overflow: auto</code>，防止内容溢出。</strong></p>
+<p>####视口居中</p>
+<p>内容元素：<code>position: fixed</code>，<code>z-index: 999</code>，记住父容器元素 <code>position: relative</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Absolute-Center</span><span class="class">.is-Fixed</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">z-index</span>:<span class="value"> <span class="number">999</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><a href="http://codepen.io/shshaw/full/gEiDt#Fixed" target="_blank" rel="external">模态窗口实例</a></p>
+<p>####响应式</p>
+<p>百分比宽高，最大、最小宽度均可以，加 padding 也可以</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Absolute-Center</span><span class="class">.is-Responsive</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">60%</span></span></span>; </span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">60%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">min-width</span>:<span class="value"> <span class="number">400px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">max-width</span>:<span class="value"> <span class="number">500px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">40px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>####偏移</p>
+<p>只要 <code>margin: auto;</code> 在，内容块将垂直居中，top, left, bottom, right 可以设置偏移。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Absolute-Center</span><span class="class">.is-Right</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> auto</span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">20px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">text-align</span>:<span class="value"> right</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>####溢出</p>
+<p>居中内容比父容器高时，防止溢出，加 <code>overflow: auto</code> （没有任何 padding 时，也可以加 <code>max-height: 100%;</code>）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Absolute-Center</span><span class="class">.is-Overflow</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">max-height</span>:<span class="value"> <span class="number">100%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>####调整尺寸</p>
+<p><strong>resize</strong> 属性可以让尺寸可调。<br>设置 <strong>min- /max-</strong> 限制尺寸，确定加了 <code>overflow: auto</code> 。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Absolute-Center</span><span class="class">.is-Resizable</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">min-width</span>:<span class="value"> <span class="number">20%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">max-width</span>:<span class="value"> <span class="number">80%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">min-height</span>:<span class="value"> <span class="number">20%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">max-height</span>:<span class="value"> <span class="number">80%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">resize</span>:<span class="value"> both</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>####图像</p>
+<p>图像同样适用，设置 <code>height: auto;</code> </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Absolute-Center</span><span class="class">.is-Image</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>####可变高度</p>
+<p>高度必须定义，但可以是百分比或 max-height。不想定义高度的话，用 <code>display: table</code> （需要考虑 Table-Cell 兼容性）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Absolute-Center</span><span class="class">.is-Variable</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>##负 margin</p>
+<p>确切知道宽高，负 margin 是宽和高的一半。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.is-Negative</span> <span class="rules">&#123;</span><br><span class="line">        <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">200px</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">20px</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> -<span class="number">170px</span></span></span>; <span class="comment">/* (width + padding)/2 */</span></span><br><span class="line">        <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> -<span class="number">120px</span></span></span>; <span class="comment">/* (height + padding)/2 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>##Table-Cell</p>
+<p>参考文章：<a href="http://www.456bereastreet.com/archive/201103/flexible_height_vertical_centering_with_css_beyond_ie7/" target="_blank" rel="external">Flexible height vertical centering with CSS, beyond IE7</a></p>
+<p>结构：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"Pos-Container is-Table"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"Table-Cell"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"Center-Block"</span>&gt;</span></span><br><span class="line">    &amp;lt!-- CONTENT --&gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Pos-Container</span><span class="class">.is-Table</span> <span class="rules">&#123; <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>; &#125;</span></span><br><span class="line"><span class="class">.is-Table</span> <span class="class">.Table-Cell</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> table-cell</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">vertical-align</span>:<span class="value"> middle</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.is-Table</span> <span class="class">.Center-Block</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">0</span> auto</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>##FlexBox</p>
+<p>参考文章：<a href="http://coding.smashingmagazine.com/2013/05/22/centering-elements-with-flexbox/" target="_blank" rel="external">Designing CSS Layouts With Flexbox Is As Easy As Pie</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.Pos-Container</span><span class="class">.is-Flexbox</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> -webkit-box</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> -moz-box</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> -ms-flexbox</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> -webkit-flex</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-box-align</span>:<span class="value"> center</span></span>;</span><br><span class="line">     <span class="rule"><span class="attribute">-moz-box-align</span>:<span class="value"> center</span></span>;</span><br><span class="line">     <span class="rule"><span class="attribute">-ms-flex-align</span>:<span class="value"> center</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-align-items</span>:<span class="value"> center</span></span>;</span><br><span class="line">          <span class="rule"><span class="attribute">align-items</span>:<span class="value"> center</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-box-pack</span>:<span class="value"> center</span></span>;</span><br><span class="line">     <span class="rule"><span class="attribute">-moz-box-pack</span>:<span class="value"> center</span></span>;</span><br><span class="line">     <span class="rule"><span class="attribute">-ms-flex-pack</span>:<span class="value"> center</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-justify-content</span>:<span class="value"> center</span></span>;</span><br><span class="line">          <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> center</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考资料：   </p>
+<ul>
+<li><a href="http://coding.smashingmagazine.com/2013/08/09/absolute-horizontal-vertical-centering-css/" target="_blank" rel="external">Absolute Horizontal And Vertical Centering In CSS</a>   </li>
+<li><a href="http://codepen.io/shshaw/full/gEiDt" target="_blank" rel="external">Absolute Centering in CSS</a>   </li>
+<li><a href="http://html5hub.com/centering-all-the-directions/#i.n590rnl9he4uud" target="_blank" rel="external">CENTERING ALL THE DIRECTIONS</a>   </li>
+<li><a href="http://demosthenes.info/blog/723/Six-Ways-of-Centering-With-CSS" target="_blank" rel="external">Seven Ways of Centering With CSS</a>   </li>
+<li><a href="http://designshack.net/articles/css/how-to-center-anything-with-css" target="_blank" rel="external">How to Center Anything With CSS</a>   </li>
+<li><a href="http://blog.themeforest.net/tutorials/vertical-centering-with-css/" target="_blank" rel="external">Vertical Centering With CSS</a></li>
+</ul>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag">#CSS</a>
+          
+            <a href="/tags/垂直居中/" rel="tag">#垂直居中</a>
+          
+            <a href="/tags/水平居中/" rel="tag">#水平居中</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/08/13/javascript-promises/" rel="next" title="JavaScript Promises">
+                <i class="fa fa-chevron-left"></i> JavaScript Promises
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/08/29/devtoolsecrets/" rel="prev" title="浏览器开发工具的秘密">
+                浏览器开发工具的秘密 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/08/13/centering-all-the-directions/"
+     data-title="CSS 居中大全"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/08/13/centering-all-the-directions/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/08/13/centering-all-the-directions/"
+           data-title="CSS 居中大全" data-url="http://jinlong.github.io/2013/08/13/centering-all-the-directions/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

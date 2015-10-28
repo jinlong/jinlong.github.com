@@ -1,0 +1,1039 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="ES6,JavaScript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：《ELIMINATE JAVASCRIPT CODE SMELLS》作者：@elijahmanor笔记：涂鸦码农
+
+#难闻的代码
+12345678910111213141516171819202122232425262728293031/* const */ var CONSONANTS = &apos;bcdfghjklmnpqrstvwxyz&apos;;/* const */ var VOWELS = &apos;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="去除 JavaScript 代码的怪味">
+<meta property="og:url" content="http://jinlong.github.io/2015/05/21/eliminate-javascript-code-smells/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：《ELIMINATE JAVASCRIPT CODE SMELLS》作者：@elijahmanor笔记：涂鸦码农
+
+#难闻的代码
+12345678910111213141516171819202122232425262728293031/* const */ var CONSONANTS = &apos;bcdfghjklmnpqrstvwxyz&apos;;/* const */ var VOWELS = &apos;">
+<meta property="og:image" content="http://jinlong.github.io/image/js-smell/copy-paste-code-box-crop.png">
+<meta property="og:image" content="http://jinlong.github.io/image/js-smell/copy-paste-code-circle-crop.png">
+<meta property="og:image" content="http://jinlong.github.io/image/js-smell/jsinspect.png">
+<meta property="og:image" content="http://jinlong.github.io/image/js-smell/jscpd.png">
+<meta property="og:image" content="http://jinlong.github.io/image/js-smell/06-1-a.png">
+<meta property="og:image" content="http://jinlong.github.io/image/js-smell/06-1-b.png">
+<meta property="og:updated_time" content="2015-10-28T14:32:27.562Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="去除 JavaScript 代码的怪味">
+<meta name="twitter:description" content="原文：《ELIMINATE JAVASCRIPT CODE SMELLS》作者：@elijahmanor笔记：涂鸦码农
+
+#难闻的代码
+12345678910111213141516171819202122232425262728293031/* const */ var CONSONANTS = &apos;bcdfghjklmnpqrstvwxyz&apos;;/* const */ var VOWELS = &apos;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 去除 JavaScript 代码的怪味 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                去除 JavaScript 代码的怪味
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-05-21T23:06:21+08:00" content="2015-05-21">
+              2015-05-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/21/eliminate-javascript-code-smells/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/21/eliminate-javascript-code-smells/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：《<a href="http://elijahmanor.github.io/talks/js-smells/#/" target="_blank" rel="external">ELIMINATE JAVASCRIPT CODE SMELLS</a>》<br>作者：<a href="http://elijahmanor.com" target="_blank" rel="external">@elijahmanor</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码农</a></p>
+</blockquote>
+<p>#难闻的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> CONSONANTS = <span class="string">'bcdfghjklmnpqrstvwxyz'</span>;</span><br><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> VOWELS = <span class="string">'aeiou'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">englishToPigLatin</span>(<span class="params">english</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/* const */</span> <span class="keyword">var</span> SYLLABLE = <span class="string">'ay'</span>;</span><br><span class="line">  <span class="keyword">var</span> pigLatin = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (english !== <span class="literal">null</span> &amp;&amp; english.length &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">    (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> ||</span><br><span class="line">    CONSONANTS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> )) &#123;</span><br><span class="line">    <span class="keyword">if</span> (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">      pigLatin = english + SYLLABLE;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> preConsonants = <span class="string">''</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; english.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (CONSONANTS.indexOf(english[i]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">          preConsonants += english[i];</span><br><span class="line">          <span class="keyword">if</span> (preConsonants == <span class="string">'q'</span> &amp;&amp;</span><br><span class="line">            i+<span class="number">1</span> &lt; english.length &amp;&amp; english[i+<span class="number">1</span>] == <span class="string">'u'</span>) &#123;</span><br><span class="line">            preConsonants += <span class="string">'u'</span>;</span><br><span class="line">            i += <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="keyword">break</span>; &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      pigLatin = english.substring(i) + preConsonants + SYLLABLE;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> pigLatin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##为毛是这个味？<br><a id="more"></a></p>
+<p>##很多原因：</p>
+<ul>
+<li>声明过多</li>
+<li>嵌套太深</li>
+<li>复杂度太高</li>
+</ul>
+<p>##检查工具 </p>
+<p><strong>Lint 规则</strong></p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/<span class="keyword">*</span>jshint maxstatements:15, maxdepth:2, maxcomplexity:5 <span class="keyword">*</span>/</span><br><span class="line">/<span class="keyword">*</span>jshint 最多声明:15, 最大深度:2, 最高复杂度:5<span class="keyword">*</span>/</span><br><span class="line"></span><br><span class="line">/<span class="keyword">*</span>eslint max-statements:[2, 15], max-depth:[1, 2], complexity:[2, 5] <span class="keyword">*</span>/</span><br></pre></td></tr></table></figure>
+<p><strong>结果</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span>:<span class="number">0</span> - <span class="built_in">Function</span> <span class="string">'englishToPigLatin'</span> has a complexity <span class="keyword">of</span> <span class="number">7.</span></span><br><span class="line"><span class="comment">//englishToPigLatin 方法复杂度为 7</span></span><br><span class="line"><span class="number">7</span>:<span class="number">0</span> - This <span class="function"><span class="keyword">function</span> <span class="title">has</span> <span class="title">too</span> <span class="title">many</span> <span class="title">statements</span> (<span class="params">16</span>). <span class="title">Maximum</span> <span class="title">allowed</span> <span class="title">is</span> 15.</span><br><span class="line">//次方法有太多声明(<span class="params">16</span>)。最大允许值为15。</span><br><span class="line">22:10 - <span class="title">Blocks</span> <span class="title">are</span> <span class="title">nested</span> <span class="title">too</span> <span class="title">deeply</span> (<span class="params">5</span>).</span><br><span class="line">//嵌套太深(<span class="params">5</span>)</span></span><br></pre></td></tr></table></figure>
+<p>##重构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CONSONANTS = [<span class="string">'th'</span>, <span class="string">'qu'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'j'</span>, <span class="string">'k'</span>,</span><br><span class="line"><span class="string">'l'</span>, <span class="string">'m'</span>, <span class="string">'n'</span>, <span class="string">'p'</span>, <span class="string">'q'</span>, <span class="string">'r'</span>, <span class="string">'s'</span>, <span class="string">'t'</span>, <span class="string">'v'</span>, <span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>];</span><br><span class="line"><span class="keyword">const</span> VOWELS = [<span class="string">'a'</span>, <span class="string">'e'</span>, <span class="string">'i'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>];</span><br><span class="line"><span class="keyword">const</span> ENDING = <span class="string">'ay'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> isValid = word =&gt; startsWithVowel(word) || startsWithConsonant(word);</span><br><span class="line"><span class="keyword">let</span> startsWithVowel = word =&gt; !!~VOWELS.indexOf(word[<span class="number">0</span>]);</span><br><span class="line"><span class="keyword">let</span> startsWithConsonant = word =&gt; !!~CONSONANTS.indexOf(word[<span class="number">0</span>]);</span><br><span class="line"><span class="keyword">let</span> getConsonants = word =&gt; CONSONANTS.reduce((memo, char) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (word.startsWith(char)) &#123;</span><br><span class="line">    memo += char;</span><br><span class="line">    word = word.substr(char.length);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> memo;</span><br><span class="line">&#125;, <span class="string">''</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">englishToPigLatin</span>(<span class="params">english=''</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (isValid(english)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (startsWithVowel(english)) &#123;</span><br><span class="line">        english += ENDING;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> letters = getConsonants(english);</span><br><span class="line">        english = <span class="string">`<span class="subst">$&#123;english.substr(letters.length)&#125;</span><span class="subst">$&#123;letters&#125;</span><span class="subst">$&#123;ENDING&#125;</span>`</span>;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> english;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>重构后统计</strong></p>
+<ul>
+<li>max-statements（最多声明）: 16 → 6</li>
+<li>max-depth（最大嵌套）: 5 → 2</li>
+<li>complexity（复杂度）: 7 → 3</li>
+<li>max-len（最多行数）: 65 → 73</li>
+<li>max-params（最多参数）: 1 → 2</li>
+<li>max-nested-callbacks（最多嵌套回调）: 0 → 1</li>
+</ul>
+<p>##资源</p>
+<p>jshint - <a href="jshint - http://jshint.com/">http://jshint.com/</a><br>eslint - <a href="http://eslint.org/" target="_blank" rel="external">http://eslint.org/</a><br>jscomplexity - <a href="http://jscomplexity.org/" target="_blank" rel="external">http://jscomplexity.org/</a><br>escomplex - <a href="https://github.com/philbooth/escomplex" target="_blank" rel="external">https://github.com/philbooth/escomplex</a><br>jasmine - <a href="http://jasmine.github.io/" target="_blank" rel="external">http://jasmine.github.io/</a> </p>
+<p>#复制粘贴代码的味道</p>
+<p>已有功能…</p>
+<p><img src="/image/js-smell/copy-paste-code-box-crop.png"></p>
+<p>已有代码，BOX.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ... more code ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> boxes = <span class="built_in">document</span>.querySelectorAll(<span class="string">'.Box'</span>);</span><br><span class="line"></span><br><span class="line">[].forEach.call(boxes, <span class="function"><span class="keyword">function</span>(<span class="params">element, index</span>) </span>&#123;</span><br><span class="line">  element.innerText = <span class="string">"Box: "</span> + index;</span><br><span class="line">  element.style.backgroundColor =</span><br><span class="line">    <span class="string">'#'</span> + (<span class="built_in">Math</span>.random() * <span class="number">0xFFFFFF</span> &lt;&lt; <span class="number">0</span>).toString(<span class="number">16</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... more code ...</span></span><br></pre></td></tr></table></figure>
+<p>那么，现在想要这个功能</p>
+<p><img src="/image/js-smell/copy-paste-code-circle-crop.png"></p>
+<p>于是，Duang!  CIRCLE.JS 就出现了…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ... more code ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> circles = <span class="built_in">document</span>.querySelectorAll(<span class="string">".Circle"</span>);</span><br><span class="line"></span><br><span class="line">[].forEach.call(circles, <span class="function"><span class="keyword">function</span>(<span class="params">element, index</span>) </span>&#123;</span><br><span class="line">  element.innerText = <span class="string">"Circle: "</span> + index;</span><br><span class="line">  element.style.color =</span><br><span class="line">    <span class="string">'#'</span> + (<span class="built_in">Math</span>.random() * <span class="number">0xFFFFFF</span> &lt;&lt; <span class="number">0</span>).toString(<span class="number">16</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... more code ...</span></span><br></pre></td></tr></table></figure>
+<p>为毛是这个味？因为我们复制粘贴了！</p>
+<p>##工具</p>
+<p><a href="https://github.com/danielstjules/jsinspect" target="_blank" rel="external">JSINSPECT</a></p>
+<p>检查复制粘贴和结构相似的代码</p>
+<p>一行命令：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jsinspect</span><br></pre></td></tr></table></figure>
+<p><img src="/image/js-smell/jsinspect.png"></p>
+<p><a href="https://github.com/kucherenko/jscpd" target="_blank" rel="external">JSCPD</a></p>
+<p>程序源码的复制/粘贴检查器</p>
+<p>(JavaScript, TypeScript, C#, Ruby, CSS, SCSS, HTML, 等等都适用…)</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jscpd -f <span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.js -l 1 -t 30 --languages javascript</span><br></pre></td></tr></table></figure>
+<p><img src="/image/js-smell/jscpd.png"></p>
+<p>##怎么能不被发现？重构</p>
+<p>把随机颜色部分丢出去…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> randomColor = () =&gt; <span class="string">`#<span class="subst">$&#123;(Math.random() * 0xFFFFFF &lt;&lt; 0).toString(16)&#125;</span>;</span><br><span class="line"></span><br><span class="line">let boxes = document.querySelectorAll(".Box");</span><br><span class="line">[].forEach.call(boxes, (element, index) =&gt; &#123;</span><br><span class="line">  element.innerText = "Box: " + index;</span><br><span class="line">  element.style.backgroundColor = randomColor();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">let circles = document.querySelectorAll(".Circle");</span><br><span class="line">[].forEach.call(circles, (element, index) =&gt; &#123;</span><br><span class="line">  element.innerText = "Circle: " + index;</span><br><span class="line">  element.style.color = randomColor();</span><br><span class="line">&#125;);</span></span><br></pre></td></tr></table></figure>
+<p>再重构</p>
+<p>再把怪异的 [].forEach.call 部分丢出去…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> randomColor = () =&gt; <span class="string">`#<span class="subst">$&#123;(Math.random() * 0xFFFFFF &lt;&lt; 0).toString(16)&#125;</span>;</span><br><span class="line"></span><br><span class="line">let $$ = selector =&gt; [].slice.call(document.querySelectorAll(selector || '*'));</span><br><span class="line"></span><br><span class="line">$$('.Box').forEach((element, index) =&gt; &#123;</span><br><span class="line">  element.innerText = "Box: " + index;</span><br><span class="line">  element.style.backgroundColor = randomColor();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$$(".Circle").forEach((element, index) =&gt; &#123;</span><br><span class="line">  element.innerText = "Circle: " + index;</span><br><span class="line">  element.style.color = randomColor();</span><br><span class="line">&#125;);</span></span><br></pre></td></tr></table></figure>
+<p>再再重构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> randomColor = () =&gt; <span class="string">`#<span class="subst">$&#123;(Math.random() * 0xFFFFFF &lt;&lt; 0).toString(16)&#125;</span>;</span><br><span class="line"></span><br><span class="line">let $$ = selector =&gt; [].slice.call(document.querySelectorAll(selector || '*'));</span><br><span class="line"></span><br><span class="line">let updateElement = (selector, textPrefix, styleProperty) =&gt; &#123;</span><br><span class="line">  $$(selector).forEach((element, index) =&gt; &#123;</span><br><span class="line">    element.innerText = textPrefix + ': ' + index;</span><br><span class="line">    element.style[styleProperty] = randomColor();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">updateElement('.Box', 'Box', 'backgroundColor');</span><br><span class="line"></span><br><span class="line">updateElement('.Circle', 'Circle', 'color');</span></span><br></pre></td></tr></table></figure>
+<p>##资源</p>
+<ul>
+<li><a href="https://github.com/danielstjules" target="_blank" rel="external">jsinspect</a>  </li>
+<li><a href="https://github.com/kucherenko/jscpd" target="_blank" rel="external">jscpd</a>  </li>
+<li><a href="http://codepen.io/elijahmanor/pen/myQebo" target="_blank" rel="external">CodePen</a> </li>
+</ul>
+<p>#switch 味道</p>
+<p>##难闻的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">shape, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> area = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'Triangle'</span>:</span><br><span class="line">      area = <span class="number">.5</span> * options.width * options.height;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'Square'</span>:</span><br><span class="line">      area = <span class="built_in">Math</span>.pow(options.width, <span class="number">2</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'Rectangle'</span>:</span><br><span class="line">      area = options.width * options.height;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Invalid shape: '</span> + shape);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getArea(<span class="string">'Triangle'</span>,  &#123; width: <span class="number">100</span>, height: <span class="number">100</span> &#125;);</span><br><span class="line">getArea(<span class="string">'Square'</span>,    &#123; width: <span class="number">100</span> &#125;);</span><br><span class="line">getArea(<span class="string">'Rectangle'</span>, &#123; width: <span class="number">100</span>, height: <span class="number">100</span> &#125;);</span><br><span class="line">getArea(<span class="string">'Bogus'</span>);</span><br></pre></td></tr></table></figure>
+<p>##为毛是这个味？违背“<a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design" target="_blank" rel="external">开放/封闭原则</a>” </p>
+<p>增加个新形状</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">shape, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> area = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'Triangle'</span>:</span><br><span class="line">      area = <span class="number">.5</span> * options.width * options.height;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'Square'</span>:</span><br><span class="line">      area = <span class="built_in">Math</span>.pow(options.width, <span class="number">2</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'Rectangle'</span>:</span><br><span class="line">      area = options.width * options.height;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'Circle'</span>:</span><br><span class="line">      area = <span class="built_in">Math</span>.PI * <span class="built_in">Math</span>.pow(options.radius, <span class="number">2</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Invalid shape: '</span> + shape);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>加点设计模式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">shapes</span>) </span>&#123; <span class="comment">// triangle.js</span></span><br><span class="line">  <span class="keyword">var</span> Triangle = shapes.Triangle = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.width = options.width;</span><br><span class="line">    <span class="keyword">this</span>.height = options.height;</span><br><span class="line">  &#125;;</span><br><span class="line">  Triangle.prototype.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0.5</span> * <span class="keyword">this</span>.width * <span class="keyword">this</span>.height;</span><br><span class="line">  &#125;;  </span><br><span class="line">&#125;(<span class="built_in">window</span>.shapes = <span class="built_in">window</span>.shapes || &#123;&#125;));</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">shape, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Shape = <span class="built_in">window</span>.shapes[shape], area = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (Shape &amp;&amp; <span class="keyword">typeof</span> Shape === <span class="string">'function'</span>) &#123;</span><br><span class="line">    area = <span class="keyword">new</span> Shape(options).getArea();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Invalid shape: '</span> + shape);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getArea(<span class="string">'Triangle'</span>,  &#123; width: <span class="number">100</span>, height: <span class="number">100</span> &#125;);</span><br><span class="line">getArea(<span class="string">'Square'</span>,    &#123; width: <span class="number">100</span> &#125;);</span><br><span class="line">getArea(<span class="string">'Rectangle'</span>, &#123; width: <span class="number">100</span>, height: <span class="number">100</span> &#125;);</span><br><span class="line">getArea(<span class="string">'Bogus'</span>);</span><br></pre></td></tr></table></figure>
+<p>再增加新形状时</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// circle.js</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">shapes</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Circle = shapes.Circle = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.radius = options.radius;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  Circle.prototype.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.PI * <span class="built_in">Math</span>.pow(<span class="keyword">this</span>.radius, <span class="number">2</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  Circle.prototype.getCircumference = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * <span class="built_in">Math</span>.PI * <span class="keyword">this</span>.radius;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;(<span class="built_in">window</span>.shapes = <span class="built_in">window</span>.shapes || &#123;&#125;));</span><br></pre></td></tr></table></figure>
+<p>##还有其它的味道吗？神奇的字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">shape, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> area = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'Triangle'</span>:</span><br><span class="line">      area = <span class="number">.5</span> * options.width * options.height;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="comment">/* ... more code ... */</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getArea(<span class="string">'Triangle'</span>, &#123; width: <span class="number">100</span>, height: <span class="number">100</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>神奇的字符串重构为对象类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shapeType = &#123;</span><br><span class="line">  triangle: <span class="string">'Triangle'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">shape, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> area = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">    <span class="keyword">case</span> shapeType.triangle:</span><br><span class="line">      area = <span class="number">.5</span> * options.width * options.height;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getArea(shapeType.triangle, &#123; width: <span class="number">100</span>, height: <span class="number">100</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>神奇字符重构为 CONST &amp; SYMBOLS</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> shapeType = &#123;</span><br><span class="line">  triangle: <span class="keyword">new</span> <span class="built_in">Symbol</span>()</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">shape, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> area = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">    <span class="keyword">case</span> shapeType.triangle:</span><br><span class="line">      area = <span class="number">.5</span> * options.width * options.height;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getArea(shapeType.triangle, &#123; width: <span class="number">100</span>, height: <span class="number">100</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>##工具！？！</p>
+<p>木有 :(</p>
+<p><a href="http://bit.ly/eslint-plugin-smells" target="_blank" rel="external">ESLINT-PLUGIN-SMELLS</a><br>用于 JavaScript Smells（味道） 的 ESLint 规则</p>
+<p>规则</p>
+<ul>
+<li>no-switch - 不允许使用  switch  声明</li>
+<li>no-complex-switch-case -  不允许使用复杂的  switch  声明</li>
+</ul>
+<p>##资源</p>
+<ul>
+<li><a href="http://codepen.io/elijahmanor/pen/OPazmm" target="_blank" rel="external">CodePen</a>  </li>
+<li><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/" target="_blank" rel="external">Addy Osmani’s JavaScript Design Patterns eBook</a>  </li>
+<li><a href="http://eslint.org/" target="_blank" rel="external">ESLint</a>  </li>
+<li><a href="https://github.com/elijahmanor/eslint-plugin-smells" target="_blank" rel="external">eslint-plugin-smells</a>  </li>
+<li><a href="http://www.2ality.com/2015/02/es6-scoping.html" target="_blank" rel="external">ES6 Scoping</a>  </li>
+<li><a href="http://www.2ality.com/2014/12/es6-symbols.html" target="_blank" rel="external">ES6 Symbols</a>  </li>
+<li><a href="http://babeljs.io/docs/learn-es6" target="_blank" rel="external">Learn ES6</a></li>
+</ul>
+<p>#this 深渊的味道</p>
+<p>##难闻的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.teeth = [&#123; clean: <span class="literal">false</span> &#125;, &#123; clean: <span class="literal">false</span> &#125;, &#123; clean: <span class="literal">false</span> &#125;];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Person.prototype.brush = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.teeth.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">tooth</span>) </span>&#123;</span><br><span class="line">    that.clean(tooth);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'brushed'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Person.prototype.clean = <span class="function"><span class="keyword">function</span>(<span class="params">tooth</span>) </span>&#123;</span><br><span class="line">  tooth.clean = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line">person.brush();</span><br><span class="line"><span class="built_in">console</span>.log(person.teeth);</span><br></pre></td></tr></table></figure>
+<p>##为什么是这个味？that 还是 self 还是 selfie</p>
+<p>替换方案<br>1) bind</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.brush = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.teeth.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">tooth</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.clean(tooth);</span><br><span class="line">  &#125;.bind(<span class="keyword">this</span>));</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'brushed'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>替换方案<br>2) forEach 的第二个参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.brush = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.teeth.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">tooth</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.clean(tooth);</span><br><span class="line">  &#125;, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'brushed'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>替换方案<br>3) ECMAScript 2015 (ES6)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.brush = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.teeth.forEach(tooth =&gt; &#123;</span><br><span class="line">    <span class="keyword">this</span>.clean(tooth);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'brushed'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>4a) 函数式编程</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.brush = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.teeth.forEach(<span class="keyword">this</span>.clean);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'brushed'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>4b) 函数式编程</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.brush = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.teeth.forEach(<span class="keyword">this</span>.clean.bind(<span class="keyword">this</span>));</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'brushed'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>##工具</p>
+<p>ESLint</p>
+<ul>
+<li><a href="https://github.com/elijahmanor/eslint-plugin-smells" target="_blank" rel="external">no-this-assign</a> (eslint-plugin-smells) </li>
+<li><a href="http://eslint.org/docs/rules/consistent-this" target="_blank" rel="external">consistent-this</a> </li>
+<li><a href="http://eslint.org/docs/rules/no-extra-bind" target="_blank" rel="external">no-extra-bind</a></li>
+</ul>
+<p>#字符串连接的味道</p>
+<p>##难闻的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> build = <span class="function"><span class="keyword">function</span>(<span class="params">id, href</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> $( <span class="string">"&lt;div id='tab'&gt;&lt;a href='"</span> + href + <span class="string">"' id='"</span>+ id + <span class="string">"'&gt;&lt;/div&gt;"</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##为毛是这个味？因为字符串连接</p>
+<p>替换方案<br>@thomasfuchs <a href="http://mir.aculo.us/2011/03/09/little-helpers-a-tweet-sized-javascript-templating-engine/" target="_blank" rel="external">推文上的 JavaScript 模板引擎</a> </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params">s, d</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">in</span> d)</span><br><span class="line">    s = s.replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'&#123;'</span> + p + <span class="string">'&#125;'</span>, <span class="string">'g'</span>), d[p]);</span><br><span class="line">  <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> build = <span class="function"><span class="keyword">function</span>(<span class="params">id, href</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> options = &#123;</span><br><span class="line">    id: id</span><br><span class="line">    href: href</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> t(<span class="string">'&lt;div id="tab"&gt;&lt;a href="&#123;href&#125;" id="&#123;id&#125;"&gt;&lt;/div&gt;'</span>, options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>替换方案<br>2) ECMAScript 2015 (ES6) 模板字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> build = (id, href) =&gt;</span><br><span class="line">  <span class="string">`&lt;div id="tab"&gt;&lt;a href="<span class="subst">$&#123;href&#125;</span>" id="<span class="subst">$&#123;id&#125;</span>"&gt;&lt;/div&gt;`</span>;</span><br></pre></td></tr></table></figure>
+<p>替换方案<br>3) ECMAScript 2015 (ES6)  模板字符串  (多行)</p>
+<p>替换方案<br>4) 其它小型库或大型库/框架</p>
+<ul>
+<li>Lowdash 或 Underscore</li>
+<li>Angular</li>
+<li>React</li>
+<li>Ember</li>
+<li>等等…</li>
+</ul>
+<p>##工具</p>
+<p>ESLINT-PLUGIN-SMELLS<br><a href="http://bit.ly/eslint-plugin-smells" target="_blank" rel="external">no-complex-string-concat</a> </p>
+<p>##资源</p>
+<p><a href="http://mir.aculo.us/2011/03/09/little-helpers-a-tweet-sized-javascript-templating-engine/" target="_blank" rel="external">Tweet Sized JavaScript Templating Engine</a> by @thomasfuchs<br>Learn ECMAScript 2015 (ES6) - <a href="http://babeljs.io/docs/learn-es6/" target="_blank" rel="external">http://babeljs.io/docs/learn-es6/</a></p>
+<p>#jQuery 调查</p>
+<p>##难闻的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">'.Component'</span>)</span><br><span class="line">    .find(<span class="string">'button'</span>)</span><br><span class="line">      .addClass(<span class="string">'Component-button--action'</span>)</span><br><span class="line">      .click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; alert(<span class="string">'HEY!'</span>); &#125;)</span><br><span class="line">    .end()</span><br><span class="line">    .mouseenter(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; $(<span class="keyword">this</span>).addClass(<span class="string">'Component--over'</span>); &#125;)</span><br><span class="line">    .mouseleave(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; $(<span class="keyword">this</span>).removeClass(<span class="string">'Component--over'</span>); &#125;)</span><br><span class="line">    .addClass(<span class="string">'initialized'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>##为毛是这个味？丧心病狂的链式调用</p>
+<p>愉快地重构吧</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Event Delegation before DOM Ready</span></span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">'mouseenter mouseleave'</span>, <span class="string">'.Component'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  $(<span class="keyword">this</span>).toggleClass(<span class="string">'Component--over'</span>, e.type === <span class="string">'mouseenter'</span>);  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="string">'.Component'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">'HEY!'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">'.Component button'</span>).addClass(<span class="string">'Component-button--action'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>最终 Demo</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="pvQQZw" data-default-tab="result" data-user="elijahmanor" class="codepen">See the Pen <a href="http://codepen.io/elijahmanor/pen/pvQQZw/" target="_blank" rel="external">pvQQZw</a> by Elijah Manor (<a href="http://codepen.io/elijahmanor" target="_blank" rel="external">@elijahmanor</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>##工具</p>
+<p>ESLINT-PLUGIN-SMELLS</p>
+<ul>
+<li><a href="http://bit.ly/eslint-plugin-smells" target="_blank" rel="external">no-complex-chaining</a> </li>
+</ul>
+<p>#难以琢磨的计时器</p>
+<p>##难闻的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'start setInterval'</span>);</span><br><span class="line">  someLongProcess(getRandomInt(<span class="number">2000</span>, <span class="number">4000</span>));</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">someLongProcess</span>(<span class="params">duration</span>) </span>&#123;</span><br><span class="line">  setTimeout(</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'long process: '</span> + duration); &#125;,</span><br><span class="line">    duration</span><br><span class="line">  );  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomInt</span>(<span class="params">min, max</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (max - min + <span class="number">1</span>)) + min;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##为毛这个味？无法同步的计时器</p>
+<p>Demo: setInterval</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="bNQmzP" data-default-tab="result" data-user="elijahmanor" class="codepen">See the Pen <a href="http://codepen.io/elijahmanor/pen/bNQmzP/" target="_blank" rel="external">bNQmzP</a> by Elijah Manor (<a href="http://codepen.io/elijahmanor" target="_blank" rel="external">@elijahmanor</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>用 setTimeout 保证顺序</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'start setTimeout'</span>)</span><br><span class="line">  someLongProcess(getRandomInt(<span class="number">2000</span>, <span class="number">4000</span>), <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(timer, <span class="number">3000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">someLongProcess</span>(<span class="params">duration, callback</span>) </span>&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'long process: '</span> + duration);</span><br><span class="line">    callback();</span><br><span class="line">  &#125;, duration);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* getRandomInt(min, max) &#123;&#125; */</span></span><br></pre></td></tr></table></figure>
+<p>Demo: setTimeout </p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="raQQay" data-default-tab="result" data-user="elijahmanor" class="codepen">See the Pen <a href="http://codepen.io/elijahmanor/pen/raQQay/" target="_blank" rel="external">raQQay</a> by Elijah Manor (<a href="http://codepen.io/elijahmanor" target="_blank" rel="external">@elijahmanor</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>#重复定义</p>
+<p>##难闻的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data = <span class="keyword">this</span>.appendAnalyticsData(data);</span><br><span class="line">data = <span class="keyword">this</span>.appendSubmissionData(data);</span><br><span class="line">data = <span class="keyword">this</span>.appendAdditionalInputs(data);</span><br><span class="line">data = <span class="keyword">this</span>.pruneObject(data);</span><br></pre></td></tr></table></figure>
+<p>替换方案<br>1) 嵌套调用函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data = <span class="keyword">this</span>.pruneObject(</span><br><span class="line">  <span class="keyword">this</span>.appendAdditionalInputs(</span><br><span class="line">    <span class="keyword">this</span>.appendSubmissionData(</span><br><span class="line">      <span class="keyword">this</span>.appendAnalyticsData(data)</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>2) forEach<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funcs = [</span><br><span class="line">  <span class="keyword">this</span>.appendAnalyticsData,</span><br><span class="line">  <span class="keyword">this</span>.appendSubmissionData,</span><br><span class="line">  <span class="keyword">this</span>.appendAdditionalInputs,</span><br><span class="line">  <span class="keyword">this</span>.pruneObject</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">funcs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">func</span>) </span>&#123;</span><br><span class="line">  data = func(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>3) reduce<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funcs = [</span><br><span class="line">  <span class="keyword">this</span>.appendAnalyticsData,</span><br><span class="line">  <span class="keyword">this</span>.appendSubmissionData,</span><br><span class="line">  <span class="keyword">this</span>.appendAdditionalInputs,</span><br><span class="line">  <span class="keyword">this</span>.pruneObject</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">data = funcs.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">memo, func</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> func(memo);</span><br><span class="line">&#125;, data);</span><br></pre></td></tr></table></figure></p>
+<p>4) <a href="https://lodash.com/docs#flow" target="_blank" rel="external">flow</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = _.flow(</span><br><span class="line">  <span class="keyword">this</span>.appendAnalyticsData,</span><br><span class="line">  <span class="keyword">this</span>.appendSubmissionData,</span><br><span class="line">  <span class="keyword">this</span>.appendAdditionalInputs,</span><br><span class="line">  <span class="keyword">this</span>.pruneObject</span><br><span class="line">)(data);</span><br></pre></td></tr></table></figure></p>
+<p>##工具</p>
+<p>ESLINT-PLUGIN-SMELLS</p>
+<ul>
+<li><a href="http://bit.ly/eslint-plugin-smells" target="_blank" rel="external">no-reassign</a> </li>
+</ul>
+<p>##资源</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" target="_blank" rel="external">forEach</a>  </li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce" target="_blank" rel="external">reduce</a>  </li>
+<li><a href="https://lodash.com/docs#flow" target="_blank" rel="external">_.flow</a> </li>
+</ul>
+<p>#过度耦合</p>
+<p>##难闻的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ShoppingCart</span>(<span class="params"></span>) </span>&#123; <span class="keyword">this</span>.items = []; &#125;</span><br><span class="line">ShoppingCart.prototype.addItem = <span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.items.push(item);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Product</span>(<span class="params">name</span>) </span>&#123; <span class="keyword">this</span>.name = name; &#125;</span><br><span class="line">Product.prototype.addToCart = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  shoppingCart.addItem(<span class="keyword">this</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> shoppingCart = <span class="keyword">new</span> ShoppingCart();</span><br><span class="line"><span class="keyword">var</span> product = <span class="keyword">new</span> Product(<span class="string">'Socks'</span>);</span><br><span class="line">product.addToCart();</span><br><span class="line"><span class="built_in">console</span>.log(shoppingCart.items);</span><br></pre></td></tr></table></figure>
+<p>##为毛是这个味？紧密耦合的依赖关系</p>
+<p>如何改善！？！</p>
+<ol>
+<li>依赖注入</li>
+<li><p>消息订阅</p>
+</li>
+<li><p>依赖注入 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ShoppingCart</span>(<span class="params"></span>) </span>&#123; <span class="keyword">this</span>.items = []; &#125;</span><br><span class="line">ShoppingCart.prototype.addItem = <span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.items.push(item);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Product</span>(<span class="params">name, shoppingCart</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.shoppingCart = shoppingCart;</span><br><span class="line">&#125;</span><br><span class="line">Product.prototype.addToCart = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.shoppingCart.addItem(<span class="keyword">this</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> shoppingCart = <span class="keyword">new</span> ShoppingCart();</span><br><span class="line"><span class="keyword">var</span> product = <span class="keyword">new</span> Product(<span class="string">'Socks'</span>, shoppingCart);</span><br><span class="line">product.addToCart();</span><br><span class="line"><span class="built_in">console</span>.log(shoppingCart.items);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>消息订阅 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> channel = postal.channel();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ShoppingCart</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.items = [];</span><br><span class="line">  channel.subscribe(<span class="string">'shoppingcart.add'</span>, <span class="keyword">this</span>.addItem);</span><br><span class="line">&#125;</span><br><span class="line">ShoppingCart.prototype.addItem = <span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.items.push(item);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Product</span>(<span class="params">name</span>) </span>&#123; <span class="keyword">this</span>.name = name; &#125;</span><br><span class="line">Product.prototype.addToCart = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  channel.publish(<span class="string">'shoppingcart.add'</span>, <span class="keyword">this</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> shoppingCart = <span class="keyword">new</span> ShoppingCart();</span><br><span class="line"><span class="keyword">var</span> product = <span class="keyword">new</span> Product(<span class="string">'Socks'</span>);</span><br><span class="line">product.addToCart();</span><br><span class="line"><span class="built_in">console</span>.log(shoppingCart.items);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>资源</p>
+<ul>
+<li><a href="https://github.com/postaljs/postal.js" target="_blank" rel="external">postal</a> by @ifandelse</li>
+</ul>
+<p>#连续不断的交互</p>
+<p>##难闻的代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> search = <span class="built_in">document</span>.querySelector(<span class="string">'.Autocomplete'</span>);</span><br><span class="line"></span><br><span class="line">search.addEventListener(<span class="string">'input'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Make Ajax call for autocomplete</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(e.target.value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>Demo: 根本停不下来</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="LEXBdX" data-default-tab="result" data-user="elijahmanor" class="codepen">See the Pen <a href="http://codepen.io/elijahmanor/pen/LEXBdX/" target="_blank" rel="external">LEXBdX</a> by Elijah Manor (<a href="http://codepen.io/elijahmanor" target="_blank" rel="external">@elijahmanor</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>解决方案：节流阀<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> search = <span class="built_in">document</span>.querySelector(<span class="string">'.Autocomplete'</span>);</span><br><span class="line"></span><br><span class="line">search.addEventListener(<span class="string">'input'</span>, _.throttle(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Make Ajax call for autocomplete</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(e.target.value);</span><br><span class="line">&#125;, <span class="number">500</span>));</span><br></pre></td></tr></table></figure></p>
+<p>Demo: </p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="azQjGj" data-default-tab="result" data-user="elijahmanor" class="codepen">See the Pen <a href="http://codepen.io/elijahmanor/pen/azQjGj/" target="_blank" rel="external">azQjGj</a> by Elijah Manor (<a href="http://codepen.io/elijahmanor" target="_blank" rel="external">@elijahmanor</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>解决方案：DEBOUNCE<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> search = <span class="built_in">document</span>.querySelector(<span class="string">'.Autocomplete'</span>);</span><br><span class="line"></span><br><span class="line">search.addEventListener(<span class="string">'input'</span>, _.debounce(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Make Ajax call for autocomplete</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(e.target.value);</span><br><span class="line">&#125;, <span class="number">500</span>));</span><br></pre></td></tr></table></figure></p>
+<p>Demo</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="bNQjje" data-default-tab="result" data-user="elijahmanor" class="codepen">See the Pen <a href="http://codepen.io/elijahmanor/pen/bNQjje/" target="_blank" rel="external">bNQjje</a> by Elijah Manor (<a href="http://codepen.io/elijahmanor" target="_blank" rel="external">@elijahmanor</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>资源</p>
+<ul>
+<li><a href="https://lodash.com/" target="_blank" rel="external">lodash</a>  </li>
+<li><a href="https://lodash.com/docs#throttle" target="_blank" rel="external">throttle</a> </li>
+<li><a href="https://lodash.com/docs#debounce" target="_blank" rel="external">debounce</a></li>
+</ul>
+<p>#匿名函数</p>
+<p>##难闻的代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> search = <span class="built_in">document</span>.querySelector(<span class="string">'.Autocomplete'</span>);</span><br><span class="line"></span><br><span class="line">search.addEventListener(<span class="string">'input'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.target.value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>给函数命名的原因：</p>
+<ol>
+<li>堆栈追踪</li>
+<li>去关联</li>
+<li><p>代码复用</p>
+</li>
+<li><p>堆栈追踪</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> search = <span class="built_in">document</span>.querySelector(<span class="string">'.Autocomplete'</span>);</span><br><span class="line"></span><br><span class="line">search.addEventListener(<span class="string">'input'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.target.value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="/image/js-smell/06-1-a.png"></p>
+<p>修改后<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> search = <span class="built_in">document</span>.querySelector(<span class="string">'.Autocomplete'</span>);</span><br><span class="line"></span><br><span class="line">search.addEventListener(<span class="string">'input'</span>, <span class="function"><span class="keyword">function</span> <span class="title">matches</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.target.value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><img src="/image/js-smell/06-1-b.png"></p>
+<ol>
+<li>去关联</li>
+</ol>
+<p>单次事件绑定<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'button'</span>)</span><br><span class="line">  .addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="title">handler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'Ka-boom!'</span>);</span><br><span class="line">    <span class="keyword">this</span>.removeEventListener(<span class="string">'click'</span>, handler);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>Demo</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="PwxBxP" data-default-tab="result" data-user="elijahmanor" class="codepen">See the Pen <a href="http://codepen.io/elijahmanor/pen/PwxBxP/" target="_blank" rel="external">PwxBxP</a> by Elijah Manor (<a href="http://codepen.io/elijahmanor" target="_blank" rel="external">@elijahmanor</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<ol>
+<li>代码复用</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> kaboom = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; alert(<span class="string">'Ka-boom'</span>); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'button'</span>).addEventListener(<span class="string">'click'</span>, kaboom);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'#egg'</span>).addEventListener(<span class="string">'mouseenter'</span>, kaboom);</span><br></pre></td></tr></table></figure>
+<p>##资源</p>
+<ul>
+<li><a href="https://developer.chrome.com/devtools" target="_blank" rel="external">Chrome DevTools</a> </li>
+</ul>
+<p>#结尾</p>
+<p>更多的 ESLint 规则</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/eslint-plugin-react" target="_blank" rel="external">eslint-plugin-react</a>  </li>
+<li><a href="https://www.npmjs.com/package/eslint-plugin-angular" target="_blank" rel="external">eslint-plugin-angular</a> </li>
+<li><a href="https://www.npmjs.com/package/eslint-plugin-ember" target="_blank" rel="external">eslint-plugin-ember</a>  </li>
+<li><a href="https://www.npmjs.com/package/eslint-plugin-backbone" target="_blank" rel="external">eslint-plugin-backbone</a> </li>
+</ul>
+<p>##资源</p>
+<p>NPM 搜索  <a href="https://www.npmjs.com/search?q=eslint-plugin" target="_blank" rel="external">eslint-plugin</a>  </p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ES6/" rel="tag">#ES6</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/02/01/javascript-errors-and-how-to-fix-them/" rel="next" title="JavaScript 错误以及如何修复">
+                <i class="fa fa-chevron-left"></i> JavaScript 错误以及如何修复
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/24/css-retina-hairlines/" rel="prev" title="Retina屏的移动设备如何实现真正1px的线？">
+                Retina屏的移动设备如何实现真正1px的线？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/05/21/eliminate-javascript-code-smells/"
+     data-title="去除 JavaScript 代码的怪味"
+     data-content=""
+     data-url="http://jinlong.github.io/2015/05/21/eliminate-javascript-code-smells/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/05/21/eliminate-javascript-code-smells/"
+           data-title="去除 JavaScript 代码的怪味" data-url="http://jinlong.github.io/2015/05/21/eliminate-javascript-code-smells/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

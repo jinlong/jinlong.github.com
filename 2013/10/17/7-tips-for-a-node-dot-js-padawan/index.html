@@ -1,0 +1,842 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Node.js," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：7 tips for a Node.js padawan感谢 Di Wu 同学，参考了他的译文《7 Tips for a Node.js Padawan》，某些不妥的地方做了些许修改。
+
+####或许我刚入门时就想了解这些知识。
+Node.js 开发相当有趣，相当令人满足。它有3万5千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。
+可是对于刚接触">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向Node.js新手的7个技巧">
+<meta property="og:url" content="http://jinlong.github.io/2013/10/17/7-tips-for-a-node-dot-js-padawan/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：7 tips for a Node.js padawan感谢 Di Wu 同学，参考了他的译文《7 Tips for a Node.js Padawan》，某些不妥的地方做了些许修改。
+
+####或许我刚入门时就想了解这些知识。
+Node.js 开发相当有趣，相当令人满足。它有3万5千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。
+可是对于刚接触">
+<meta property="og:updated_time" content="2014-11-21T07:17:04.698Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面向Node.js新手的7个技巧">
+<meta name="twitter:description" content="原文：7 tips for a Node.js padawan感谢 Di Wu 同学，参考了他的译文《7 Tips for a Node.js Padawan》，某些不妥的地方做了些许修改。
+
+####或许我刚入门时就想了解这些知识。
+Node.js 开发相当有趣，相当令人满足。它有3万5千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。
+可是对于刚接触">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 面向Node.js新手的7个技巧 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                面向Node.js新手的7个技巧
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-10-17T17:38:00+08:00" content="2013-10-17">
+              2013-10-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/入门/" itemprop="url" rel="index">
+                    <span itemprop="name">入门</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/10/17/7-tips-for-a-node-dot-js-padawan/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：<a href="https://medium.com/tech-talk/e7c0b0e5ce3c" target="_blank" rel="external">7 tips for a Node.js padawan</a><br>感谢 <a href="http://diwu.me/about/index.html" target="_blank" rel="external">Di Wu</a> 同学，参考了他的译文《<a href="http://diwu.me/2013/09/24/7-tips-for-a-node-dot-js-padawan/" target="_blank" rel="external">7 Tips for a Node.js Padawan</a>》，某些不妥的地方做了些许修改。</p>
+</blockquote>
+<p>####或许我刚入门时就想了解这些知识。</p>
+<p>Node.js 开发相当有趣，相当令人满足。它有3万5千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。</p>
+<p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
+<p>##技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</p>
+<p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
+<p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon" target="_blank" rel="external">Nodemon</a> 。运行以下命令安装它：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> nodemon</span></span><br></pre></td></tr></table></figure>
+<p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
+<p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
+<p><a href="https://github.com/Unitech/pm2" target="_blank" rel="external">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
+<p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app<span class="class">.js</span> -<span class="tag">i</span> max</span><br></pre></td></tr></table></figure>
+<p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br><a id="more"></a></p>
+<p>##技巧 2 ：Async 或者 Q</p>
+<p>越早写 node.js 应用，越会尽早领略回调地狱之痛。如果你没见过，这有一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">register</span>(<span class="params">name, password, cb</span>)</span>&#123;</span><br><span class="line">  checkIfNameExists(name, <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(err)&#123;</span><br><span class="line">    <span class="keyword">return</span> cb(“error”);</span><br><span class="line">   &#125;</span><br><span class="line">   checkIfPasswordGood(password, <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">     <span class="keyword">return</span> cb(“error”);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    createAccount(name,password, <span class="function"><span class="keyword">function</span>(<span class="params">err,result</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      <span class="keyword">return</span> cb(“error”);</span><br><span class="line">     &#125;</span><br><span class="line">     createBlog(name, <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span>&#123;</span><br><span class="line">      sendEmail(name, <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span>&#123;</span><br><span class="line">       callback(result);</span><br><span class="line">      &#125;);</span><br><span class="line">     &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">   &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不怎么美的神奇代码的确存在，但你如何避免呢？</p>
+<p>一种简单的方式是用 <code>events</code> ，我个人不建议这么做，它违背了一个函数的观点，可以用 <code>events</code> 调用只有一个用途的私有方法。</p>
+<p>所以怎么做呢？有两个相互竞争的库：<code>async.js</code> 和 <code>Q</code> ，它们均可以避免回调地狱出现。</p>
+<p><a href="https://github.com/caolan/async" target="_blank" rel="external">Async.js</a> 或者 “async”可以轻松执行连续或者平行的函数，不需要一层一层的嵌套。</p>
+<p>下面是 Async 支持的模式，readme 有记录。想了解 async 支持的所有模式，看看它们的代码仓库。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">async.map([‘file1',’file2',’file3'], fs.stat, function(err, results)&#123;</span><br><span class="line">  // results is now an array of stats for each file</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">async.filter([‘file1',’file2',’file3'], fs.exists, function(results)&#123;</span><br><span class="line">// results now equals an array of the existing files</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">async.parallel([</span><br><span class="line">  function()&#123; … &#125;,</span><br><span class="line">  function()&#123; … &#125;</span><br><span class="line">  ], callback);</span><br><span class="line"> </span><br><span class="line">async.series([</span><br><span class="line">  function()&#123; … &#125;,</span><br><span class="line">  function()&#123; … &#125;</span><br><span class="line">  ]);</span><br><span class="line"> </span><br><span class="line">async.waterfall([</span><br><span class="line">  function(callback)&#123;</span><br><span class="line">   callback(null, ‘one’, ‘two’);</span><br><span class="line">  &#125;,</span><br><span class="line">  function(arg1, arg2, callback)&#123;</span><br><span class="line">   callback(null, ‘three’);</span><br><span class="line">  &#125;,</span><br><span class="line">  function(arg1, callback)&#123;</span><br><span class="line">// arg1 now equals ‘three’</span><br><span class="line">callback(null, ‘done’);</span><br><span class="line">&#125;</span><br><span class="line">], function (err, result) &#123;</span><br><span class="line">// result now equals ‘done’</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果我们用 async 的 <code>waterfall</code> 来修改之前的例子，代码将更加易读，再也不会涉及死亡金字塔了。</p>
+<p>另一个很好的库是 <a href="https://github.com/kriskowal/q" target="_blank" rel="external">Q</a> ，这个库用到了 promises 的概念。Promise 是一个含有‘promise’方法的返回对象，他提供了一个最终返回值，非常优雅的将 javascripts 的异步特性和 node.js 紧密联系起来。</p>
+<p>从 Q 的代码仓库页拿来的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">promiseMeSomething()</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">reason</span>) </span>&#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>promise me 函数立刻返回一个对象，调用 <code>then</code> 将返回传入 value 值的函数。它也带一个回调函数，处理未能返回值的情况。</p>
+<p>用非常整洁的方式避免了回调地狱。如果重写原来的例子，当 <code>then</code> 执行的时候才调用每个函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Q.fcall(checkIfNameExists)</span><br><span class="line">.then(checkIfPasswordIsGood)</span><br><span class="line">.then(createAccount)</span><br><span class="line">.then(createBlog)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line"><span class="comment">// Do something with the result</span></span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line"><span class="comment">// Handle any error from all above steps</span></span><br><span class="line">&#125;)</span><br><span class="line">.done();</span><br></pre></td></tr></table></figure>
+<p>如前面所说，我不喜欢创建单一目标函数。取而代之，用 “then”传递函数，仅传递一个匿名函数，当然选择权在你手中。</p>
+<p>总之，当你掉入回调地狱时，是该关注下 async.js 或者 Q 了。</p>
+<blockquote>
+<p>“我个人喜好？一直是 Q！”</p>
+</blockquote>
+<p>##技巧 3 ：轻松调试 Node.js 应用</p>
+<p>如果你从一个 IDE 重度集成的语言比如 java 或者 C# 转来调试 Node.js，你一定会感到很困扰。大多数新的 node 开发者采用 “flow”调试模式，你最好的帮手是 <code>console.log</code> 。</p>
+<p>但是肯定有更便利的调试方式，Node.js 内置了一个调试器你可以叫它 node debug，不过我更喜欢的 <code>node-inspector</code> 。</p>
+<p>它们的 github 仓库提到“Node Inspector 是使用了 Blink 开发工具的 node.js 调试工具界面（先前的 WebKit Web Inspector）。”</p>
+<p>简而言之，无论你选择哪个编辑器和 chrome web tools ，node-inspector 都可以调试你的应用。多爽啊。</p>
+<p>Node Inspector 可以做一些真正酷的东西，比如实时代码修改，单步调试，作用域注入和一堆很酷的功能。</p>
+<p>它涉及到一些设置，可以按照<a href="https://github.com/node-inspector/node-inspector" target="_blank" rel="external">这里</a> 的说明做。</p>
+<p>##技巧 4 ：Nodefly</p>
+<p>一旦你的应用正常运行，你可能会问自己，如何监控它的性能，如何通过分析确保它以最佳速度运行呢。最简单的回答是使用非常棒的 Nodefly 服务。</p>
+<p>通过一行简单的代码，Nodefly 开始监控应用程序的内存泄露， 测量 redis 用了多久，mongo 查询和一堆其他很酷的东西。</p>
+<p><a href="http://www.nodefly.com/" target="_blank" rel="external">http://www.nodefly.com/</a></p>
+<p>##技巧 5 ：用 NPM 管理模块</p>
+<p>node 最寻常的事情之一是通过 NPM 安装程序包。Node 有个神奇的包管理器，它会安装 package.json 清单文件里指定的模块。可是初学者都会遇到一件事情，package.json 文件中所有使用的模块如何保持最新。</p>
+<p>总是打开 package.json 更新已安装模块的依赖属性似乎很痛苦，很多人不知道 npm 可以帮你做这些！</p>
+<p>简单运行 npm install — save module_name ，npm 将自动更新带有正确模块和版本号的 package.json </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> —<span class="keyword">save</span> module_name</span></span><br></pre></td></tr></table></figure>
+<p>##技巧 6 ：不要提交 node_modules 文件夹</p>
+<p>我们一直谈论模块和 npm ，还有人不知道不该提交 <code>node_modules</code> 文件夹，最大的原因是没有必要提交。当别人检出你的代码，他们可以用 npm 安装所需模块。</p>
+<p>你也许会说提交 node_modules 文件夹无伤大雅，但是如果检出你代码的人用跟你不同的操作系统呢，通过 npm 安装的模块是编译过的？你的应用会崩溃，检出你代码的人完全不知道为什么！</p>
+<p>举例来说，当你安装过 bcrypt 和 sentimental 模块后，它们在主机上是编译过的，因为它们的原始组件是用 C 写的。</p>
+<p>最优的作法是把 node_modules 文件夹加到 .gitignore 里，避免提交它。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .gitignore node_modules/*</span></span><br></pre></td></tr></table></figure>
+<p>##技巧 7 ：不要忘记 return</p>
+<p>刚入门的 node 开发者通常容易犯个错误，callback 回调函数后面忘加 return 。虽然有时候没什么影响，多数情况你会遇到奇怪的问题，callback 回调执行了两次。</p>
+<p>看个简单的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">do</span>(<span class="params">err,result, callback</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(err)&#123;</span><br><span class="line">callback(“error”);</span><br><span class="line">&#125;</span><br><span class="line">callback(“good”);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>乍一看，没什么问题。如果有错误，把 “error”传入 callback，没错则传递“good”。但是调用 callback 以后并没有停止执行，会接着调用 callback(“good”) 。</p>
+<p>在复杂的代码中，加上 return 会节约数小时的调试时间。</p>
+<hr>
+<p>Node.js 是个很赞的开发平台，如果你谨记这 7 条技巧，开发，调试和部署到生产环境时，可以节省不少时间，防止头发尽早变灰白。</p>
+<p>需要 Node.js 咨询？联系 <a href="http://www.dynamatik.com/" target="_blank" rel="external">Dynamatik</a> 吧。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/10/02/client-side-full-text-search-in-css/" rel="next" title="用 CSS 实现客户端全文搜索">
+                <i class="fa fa-chevron-left"></i> 用 CSS 实现客户端全文搜索
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/10/20/ten-years-of-sliding-doors-of-css/" rel="prev" title="CSS 滑动门十年纪念">
+                CSS 滑动门十年纪念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/10/17/7-tips-for-a-node-dot-js-padawan/"
+     data-title="面向Node.js新手的7个技巧"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/10/17/7-tips-for-a-node-dot-js-padawan/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/10/17/7-tips-for-a-node-dot-js-padawan/"
+           data-title="面向Node.js新手的7个技巧" data-url="http://jinlong.github.io/2013/10/17/7-tips-for-a-node-dot-js-padawan/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

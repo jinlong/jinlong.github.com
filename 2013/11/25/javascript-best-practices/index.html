@@ -1,0 +1,885 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Javascript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 PPT （需翻墙）
+
+原文：Javascript BEST PRACTICES PART 1Javascript BEST PRACTICES PART 2译者：涂鸦码龙
+
+##Make it Understandable（更易理解）
+变量和函数选择容易理解，较短的单词命名。
+不好的变量名：1x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript 最佳实践">
+<meta property="og:url" content="http://jinlong.github.io/2013/11/25/javascript-best-practices/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 PPT （需翻墙）
+
+原文：Javascript BEST PRACTICES PART 1Javascript BEST PRACTICES PART 2译者：涂鸦码龙
+
+##Make it Understandable（更易理解）
+变量和函数选择容易理解，较短的单词命名。
+不好的变量名：1x">
+<meta property="og:updated_time" content="2015-10-28T14:44:32.615Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript 最佳实践">
+<meta name="twitter:description" content="本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 PPT （需翻墙）
+
+原文：Javascript BEST PRACTICES PART 1Javascript BEST PRACTICES PART 2译者：涂鸦码龙
+
+##Make it Understandable（更易理解）
+变量和函数选择容易理解，较短的单词命名。
+不好的变量名：1x">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Javascript 最佳实践 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Javascript 最佳实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-11-25T13:12:00+08:00" content="2013-11-25">
+              2013-11-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/11/25/javascript-best-practices/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/11/25/javascript-best-practices/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 <a href="http://www.slideshare.net/cheilmann/javascript-best-practices-1041724" target="_blank" rel="external">PPT</a> （需翻墙）</p>
+<blockquote>
+<p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/" target="_blank" rel="external">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/" target="_blank" rel="external">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>##Make it Understandable（更易理解）</p>
+<p>变量和函数选择容易理解，较短的单词命名。</p>
+<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>##避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> labels = &#123;</span><br><span class="line">   <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">   <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">   <span class="string">'contact'</span>:<span class="string">'contact'</span> </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   current = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   show();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>对象字面量：</strong>所有东西都被包含起来，但是通过对象名字可以访问。</p>
+<div style="color:#c01d1d"><strong>问题：</strong>重复的模块名称导致代码庞大恼人。</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">demo = &#123;</span><br><span class="line">   current:<span class="literal">null</span>,</span><br><span class="line">   labels:&#123;</span><br><span class="line">      <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">      <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">      <span class="string">'contact'</span>:<span class="string">'contact'</span></span><br><span class="line">   &#125;,</span><br><span class="line">   init:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;,</span><br><span class="line">   show:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      demo.current = <span class="number">1</span>;</span><br><span class="line">   &#125;,</span><br><span class="line">   hide:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      demo.show();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>模块模式：</strong>你需要指定哪些是全局的，哪些不是 —— 转换两者语法。</p>
+<div style="color:#c01d1d"><strong>问题：</strong>重复的模块名称，内部函数的不同语法。</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> labels = &#123;</span><br><span class="line">      <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">      <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">      <span class="string">'contact'</span>:<span class="string">'contact'</span></span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      current:<span class="literal">null</span>,</span><br><span class="line">      init:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      &#125;,</span><br><span class="line">      show:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="built_in">module</span>.current = <span class="number">1</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      hide:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="built_in">module</span>.show();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+<div style="color:#5ead12"><br><strong>Revealing Module Pattern（揭示模块模式）：</strong>暴露的全局变量和局部变量，保持语法一致。<br></div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line">   <span class="keyword">var</span> labels = &#123;</span><br><span class="line">      <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">      <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">      <span class="string">'contact'</span>:<span class="string">'contact'</span></span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">var</span> init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">var</span> show = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      current = <span class="number">1</span>;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">var</span> hide = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      show();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span>&#123;init:init, show:show, current:current&#125;</span><br><span class="line">&#125;();</span><br><span class="line"><span class="built_in">module</span>.init();</span><br></pre></td></tr></table></figure>
+<p>##坚持一种严格的编码风格</p>
+<p>浏览器是非常宽容的 JavaScript 解析器。但是，当你转换到另一个环境，或者移交给另一个开发者时，松懈的代码风格对自己很不利。Valid code is secure code（有效的代码是安全的代码）。</p>
+<p><strong>验证你的代码：</strong><a href="http://www.jslint.com/" target="_blank" rel="external">http://www.jslint.com/</a></p>
+<p>##需要注释，不要过分注释</p>
+<blockquote>
+<p>“Good code explains itself （好的代码会自我解释）”是傲慢的神话。</p>
+</blockquote>
+<p>需要的时候加上注释 —— 但是不要长篇大论。</p>
+<p>避免用单行注释 //。/&#42; &#42;/ 更安全，当删除换行符时不会导致出错。</p>
+<p>如果你使用注释调试，这是个不错的小技巧：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">/*</span><br><span class="line">   var init = function()&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   var show = function()&#123;</span><br><span class="line">      current = 1;</span><br><span class="line">   &#125;;</span><br><span class="line">   var hide = function()&#123;</span><br><span class="line">      show();</span><br><span class="line">   &#125;</span><br><span class="line">// */</span></span><br><span class="line">   <span class="keyword">return</span>&#123;init:init, show:show, current:current&#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+<p>HTML 或 JavaScript 里的注释不应该给最终用户看到。理解 <strong>Development code is not live code （开发代码不是线上代码）</strong>。</p>
+<h2 id="避免与其它技术混用">避免与其它技术混用</h2><p>JavaScript 擅长计算，转换，访问外部资源（Ajax）和定义界面的交互行为（事件处理）。别的事情应该让别的技术完成。</p>
+<p>例如：</p>
+<div style="color:#c01d1d">当所有带“mandatory”class 的区域是空时，用红色边框标注一下。</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="built_in">document</span>.getElementById(<span class="string">'mainform'</span>);</span><br><span class="line"><span class="keyword">var</span> inputs = f.getElementsByTagName(<span class="string">'input'</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,j=inputs.length;i&lt;j;i++)&#123;</span><br><span class="line">   <span class="keyword">if</span>(inputs[i].className === <span class="string">'mandatory'</span> &amp;&amp; inputs.value === <span class="string">''</span>)&#123;</span><br><span class="line">      inputs[i].style.borderColor = <span class="string">'#f00'</span>;</span><br><span class="line">      inputs[i].style.borderStyle = <span class="string">'solid'</span>;</span><br><span class="line">      inputs[i].style.borderWidth = <span class="string">'1px'</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div style="color:#c01d1d">… 两个月下来：所有的样式必须遵循新公司的风格指南，不允许有边框，错误应该有个警示图标。怎么办呢？</div><br><br><br><div style="color:#5ead12">我们不必通过改变 JavaScript 代码来改变外观和感觉。</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="built_in">document</span>.getElementById(<span class="string">'mainform'</span>);</span><br><span class="line"><span class="keyword">var</span> inputs = f.getElementsByTagName(<span class="string">'input'</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,j=inputs.length;i&lt;j;i++)&#123;</span><br><span class="line">   <span class="keyword">if</span>(inputs[i].className === <span class="string">'mandatory'</span> &amp;&amp; inputs.value === <span class="string">''</span>)&#123;</span><br><span class="line">      inputs[i].className+=<span class="string">' error'</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div><br>使用 CSS 继承可以避免循环许多元素。<br></div>
+
+<p>##使用简洁的写法</p>
+<p><strong>一旦你习惯简洁写法，代码会更清爽，更易读。</strong></p>
+<p>这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lunch = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">lunch[<span class="number">0</span>]=<span class="string">'Dosa'</span>;</span><br><span class="line">lunch[<span class="number">1</span>]=<span class="string">'Roti'</span>;</span><br><span class="line">lunch[<span class="number">2</span>]=<span class="string">'Rice'</span>;</span><br><span class="line">lunch[<span class="number">3</span>]=<span class="string">'what the heck is this?'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>等价于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lunch = [</span><br><span class="line">   <span class="string">'Dosa'</span>,</span><br><span class="line">   <span class="string">'Roti'</span>,</span><br><span class="line">   <span class="string">'Rice'</span>,</span><br><span class="line">   <span class="string">'what the heck is this?'</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
+<p>这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(v)&#123;</span><br><span class="line">   <span class="keyword">var</span> x = v;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="keyword">var</span> x =<span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>等价于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = v || <span class="number">10</span>;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> direction;</span><br><span class="line"><span class="keyword">if</span>(x &gt; <span class="number">100</span>)&#123;</span><br><span class="line">   direction = <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   direction = -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>等价于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> direction = (x &gt; <span class="number">100</span>) ? <span class="number">1</span> : -<span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
+<p>##模块化</p>
+<p><strong>保持代码的模块化和专业化</strong></p>
+<p>我们很容易写一个函数做所有事，可是当扩展功能时，发现好几个函数做同样的事情。</p>
+<p>为了避免此事，确保写较小的，通用辅助函数，完成一个特定的任务，而不是所有的方法。</p>
+<p>再后来，你可以使用 revealing module pattern（揭示模块模式）暴露一些方法，创建一套 API 扩展主要功能。</p>
+<p>好的代码应该易于扩展，不需要重写核心。</p>
+<p>##渐进增强</p>
+<p><strong>避免创建许多 JavaScript 依赖代码</strong></p>
+<p>DOM 操作又慢又昂贵。</p>
+<p>当禁用 JavaScript 时，依赖 JavaScript 的元素要仍然可用。</p>
+<p>##允许配置和转化</p>
+<p><strong>代码也许会变，代码结构不应该是松散的。</strong></p>
+<p>包括标签，CSS 类，ID 和默认配置。</p>
+<p>把这些放进一个配置对象，保持公开，我们很容易维护，并且可以自由定制。</p>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">carousel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> config = &#123;</span><br><span class="line">      CSS:&#123;</span><br><span class="line">         classes:&#123;</span><br><span class="line">            current:<span class="string">'current'</span>,</span><br><span class="line">            scrollContainer:<span class="string">'scroll'</span></span><br><span class="line">         &#125;,</span><br><span class="line">         IDs:&#123;</span><br><span class="line">            maincontainer:<span class="string">'carousel'</span></span><br><span class="line">         &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      labels:&#123;</span><br><span class="line">         previous:<span class="string">'back'</span>,</span><br><span class="line">         next:<span class="string">'next'</span>,</span><br><span class="line">         auto:<span class="string">'play'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      settings:&#123;</span><br><span class="line">         amount:<span class="number">5</span>,</span><br><span class="line">         skin:<span class="string">'blue'</span>,</span><br><span class="line">         autoplay:<span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">highlight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">return</span> &#123;config:config,init:init&#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+<p>##避免严重嵌套</p>
+<p><strong>多层嵌套的代码很不易读。</strong></p>
+<p>循环嵌套循环是个坏主意，需要小心几个迭代器变量（i, j, k, l, m…）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderProfiles</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> out = <span class="built_in">document</span>.getElementById(<span class="string">'profiles'</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;o.members.length;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> ul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">      <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">      li.appendChild(<span class="built_in">document</span>.createTextNode(o.members[i].name));</span><br><span class="line">      <span class="keyword">var</span> nestedul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;o.members[i].data.length;j++)&#123;</span><br><span class="line">         <span class="keyword">var</span> datali = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">         datali.appendChild(</span><br><span class="line">            <span class="built_in">document</span>.createTextNode(</span><br><span class="line">               o.members[i].data[j].label + <span class="string">' '</span> +</span><br><span class="line">               o.members[i].data[j].value</span><br><span class="line">            )</span><br><span class="line">         );</span><br><span class="line">         nestedul.appendChild(detali);</span><br><span class="line">      &#125;</span><br><span class="line">      li.appendChild(nestedul);</span><br><span class="line">   &#125;</span><br><span class="line">   out.appendChild(ul);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用专门的工具方法避免重度的循环嵌套。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderProfiles</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> out = <span class="built_in">document</span>.getElementById(<span class="string">'profiles'</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;o.members.length;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> ul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">      <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">      li.appendChild(<span class="built_in">document</span>.createTextNode(data.members[i].name));</span><br><span class="line">      li.appendChild(addMemberData(o.members[i]));</span><br><span class="line">   &#125;</span><br><span class="line">   out.appendChild(ul);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addMemberData</span>(<span class="params">member</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> ul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;member.data.length;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">      li.appendChild(</span><br><span class="line">         <span class="built_in">document</span>.createTextNode(</span><br><span class="line">            member.data[i].label + <span class="string">' '</span> +</span><br><span class="line">            member.data[i].value</span><br><span class="line">         )</span><br><span class="line">      );</span><br><span class="line">   &#125;</span><br><span class="line">   ul.appendChild(li);</span><br><span class="line">   <span class="keyword">return</span> ul;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##优化循环</p>
+<p><strong>JavaScript 循环可能非常慢。</strong></p>
+<p>不要让 JavaScript 每次迭代都读取数组的长度，用变量保存长度的值。</p>
+<p>不好：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> names = [<span class="string">'George'</span>,</span><br><span class="line"><span class="string">'Ringo'</span>,</span><br><span class="line"><span class="string">'Paul'</span>,</span><br><span class="line"><span class="string">'John'</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;names.length;i++)&#123;</span><br><span class="line">   doSomethingWith(names[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> names = [<span class="string">'George'</span>,</span><br><span class="line"><span class="string">'Ringo'</span>,</span><br><span class="line"><span class="string">'Paul'</span>,</span><br><span class="line"><span class="string">'John'</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,j=names.length;i&lt;j;i++)&#123;</span><br><span class="line">  doSomethingWith(names[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div>重度计算代码放到循环外边，包括正则表达式，首要的是 DOM 操作。</div>
+
+<p>你可以在循环里创建 DOM 节点，但是避免插入文档对象。</p>
+<p>##DOM 访问最小化</p>
+<p><strong>如果可以避免，不要访问 DOM。</strong></p>
+<p><strong>原因：</strong>比较慢，有各种各样的浏览器问题</p>
+<p><strong>解决方案：</strong>编写或使用一个辅助方法，批量把数据集转换成 HTML 。</p>
+<p>所有的数据在一个方法中处理，最后把结果一次性加入到 DOM 中去。</p>
+<p>##不要屈服于浏览器的奇怪表现</p>
+<p><strong>依赖浏览器稀奇古怪的行为，不如希望它一切正常。</strong></p>
+<p>避免使用一些奇技淫巧，分析问题的根源。</p>
+<p>很多时候，你会发现你需要额外的功能，是因为你的界面规划不好。</p>
+<p>##不要信任任何数据</p>
+<p><strong>好的代码不会信任收到的任何数据。</strong></p>
+<ul>
+<li>不要相信 HTML 文档<br>任何用户都可以干预它，比如通过 Firebug 。</li>
+<li>不要相信你的函数接收的数据格式永远正确。<br>用 typeof 测试，然后再处理它。</li>
+<li>不要预期 DOM 中的元素是可用的。<br>改变它们之前测试一下，确保它们如你的预期。</li>
+<li>不要妄图使用 JavaScript 保护一些东西。<br>JavaScript 代码很容易被破解 :)</li>
+</ul>
+<p>##通过 JavaScript 添加功能，而不是添加内容   </p>
+<p>如果你发现 JavaScript 里面有过多的 HTML ，你可能做错了什么。</p>
+<p>创建使用 DOM 不是很方便，一般用 <strong>innerHTML</strong> ，这样很难追踪 HTML 的代码质量。</p>
+<p>如果的确有大量的界面，可以通过 Ajax 加载静态的 HTML 文档界面。</p>
+<p>这种方式 HTML 好维护，并且支持定制。</p>
+<p>##站在巨人的肩膀上</p>
+<p><strong>JavaScript 很有趣，不过针对所有浏览器写 JavaScript 不那么有趣… 所以从一个好框架入手。</strong></p>
+<p>JavaScript 框架专门用于堵浏览器的漏洞，让浏览器行为和你的代码更符合预期。</p>
+<p>好的框架帮助你写代码，帮你节省了一些支持主流浏览器的开销。</p>
+<p>##开发代码不等于线上代码</p>
+<p><strong>线上代码为机器所写，开发环境代码为人而写。</strong></p>
+<ul>
+<li>构建流程包含核对，最小化和优化代码。</li>
+<li>不要过早优化。</li>
+<li>如果我们减少了编码时间，可以有更多时间完善向机器码的转换。</li>
+</ul>
+<blockquote>
+<p>参考资料：<br><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/" target="_blank" rel="external">Learning JavaScript Design Patterns</a> </p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript/" rel="tag">#Javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/11/25/smart-transitions-in-user-experience-design/" rel="next" title="用户体验设计中的巧妙过渡">
+                <i class="fa fa-chevron-left"></i> 用户体验设计中的巧妙过渡
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/12/22/grunt-getting-started/" rel="prev" title="Grunt 入门笔记">
+                Grunt 入门笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/11/25/javascript-best-practices/"
+     data-title="Javascript 最佳实践"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/11/25/javascript-best-practices/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/11/25/javascript-best-practices/"
+           data-title="Javascript 最佳实践" data-url="http://jinlong.github.io/2013/11/25/javascript-best-practices/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#避免与其它技术混用"><span class="nav-number">1.</span> <span class="nav-text">避免与其它技术混用</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

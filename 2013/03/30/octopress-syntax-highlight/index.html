@@ -1,0 +1,798 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Octopress,代码高亮," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="先啰嗦啰嗦，吐槽几句，木有同感可以略过……
+“尼玛，真是应了 Octopress 那句口号：黑客专用博客框架，一般人想搞定它真不易啊！自从决定用 Octopress 起就开始处处踩坑，基本木有顺利的时候。就想用用Markdown ，体验一下所谓的畅快淋漓的写作快感，只想少花时间折腾博客样式，容易嘛……”
+开始选的 jekyllbootstrap 按照教程步骤一步步来，安个 Ruby 费了老鼻子劲，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="踩中Octopress代码高亮的坑">
+<meta property="og:url" content="http://jinlong.github.io/2013/03/30/octopress-syntax-highlight/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="先啰嗦啰嗦，吐槽几句，木有同感可以略过……
+“尼玛，真是应了 Octopress 那句口号：黑客专用博客框架，一般人想搞定它真不易啊！自从决定用 Octopress 起就开始处处踩坑，基本木有顺利的时候。就想用用Markdown ，体验一下所谓的畅快淋漓的写作快感，只想少花时间折腾博客样式，容易嘛……”
+开始选的 jekyllbootstrap 按照教程步骤一步步来，安个 Ruby 费了老鼻子劲，">
+<meta property="og:updated_time" content="2015-10-28T14:52:27.381Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="踩中Octopress代码高亮的坑">
+<meta name="twitter:description" content="先啰嗦啰嗦，吐槽几句，木有同感可以略过……
+“尼玛，真是应了 Octopress 那句口号：黑客专用博客框架，一般人想搞定它真不易啊！自从决定用 Octopress 起就开始处处踩坑，基本木有顺利的时候。就想用用Markdown ，体验一下所谓的畅快淋漓的写作快感，只想少花时间折腾博客样式，容易嘛……”
+开始选的 jekyllbootstrap 按照教程步骤一步步来，安个 Ruby 费了老鼻子劲，">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 踩中Octopress代码高亮的坑 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                踩中Octopress代码高亮的坑
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-03-30T14:40:00+08:00" content="2013-03-30">
+              2013-03-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Octopress/" itemprop="url" rel="index">
+                    <span itemprop="name">Octopress</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Octopress/代码高亮/" itemprop="url" rel="index">
+                    <span itemprop="name">代码高亮</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/03/30/octopress-syntax-highlight/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/03/30/octopress-syntax-highlight/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>先啰嗦啰嗦，吐槽几句，木有同感可以略过……</p>
+<p>“尼玛，真是应了 Octopress 那句口号：黑客专用博客框架，一般人想搞定它真不易啊！自从决定用 Octopress 起就开始处处踩坑，基本木有顺利的时候。就想用用Markdown ，体验一下所谓的畅快淋漓的写作快感，只想少花时间折腾博客样式，容易嘛……”</p>
+<p>开始选的 <a href="http://jekyllbootstrap.com/" target="_blank" rel="external">jekyllbootstrap</a> 按照教程步骤一步步来，安个 Ruby 费了老鼻子劲，最后卡在 <code>jekyll --server</code> 上，死活在本地无法预览，写个博客，做点改动都要传到 Github 看效果，实在忍受不了…… 放弃!</p>
+<p>不破不立，正当我打算放弃折腾 Jekyll 这破玩意儿的时候，发现了 Octopress ，它真像黑夜里的一盏明灯啊，让我又燃起了希望~~~</p>
+<p>果不其然，Octopress 配置起来容易许多，再加我有了一些折腾 Jekyll 的经验，虽然过程有点小坎坷，但在 Google 的帮助下总算搭起了环境。</p>
+<p>Google 的文章一大把，但适合自己最重要，还是把配置 Octopress 的过程总结了一篇博文留念<a href="http://jinlong.github.com/blog/2013/03/15/deploy-github-pages-using-octopress-on-windows/" target="_blank" rel="external">《Deploy Github Pages Using Octopress on Windows》</a> </p>
+<h2 id="<!-more->"><a id="more"></a></h2><p>作为一个技术博客，木有代码高亮是实在说不过去的，正好翻译了一篇文章<a href="http://jinlong.github.com/blog/2013/03/29/the-length-of-css/" target="_blank" rel="external">《CSS 的长度》</a> 内有代码段，正好拿来练手。</p>
+<p>本以为 Octopress 的<a href="http://octopress.org/docs/blogging/code/" target="_blank" rel="external">代码高亮像教程</a> 说的那么简单，加个标签，加个标记就能搞定，结果又低估了黑客专用博客的实力了。坑爹啊，继续折腾……</p>
+<p>最简单的这种代码样式，大家肯定都会啊：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="preprocessor">#<span class="number">180</span>;&amp;#<span class="number">180</span>;&amp;#<span class="number">180</span>;</span></span><br><span class="line">$ sudo make me a sandwich</span><br><span class="line">&amp;<span class="preprocessor">#<span class="number">180</span>;&amp;#<span class="number">180</span>;&amp;#<span class="number">180</span>;</span></span><br></pre></td></tr></table></figure></p>
+<p>我想要那种带颜色儿的，看到了这种语法：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">&amp;</span><span class="id">#180</span>;<span class="keyword">&amp;</span><span class="id">#180</span>;<span class="keyword">&amp;</span><span class="id">#180</span>; <span class="attr_selector">[language]</span> <span class="attr_selector">[title]</span> <span class="attr_selector">[url]</span> <span class="attr_selector">[link text]</span></span><br><span class="line"><span class="tag">code</span> <span class="tag">snippet</span></span><br><span class="line"><span class="keyword">&amp;</span><span class="id">#180</span>;<span class="keyword">&amp;</span><span class="id">#180</span>;<span class="keyword">&amp;</span><span class="id">#180</span>;</span><br></pre></td></tr></table></figure>
+<p>第一感觉好强大啊，亲手一试才知道，<code>[language][title][url][link text]</code>四个参数，少一个就敢给你玩白页，博客跑不起来喽。</p>
+<p>再往下看，看到了 Inline Code Blocks：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;\% codeblock <span class="string">[title]</span> <span class="string">[lang:language]</span> <span class="string">[url]</span> <span class="string">[link text]</span> \%&#125;</span><br><span class="line">code snippet</span><br><span class="line">&#123;\% endcodeblock \%&#125;</span><br></pre></td></tr></table></figure>
+<p>这个好啊，可以规定编程语言，标题，链接地址，链接文字，而且还能缺省参数，厉害厉害~试试吧~</p>
+<p>啊啊啊啊啊啊啊啊啊啊……嘛玩意儿，Build Failed 了，博客又起不来了。</p>
+<p>Google 开搜吧，各种搜各种搜……</p>
+<p><code>_config.yml</code> 配置文件设置一下：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pygments: <span class="keyword">true</span> # <span class="keyword">default</span> python pygments have been replaced <span class="keyword">by</span> pygments.rb</span><br></pre></td></tr></table></figure>
+<p>有说要安 Python 的，啥 Ruby 啊 Python 啊，貌似听人说过的语言，装上吧，Python 还说要 2.7 版，3.3 不行，<a href="http://www.python.org/getit/" target="_blank" rel="external">这里下载</a> </p>
+<p>请先安装 <code>python-xxx.msi</code>，然后把 python home（例如： E:\Python27）加到windows环境变量下<br>请注意，一定一定要把 python home 加到windows环境变量下。<br>然后试下 <code>rake generate</code> 怎样？不行的话重启一下，环境变量生效（我被这坑了）。</p>
+<p>还不行的话，看看 RubyPython 是不是没装？<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ gem list --local</span><br><span class="line"></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span> LOCAL GEMS <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"></span><br><span class="line">rubypython (0.6.3)</span><br></pre></td></tr></table></figure></p>
+<p>没有此物的话，<a href="http://rubygems.org/gems/rubypython" target="_blank" rel="external">安装一下吧</a> （我就是新安的）：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="keyword">install</span> rubypython</span><br></pre></td></tr></table></figure></p>
+<p>如果还碰到了其它乱七八糟的问题，看看这个<a href="https://github.com/imathis/octopress/issues/262" target="_blank" rel="external">汇总</a>吧，兴许有你碰到的。</p>
+<p>祝好运~~我是可以本地预览，有代码高亮了，看<a href="http://jinlong.github.io/blog/2013/03/29/the-length-of-css/">效果</a>。</p>
+<blockquote>
+<p>参考文章：<br><a href="http://maxisam.github.com/blog/2013/01/07/code-block-in-octopress/" target="_blank" rel="external">Code Block in Octopress</a><br><a href="http://www.blogjava.net/lishunli/archive/2012/03/18/372115.html" target="_blank" rel="external">试用Octopress</a><br><a href="https://github.com/imathis/octopress/issues/262" target="_blank" rel="external">Exception on generate codeblock with “lang:” on Windows</a></p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Octopress/" rel="tag">#Octopress</a>
+          
+            <a href="/tags/代码高亮/" rel="tag">#代码高亮</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/03/29/the-length-of-css/" rel="next" title="CSS 的长度">
+                <i class="fa fa-chevron-left"></i> CSS 的长度
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/04/20/advanced-cross-browser-flexbox/" rel="prev" title="跨浏览器弹性布局进阶教程">
+                跨浏览器弹性布局进阶教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/03/30/octopress-syntax-highlight/"
+     data-title="踩中Octopress代码高亮的坑"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/03/30/octopress-syntax-highlight/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/03/30/octopress-syntax-highlight/"
+           data-title="踩中Octopress代码高亮的坑" data-url="http://jinlong.github.io/2013/03/30/octopress-syntax-highlight/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#<!-more->"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

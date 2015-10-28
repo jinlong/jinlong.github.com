@@ -1,0 +1,842 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="AngularJS,翻译," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="五一放假没干啥正事，想起鼓捣 AngularJS 了，把它的新手指南一口气翻了个遍，算是入了点门了。个人感觉这货挺适合做 web app 的（可能因为我没接触过别的 MVC 框架吧…），它的亮点是数据绑定，扩展 HTML，居然把 DOM 操作都替咱做了…
+话不多说，下面是我边看边记的笔记，自认为重点的记了下中文。   
+
+原文地址：AngularJS Tutorial笔记作者：涂鸦码龙
+
+##搭环">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS 新手指南1">
+<meta property="og:url" content="http://jinlong.github.io/2013/05/02/angularjs-tutorial1/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="五一放假没干啥正事，想起鼓捣 AngularJS 了，把它的新手指南一口气翻了个遍，算是入了点门了。个人感觉这货挺适合做 web app 的（可能因为我没接触过别的 MVC 框架吧…），它的亮点是数据绑定，扩展 HTML，居然把 DOM 操作都替咱做了…
+话不多说，下面是我边看边记的笔记，自认为重点的记了下中文。   
+
+原文地址：AngularJS Tutorial笔记作者：涂鸦码龙
+
+##搭环">
+<meta property="og:image" content="http://jinlong.github.io/images/post/tutorial_02.png">
+<meta property="og:updated_time" content="2014-11-21T07:52:12.594Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS 新手指南1">
+<meta name="twitter:description" content="五一放假没干啥正事，想起鼓捣 AngularJS 了，把它的新手指南一口气翻了个遍，算是入了点门了。个人感觉这货挺适合做 web app 的（可能因为我没接触过别的 MVC 框架吧…），它的亮点是数据绑定，扩展 HTML，居然把 DOM 操作都替咱做了…
+话不多说，下面是我边看边记的笔记，自认为重点的记了下中文。   
+
+原文地址：AngularJS Tutorial笔记作者：涂鸦码龙
+
+##搭环">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> AngularJS 新手指南1 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                AngularJS 新手指南1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-05-02T23:18:00+08:00" content="2013-05-02">
+              2013-05-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
+                    <span itemprop="name">AngularJS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/05/02/angularjs-tutorial1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/02/angularjs-tutorial1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>五一放假没干啥正事，想起鼓捣 AngularJS 了，把它的新手指南一口气翻了个遍，算是入了点门了。个人感觉这货挺适合做 web app 的（可能因为我没接触过别的 MVC 框架吧…），它的亮点是数据绑定，扩展 HTML，居然把 DOM 操作都替咱做了…</p>
+<p>话不多说，下面是我边看边记的笔记，自认为重点的记了下中文。   </p>
+<blockquote>
+<p>原文地址：<a href="http://docs.angularjs.org/tutorial" target="_blank" rel="external">AngularJS Tutorial</a><br>笔记作者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>##搭环境</p>
+<ul>
+<li><p>安装nodejs</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span><span class="identifier"> </span><span class="title">--version</span>    //nodejs 版本</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 Git</p>
+</li>
+<li><p>克隆 angular-phonecat 项目</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>://github.com/angular/angular-phonecat.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>找到项目目录 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> angular-phonecat</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>起 http 服务器 </p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span><span class="identifier"> </span><span class="title">scripts</span>\web-server.js</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<p>##启动应用<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -f step-<span class="number">0</span>（<span class="number">0</span>-<span class="number">11</span>） <span class="comment">//重置每一步骤的 git 项目状态</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;html ng-app&gt;</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>ng-app<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span> 属性代表 Angular 指令（<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>ngApp<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>；Angular 用名字+破折号作为属性名，驼峰写法作为对应的指令名），Angular 认为是 app 根元素。</span><br><span class="line"></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>引入 Angular ：<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span></span><br></pre></td></tr></table></figure>
+<p><script src="lib/angular/angular.js"></script><br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">HTML 页面完全下载，注册一个回调函数，Angular 认出了 [<span class="link_label">ngApp</span>](<span class="link_url">http://docs.angularjs.org/api/ng.directive:ngApp</span>) 指令。</span><br><span class="line"></span><br><span class="line">&#123;% codeblock %&#125;</span><br><span class="line">Nothing here &amp;#123;&amp;#123;'yet' + '!'&#125;&#125; </span><br><span class="line">&#123;% endcodeblock %&#125;</span><br><span class="line"></span><br><span class="line">双层大括号，Angular 模版，数据绑定</span><br><span class="line"></span><br><span class="line"><span class="strong">***启动 Angular 应用**</span>*</span><br><span class="line"></span><br><span class="line">自动启动使用 <span class="strong">***ngApp**</span>* 指令；</span><br><span class="line"></span><br><span class="line">[<span class="link_label">手动启动</span>](<span class="link_url">http://docs.angularjs.org/guide/bootstrap</span>)：</span><br><span class="line"><span class="code">```</span>js</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined"></span></span></span><br><span class="line">angular.element(document).ready(function()&#123;</span><br><span class="line"><span class="code">	angular.bootstrap(document);</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="xml"><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>app 引导程序做了2件重要的事：   </p>
+<ol>
+<li><a href="http://docs.angularjs.org/api/AUTO.$injector" target="_blank" rel="external">注入器</a>将用于相应的注入   </li>
+<li>注入器创建了<a href="http://docs.angularjs.org/api/ng.$rootScope" target="_blank" rel="external">根作用域</a>，它将作为应用模型的上下文   </li>
+<li>Angular 将从 root 元素的 <strong><em>ngApp</em></strong> 开始编译，处理各种指令和绑定</li>
+</ol>
+<p>一旦应用启动，将等待引入的浏览器事件（mouse click, key press 或者 HTTP 相应），它们可能改变模型（model）。一旦事件触发，Angular 会探测模型改变，并会反映到视图（view）中，更新所有影响到的绑定。</p>
+<p>##Angular 模版</p>
+<p>MVC（<a href="http://en.wikipedia.org/wiki/Model%E2%80%93View%E2%80%93Controller" target="_blank" rel="external">Model-View-Controller</a>  模型-视图-控制器）</p>
+<p><strong><em>View 和 Template</em></strong></p>
+<p>view 是 model 通过 HTML template 的映射，model 改变，Angular 刷新相应的绑定点，更新 view。</p>
+<p>Angular 通过这个模版构建 view 组件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">ng-app</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"lib/angular/angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/controllers.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">ng-controller</span>=<span class="value">"PhoneListCtrl"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones"</span>&gt;</span></span><br><span class="line">   &amp;#123;&amp;#123;phone.name&#125;&#125;</span><br><span class="line">   <span class="tag">&lt;<span class="title">p</span>&gt;</span>&amp;#123;&amp;#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>ng-repeat=”phone in phones”</strong> 是 Angular repeater，以 &lt;li&gt; 为模版循环 phones 里的 phone。<br>&#123;&#123;phone.name}} 表示绑定，表达式关联到 PhoneListCtrl controller 定义的应用模型。</p>
+<p><img src="/images/post/tutorial_02.png"></p>
+<p><strong><em>Model 和 Controller</em></strong></p>
+<p>数据模型（一个简单的手机数组）通过 PhoneListCtrl 控制器实例化：</p>
+<figure class="highlight js"><figcaption><span>app/js/controllers.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PhoneListCtrl</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">  $scope.phones = [</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"Nexus S"</span>,</span><br><span class="line">     <span class="string">"snippet"</span>: <span class="string">"Fast just got faster with Nexus S."</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"Motorola XOOM™ with Wi-Fi"</span>,</span><br><span class="line">     <span class="string">"snippet"</span>: <span class="string">"The Next, Next Generation tablet."</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"MOTOROLA XOOM™"</span>,</span><br><span class="line">     <span class="string">"snippet"</span>: <span class="string">"The Next, Next Generation tablet."</span>&#125;</span><br><span class="line">  ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>尽管控制器（controller ）还没做太多控制，但它扮演了重要的角色。它为我们的数据模型（model）提供上下文，控制器允许我们建立模型和视图（view）之间的数据绑定：</p>
+<p>PhoneListCtrl —— 控制器函数的名字（在 controller.js 里面），匹配 &lt;body&gt; 标签里面 <a href="http://docs.angularjs.org/api/ng.directive:ngController" target="_blank" rel="external">ngController</a>（ng-controller=”PhoneListCtrl”）指令的名字。</p>
+<p>手机数据加到了作用域（<code>$scope</code>），注入到我们的控制器函数里。当应用启动时，控制器作用域被创建，它继承了根作用域。在 &lt;body ng-controller=”PhoneListCtrl”&gt; 之间，控制器作用域对所有绑定有效。</p>
+<p>Angular 里面作用域的概念很重要；作用域可以看作胶，粘合模版（template ），模型（model）和控制器（controller）。Angular 把作用域，模版信息，数据模型和控制器一起使用，保持模型和视图的分离且同步。</p>
+<p><a href="http://docs.angularjs.org/api/ng.$rootScope.Scope" target="_blank" rel="external">Angular 作用域文档</a></p>
+<p><strong><em>实验</em></strong></p>
+<ul>
+<li>在 index.html 增加另一处绑定：</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Total <span class="type">number</span> <span class="keyword">of</span> phones: &amp;<span class="comment">#123;&amp;#123;phones.length&#125;&#125;&lt;/p&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在控制器里增加新的模型属性，然后绑定到模版里：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scope.hello = <span class="string">"Hello, World!"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建一个重复器（repeater），构造一个简单的表格：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">tr</span>&gt;</span><span class="tag">&lt;<span class="title">th</span>&gt;</span>row number<span class="tag">&lt;/<span class="title">th</span>&gt;</span><span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">tr</span> <span class="attribute">ng-repeat</span>=<span class="value">"i in [0, 1, 2, 3, 4, 5, 6, 7]"</span>&gt;</span><span class="tag">&lt;<span class="title">td</span>&gt;</span>&amp;#123;&amp;#123;i+1&#125;&#125;<span class="tag">&lt;/<span class="title">td</span>&gt;</span><span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AngularJS/" rel="tag">#AngularJS</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/04/21/blink/" rel="next" title="Blink">
+                <i class="fa fa-chevron-left"></i> Blink
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/05/03/angularjs-tutorial2/" rel="prev" title="AngularJS 新手指南2">
+                AngularJS 新手指南2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/05/02/angularjs-tutorial1/"
+     data-title="AngularJS 新手指南1"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/05/02/angularjs-tutorial1/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/05/02/angularjs-tutorial1/"
+           data-title="AngularJS 新手指南1" data-url="http://jinlong.github.io/2013/05/02/angularjs-tutorial1/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

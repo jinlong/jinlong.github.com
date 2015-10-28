@@ -1,0 +1,833 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="requestAnimationFrame," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：Better performance with requestAnimationFrame作者：Luz Caballero译者：涂鸦码龙
+
+##介绍
+本文讨论如何使用 requestAnimationFrame API 代替旧的 setInterval / setTimeout 方法，从而提高动画的性能。当然，我们会演示代码实例。
+当前几乎所有的主流浏览器都支持 requestAnimati">
+<meta property="og:type" content="article">
+<meta property="og:title" content="requestAnimationFrame 性能更好">
+<meta property="og:url" content="http://jinlong.github.io/2013/06/24/better-performance-with-requestanimationframe/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：Better performance with requestAnimationFrame作者：Luz Caballero译者：涂鸦码龙
+
+##介绍
+本文讨论如何使用 requestAnimationFrame API 代替旧的 setInterval / setTimeout 方法，从而提高动画的性能。当然，我们会演示代码实例。
+当前几乎所有的主流浏览器都支持 requestAnimati">
+<meta property="og:image" content="http://jinlong.github.io/images/post/req/figure1.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/req/figure2.png">
+<meta property="og:updated_time" content="2014-11-21T07:42:02.852Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="requestAnimationFrame 性能更好">
+<meta name="twitter:description" content="原文：Better performance with requestAnimationFrame作者：Luz Caballero译者：涂鸦码龙
+
+##介绍
+本文讨论如何使用 requestAnimationFrame API 代替旧的 setInterval / setTimeout 方法，从而提高动画的性能。当然，我们会演示代码实例。
+当前几乎所有的主流浏览器都支持 requestAnimati">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> requestAnimationFrame 性能更好 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                requestAnimationFrame 性能更好
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-06-24T16:06:00+08:00" content="2013-06-24">
+              2013-06-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/requestAnimationFrame/" itemprop="url" rel="index">
+                    <span itemprop="name">requestAnimationFrame</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/requestAnimationFrame/game/" itemprop="url" rel="index">
+                    <span itemprop="name">game</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/06/24/better-performance-with-requestanimationframe/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/06/24/better-performance-with-requestanimationframe/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/" target="_blank" rel="external">Better performance with requestAnimationFrame</a><br>作者：<a href="http://dev.opera.com/author/dropoutwannabe" target="_blank" rel="external">Luz Caballero</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>##介绍</p>
+<p>本文讨论如何使用 <strong>requestAnimationFrame</strong> API 代替旧的 <code>setInterval / setTimeout</code> 方法，从而提高动画的性能。当然，我们会演示<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/raf-demo.html" target="_blank" rel="external">代码实例</a>。</p>
+<p>当前<a href="http://caniuse.com/requestanimationframe" target="_blank" rel="external">几乎所有的主流浏览器都支持</a> requestAnimationFrame ，尽管有的还带前缀。Erik Möller 已经写了个 <a href="http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating" target="_blank" rel="external">polyfill</a> ，加上这个应该可以支持所有浏览器啦。一言难尽，让我们从头说来…</p>
+<p>##老方法不太好</p>
+<p>在表彰 <strong>requestAnimationFrame</strong> 之前，我们先看看用老方法是怎么实现动画的。我确定没必要提很久以前 Mozilla 第一个实现了 <code>mozRequestAnimationFrame</code> ，你可能已经用 <code>setTimeout</code> 和 <code>setInterval</code> 创建了动画。假定你已经熟悉这两个方法，我不再赘述。如果你想了解更多，可以看 John Resig 的精彩文章，深度解析 <a href="http://ejohn.org/blog/how-javascript-timers-work/" target="_blank" rel="external">JavaScript 计时器如何工作</a> 。</p>
+<p>我并不是轻视这些老方法，它们的确有一些缺点。首先，当相应的浏览器窗口最小化，JavaScript 计时器在背景标签仍然持续运行。因此，浏览器继续运行看不见的动画，导致不必要的 CPU 和电池寿命的消耗。在移动设备尤其严重。</p>
+<p>其次，不仅计时器持续运行看不见的动画，而且当时间到了，仍会排队执行它们的回调函数。让我解释下为什么这样会出问题 —— 比如说由于某些原因，回调函数占用太多时间，比你设定的时间要长。一旦计时器时间到了，它将排队执行 “下一次” 回调函数，甚至前一个还没执行完。这一过程不断重复，很快排队了几乎无数的计时器代码，导致浏览器不堪重负。图1 说明这一情况。<br><a id="more"></a><br><img src="/images/post/req/figure1.png"></p>
+<p><em>图 1：假如你的回调函数执行时间比设定时间更长，多个回调函数排队会阻塞浏览器。</em></p>
+<p>假如你的回调函数执行时间没比设定时间长，<code>setTimeout</code> 和 <code>setInterval</code> 仍不是最理想的。两者只能以固定的频率重绘动画，为了让动画更平滑，我们谨慎起见，选择比屏幕刷新率略高的频率。这样导致不必要的绘制，在屏幕刷新率准备绘制动画结果之前，一些帧已经画过了，因此它们被丢弃了。图 2 说明此问题。</p>
+<p><img src="/images/post/req/figure2.png"></p>
+<p><em>图 2：跳帧会导致较高的 CPU 占用和电池消耗，有时甚至导致动画不平稳。</em></p>
+<p>当用这些方法实现循环动画时，缺点更加突出，比如用于游戏或疯狂的实验（像我的 <a href="http://shinydemos.com/hipster-dog/" target="_blank" rel="external">hipster dog</a>），这种情况，循环的动画保证不间断地排队执行新的回调函数。如果你想了解更多关于循环动画的历史，以及使用 <code>setTimeout</code> 和 <code>setInterval</code> 时，循环动画表现如何；以及 <strong>requestAnimationFrame</strong> 如何改变我们的编码形式，我强烈建议阅读 Nicholas Zakas 写的“<a href="http://www.nczonline.net/blog/2011/05/03/better-javascript-animations-with-requestanimationframe/" target="_blank" rel="external">用 requestAnimationFrame 实现更好的 JavaScript 动画</a> ”，他的见解深刻。</p>
+<p>##介绍 requestAnimationFrame </p>
+<p><strong>requestAnimationFrame</strong> API 的确如你所愿：它把绘制动画的任务直接交给浏览器，浏览器可以做的更好。</p>
+<p><strong>requestAnimationFrame</strong> 是 W3C <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html" target="_blank" rel="external">基于脚本动画的定时控制</a> API 的一部分。</p>
+<p>##requestAnimationFrame 做了什么</p>
+<p>浏览器了解标签和窗口的状态，页面哪部分可见或不可见，了解当浏览器准备绘制时，其它的动画也在运行。<strong>requestAnimationFrame</strong> 让浏览器负责，允许它使用这些信息优化动画的调度，解决了我们先前讨论的 JavaScript 计时器问题。<strong>requestAnimationFrame</strong> 的流程像这样：</p>
+<ul>
+<li>首先，它仅仅绘制用户可见的动画。这意味着没把 CPU 或电池寿命浪费在绘制处于背景标签，最小化窗口，或者页面隐藏区域的动画上。</li>
+<li>第二，当浏览器准备好绘制时（空闲时），才绘制一帧，此时没有等待中的帧。意味着用 <strong>requestAnimationFrame</strong> 绘制动画不可能出现多个排队的回调函数，或者阻塞浏览器。</li>
+<li>第三，由于浏览器准备好时（空闲时）才绘制帧，不会有等待绘制的帧，没有多余的帧绘制。因此动画更平滑，CPU 和电池使用被进一步优化。</li>
+</ul>
+<blockquote>
+<p>我只是说直到当前的帧绘制完成，都没有额外的回调函数在排队。如果你多次调用 requestAnimationFrame() ，每次调用都有回调函数在排队。</p>
+</blockquote>
+<p> 另外，浏览器可以把同一页面的多处动画，保持在单一的回流和重绘周期里。</p>
+<p>##requestAnimationFrame 没做什么</p>
+<ul>
+<li>创建一个连续的动画；它仅安排单独的更新，通过一个返回的 <strong>id</strong> 号识别。如果还有后续的动画帧，<strong>requestAnimationFrame</strong> 将在回调函数里再次被调用。如果需要停止动画，使用 <code>cancelAnimationFrame(id)</code> 。</li>
+<li>确保真正需要时再绘制。</li>
+<li>保证动画的同步性。如果你同时开始两个动画，但是一个在可见区域，另一个不是，第一个动画将执行，另一个则不会；当第二个变得可见时，它们也许不同步了。如果你关心这个，在写动画代码的时候要注意， 指定一个参数确保所有需要同步的动画状态，不受可见程度的影响（如一组动画从开始以来经过的时间），而不是根据每个动画的前一帧。</li>
+<li>即使你尝试用任何方法，触发回调中间的回流（像 <code>getComputedStyle()</code> ，正常情况下，可以触发回流和重绘），它也会等到回调函数执行完毕才绘制。</li>
+</ul>
+<p>##如何使用 requestAnimationFrame </p>
+<p><a href="http://caniuse.com/requestanimationframe" target="_blank" rel="external">主流浏览器都支持</a> <strong>requestAnimationFrame</strong> ，但是有的仍需前缀。写本文的时候，加前缀的情况如下：</p>
+<ul>
+<li>Opera: Opera 15 以后无前缀</li>
+<li>Chrome: Chrome 24+ 无前缀</li>
+<li>Safari: 有前缀</li>
+<li>Firefox: 有前缀，Firefox 23+ 无前缀</li>
+<li>IE: IE 10 以后无前缀</li>
+</ul>
+<p>为了确保你的代码万无一失，应该使用 <a href="http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating" target="_blank" rel="external">Erik Möller’s polyfill</a> （它提供了健全的跨浏览器支持），这是在 <a href="http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/" target="_blank" rel="external">Paul Irish 的这篇文章</a> 的代码基础上改进而来的。</p>
+<p>这是我们的青蛙实例中处理动画的简单代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> requestId = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> animationStartTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params">time</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> frog = <span class="built_in">document</span>.getElementById(<span class="string">"animated"</span>);</span><br><span class="line">  frog.style.left = (<span class="number">50</span> + (time - animationStartTime)/<span class="number">10</span> % <span class="number">300</span>) + <span class="string">"px"</span>;</span><br><span class="line">  frog.style.top = (<span class="number">185</span> - <span class="number">10</span> * ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) + ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) * ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) ) + <span class="string">"px"</span>;</span><br><span class="line">  <span class="keyword">var</span> t = (time - animationStartTime)/<span class="number">10</span> % <span class="number">100</span>;</span><br><span class="line">  frog.style.backgroundPosition = - <span class="built_in">Math</span>.floor(t / (<span class="number">100</span>/<span class="number">2</span>)) * <span class="number">60</span>+ <span class="string">"px"</span>;</span><br><span class="line">  requestId = <span class="built_in">window</span>.requestAnimationFrame(animate);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  animationStartTime = <span class="built_in">window</span>.performance.now();</span><br><span class="line">  requestId = <span class="built_in">window</span>.requestAnimationFrame(animate);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (requestId)</span><br><span class="line">    <span class="built_in">window</span>.cancelAnimationFrame(requestId);</span><br><span class="line">  requestId = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>requestAnimationFrame</strong> 方法告诉浏览器，基于脚本的动画需要重新取样，需要往 <strong>animation frame request callback list（动画帧请求回调列表）</strong>插入一个 <strong>callback</strong> （回调函数）。这些保存的回调函数的 <strong>id</strong> 列表正等待执行。调用 requestAnimationFrame 返回 <strong>id</strong>（requestId），用来识别队列中的回调函数。 id 可以通过 <code>cancelAnimationFrame(id)</code> 取消回调函数。</p>
+<p><strong>requestAnimationFrame</strong> 方法作为它的参数的回调方法，用来绘制动画（<code>animate</code>）的新帧。当接到动画更新请求（<code>time</code>）时，回调函数收到一个 <strong>timestamp</strong> （时间戳）参数。</p>
+<p>时间戳是调用 <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#dom-performance-now" target="_blank" rel="external">Performance 接口的 now 方法</a> 的执行结果（译者注：<a href="http://caniuse.com/#search=performance" target="_blank" rel="external">Performance 支持情况</a>）。你需要确保任何其它想拿来比较的时间测量单位也是 <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#sec-DOMHighResTimeStamp" target="_blank" rel="external">DOMHighResTimeStamp</a> —— 以上例子我们调用 <code>window.performance.now</code>，把它的结果存在 <code>animationStartTime</code> 变量中。在动画函数（<code>animate</code>）中，我们在每一帧都用开始时间跟当前时间（<code>time</code>）做比较，计算每个青蛙实例的位置。</p>
+<blockquote>
+<p>当你写动画时，如果碰到一些旧教程，注意 <code>animationStartTime</code> 属性是内建的，但这里并不赞成，因此你必须像上面那样自己记录开始时间。</p>
+</blockquote>
+<p>要看代码效果，你可以看我的 <a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/raf-demo.html" target="_blank" rel="external">requestAnimationFrame 实例</a> 。</p>
+<p>总结</p>
+<p>本文我们讨论了如何通过 <strong>requestAnimationFrame</strong> 提高 JavaScript 动画的性能，以及如何在所有浏览器中成功使用它。我希望通过此文激发你去尝试一些很酷的动画实验 —— 你可能已经着手改造旧的动画代码了吧！</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/requestAnimationFrame/" rel="tag">#requestAnimationFrame</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/06/05/the-design-of-code-organizing-javascript/" rel="next" title="代码设计：组织 JavaScript">
+                <i class="fa fa-chevron-left"></i> 代码设计：组织 JavaScript
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/07/06/using-javascripts-tostring-method/" rel="prev" title="使用 JavaScript 的 toString 方法">
+                使用 JavaScript 的 toString 方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/06/24/better-performance-with-requestanimationframe/"
+     data-title="requestAnimationFrame 性能更好"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/06/24/better-performance-with-requestanimationframe/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/06/24/better-performance-with-requestanimationframe/"
+           data-title="requestAnimationFrame 性能更好" data-url="http://jinlong.github.io/2013/06/24/better-performance-with-requestanimationframe/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

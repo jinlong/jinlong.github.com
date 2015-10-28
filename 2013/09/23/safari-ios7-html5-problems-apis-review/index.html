@@ -1,0 +1,1061 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="HTML5,Safari,iOS7," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：Safari on iOS 7 and HTML5: problems, changes and new APIs译者：涂鸦码龙感谢 CSS魔法 指正翻译问题
+
+这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，bug 最多的 Safari 版本嘛。文本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 7 的 Safari 和 HTML5：问题，变化和新 API">
+<meta property="og:url" content="http://jinlong.github.io/2013/09/23/safari-ios7-html5-problems-apis-review/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：Safari on iOS 7 and HTML5: problems, changes and new APIs译者：涂鸦码龙感谢 CSS魔法 指正翻译问题
+
+这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，bug 最多的 Safari 版本嘛。文本">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/safari.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/tint.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/fullscreen2.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/twitter-300x171.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/catchme.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/bottom-toolbar.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/page-title.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/share.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/gestures.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/favorites2.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/cc1.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/cc2ch.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/datetime.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/sticky1.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/statusbar2.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/multitask.png">
+<meta property="og:image" content="http://jinlong.github.io/images/post/ios7/Screen-Shot-2013-09-18-at-4.02.56-PM.png">
+<meta property="og:updated_time" content="2014-11-21T07:23:39.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 7 的 Safari 和 HTML5：问题，变化和新 API">
+<meta name="twitter:description" content="原文：Safari on iOS 7 and HTML5: problems, changes and new APIs译者：涂鸦码龙感谢 CSS魔法 指正翻译问题
+
+这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，bug 最多的 Safari 版本嘛。文本">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> iOS 7 的 Safari 和 HTML5：问题，变化和新 API | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS 7 的 Safari 和 HTML5：问题，变化和新 API
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-09-23T23:32:00+08:00" content="2013-09-23">
+              2013-09-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS7/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS7</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS7/Safari/" itemprop="url" rel="index">
+                    <span itemprop="name">Safari</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS7/Safari/HTML5/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML5</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/09/23/safari-ios7-html5-problems-apis-review/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/09/23/safari-ios7-html5-problems-apis-review/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：<a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review" target="_blank" rel="external">Safari on iOS 7 and HTML5: problems, changes and new APIs</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a><br>感谢 <a href="http://weibo.com/cssmagic" target="_blank" rel="external">CSS魔法</a> 指正翻译问题</p>
+</blockquote>
+<p><img src="/images/post/ios7/safari.png"><br>这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，<strong>bug 最多的 Safari 版本</strong>嘛。文本我将介绍新的 API 和特性，以及如果你有网站或 webapp ，马上需要处理的大多数问题。</p>
+<p>##简而言之</p>
+<p>没有时间读这篇长文？  </p>
+<ul>
+<li><strong>UI 变化</strong>：工具栏色彩，新的全屏导航问题，新的主屏图标尺寸；iPhone 未使用 <code>&lt;title&gt;</code>；可能与新手势冲突。    </li>
+<li><strong>新设备</strong>：对 web 开发者而言没有任何新东西，跟 iPhone 5 相同。    </li>
+<li><strong>HTML 5 标签</strong>：视频轨道，<code>&lt;progress&gt;</code>，移除对 <code>input type=datetime</code> 的支持。    </li>
+<li><strong>HTML 5 API</strong> ：Page Visibility（页面可见性），AirPlay API，canvas 增强，移除对共享 Workers 的支持，Web Speech 综合 API， 无前缀的 Web Audio 和 Animation Timing， Mutation Observer 和其它小调整。WebSQL 使用超过 5Mb 的大问题。    </li>
+<li><strong>CSS</strong> ：Regions，Sticky 定位， FlexBox，ClipPath，无前缀的 Transitions 和 其它优化。    </li>
+<li><strong>主屏 webapps</strong> ：一些严重的问题（比如，不支持 <code>alert</code> ！）    </li>
+<li><strong>原生 webapps</strong> ：Web View 分页，原生 app 的 JavaScript 运行时，以及视频播放新功能。<a id="more"></a>
+##新浏览器</li>
+</ul>
+<p>Safari ，像其它原生应用一样，在用户界面和体验方面已经迎来大幅更新。这些变化会影响用户与网站的交互，以及 webapp 的反应。</p>
+<p>###工具栏色彩</p>
+<p>Safari 的工具栏已经着色（iPhone 上的 URL 条和底部工具条），颜色基于：<br>a) 加载页面时的背景色<br>b) 当滚动页面时，工具条后面的当前主色</p>
+<p>如果你想“hack”初始颜色，与 body 背景不同，并不需要往 HTML 里面加无用的东西（比如新容器），仅需使用下面的 CSS hack:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">body</span> <span class="rules">&#123;</span><br><span class="line"><span class="rule"><span class="attribute">background-color</span>:<span class="value"> blue</span></span>; <span class="comment">/* 用于着色 */</span></span><br><span class="line"><span class="rule"><span class="attribute">background-image</span>:<span class="value"> <span class="function">linear-gradient</span>(to bottom, green <span class="number">0%</span>, green <span class="number">100%</span>)</span></span>; <span class="comment">/* 用于 body */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>我们定义了背景色和背景图像；内容将用图像（本例是渐变，也可以是 data URI 1px 图像）。以下例子，前两个用了同样的颜色（仅用背景），最后一个工具栏颜色和 body 颜色不同。<br><img src="/images/post/ios7/tint.png"></p>
+<p>###全屏和 HTML 5 应用、游戏的大问题</p>
+<p>如今 iPhone 和 iPod touch 上的网页浏览总是全屏。当用户在垂直模式（portrait ）滚动页面时，底部工具栏将消失，URL 栏变成一个小的半透明的条出现在顶部。水平模式（landscape），用户滚动页面底部工具栏和主域名栏同时消失，变成完整的全屏模式。</p>
+<p>工具栏和完整的 URL 栏将再次出现：<br>1) 用户轻击页面顶部，或者<br>2) 用户把页面滚回顶部</p>
+<p>下面图片显示了水平和垂直模式，滚动页面前后的 UI 变化：<br><img src="/images/post/ios7/fullscreen2.png"></p>
+<p>问题是：  </p>
+<ul>
+<li>当工具栏出现/消失时，<code>resize</code> 事件不会触发   </li>
+<li>我们无法探测 JavaScript 或者 media queries 的变化    </li>
+<li>老技巧 <code>window.scrollTo</code> 隐藏地址栏不再工作；因此，没有用户介入滚动页面，没有办法隐藏地址栏或工具栏了。  </li>
+<li>如果没有使用原生的滚动，会遇到问题（细节见下面）。   </li>
+<li>9月19日更新: canvas 底部无法交互（细节如下）</li>
+</ul>
+<p>如果你使用“非原生”的滚动布局，比如 iframe，<code>overflow:scroll</code> ，或者基于 JavaScript 的滚动组件，工具栏永远不会隐藏。更大的问题是，用户一旦进入全屏模式，将无法返回正常模式。比如，以水平模式看 Twitter 网站（使用 <code>overflow:scroll</code>），滚动区域少于屏幕的 50%时，工具栏再也不会消失。</p>
+<p><img src="/images/post/ios7/twitter-300x171.png"></p>
+<p>说实话，如果你从垂直模式切换到水平模式，有时会变成全屏无法滚动，但是你无法避免。你需要测试它们找到解决办法。</p>
+<p>滚动出现工具栏的问题同样出现在 HTML5 游戏。Beta 1 期间, Apple 论坛就有许多人反馈这个问题，比如：</p>
+<ul>
+<li><strong>Richard Davey</strong>：对我们而言这的确是个问题，我们 BBC 网站上的所有游戏显示都出了问题（试下上面的<a href="http://www.bbc.co.uk/cbeebies/" target="_blank" rel="external">所有例子</a>）。移除了全屏按钮，废弃了’hack’，我们无法让游戏全屏。游戏挤在 iPhone 浏览器中间的一个小窗口。(…) 水平模式打开页面，仅有 2/3 的屏幕可用，控制区域占用了 1/3 的屏幕。(…) </li>
+<li><strong>TheFlashGuy</strong>：在水平模式，我们需要控制浏览器工具栏的显示/隐藏。用户点击屏幕顶部或底部，太容易进入这个模式了，此模式破坏了许多网站和 web app，因为它们主要的 ui 导航元素习惯放在内容区域的顶部或底部。</li>
+</ul>
+<blockquote>
+<p>“你的网站无法获得真正的全屏体验。这点反而成了 iOS 6 喜人的一面了，失去这点是主要的倒退。Richard Davey”</p>
+</blockquote>
+<p><img src="/images/post/ios7/catchme.png"></p>
+<p>##底部工具栏和交互元素（9月19日 更新 ）</p>
+<p>一旦进入全屏模式，页面底部就不可交互。此问题影响到全屏模式（滚动以后）视口底部的任何工具栏，链接或者表单项。比如，底部固定的工具栏。</p>
+<p>当你点击视口的这部分，仅仅触发了全屏驳回动作。因此，Safari 工具栏出现，需要再次点击交互项触发动作，因此两次点击才触发一个按钮。可以在<a href="http://view.jquerymobile.com/master/demos/widgets/fixed-toolbars/footer-persist-a.php" target="_blank" rel="external">这</a> 测试，滚动然后点击底部工具栏。</p>
+<p>比如，你想点击相册下一张图片，仅仅打开了 Safari 工具栏，你需要再次点击相册执行相应操作。<br><img src="/images/post/ios7/bottom-toolbar.png"></p>
+<p>###标题</p>
+<p>下一个巨大的变化是 iPhone 的 Safari UI 的 title 标题区域。iPhone 的页面标题被当前的域名取代（见下图），页面标题只在浏览选项卡时可用。<br><img src="/images/post/ios7/page-title.png"></p>
+<blockquote>
+<p>“在 iPhone iOS 7 上，当用户浏览网页时，页面的 <code>&lt;title&gt;</code> 将被忽略。”</p>
+</blockquote>
+<p>iPad 没有全屏模式；工具栏和标题栏总是可见。</p>
+<p>###添加到主页按钮</p>
+<p><img src="/images/post/ios7/share.png"></p>
+<p>整个 UI 已经改变，包括新图标取代<strong>分享图标</strong>，因此每个网站都推荐用户添加到书签，或者添加到主屏，它们需要更新图标。</p>
+<p>###手势</p>
+<p>操作系统和 Safari 如今提供新的手势，如果你自己检测手势的话，新手势可能影响你的网站。   </p>
+<p>A) <strong>控制中心</strong>：当你从屏幕底部向上滑时出现。这一版，由于全屏，屏幕底部可能是网站的一部分，而不是 Safari 工具栏。因此，<strong>建议用户从 canvas 的底部向上滑时，需要多加小心</strong>。<br>B) <strong>历史手势</strong>：第二个可能有问题的手势是从边界左滑，右滑；Safari 将触发浏览历史的后退和前进动作，像 Windows 8 模式的 IE。如果你引导用户左滑或右滑，并且边缘没有一点边距的话，历史手势可能与网站手势发生冲突（不过说实话，Chrome 存在同样的问题）。</p>
+<p>在单页 webapp （Safari 内）中，当使用 History API 或者 hash 技术管理应用状态时，此问题相当严重。当用户使用后退手势时，他将看到同一应用的两个图像，可是用户在同一个应用中。当你使用 side-by-side （并排）滚动手势时，比如 Yahoo! 主页，如果用户从边界触发手势（它甚至触发了 touch 事件），可能有使用问题 ：</p>
+<p><img src="/images/post/ios7/gestures.png"></p>
+<p>当用户手势返回时，手势和回退动画（向右滑）也会跟一些 UI 框架发送冲突，比如 jQuery Mobile 或者 Sencha Touch，两种动画都会渲染（浏览器动画，然后是框架动画）。此外，当前一页在左侧并滚动到特定位置，滑动动画的快照是正常的，但是页面从顶部加载，并未保持原来的滚动位置。</p>
+<p>没有办法阻止这些手势，因为它们是由 OS （操作系统）或者浏览器自身管理的。</p>
+<p>非常希望，历史手势在主屏 webapp 或 UIWebViews （比如 PhoneGap 应用）上是禁用的。</p>
+<p>###图标尺寸</p>
+<p>在 7.0 中，新的系统图标比前一版本大 5% ，比如在 Retina iPhone 设备用 120x120 代替先前的 114x114 。如今，系统图标也变成扁平化，不再需要闪亮的效果，因此我们可能想更新图标匹配新设计。我们可以用同样的带新尺寸的 <strong>apple-touch-icon</strong> link 。</p>
+<p><strong>apple-touch-icon</strong> precomposed 版仍旧支持，只不过图标没有闪亮的效果了。如果我们定义两种，precomposed 版优先。</p>
+<p>iOS 7 可用的图标尺寸是：   </p>
+<ul>
+<li>iPhone / iPod Touch 视网膜屏: <strong>120x120</strong>    </li>
+<li>iPad 非视网膜屏（iPad 2 和 iPad mini）: <strong>76x76</strong>    </li>
+<li>iPad 视网膜屏: <strong>152x152</strong></li>
+</ul>
+<p>我们需要记住所有非视网膜屏的 iPhone-因子设备无法使用 iOS 7 。如果我们没提供新的图标尺寸，设备还会用 iOS 6 相关的图标。如果我们想覆盖所有可能的 iOS 图标，使用下面的代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 非视网膜 iPhone 低于 iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon57.png"</span> <span class="attribute">sizes</span>=<span class="value">"57x57"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 非视网膜 iPad 低于 iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon72.png"</span> <span class="attribute">sizes</span>=<span class="value">"72x72"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 非视网膜 iPad iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon76.png"</span> <span class="attribute">sizes</span>=<span class="value">"76x76"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 视网膜 iPhone 低于 iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon114.png"</span> <span class="attribute">sizes</span>=<span class="value">"114x114"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 视网膜 iPhone iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon120.png"</span> <span class="attribute">sizes</span>=<span class="value">"120x120"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 视网膜 iPad 低于 iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon144.png"</span> <span class="attribute">sizes</span>=<span class="value">"144x144"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 视网膜 iPad iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon152.png"</span> <span class="attribute">sizes</span>=<span class="value">"152x152"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>###书签和收藏夹</p>
+<p>书签也用了新图标（看下面左侧的图），貌似无法修改这些图标和文字。</p>
+<p>当你点击地址栏时出现收藏夹（下面右侧图），看起来像是用了 <strong>apple-touch-icon</strong> link ，但是没有遵循任何尺寸原则，并且我发现了怪异现象，比如一些带正确的 link 元素的网站，收藏夹却不显示图标。XXXX</p>
+<p><img src="/images/post/ios7/favorites2.png"></p>
+<p>##新设备</p>
+<p>过几天，iPhone 5S 和 iPhone 5C 就可以在市场上买到了，从 web 开发的观点看，好消息是它们确实跟 iPhone 5 一模一样。同样的屏幕尺寸，同样的像素密度，同样的功能。它们也许快一些，但是从编码的角度，完全不必担心。</p>
+<p>新的 Touch ID 特性（指纹识别），网站还无法使用，以 JavaScript 开发者的观点看，64位 CPU 不会改变什么。也就是说，iOS 模拟器有能力模拟 64位 CPU。</p>
+<p>##HTML5 标记支持</p>
+<p>###视频轨道</p>
+<p>HTML5 video 元素现在支持 <strong>track</strong> 子元素，用于subtitles （字幕）或者关闭 captions （解说字幕）。支持多语言，可以通过视频播放器的一个选择器选择它。用户可以改变语言，或者在轨道选择器禁用 captions （解说字幕）。</p>
+<p><img src="/images/post/ios7/cc1.png"></p>
+<p>对于所有可能的轨道类型（<code>kind</code> 属性），仅支持 captions（解说字幕） 和 subtitles（字幕），我们必须在 <code>srclang</code> 属性以 <a href="http://en.wikipedia.org/wiki/ISO_639-1" target="_blank" rel="external">ISO 格式</a> （比如 English 是 en）定义语言。当用户可以听到声音但不理解语言时，字幕非常有用。当用户无法听到声音时，解说字幕很有用，它包含了当前发生情况的额外信息（比如背景音乐正在播放）。</p>
+<p><img src="/images/post/ios7/cc2ch.png"></p>
+<p>定义轨道的 <code>label</code> 属性毫无价值，因为 iOS 忽视它，如果 kind 值使用 captions 代替 subtitles ，菜单中带有可选的 CC 后缀的语言名取代了 label。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">video</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"myvideo.mp4"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">track</span> <span class="attribute">kind</span>=<span class="value">"captions"</span> <span class="attribute">src</span>=<span class="value">"my-captions-en.vtt"</span> <span class="attribute">srclang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">track</span> <span class="attribute">kind</span>=<span class="value">"subtitles"</span> <span class="attribute">src</span>=<span class="value">"my-captions-fr.vtt"</span> <span class="attribute">srclang</span>=<span class="value">"fr"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以通过 JavaScript API 访问轨道，我们可以遍历所有轨道文件。这点可能仅对 iPad 有用，在 iPad 上，我们可以在 web canvas 里真正嵌入一段视频，iPhone 上永远是全屏模式。</p>
+<p>track 元素遵循跨域策略，默认情况，视频和轨道必须是同源。使用 JavaScript 可以探测 track 是否可用，用到 webkitHasClosedCaptions ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasCC = <span class="built_in">document</span>.querySelector(<span class="string">"video"</span>).webkitHasClosedCaptions;</span><br></pre></td></tr></table></figure>
+<p>还可以通过 <code>webkitClosedCaptionsVisible</code> （布尔属性）改变每个 video 元素的 captions （解说字幕）的可见性。</p>
+<p>字幕样式</p>
+<p>iOS 7 支持新的 <strong>::cue</strong> 伪元素，我们仅可以改变 text-shadow, opacity 和 outline。所有其它属性比如颜色和字体样式不支持。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pseudo">::cue</span> <span class="rules">&#123; <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0.8</span> </span></span></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>更多关于 <a href="http://www.html5rocks.com/en/tutorials/track/basics/" target="_blank" rel="external">Track 元素和 API</a> （记住 Safari 并非支持所有 API）。</p>
+<p>###PROGRESS 和 OUTPUT 元素</p>
+<p>已支持 <code>&lt;progress&gt;</code> 元素，基于 max 和 value 创建进度条。如同其它浏览器，不支持模糊进度，当我们知道明确的进度值时才适用。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;progress <span class="built_in">max</span>=<span class="string">"100"</span> <span class="built_in">value</span>=<span class="string">"40"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>已支持 <code>&lt;output&gt;</code> 元素，没感觉有什么特别 :) 。</p>
+<p>貌似支持 <code>&lt;meter&gt;</code> ，所有内容会被忽略，我感觉有 bug 。</p>
+<p>###移除：datetime input type</p>
+<p>追随 Google Chrome ，iOS Safari <strong>不再支持 datetime 的 input 类型</strong>，它将退化成 text 。这个类型将被标准废弃，标准赞成使用两个 input ， date 和 time 达到同样的目的。问题是 datetime 兼容 iOS 5.0 至 iOS 6.1 ；如果使用它要多加小心！</p>
+<p>week input 类型仍没支持，回退成 text 类型，渲染成一个不可交互的控件。</p>
+<p><img src="/images/post/ios7/datetime.png"></p>
+<blockquote>
+<p>“如果你正在使用 input type=’datetime’ ，你应该马上采取行动，因为它被渲染成 text 类型。”</p>
+</blockquote>
+<p>###无缝 iframe</p>
+<p>在 iOS 7 上，新的布尔属性 <code>seamless</code> 用于创建无边界的 iframe 。iframe 将没有滚动条，默认情况，它会取到内部内容的高度，作为 DOM 中其它块级元素的使用空间。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">seamless</span> <span class="attribute">src</span>=<span class="value">"mypage.html"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>##HTML5 JavaScript API</p>
+<p>先以坏新闻开头：<strong>未支持 WebGL，FullScreen，WebRTC， getUserMedia 或者 IndexedDB</strong> 。</p>
+<p>可用的新 API ：   </p>
+<ul>
+<li>Page Visibility API   </li>
+<li>XHR 2.0 完全实现   </li>
+<li>Video tracks API (已覆盖)   </li>
+<li>AirPlay API   </li>
+<li>CSS Regions API    </li>
+<li>Canvas 增强   </li>
+<li>移除对 Shared Workers （共享 Workers ） 的支持   </li>
+<li>WebSpeech 合成 API</li>
+</ul>
+<p>iOS 7 的 Page Visibility API 带有 -webkit- 前缀，用于探测 tab 标签在前台还是后台。你可以测试<a href="http://mobilexweb.com/ts/api/page.html" target="_blank" rel="external">这个 demo</a> 。XMLHttpRequest 2.0 规范完全兼容意味着我们可以把 ‘<strong>blob</strong>‘ 作为响应。Video tracks API 已经快速覆盖，意味着我们可以检索和导航所有媒体元素的所有轨道内容。</p>
+<p>CSS Regions API 作为 CSS Regions 规范的一部分，主要带前缀的 <code>webkitGetFlowByName</code> 函数对每个 DOM 元素都可用。</p>
+<p>Canvas 2D Drawing API，canvas context 现在有 <code>globalCompositeOperation</code> 属性，当绘制不同的层时，我们可以定义混合模式（比如正片叠底）。已有新的 Path 构造器，在 canvas context 绘制的路径可以保存，用于后期使用，避免直接画在画布上。</p>
+<p>###AirPlay API</p>
+<p>AirPlay API 需要解释。AirPlay 是 Apple 的无线流媒体解决方案，可以在不同设备间传递流媒体内容，Apple TV 已经使用。Safari 已经支持 <strong>x-webkit-airplay</strong> HTML 属性，用于定义是否使用 AirPlay ，之前我们无法通过 HTML5 定制体验。</p>
+<p>API 可以通过 AirPlay 定制播放器，获取流的内容和事件。每个 video 元素都有 <strong>webkitplaybacktargetavailabilitychanged</strong> 和 <strong>webkitcurrentplaybacktargetiswirelesschanged</strong> 。让我们见识下不用下划线，驼峰或者其它方式命名事件有多可怕 :S 。当新的 AirPlay 对象（比如 Apple TV）启用，或者禁用，第一个事件触发；当重放状态改变时，第二个事件触发。</p>
+<blockquote>
+<p>“我认为 <strong>webkitcurrentplaybacktargetiswirelesschanged</strong> 创造了记录：迄今最长的 JavaScript 事件名。”</p>
+</blockquote>
+<p>如果有个流对象可用，我们可以提供一个按钮，选择后调用视频的 <strong>webkitShowPlaybackTargetPicker</strong> 函数。</p>
+<p>仍旧没有官方的 API 文档，你可以看这视频 <a href="https://developer.apple.com/wwdc/videos/index.php?id=600" target="_blank" rel="external">‘What’s New in Safari and WebKit for Web Developers’</a> ，WWDC 会议的视频提到了这个话题。</p>
+<p>###后台执行</p>
+<p>有几个后台执行的用例：   </p>
+<ul>
+<li>如果用户切换了 tab （标签选择屏），你的代码仍旧执行，但是图像静止了   </li>
+<li>如果用户切换了应用（多任务模式），你的代码仍旧执行，图像更新   </li>
+<li>如果 Safari 在前台，你的网站在后端标签，你的代码冻结，Safari 有最新执行的快照用于 UI 显示   </li>
+<li>Safari 在后台你的代码冻结</li>
+</ul>
+<p>###WebSpeech 合成 API</p>
+<p>9月19日更新：API 能起作用，因此是官方支持。</p>
+<p>WebSpeech API 可以让网站记录和转录音频，还可以把文字合成到声音中，使用操作系统内部声音播放。</p>
+<p>iOS Safari 仅包含合成 API（文字到语音），没有从麦克风听音频的 API 。使用 <code>speechSynthesis.getVoices()</code> ，你可以在一个真实设备，查询所有不同语言的可用声音，它返回 36 种声音（有时刷新页面返回 0，感觉像 bug ）。在英语方面，使用 <code>en-US</code> 是女声，使用 <code>en-GB</code> 是男声。在语音识别方面我不是专家，但是感觉声音 API 不同于 Siri ，iOS 7 的 Siri 听起来更自然。</p>
+<p>让 JavaScript 通过你的网站开口说话，可以使用默认语言的快捷版，或者定义不同的属性像以下例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">speechSynthesis.speak(<span class="keyword">new</span> SpeechSynthesisUtterance(<span class="string">"Hello, this is my voice on a webpage"</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> speech = <span class="keyword">new</span> SpeechSynthesisUtterance();</span><br><span class="line">speech.text = <span class="string">"Hello"</span>;</span><br><span class="line">speech.volume = <span class="number">1</span>; <span class="comment">// 0 to 1</span></span><br><span class="line">speech.rate = <span class="number">1</span>; <span class="comment">// 0.1 to 9</span></span><br><span class="line">speech.pitch = <span class="number">1</span>; <span class="comment">// 0 to 2, 1=normal</span></span><br><span class="line">speech.lang = <span class="string">"en-US"</span>;</span><br><span class="line">speechSynthesis.speak(speech);</span><br></pre></td></tr></table></figure>
+<p>通过 <code>SpeechSynthesisUtterance</code> 对象可以绑定一些事件，比如 start 和 end ，但是不要在事件内部用 alert ，你的 Safari 将未响应（不要问我为什么）。</p>
+<p>可以说出来的字符串可以是无格式的文本，标准也支持 <a href="http://www.w3.org/TR/speech-synthesis/" target="_blank" rel="external">SSML 格式（语音合成标记语言）</a>  的 XML 文档，iOS Safari 仅阅读 XML :) 。</p>
+<p>记住 <strong>Speech 合成 API 仅作用于用户明确的行为</strong>，比如点击一个按钮，因此你不能在 onload 或者基于时间坐标发起语音。用 iOS 7 设备试试这个<a href="http://mobilexweb.com/ts/api/speech.html" target="_blank" rel="external">在线 demo</a> 。</p>
+<p>###其它变化</p>
+<ul>
+<li>MutationObserver   </li>
+<li>无前缀的 Animation Timing API （也被称为 requestAnimationFrame）   </li>
+<li>无前缀的 <strong>transitionend</strong> 事件名    </li>
+<li>无前缀 URL（?）   </li>
+<li>无前缀 WebAudio API 及新的高级功能   </li>
+<li>新的 DOM 属性 <code>hidden</code> 和 <code>visibilityState</code></li>
+<li>支持 window.doNotTrack</li>
+</ul>
+<p>###WebSQL bug</p>
+<p>使用 <strong>WebSQL API</strong> ，当创建的数据库大于 5Mb 时，会有大问题（DOMException）。先前版本，用户许可限制是 50Mb。因为 bug ，仅仅使用 5Mb ，用户将收到许可对话框。尽管用户给予权限占用更多容量，但它的确是一个<strong>很大的 bug</strong>。</p>
+<p>9月19日更新: 根据纽约时报的 tarobomb ，当你首次创建数据库，如果请求容量小于 5Mb，然后想存更多数据（大于 50Mb）时，合适的确认框出现（首次 10Mb，然后 25Mb，最终 50Mb），你最终能储存超过 5Mb 的数据。</p>
+<p>##CSS 支持</p>
+<p>支持新的规范（大部分有 webkit 前缀）：</p>
+<ul>
+<li>Sticky 定位   </li>
+<li>CSS Regions   </li>
+<li>CSS Grid Layout (not working)   </li>
+<li>CSS FlexBox    </li>
+<li>动态字体类型</li>
+</ul>
+<p>###Sticky 定位</p>
+<p>Sticky 定位是新的实验特性，可以在视口中固定一个元素，当它的父容器移出可视区域时消失（通常在滚动操作后触发）。它像是混合定位：当 static 定位元素移出视口时变成 position: fixed 。如果有多个 sticky 元素，它们会聚集到同一区域（定义同样位置属性的话），当滚动到类似原生 UITableView 部分时，可以做个不错的效果。</p>
+<p>9月19日更新：<a href="https://twitter.com/zachleat/status/362588551847755776" target="_blank" rel="external">一些报告</a> 显示这一特性在 6.1 就可用了（但是在社区没有找到资料，因此我在这提一下）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h1</span> <span class="rules">&#123; <span class="rule"><span class="attribute">position</span>:<span class="value"> -webkit-sticky</span></span>;   <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">10px</span></span></span>; &#125;</span></span><br></pre></td></tr></table></figure>
+<p>你可以试试这个 <a href="http://html5-demos.appspot.com/static/css/sticky.html" target="_blank" rel="external">demo</a> 。<br><img src="/images/post/ios7/sticky1.png"></p>
+<p>###CSS Regions</p>
+<p><a href="http://dev.w3.org/csswg/css-regions/" target="_blank" rel="external">CSS Regions</a> 规范是 Adobe 提的，我们可以创建类似杂志设计，通过不同的容器排版内容。由于屏幕尺寸的性质，针对 iPad 网站和 webapp，我们将使用新的流原理。</p>
+<p>在 iOS 上，选择不同区域的内容是不允许的。CSS Exclusions 可以定义区域的形状，通常情况下，它和 CSS Regions 是好伙伴，但它还不可用。</p>
+<p>你可以试试这些<a href="http://codepen.io/collection/jabto" target="_blank" rel="external">在线 demo</a> 。</p>
+<p>###CSS Grid Layout</p>
+<p><a href="http://dev.w3.org/csswg/css-grid/" target="_blank" rel="external">CSS Grid Layout</a> 是 W3C 的新布局规范（由微软提出，IE 10 已经实现）。所有新的 CSS 属性（-webkit-grid-X）都可用，但我无法使用 display: grid 或者 display: -webkit-grid 。我不确定是否有其它方式启用它，或者它未完全实现。</p>
+<p>###CSS FlexBox</p>
+<p>CSS FlexBox 的最终规范出来了，水平/垂直定位元素时，我们可以不用浮动和清除浮动了。使用时我们应该给容器加个 <strong>display: -webkit-flex</strong>，然后应用不同的属性。</p>
+<p>###动态字体</p>
+<p>iOS 7 支持动态字体这种新字体类型，用于调整粗细，字间距和行距，基于当前字体提升易读性。我们可以把此新特性用于 HTML，使用新的 <strong>-apple-</strong> 前缀（也许因为 webkit 将来不打算使用前缀？）。有一长串的常量，比如 -apple-system-headline1，-apple-system-body 和 -apple-system-caption1 。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h1</span> <span class="rules">&#123; <span class="rule"><span class="attribute">font</span>:<span class="value"> -apple-system-headline1 </span></span></span>&#125;</span><br><span class="line"><span class="tag">p</span> <span class="rules">&#123; <span class="rule"><span class="attribute">font</span>:<span class="value"> -apple-system-body </span></span></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>###其它 CSS 改进</p>
+<p>media queries 的 <strong>resolution</strong> 属性还是没支持，有些新东西，比如可以查询 <strong>min-color-index</strong> 和 <strong>max-color-index</strong> ，虽然没什么用吧 :) </p>
+<p>还有一些次要更新，包括：</p>
+<ul>
+<li>无前缀的 CSS Transitions （和 <code>transitionend</code> 事件）   </li>
+<li>CSS Clip Path 基于形状剪裁内容，包括圆形，矩形和多边形 </li>
+<li>字体的 Kerning 和 Ligatures 默认启用 </li>
+<li>Background  背景属性更兼容不同的值 </li>
+<li>box-decoration-break: slice/clone </li>
+<li>tab-size 样式 </li>
+<li>overflow-wrap: normal/hypernate/break-word </li>
+<li>支持 ch 和 vmax 单位 </li>
+<li>mask-type: alpha </li>
+<li>新的伪元素 ::cue 在 video 轨道部分已提到 </li>
+<li>-webkit-background-composite 属性（但是我试了不起作用）</li>
+</ul>
+<p>##主屏 webapp</p>
+<blockquote>
+<p>“如果你正在用主屏 webapp ，有个不幸的消息：此平台的此版本有太多 bug 了。”</p>
+</blockquote>
+<p>唯一的好消息是，当全屏时，貌似没有 WebSQL 存储限制了；不需要用户的许可。</p>
+<p>大问题<br>主屏 webapp 有不少大问题：</p>
+<ul>
+<li><strong>标准的对话框无法使用了</strong>，比如 <code>alert</code>, <code>confirm</code> 或 <code>prompt</code> 。 </li>
+<li><strong>webapp 无法打开外部的 URI</strong> ，比如 Safari 里的网站，打电话，打开 AppStore 等。任何 URI 都会忽略。 </li>
+<li><strong>如果安装超过4个 app ，主屏会发生奇怪的事情</strong>，比如一个 webapp 取代了另一个。你会看到同样 webapp 的副本。同一时间打开不同的 webapp 时也发生同样的事情。在你的设备试试访问 app.ft.com，安装 webapp ；到 pattern.dk/sun，安装 webapp ；重复操作几次，你会发现主屏乱了。重启设备貌似可以解决问题。 </li>
+<li>垂直模式输入文本，select 或者 日期控件获得焦点，media queries 将把方向变成水平，resize 事件触发。此情况出现在主屏 webapp 和 Web Views ，Safari 没事（bug?）。 </li>
+<li>9月19日更新：如果使用 Application Cache ，通过 hash 或其它技术管理状态，历史对象将不保存你的导航历史，因此 <code>history.back()</code> 将不起作用，<code>history.length</code> 永远是 1 。（多谢 10+ 以上的人报告此问题！）</li>
+<li>9月19日更新：当你安装图标到主屏，你的网站和 webapp 之间的 Cookies 无法互通（出于身份验证的目的）。直到 6.1 才有的功能现在没有了。（感谢 Joseph Pearson 报告此问题；<a href="http://test.monoclejs.com/test/bugs/ios-cookies/" target="_blank" rel="external">测试用例在此</a> ）</li>
+</ul>
+<p>###状态栏</p>
+<p>如果你没有提供 <strong>apple-mobile-web-app-status-bar-style</strong> meta 标签，或者你提供了一个默认值，状态栏将变黑，因此… 屏幕只会有个黑色区域（一些设备仅有电池图标）。用户无法看到状态栏的时钟和其它图标。</p>
+<p>黑色值并不是 iOS 7 全屏模式的新样式，如果你定义 <strong>apple-mobile-web-app-status-bar-style</strong> 的值为 <strong>black-translucent</strong> ，它不再是黑的，遵循 app 全屏模式，它变得完全透明。不幸的是， 貌似没有办法定义背景清除还是黑色，因此我们需要测试图标和时间跟背景好不好区分。更新：文字貌似总是白的。</p>
+<p>下面的图片可以看到默认状态栏，black 值和 black-translucent 值在 iOS 7 的效果。<br><img src="/images/post/ios7/statusbar2.png"></p>
+<p>###启动图片和多任务管理</p>
+<p>对于新的多任务系统，有主屏 webapp 时，系统用白色图片，而不是启动图片，并不是 app 当前状态的预览。唯一例外是，当 webapp 仍旧是激活状态时 ，你可以看正确的快照。以下例子，我们可以看到 Financial Times webapp 有白色快照，只有当它是激活状态时才有正确的启动图片。<br><img src="/images/post/ios7/multitask.png"></p>
+<p>幸运的是 iPhone 5 的主屏 webapp 没 bug ，它们是 letterboxing 应用（它被发现后的一年）。我们不再需要视口 hack 解决方案了。</p>
+<p>##原生 webapp 开发</p>
+<p>如果你开发 hybrid 混合（原生 webapp ）应用，比如 Apache Cordova (PhoneGap) 应用，有一些消息告诉你。首先，还没有 Nitro 引擎。</p>
+<p>###Paginate （随意翻阅）模式</p>
+<p>当在原生应用中，使用 UIWebView 实现丰富内容时，或者对于原生 webapp （hybrid），我们可以为了电子书阅读体验使用 <strong>Paginate</strong> （随意翻阅）特性，避免出现垂直滚动条（类似 Windows 8 应用体验）。如果应用显示动态加载内容，这一特性是完美的，我们不能预先优化分页。有不同的 Objective-C 属性配置分页过程。要启用它，需要这么做：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myWebView.paginationMode = UIWebPaginationModeLeftToRight<span class="comment">;</span></span><br><span class="line">myWebView.paginationBreakingMode = UIWebPaginationBreakingModePage<span class="comment">;</span></span><br><span class="line">myWebView.gapBetweenPages = 50<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>这些属性将把 web view 里的 HTML 文档转换成分页模式（分成水平方向页面）。</p>
+<p>###其它改进</p>
+<ul>
+<li>对于原生开发（不一定使用 Web View），iOS SDK 现在包含了 JavaScript 运行时：JavaScript Core 框架，把 Objective-C 包装成标准的 JavaScript  对象。我们可以用这个框架运行 JavaScript 代码，解析 JSON 。 </li>
+<li>Web View 新属性，HTML 5 视频现在有了内联回放模式，代替默认的全屏模式。 </li>
+<li>Web View 新属性，在原生 webapp 里，可以启用视频自动播放。 </li>
+<li>iOS 7 也有 SafariServices 框架，以编程方式添加 URL 到 Safari 阅读列表比较有用。</li>
+</ul>
+<p>##远程调试</p>
+<p>如果你有 MacOS 就可以和 iOS 设备进行远程调试，必须更新 Safari 到 6.1 ，更新 iTunes 到 11.1 ，才能和 iOS 7 设备通讯。写此文时，Safari 6.1 仅仅是<a href="https://developer.apple.com/downloads/index.action?name=Safari%206.1" target="_blank" rel="external">预览版</a> 。</p>
+<p>内部调试的功能和先前版本一致，用户界面变了许多，设计更简洁。<br><img src="/images/post/ios7/Screen-Shot-2013-09-18-at-4.02.56-PM.png"></p>
+<p>##还未支持</p>
+<p>列表很庞大，因此我列举一些 Mac 版 Safari 7 公布的特性，但是 iOS Safari 没支持的特性：</p>
+<ul>
+<li>Web Speech API （支持，但在 iOS 无法良好工作）</li>
+<li>网站推送通知。对 iOS 而言将是很好的补充，但是仅有 Mac OS 支持。</li>
+<li>背景混合模式 </li>
+<li>Grid Layout （栅格布局）（支持，但在 iOS 无法良好工作）</li>
+</ul>
+<p>##除此之外？</p>
+<p>本文大部分的 bug 和问题是数月前在私人论坛提出的，许多人已经发送 bug 报告，他们拼命在论坛找解决方案。难以置信 Apple 并没有给 web 开发者答复，他们没有执行一些基本的测试套件，从中发现一些 API bug 。</p>
+<p>你是否发现其它的 API 或支持情况？其它 bug ？欢迎在下方随意添加评论。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTML5/" rel="tag">#HTML5</a>
+          
+            <a href="/tags/Safari/" rel="tag">#Safari</a>
+          
+            <a href="/tags/iOS7/" rel="tag">#iOS7</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/09/11/var-and-fun-hoisting/" rel="next" title="JavaScript 中的变量和函数提升">
+                <i class="fa fa-chevron-left"></i> JavaScript 中的变量和函数提升
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/10/02/client-side-full-text-search-in-css/" rel="prev" title="用 CSS 实现客户端全文搜索">
+                用 CSS 实现客户端全文搜索 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/09/23/safari-ios7-html5-problems-apis-review/"
+     data-title="iOS 7 的 Safari 和 HTML5：问题，变化和新 API"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/09/23/safari-ios7-html5-problems-apis-review/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/09/23/safari-ios7-html5-problems-apis-review/"
+           data-title="iOS 7 的 Safari 和 HTML5：问题，变化和新 API" data-url="http://jinlong.github.io/2013/09/23/safari-ios7-html5-problems-apis-review/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

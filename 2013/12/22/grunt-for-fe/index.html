@@ -1,0 +1,877 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="Grunt," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：Grunt for People Who Think Things Like Grunt are Weird and Hard此篇笔记包含了个人的理解，只记录了文章的要点，并没有逐句翻译，如有不妥望指正。
+
+Grunt 可以帮前端工程师做什么：
+
+合并 CSS 和 JS 文件   
+压缩 CSS ，最小化 JS   
+优化图片   
+使用 Sass
+
+前提：安装 Node.js 
+项目根目录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grunt-前端利器">
+<meta property="og:url" content="http://jinlong.github.io/2013/12/22/grunt-for-fe/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：Grunt for People Who Think Things Like Grunt are Weird and Hard此篇笔记包含了个人的理解，只记录了文章的要点，并没有逐句翻译，如有不妥望指正。
+
+Grunt 可以帮前端工程师做什么：
+
+合并 CSS 和 JS 文件   
+压缩 CSS ，最小化 JS   
+优化图片   
+使用 Sass
+
+前提：安装 Node.js 
+项目根目录">
+<meta property="og:image" content="http://jinlong.github.io/images/post/gruntForFE/package-json-file.gif">
+<meta property="og:image" content="http://jinlong.github.io/images/post/gruntForFE/uglify-code.gif">
+<meta property="og:image" content="http://jinlong.github.io/images/post/gruntForFE/squished-images.gif">
+<meta property="og:image" content="http://jinlong.github.io/images/post/gruntForFE/error-running-grunt.gif">
+<meta property="og:updated_time" content="2014-10-25T02:55:52.016Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Grunt-前端利器">
+<meta name="twitter:description" content="原文：Grunt for People Who Think Things Like Grunt are Weird and Hard此篇笔记包含了个人的理解，只记录了文章的要点，并没有逐句翻译，如有不妥望指正。
+
+Grunt 可以帮前端工程师做什么：
+
+合并 CSS 和 JS 文件   
+压缩 CSS ，最小化 JS   
+优化图片   
+使用 Sass
+
+前提：安装 Node.js 
+项目根目录">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Grunt-前端利器 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Grunt-前端利器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-12-22T23:42:00+08:00" content="2013-12-22">
+              2013-12-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Grunt/" itemprop="url" rel="index">
+                    <span itemprop="name">Grunt</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/12/22/grunt-for-fe/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/12/22/grunt-for-fe/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：<a href="http://24ways.org/2013/grunt-is-not-weird-and-hard/" target="_blank" rel="external">Grunt for People Who Think Things Like Grunt are Weird and Hard</a><br>此篇笔记包含了个人的理解，只记录了文章的要点，并没有逐句翻译，如有不妥望指正。</p>
+</blockquote>
+<p>Grunt 可以帮前端工程师做什么：</p>
+<ul>
+<li>合并 CSS 和 JS 文件   </li>
+<li>压缩 CSS ，最小化 JS   </li>
+<li>优化图片   </li>
+<li>使用 Sass</li>
+</ul>
+<p>前提：安装 <a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a> </p>
+<p>项目根目录需要 <strong>package.json</strong> 文件</p>
+<p><img src="/images/post/gruntForFE/package-json-file.gif"></p>
+<p>package.json 内容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">name</span>": <span class="value"><span class="string">"example-project"</span></span>,</span><br><span class="line">  "<span class="attribute">version</span>": <span class="value"><span class="string">"0.1.0"</span></span>,</span><br><span class="line">  "<span class="attribute">devDependencies</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">grunt</span>": <span class="value"><span class="string">"~0.4.1"</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>打开命令行工具，切换到项目文件夹，运行命令：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>node_modules</strong> 文件夹出现了，里面是 “<strong>devDependencies</strong>”属性定义的依赖包</p>
+<p>全局安装 Grunt CLI：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> grunt-cli</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>##合并文件</p>
+<p>安装合并文件插件 <a href="https://github.com/gruntjs/grunt-contrib-concat" target="_blank" rel="external">grunt-contrib-concat</a> </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> grunt-contrib-<span class="keyword">concat</span> <span class="comment">--save-dev</span></span></span><br></pre></td></tr></table></figure>
+<p>package.json 会为” devDependencies“属性自动添加新的依赖，多了这一行：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"grunt-contrib-concat"</span>: <span class="string">"~0.3.0"</span></span><br></pre></td></tr></table></figure>
+<p>配置 <strong>Gruntfile.js</strong> 配置文件</p>
+<p>格式如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1. 所有配置文件 </span></span><br><span class="line">    grunt.initConfig(&#123;</span><br><span class="line">        pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),</span><br><span class="line"></span><br><span class="line">        concat: &#123;</span><br><span class="line">            <span class="comment">// 2.  合并文件的配置项</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 加载使用的插件</span></span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-concat'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 默认任务</span></span><br><span class="line">    grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'concat'</span>]);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>合并文件的插件配置<a href="https://github.com/gruntjs/grunt-contrib-concat#usage-examples" target="_blank" rel="external">实例</a>： </p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">concat</span>: &#123;   </span><br><span class="line">    <span class="tag">dist</span>: &#123;</span><br><span class="line">        <span class="attribute">src</span>: [</span><br><span class="line">            <span class="string">'js/libs/*.js'</span>, <span class="comment">//libs 文件夹的所有 JS 文件</span></span><br><span class="line">            <span class="string">'js/global.js'</span>  <span class="comment">// 指定文件</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attribute">dest</span>: <span class="string">'js/build/production.js'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>src 属性是原 JS 文件的数组，dest 是合并后的文件</p>
+<p>比较全面 Gruntfile.js 文件看<a href="https://github.com/chriscoyier/My-Grunt-Boilerplate/blob/master/Gruntfile.js" target="_blank" rel="external">这个模版</a> </p>
+<p>然后在命令行运行：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt</span><br></pre></td></tr></table></figure></p>
+<p>##最小化 JS</p>
+<p>为 Grunt 添加新任务比较简单：</p>
+<ol>
+<li>找到需要的 Grunt 插件   </li>
+<li>学习插件的配置风格   </li>
+<li>为自己的项目写配置文件</li>
+</ol>
+<p>官方的最小化插件 <a href="https://github.com/gruntjs/grunt-contrib-uglify" target="_blank" rel="external">grunt-contrib-uglify</a> ，安装一下：</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install grunt-contrib-uglify --<span class="built_in">save</span>-<span class="built_in">dev</span></span><br></pre></td></tr></table></figure>
+<p>修改 Gruntfile.js 文件，加载此插件：<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.loadNpmTasks(<span class="symbol">'grunt</span>-contrib-uglify');</span><br></pre></td></tr></table></figure></p>
+<p>配置一下：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">uglify</span>: &#123;</span><br><span class="line">    <span class="tag">build</span>: &#123;</span><br><span class="line">        <span class="attribute">src</span>: <span class="string">'js/build/production.js'</span>,</span><br><span class="line">        <span class="attribute">dest</span>: <span class="string">'js/build/production.min.js'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>更新默认任务：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="atom">grunt</span>.<span class="atom">registerTask</span>(<span class="string">'default'</span>, [<span class="string">'concat'</span>, <span class="string">'uglify'</span>]);</span><br></pre></td></tr></table></figure>
+<p>运行 <code>grunt</code> 即可执行最小化任务</p>
+<p><img src="/images/post/gruntForFE/uglify-code.gif"></p>
+<p>##优化图片</p>
+<p>官方的图片优化插件 <a href="https://github.com/gruntjs/grunt-contrib-imagemin" target="_blank" rel="external">grunt-contrib-imagemin</a> </p>
+<p>安装即可：<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install grunt-contrib-imagemin --<span class="built_in">save</span>-<span class="built_in">dev</span></span><br></pre></td></tr></table></figure></p>
+<p>修改 Gruntfile.js 文件，加载此插件：<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.loadNpmTasks(<span class="symbol">'grunt</span>-contrib-imagemin');</span><br></pre></td></tr></table></figure></p>
+<p>添加配置：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">imagemin</span>: <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">dynamic</span>:<span class="value"> &#123;</span><br><span class="line">        files: [&#123;</span><br><span class="line">            expand: true,</span><br><span class="line">            cwd: <span class="string">'images/'</span>,</span><br><span class="line">            src: [<span class="string">'**/*.&#123;png,jpg,gif&#125;'</span>],</span><br><span class="line">            dest: <span class="string">'images/build/'</span></span><br><span class="line">        </span></span></span>&#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>添加成默认任务<br><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="atom">grunt</span>.<span class="atom">registerTask</span>(<span class="string">'default'</span>, [<span class="string">'concat'</span>, <span class="string">'uglify'</span>, <span class="string">'imagemin'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>运行 <code>grunt</code> 看奇迹发生</p>
+<p><img src="/images/post/gruntForFE/squished-images.gif"></p>
+<p>##让任务更智能，更自动</p>
+<ol>
+<li>需要执行的时候自动执行   </li>
+<li>一次执行一个任务   </li>
+</ol>
+<p>比如:</p>
+<ol>
+<li>当 JS 修改了以后，合并，最小化文件   </li>
+<li>当添加新图片，修改旧图片时优化图像   </li>
+</ol>
+<p>可以通过官方的  <a href="https://github.com/gruntjs/grunt-contrib-watch" target="_blank" rel="external">grunt-contrib-watch</a> 插件监视文件。</p>
+<p>照例安装插件，修改配置文件：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">watch</span>: <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">scripts</span>:<span class="value"> &#123;</span><br><span class="line">        files: [<span class="string">'js/*.js'</span>],</span><br><span class="line">        tasks: [<span class="string">'concat'</span>, <span class="string">'uglify'</span>],</span><br><span class="line">        options: &#123;</span><br><span class="line">            spawn: false,</span><br><span class="line">        </span></span></span>&#125;,</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>出现错误的时候，命令行会有提示：</p>
+<p><img src="/images/post/gruntForFE/error-running-grunt.gif"></p>
+<p>##Grunt 做我们的预处理器</p>
+<p>我还没用过此类的预处理器，好 out ……先留个坑，等用的时候再做记录。请感兴趣的同学<a href="http://24ways.org/2013/grunt-is-not-weird-and-hard/" target="_blank" rel="external">参考原文</a></p>
+<p>##继续升级</p>
+<p>添加更多有用的任务：</p>
+<ul>
+<li>使用 <a href="http://css-tricks.com/autoprefixer/" target="_blank" rel="external">Autoprefixer</a> ，CSS 中自动加前缀   </li>
+<li>JS 单元测试（比如：<a href="https://github.com/pivotal/jasmine" target="_blank" rel="external">Jasmine</a> ）   </li>
+<li>自动生成图片雪碧图和 SVG 图标（比如：<a href="https://github.com/filamentgroup/grunticon" target="_blank" rel="external">Grunticon</a> ）   </li>
+<li>作为文件资源服务器   </li>
+<li>代码质量工具： <a href="http://philipwalton.com/articles/introducing-html-inspector/" target="_blank" rel="external">HTML-Inspector</a> ， <a href="http://csslint.net/" target="_blank" rel="external">CSS Lint</a>  或者 <a href="http://www.jshint.com/" target="_blank" rel="external">JS Hint</a>   </li>
+<li><a href="http://css-tricks.com/cross-browser-css-injection/" target="_blank" rel="external">跨浏览器 CSS 注入</a>   </li>
+<li>帮助提交版本控制仓库，比如 GitHub   </li>
+<li>添加资源版本号（清缓存）   </li>
+<li>帮助部署测试和生成环境（比如：<a href="http://leanmeanfightingmachine.github.io/dploy/" target="_blank" rel="external">DPLOY</a> ）</li>
+</ul>
+<p>延伸阅读：</p>
+<ul>
+<li>读 Mark McDonnell 的 <a href="http://www.integralist.co.uk/Grunt-Boilerplate.html" target="_blank" rel="external">Grunt 模版</a>   </li>
+<li>读 Nicolas Bevacqua 的 <a href="http://blog.ponyfoo.com/2013/11/13/grunt-tips-and-tricks" target="_blank" rel="external">Grunt 小窍门</a>   </li>
+<li>通过<a href="https://github.com/cowboy/wesbos/commit/5a2980a7818957cbaeedcd7552af9ce54e05e3fb" target="_blank" rel="external">分割小文件</a> 组织 Gruntfile.js 文件   </li>
+<li>深层学习 Grunt 源码和 <a href="http://gruntjs.com/api/grunt" target="_blank" rel="external">API</a>    </li>
+</ul>
+<p>附赠：<a href="https://github.com/vladikoff/grunt-devtools" target="_blank" rel="external">Grunt DevTools Chrome 扩展</a>  </p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grunt/" rel="tag">#Grunt</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/12/22/grunt-getting-started/" rel="next" title="Grunt 入门笔记">
+                <i class="fa fa-chevron-left"></i> Grunt 入门笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/01/07/introduction-to-express/" rel="prev" title="Express 入门">
+                Express 入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/12/22/grunt-for-fe/"
+     data-title="Grunt-前端利器"
+     data-content=""
+     data-url="http://jinlong.github.io/2013/12/22/grunt-for-fe/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/12/22/grunt-for-fe/"
+           data-title="Grunt-前端利器" data-url="http://jinlong.github.io/2013/12/22/grunt-for-fe/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

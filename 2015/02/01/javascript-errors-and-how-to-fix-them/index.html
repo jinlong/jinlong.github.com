@@ -1,0 +1,848 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文《JavaScript Errors and How to Fix Them》作者：Jani Hartikainen翻译：涂鸦码农
+
+JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？
+以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。
+###">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 错误以及如何修复">
+<meta property="og:url" content="http://jinlong.github.io/2015/02/01/javascript-errors-and-how-to-fix-them/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文《JavaScript Errors and How to Fix Them》作者：Jani Hartikainen翻译：涂鸦码农
+
+JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？
+以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。
+###">
+<meta property="og:updated_time" content="2015-10-28T14:34:00.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 错误以及如何修复">
+<meta name="twitter:description" content="原文《JavaScript Errors and How to Fix Them》作者：Jani Hartikainen翻译：涂鸦码农
+
+JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？
+以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。
+###">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> JavaScript 错误以及如何修复 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript 错误以及如何修复
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-02-01T22:09:27+08:00" content="2015-02-01">
+              2015-02-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/02/01/javascript-errors-and-how-to-fix-them/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/01/javascript-errors-and-how-to-fix-them/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文《<a href="http://davidwalsh.name/fix-javascript-errors" target="_blank" rel="external">JavaScript Errors and How to Fix Them</a>》<br>作者：Jani Hartikainen<br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码农</a></p>
+</blockquote>
+<p>JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？</p>
+<p>以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。</p>
+<p>###如何读懂错误？</p>
+<p>首先，让我们快速看下错误信息的结构。理解结构有助于理解错误，如果遇到列表之外的错误会减少麻烦。</p>
+<p>Chrome 中典型的错误像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught <span class="built_in">TypeError</span>: <span class="literal">undefined</span> is not a <span class="function"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure>
+<p>错误的结构如下：</p>
+<ol>
+<li><p><strong>Uncaught TypeError：</strong>这部分信息通常不是很有用。<code>Uncaught</code> 表示错误没有被 <code>catch</code> 语句捕获，<code>TypeError</code> 是错误的名字。</p>
+</li>
+<li><p><strong>undefined is not a function:</strong> 这部分信息，你必须逐字阅读。比如这里表示代码尝试使用 <code>undefined</code> ，把它当做一个函数。</p>
+</li>
+</ol>
+<p>其它基于 webkit 的浏览器，比如 Safari ，给出的错误格式跟 Chrome 很类似。Firefox 也类似，但是不总包含第一部分，最新版本的 IE 也给出比 Chrome 简单的错误 - 但是在这里，简单并不总代表好。</p>
+<p>以下是真正的错误。</p>
+<p>###Uncaught TypeError: undefined is not a function</p>
+<p><strong>相关错误：</strong>number is not a function, object is not a function, string is not a function, Unhandled Error: ‘foo’ is not a function, Function Expected</p>
+<p>当尝试调用一个像方法的值时，这个值并不是一个方法。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">undefined</span>;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>如果你尝试调用一个对象的方法时，你输错了名字，这个典型的错误很容易发生。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="built_in">document</span>.getElementByID(<span class="string">'foo'</span>);</span><br></pre></td></tr></table></figure>
+<p>由于对象的属性不存在，默认是 <code>undefined</code> ，以上代码将导致这个错误。</p>
+<p>尝试调用一个像方法的数字，“number is not a function” 错误出现。</p>
+<p><strong>如何修复错误：</strong>确保方法名正确。这个错误的行号将指出正确的位置。</p>
+<p>###Uncaught ReferenceError: Invalid left-hand side in assignment</p>
+<p><strong>相关错误：</strong>Uncaught exception: ReferenceError: Cannot assign to ‘functionCall()’, Uncaught exception: ReferenceError: Cannot assign to ‘this’</p>
+<p>尝试给不能赋值的东西赋值，引起这个错误。</p>
+<p>这个错误最常见的例子出现在 if 语句使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(doSomething() = <span class="string">'somevalue'</span>)</span><br></pre></td></tr></table></figure>
+<p>此例中，程序员意外地使用了单个等号，而不是双等号。“left-hand side in assignment” 提及了等号左手边的部分，因此你可以看到以上例子，左手边包含不能赋值的东西，导致这个错误。</p>
+<p><strong>如何修复错误：</strong>确保没有给函数结果赋值，或者给 <code>this</code> 关键字赋值。</p>
+<p>###Uncaught TypeError: Converting circular structure to JSON</p>
+<p><strong>相关错误：</strong>Uncaught exception: TypeError: JSON.stringify: Not an acyclic Object, TypeError: cyclic object value, Circular reference in value argument not supported</p>
+<p>把循环引用的对象，传给 <code>JSON.stringify</code> 总会引起错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123; &#125;;</span><br><span class="line"><span class="keyword">var</span> b = &#123; a: a &#125;;</span><br><span class="line">a.b = b;</span><br><span class="line"><span class="built_in">JSON</span>.stringify(a);</span><br></pre></td></tr></table></figure>
+<p>由于以上的 <code>a</code> 和 <code>b</code> 循环引用彼此，结果对象无法转换成 JSON。</p>
+<p><strong>如何修复错误：</strong>移除任何想转换成 JSON 的对象中的循环引用。</p>
+<p>###Unexpected token ;</p>
+<p><strong>相关错误：</strong>Expected ), missing ) after argument list</p>
+<p>JavaScript 解释器预期的东西没有被包含。不匹配的圆括号或方括号通常引起这个错误。</p>
+<p>错误信息可能有所不同 - “Unexpected token ]” 或者 “Expected {” 等。</p>
+<p><strong>如何修复错误：</strong>有时错误出现的行号并不准确，因此很难修复。</p>
+<ul>
+<li>[ ] { } ( ) 这几个符号不配对常常导致出错。检查所有的圆括号和方括号是否配对。行号指出的不仅是问题字符。</li>
+<li>Unexpected / 跟正则表达式有关。此时行号通常是正确的。</li>
+<li>Unexpected ;  对象或者数组字面量里面有个 ; 通常引起这个错误，或者函数调用的参数列表里有个分号。此时的行号通常也是正确的。</li>
+</ul>
+<p>###Uncaught SyntaxError: Unexpected token ILLEGAL</p>
+<p><strong>相关错误：</strong>Unterminated String Literal, Invalid Line Terminator</p>
+<p>一个字符串字面量少了结尾的引号。</p>
+<p><strong>如何修复错误：</strong>确保所有的字符串都有结束的引号。</p>
+<p>###Uncaught TypeError: Cannot read property ‘foo’ of null, Uncaught TypeError: Cannot read property ‘foo’ of undefined</p>
+<p><strong>相关错误：</strong>TypeError: someVal is null, Unable to get property ‘foo’ of undefined or null reference</p>
+<p>尝试读取 <code>null</code> 或者 <code>undefined</code> ，把它当成了对象。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someVal = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.log(someVal.foo);</span><br></pre></td></tr></table></figure>
+<p><strong>如何修复错误：</strong>通常由于拼写错误导致。检查错误指出的行号附近使用的变量名是否正确。</p>
+<p>###Uncaught TypeError: Cannot set property ‘foo’ of null, Uncaught TypeError: Cannot set property ‘foo’ of undefined</p>
+<p><strong>相关错误：</strong>TypeError: someVal is undefined, Unable to set property ‘foo’ of undefined or null reference</p>
+<p>尝试写入 <strong>null</strong> 或者 <strong>undefined</strong> ，把它当成了一个对象。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someVal = <span class="literal">null</span>;</span><br><span class="line">someVal.foo = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>如何修复错误：</strong>也是由于拼写错误所致。检查错误指出的行号附近的变量名。</p>
+<p>###Uncaught RangeError: Maximum call stack size exceeded</p>
+<p><strong>相关错误：</strong>Related errors: Uncaught exception: RangeError: Maximum recursion depth exceeded, too much recursion, Stack overflow</p>
+<p>通常由程序逻辑 bug 引起，导致函数的无限递归调用。</p>
+<p><strong>如何修复错误：</strong>检查递归函数中可能导致无限循环 的 bug 。</p>
+<p>###Uncaught URIError: URI malformed</p>
+<p><strong>相关错误：</strong>URIError: malformed URI sequence</p>
+<p>无效的 decodeURIComponent 调用所致。</p>
+<p><strong>如何修复错误：</strong>按照错误指出的行号，检查 <code>decodeURIComponent</code> 调用，它是正确的。</p>
+<p>###XMLHttpRequest cannot load <a href="http://some/url/" target="_blank" rel="external">http://some/url/</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource</p>
+<p><strong>相关错误：</strong>Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at<br><a href="http://some/url/" target="_blank" rel="external">http://some/url/</a></p>
+<p>错误肯定是使用 XMLHttpRequest 引起的。</p>
+<p><strong>如何修复：</strong>确保请求的 URL 是正确的，它遵循<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">同源策略</a> 。最好的方法是从代码中找到错误信息指出的 URL 。</p>
+<p>###InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable</p>
+<p><strong>相关错误：</strong>InvalidStateError, DOMException code 11</p>
+<p>代码调用的方法在当前状态无法调用。通常由 <code>XMLHttpRequest</code> 引起，在方法准备完毕之前调用它会引起错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.setRequestHeader(<span class="string">'Some-Header'</span>, <span class="string">'val'</span>);</span><br></pre></td></tr></table></figure>
+<p>这时就会出错，因为 <code>setRequestHeader</code> 方法只能在 <code>xhr.open</code> 方法之后调用。</p>
+<p><strong>如何修复：</strong>查看错误指出的行号，确保代码运行的时机正确，或者在它（例如 <strong>xhr.open</strong><br>）之前添加了不必要的调用</p>
+<p>###结论</p>
+<p>我看过不少无用的 JavaScript 错误，比如 PHP 中声名狼藉的异常 <code>Expected T_PAAMAYIM_NEKUDOTAYIM</code> 。抛出更熟悉的错误才更有意义。现代浏览器不再抛出完全无用的错误，才会更有帮助。</p>
+<p>你看到的最令人困惑的错误是什么？在评论中分享一下呗。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/10/25/jshint-configuration/" rel="next" title="JSHint 配置浅析">
+                <i class="fa fa-chevron-left"></i> JSHint 配置浅析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/21/eliminate-javascript-code-smells/" rel="prev" title="去除 JavaScript 代码的怪味">
+                去除 JavaScript 代码的怪味 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/02/01/javascript-errors-and-how-to-fix-them/"
+     data-title="JavaScript 错误以及如何修复"
+     data-content=""
+     data-url="http://jinlong.github.io/2015/02/01/javascript-errors-and-how-to-fix-them/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/02/01/javascript-errors-and-how-to-fix-them/"
+           data-title="JavaScript 错误以及如何修复" data-url="http://jinlong.github.io/2015/02/01/javascript-errors-and-how-to-fix-them/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
