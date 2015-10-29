@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -61,22 +61,19 @@
 
 
 
-<meta name="description" content="##自定义过滤器
-创建 phonecatFilters 模块，用此模块注册自定义过滤器：
-12345angular.module(&apos;phonecatFilters&apos;, []).filter(&apos;checkmark&apos;, function() &amp;#123;  return function(input) &amp;#123;    return input ? &apos;\u2713&apos; : &apos;\u2718&apos;;  &amp;#1">
+<meta name="description" content="自定义过滤器创建 phonecatFilters 模块，用此模块注册自定义过滤器：
+12345angular.module(&apos;phonecatFilters&apos;, []).filter(&apos;checkmark&apos;, function() &amp;#123;  return function(input) &amp;#123;    return input ? &apos;\u2713&apos; : &apos;\u2718&apos;;  &amp;#125;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AngularJS 新手指南4">
 <meta property="og:url" content="http://jinlong.github.io/2013/05/03/angularjs-tutorial4/index.html">
 <meta property="og:site_name" content="Alon's Blog">
-<meta property="og:description" content="##自定义过滤器
-创建 phonecatFilters 模块，用此模块注册自定义过滤器：
-12345angular.module(&apos;phonecatFilters&apos;, []).filter(&apos;checkmark&apos;, function() &amp;#123;  return function(input) &amp;#123;    return input ? &apos;\u2713&apos; : &apos;\u2718&apos;;  &amp;#1">
-<meta property="og:updated_time" content="2014-11-21T07:48:19.221Z">
+<meta property="og:description" content="自定义过滤器创建 phonecatFilters 模块，用此模块注册自定义过滤器：
+12345angular.module(&apos;phonecatFilters&apos;, []).filter(&apos;checkmark&apos;, function() &amp;#123;  return function(input) &amp;#123;    return input ? &apos;\u2713&apos; : &apos;\u2718&apos;;  &amp;#125;">
+<meta property="og:updated_time" content="2015-10-29T02:35:51.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS 新手指南4">
-<meta name="twitter:description" content="##自定义过滤器
-创建 phonecatFilters 模块，用此模块注册自定义过滤器：
-12345angular.module(&apos;phonecatFilters&apos;, []).filter(&apos;checkmark&apos;, function() &amp;#123;  return function(input) &amp;#123;    return input ? &apos;\u2713&apos; : &apos;\u2718&apos;;  &amp;#1">
+<meta name="twitter:description" content="自定义过滤器创建 phonecatFilters 模块，用此模块注册自定义过滤器：
+12345angular.module(&apos;phonecatFilters&apos;, []).filter(&apos;checkmark&apos;, function() &amp;#123;  return function(input) &amp;#123;    return input ? &apos;\u2713&apos; : &apos;\u2718&apos;;  &amp;#125;">
 
 
 
@@ -291,8 +288,7 @@
       
 
       
-        <span itemprop="articleBody"><p>##自定义过滤器</p>
-<p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
+        <span itemprop="articleBody"><h2 id="自定义过滤器">自定义过滤器</h2><p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'phonecatFilters'</span>, []).filter(<span class="string">'checkmark'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> input ? <span class="string">'\u2713'</span> : <span class="string">'\u2718'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。</p>
 <p>我们需要给 phonecat 模块注册 phonecatFilters 模块。</p>
@@ -314,8 +310,7 @@
 <li>我们也可以创建带有输入元素的模型，把过滤器绑定和它联合起来。index.html 加以下代码试试：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input ng-model=<span class="string">"userInput"</span>&gt; Uppercased: &amp;<span class="preprocessor">#<span class="number">123</span>;&amp;#<span class="number">123</span>; userInput | uppercase &#125;&#125;</span></span><br></pre></td></tr></table></figure>
-<p>##事件处理</p>
-<p>在手机详情页加个点击缩缩图切换对应大图的效果。</p>
+<h2 id="事件处理">事件处理</h2><p>在手机详情页加个点击缩缩图切换对应大图的效果。</p>
 <p><strong><em>控制器</em></strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PhoneDetailCtrl</span>(<span class="params">$scope, $routeParams, $http</span>) </span>&#123;</span><br><span class="line">  $http.get(<span class="string">'phones/'</span> + $routeParams.phoneId + <span class="string">'.json'</span>).success(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    $scope.phone = data;</span><br><span class="line">    $scope.mainImageUrl = data.images[<span class="number">0</span>];</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  $scope.setImage = <span class="function"><span class="keyword">function</span>(<span class="params">imageUrl</span>) </span>&#123;</span><br><span class="line">    $scope.mainImageUrl = imageUrl;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', '$http'];</span></span><br></pre></td></tr></table></figure>
 <p>PhoneDetailCtrl 控制器，创建了 mainImageUrl 模型属性，默认值设为第一个手机图片的 URL。<br>我们也创建了 setImage 事件处理器，它将改变 mainImageUrl 的值。</p>
@@ -327,8 +322,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$scope.hello = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'Hello '</span> + (name || <span class="string">'world'</span>) + <span class="string">'!'</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>然后往 phone-details.html 模版添加以下代码：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">ng-click</span>=<span class="value">"hello('Elmo')"</span>&gt;</span>Hello<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>##REST 和自定义服务</p>
-<p>最后为应用定义一个基于 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank" rel="external">REST</a> 客户端的自定义服务，用此客户端我们可以更容易的发起 XHR 请求获取数据，不必使用底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank" rel="external">$http</a> API，HTTP 方法和 URL。</p>
+<h2 id="REST_和自定义服务">REST 和自定义服务</h2><p>最后为应用定义一个基于 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank" rel="external">REST</a> 客户端的自定义服务，用此客户端我们可以更容易的发起 XHR 请求获取数据，不必使用底层的 <a href="http://docs.angularjs.org/api/ng.$http" target="_blank" rel="external">$http</a> API，HTTP 方法和 URL。</p>
 <p><strong><em>模版</em></strong></p>
 <p>自定义服务定义到 app/js/services.js 中，我们把它引入到布局模版中。此外，需要加载 angular-resource.js 文件，此文件的 $resource 服务包含 ngResource 模块，我们马上要用：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/services.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"lib/angular/angular-resource.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -347,8 +341,7 @@
 <p>换成了：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scope.phones = Phone.query();</span><br></pre></td></tr></table></figure>
 <p>非常值得注意的是，当调用 Phone 服务时， 我们没有传递回调函数。</p>
-<p>##结语</p>
-<p>我们的应用完成啦，<code>git checkout</code> 命令可以跳回原先的步骤。</p>
+<h2 id="结语">结语</h2><p>我们的应用完成啦，<code>git checkout</code> 命令可以跳回原先的步骤。</p>
 <p><a href="http://docs.angularjs.org/guide/index" target="_blank" rel="external">开发者指南</a> 有更多的例子和详细资料。</p>
 <p>更多代码实例，看 <a href="http://docs.angularjs.org/cookbook/index" target="_blank" rel="external">Cookbook</a> 。</p>
 <p>当你准备用 Angular 开发项目时，推荐你使用 angular <a href="https://github.com/angular/angular-seed" target="_blank" rel="external">种子</a> 引导开发。</p>
@@ -468,7 +461,7 @@
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -565,7 +558,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义过滤器"><span class="nav-number">1.</span> <span class="nav-text">自定义过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件处理"><span class="nav-number">2.</span> <span class="nav-text">事件处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REST_和自定义服务"><span class="nav-number">3.</span> <span class="nav-text">REST 和自定义服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

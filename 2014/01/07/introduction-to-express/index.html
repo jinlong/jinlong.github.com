@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -63,30 +63,27 @@
 
 <meta name="description" content="原文：Introduction to Express笔记：涂鸦码龙
 
-##安装
-package.json 中手动添加 Express 依赖
-12345678&amp;#123;   &quot;name&quot;: &quot;demo1&quot;,   &quot;description&quot;: &quot;First Express app&quot;,   &quot;version&quot;: &quot;0.0.1&quot;,   &quot;dependencies&quot;: &amp;#123;      &quot;expre">
+安装package.json 中手动添加 Express 依赖
+12345678&amp;#123;   &quot;name&quot;: &quot;demo1&quot;,   &quot;description&quot;: &quot;First Express app&quot;,   &quot;version&quot;: &quot;0.0.1&quot;,   &quot;dependencies&quot;: &amp;#123;      &quot;express&quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Express 入门">
 <meta property="og:url" content="http://jinlong.github.io/2014/01/07/introduction-to-express/index.html">
 <meta property="og:site_name" content="Alon's Blog">
 <meta property="og:description" content="原文：Introduction to Express笔记：涂鸦码龙
 
-##安装
-package.json 中手动添加 Express 依赖
-12345678&amp;#123;   &quot;name&quot;: &quot;demo1&quot;,   &quot;description&quot;: &quot;First Express app&quot;,   &quot;version&quot;: &quot;0.0.1&quot;,   &quot;dependencies&quot;: &amp;#123;      &quot;expre">
+安装package.json 中手动添加 Express 依赖
+12345678&amp;#123;   &quot;name&quot;: &quot;demo1&quot;,   &quot;description&quot;: &quot;First Express app&quot;,   &quot;version&quot;: &quot;0.0.1&quot;,   &quot;dependencies&quot;: &amp;#123;      &quot;express&quot;">
 <meta property="og:image" content="http://jinlong.github.io/images/post/exp-blog/express-blog3-home.jpg">
 <meta property="og:image" content="http://jinlong.github.io/images/post/exp-blog/express-blog3-article.jpg">
 <meta property="og:image" content="http://jinlong.github.io/images/post/exp-blog/express-blog4-home.jpg">
 <meta property="og:image" content="http://jinlong.github.io/images/post/exp-blog/express-blog4-article.jpg">
-<meta property="og:updated_time" content="2015-10-28T14:37:46.003Z">
+<meta property="og:updated_time" content="2015-10-29T02:55:35.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Express 入门">
 <meta name="twitter:description" content="原文：Introduction to Express笔记：涂鸦码龙
 
-##安装
-package.json 中手动添加 Express 依赖
-12345678&amp;#123;   &quot;name&quot;: &quot;demo1&quot;,   &quot;description&quot;: &quot;First Express app&quot;,   &quot;version&quot;: &quot;0.0.1&quot;,   &quot;dependencies&quot;: &amp;#123;      &quot;expre">
+安装package.json 中手动添加 Express 依赖
+12345678&amp;#123;   &quot;name&quot;: &quot;demo1&quot;,   &quot;description&quot;: &quot;First Express app&quot;,   &quot;version&quot;: &quot;0.0.1&quot;,   &quot;dependencies&quot;: &amp;#123;      &quot;express&quot;">
 
 
 
@@ -304,8 +301,7 @@ package.json 中手动添加 Express 依赖
         <span itemprop="articleBody"><blockquote>
 <p>原文：<a href="http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-express/" target="_blank" rel="external">Introduction to Express</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
-<p>##安装</p>
-<p>package.json 中手动添加 Express 依赖</p>
+<h2 id="安装">安装</h2><p>package.json 中手动添加 Express 依赖</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="string">"name"</span>: <span class="string">"demo1"</span>,</span><br><span class="line">   <span class="string">"description"</span>: <span class="string">"First Express app"</span>,</span><br><span class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</span><br><span class="line">   <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>相同的目录运行：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
@@ -316,8 +312,7 @@ package.json 中手动添加 Express 依赖
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 <p>运行 <code>node app</code> 没发生任何事情。</p>
 <a id="more"></a>
-<p>##定义路由</p>
-<p>我们给应用添加一些简单的路由，Express 可以响应各种 HTTP 请求：</p>
+<h2 id="定义路由">定义路由</h2><p>我们给应用添加一些简单的路由，Express 可以响应各种 HTTP 请求：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Regular HTTP get</span></span><br><span class="line">app.get(some url, <span class="keyword">do</span> something);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//Some other page</span></span><br><span class="line">app.get(some other url, <span class="keyword">do</span> something <span class="keyword">else</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//I can respond to a form post</span></span><br><span class="line">app.post(some url, <span class="keyword">do</span> more stuff);</span><br></pre></td></tr></table></figure>
 <p>我们写个真实的例子，给应用添加主页：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">   response.send(<span class="string">"This would be some HTML"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -325,24 +320,20 @@ package.json 中手动添加 Express 依赖
 <p><strong>request.send()</strong> API 智能处理不同类型的数据，假如你想为网站添加简单的基于 JSON 的 API ，Express 可以把返回结果转换成 JSON 并设置适当的响应头。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/api'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">   response.send(&#123;name:<span class="string">"Raymond"</span>,age:<span class="number">40</span>&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>可想而知，添加更多的路由，并处理所需的响应，就可以构建一个应用。<br><!--more--></p>
-<p>##通用的博客应用</p>
-<p>跳过 package.json 文件，因为除了 name 属性不一样，其它项都一样。来看 app.js 。</p>
+<h2 id="通用的博客应用">通用的博客应用</h2><p>跳过 package.json 文件，因为除了 name 属性不一样，其它项都一样。来看 app.js 。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.sendfile(<span class="string">'./views/index.html'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.sendfile(<span class="string">'./views/about.html'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/article'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.sendfile(<span class="string">'./views/article.html'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 <p>我们把 <strong>send</strong> 换成了 <strong>sendfile</strong> 。与其把大段的 HTML 字符串放到 app.js 文件里，不如增加三个路由，主页，关于页，文章页。</p>
-<p>###添加 HTML</p>
-<p>主页：</p>
+<h3 id="添加_HTML">添加 HTML</h3><p>主页：</p>
 <p><a href="https://gist.github.com/jinlong/8297190#file-home-html" target="_blank" rel="external">HTML 代码</a></p>
 <p>这里并没什么特别的，Express 将返回纯静态的 HTML 。关于页和文章页只不过把 title 和 h1 值改了。</p>
-<p>###由静态到动态</p>
-<p>Express 支持各种模板引擎，express 命令行可以添加对 Jade，EJS，JSHTML 和 Hogan 的支持。根据 Express 文档，任何模版引擎只要符合特定的签名就可以生效。推荐从 <a href="https://github.com/visionmedia/consolidate.js" target="_blank" rel="external">consolidate.js</a> 库（模版引擎集合）里面查找喜欢的模版引擎。</p>
+<h3 id="由静态到动态">由静态到动态</h3><p>Express 支持各种模板引擎，express 命令行可以添加对 Jade，EJS，JSHTML 和 Hogan 的支持。根据 Express 文档，任何模版引擎只要符合特定的签名就可以生效。推荐从 <a href="https://github.com/visionmedia/consolidate.js" target="_blank" rel="external">consolidate.js</a> 库（模版引擎集合）里面查找喜欢的模版引擎。</p>
 <p>我是 <a href="http://handlebarsjs.com/" target="_blank" rel="external">Handlebars</a> 的超级粉，我的许多客户端应用都用它，服务器端自然也少不了它。要用 Handlebars 还需要安装包装库 <a href="https://github.com/donpark/hbs" target="_blank" rel="external">hbs</a> 。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="string">"name"</span>: <span class="string">"blog2"</span>,</span><br><span class="line">   <span class="string">"description"</span>: <span class="string">"Blog app"</span>,</span><br><span class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</span><br><span class="line">   <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span>,</span><br><span class="line">      <span class="string">"hbs"</span>:<span class="string">"*"</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后更新 app.js 使用此引擎：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> hbs = <span class="built_in">require</span>(<span class="string">'hbs'</span>);</span><br><span class="line"> </span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'html'</span>);</span><br><span class="line">app.engine(<span class="string">'html'</span>, hbs.__express);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'index'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'about'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/article'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'article'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 <p>为了使用 Handlebars ，我们通过 require 把 HBS 包装库引入，然后让 Express 使用它。<br>默认情况下，Handlebars 会解析包含了特定引擎扩展的文件，这里是 <code>something.hbs</code> 。但也可以使用 “<code>view engine</code>”指令告诉 Express 动态解析 HTML 文件。这样我的编辑器可以提供良好的代码校验和语法高亮。通过 <code>app.engine</code> 真正加载引擎。</p>
 <p>最终路由用了新的 <code>render</code> 方法，Express 默认使用 views 文件夹，因此我们可以省略。由于 Express 记住了我们要解析的扩展名，所以它也可以省略。<code>res.render(&#39;something&#39;)</code> 实际等于告诉 Express 查找 <code>views/something.html</code> 。Express 基于模板引擎规则解析它，并返回到浏览器。</p>
-<p>###主页显示博客条目</p>
-<p>我们可以连接到 MySQL 或者 Mongo，这里我们创建一个静态的数据集，取名 blog.js ，它提供获取一组条目和获取一个条目功能。</p>
+<h3 id="主页显示博客条目">主页显示博客条目</h3><p>我们可以连接到 MySQL 或者 Mongo，这里我们创建一个静态的数据集，取名 blog.js ，它提供获取一组条目和获取一个条目功能。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> entries = [</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">1</span>, <span class="string">"title"</span>:<span class="string">"Hello World!"</span>, <span class="string">"body"</span>:<span class="string">"This is the body of my blog entry. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/2/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">2</span>, <span class="string">"title"</span>:<span class="string">"Eggs for Breakfast"</span>, <span class="string">"body"</span>:<span class="string">"Today I had eggs for breakfast. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/3/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">3</span>, <span class="string">"title"</span>:<span class="string">"Beer is Good"</span>, <span class="string">"body"</span>:<span class="string">"News Flash! Beer is awesome!"</span>, <span class="string">"published"</span>:<span class="string">"6/4/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">4</span>, <span class="string">"title"</span>:<span class="string">"Mean People Suck"</span>, <span class="string">"body"</span>:<span class="string">"People who are mean aren't nice or fun to hang around."</span>, <span class="string">"published"</span>:<span class="string">"6/5/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">5</span>, <span class="string">"title"</span>:<span class="string">"I'm Leaving Technology X and You Care"</span>, <span class="string">"body"</span>:<span class="string">"Let me write some link bait about why I'm not using a particular technology anymore."</span>, <span class="string">"published"</span>:<span class="string">"6/10/2013"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"id"</span>:<span class="number">6</span>, <span class="string">"title"</span>:<span class="string">"Help My Kickstarter"</span>, <span class="string">"body"</span>:<span class="string">"I want a new XBox One. Please fund my Kickstarter."</span>, <span class="string">"published"</span>:<span class="string">"6/12/2013"</span>&#125;];</span><br><span class="line">exports.getBlogEntries = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> entries;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">exports.getBlogEntry = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; entries.length; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span>(entries[i].id == id) <span class="keyword">return</span> entries[i];</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们还可以提供添加，编辑和删除，这里到此为止。再更新下 app.js ：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> hbs = <span class="built_in">require</span>(<span class="string">'hbs'</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> blogEngine = <span class="built_in">require</span>(<span class="string">'./blog'</span>);</span><br><span class="line"> </span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'html'</span>);</span><br><span class="line">app.engine(<span class="string">'html'</span>, hbs.__express);</span><br><span class="line">app.use(express.bodyParser());</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'index'</span>,&#123;title:<span class="string">"My Blog"</span>, entries:blogEngine.getBlogEntries()&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">'about'</span>, &#123;title:<span class="string">"About Me"</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.get(<span class="string">'/article/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> entry = blogEngine.getBlogEntry(req.params.id);</span><br><span class="line">   res.render(<span class="string">'article'</span>,&#123;title:entry.title, blog:entry&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
@@ -350,20 +341,17 @@ package.json 中手动添加 Express 依赖
 <p>在主页，我们给 <code>render</code> API 传两个参数，参数是一个对象，包含 <code>title</code> 和 <code>entries</code> 属性。title 的值时字符串，但是 entries 调用 <code>blogEngine</code> API 。我们传的任何数据将对模版生效，主页模版需要调整。</p>
 <p><a href="https://gist.github.com/jinlong/8297190#file-home-tpl-html" target="_blank" rel="external">主页模版代码</a></p>
 <p>即使你从没用过 Handlebars ，仍旧能猜到这里的含义。<code>#each</code> 指令将循环一个数组，&#123;&#123;&#125;&#125; 表示从博客条目列表取到的参数。</p>
-<p>###创建一个布局</p>
-<p>你肯定关心剩下的 HTML 怎么改，Express 用了模版引擎会自动支持布局。这意味着我可以创建通用的网站设计布局，Express 将利用它构造特定的页面。按照约定，它取名 <code>layout.something</code> ，“something”是你使用的特定扩展。我们用了 HTML ，它就是 <code>layout.html</code> 。</p>
+<h3 id="创建一个布局">创建一个布局</h3><p>你肯定关心剩下的 HTML 怎么改，Express 用了模版引擎会自动支持布局。这意味着我可以创建通用的网站设计布局，Express 将利用它构造特定的页面。按照约定，它取名 <code>layout.something</code> ，“something”是你使用的特定扩展。我们用了 HTML ，它就是 <code>layout.html</code> 。</p>
 <p><a href="https://gist.github.com/jinlong/8297190#file-layout-html" target="_blank" rel="external">layout.html 代码</a></p>
 <p>关于页面没什么亮点，我们跳过，下面看文章路由。URL 现在包含了标记 <code>:id</code> ，Express 可以创建动态的 URL ，用于对应请求参数。我们定义的链接像这样：<br><code>/article/</code></p>
 <p>理论上，每一个博客条目需要一个路由，但是创建一个抽象的路由匹配这些请求效果更好。 <code>bodyParser</code> （这一特性来源于 Connect 框架，的确对我很有帮助，它不仅支持查询字符串，而且支持表单主体，几乎每个 Express 应用都会用到它。）</p>
-<p>###显示个别文章</p>
-<p>由于 URL 结尾包含动态值，我们可以把它传给 <code>blogEngine</code> 对象，用得到的结果作为视图的变量。</p>
+<h3 id="显示个别文章">显示个别文章</h3><p>由于 URL 结尾包含动态值，我们可以把它传给 <code>blogEngine</code> 对象，用得到的结果作为视图的变量。</p>
 <p><a href="https://gist.github.com/jinlong/8297190#file-article-html" target="_blank" rel="external">article.html 文件</a></p>
 <p>现在我们创建了一个真正动态，但是难看的应用，这是新主页：</p>
 <p><img src="/images/post/exp-blog/express-blog3-home.jpg"></p>
 <p>这是特定的博客条目：</p>
 <p><img src="/images/post/exp-blog/express-blog3-article.jpg"></p>
-<p>##润色！</p>
-<p>我们加点基本的样式，让应用变好看点。Express 提供了简洁的方式添加图像，JavaScript 库和样式表之类的静态资源，简单定义一个静态文件夹，任何请求将从这个文件夹查找文件。</p>
+<h2 id="润色！">润色！</h2><p>我们加点基本的样式，让应用变好看点。Express 提供了简洁的方式添加图像，JavaScript 库和样式表之类的静态资源，简单定义一个静态文件夹，任何请求将从这个文件夹查找文件。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(<span class="string">'public'</span>));</span><br></pre></td></tr></table></figure>
 <p>此时，如果请求 /foo.css，public 文件夹存在 foo.css 文件，将返回它。我把 <a href="http://twitter.github.io/bootstrap/" target="_blank" rel="external">Bootstrap</a> 和 jQuery 副本放到了 public 文件夹。</p>
 <p>然后在我的 layout.html ，我可以引用这些资源。这是链接 bootstrap.css 的例子：</p>
@@ -373,8 +361,7 @@ package.json 中手动添加 Express 依赖
 <p><img src="/images/post/exp-blog/express-blog4-home.jpg"></p>
 <p>文章页：</p>
 <p><img src="/images/post/exp-blog/express-blog4-article.jpg"></p>
-<p>##进阶？</p>
-<p>延伸阅读：</p>
+<h2 id="进阶？">进阶？</h2><p>延伸阅读：</p>
 <ul>
 <li><a href="http://expressjs.com/" target="_blank" rel="external">Express homepage</a>    </li>
 <li><a href="https://groups.google.com/forum/?fromgroups#!forum/express-js" target="_blank" rel="external">Google group</a>   </li>
@@ -496,7 +483,7 @@ package.json 中手动添加 Express 依赖
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -593,7 +580,7 @@ package.json 中手动添加 Express 依赖
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义路由"><span class="nav-number">2.</span> <span class="nav-text">定义路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用的博客应用"><span class="nav-number">3.</span> <span class="nav-text">通用的博客应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加_HTML"><span class="nav-number">3.1.</span> <span class="nav-text">添加 HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由静态到动态"><span class="nav-number">3.2.</span> <span class="nav-text">由静态到动态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主页显示博客条目"><span class="nav-number">3.3.</span> <span class="nav-text">主页显示博客条目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个布局"><span class="nav-number">3.4.</span> <span class="nav-text">创建一个布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示个别文章"><span class="nav-number">3.5.</span> <span class="nav-text">显示个别文章</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#润色！"><span class="nav-number">4.</span> <span class="nav-text">润色！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶？"><span class="nav-number">5.</span> <span class="nav-text">进阶？</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

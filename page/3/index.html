@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -61,15 +61,15 @@
 
 
 
-<meta name="description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Alon's Blog">
 <meta property="og:url" content="http://jinlong.github.io/page/3/index.html">
 <meta property="og:site_name" content="Alon's Blog">
-<meta property="og:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta property="og:description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Alon's Blog">
-<meta name="twitter:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta name="twitter:description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译">
 
 
 
@@ -522,11 +522,9 @@
           <blockquote>
 <p>原文：<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/">Better performance with requestAnimationFrame</a><br>作者：<a href="http://dev.opera.com/author/dropoutwannabe">Luz Caballero</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
 </blockquote>
-<p>##介绍</p>
-<p>本文讨论如何使用 <strong>requestAnimationFrame</strong> API 代替旧的 <code>setInterval / setTimeout</code> 方法，从而提高动画的性能。当然，我们会演示<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/raf-demo.html">代码实例</a>。</p>
+<h2 id="介绍">介绍</h2><p>本文讨论如何使用 <strong>requestAnimationFrame</strong> API 代替旧的 <code>setInterval / setTimeout</code> 方法，从而提高动画的性能。当然，我们会演示<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/raf-demo.html">代码实例</a>。</p>
 <p>当前<a href="http://caniuse.com/requestanimationframe">几乎所有的主流浏览器都支持</a> requestAnimationFrame ，尽管有的还带前缀。Erik Möller 已经写了个 <a href="http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating">polyfill</a> ，加上这个应该可以支持所有浏览器啦。一言难尽，让我们从头说来…</p>
-<p>##老方法不太好</p>
-<p>在表彰 <strong>requestAnimationFrame</strong> 之前，我们先看看用老方法是怎么实现动画的。我确定没必要提很久以前 Mozilla 第一个实现了 <code>mozRequestAnimationFrame</code> ，你可能已经用 <code>setTimeout</code> 和 <code>setInterval</code> 创建了动画。假定你已经熟悉这两个方法，我不再赘述。如果你想了解更多，可以看 John Resig 的精彩文章，深度解析 <a href="http://ejohn.org/blog/how-javascript-timers-work/">JavaScript 计时器如何工作</a> 。</p>
+<h2 id="老方法不太好">老方法不太好</h2><p>在表彰 <strong>requestAnimationFrame</strong> 之前，我们先看看用老方法是怎么实现动画的。我确定没必要提很久以前 Mozilla 第一个实现了 <code>mozRequestAnimationFrame</code> ，你可能已经用 <code>setTimeout</code> 和 <code>setInterval</code> 创建了动画。假定你已经熟悉这两个方法，我不再赘述。如果你想了解更多，可以看 John Resig 的精彩文章，深度解析 <a href="http://ejohn.org/blog/how-javascript-timers-work/">JavaScript 计时器如何工作</a> 。</p>
 <p>我并不是轻视这些老方法，它们的确有一些缺点。首先，当相应的浏览器窗口最小化，JavaScript 计时器在背景标签仍然持续运行。因此，浏览器继续运行看不见的动画，导致不必要的 CPU 和电池寿命的消耗。在移动设备尤其严重。</p>
 <p>其次，不仅计时器持续运行看不见的动画，而且当时间到了，仍会排队执行它们的回调函数。让我解释下为什么这样会出问题 —— 比如说由于某些原因，回调函数占用太多时间，比你设定的时间要长。一旦计时器时间到了，它将排队执行 “下一次” 回调函数，甚至前一个还没执行完。这一过程不断重复，很快排队了几乎无数的计时器代码，导致浏览器不堪重负。图1 说明这一情况。<br>
           <div class="post-more-link text-center">
@@ -653,8 +651,7 @@
 <p>比较宽松的语言，特别是 JavaScript ，需要一些规矩才能写好——代码设计。JavaScript 环境非常宽松，随处扔些代码片段，就可能起作用。早点确立系统架构（然后遵守它！）对你的代码库提供制约，确保自始至终的一致性。</p>
 <p>我比较喜欢的一个方法由久经考验的软件设计模式组成——模块模式，可扩展的结构使它成为可靠的系统架构，和可维护的代码库。我喜欢在一个 jQuery 插件里面构建模块，有漂亮的复用性，提供强健的选项设置，暴露一些精心设计的 API。</p>
 <p>下面，我将逐步讲解如何精心设计你的代码，把它变成结构良好的组件，从而在项目中复用。</p>
-<p>###模块模式</p>
-<p>已有许多设计模式，同样有许多相关资源。<a href="https://twitter.com/addyosmani">Addy Osmani</a> 写了本关于 JavaScript 设计模式的书《<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">令人惊奇的书（免费！）</a>》，我极力推荐给各个水平的开发者。</p>
+<h3 id="模块模式">模块模式</h3><p>已有许多设计模式，同样有许多相关资源。<a href="https://twitter.com/addyosmani">Addy Osmani</a> 写了本关于 JavaScript 设计模式的书《<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">令人惊奇的书（免费！）</a>》，我极力推荐给各个水平的开发者。</p>
 <p><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">模块模式</a> 是一个简单的结构基础，它可以让你的代码保持干净和条例清晰。一个“模块”就是个标准的包含方法和属性的对象字面量，简单是这个模式的最大亮点：甚至一些不熟悉传统的软件设计模式的人，一看就能立刻明白代码是如何工作的。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2013/06/05/the-design-of-code-organizing-javascript/#more" rel="contents">
@@ -874,8 +871,7 @@
 
       
         
-          <p>##自定义过滤器</p>
-<p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
+          <h2 id="自定义过滤器">自定义过滤器</h2><p>创建 phonecatFilters 模块，用此模块注册自定义过滤器：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'phonecatFilters'</span>, []).filter(<span class="string">'checkmark'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> input ? <span class="string">'\u2713'</span> : <span class="string">'\u2718'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>过滤器的名字是“checkmark”，根据 input 判断 true 或 false，我们用 unicode 字符代替 true 或 false（\u2713 和 \u2718）。</p>
 <p>我们需要给 phonecat 模块注册 phonecatFilters 模块。</p>
@@ -996,8 +992,7 @@
 
       
         
-          <p>##模版链接和图片</p>
-<p><strong><em>数据</em></strong></p>
+          <h2 id="模版链接和图片">模版链接和图片</h2><p><strong><em>数据</em></strong></p>
 <p>注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 <code>app/img/phones/</code> 路径：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"id"</span>: <span class="string">"motorola-defy-with-motoblur"</span>,</span><br><span class="line">  <span class="string">"imageUrl"</span>: <span class="string">"img/phones/motorola-defy-with-motoblur.0.jpg"</span>,</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Motorola DEFY\u2122 with MOTOBLUR\u2122"</span>,</span><br><span class="line">&#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p><strong><em>模版</em></strong></p>
@@ -1114,8 +1109,7 @@
 
       
         
-          <p>##过滤</p>
-<p><strong><em>Controller</em></strong></p>
+          <h2 id="过滤">过滤</h2><p><strong><em>Controller</em></strong></p>
 <p>没作任何变化</p>
 <p><strong><em>Template</em></strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container-fluid"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row-fluid"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"span2"</span>&gt;</span></span><br><span class="line">Search: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">ng-model</span>=<span class="value">"query"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"span10"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phones"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones | filter:query"</span>&gt;</span></span><br><span class="line">      \&#123;\&#123;phone.name&#125;&#125;</span><br><span class="line">      <span class="tag">&lt;<span class="title">p</span>&gt;</span>\&#123;\&#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -1239,8 +1233,7 @@
 <blockquote>
 <p>原文地址：<a href="http://docs.angularjs.org/tutorial">AngularJS Tutorial</a><br>笔记作者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
 </blockquote>
-<p>##搭环境</p>
-<ul>
+<h2 id="搭环境">搭环境</h2><ul>
 <li><p>安装nodejs</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span><span class="identifier"> </span><span class="title">--version</span>    //nodejs 版本</span><br></pre></td></tr></table></figure>
 </li>
@@ -1390,8 +1383,7 @@
 <li><a href="http://www.brucelawson.co.uk/2013/hello-blink/">Bruce Lawson</a> 关于 Opera 采用 Blink 的文章。</li>
 </ul>
 <p>除了这些之外，<a href="http://peter.sh/">Peter Beverloo</a> 非常热心地通过电子邮件发了我一些信息。</p>
-<p>##Blink 是什么？</p>
-<p>Blink 是一个新的渲染引擎，这意味着它对 CSS 和 JavaScript 的解析将与 WebKit （Gecko 或者 Trident） 有所不同。它将驱动所有使用 Chromium 的浏览器（Google 的开源浏览器）。</p>
+<h2 id="Blink_是什么？">Blink 是什么？</h2><p>Blink 是一个新的渲染引擎，这意味着它对 CSS 和 JavaScript 的解析将与 WebKit （Gecko 或者 Trident） 有所不同。它将驱动所有使用 Chromium 的浏览器（Google 的开源浏览器）。</p>
 <p>Blink 已成为 WebKit 的分支，这意味着当前它跟 WebKit 几乎一样。不过，WebKit 本身不是一个单一的实体；正如我<a href="http://www.quirksmode.org/compatibility.html">原先的研究成果</a> ，一款基于 WebKit 的浏览器对 CSS 和 JavaScript 的支持并不完全一致。如今，Blink 作为一种 WebKit 不足为奇。</p>
 <p>将来这些会改变，从现在开始，WebKit 和 Blink 将带着不同的目标和不同的支持特性分道扬镳。当前 Blink 和 WebKit 的代码共享存在可行性，但是，久而久之，两者差异越来越大时，共享变得不那么容易。</p>
 <p>因此，Blink 已成为一个 WebKit  版本，久而久之，它会像其它分支一样，离 WebKit 越来越远，越来越远……<br>
@@ -1459,7 +1451,7 @@
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">

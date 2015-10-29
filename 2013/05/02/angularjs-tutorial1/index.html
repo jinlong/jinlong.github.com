@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -66,7 +66,7 @@
 
 原文地址：AngularJS Tutorial笔记作者：涂鸦码龙
 
-##搭环">
+搭环境">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AngularJS 新手指南1">
 <meta property="og:url" content="http://jinlong.github.io/2013/05/02/angularjs-tutorial1/index.html">
@@ -76,9 +76,9 @@
 
 原文地址：AngularJS Tutorial笔记作者：涂鸦码龙
 
-##搭环">
+搭环境">
 <meta property="og:image" content="http://jinlong.github.io/images/post/tutorial_02.png">
-<meta property="og:updated_time" content="2014-11-21T07:52:12.594Z">
+<meta property="og:updated_time" content="2015-10-29T02:34:35.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS 新手指南1">
 <meta name="twitter:description" content="五一放假没干啥正事，想起鼓捣 AngularJS 了，把它的新手指南一口气翻了个遍，算是入了点门了。个人感觉这货挺适合做 web app 的（可能因为我没接触过别的 MVC 框架吧…），它的亮点是数据绑定，扩展 HTML，居然把 DOM 操作都替咱做了…
@@ -86,7 +86,7 @@
 
 原文地址：AngularJS Tutorial笔记作者：涂鸦码龙
 
-##搭环">
+搭环境">
 
 
 
@@ -306,8 +306,7 @@
 <blockquote>
 <p>原文地址：<a href="http://docs.angularjs.org/tutorial" target="_blank" rel="external">AngularJS Tutorial</a><br>笔记作者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
-<p>##搭环境</p>
-<ul>
+<h2 id="搭环境">搭环境</h2><ul>
 <li><p>安装nodejs</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span><span class="identifier"> </span><span class="title">--version</span>    //nodejs 版本</span><br></pre></td></tr></table></figure>
 </li>
@@ -324,7 +323,7 @@
 </li>
 </ul>
 <a id="more"></a>
-<p>##启动应用<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -f step-<span class="number">0</span>（<span class="number">0</span>-<span class="number">11</span>） <span class="comment">//重置每一步骤的 git 项目状态</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="启动应用">启动应用</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -f step-<span class="number">0</span>（<span class="number">0</span>-<span class="number">11</span>） <span class="comment">//重置每一步骤的 git 项目状态</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;html ng-app&gt;</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>ng-app<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span> 属性代表 Angular 指令（<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>ngApp<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>；Angular 用名字+破折号作为属性名，驼峰写法作为对应的指令名），Angular 认为是 app 根元素。</span><br><span class="line"></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>引入 Angular ：<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span></span><br></pre></td></tr></table></figure>
 <p><script src="lib/angular/angular.js"></script><br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">HTML 页面完全下载，注册一个回调函数，Angular 认出了 [<span class="link_label">ngApp</span>](<span class="link_url">http://docs.angularjs.org/api/ng.directive:ngApp</span>) 指令。</span><br><span class="line"></span><br><span class="line">&#123;% codeblock %&#125;</span><br><span class="line">Nothing here &amp;#123;&amp;#123;'yet' + '!'&#125;&#125; </span><br><span class="line">&#123;% endcodeblock %&#125;</span><br><span class="line"></span><br><span class="line">双层大括号，Angular 模版，数据绑定</span><br><span class="line"></span><br><span class="line"><span class="strong">***启动 Angular 应用**</span>*</span><br><span class="line"></span><br><span class="line">自动启动使用 <span class="strong">***ngApp**</span>* 指令；</span><br><span class="line"></span><br><span class="line">[<span class="link_label">手动启动</span>](<span class="link_url">http://docs.angularjs.org/guide/bootstrap</span>)：</span><br><span class="line"><span class="code">```</span>js</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined"></span></span></span><br><span class="line">angular.element(document).ready(function()&#123;</span><br><span class="line"><span class="code">	angular.bootstrap(document);</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="xml"><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>app 引导程序做了2件重要的事：   </p>
@@ -334,8 +333,7 @@
 <li>Angular 将从 root 元素的 <strong><em>ngApp</em></strong> 开始编译，处理各种指令和绑定</li>
 </ol>
 <p>一旦应用启动，将等待引入的浏览器事件（mouse click, key press 或者 HTTP 相应），它们可能改变模型（model）。一旦事件触发，Angular 会探测模型改变，并会反映到视图（view）中，更新所有影响到的绑定。</p>
-<p>##Angular 模版</p>
-<p>MVC（<a href="http://en.wikipedia.org/wiki/Model%E2%80%93View%E2%80%93Controller" target="_blank" rel="external">Model-View-Controller</a>  模型-视图-控制器）</p>
+<h2 id="Angular_模版">Angular 模版</h2><p>MVC（<a href="http://en.wikipedia.org/wiki/Model%E2%80%93View%E2%80%93Controller" target="_blank" rel="external">Model-View-Controller</a>  模型-视图-控制器）</p>
 <p><strong><em>View 和 Template</em></strong></p>
 <p>view 是 model 通过 HTML template 的映射，model 改变，Angular 刷新相应的绑定点，更新 view。</p>
 <p>Angular 通过这个模版构建 view 组件：</p>
@@ -479,7 +477,7 @@
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -576,7 +574,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭环境"><span class="nav-number">1.</span> <span class="nav-text">搭环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动应用"><span class="nav-number">2.</span> <span class="nav-text">启动应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular_模版"><span class="nav-number">3.</span> <span class="nav-text">Angular 模版</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

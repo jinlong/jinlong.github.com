@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -61,15 +61,15 @@
 
 
 
-<meta name="description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Alon's Blog">
 <meta property="og:url" content="http://jinlong.github.io/index.html">
 <meta property="og:site_name" content="Alon's Blog">
-<meta property="og:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta property="og:description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Alon's Blog">
-<meta name="twitter:description" content="Alon&apos;s Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译">
+<meta name="twitter:description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译">
 
 
 
@@ -281,8 +281,7 @@
 <hr>
 <p>好的 API 设计：在自描述的同时，达到抽象的目标。</p>
 <p>设计良好的 API ，开发者可以快速上手，没必要经常抱着手册和文档，也没必要频繁光顾技术支持社区。</p>
-<p>#流畅的接口</p>
-<p><strong><a href="https://en.wikipedia.org/wiki/Method_chaining">方法链</a>：流畅易读，更易理解</strong></p>
+<h1 id="流畅的接口">流畅的接口</h1><p><strong><a href="https://en.wikipedia.org/wiki/Method_chaining">方法链</a>：流畅易读，更易理解</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//常见的 API 调用方式：改变一些颜色，添加事件监听</span></span><br><span class="line"><span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"foobar"</span>);</span><br><span class="line">elem.style.background = <span class="string">"red"</span>;</span><br><span class="line">elem.style.color = <span class="string">"green"</span>;</span><br><span class="line">elem.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">"hello world!"</span>);</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//（设想的）方法链 API</span></span><br><span class="line">DOMHelper.getElementById(<span class="string">'foobar'</span>)</span><br><span class="line">  .setStyle(<span class="string">"background"</span>, <span class="string">"red"</span>)</span><br><span class="line">  .setStyle(<span class="string">"color"</span>, <span class="string">"green"</span>)</span><br><span class="line">  .addEvent(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"hello world"</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/08/31/secrets-of-awesome-javascript-api-design/#more" rel="contents">
@@ -486,9 +485,8 @@
           <blockquote>
 <p>原文：《<a href="http://elijahmanor.github.io/talks/js-smells/#/">ELIMINATE JAVASCRIPT CODE SMELLS</a>》<br>作者：<a href="http://elijahmanor.com">@elijahmanor</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码农</a></p>
 </blockquote>
-<p>#难闻的代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> CONSONANTS = <span class="string">'bcdfghjklmnpqrstvwxyz'</span>;</span><br><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> VOWELS = <span class="string">'aeiou'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">englishToPigLatin</span>(<span class="params">english</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/* const */</span> <span class="keyword">var</span> SYLLABLE = <span class="string">'ay'</span>;</span><br><span class="line">  <span class="keyword">var</span> pigLatin = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (english !== <span class="literal">null</span> &amp;&amp; english.length &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">    (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> ||</span><br><span class="line">    CONSONANTS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> )) &#123;</span><br><span class="line">    <span class="keyword">if</span> (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">      pigLatin = english + SYLLABLE;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> preConsonants = <span class="string">''</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; english.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (CONSONANTS.indexOf(english[i]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">          preConsonants += english[i];</span><br><span class="line">          <span class="keyword">if</span> (preConsonants == <span class="string">'q'</span> &amp;&amp;</span><br><span class="line">            i+<span class="number">1</span> &lt; english.length &amp;&amp; english[i+<span class="number">1</span>] == <span class="string">'u'</span>) &#123;</span><br><span class="line">            preConsonants += <span class="string">'u'</span>;</span><br><span class="line">            i += <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="keyword">break</span>; &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      pigLatin = english.substring(i) + preConsonants + SYLLABLE;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> pigLatin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>##为毛是这个味？<br>
+<h1 id="难闻的代码">难闻的代码</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> CONSONANTS = <span class="string">'bcdfghjklmnpqrstvwxyz'</span>;</span><br><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> VOWELS = <span class="string">'aeiou'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">englishToPigLatin</span>(<span class="params">english</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/* const */</span> <span class="keyword">var</span> SYLLABLE = <span class="string">'ay'</span>;</span><br><span class="line">  <span class="keyword">var</span> pigLatin = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (english !== <span class="literal">null</span> &amp;&amp; english.length &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">    (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> ||</span><br><span class="line">    CONSONANTS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> )) &#123;</span><br><span class="line">    <span class="keyword">if</span> (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">      pigLatin = english + SYLLABLE;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> preConsonants = <span class="string">''</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; english.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (CONSONANTS.indexOf(english[i]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">          preConsonants += english[i];</span><br><span class="line">          <span class="keyword">if</span> (preConsonants == <span class="string">'q'</span> &amp;&amp;</span><br><span class="line">            i+<span class="number">1</span> &lt; english.length &amp;&amp; english[i+<span class="number">1</span>] == <span class="string">'u'</span>) &#123;</span><br><span class="line">            preConsonants += <span class="string">'u'</span>;</span><br><span class="line">            i += <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="keyword">break</span>; &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      pigLatin = english.substring(i) + preConsonants + SYLLABLE;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> pigLatin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="为毛是这个味？">为毛是这个味？</h2>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/05/21/eliminate-javascript-code-smells/#more" rel="contents">
               阅读全文 &raquo;
@@ -591,8 +589,7 @@
 </blockquote>
 <p>JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？</p>
 <p>以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。</p>
-<p>###如何读懂错误？</p>
-<p>首先，让我们快速看下错误信息的结构。理解结构有助于理解错误，如果遇到列表之外的错误会减少麻烦。</p>
+<h3 id="如何读懂错误？">如何读懂错误？</h3><p>首先，让我们快速看下错误信息的结构。理解结构有助于理解错误，如果遇到列表之外的错误会减少麻烦。</p>
 <p>Chrome 中典型的错误像这样：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught <span class="built_in">TypeError</span>: <span class="literal">undefined</span> is not a <span class="function"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure>
 <p>错误的结构如下：</p>
@@ -604,8 +601,7 @@
 </ol>
 <p>其它基于 webkit 的浏览器，比如 Safari ，给出的错误格式跟 Chrome 很类似。Firefox 也类似，但是不总包含第一部分，最新版本的 IE 也给出比 Chrome 简单的错误 - 但是在这里，简单并不总代表好。</p>
 <p>以下是真正的错误。</p>
-<p>###Uncaught TypeError: undefined is not a function</p>
-<p><strong>相关错误：</strong>number is not a function, object is not a function, string is not a function, Unhandled Error: ‘foo’ is not a function, Function Expected</p>
+<h3 id="Uncaught_TypeError:_undefined_is_not_a_function">Uncaught TypeError: undefined is not a function</h3><p><strong>相关错误：</strong>number is not a function, object is not a function, string is not a function, Unhandled Error: ‘foo’ is not a function, Function Expected</p>
 <p>当尝试调用一个像方法的值时，这个值并不是一个方法。比如：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">undefined</span>;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
@@ -708,15 +704,11 @@
           <blockquote>
 <p><a href="http://www.jshint.com/">JSHint</a>，发现错误和潜在问题的社区驱动的工具<br><a href="http://jslinterrors.com/">JSLint 错误解析</a></p>
 </blockquote>
-<p>##单独安装</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="operator"><span class="keyword">install</span> jshint -<span class="keyword">g</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="单独安装">单独安装</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="operator"><span class="keyword">install</span> jshint -<span class="keyword">g</span></span></span><br></pre></td></tr></table></figure>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ jshint myfile<span class="class">.js</span></span><br><span class="line">myfile<span class="class">.js</span>: line <span class="number">10</span>, col <span class="number">39</span>, Octal literals are not allowed <span class="keyword">in</span> strict mode.</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> error</span><br></pre></td></tr></table></figure>
-<p>##编辑器和IDE插件</p>
-<p><a href="https://github.com/victorporof/Sublime-JSHint">Sublime-JSHint</a> </p>
-<p>###安装</p>
-<p><code>Ctrl+Shift+P</code> 或 <code>Cmd+Shift+P</code><br>输入 <code>install</code>，选择 <code>Package Control: Install Package</code><br>输入 <code>js gutter</code>，选择 <code>JSHint Gutter</code></p>
-<p>###使用方法：</p>
-<p>Tools -&gt; Command Palette (<code>Ctrl+Shift+P</code> 或者 <code>Cmd+Shift+P</code>) 然后输入 <code>jshint</code></p>
+<h2 id="编辑器和IDE插件">编辑器和IDE插件</h2><p><a href="https://github.com/victorporof/Sublime-JSHint">Sublime-JSHint</a> </p>
+<h3 id="安装">安装</h3><p><code>Ctrl+Shift+P</code> 或 <code>Cmd+Shift+P</code><br>输入 <code>install</code>，选择 <code>Package Control: Install Package</code><br>输入 <code>js gutter</code>，选择 <code>JSHint Gutter</code></p>
+<h3 id="使用方法：">使用方法：</h3><p>Tools -&gt; Command Palette (<code>Ctrl+Shift+P</code> 或者 <code>Cmd+Shift+P</code>) 然后输入 <code>jshint</code></p>
 <p>– 或者 –</p>
 <p><code>Ctrl+Shift+J</code> (或者 Mac 使用 <code>Cmd+Shift+J</code>)</p>
 <p>– 或者 –</p>
@@ -933,8 +925,7 @@
           <blockquote>
 <p>原文：<a href="http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-express/">Introduction to Express</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
 </blockquote>
-<p>##安装</p>
-<p>package.json 中手动添加 Express 依赖</p>
+<h2 id="安装">安装</h2><p>package.json 中手动添加 Express 依赖</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="string">"name"</span>: <span class="string">"demo1"</span>,</span><br><span class="line">   <span class="string">"description"</span>: <span class="string">"First Express app"</span>,</span><br><span class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</span><br><span class="line">   <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>相同的目录运行：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
@@ -1172,16 +1163,13 @@
           <blockquote>
 <p>原文： <a href="http://gruntjs.com/getting-started">Getting started</a></p>
 </blockquote>
-<p>##安装 CLI</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> grunt-cli</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装_CLI">安装 CLI</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> grunt-cli</span></span><br></pre></td></tr></table></figure>
 <p>可以在任何路径运行 <code>grunt</code> 命令</p>
 <p>通过 <code>Gruntfile</code> 文件运行某一版本 grunt ，允许多版本共存</p>
-<p>##CLI 如何工作</p>
-<p>每次运行 grunt ，它会使用 node 的 <code>require()</code> 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。</p>
+<h2 id="CLI_如何工作">CLI 如何工作</h2><p>每次运行 grunt ，它会使用 node 的 <code>require()</code> 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。</p>
 <p>找到了本地安装的 Grunt ，CLI 加载本地安装的 Grunt 库，应用 <code>Gruntfile</code> 里的配置，执行预期的任务。</p>
 <p>想理解真正奥秘，可以<a href="https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt">读源码</a>，它非常短。</p>
-<p>##运行已存在的 Grunt 项目</p>
-<p>假设  Grunt CLI 已安装，项目已通过 <code>package.json</code> 和 <code>Gruntfile</code> 配置好，使用 Grunt 非常简单：</p>
+<h2 id="运行已存在的_Grunt_项目">运行已存在的 Grunt 项目</h2><p>假设  Grunt CLI 已安装，项目已通过 <code>package.json</code> 和 <code>Gruntfile</code> 配置好，使用 Grunt 非常简单：</p>
 <ol>
 <li>切换到项目的根目录   </li>
 <li>通过 <code>npm install</code> 安装项目依赖   </li>
@@ -1289,9 +1277,8 @@
 <blockquote>
 <p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
 </blockquote>
-<p>##Make it Understandable（更易理解）</p>
-<p>变量和函数选择容易理解，较短的单词命名。</p>
-<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>##避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
+<h2 id="Make_it_Understandable（更易理解）">Make it Understandable（更易理解）</h2><p>变量和函数选择容易理解，较短的单词命名。</p>
+<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>## 避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> labels = &#123;</span><br><span class="line">   <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">   <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">   <span class="string">'contact'</span>:<span class="string">'contact'</span> </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   current = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   show();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
@@ -1358,7 +1345,7 @@
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">

@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -61,30 +61,27 @@
 
 
 
-<meta name="description" content="##过滤
-Controller
+<meta name="description" content="过滤Controller
 没作任何变化
 Template
-123456789101112131415&amp;lt;div class=&quot;container-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;row-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;span2&quot;&amp;gt;Search: &amp;lt;input ng-model=&quot;query&quot;&amp;gt;  &amp;lt;/div&amp;gt;">
+123456789101112131415&amp;lt;div class=&quot;container-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;row-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;span2&quot;&amp;gt;Search: &amp;lt;input ng-model=&quot;query&quot;&amp;gt;  &amp;lt;/div&amp;gt;   &amp;l">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AngularJS 新手指南2">
 <meta property="og:url" content="http://jinlong.github.io/2013/05/03/angularjs-tutorial2/index.html">
 <meta property="og:site_name" content="Alon's Blog">
-<meta property="og:description" content="##过滤
-Controller
+<meta property="og:description" content="过滤Controller
 没作任何变化
 Template
-123456789101112131415&amp;lt;div class=&quot;container-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;row-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;span2&quot;&amp;gt;Search: &amp;lt;input ng-model=&quot;query&quot;&amp;gt;  &amp;lt;/div&amp;gt;">
+123456789101112131415&amp;lt;div class=&quot;container-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;row-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;span2&quot;&amp;gt;Search: &amp;lt;input ng-model=&quot;query&quot;&amp;gt;  &amp;lt;/div&amp;gt;   &amp;l">
 <meta property="og:image" content="http://jinlong.github.io/images/post/tutorial_04.png">
 <meta property="og:image" content="http://jinlong.github.io/images/post/xhr_service_final.png">
-<meta property="og:updated_time" content="2014-11-21T07:51:40.128Z">
+<meta property="og:updated_time" content="2015-10-29T02:35:03.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS 新手指南2">
-<meta name="twitter:description" content="##过滤
-Controller
+<meta name="twitter:description" content="过滤Controller
 没作任何变化
 Template
-123456789101112131415&amp;lt;div class=&quot;container-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;row-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;span2&quot;&amp;gt;Search: &amp;lt;input ng-model=&quot;query&quot;&amp;gt;  &amp;lt;/div&amp;gt;">
+123456789101112131415&amp;lt;div class=&quot;container-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;row-fluid&quot;&amp;gt;  &amp;lt;div class=&quot;span2&quot;&amp;gt;Search: &amp;lt;input ng-model=&quot;query&quot;&amp;gt;  &amp;lt;/div&amp;gt;   &amp;l">
 
 
 
@@ -299,8 +296,7 @@ Template
       
 
       
-        <span itemprop="articleBody"><p>##过滤</p>
-<p><strong><em>Controller</em></strong></p>
+        <span itemprop="articleBody"><h2 id="过滤">过滤</h2><p><strong><em>Controller</em></strong></p>
 <p>没作任何变化</p>
 <p><strong><em>Template</em></strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container-fluid"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row-fluid"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"span2"</span>&gt;</span></span><br><span class="line">Search: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">ng-model</span>=<span class="value">"query"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"span10"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phones"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones | filter:query"</span>&gt;</span></span><br><span class="line">      \&#123;\&#123;phone.name&#125;&#125;</span><br><span class="line">      <span class="tag">&lt;<span class="title">p</span>&gt;</span>\&#123;\&#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -324,8 +320,7 @@ Template
 <p>修改&lt;title&gt; 标签，把 ngController 定义放到 HTML 元素上。确保移除原来 body 上的定义。</p>
 <p><a href="http://docs.angularjs.org/api/ng.directive:ngBind" target="_blank" rel="external">ngBind</a>  或 <a href="http://docs.angularjs.org/api/ng.directive:ngBindTemplate" target="_blank" rel="external">ngBindTemplate</a> 命令，与双大括号等价的写法：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">title</span> <span class="attribute">ng-bind-template</span>=<span class="value">"Google Phone Gallery: \&#123;\&#123;query&#125;&#125;"</span>&gt;</span>Google Phone Gallery<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>##双向数据绑定</p>
-<p>模版增加了下拉菜单：</p>
+<h2 id="双向数据绑定">双向数据绑定</h2><p>模版增加了下拉菜单：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Search: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">ng-model</span>=<span class="value">"query"</span>&gt;</span></span><br><span class="line">Sort by:</span><br><span class="line"><span class="tag">&lt;<span class="title">select</span> <span class="attribute">ng-model</span>=<span class="value">"orderProp"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"name"</span>&gt;</span>Alphabetical<span class="tag">&lt;/<span class="title">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"age"</span>&gt;</span>Newest<span class="tag">&lt;/<span class="title">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"phones"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"phone in phones | filter:query | orderBy:orderProp"</span>&gt;</span></span><br><span class="line">    &amp;#123;&amp;#123;phone.name&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="title">p</span>&gt;</span>&amp;#123;&amp;#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>添加了 &lt;select&gt; 元素，命名 orderProp。</p>
 <p><img src="/images/post/tutorial_04.png"></p>
@@ -345,8 +340,7 @@ Template
 <li><p>在 index.html 模版增加 &#123;&#123;orderProp}} 绑定，可以显示当前的值。</p>
 </li>
 </ul>
-<p>##XHR 和依赖注入</p>
-<p>刚才的数据源都是硬编码的数据集，让我们用下 angular 的<a href="http://docs.angularjs.org/api/ng" target="_blank" rel="external">内建服务</a> <a href="http://docs.angularjs.org/api/ng.$http" target="_blank" rel="external">$http</a> 从服务器获取大一点的数据集。我们将用 angular 的<a href="http://docs.angularjs.org/guide/di" target="_blank" rel="external">依赖注入</a>（DI）为 PhoneListCtrl 控制器服务。</p>
+<h2 id="XHR_和依赖注入">XHR 和依赖注入</h2><p>刚才的数据源都是硬编码的数据集，让我们用下 angular 的<a href="http://docs.angularjs.org/api/ng" target="_blank" rel="external">内建服务</a> <a href="http://docs.angularjs.org/api/ng.$http" target="_blank" rel="external">$http</a> 从服务器获取大一点的数据集。我们将用 angular 的<a href="http://docs.angularjs.org/guide/di" target="_blank" rel="external">依赖注入</a>（DI）为 PhoneListCtrl 控制器服务。</p>
 <p><strong><em>数据</em></strong></p>
 <p>项目里的 <code>app/phones/phones.json</code> 文件包含比较大的手机列表。</p>
 <p><strong><em>Controller</em></strong></p>
@@ -490,7 +484,7 @@ Template
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -587,7 +581,7 @@ Template
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤"><span class="nav-number">1.</span> <span class="nav-text">过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向数据绑定"><span class="nav-number">2.</span> <span class="nav-text">双向数据绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XHR_和依赖注入"><span class="nav-number">3.</span> <span class="nav-text">XHR 和依赖注入</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

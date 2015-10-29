@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -82,7 +82,7 @@
 <meta property="og:image" content="http://jinlong.github.io/images/post/smart-transitions/Sticky-Label.gif">
 <meta property="og:image" content="http://jinlong.github.io/images/post/smart-transitions/iOS_Lockscreen-500-final.jpg">
 <meta property="og:image" content="http://jinlong.github.io/images/post/smart-transitions/CBH.gif">
-<meta property="og:updated_time" content="2014-10-25T02:20:53.100Z">
+<meta property="og:updated_time" content="2015-10-29T02:54:08.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用户体验设计中的巧妙过渡">
 <meta name="twitter:description" content="原文：Smart Transitions In User Experience Design译者：涂鸦码龙
@@ -313,21 +313,18 @@
 </blockquote>
 <p>我们对于产品的体验和印象来源于诸多因素的集合，交互扮演一个根基的角色。我们无法想象用户界面是静态设计，随后再添加交互魔法。相反，我们需要在早期加入交互特性，把它当成天然的组成部分。</p>
 <p>让我们看看一些巧妙的交互，它们是一些微妙的动画，优雅地改善了用户体验。<br><a id="more"></a></p>
-<p>##动画滚动</p>
-<p>超链接总是褒贬不一，当点击一个链接时，可以生硬地跳转，结果是<strong>丢失上下文</strong>。</p>
+<h2 id="动画滚动">动画滚动</h2><p>超链接总是褒贬不一，当点击一个链接时，可以生硬地跳转，结果是<strong>丢失上下文</strong>。</p>
 <p>对网站而言，特别是长网站，加一个线性滚动动画，可以改善用户体验：</p>
 <p><img src="/images/post/smart-transitions/ScrollingAnimated.gif"></p>
 <p>对比下面看看：</p>
 <p><img src="/images/post/smart-transitions/ScrollingNoAnimation.gif"></p>
 <p>对比下默认行为和动画行为，跳过内容不再是无意识的行为；它是一个决定。实际上，《<a href="http://hopelies.com/" target="_blank" rel="external">Hope Lies at 24 Frames Per Second</a>》此文中的菜单按钮没有任何动画，它花了我1分多钟才明白确切发生了什么。</p>
 <p><strong>要点：</strong>界面的突然变化用户很难适应，总是告知他们发生了什么。</p>
-<p>##有状态的切换</p>
-<p>让我们看看另一个例子：切换菜单。用户点击“+”号增加内容或展开元素。通过旋转 45 度，加号变成了叉号，叉号大家广泛理解为“关闭”：</p>
+<h2 id="有状态的切换">有状态的切换</h2><p>让我们看看另一个例子：切换菜单。用户点击“+”号增加内容或展开元素。通过旋转 45 度，加号变成了叉号，叉号大家广泛理解为“关闭”：</p>
 <p><img src="/images/post/smart-transitions/Stateful-toggle.gif"></p>
 <p>简单的变换完全改变了图标的意义。这个小细节比让用户猜测接下来发生什么，以及理解图标是什么意思容易多了。这个切换对用户非常友好。此外，加号旋转总是跟内容保持一个方向，加强了信息的流动。</p>
 <p><strong>要点：</strong>让网站元素的每个状态都可理解。</p>
-<p>##渐进呈现表单和评论</p>
-<p>许多博客和新闻网站的评论表单不是很友好，当你准备发表评论时，你只想输入评论而不是干别的，典型的问题是，它会询问你各种其它的事情，好烦人呐。</p>
+<h2 id="渐进呈现表单和评论">渐进呈现表单和评论</h2><p>许多博客和新闻网站的评论表单不是很友好，当你准备发表评论时，你只想输入评论而不是干别的，典型的问题是，它会询问你各种其它的事情，好烦人呐。</p>
 <p>为了激发用户的评论热情，我们可以<strong>仅显示最重要的元素：评论框</strong>。当用户点击输入区域时，展开相应的表单。真实世界渐进展现的例子，可以看纽约时报的 beta 网站：</p>
 <p><img src="/images/post/smart-transitions/NY-Times.gif"></p>
 <p>你可以更进一步，当评论框获得焦点时展开表单。这么做有个问题，交互设计的基本原则提到：<strong>an action should always happen close to where the interaction occurs （一个行为总是发生在离交互点最近的地方）</strong>（关注焦点附近）。我们可以再进一步，给评论框添加动画引导用户：</p>
@@ -336,18 +333,15 @@
 <p>如你所见，这么做减少了混乱，令评论表单更吸引人。</p>
 <p>更好的做法是，当用户到达页面底部时自动加载评论。我们应该避免强迫用户去点击，除非有更好的理由。</p>
 <p><strong>要点：</strong>渐进展现为了减少 UI 组件的呈现，用户需要它们时再显示出来。</p>
-<p>##Pull To Refresh （拉动刷新）</p>
-<p>最令人激动的交互之一是伴随着 iPhone 出现， Loren Brichter 倡导的 “拉动刷新”。用户可以更新可卷动的时序型内容。你可以在 Twitter 的应用中看到此效果。</p>
+<h2 id="Pull_To_Refresh_（拉动刷新）">Pull To Refresh （拉动刷新）</h2><p>最令人激动的交互之一是伴随着 iPhone 出现， Loren Brichter 倡导的 “拉动刷新”。用户可以更新可卷动的时序型内容。你可以在 Twitter 的应用中看到此效果。</p>
 <p><img src="/images/post/smart-transitions/Twitter.gif"></p>
 <p>为什么效果这么好？在拉动刷新出现之前，用户必须点击浏览器的刷新按钮加载更多内容。把用户发现更多内容的愿望和刷新行为联系起来，明确的点击行为变得好古板。</p>
 <p><strong>要点：</strong>连接意图和行为，体验变得更加无缝。</p>
-<p>##Sticky Labels （粘性标签）</p>
-<p>粘性标签是另一个微妙而实用的组合，它把用户界面与有意义的过渡结合起来。看看 <a href="http://edenspiekermann.com/projects" target="_blank" rel="external">Edenspiekermann’s use of this technique</a> 的运用。</p>
+<h2 id="Sticky_Labels_（粘性标签）">Sticky Labels （粘性标签）</h2><p>粘性标签是另一个微妙而实用的组合，它把用户界面与有意义的过渡结合起来。看看 <a href="http://edenspiekermann.com/projects" target="_blank" rel="external">Edenspiekermann’s use of this technique</a> 的运用。</p>
 <p><img src="/images/post/smart-transitions/Sticky-Label.gif"></p>
 <p>项目标签一直固定在内容的左侧，直到下一个项目出现。这个效果类似 iOS 地址本，它为较长区域提供了上下文。过渡效果不仅增加了方向感，而且提供了基于上下文的描述。</p>
 <p><strong>要点：</strong>长区域中添加了有价值信息的摘要或者标题可以使用粘性标签。</p>
-<p>##Affordance Transition （自解释的过渡效果）</p>
-<p>自解释的概念源于认知心理学，指一个对象的特征，它用于引导用户。</p>
+<h2 id="Affordance_Transition_（自解释的过渡效果）">Affordance Transition （自解释的过渡效果）</h2><p>自解释的概念源于认知心理学，指一个对象的特征，它用于引导用户。</p>
 <p>在用户界面设计的上下文，EU 网站的<a href="http://ec.europa.eu/regional_policy/archive/country/commu/docevent/26112008/5_doulgerof_glossary.pdf" target="_blank" rel="external">可用性词汇</a>（PDF）中如此定义自解释性：</p>
 <blockquote>
 <p>“An affordance is a desirable property of a user interface — software which naturally leads people to take the correct steps to accomplish their goals.”<br>“自解释性是用户界面令人满意的特性 —— 软件很自然地引导用户，通过正确的步骤达到预期的目标。”</p>
@@ -356,18 +350,15 @@
 <p><img src="/images/post/smart-transitions/iOS_Lockscreen-500-final.jpg"></p>
 <p>iOS 6 的锁屏旁边的相机图标，暗示可以拖动。Apple 在 iOS 7里移除了它，显然是因为用户习惯让它看起来更像一个独立的图标。后来是怎么做的：当你拖动按钮，锁屏弹起，相机出现在下面。这是一项将用户指向功能的很好的技术。</p>
 <p><strong>要点：</strong>在界面上，给予元素高度自解释性，它会把用户指向功能。</p>
-<p>##Context-Based Hiding（基于上下文隐藏）</p>
-<p>iOS 上的 Google Chrome 启动后有个基于上下文隐藏功能，见下图：</p>
+<h2 id="Context-Based_Hiding（基于上下文隐藏）">Context-Based Hiding（基于上下文隐藏）</h2><p>iOS 上的 Google Chrome 启动后有个基于上下文隐藏功能，见下图：</p>
 <p><img src="/images/post/smart-transitions/CBH.gif"></p>
 <p>基本理念是当用户向下滚动页面，浏览器导航面板自动隐藏。当用户再次向上滚动页面，控制面板出现。这种方法不仅改善了上下文体验（专注于内容本身），而且增加了屏幕可用空间。屏幕空间在移动设备尤为重要。</p>
 <p>首先假设<strong>用户将一直浏览关注的内容</strong>。当他们停止浏览，上下文可能改变；因此，导航面板需要重新出现。这一技术节省屏幕空间的同时，检查某种假设是否超出了你的测试用例。</p>
 <p>iOS 处理的更好，当到达页面的底部时，控制面板再次出现。这是一个动态整合用户需求的绝佳的例子。</p>
 <p><strong>要点：</strong>使用基于上下文的隐藏功能提高用户关注度，节省屏幕空间。</p>
-<p>##Focus Transition（焦点过渡）</p>
-<p>当通过键盘导航时，用户按下 Tab 键，常常搞不清焦点移动到哪里了。通过动画指引他们到达页面指定位置。过渡是微妙的，但在指引用户方面影响巨大。</p>
+<h2 id="Focus_Transition（焦点过渡）">Focus Transition（焦点过渡）</h2><p>当通过键盘导航时，用户按下 Tab 键，常常搞不清焦点移动到哪里了。通过动画指引他们到达页面指定位置。过渡是微妙的，但在指引用户方面影响巨大。</p>
 <p><strong>要点：</strong>为用户指明方向，不管他们如何导航。</p>
-<p>##总之</p>
-<p>这几个例子仅仅是九牛一毛罢了，本文要点不是秀一些最新最酷的交互技术，而是强调如何通过轻微的交互细节大大提高用户体验。</p>
+<h2 id="总之">总之</h2><p>这几个例子仅仅是九牛一毛罢了，本文要点不是秀一些最新最酷的交互技术，而是强调如何通过轻微的交互细节大大提高用户体验。</p>
 <p>如果我们想设计出更好的数字产品，我们需要挑战当前的信念，看看何种交互模式更能方便用户的使用。我没说要重复造轮子，但是不要停止探索。因此，走出你的安乐窝，保持探索，勇于尝试。</p>
 <p>如果你喜欢本文，可以在 Twitter 上<a href="http://www.twitter.com/webchaeschtli" target="_blank" rel="external">关注我</a> ，或者到瑞士请我一块瑞士巧克力。</p>
 </span>
@@ -486,7 +477,7 @@
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -583,7 +574,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动画滚动"><span class="nav-number">1.</span> <span class="nav-text">动画滚动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有状态的切换"><span class="nav-number">2.</span> <span class="nav-text">有状态的切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐进呈现表单和评论"><span class="nav-number">3.</span> <span class="nav-text">渐进呈现表单和评论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pull_To_Refresh_（拉动刷新）"><span class="nav-number">4.</span> <span class="nav-text">Pull To Refresh （拉动刷新）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sticky_Labels_（粘性标签）"><span class="nav-number">5.</span> <span class="nav-text">Sticky Labels （粘性标签）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Affordance_Transition_（自解释的过渡效果）"><span class="nav-number">6.</span> <span class="nav-text">Affordance Transition （自解释的过渡效果）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Context-Based_Hiding（基于上下文隐藏）"><span class="nav-number">7.</span> <span class="nav-text">Context-Based Hiding（基于上下文隐藏）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Focus_Transition（焦点过渡）"><span class="nav-number">8.</span> <span class="nav-text">Focus Transition（焦点过渡）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总之"><span class="nav-number">9.</span> <span class="nav-text">总之</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -65,10 +65,9 @@
 
 “Octopress is a blogging framework for hackers”Octopress 是黑客专属的博客框架，命令行可以搞定一切部署。
 
-##前期准备
-
+前期准备
 安装 Git http://git-scm.com/ (需翻墙), google code 也提供下载  
-使用 rbenv 或 RVM 安装 Ruby 1.9.3这俩儿货我均搞不定，总是磕磕绊绊不顺利，最">
+使用 rbenv 或 RVM 安装 Ruby 1.9.3这俩儿货我均搞不定，总是磕磕绊绊不顺利，最终发现">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deploy Github Pages using Octopress on Windows">
 <meta property="og:url" content="http://jinlong.github.io/2013/03/15/deploy-github-pages-using-octopress-on-windows/index.html">
@@ -77,21 +76,19 @@
 
 “Octopress is a blogging framework for hackers”Octopress 是黑客专属的博客框架，命令行可以搞定一切部署。
 
-##前期准备
-
+前期准备
 安装 Git http://git-scm.com/ (需翻墙), google code 也提供下载  
-使用 rbenv 或 RVM 安装 Ruby 1.9.3这俩儿货我均搞不定，总是磕磕绊绊不顺利，最">
-<meta property="og:updated_time" content="2014-11-21T08:00:18.288Z">
+使用 rbenv 或 RVM 安装 Ruby 1.9.3这俩儿货我均搞不定，总是磕磕绊绊不顺利，最终发现">
+<meta property="og:updated_time" content="2015-10-29T02:25:15.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Deploy Github Pages using Octopress on Windows">
 <meta name="twitter:description" content="官方文档 
 
 “Octopress is a blogging framework for hackers”Octopress 是黑客专属的博客框架，命令行可以搞定一切部署。
 
-##前期准备
-
+前期准备
 安装 Git http://git-scm.com/ (需翻墙), google code 也提供下载  
-使用 rbenv 或 RVM 安装 Ruby 1.9.3这俩儿货我均搞不定，总是磕磕绊绊不顺利，最">
+使用 rbenv 或 RVM 安装 Ruby 1.9.3这俩儿货我均搞不定，总是磕磕绊绊不顺利，最终发现">
 
 
 
@@ -310,19 +307,17 @@
 <blockquote>
 <p>“Octopress is a blogging framework for hackers”<br>Octopress 是黑客专属的博客框架，命令行可以搞定一切部署。</p>
 </blockquote>
-<p>##前期准备</p>
-<ol>
+<h2 id="前期准备">前期准备</h2><ol>
 <li>安装 Git <a href="http://git-scm.com/" target="_blank" rel="external">http://git-scm.com/</a> (需翻墙), <a href="https://code.google.com/p/msysgit/" target="_blank" rel="external">google code 也提供下载</a>  </li>
 <li>使用 <a href="http://octopress.org/docs/setup/rbenv" target="_blank" rel="external">rbenv</a> 或 <a href="http://octopress.org/docs/setup/rvm" target="_blank" rel="external">RVM</a> 安装 Ruby 1.9.3<br>这俩儿货我均搞不定，总是磕磕绊绊不顺利，最终发现了一个简单的套件 <a href="http://railsinstaller.org/" target="_blank" rel="external">RailsInstaller</a>  。这个相当爽啊，包含：Ruby 1.9.3-p125，Bundler 1.0.18，Git 1.7.6，DevKit等工具，虽然有的用不着，但比起配置 Ruby 和一些插件痛快多了。<a id="more"></a>
-##安装 Octopress</li>
+<h2 id="安装_Octopress">安装 Octopress</h2></li>
 </ol>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>://github.com/imathis/octopress.git octopress </span><br><span class="line">cd octopress <span class="comment"># 如果你用的RVM，将被问到是否信任.rvmrc 文件（答 yes）</span></span><br><span class="line">ruby --<span class="operator">version</span> <span class="comment"># 应该显示 Ruby 1.9.3</span></span><br></pre></td></tr></table></figure>
 <p>安装相关组件</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">gem</span> install <span class="keyword">bundler</span><br><span class="line"></span><span class="label">rbenv</span> rehash    # 如果你用的 rbenv，rehash 用来运行 <span class="keyword">bundle </span>命令</span><br><span class="line"><span class="keyword">bundle </span>install</span><br></pre></td></tr></table></figure>
 <p>安装 Octopress 默认主题</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
-<p>##部署到 Github Pages </p>
-<p>新建 Github 仓库，一定要用你的用户名或组织名，例如：<code>username.github.com</code> 或 <code>organization.github.com</code>。你的博客将会<br>提交到 <code>http://username.github.com</code> 主分支，通过简单配置 Octopress 可以帮你做这些。</p>
+<h2 id="部署到_Github_Pages">部署到 Github Pages</h2><p>新建 Github 仓库，一定要用你的用户名或组织名，例如：<code>username.github.com</code> 或 <code>organization.github.com</code>。你的博客将会<br>提交到 <code>http://username.github.com</code> 主分支，通过简单配置 Octopress 可以帮你做这些。</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rake</span> setup_github_pages</span><br></pre></td></tr></table></figure>
 <ol>
 <li>会问你的 Github 仓库 url ，填上（例如：<code>git@github.com:jinlong/jinlong.github.com.git</code>）</li>
@@ -341,8 +336,7 @@
 <p>将 <code>_deploy</code>  的文件加到 git 里，并提交到主分支。过几秒你会收到<br>Github 邮件说你的提交已经收到将发布你的站点（第一次创建）。</p>
 <p>别忘了提交源码到 github。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git <span class="operator"><span class="keyword">commit</span> -<span class="keyword">m</span> <span class="string">'your message'</span></span><br><span class="line">git push origin <span class="keyword">source</span></span></span><br></pre></td></tr></table></figure>
-<p>##配置 Octopress </p>
-<p>一般需要改 <code>Rakefile</code> 和 <code>_config.yml</code> 文件</p>
+<h2 id="配置_Octopress">配置 Octopress</h2><p>一般需要改 <code>Rakefile</code> 和 <code>_config.yml</code> 文件</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_config.yml       <span class="preprocessor"># 主要配置(Jekyll 的设置)</span></span><br><span class="line">Rakefile          <span class="preprocessor"># 部署配置</span></span><br><span class="line">config.rb         <span class="preprocessor"># Compass 配置</span></span><br><span class="line">config.ru         <span class="preprocessor"># Rack 配置</span></span><br></pre></td></tr></table></figure>
 <p><em>主要配置</em>（<code>_config.yml</code>）</p>
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">url:</span>                <span class="preprocessor"># 博客地址</span></span><br><span class="line"><span class="label">title:</span>              <span class="preprocessor"># 大标题</span></span><br><span class="line"><span class="label">subtitle:</span>           <span class="preprocessor"># 子标题</span></span><br><span class="line"><span class="label">author:</span>             <span class="preprocessor"># 你的名字</span></span><br><span class="line"><span class="label">simple_search:</span>      <span class="preprocessor"># 搜索引擎</span></span><br><span class="line"><span class="label">description:</span>        <span class="preprocessor"># 站点的 meta 描述</span></span><br><span class="line"><span class="label">date_format:</span>        <span class="preprocessor"># 日期格式，默认 Ruby 日期格式</span></span><br><span class="line"><span class="label">subscribe_rss:</span>      <span class="preprocessor"># RSS 订阅，默认 /atom.xml</span></span><br></pre></td></tr></table></figure>
@@ -353,8 +347,7 @@
 <p>不能使用中文，字符集不兼容</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">echo <span class="string">'export LC_ALL=zh_CN.UTF-8'</span> <span class="prompt">&gt;&gt; </span>.bash_profile</span><br><span class="line">echo <span class="string">'export LANG=zh_CN.UTF-8'</span> <span class="prompt">&gt;&gt; </span>.bash_profile</span><br></pre></td></tr></table></figure>
 <p>切记运行下面命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
-<p>##写博客</p>
-<p>博客都放在 <code>source/_posts</code>目录，根据 <code>YYYY-MM-DD-post-title.markdown</code> 格式命名，日期决定博客排序。</p>
+<h2 id="写博客">写博客</h2><p>博客都放在 <code>source/_posts</code>目录，根据 <code>YYYY-MM-DD-post-title.markdown</code> 格式命名，日期决定博客排序。</p>
 <figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake <span class="keyword">new</span><span class="number">_p</span>ost[<span class="string">"title"</span>]</span><br></pre></td></tr></table></figure>
 <p><em>参考文章：</em></p>
 <blockquote>
@@ -476,7 +469,7 @@
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -573,7 +566,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前期准备"><span class="nav-number">1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装_Octopress"><span class="nav-number">2.</span> <span class="nav-text">安装 Octopress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到_Github_Pages"><span class="nav-number">3.</span> <span class="nav-text">部署到 Github Pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置_Octopress"><span class="nav-number">4.</span> <span class="nav-text">配置 Octopress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写博客"><span class="nav-number">5.</span> <span class="nav-text">写博客</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

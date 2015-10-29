@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -61,25 +61,22 @@
 
 
 
-<meta name="description" content="##模版链接和图片
-数据
+<meta name="description" content="模版链接和图片数据
 注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 app/img/phones/ 路径：
-1234567[&amp;#123;  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,  &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,  &quot;name&quot;: &quot;M">
+1234567[&amp;#123;  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,  &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,  &quot;name&quot;: &quot;Moto">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AngularJS 新手指南3">
 <meta property="og:url" content="http://jinlong.github.io/2013/05/03/angularjs-tutorial3/index.html">
 <meta property="og:site_name" content="Alon's Blog">
-<meta property="og:description" content="##模版链接和图片
-数据
+<meta property="og:description" content="模版链接和图片数据
 注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 app/img/phones/ 路径：
-1234567[&amp;#123;  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,  &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,  &quot;name&quot;: &quot;M">
-<meta property="og:updated_time" content="2014-11-21T07:51:00.125Z">
+1234567[&amp;#123;  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,  &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,  &quot;name&quot;: &quot;Moto">
+<meta property="og:updated_time" content="2015-10-29T02:35:34.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS 新手指南3">
-<meta name="twitter:description" content="##模版链接和图片
-数据
+<meta name="twitter:description" content="模版链接和图片数据
 注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 app/img/phones/ 路径：
-1234567[&amp;#123;  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,  &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,  &quot;name&quot;: &quot;M">
+1234567[&amp;#123;  &quot;id&quot;: &quot;motorola-defy-with-motoblur&quot;,  &quot;imageUrl&quot;: &quot;img/phones/motorola-defy-with-motoblur.0.jpg&quot;,  &quot;name&quot;: &quot;Moto">
 
 
 
@@ -294,8 +291,7 @@
       
 
       
-        <span itemprop="articleBody"><p>##模版链接和图片</p>
-<p><strong><em>数据</em></strong></p>
+        <span itemprop="articleBody"><h2 id="模版链接和图片">模版链接和图片</h2><p><strong><em>数据</em></strong></p>
 <p>注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 <code>app/img/phones/</code> 路径：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"id"</span>: <span class="string">"motorola-defy-with-motoblur"</span>,</span><br><span class="line">  <span class="string">"imageUrl"</span>: <span class="string">"img/phones/motorola-defy-with-motoblur.0.jpg"</span>,</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Motorola DEFY\u2122 with MOTOBLUR\u2122"</span>,</span><br><span class="line">&#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p><strong><em>模版</em></strong></p>
@@ -304,8 +300,7 @@
 <p><strong><em>实验</em></strong></p>
 <p>把 ngSrc 换成 src 属性，用 Firebug 之类的工具查看服务器访问日志，确认应用发起了无关的请求 /app/%7B%7Bphone.imageUrl%7D%7D (或 /app/&#123;&#123;phone.imageUrl}})。</p>
 <a id="more"></a>
-<p>##多视图，路径规划和布局模版</p>
-<p>我们准备把 index.html 变成整体布局模版，它将用于所有视图。其它具体的模版根据当前的“路径”—— 当前展示给用户的视图，包含在布局模版中。应用的路径通过 <a href="http://docs.angularjs.org/api/ng.$routeProvider" target="_blank" rel="external">$routeProvider</a> 定义，$routeProvider 是 <a href="http://docs.angularjs.org/api/ng.$route" target="_blank" rel="external">$route 服务</a> 的提供者。这一服务让你很轻松地把控制器，视图模版和当前的 URL 地址联系在一起。使用此特性，我们可以实现<a href="http://en.wikipedia.org/wiki/Deep_linking" target="_blank" rel="external">深层链接</a>，通过深层链接可以利用浏览器的历史（后退前进导航）和书签。</p>
+<h2 id="多视图，路径规划和布局模版">多视图，路径规划和布局模版</h2><p>我们准备把 index.html 变成整体布局模版，它将用于所有视图。其它具体的模版根据当前的“路径”—— 当前展示给用户的视图，包含在布局模版中。应用的路径通过 <a href="http://docs.angularjs.org/api/ng.$routeProvider" target="_blank" rel="external">$routeProvider</a> 定义，$routeProvider 是 <a href="http://docs.angularjs.org/api/ng.$route" target="_blank" rel="external">$route 服务</a> 的提供者。这一服务让你很轻松地把控制器，视图模版和当前的 URL 地址联系在一起。使用此特性，我们可以实现<a href="http://en.wikipedia.org/wiki/Deep_linking" target="_blank" rel="external">深层链接</a>，通过深层链接可以利用浏览器的历史（后退前进导航）和书签。</p>
 <p><strong><em>DI，注入器和提供者笔记</em></strong></p>
 <p>如你所想，<a href="http://docs.angularjs.org/guide/di" target="_blank" rel="external">依赖注入</a> （DI）是 AngularJS 的核心特性，因此理解它的原理非常重要。</p>
 <p>当应用启动时，Angular 创建了用于所有 DI 的注入器。注入器对 $http 或 $route 全然不知，实际上，它甚至不知道这些服务的存在，除非它被配置在合适的模块定义中。注入器的唯一责任是加载特定的模块定义，注册所有模块已定义的服务提供者，当被问及注入一个相关的特定函数时，它通过提供者实例化。</p>
@@ -338,8 +333,7 @@
 <p>注意我们用的 phoneId 模型定义在 PhoneDetailCtrl 控制器。</p>
 <p><strong><em>实验</em></strong></p>
 <p>试着在 index.html 添加一个 &#123;&#123;orderProp}} 绑定，你到手机列表视图时，什么也不会发生，因为 orderProp 模型仅在 PhoneListCtrl 管理的作用域有效，它与 &lt;div ng-view&gt; 元素相关。如果往 phone-list.html 里面添加同样的绑定，绑定将生效。</p>
-<p>##更多模版</p>
-<p><strong><em>数据</em></strong></p>
+<h2 id="更多模版">更多模版</h2><p><strong><em>数据</em></strong></p>
 <p>除了 phones.json 外，app/phones/ 路径新加了包含每一手机信息的 json 文件：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"additionalFeatures"</span>: <span class="string">"Contour Display, Near Field Communications (NFC),..."</span>,</span><br><span class="line">  <span class="string">"android"</span>: &#123;</span><br><span class="line">      <span class="string">"os"</span>: <span class="string">"Android 2.3"</span>,</span><br><span class="line">      <span class="string">"ui"</span>: <span class="string">"Android"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  <span class="string">"images"</span>: [</span><br><span class="line">      <span class="string">"img/phones/nexus-s.0.jpg"</span>,</span><br><span class="line">      <span class="string">"img/phones/nexus-s.1.jpg"</span>,</span><br><span class="line">      <span class="string">"img/phones/nexus-s.2.jpg"</span>,</span><br><span class="line">      <span class="string">"img/phones/nexus-s.3.jpg"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"storage"</span>: &#123;</span><br><span class="line">      <span class="string">"flash"</span>: <span class="string">"16384MB"</span>,</span><br><span class="line">      <span class="string">"ram"</span>: <span class="string">"512MB"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>每个文件用同样的数据结构，描述了手机的各种属性。</p>
@@ -466,7 +460,7 @@
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -563,7 +557,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模版链接和图片"><span class="nav-number">1.</span> <span class="nav-text">模版链接和图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多视图，路径规划和布局模版"><span class="nav-number">2.</span> <span class="nav-text">多视图，路径规划和布局模版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多模版"><span class="nav-number">3.</span> <span class="nav-text">更多模版</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

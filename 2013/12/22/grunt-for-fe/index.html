@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -91,7 +91,7 @@ Grunt 可以帮前端工程师做什么：
 <meta property="og:image" content="http://jinlong.github.io/images/post/gruntForFE/uglify-code.gif">
 <meta property="og:image" content="http://jinlong.github.io/images/post/gruntForFE/squished-images.gif">
 <meta property="og:image" content="http://jinlong.github.io/images/post/gruntForFE/error-running-grunt.gif">
-<meta property="og:updated_time" content="2014-10-25T02:55:52.016Z">
+<meta property="og:updated_time" content="2015-10-29T02:54:27.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Grunt-前端利器">
 <meta name="twitter:description" content="原文：Grunt for People Who Think Things Like Grunt are Weird and Hard此篇笔记包含了个人的理解，只记录了文章的要点，并没有逐句翻译，如有不妥望指正。
@@ -327,8 +327,7 @@ Grunt 可以帮前端工程师做什么：
 <p>全局安装 Grunt CLI：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> grunt-cli</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>##合并文件</p>
-<p>安装合并文件插件 <a href="https://github.com/gruntjs/grunt-contrib-concat" target="_blank" rel="external">grunt-contrib-concat</a> </p>
+<h2 id="合并文件">合并文件</h2><p>安装合并文件插件 <a href="https://github.com/gruntjs/grunt-contrib-concat" target="_blank" rel="external">grunt-contrib-concat</a> </p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> grunt-contrib-<span class="keyword">concat</span> <span class="comment">--save-dev</span></span></span><br></pre></td></tr></table></figure>
 <p>package.json 会为” devDependencies“属性自动添加新的依赖，多了这一行：</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"grunt-contrib-concat"</span>: <span class="string">"~0.3.0"</span></span><br></pre></td></tr></table></figure>
@@ -339,8 +338,7 @@ Grunt 可以帮前端工程师做什么：
 <p>src 属性是原 JS 文件的数组，dest 是合并后的文件</p>
 <p>比较全面 Gruntfile.js 文件看<a href="https://github.com/chriscoyier/My-Grunt-Boilerplate/blob/master/Gruntfile.js" target="_blank" rel="external">这个模版</a> </p>
 <p>然后在命令行运行：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt</span><br></pre></td></tr></table></figure></p>
-<p>##最小化 JS</p>
-<p>为 Grunt 添加新任务比较简单：</p>
+<h2 id="最小化_JS">最小化 JS</h2><p>为 Grunt 添加新任务比较简单：</p>
 <ol>
 <li>找到需要的 Grunt 插件   </li>
 <li>学习插件的配置风格   </li>
@@ -354,16 +352,14 @@ Grunt 可以帮前端工程师做什么：
 <figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="atom">grunt</span>.<span class="atom">registerTask</span>(<span class="string">'default'</span>, [<span class="string">'concat'</span>, <span class="string">'uglify'</span>]);</span><br></pre></td></tr></table></figure>
 <p>运行 <code>grunt</code> 即可执行最小化任务</p>
 <p><img src="/images/post/gruntForFE/uglify-code.gif"></p>
-<p>##优化图片</p>
-<p>官方的图片优化插件 <a href="https://github.com/gruntjs/grunt-contrib-imagemin" target="_blank" rel="external">grunt-contrib-imagemin</a> </p>
+<h2 id="优化图片">优化图片</h2><p>官方的图片优化插件 <a href="https://github.com/gruntjs/grunt-contrib-imagemin" target="_blank" rel="external">grunt-contrib-imagemin</a> </p>
 <p>安装即可：<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install grunt-contrib-imagemin --<span class="built_in">save</span>-<span class="built_in">dev</span></span><br></pre></td></tr></table></figure></p>
 <p>修改 Gruntfile.js 文件，加载此插件：<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.loadNpmTasks(<span class="symbol">'grunt</span>-contrib-imagemin');</span><br></pre></td></tr></table></figure></p>
 <p>添加配置：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">imagemin</span>: <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">dynamic</span>:<span class="value"> &#123;</span><br><span class="line">        files: [&#123;</span><br><span class="line">            expand: true,</span><br><span class="line">            cwd: <span class="string">'images/'</span>,</span><br><span class="line">            src: [<span class="string">'**/*.&#123;png,jpg,gif&#125;'</span>],</span><br><span class="line">            dest: <span class="string">'images/build/'</span></span><br><span class="line">        </span></span></span>&#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>添加成默认任务<br><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="atom">grunt</span>.<span class="atom">registerTask</span>(<span class="string">'default'</span>, [<span class="string">'concat'</span>, <span class="string">'uglify'</span>, <span class="string">'imagemin'</span>]);</span><br></pre></td></tr></table></figure></p>
 <p>运行 <code>grunt</code> 看奇迹发生</p>
 <p><img src="/images/post/gruntForFE/squished-images.gif"></p>
-<p>##让任务更智能，更自动</p>
-<ol>
+<h2 id="让任务更智能，更自动">让任务更智能，更自动</h2><ol>
 <li>需要执行的时候自动执行   </li>
 <li>一次执行一个任务   </li>
 </ol>
@@ -377,10 +373,8 @@ Grunt 可以帮前端工程师做什么：
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">watch</span>: <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">scripts</span>:<span class="value"> &#123;</span><br><span class="line">        files: [<span class="string">'js/*.js'</span>],</span><br><span class="line">        tasks: [<span class="string">'concat'</span>, <span class="string">'uglify'</span>],</span><br><span class="line">        options: &#123;</span><br><span class="line">            spawn: false,</span><br><span class="line">        </span></span></span>&#125;,</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>出现错误的时候，命令行会有提示：</p>
 <p><img src="/images/post/gruntForFE/error-running-grunt.gif"></p>
-<p>##Grunt 做我们的预处理器</p>
-<p>我还没用过此类的预处理器，好 out ……先留个坑，等用的时候再做记录。请感兴趣的同学<a href="http://24ways.org/2013/grunt-is-not-weird-and-hard/" target="_blank" rel="external">参考原文</a></p>
-<p>##继续升级</p>
-<p>添加更多有用的任务：</p>
+<h2 id="Grunt_做我们的预处理器">Grunt 做我们的预处理器</h2><p>我还没用过此类的预处理器，好 out ……先留个坑，等用的时候再做记录。请感兴趣的同学<a href="http://24ways.org/2013/grunt-is-not-weird-and-hard/" target="_blank" rel="external">参考原文</a></p>
+<h2 id="继续升级">继续升级</h2><p>添加更多有用的任务：</p>
 <ul>
 <li>使用 <a href="http://css-tricks.com/autoprefixer/" target="_blank" rel="external">Autoprefixer</a> ，CSS 中自动加前缀   </li>
 <li>JS 单元测试（比如：<a href="https://github.com/pivotal/jasmine" target="_blank" rel="external">Jasmine</a> ）   </li>
@@ -514,7 +508,7 @@ Grunt 可以帮前端工程师做什么：
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -611,7 +605,7 @@ Grunt 可以帮前端工程师做什么：
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#合并文件"><span class="nav-number">1.</span> <span class="nav-text">合并文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小化_JS"><span class="nav-number">2.</span> <span class="nav-text">最小化 JS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化图片"><span class="nav-number">3.</span> <span class="nav-text">优化图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让任务更智能，更自动"><span class="nav-number">4.</span> <span class="nav-text">让任务更智能，更自动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grunt_做我们的预处理器"><span class="nav-number">5.</span> <span class="nav-text">Grunt 做我们的预处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继续升级"><span class="nav-number">6.</span> <span class="nav-text">继续升级</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

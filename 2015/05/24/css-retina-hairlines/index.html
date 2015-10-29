@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -77,7 +77,7 @@
 <meta property="og:image" content="http://jinlong.github.io/image/css-retina-1px/css.jpg">
 <meta property="og:image" content="http://jinlong.github.io/image/css-retina-1px/hairline.jpg">
 <meta property="og:image" content="http://jinlong.github.io/image/css-retina-1px/border.png">
-<meta property="og:updated_time" content="2015-10-28T10:09:38.256Z">
+<meta property="og:updated_time" content="2015-10-29T03:07:55.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Retina屏的移动设备如何实现真正1px的线？">
 <meta name="twitter:description" content="前些日子总被人问起 iOS Retina 屏，设置 1px 边框，实际显示 2px，如何解决？原来一直没在意，源于自己根本不是像素眼……今天仔细瞅了瞅原生实现的边框和CSS设置的边框，确实差距不小……
@@ -292,8 +292,7 @@
 <p>上图是原生实现，下图是 CSS 边框，手机上对比更加明显<br><img src="/image/css-retina-1px/native.jpg"><img src="/image/css-retina-1px/css.jpg"></p>
 <p>然后，如何解决呢？搜遍整个谷歌，发现好多人早已开始研究解决方案了。到底有哪些方案，到底好不好用呢？试过才知道，把我试过的结论记录一下。</p>
 <a id="more"></a>
-<p>#有说用 0.5px 解决的</p>
-<p>在2014年的 WWDC，“设计响应的Web体验” 一讲中，Ted O’Connor 讲到关于“retina<br> hairlines”（retina 极细的线）：在retina屏上仅仅显示1物理像素的边框，开发者应该如何处理呢。</p>
+<h1 id="有说用_0-5px_解决的">有说用 0.5px 解决的</h1><p>在2014年的 WWDC，“设计响应的Web体验” 一讲中，Ted O’Connor 讲到关于“retina<br> hairlines”（retina 极细的线）：在retina屏上仅仅显示1物理像素的边框，开发者应该如何处理呢。</p>
 <p>他们曾介绍到 iOS 8 和 OS X Yosemite 即将支持 0.5px 的边框：</p>
 <p><img src="/image/css-retina-1px/hairline.jpg"></p>
 <p>额的神呐！so easy! 果真如此吗？</p>
@@ -305,28 +304,23 @@
 <p>然后，极细的边框样式就容易了：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">div</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1px</span> solid <span class="hexcolor">#bbb</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="class">.hairlines</span> <span class="tag">div</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">border-width</span>:<span class="value"> <span class="number">0.5px</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <p><strong>看起来是个解决方案，可是我要兼容安卓设备，和 iOS 8 以下设备怎么办？这个思路行不通。</strong></p>
-<p>#还有用图片实现 border 的</p>
-<p>6x6 的 一张图片</p>
+<h1 id="还有用图片实现_border_的">还有用图片实现 border 的</h1><p>6x6 的 一张图片</p>
 <p><img src="/image/css-retina-1px/border.png"></p>
 <p>可以用 gif，png，或 base64 图片</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.border</span><span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">border-width</span>:<span class="value"> <span class="number">1px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-image</span>:<span class="value"> <span class="function">url</span>(border.gif) <span class="number">2</span> repeat</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <p><strong>缺点是改边框颜色时要改图片，不是很方便。</strong></p>
-<p>#还有用多背景渐变实现的</p>
-<p>设置1px的渐变背景，50%有颜色，50%透明</p>
+<h1 id="还有用多背景渐变实现的">还有用多背景渐变实现的</h1><p>设置1px的渐变背景，50%有颜色，50%透明</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.border</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">background</span>:<span class="value"></span><br><span class="line">    <span class="function">linear-gradient</span>(<span class="number">180deg</span>, black, black <span class="number">50%</span>, transparent <span class="number">50%</span>) top    left  / <span class="number">100%</span> <span class="number">1px</span> no-repeat,</span><br><span class="line">    <span class="function">linear-gradient</span>(<span class="number">90deg</span>,  black, black <span class="number">50%</span>, transparent <span class="number">50%</span>) top    right / <span class="number">1px</span> <span class="number">100%</span> no-repeat,</span><br><span class="line">    <span class="function">linear-gradient</span>(<span class="number">0</span>,      black, black <span class="number">50%</span>, transparent <span class="number">50%</span>) bottom right / <span class="number">100%</span> <span class="number">1px</span> no-repeat,</span><br><span class="line">    <span class="function">linear-gradient</span>(-<span class="number">90deg</span>, black, black <span class="number">50%</span>, transparent <span class="number">50%</span>) bottom left  / <span class="number">1px</span> <span class="number">100%</span> no-repeat</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <p><strong>多写了不少代码，圆角也没法实现，也是不太好用。</strong></p>
-<p>#还有用 box-shadow 模拟边框的</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.hairlines</span> <span class="tag">li</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">border</span>:<span class="value"> none</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> -<span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h1 id="还有用_box-shadow_模拟边框的">还有用 box-shadow 模拟边框的</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.hairlines</span> <span class="tag">li</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">border</span>:<span class="value"> none</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> -<span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <p><strong>试了下不太好用，颜色不好处理，有阴影出现。</strong></p>
-<p>#<a href="http://m.taobao.com/" target="_blank" rel="external">淘宝M站</a>是通过 viewport + rem 实现的</p>
-<p>在<code>devicePixelRatio = 2</code> 时，输出viewport</p>
+<h1 id="淘宝M站是通过_viewport_+_rem_实现的"><a href="http://m.taobao.com/" target="_blank" rel="external">淘宝M站</a>是通过 viewport + rem 实现的</h1><p>在<code>devicePixelRatio = 2</code> 时，输出viewport</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>在<code>devicePixelRatio = 3</code> 时，输出viewport</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>同时通过设置对应viewport的rem基准值，这种方式就可以像以前一样轻松愉快的写1px了。</p>
 <p><strong>个人感觉为了做个 border 多准备两套样式，还得动态改变 viewport ，有点费劲。</strong></p>
-<p>#最后找到一个还算好用的方法：伪类  + transform</p>
-<p>原理是把原先元素的 border 去掉，然后利用 <code>:before</code> 或者 <code>:after</code> 重做 border ，并 transform 的 scale 缩小一半，原先的元素相对定位，新做的 border 绝对定位</p>
+<h1 id="最后找到一个还算好用的方法：伪类_+_transform">最后找到一个还算好用的方法：伪类  + transform</h1><p>原理是把原先元素的 border 去掉，然后利用 <code>:before</code> 或者 <code>:after</code> 重做 border ，并 transform 的 scale 缩小一半，原先的元素相对定位，新做的 border 绝对定位</p>
 <ul>
 <li>单条 border</li>
 </ul>
@@ -465,7 +459,7 @@
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -562,7 +556,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#有说用_0-5px_解决的"><span class="nav-number">1.</span> <span class="nav-text">有说用 0.5px 解决的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#还有用图片实现_border_的"><span class="nav-number">2.</span> <span class="nav-text">还有用图片实现 border 的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#还有用多背景渐变实现的"><span class="nav-number">3.</span> <span class="nav-text">还有用多背景渐变实现的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#还有用_box-shadow_模拟边框的"><span class="nav-number">4.</span> <span class="nav-text">还有用 box-shadow 模拟边框的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#淘宝M站是通过_viewport_+_rem_实现的"><span class="nav-number">5.</span> <span class="nav-text">淘宝M站是通过 viewport + rem 实现的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后找到一个还算好用的方法：伪类_+_transform"><span class="nav-number">6.</span> <span class="nav-text">最后找到一个还算好用的方法：伪类  + transform</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

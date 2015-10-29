@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译" />
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
 
 
 
@@ -65,9 +65,8 @@
 
 原文：Javascript BEST PRACTICES PART 1Javascript BEST PRACTICES PART 2译者：涂鸦码龙
 
-##Make it Understandable（更易理解）
-变量和函数选择容易理解，较短的单词命名。
-不好的变量名：1x">
+Make it Understandable（更易理解）变量和函数选择容易理解，较短的单词命名。
+不好的变量名：1x1 f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Javascript 最佳实践">
 <meta property="og:url" content="http://jinlong.github.io/2013/11/25/javascript-best-practices/index.html">
@@ -76,19 +75,17 @@
 
 原文：Javascript BEST PRACTICES PART 1Javascript BEST PRACTICES PART 2译者：涂鸦码龙
 
-##Make it Understandable（更易理解）
-变量和函数选择容易理解，较短的单词命名。
-不好的变量名：1x">
-<meta property="og:updated_time" content="2015-10-28T14:44:32.615Z">
+Make it Understandable（更易理解）变量和函数选择容易理解，较短的单词命名。
+不好的变量名：1x1 f">
+<meta property="og:updated_time" content="2015-10-29T02:53:26.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript 最佳实践">
 <meta name="twitter:description" content="本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 PPT （需翻墙）
 
 原文：Javascript BEST PRACTICES PART 1Javascript BEST PRACTICES PART 2译者：涂鸦码龙
 
-##Make it Understandable（更易理解）
-变量和函数选择容易理解，较短的单词命名。
-不好的变量名：1x">
+Make it Understandable（更易理解）变量和函数选择容易理解，较短的单词命名。
+不好的变量名：1x1 f">
 
 
 
@@ -295,9 +292,8 @@
 <blockquote>
 <p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/" target="_blank" rel="external">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/" target="_blank" rel="external">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
-<p>##Make it Understandable（更易理解）</p>
-<p>变量和函数选择容易理解，较短的单词命名。</p>
-<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>##避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
+<h2 id="Make_it_Understandable（更易理解）">Make it Understandable（更易理解）</h2><p>变量和函数选择容易理解，较短的单词命名。</p>
+<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>## 避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> labels = &#123;</span><br><span class="line">   <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">   <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">   <span class="string">'contact'</span>:<span class="string">'contact'</span> </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   current = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   show();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -312,11 +308,9 @@
 <div style="color:#5ead12"><br><strong>Revealing Module Pattern（揭示模块模式）：</strong>暴露的全局变量和局部变量，保持语法一致。<br></div>
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line">   <span class="keyword">var</span> labels = &#123;</span><br><span class="line">      <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">      <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">      <span class="string">'contact'</span>:<span class="string">'contact'</span></span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">var</span> init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">var</span> show = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      current = <span class="number">1</span>;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">var</span> hide = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      show();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span>&#123;init:init, show:show, current:current&#125;</span><br><span class="line">&#125;();</span><br><span class="line"><span class="built_in">module</span>.init();</span><br></pre></td></tr></table></figure>
-<p>##坚持一种严格的编码风格</p>
-<p>浏览器是非常宽容的 JavaScript 解析器。但是，当你转换到另一个环境，或者移交给另一个开发者时，松懈的代码风格对自己很不利。Valid code is secure code（有效的代码是安全的代码）。</p>
+<h2 id="坚持一种严格的编码风格">坚持一种严格的编码风格</h2><p>浏览器是非常宽容的 JavaScript 解析器。但是，当你转换到另一个环境，或者移交给另一个开发者时，松懈的代码风格对自己很不利。Valid code is secure code（有效的代码是安全的代码）。</p>
 <p><strong>验证你的代码：</strong><a href="http://www.jslint.com/" target="_blank" rel="external">http://www.jslint.com/</a></p>
-<p>##需要注释，不要过分注释</p>
-<blockquote>
+<h2 id="需要注释，不要过分注释">需要注释，不要过分注释</h2><blockquote>
 <p>“Good code explains itself （好的代码会自我解释）”是傲慢的神话。</p>
 </blockquote>
 <p>需要的时候加上注释 —— 但是不要长篇大论。</p>
@@ -334,72 +328,60 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="built_in">document</span>.getElementById(<span class="string">'mainform'</span>);</span><br><span class="line"><span class="keyword">var</span> inputs = f.getElementsByTagName(<span class="string">'input'</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,j=inputs.length;i&lt;j;i++)&#123;</span><br><span class="line">   <span class="keyword">if</span>(inputs[i].className === <span class="string">'mandatory'</span> &amp;&amp; inputs.value === <span class="string">''</span>)&#123;</span><br><span class="line">      inputs[i].className+=<span class="string">' error'</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <div><br>使用 CSS 继承可以避免循环许多元素。<br></div>
 
-<p>##使用简洁的写法</p>
-<p><strong>一旦你习惯简洁写法，代码会更清爽，更易读。</strong></p>
+<h2 id="使用简洁的写法">使用简洁的写法</h2><p><strong>一旦你习惯简洁写法，代码会更清爽，更易读。</strong></p>
 <p>这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lunch = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">lunch[<span class="number">0</span>]=<span class="string">'Dosa'</span>;</span><br><span class="line">lunch[<span class="number">1</span>]=<span class="string">'Roti'</span>;</span><br><span class="line">lunch[<span class="number">2</span>]=<span class="string">'Rice'</span>;</span><br><span class="line">lunch[<span class="number">3</span>]=<span class="string">'what the heck is this?'</span>;</span><br></pre></td></tr></table></figure></p>
 <p>等价于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lunch = [</span><br><span class="line">   <span class="string">'Dosa'</span>,</span><br><span class="line">   <span class="string">'Roti'</span>,</span><br><span class="line">   <span class="string">'Rice'</span>,</span><br><span class="line">   <span class="string">'what the heck is this?'</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
 <p>这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(v)&#123;</span><br><span class="line">   <span class="keyword">var</span> x = v;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="keyword">var</span> x =<span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>等价于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = v || <span class="number">10</span>;</span><br></pre></td></tr></table></figure></p>
 <p>这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> direction;</span><br><span class="line"><span class="keyword">if</span>(x &gt; <span class="number">100</span>)&#123;</span><br><span class="line">   direction = <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   direction = -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>等价于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> direction = (x &gt; <span class="number">100</span>) ? <span class="number">1</span> : -<span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
-<p>##模块化</p>
-<p><strong>保持代码的模块化和专业化</strong></p>
+<h2 id="模块化">模块化</h2><p><strong>保持代码的模块化和专业化</strong></p>
 <p>我们很容易写一个函数做所有事，可是当扩展功能时，发现好几个函数做同样的事情。</p>
 <p>为了避免此事，确保写较小的，通用辅助函数，完成一个特定的任务，而不是所有的方法。</p>
 <p>再后来，你可以使用 revealing module pattern（揭示模块模式）暴露一些方法，创建一套 API 扩展主要功能。</p>
 <p>好的代码应该易于扩展，不需要重写核心。</p>
-<p>##渐进增强</p>
-<p><strong>避免创建许多 JavaScript 依赖代码</strong></p>
+<h2 id="渐进增强">渐进增强</h2><p><strong>避免创建许多 JavaScript 依赖代码</strong></p>
 <p>DOM 操作又慢又昂贵。</p>
 <p>当禁用 JavaScript 时，依赖 JavaScript 的元素要仍然可用。</p>
-<p>##允许配置和转化</p>
-<p><strong>代码也许会变，代码结构不应该是松散的。</strong></p>
+<h2 id="允许配置和转化">允许配置和转化</h2><p><strong>代码也许会变，代码结构不应该是松散的。</strong></p>
 <p>包括标签，CSS 类，ID 和默认配置。</p>
 <p>把这些放进一个配置对象，保持公开，我们很容易维护，并且可以自由定制。</p>
 <p>例如：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">carousel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> config = &#123;</span><br><span class="line">      CSS:&#123;</span><br><span class="line">         classes:&#123;</span><br><span class="line">            current:<span class="string">'current'</span>,</span><br><span class="line">            scrollContainer:<span class="string">'scroll'</span></span><br><span class="line">         &#125;,</span><br><span class="line">         IDs:&#123;</span><br><span class="line">            maincontainer:<span class="string">'carousel'</span></span><br><span class="line">         &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      labels:&#123;</span><br><span class="line">         previous:<span class="string">'back'</span>,</span><br><span class="line">         next:<span class="string">'next'</span>,</span><br><span class="line">         auto:<span class="string">'play'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      settings:&#123;</span><br><span class="line">         amount:<span class="number">5</span>,</span><br><span class="line">         skin:<span class="string">'blue'</span>,</span><br><span class="line">         autoplay:<span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">highlight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">return</span> &#123;config:config,init:init&#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
-<p>##避免严重嵌套</p>
-<p><strong>多层嵌套的代码很不易读。</strong></p>
+<h2 id="避免严重嵌套">避免严重嵌套</h2><p><strong>多层嵌套的代码很不易读。</strong></p>
 <p>循环嵌套循环是个坏主意，需要小心几个迭代器变量（i, j, k, l, m…）。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderProfiles</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> out = <span class="built_in">document</span>.getElementById(<span class="string">'profiles'</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;o.members.length;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> ul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">      <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">      li.appendChild(<span class="built_in">document</span>.createTextNode(o.members[i].name));</span><br><span class="line">      <span class="keyword">var</span> nestedul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;o.members[i].data.length;j++)&#123;</span><br><span class="line">         <span class="keyword">var</span> datali = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">         datali.appendChild(</span><br><span class="line">            <span class="built_in">document</span>.createTextNode(</span><br><span class="line">               o.members[i].data[j].label + <span class="string">' '</span> +</span><br><span class="line">               o.members[i].data[j].value</span><br><span class="line">            )</span><br><span class="line">         );</span><br><span class="line">         nestedul.appendChild(detali);</span><br><span class="line">      &#125;</span><br><span class="line">      li.appendChild(nestedul);</span><br><span class="line">   &#125;</span><br><span class="line">   out.appendChild(ul);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用专门的工具方法避免重度的循环嵌套。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderProfiles</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> out = <span class="built_in">document</span>.getElementById(<span class="string">'profiles'</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;o.members.length;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> ul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">      <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">      li.appendChild(<span class="built_in">document</span>.createTextNode(data.members[i].name));</span><br><span class="line">      li.appendChild(addMemberData(o.members[i]));</span><br><span class="line">   &#125;</span><br><span class="line">   out.appendChild(ul);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addMemberData</span>(<span class="params">member</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> ul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;member.data.length;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">      li.appendChild(</span><br><span class="line">         <span class="built_in">document</span>.createTextNode(</span><br><span class="line">            member.data[i].label + <span class="string">' '</span> +</span><br><span class="line">            member.data[i].value</span><br><span class="line">         )</span><br><span class="line">      );</span><br><span class="line">   &#125;</span><br><span class="line">   ul.appendChild(li);</span><br><span class="line">   <span class="keyword">return</span> ul;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>##优化循环</p>
-<p><strong>JavaScript 循环可能非常慢。</strong></p>
+<h2 id="优化循环">优化循环</h2><p><strong>JavaScript 循环可能非常慢。</strong></p>
 <p>不要让 JavaScript 每次迭代都读取数组的长度，用变量保存长度的值。</p>
 <p>不好：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> names = [<span class="string">'George'</span>,</span><br><span class="line"><span class="string">'Ringo'</span>,</span><br><span class="line"><span class="string">'Paul'</span>,</span><br><span class="line"><span class="string">'John'</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;names.length;i++)&#123;</span><br><span class="line">   doSomethingWith(names[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>好：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> names = [<span class="string">'George'</span>,</span><br><span class="line"><span class="string">'Ringo'</span>,</span><br><span class="line"><span class="string">'Paul'</span>,</span><br><span class="line"><span class="string">'John'</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,j=names.length;i&lt;j;i++)&#123;</span><br><span class="line">  doSomethingWith(names[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <div>重度计算代码放到循环外边，包括正则表达式，首要的是 DOM 操作。</div>
 
 <p>你可以在循环里创建 DOM 节点，但是避免插入文档对象。</p>
-<p>##DOM 访问最小化</p>
-<p><strong>如果可以避免，不要访问 DOM。</strong></p>
+<h2 id="DOM_访问最小化">DOM 访问最小化</h2><p><strong>如果可以避免，不要访问 DOM。</strong></p>
 <p><strong>原因：</strong>比较慢，有各种各样的浏览器问题</p>
 <p><strong>解决方案：</strong>编写或使用一个辅助方法，批量把数据集转换成 HTML 。</p>
 <p>所有的数据在一个方法中处理，最后把结果一次性加入到 DOM 中去。</p>
-<p>##不要屈服于浏览器的奇怪表现</p>
-<p><strong>依赖浏览器稀奇古怪的行为，不如希望它一切正常。</strong></p>
+<h2 id="不要屈服于浏览器的奇怪表现">不要屈服于浏览器的奇怪表现</h2><p><strong>依赖浏览器稀奇古怪的行为，不如希望它一切正常。</strong></p>
 <p>避免使用一些奇技淫巧，分析问题的根源。</p>
 <p>很多时候，你会发现你需要额外的功能，是因为你的界面规划不好。</p>
-<p>##不要信任任何数据</p>
-<p><strong>好的代码不会信任收到的任何数据。</strong></p>
+<h2 id="不要信任任何数据">不要信任任何数据</h2><p><strong>好的代码不会信任收到的任何数据。</strong></p>
 <ul>
 <li>不要相信 HTML 文档<br>任何用户都可以干预它，比如通过 Firebug 。</li>
 <li>不要相信你的函数接收的数据格式永远正确。<br>用 typeof 测试，然后再处理它。</li>
 <li>不要预期 DOM 中的元素是可用的。<br>改变它们之前测试一下，确保它们如你的预期。</li>
 <li>不要妄图使用 JavaScript 保护一些东西。<br>JavaScript 代码很容易被破解 :)</li>
 </ul>
-<p>##通过 JavaScript 添加功能，而不是添加内容   </p>
-<p>如果你发现 JavaScript 里面有过多的 HTML ，你可能做错了什么。</p>
+<h2 id="通过_JavaScript_添加功能，而不是添加内容">通过 JavaScript 添加功能，而不是添加内容</h2><p>如果你发现 JavaScript 里面有过多的 HTML ，你可能做错了什么。</p>
 <p>创建使用 DOM 不是很方便，一般用 <strong>innerHTML</strong> ，这样很难追踪 HTML 的代码质量。</p>
 <p>如果的确有大量的界面，可以通过 Ajax 加载静态的 HTML 文档界面。</p>
 <p>这种方式 HTML 好维护，并且支持定制。</p>
-<p>##站在巨人的肩膀上</p>
-<p><strong>JavaScript 很有趣，不过针对所有浏览器写 JavaScript 不那么有趣… 所以从一个好框架入手。</strong></p>
+<h2 id="站在巨人的肩膀上">站在巨人的肩膀上</h2><p><strong>JavaScript 很有趣，不过针对所有浏览器写 JavaScript 不那么有趣… 所以从一个好框架入手。</strong></p>
 <p>JavaScript 框架专门用于堵浏览器的漏洞，让浏览器行为和你的代码更符合预期。</p>
 <p>好的框架帮助你写代码，帮你节省了一些支持主流浏览器的开销。</p>
-<p>##开发代码不等于线上代码</p>
-<p><strong>线上代码为机器所写，开发环境代码为人而写。</strong></p>
+<h2 id="开发代码不等于线上代码">开发代码不等于线上代码</h2><p><strong>线上代码为机器所写，开发环境代码为人而写。</strong></p>
 <ul>
 <li>构建流程包含核对，最小化和优化代码。</li>
 <li>不要过早优化。</li>
@@ -522,7 +504,7 @@
           <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Alon Zhang</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Alon's Blog | JS | JavaScript | CSS3 | HTML5 | Node | 前端技术积累，技术文章翻译</p>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -619,7 +601,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#避免与其它技术混用"><span class="nav-number">1.</span> <span class="nav-text">避免与其它技术混用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Make_it_Understandable（更易理解）"><span class="nav-number">1.</span> <span class="nav-text">Make it Understandable（更易理解）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坚持一种严格的编码风格"><span class="nav-number">2.</span> <span class="nav-text">坚持一种严格的编码风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需要注释，不要过分注释"><span class="nav-number">3.</span> <span class="nav-text">需要注释，不要过分注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免与其它技术混用"><span class="nav-number">4.</span> <span class="nav-text">避免与其它技术混用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用简洁的写法"><span class="nav-number">5.</span> <span class="nav-text">使用简洁的写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块化"><span class="nav-number">6.</span> <span class="nav-text">模块化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐进增强"><span class="nav-number">7.</span> <span class="nav-text">渐进增强</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#允许配置和转化"><span class="nav-number">8.</span> <span class="nav-text">允许配置和转化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免严重嵌套"><span class="nav-number">9.</span> <span class="nav-text">避免严重嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化循环"><span class="nav-number">10.</span> <span class="nav-text">优化循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM_访问最小化"><span class="nav-number">11.</span> <span class="nav-text">DOM 访问最小化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要屈服于浏览器的奇怪表现"><span class="nav-number">12.</span> <span class="nav-text">不要屈服于浏览器的奇怪表现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要信任任何数据"><span class="nav-number">13.</span> <span class="nav-text">不要信任任何数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过_JavaScript_添加功能，而不是添加内容"><span class="nav-number">14.</span> <span class="nav-text">通过 JavaScript 添加功能，而不是添加内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#站在巨人的肩膀上"><span class="nav-number">15.</span> <span class="nav-text">站在巨人的肩膀上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发代码不等于线上代码"><span class="nav-number">16.</span> <span class="nav-text">开发代码不等于线上代码</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
