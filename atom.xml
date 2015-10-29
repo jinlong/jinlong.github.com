@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2015-10-29T03:08:21.952Z</updated>
+  <updated>2015-10-29T05:18:03.346Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -13,6 +13,195 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[如何同步 Github fork 出来的分支]]></title>
+    <link href="http://jinlong.github.io/2015/10/12/syncing-a-fork/"/>
+    <id>http://jinlong.github.io/2015/10/12/syncing-a-fork/</id>
+    <published>2015-10-12T05:00:18.000Z</published>
+    <updated>2015-10-29T05:18:03.346Z</updated>
+    <content type="html"><![CDATA[<p>原先一直有个疑惑， Github fork 出来的项目，我已经做了部分修改，由于某些原因，无法提交 Pull Request，可是想把原项目的最近更新代码合并进来怎么办？google 了一下才茅塞顿开，年纪大了，这里记录一下吧。</p>
+<p>两种方式：</p>
+<ol>
+<li>项目 fetch 到本地，通过命令行的方式 merge</li>
+<li>懒人方法，只用  Github ，不用命令行</li>
+</ol>
+<a id="more"></a>
+<h1 id="项目_fetch_到本地，通过命令行的方式_merge">项目 fetch 到本地，通过命令行的方式 merge</h1><p>提示：跟上游仓库同步代码之前，必须配置过 remote，<a href="https://help.github.com/articles/configuring-a-remote-for-a-fork/" target="_blank" rel="external">指向上游仓库</a> 。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">add</span> upstream http<span class="variable">s:</span>//github.<span class="keyword">com</span>/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git</span><br></pre></td></tr></table></figure>
+<ol>
+<li>打开命令行工具</li>
+<li>切换当前工作路径至你的本地工程</li>
+<li><p>从上游仓库获取到分支，及相关的提交信息，它们将被保存在本地的 <code>upstream/master</code> 分支</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git fetch upstream</span><br><span class="line"><span class="preprocessor"># remote: Counting objects: <span class="number">75</span>, done.</span></span><br><span class="line"><span class="preprocessor"># remote: Compressing objects: <span class="number">100</span>% (<span class="number">53</span>/<span class="number">53</span>), done.</span></span><br><span class="line"><span class="preprocessor"># remote: Total <span class="number">62</span> (delta <span class="number">27</span>), reused <span class="number">44</span> (delta <span class="number">9</span>)</span></span><br><span class="line"><span class="preprocessor"># Unpacking objects: <span class="number">100</span>% (<span class="number">62</span>/<span class="number">62</span>), done.</span></span><br><span class="line"><span class="preprocessor"># From https:<span class="comment">//github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY</span></span></span><br><span class="line"><span class="preprocessor">#  * [new branch]      master     -&gt; upstream/master</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换到本地的 <code>master</code> 分支</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="keyword">master</span></span><br><span class="line"><span class="title"># Switched</span> to branch '<span class="literal">master</span>'</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把 <code>upstream/master</code> 分支合并到本地的 <code>master</code> 分支，本地的 <code>master</code> 分支便跟上游仓库保持同步了，并且没有丢失你本地的修改。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git merge upstream/master</span><br><span class="line"><span class="preprocessor"># Updating a422352.<span class="number">.5</span>fdff0f</span></span><br><span class="line"><span class="preprocessor"># Fast-forward</span></span><br><span class="line"><span class="preprocessor">#  README                    |    <span class="number">9</span> -------</span></span><br><span class="line"><span class="preprocessor">#  README.md                 |    <span class="number">7</span> ++++++</span></span><br><span class="line"><span class="preprocessor">#  <span class="number">2</span> files changed, <span class="number">7</span> insertions(+), <span class="number">9</span> deletions(-)</span></span><br><span class="line"><span class="preprocessor">#  delete mode <span class="number">100644</span> README</span></span><br><span class="line"><span class="preprocessor">#  create mode <span class="number">100644</span> README.md</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>提示：同步后的代码仅仅是保存在本地仓库，记得 <code>push</code> 到 Github 哟。</p>
+<h1 id="懒人方法，只用_github_，不用命令行">懒人方法，只用 github ，不用命令行</h1><p>盗几张<a href="http://www.zhihu.com/question/20393785" target="_blank" rel="external">知乎的图</a>，见图知意。</p>
+<p><img src="/image/sync-a-fork/1.jpg" alt="步骤1"><br><img src="/image/sync-a-fork/2.jpg" alt="步骤2"><br><img src="/image/sync-a-fork/3.jpg" alt="步骤3"><br><img src="/image/sync-a-fork/4.jpg" alt="步骤4"><br>这一页往下面拉:<br><img src="/image/sync-a-fork/5.jpg" alt="步骤5"></p>
+<h1 id="参考资料：">参考资料：</h1><ul>
+<li>《<a href="http://www.zhihu.com/question/20393785" target="_blank" rel="external">Github 上怎样把新 commits 使用在自己的 fork 上？</a>》</li>
+<li>《<a href="https://www.peterdavehello.org/2014/02/update_forked_repository/" target="_blank" rel="external">更新從Github上fork出來的repository (或是同步兩個不同server端的repository)</a>》</li>
+<li>《<a href="https://help.github.com/articles/syncing-a-fork/" target="_blank" rel="external">Syncing a fork</a>》</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>原先一直有个疑惑， Github fork 出来的项目，我已经做了部分修改，由于某些原因，无法提交 Pull Request，可是想把原项目的最近更新代码合并进来怎么办？google 了一下才茅塞顿开，年纪大了，这里记录一下吧。</p>
+<p>两种方式：</p>
+<ol>
+<li>项目 fetch 到本地，通过命令行的方式 merge</li>
+<li>懒人方法，只用  Github ，不用命令行</li>
+</ol>]]>
+    
+    </summary>
+    
+      <category term="git" scheme="http://jinlong.github.io/tags/git/"/>
+    
+      <category term="github" scheme="http://jinlong.github.io/tags/github/"/>
+    
+      <category term="github" scheme="http://jinlong.github.io/categories/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[是什么导致重排（layout / reflow）？]]></title>
+    <link href="http://jinlong.github.io/2015/09/30/what-forces-layout-reflow/"/>
+    <id>http://jinlong.github.io/2015/09/30/what-forces-layout-reflow/</id>
+    <published>2015-09-30T04:23:38.000Z</published>
+    <updated>2015-10-29T04:52:38.862Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>原文：<a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a" target="_blank" rel="external">What forces layout / reflow</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+<p>注：本文只摘取了自己认为重要的知识点，并没有逐字逐句翻译</p>
+</blockquote>
+<p>当在 JavaScript 中调用（requested/called）以下所有属性或方法时，浏览器将会同步地计算样式和布局。重排（也有叫 reflow 或 <a href="http://www.kellegous.com/j/2013/01/26/layout-performance/" target="_blank" rel="external">layout thrashing</a> 的），通常是性能瓶颈。</p>
+<h1 id="元素">元素</h1><h2 id="盒子计算">盒子计算</h2><ul>
+<li>elem.offsetLeft, elem.offsetTop, elem.offsetWidth, elem.offsetHeight, elem.offsetParent</li>
+<li>elem.clientLeft, elem.clientTop, elem.clientWidth, elem.clientHeight</li>
+<li>elem.getClientRects(), elem.getBoundingClientRect()</li>
+</ul>
+<h2 id="滚动相关">滚动相关</h2><ul>
+<li>elem.scrollBy(), elem.scrollTo()</li>
+<li>elem.scrollIntoView(), elem.scrollIntoViewIfNeeded()</li>
+<li>elem.scrollWidth, elem.scrollHeight</li>
+<li>elem.scrollLeft, elem.scrollTop，设置它们的值，同样会影响</li>
+</ul>
+<h2 id="获得焦点">获得焦点</h2><ul>
+<li>elem.focus() 可以引起两次重排（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/dom/Element.cpp&amp;q=updateLayoutIgnorePendingStylesheets%20-f:out%20-f:test&amp;sq=package:chromium&amp;l=2369&amp;ct=rc&amp;cd=4&amp;dr=C" target="_blank" rel="external">源码在此</a>）</li>
+</ul>
+<a id="more"></a>
+<h2 id="还有…">还有…</h2><ul>
+<li>elem.computedRole, elem.computedName</li>
+<li>elem.innerText（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/dom/Element.cpp&amp;q=updateLayoutIgnorePendingStylesheets%20-f:out%20-f:test&amp;sq=package:chromium&amp;l=2626&amp;ct=rc&amp;cd=4&amp;dr=C" target="_blank" rel="external">源码</a>）</li>
+</ul>
+<h1 id="getComputedStyle">getComputedStyle</h1><p><code>window.getComputedStyle()</code> 通常会引起样式重新计算（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/dom/Document.cpp&amp;sq=package:chromium&amp;type=cs&amp;l=1860&amp;q=updateLayoutTreeForNodeIfNeeded" target="_blank" rel="external">源码</a>）</p>
+<p>如果以下任何一种情况存在，<code>window.getComputedStyle()</code> 将会引起重排：</p>
+<ol>
+<li>元素在 shadow tree 中</li>
+<li>使用了 media queries （viewport相关的一种），特别是以下某一属性：（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/css/MediaQueryExp.cpp&amp;sq=package:chromium&amp;type=cs&amp;l=163&amp;q=MediaQueryExp::isViewportDependent" target="_blank" rel="external">源码</a>）<ul>
+<li>min-width, min-height, max-width, max-height, width, height</li>
+<li>aspect-ratio, min-aspect-ratio, max-aspect-ratio</li>
+<li>device-pixel-ratio, resolution, orientation</li>
+</ul>
+</li>
+<li>获取以下的某一种属性：（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/css/CSSComputedStyleDeclaration.cpp&amp;sq=package:chromium&amp;l=457&amp;dr=C&amp;q=isLayoutDependent" target="_blank" rel="external">源码</a>）<ul>
+<li>height, width</li>
+<li>top, right, bottom, left</li>
+<li>margin [-top, -right, -bottom, -left, 或简写] ，仅当 margin 是固定值。</li>
+<li>padding [-top, -right, -bottom, -left,  或简写] ，仅当 padding 是固定值。</li>
+<li>transform, transform-origin, perspective-origin</li>
+<li>translate, rotate, scale</li>
+<li>webkit-filter, backdrop-filter</li>
+<li>motion-path, motion-offset, motion-rotation</li>
+<li>x, y, rx, ry</li>
+</ul>
+</li>
+</ol>
+<h1 id="window">window</h1><ul>
+<li>window.scrollX, window.scrollY</li>
+<li>window.innerHeight, window.innerWidth</li>
+<li>window.getMatchedCSSRules() 仅重新计算样式</li>
+</ul>
+<h1 id="表单">表单</h1><ul>
+<li>inputElem.focus()</li>
+<li>inputElem.select(), textareaElem.select()（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/html/HTMLTextFormControlElement.cpp&amp;q=updateLayoutIgnorePendingStylesheets%20-f:out%20-f:test&amp;sq=package:chromium&amp;l=192&amp;dr=C" target="_blank" rel="external">源码</a>）</li>
+</ul>
+<h1 id="鼠标事件">鼠标事件</h1><ul>
+<li>mouseEvt.layerX, mouseEvt.layerY, mouseEvt.offsetX, mouseEvt.offsetY（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/events/MouseRelatedEvent.cpp&amp;q=f:mouserelatedevent%20computeRelativePosition&amp;sq=package:chromium&amp;type=cs&amp;l=132" target="_blank" rel="external">源码</a>）</li>
+</ul>
+<h1 id="document">document</h1><ul>
+<li>doc.scrollingElement 仅重新计算样式</li>
+</ul>
+<h1 id="Range">Range</h1><ul>
+<li>range.getClientRects(), range.getBoundingClientRect()</li>
+</ul>
+<h1 id="SVG">SVG</h1><p>相当多；没有详尽的清单，但是 <a href="http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html" target="_blank" rel="external">Tony Gentilcore’s 2011 Layout Triggering List</a> 指出了一些。</p>
+<h1 id="contenteditable">contenteditable</h1><p>数不胜数，…包含复制图片到剪切板（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/editing/Editor.cpp&amp;sq=package:chromium&amp;l=420&amp;dr=C&amp;rcl=1442532378" target="_blank" rel="external">源码</a>）</p>
+<h1 id="附录">附录</h1><ul>
+<li>Reflow 仅在文档流已经改变，设定无效的样式或布局时，带来一定消耗。通常情况下，是由于 DOM 已经改变（class 名已修改，节点已新增/已移除，甚至添加一个伪类，像 :focus）。</li>
+<li>如果引起重排，样式首先必须重新计算。因此重排会触发两种操作。它的消耗非常依赖于内容/形势，但通常两种操作成本相似。</li>
+<li>我们该如何避免呢？长话短说：<ul>
+<li>for 循环里触发重排 &amp; 改变 DOM 性能最低，尽量避免。</li>
+<li>使用 DevTools Timeline 看看问题在哪。</li>
+<li>合并读写 DOM 操作（通过 [FastDOM])(<a href="https://github.com/wilsonpage/fastdom" target="_blank" rel="external">https://github.com/wilsonpage/fastdom</a>) 或 虚拟 DOM 实现）</li>
+</ul>
+</li>
+</ul>
+<h1 id="啃_Chromium_源码：">啃 Chromium 源码：</h1><ul>
+<li>触发重排（和重新计算样式）：<a href="https://code.google.com/p/chromium/codesearch#search/&amp;q=updateLayoutIgnorePendingStylesheets%20-f:out%20-f:test&amp;sq=package:chromium&amp;type=cs" target="_blank" rel="external">updateLayoutIgnorePendingStylesheets - Chromium Code Search</a> </li>
+<li>触发样式重算：<a href="https://code.google.com/p/chromium/codesearch#search/&amp;q=updateLayoutTree%20-f:out&amp;p=1&amp;sq=package:chromium&amp;type=cs" target="_blank" rel="external">updateLayoutTree - Chromium Code Search</a> </li>
+</ul>
+<h1 id="CSS_Triggers">CSS Triggers</h1><p><a href="http://csstriggers.com/" target="_blank" rel="external">CSS Triggers</a> 是非常棒的参考资源。设置/改变给出的 CSS 值，在浏览器的生命周期会出现什么结果，会触发哪些操作都有展示。</p>
+<h1 id="更多资料">更多资料</h1><ul>
+<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing?hl=en" target="_blank" rel="external">Avoiding layout thrashing — Web Fundamentals</a> </li>
+<li><a href="https://mattandre.ws/2014/05/really-fixing-layout-thrashing/" target="_blank" rel="external">Fixing Layout thrashing in the real world | Matt Andrews</a> </li>
+<li><a href="https://developer.chrome.com/devtools/docs/demos/too-much-layout" target="_blank" rel="external">Timeline demo: Diagnosing forced synchronous layouts - Google Chrome</a> </li>
+<li><a href="http://wilsonpage.co.uk/preventing-layout-thrashing/" target="_blank" rel="external">Preventing ‘layout thrashing’ | Wilson Page</a> </li>
+<li><a href="https://github.com/wilsonpage/fastdom" target="_blank" rel="external">wilsonpage/fastdom</a> </li>
+<li><a href="http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/" target="_blank" rel="external">Rendering: repaint, reflow/relayout, restyle / Stoyan</a> </li>
+<li><a href="http://blog.fogcreek.com/we-spent-a-week-making-trello-boards-load-extremely-fast-heres-how-we-did-it/" target="_blank" rel="external">We spent a week making Trello boards load extremely fast. Here’s how we did it. - Fog Creek Blog</a> </li>
+<li><a href="https://developers.google.com/speed/articles/reflow?hl=en" target="_blank" rel="external">Minimizing browser reflow  |  PageSpeed Insights  |  Google Developers</a> </li>
+<li><a href="https://developers.google.com/speed/articles/reflow?hl=en" target="_blank" rel="external">Optimizing Web Content in UIWebViews and Websites on iOS</a> </li>
+<li><a href="http://www.html5rocks.com/en/tutorials/speed/layers/" target="_blank" rel="external">Accelerated Rendering in Chrome</a> </li>
+<li><a href="https://www.igvita.com/slides/2012/web-performance-for-the-curious/" target="_blank" rel="external">web performance for the curious</a> </li>
+<li><a href="http://jankfree.org/" target="_blank" rel="external">Jank Free</a> </li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>原文：<a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a">What forces layout / reflow</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+<p>注：本文只摘取了自己认为重要的知识点，并没有逐字逐句翻译</p>
+</blockquote>
+<p>当在 JavaScript 中调用（requested/called）以下所有属性或方法时，浏览器将会同步地计算样式和布局。重排（也有叫 reflow 或 <a href="http://www.kellegous.com/j/2013/01/26/layout-performance/">layout thrashing</a> 的），通常是性能瓶颈。</p>
+<h1 id="元素">元素</h1><h2 id="盒子计算">盒子计算</h2><ul>
+<li>elem.offsetLeft, elem.offsetTop, elem.offsetWidth, elem.offsetHeight, elem.offsetParent</li>
+<li>elem.clientLeft, elem.clientTop, elem.clientWidth, elem.clientHeight</li>
+<li>elem.getClientRects(), elem.getBoundingClientRect()</li>
+</ul>
+<h2 id="滚动相关">滚动相关</h2><ul>
+<li>elem.scrollBy(), elem.scrollTo()</li>
+<li>elem.scrollIntoView(), elem.scrollIntoViewIfNeeded()</li>
+<li>elem.scrollWidth, elem.scrollHeight</li>
+<li>elem.scrollLeft, elem.scrollTop，设置它们的值，同样会影响</li>
+</ul>
+<h2 id="获得焦点">获得焦点</h2><ul>
+<li>elem.focus() 可以引起两次重排（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/dom/Element.cpp&amp;q=updateLayoutIgnorePendingStylesheets%20-f:out%20-f:test&amp;sq=package:chromium&amp;l=2369&amp;ct=rc&amp;cd=4&amp;dr=C">源码在此</a>）</li>
+</ul>]]>
+    
+    </summary>
+    
+      <category term="layout" scheme="http://jinlong.github.io/tags/layout/"/>
+    
+      <category term="reflow" scheme="http://jinlong.github.io/tags/reflow/"/>
+    
+      <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[JavaScript API 设计原则]]></title>
@@ -2327,134 +2516,6 @@
       <category term="水平居中" scheme="http://jinlong.github.io/categories/CSS/%E6%B0%B4%E5%B9%B3%E5%B1%85%E4%B8%AD/"/>
     
       <category term="垂直居中" scheme="http://jinlong.github.io/categories/CSS/%E6%B0%B4%E5%B9%B3%E5%B1%85%E4%B8%AD/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[JavaScript Promises]]></title>
-    <link href="http://jinlong.github.io/2013/08/13/javascript-promises/"/>
-    <id>http://jinlong.github.io/2013/08/13/javascript-promises/</id>
-    <published>2013-08-13T05:13:00.000Z</published>
-    <updated>2015-10-28T14:48:49.576Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>原文：<a href="http://wildermuth.com/2013/8/3/JavaScript_Promises" target="_blank" rel="external">JavaScript Promises</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
-</blockquote>
-<p>不，我不是要谈论 JavaScript 会解决一切问题的承诺。我甚至也不相信这点;) 我想谈谈几个JavaScript 库（包括 <a href="http://angularjs.org/" target="_blank" rel="external">AngularJS</a>，<a href="http://jquery.com/" target="_blank" rel="external">jQuery</a>，<a href="http://dojotoolkit.org/" target="_blank" rel="external">Dojo</a> 和 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br229773.aspx" target="_blank" rel="external">WinJS</a>）用到的约定对象（promise object）的概念。</p>
-<p>promise 是处理异步操作的模式。问题是当你开始一个异步操作，操作完成时需要执行一些代码。异步代码非常普遍，大部分的库已经找到了解决方案，传入回调函数。但是，每个库的作法很少有共性。让我们看看 jQuery 的例子：</p>
-<iframe width="100%" height="300" src="http://jsfiddle.net/cuXqF/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-<a id="more"></a>
-<p>此例中我们可以看到 jQuery 使用配置对象的 <code>success</code> 属性指定回调函数。这不是一个 promise，而是一种传入回调函数的方式。当 ajax 调用完成，它会调用 <code>success</code> 函数。依靠这个库做异步操作，你可能会传一组回调函数（比如 success 或者 failure）。有很多方法可以实现这一点。</p>
-<p>约定模式（promise pattern）着手简化这个过程。异步操作简单返回一个对象叫一个约定（promise） 。promise 允许你调用 <strong>then</strong> 方法，让你指定一个或多个回调函数。让我们看看如何用 jQuery 建立一个 promise：</p>
-<iframe width="100%" height="300" src="http://jsfiddle.net/FDg6d/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-<p>比较有趣的是，<strong>ajax</strong> 返回 <strong>xhr</strong> 对象实现了 promise 模式，因此我们可以调用 <strong>then</strong> 。这样做的优势是你可以链式调用，实现独立操作，完成操作时调用 <strong>done</strong>，如下所示 ：</p>
-<iframe width="100%" height="300" src="http://jsfiddle.net/kWrpq/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-<p>由于许多库开始着手实现 promise 模式，处理异步操作应该会更简单，不管你写什么代码（比如 NodeJS，in-browser JS 等）。promise 从另一个侧面看像什么呢？</p>
-<p>这个模式的关键点是 <strong>then</strong> 函数可以接收两个函数，第一个用于成功回调；第二个用于失败回调，像这样：</p>
-<iframe width="100%" height="300" src="http://jsfiddle.net/SwzkK/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-<p>注意到我们用了 <strong>always</strong> 指定成功或失败时的回调函数。</p>
-<p>再看一个 AngularJS 的例子：</p>
-<iframe width="100%" height="300" src="http://jsfiddle.net/s35B9/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-<p>AngularJS 使用 <code>$q</code> 变量，开始调用 <code>defer()</code>，返回对象包含成功或失败的条件，还有 promise 本身。注意 <code>_callMe</code> 函数，<code>d</code> 变量是调用 <code>$q.defer()</code> 创建的，<code>d.promise</code> 是函数返回的，因此调用者（caller） 可以调用 promise 方法（比如 <code>then</code>）。当真正的异步操作执行时（此时嘲笑一下 <code>setTimeout</code> ），我们可以在 d 对象使用 <code>resolve</code> 方法，告诉 promise 我们成功完成（因此在 <code>then</code> 方法后面调用第一个函数）。如果我们调用 <code>reject</code> ，第二个方法将被调用（失败回调）。</p>
-<p>你可以在 JSFiddle 里玩一下这些例子，看看会发生什么。Promises 的确是又简单又酷的处理异步操作的方式。我非常喜欢它，它可以简化你的代码。</p>
-<blockquote>
-<p>更多介绍：<a href="http://www.promisejs.org/" target="_blank" rel="external">www.promisejs.org</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>原文：<a href="http://wildermuth.com/2013/8/3/JavaScript_Promises">JavaScript Promises</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<p>不，我不是要谈论 JavaScript 会解决一切问题的承诺。我甚至也不相信这点;) 我想谈谈几个JavaScript 库（包括 <a href="http://angularjs.org/">AngularJS</a>，<a href="http://jquery.com/">jQuery</a>，<a href="http://dojotoolkit.org/">Dojo</a> 和 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br229773.aspx">WinJS</a>）用到的约定对象（promise object）的概念。</p>
-<p>promise 是处理异步操作的模式。问题是当你开始一个异步操作，操作完成时需要执行一些代码。异步代码非常普遍，大部分的库已经找到了解决方案，传入回调函数。但是，每个库的作法很少有共性。让我们看看 jQuery 的例子：</p>
-<iframe width="100%" height="300" src="http://jsfiddle.net/cuXqF/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>]]>
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://jinlong.github.io/tags/JavaScript/"/>
-    
-      <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[移植 Chrome 扩展至 Opera]]></title>
-    <link href="http://jinlong.github.io/2013/07/23/porting-chrome-extension-to-opera/"/>
-    <id>http://jinlong.github.io/2013/07/23/porting-chrome-extension-to-opera/</id>
-    <published>2013-07-23T09:23:00.000Z</published>
-    <updated>2014-11-21T07:38:33.970Z</updated>
-    <content type="html"><![CDATA[<p><strong>准备工作：</strong></p>
-<p>下载：<a href="https://getfirebug.com/firebuglite" target="_blank" rel="external">firebuglite 源码</a>   </p>
-<p>我下载的<a href="https://getfirebug.com/releases/lite/latest/firebug-lite.tar.tgz" target="_blank" rel="external">稳定版</a></p>
-<p>解压源码，找到 <code>firebug-lite/build/chrome-extension</code> 目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来……</p>
-<p>我感觉原因可能是：</p>
-<ol>
-<li><a href="http://dev.opera.com/extension-docs/" target="_blank" rel="external">Opera extension API</a> 暂时没有 <a href="https://developer.chrome.com/extensions/api_index.html" target="_blank" rel="external">Chrome extension API</a> 支持的多</li>
-<li>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新</li>
-</ol>
-<p>下面记录移植过程的一些要点：</p>
-<p>地址栏输入 <code>opera:opera://extensions</code> 或者 “<strong>Ctrl + Shift + E</strong>`”打开扩展页，右上角点击“<strong>开发者模式</strong>”；</p>
-<p>点击“<strong>载入解压后的扩展…</strong>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；</p>
-<p>哈，第一个报错来了：</p>
-<p><img src="/images/post/firebuglite/1.png"></p>
-<p>意思是说“<code>manifest_version</code>”值必须是 2 ，不能有引号，解释参见<a href="http://dev.opera.com/extension-docs/manifest.html#manifest_version" target="_blank" rel="external">这里</a> 。<br><a id="more"></a><br>扩展目录找到“<strong>manifest.json</strong>”文件，加入“<code>&quot;manifest_version&quot;: 2,</code>”。</p>
-<p>再加载扩展目录试试，扩展加进来了，可是又报错了……</p>
-<p><img src="/images/post/firebuglite/2.png"></p>
-<p>“<strong>manifest.json</strong>”文件里的“<code>background_page</code>”项替换成 <code>&quot;background&quot;: {&quot;scripts&quot;: [&quot;background.js&quot;]}</code> ，<strong>background.html</strong> 转换成 <strong>background.js</strong> 格式，删除没用的 <code>&lt;script&gt;</code> 标签。</p>
-<p>点击“重新载入”试试，(⊙o⊙)哦，不报错啦？打开个网页测试一下，打开 Chrome devTools ，看看 console 吧：</p>
-<p><img src="/images/post/firebuglite/3.png"></p>
-<p>果然不出所料，还是报错，好事是浏览器右上角出现“小虫子”啦，嚯嚯~~</p>
-<p>有事问 Google ，找啊找，看到<a href="http://stackoverflow.com/questions/9106519/port-error-could-not-establish-connection-receiving-end-does-not-exist-in-chr" target="_blank" rel="external">一篇帖子</a> ，很像我遇到的问题。</p>
-<p>找到“<code>contentScript.js</code>”文件，把所有 “<code>sendRequest()</code>”替换成“<code>sendMessage()</code>”，所有“<code>onRequest</code>”替换成“<code>onMessage</code>”，原因是原来的 API 已过时，<a href="http://dev.opera.com/extension-docs/tut_message_passing.html" target="_blank" rel="external">详细见文档</a>。</p>
-<p>“重新载入”扩展再试，有报错，关键的 “<code>firebug-lite.js</code>”没加载成功，要命：</p>
-<p><img src="/images/post/firebuglite/4.png"></p>
-<p>继续问谷哥，见到<a href="http://stackoverflow.com/questions/10527625/google-chrome-extension-script-injections" target="_blank" rel="external">一篇帖子</a></p>
-<p>在 “<strong>manifest.json</strong>”里增加：“<code>&quot;web_accessible_resources&quot;: [&quot;firebug-lite.js&quot;]</code>”，大概意思是资源可以通过“<code>opera-extension://[PACKAGE ID]/[PATH]</code>”取到啦，<a href="http://dev.opera.com/extension-docs/manifest.html#web_accessible_resources" target="_blank" rel="external">详细见文档</a>。</p>
-<p>再“重新载入”扩展试一试，激动啊…… “<strong>F12</strong>”Firebug 神奇的出现了，哈哈。</p>
-<p><img src="/images/post/firebuglite/5.png"></p>
-<p>不过还是有错，一些小图标资源加载不出来……</p>
-<p>坑爹的，找了半天原因，发现“<code>firebug-lite.js</code>”文件中，图标的目录有错误“chrome-extension://bmagokdooijbeehmkpknfglimnifench/skin/xp/sprite.png”。把乱码“bmagokdooijbeehmkpknfglimnifench”批量替换成你的扩展 ID 即可。</p>
-<p>艾玛，眼泪哗哗的……经过不懈的折腾，终于看到 “firebug-lite”出现在 Opera 15 中了，哈哈哈（不会觉得我无聊吧……）。</p>
-<p><img src="/images/post/firebuglite/6.png"></p>
-<p>正当狂喜之际，打包时遇到问题，JS 文件需要加载本地图片，需要用到扩展 ID（随机生成），本地测试好的扩展 ID 跟打包完的不一致，导致图片资源加载不出来。</p>
-<p>content scripts 可以获取扩展 ID：</p>
-<p><code>chrome.i18n.getMessage(&#39;@@extension_id&#39;);</code><br><code>chrome.runtime.id</code><br>获取相对路径： <code>chrome.extension.getURL(&quot;&quot;)</code></p>
-<p>我把动态获取的扩展 ID 存到 <code>localStorage</code> 里，然后在注入的其它 JS 可以调用这个扩展 ID 了，搞定收工。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong>准备工作：</strong></p>
-<p>下载：<a href="https://getfirebug.com/firebuglite">firebuglite 源码</a>   </p>
-<p>我下载的<a href="https://getfirebug.com/releases/lite/latest/firebug-lite.tar.tgz">稳定版</a></p>
-<p>解压源码，找到 <code>firebug-lite/build/chrome-extension</code> 目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来……</p>
-<p>我感觉原因可能是：</p>
-<ol>
-<li><a href="http://dev.opera.com/extension-docs/">Opera extension API</a> 暂时没有 <a href="https://developer.chrome.com/extensions/api_index.html">Chrome extension API</a> 支持的多</li>
-<li>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新</li>
-</ol>
-<p>下面记录移植过程的一些要点：</p>
-<p>地址栏输入 <code>opera:opera://extensions</code> 或者 “<strong>Ctrl + Shift + E</strong>`”打开扩展页，右上角点击“<strong>开发者模式</strong>”；</p>
-<p>点击“<strong>载入解压后的扩展…</strong>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；</p>
-<p>哈，第一个报错来了：</p>
-<p><img src="/images/post/firebuglite/1.png" /></p>
-<p>意思是说“<code>manifest_version</code>”值必须是 2 ，不能有引号，解释参见<a href="http://dev.opera.com/extension-docs/manifest.html#manifest_version">这里</a> 。<br>]]>
-    
-    </summary>
-    
-      <category term="Chrome Extensions" scheme="http://jinlong.github.io/tags/Chrome-Extensions/"/>
-    
-      <category term="Firebug" scheme="http://jinlong.github.io/tags/Firebug/"/>
-    
-      <category term="Opera Extensions" scheme="http://jinlong.github.io/tags/Opera-Extensions/"/>
-    
-      <category term="Opera Extensions" scheme="http://jinlong.github.io/categories/Opera-Extensions/"/>
-    
-      <category term="Chrome Extensions" scheme="http://jinlong.github.io/categories/Opera-Extensions/Chrome-Extensions/"/>
-    
-      <category term="Firebug" scheme="http://jinlong.github.io/categories/Opera-Extensions/Chrome-Extensions/Firebug/"/>
     
   </entry>
   
