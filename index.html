@@ -219,6 +219,244 @@
             
             
               
+                <a class="post-title-link" href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/" itemprop="url">
+                  JavaScript 如何实现后台计划任务
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-14T23:26:53+08:00" content="2015-12-14">
+              2015-12-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/14/how-to-schedule-background-tasks-in-javascript/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>原文：<a href="http://www.sitepoint.com/how-to-schedule-background-tasks-in-javascript/" target="_blank" rel="external">How to Schedule Background Tasks in JavaScript</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>即使忘了 JavaScript 的一切知识，也不会忘记：它是阻塞的。</p>
+<p>想象一下，你的浏览器里住着一个魔法小精灵，负责浏览器的正常运转。不论渲染 HTML，响应菜单命令，屏幕渲染，处理鼠标点击，或者执行 JavaScript 函数，所有事情都归一个小精灵处理。它哪忙得过来，一次只能处理一件事情。如果同时丢给它一堆任务，它会列一个长长的待办列表，按顺序完成它们。</p>
+<p>人们常常希望初始化组件和事件处理的 JavaScript 可以尽快被执行。可是，有些不太重要的后台任务不会直接影响用户体验，比如：</p>
+<ul>
+<li>记录统计数据</li>
+<li>发送数据到社交网络（或添加‘分享’按钮）</li>
+<li>预加载内容</li>
+<li>预处理或预渲染 HTML</li>
+</ul>
+<p>他们对时序要求不严格，但是为了让页面仍然响应，直到用户滚动页面或者与内容交互时才被执行。</p>
+<p>选择之一是 <a href="http://www.sitepoint.com/javascript-threading-html5-web-workers/" target="_blank" rel="external">Web Workers</a> ，它可以在独立的线程同时执行代码。用于预加载和预处理再好不过，但是你没有权限直接访问或更新 DOM。你可以在自己的代码中避开这点，但是无法保证第三方脚本比如 Google Analytics 永远不需要这个。</p>
+<p>另一个选择是 <code>setTimeout</code> ，比如 <code>setTimeout(doSomething, 1);</code> 。一旦其它的立即执行任务执行完毕，浏览器将执行 <code>doSomething()</code> 函数。实际上，它被放到了待办列表的底部。不幸的是，函数将被调用，而不顾处理需求。</p>
+<p>#requestIdleCallback</p>
+<p><a href="http://www.w3.org/TR/requestidlecallback/" target="_blank" rel="external">requestIdleCallback</a> 是新API，当浏览器稍作喘息的时候，用来执行不太重要的后台计划任务。 难免让人想起 <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="_blank" rel="external">requestAnimationFrame</a>，在下次重绘之前，执行函数更新动画。 想了解更多戳这里：<a href="http://www.sitepoint.com/simple-animations-using-requestanimationframe/" target="_blank" rel="external">使用 requestAnimationFrame 做简单的动画</a>。</p>
+<p> <code>requestIdleCallback</code> 特性监测：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">'requestIdleCallback'</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">  <span class="comment">// requestIdleCallback supported</span></span><br><span class="line">  requestIdleCallback(backgroundTask);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// no support - do something else</span></span><br><span class="line">  setTimeout(backgroundTask1, <span class="number">1</span>);</span><br><span class="line">  setTimeout(backgroundTask2, <span class="number">1</span>);</span><br><span class="line">  setTimeout(backgroundTask3, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以指定配置参数对象，比如 timeout，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requestIdleCallback(backgroundTask, &#123; timeout: <span class="number">3000</span>; &#125;);</span><br></pre></td></tr></table></figure>
+<p>确保函数在3秒之内调用，不管浏览器是否空闲。</p>
+<p><code>deadline</code> 对象传入以下参数时，<code>requestIdleCallback</code> 仅执行一次回调：</p>
+<ul>
+<li><code>didTimeout</code> —— 如果可选的 timeout 触发，则设置为 true</li>
+<li><code>timeRemaining()</code> —— 函数返回执行任务剩余的毫秒数<br><code>timeRemaining()</code> 最多分配50ms用于任务的执行，超过这个限制，也不会停止任务，但是，最好重新调用 <code>requestIdleCallback</code> 安排进一步的处理。</li>
+</ul>
+<p>我们来创建一个简单的例子，让几个任务按序执行。任务的函数引用储存在数组中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//待执行的函数数组</span></span><br><span class="line"><span class="keyword">var</span> task = [</span><br><span class="line">    background1,</span><br><span class="line">    background2,</span><br><span class="line">    background3</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">'requestIdleCallback'</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">  <span class="comment">//支持 requestIdleCallback</span></span><br><span class="line">  requestIdleCallback(backgroundTask);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">//不支持 —— 立刻执行所有任务</span></span><br><span class="line">  <span class="keyword">while</span> (task.length) &#123;</span><br><span class="line">    setTimeout(task.shift(), <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//requestIdleCallback 回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">backgroundTask</span>(<span class="params">deadline</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//如果存在，执行下一个任务</span></span><br><span class="line">  <span class="keyword">while</span> (deadline.timeRemaining() &gt; <span class="number">0</span> &amp;&amp; task.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    task.shift()();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//需要的话，安排进一步任务</span></span><br><span class="line">  <span class="keyword">if</span> (task.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    requestIdleCallback(backgroundTask);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#一次 requestIdleCallback 之间不应该做什么？</p>
+<p>Paul Lewis 在<a href="https://developers.google.com/web/updates/2015/08/using-requestidlecallback?hl=en" target="_blank" rel="external">他的文章</a>中提到，一次 requestIdleCallback 执行的任务应该切成小块。它不适用于不可预知时间的情况（比如操作 DOM，使用 requestAnimationFrame 回调更好些）。resolving（或者 rejecting）Promises 时也要谨慎，即使没有更多的剩余时间，空闲回调完成之后，回调函数也将立即执行。</p>
+<p>#requestIdleCallback 浏览器支持情况</p>
+<p><code>requestIdleCallback</code> 是试验性特性，规范仍不稳定，碰到 API 变更时不足为奇。Chrome 47 已支持… 2015年结束前应该可用了。Opera 应该会紧跟其后。Microsoft 和 Mozilla 都在考虑 API 是否应该支持 Promises 。Apple 像往常一样不鸟。</p>
+<p>Paul Lewis（上文提到的）写了一个简单的 <a href="https://gist.github.com/paullewis/55efe5d6f05434a96c36" target="_blank" rel="external">requestIdleCallback shim</a> ，它可以模拟浏览器的空闲监测行为，但不是一个 polyfill（<a href="http://www.cnblogs.com/ziyunfei/archive/2012/09/17/2688829.html" target="_blank" rel="external">shim 和 polyfill 的区别</a>）。</p>
+<p>requestIdleCallback shim代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span><br><span class="line"> * Copyright 2015 Google Inc. All rights reserved.</span><br><span class="line"> *</span><br><span class="line"> * Licensed under the Apache License, Version 2.0 (the "License");</span><br><span class="line"> * you may not use this file except in compliance with the License.</span><br><span class="line"> * You may obtain a copy of the License at</span><br><span class="line"> *</span><br><span class="line"> * http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="line"> *</span><br><span class="line"> * Unless required by applicable law or agreed to in writing, software</span><br><span class="line"> * distributed under the License is distributed on an "AS IS" BASIS,</span><br><span class="line"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express</span><br><span class="line"> * or implied. See the License for the specific language governing</span><br><span class="line"> * permissions and limitations under the License.</span><br><span class="line"> */</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * @see https://developers.google.com/web/updates/2015/08/using-requestidlecallback</span><br><span class="line"> */</span></span><br><span class="line"><span class="built_in">window</span>.requestIdleCallback = <span class="built_in">window</span>.requestIdleCallback ||</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> start = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">return</span> setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      cb(&#123; </span><br><span class="line">        didTimeout: <span class="literal">false</span>,</span><br><span class="line">        timeRemaining: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">Math</span>.max(<span class="number">0</span>, <span class="number">50</span> - (<span class="built_in">Date</span>.now() - start));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.cancelIdleCallback = <span class="built_in">window</span>.cancelIdleCallback ||</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">id</span>) </span>&#123;</span><br><span class="line">    clearTimeout(id);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2015/12/14/negating-predicate-functions-in-javaScript/" itemprop="url">
+                  JavaScript 否定谓语函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-14T22:51:37+08:00" content="2015-12-14">
+              2015-12-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/14/negating-predicate-functions-in-javaScript/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/14/negating-predicate-functions-in-javaScript/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://adripofjavascript.com/blog/drips/negating-predicate-functions-in-javascript.html">Negating Predicate Functions in JavaScript</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a>  </p>
+</blockquote>
+<p>如果你从没听过这个概念，那么至少用过谓语函数。谓语本质上是一个函数，根据它的参数，可以判断返回结果是 <code>true</code> 或者 <code>false</code>。一般都以“isX”命名，比如 <code>isEven</code> 或者 <code>isNumber</code>。</p>
+<p>假如我们有个程序，需要处理漫画书里的英雄和坏蛋，以下面的简单对象为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> superman = &#123;</span><br><span class="line">    name: <span class="string">"Superman"</span>,</span><br><span class="line">    strength: <span class="string">"Super"</span>,</span><br><span class="line">    heroism: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>程序中难免会用到一些谓语，像这些：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSuperStrong</span> (<span class="params">character</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> character.strength === <span class="string">"Super"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNotSuperStrong</span> (<span class="params">character</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> character.strength !== <span class="string">"Super"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isHeroic</span> (<span class="params">character</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> character.heroism === <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNotHeroic</span> (<span class="params">character</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> character.heroism !== <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: false</span></span><br><span class="line"><span class="built_in">console</span>.log(isNotSuperStrong(superman));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: false</span></span><br><span class="line"><span class="built_in">console</span>.log(isNotHeroic(superman));</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/14/negating-predicate-functions-in-javaScript/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2015/10/12/syncing-a-fork/" itemprop="url">
                   如何同步 Github fork 出来的分支
                 </a>
@@ -1055,249 +1293,11 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2014/01/07/introduction-to-express/" itemprop="url">
-                  Express 入门
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-01-07T16:19:00+08:00" content="2014-01-07">
-              2014-01-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Node-js/Express/" itemprop="url" rel="index">
-                    <span itemprop="name">Express</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/01/07/introduction-to-express/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/07/introduction-to-express/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文：<a href="http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-express/">Introduction to Express</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<h2 id="安装">安装</h2><p>package.json 中手动添加 Express 依赖</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="string">"name"</span>: <span class="string">"demo1"</span>,</span><br><span class="line">   <span class="string">"description"</span>: <span class="string">"First Express app"</span>,</span><br><span class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</span><br><span class="line">   <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>相同的目录运行：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
-<p>命令行安装 Express 直接运行：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> express</span></span><br></pre></td></tr></table></figure>
-<p>安装完后可以用 express 在命令行生成应用。</p>
-<p>添加 app.js 文件，写个最简单的应用，创建一个 Express 实例，开始监听特定的端口 ：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-<p>运行 <code>node app</code> 没发生任何事情。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/01/07/introduction-to-express/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/12/22/grunt-for-fe/" itemprop="url">
-                  Grunt-前端利器
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-12-22T23:42:00+08:00" content="2013-12-22">
-              2013-12-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Grunt/" itemprop="url" rel="index">
-                    <span itemprop="name">Grunt</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/12/22/grunt-for-fe/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/12/22/grunt-for-fe/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文：<a href="http://24ways.org/2013/grunt-is-not-weird-and-hard/">Grunt for People Who Think Things Like Grunt are Weird and Hard</a><br>此篇笔记包含了个人的理解，只记录了文章的要点，并没有逐句翻译，如有不妥望指正。</p>
-</blockquote>
-<p>Grunt 可以帮前端工程师做什么：</p>
-<ul>
-<li>合并 CSS 和 JS 文件   </li>
-<li>压缩 CSS ，最小化 JS   </li>
-<li>优化图片   </li>
-<li>使用 Sass</li>
-</ul>
-<p>前提：安装 <a href="http://nodejs.org/">Node.js</a> </p>
-<p>项目根目录需要 <strong>package.json</strong> 文件</p>
-<p><img src="/images/post/gruntForFE/package-json-file.gif" /></p>
-<p>package.json 内容：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">name</span>": <span class="value"><span class="string">"example-project"</span></span>,</span><br><span class="line">  "<span class="attribute">version</span>": <span class="value"><span class="string">"0.1.0"</span></span>,</span><br><span class="line">  "<span class="attribute">devDependencies</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">grunt</span>": <span class="value"><span class="string">"~0.4.1"</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
-<p>打开命令行工具，切换到项目文件夹，运行命令：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>node_modules</strong> 文件夹出现了，里面是 “<strong>devDependencies</strong>”属性定义的依赖包</p>
-<p>全局安装 Grunt CLI：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> grunt-cli</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/12/22/grunt-for-fe/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1338,7 +1338,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">41</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1352,7 +1352,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
