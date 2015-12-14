@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2015-12-14T16:00:27.958Z</updated>
+  <updated>2015-12-14T16:01:55.923Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://jinlong.github.io/2015/12/14/how-to-schedule-background-tasks-in-javascript/"/>
     <id>http://jinlong.github.io/2015/12/14/how-to-schedule-background-tasks-in-javascript/</id>
     <published>2015-12-14T15:26:53.000Z</published>
-    <updated>2015-12-14T16:00:27.958Z</updated>
+    <updated>2015-12-14T16:01:55.923Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://www.sitepoint.com/how-to-schedule-background-tasks-in-javascript/" target="_blank" rel="external">How to Schedule Background Tasks in JavaScript</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
@@ -33,8 +33,7 @@
 <li>预处理或预渲染 HTML</li>
 </ul>
 <p>他们对时序要求不严格，但是为了让页面仍然响应，直到用户滚动页面或者与内容交互时才被执行。</p>
-<p>选择之一是 <a href="http://www.sitepoint.com/javascript-threading-html5-web-workers/" target="_blank" rel="external">Web Workers</a> ，它可以在独立的线程同时执行代码。用于预加载和预处理再好不过，但是你没有权限直接访问或更新 DOM。你可以在自己的代码中避开这点，但是无法保证第三方脚本比如 Google Analytics 永远不需要这个。</p>
-<p>另一个选择是 <code>setTimeout</code> ，比如 <code>setTimeout(doSomething, 1);</code> 。一旦其它的立即执行任务执行完毕，浏览器将执行 <code>doSomething()</code> 函数。实际上，它被放到了待办列表的底部。不幸的是，函数将被调用，而不顾处理需求。</p>
+<p>选择之一是 <a href="http://www.sitepoint.com/javascript-threading-html5-web-workers/" target="_blank" rel="external">Web Workers</a> ，它可以在独立的线程同时执行代码。用于预加载和预处理再好不过，但是你没有权限直接访问或更新 DOM。你可以在自己的代码中避开这点，但是无法保证第三方脚本比如 Google Analytics 永远不需要这个。<br><a id="more"></a><br>另一个选择是 <code>setTimeout</code> ，比如 <code>setTimeout(doSomething, 1);</code> 。一旦其它的立即执行任务执行完毕，浏览器将执行 <code>doSomething()</code> 函数。实际上，它被放到了待办列表的底部。不幸的是，函数将被调用，而不顾处理需求。</p>
 <p>#requestIdleCallback</p>
 <p><a href="http://www.w3.org/TR/requestidlecallback/" target="_blank" rel="external">requestIdleCallback</a> 是新API，当浏览器稍作喘息的时候，用来执行不太重要的后台计划任务。 难免让人想起 <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="_blank" rel="external">requestAnimationFrame</a>，在下次重绘之前，执行函数更新动画。 想了解更多戳这里：<a href="http://www.sitepoint.com/simple-animations-using-requestanimationframe/" target="_blank" rel="external">使用 requestAnimationFrame 做简单的动画</a>。</p>
 <p> <code>requestIdleCallback</code> 特性监测：</p>
@@ -59,7 +58,20 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<blockquote>
-<p>原文：<a href="http://www.sitepoint.com/how-to-schedule-background-tasks-in-javascript/" target="_blank" rel="external">How to ]]>
+<p>原文：<a href="http://www.sitepoint.com/how-to-schedule-background-tasks-in-javascript/">How to Schedule Background Tasks in JavaScript</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>即使忘了 JavaScript 的一切知识，也不会忘记：它是阻塞的。</p>
+<p>想象一下，你的浏览器里住着一个魔法小精灵，负责浏览器的正常运转。不论渲染 HTML，响应菜单命令，屏幕渲染，处理鼠标点击，或者执行 JavaScript 函数，所有事情都归一个小精灵处理。它哪忙得过来，一次只能处理一件事情。如果同时丢给它一堆任务，它会列一个长长的待办列表，按顺序完成它们。</p>
+<p>人们常常希望初始化组件和事件处理的 JavaScript 可以尽快被执行。可是，有些不太重要的后台任务不会直接影响用户体验，比如：</p>
+<ul>
+<li>记录统计数据</li>
+<li>发送数据到社交网络（或添加‘分享’按钮）</li>
+<li>预加载内容</li>
+<li>预处理或预渲染 HTML</li>
+</ul>
+<p>他们对时序要求不严格，但是为了让页面仍然响应，直到用户滚动页面或者与内容交互时才被执行。</p>
+<p>选择之一是 <a href="http://www.sitepoint.com/javascript-threading-html5-web-workers/">Web Workers</a> ，它可以在独立的线程同时执行代码。用于预加载和预处理再好不过，但是你没有权限直接访问或更新 DOM。你可以在自己的代码中避开这点，但是无法保证第三方脚本比如 Google Analytics 永远不需要这个。<br>]]>
+    
     </summary>
     
       <category term="requestIdleCallback" scheme="http://jinlong.github.io/tags/requestIdleCallback/"/>

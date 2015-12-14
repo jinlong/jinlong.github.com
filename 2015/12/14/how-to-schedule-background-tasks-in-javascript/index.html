@@ -73,7 +73,7 @@
 
 即使忘了 JavaScript 的一切知识，也不会忘记：它是阻塞的。
 想象一下，你的浏览器里住着一个魔法小精灵，负责浏览器的正常运转。不论渲染 HTML，响应菜单命令，屏幕渲染，处理鼠标点击，或者执行 JavaScript 函数，所有事情都归一个小精灵处理。它哪忙得过来，一次只能处理">
-<meta property="og:updated_time" content="2015-12-14T16:00:27.958Z">
+<meta property="og:updated_time" content="2015-12-14T16:01:55.923Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 如何实现后台计划任务">
 <meta name="twitter:description" content="原文：How to Schedule Background Tasks in JavaScript翻译：涂鸦码龙
@@ -295,8 +295,7 @@
 <li>预处理或预渲染 HTML</li>
 </ul>
 <p>他们对时序要求不严格，但是为了让页面仍然响应，直到用户滚动页面或者与内容交互时才被执行。</p>
-<p>选择之一是 <a href="http://www.sitepoint.com/javascript-threading-html5-web-workers/" target="_blank" rel="external">Web Workers</a> ，它可以在独立的线程同时执行代码。用于预加载和预处理再好不过，但是你没有权限直接访问或更新 DOM。你可以在自己的代码中避开这点，但是无法保证第三方脚本比如 Google Analytics 永远不需要这个。</p>
-<p>另一个选择是 <code>setTimeout</code> ，比如 <code>setTimeout(doSomething, 1);</code> 。一旦其它的立即执行任务执行完毕，浏览器将执行 <code>doSomething()</code> 函数。实际上，它被放到了待办列表的底部。不幸的是，函数将被调用，而不顾处理需求。</p>
+<p>选择之一是 <a href="http://www.sitepoint.com/javascript-threading-html5-web-workers/" target="_blank" rel="external">Web Workers</a> ，它可以在独立的线程同时执行代码。用于预加载和预处理再好不过，但是你没有权限直接访问或更新 DOM。你可以在自己的代码中避开这点，但是无法保证第三方脚本比如 Google Analytics 永远不需要这个。<br><a id="more"></a><br>另一个选择是 <code>setTimeout</code> ，比如 <code>setTimeout(doSomething, 1);</code> 。一旦其它的立即执行任务执行完毕，浏览器将执行 <code>doSomething()</code> 函数。实际上，它被放到了待办列表的底部。不幸的是，函数将被调用，而不顾处理需求。</p>
 <p>#requestIdleCallback</p>
 <p><a href="http://www.w3.org/TR/requestidlecallback/" target="_blank" rel="external">requestIdleCallback</a> 是新API，当浏览器稍作喘息的时候，用来执行不太重要的后台计划任务。 难免让人想起 <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="_blank" rel="external">requestAnimationFrame</a>，在下次重绘之前，执行函数更新动画。 想了解更多戳这里：<a href="http://www.sitepoint.com/simple-animations-using-requestanimationframe/" target="_blank" rel="external">使用 requestAnimationFrame 做简单的动画</a>。</p>
 <p> <code>requestIdleCallback</code> 特性监测：</p>
