@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="description" content="doT.js - the fastest and concise javascript template engine for Node.js and browsers"/>
+	<style>
+	body{background-color:#f4f4f4;color:#555;max-width:800px;padding:20px;font-size:16px;font-weight:200;margin:0 auto;font-family:Helvetica Neue,arial,verdana}h1{color:#708090;text-shadow:0 1px 2px #fff;font-size:4em;text-align:center}.subtitle{text-align:center;margin-bottom:60px}h2{text-shadow:0 1px 2px #fff}h2 span{font-weight:200;font-size:14px}a{color:#2B80FF}.smaller{font-size:.8em}h4{margin:4px 0;font-weight:400;font-size:20px}textarea{border:1px solid lightgrey;outline:none;font-size:14px;width:96%;height:210px;padding:10px;text-align:left}.templategroup,.datagroup,.functiongroup,.resultgroup{width:48%;margin:4px 2% 4px 0;float:left;min-width:300px}.function,.result{background:#DDD;height:212px;padding:10px;font-size:14px;overflow-y:auto}.definegroup{display:none}.templategroup.withdefs .definegroup{display:block}.templategroup.withdefs .template{height:90px}textarea.defines{height:60px}.stripgroup{padding-top:8px;width:160px;float:left}code{font-size:14px;font-weight:bold}#sampletabs{list-style:none;margin:0;padding:0}#sampletabs li{float:left;margin:4px;padding:4px 8px;background:#DDD;cursor:pointer}#sampletabs li.active{background:#2B80FF;color:#FFF}@media all and (max-width:740px){.templategroup,.datagroup,.functiongroup,.resultgroup{width:100%;margin-right:0}pre{overflow-x:scroll}}
+    body{
+        font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Microsoft YaHei","Hiragino Sans GB","Hiragino Sans GB W3","WenQuanYi Micro Hei",sans-serif;
+        -webkit-font-smoothing:antialiased;
+    }
+	</style>
+	<title>doT.js - 精巧快速的javascript模板引擎，Node.js和浏览器同样适用</title>
+</head>
+<body>
+<a href="http://github.com/olado"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
+
+<img src="doT-js-100@2x.png" alt="doT.js" style="width: 200px;height: 200px;margin: 0 auto;display: block;"/>
+<!--<h1>doT.js</h1>-->
+<h2 class="subtitle">精巧快速的 JavaScript 模板引擎<br/>Node.js 和浏览器同样适用。</h2>
+
+<h2>起源</h2>
+<p>
+doT.js 灵感来源于搜寻基于 V8 和 Node.js ，强调性能，最快速最简洁的 JavaScript 模板函数。
+它在 Node.js 和浏览器两端都彰显出卓越的性能。
+<br/>
+<p>
+在我搜寻期间，两款模板引擎引起了我的注意，激发了创造 doT 的灵感。
+<br/>
+<br/>
+第一个是 jQote2，一个 jQuery 插件，它使用字符串拼接，避免使用 'with' 声明，它是首个追求速度的引擎。
+<br/>
+第二个是 underscore.js ，其中有一个设计精巧、扩展友好的模板函数。
+<p>
+doT.js 快速，小巧且毫无依赖。
+</p>
+</p>
+</p>
+
+<h2>来源</h2>
+<a href="https://github.com/olado/doT">github.com/olado/doT</a>
+<p>作者 Laura Doktorova, 基于 MIT 协议</p>
+
+<h2>特性</h2>
+<ul>
+<li>无依赖, 120 行代码
+</li><li>极其快速
+</li><li>自定义定界符 (custom delimiters)
+</li><li>运行时求值 (runtime evaluation)
+</li><li>运行时插值 (runtime interpolation)
+</li><li>编译时求值 (compile-time evaluation)
+</li><li>支持局部模板
+</li><li>支持条件语句
+</li><li>数组迭代器
+</li><li>编码
+</li><li>控制空白字符 - 全去或保留
+</li><li>流式友好 (streaming friendly)
+</li><li>轻逻辑或者重逻辑，由你决定
+</li>
+</ul>
+
+<h2>使用 <span>亲手试试，编辑输入然后看编译结果 </span></h2>
+<div id="samples">
+	<ul id="sampletabs"></ul>
+	<div class="stripgroup">
+		<input id="strip" type="checkbox" checked="checked"/>
+		<label for="strip">去除空白字符</label>
+	</div>
+	<div style="clear:both;height:10px"></div>
+	<div class="templategroup">
+		<h4>模板</h4>
+		<textarea autocomplete="off" class="template"></textarea>
+		<div class="definegroup">
+			<h4>编译时定义 (def)</h4>
+			<textarea autocomplete="off" class="defines"></textarea>
+		</div>
+	</div>
+	<div class="functiongroup">
+		<h4>doT.template 编译结果</h4>
+		<div class="function">
+		</div>
+	</div>
+	<div style="clear:both"></div>
+	<div class="datagroup">
+		<h4>数据</h4>
+		<textarea autocomplete="off" class="data"></textarea>
+	</div>
+	<div class="resultgroup">
+		<h4>结果</h4>
+		<div class="result">
+	</div>
+	</div>
+</div>
+<div style="clear:both"></div>
+<h3>编译时求值 vs 运行时求值</h3>
+如果你使用编译时求值，可以进一步提升性能。在每次执行时，你想使用的模板中的数据未改变时，非常适用。可考虑定义变量或者常量。 
+<p>
+同样适用于静态编译局部模板。多个页面引入相似的 header 和 footer 时非常方便。
+doT 也可以自定义局部模板。</p> 这里是如何使用变量定义和局部模板的 <a href="https://github.com/olado/doT/blob/master/examples/advancedsnippet.txt">进阶示例</a> 及 <a href="https://github.com/olado/doT/blob/master/examples/browsersample.html">更多示例</a>
+
+<h2>基准测试</h2>
+<p>
+doT 在 jsperf 上面的<a href="http://jsperf.com/dom-vs-innerhtml-based-templating/53">首次测试</a><br/>
+这是一些针对最新升级引擎的 <a href="http://jsperf.com/dom-vs-innerhtml-based-templating/413">测试结果</a>。
+<br/>
+人们会不断添加新的 javascript 模板引擎测试。
+</p>
+追加的测试放在 <a href="https://github.com/olado/doT/tree/master/benchmarks">github</a>
+<div class="smaller">
+<p>
+运行测试衡量编译后模板的执行结果：
+<br/>
+浏览器端：在 benchmarks/index.html 目录或者点<a href="http://olado.github.com/doT/bench.html">这里</a>
+<br/>
+Node 环境：运行 node benchmarks/templatesBench.js
+</p>
+<p>
+运行测试衡量编译速度：
+<br/>
+浏览器端：benchmarks/genspeed.html 目录
+<br/>
+Node 环境：运行 node benchmarks/compileBench.js
+</div>
+
+<h2>安装</h2>
+<h3>用于 Node.js</h3>
+<p>如果你打算在 Node.js 中使用 doT，可以通过 npm 安装 doT ：
+<p><code>&gt; npm install dot</code></p>
+然后在代码中使用 <code>require('dot')</code> 。
+</p>
+<h3>用于浏览器</h3>
+引入 javascript 文件：
+<p><code>&lt;script type="text/javascript" src="doT.js"&gt;&lt;/script&gt;</code></p>
+
+<h2>示例</h2>
+<div>// 1. 编译模板函数</div>
+<code>var tempFn = doT.template("&lt;h1&gt;Here is a sample template {{=it.foo}}&lt;/h1&gt;");</code>
+<div style="margin-top:10px">// 2. 多次使用模板函数</div>
+<code>var resultText = tempFn({foo: 'with doT'});</code>
+
+<h2>API</h2>
+<h3>doT.templateSettings - 默认编译设置</h3>
+可以通过改变编译设置自定义 doT。这是默认设置：
+<code><pre>doT.templateSettings = {
+  evaluate:    /\{\{([\s\S]+?)\}\}/g,
+  interpolate: /\{\{=([\s\S]+?)\}\}/g,
+  encode:      /\{\{!([\s\S]+?)\}\}/g,
+  use:         /\{\{#([\s\S]+?)\}\}/g,
+  define:      /\{\{##\s*([\w\.$]+)\s*(\:|=)([\s\S]+?)#\}\}/g,
+  conditional: /\{\{\?(\?)?\s*([\s\S]*?)\s*\}\}/g,
+  iterate:     /\{\{~\s*(?:\}\}|([\s\S]+?)\s*\:\s*([\w$]+)\s*(?:\:\s*([\w$]+))?\s*\}\})/g,
+  varname: 'it',
+  strip: true,
+  append: true,
+  selfcontained: false
+};
+</pre></code>
+如果你想用自己的定界符，可以修改 doT.templateSettings 中的正则表达式。
+<p>这是默认的定界符列表：</p>
+<code>
+<table>
+<col width="66"/>
+<tbody>
+<tr><td>{{  }}</td><td>用于求值(evaluation)</td></tr>
+<tr><td>{{= }}</td><td>用于插值(interpolation)</td></tr>
+<tr><td>{{! }}</td><td>用于编码求值</td></tr>
+<tr><td>{{# }}</td><td>用于编译时求值/引入和局部模板</td></tr>
+<tr><td>{{## #}}</td><td>用于编译时定义</td></tr>
+<tr><td>{{? }}</td><td>条件语句</td></tr>
+<tr><td>{{~ }}</td><td>数组迭代</td></tr>
+</tbody>
+</table>
+</code>
+<p>
+默认情况，模板中的数据必须用 'it' 作为引用。修改设置中的 'varname'，可以改变默认的变量名。
+例如，你可以把 'varname' 设置成 "foo, bar"，就可以传2个数据实例，通过 foo 和 bar 与模板建立关联。</p>
+<p>
+使用 'strip' 选项控制空白字符，true - 全部去掉，false - 保留。
+</p>
+<p>
+'append' 是性能优化设置。通过它调整性能，根据使用的 javascript 引擎和模板的大小，append 设置成 false，可能会产生更好的效果。
+</p>
+<p>
+如果 'selfcontained' 为 true，doT 将毫无依赖的产生函数。通常，doT 都是无依赖的，除非用到编码时，encodeHTML 会被加入。
+如果 'selfcontained' 为 true，模板需要编码，encodeHTML 方法将被引入生成模板的函数中。
+</p>
+
+<h3>doT.template - 模板编译函数</h3>
+<p>调用此函数把你的模板编译成一个方法。</p>
+<code> function(tmpl, c, def) </code>
+<ul>
+<li>tmpl - 模板正文
+</li><li>
+c - 自定义编译设置，如果为 null，用到 doT.templateSettings
+</li><li>
+def - 编译时求值的数据， 这里是 <a href="https://github.com/olado/doT/blob/master/examples/advancedsnippet.txt">进阶示例</a>.</p>
+</li></ul>
+默认，产生的方法有一个参数 - data - 命名为 'it' 。修改 doT.templateSettings.varname，可以改变参数的名字和个数。
+</p>
+
+<h3>Node 模块支持 dot 模板的自动编译</h3>
+
+<p>你可以预编译所有模板生成兼容 commonJS，浏览器和 AMD 的模块。</p>
+
+<pre><code>var dots = require("dot").process({ path: "./views"});
+</code></pre>
+
+<p>将编译指定路径下的 <b>.def</b>， <b>.dot</b>， <b>.jst</b> 文件。
+详情</p>
+
+<ul class="task-list">
+<li>
+模板文件同时可以有多个扩展名。</li>
+<li>
+<b>.def</b>扩展名文件可以通过 {{#def.name}} 引入其它文件</li>
+<li>
+<b>.dot</b>扩展名文件可以编译成同名函数，通过 render.&lt;filename&gt; 访问。
+</li>
+<li>
+<b>.jst</b>扩展名文件编译成 .js 文件。产生的 .js 文件可以作为 commonJS，AMD 模块加载，或者安装到全局变量（默认设置成 window.render）
+</li>
+<li>
+所有定义在<b>.jst</b>文件中的行内定义，被编译成单独的函数，通过 render.&lt;filename&gt;.&lt;definename&gt; 可取到。
+</li>
+<li>忽略子目录。</li>
+</ul>
+
+<p>基本用法：</p>
+
+<pre><code>	var dots = require("dot").process({path: "./views"});
+	// using .jst files
+	var render = require('./views/mytemplate');
+	render({foo:"hello world"});
+	// using .dot files
+	dots.mydottemplate({it: "dot"});
+</code></pre>
+
+<p>以上代码片段将：</p>
+
+<ul class="task-list">
+<li>
+编译 views 文件夹中的所有模板(.dot, .def, .jst)
+</li>
+<li>
+从 .jst 模板编译成的 .js 文件，放到同名的文件夹。这些文件可以被 require 引用，比如 require("./views/mytemplate")
+</li>
+<li>
+返回一个对象，从 .dot 模板编译成的函数作为它的属性
+</li>
+<li>
+渲染 mytemplate 模板
+</li>
+<li>
+注意：编译后的文件同样适用于浏览器
+</li>
+</ul>
+这里是 <a href="https://github.com/olado/doT/tree/master/examples/express">代码示例</a>, 注意在<a href="https://github.com/olado/doT/tree/master/examples/express/lib/render">输出目录</a>有个 index.js 文件。它可以这么用：
+<pre>
+<code>	var render = require('./views');
+	render.templateOne(data);
+	render.templateTwo(data);
+</code>
+</pre>
+
+<h3>有个 CLI 工具可以做同样的编译</h3>
+<pre><code>./bin/dot-packer -s examples/views -d out/views
+</code></pre>
+
+
+<h3>express 示例</h3>
+许多人把 doT 用于 express。
+<br/>
+我添加了最佳方法示例：<a href="https://github.com/olado/doT/tree/master/examples/express">doT 用于 express</a>
+
+<h2>问题</h2>
+<a href="https://github.com/olado/doT/issues">github.com/olado/doT/issues</a>
+
+<h2>历史</h2>
+2011-1-10 首次发布
+<br/>
+2014-12-2 最新版本：1.0.3
+
+<h2>作者</h2>
+<a href="http://milq.com/p/olado">@olado</a>
+
+<div style="margin-top:20px">doT.js by Laura Doktorova, MIT license</div>
+
+</body>
+<script src="doT.min.js"></script>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<!--[if lt IE 9]>
+<script src="http://bestiejs.github.com/json3/lib/json3.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+(function() {var encodeHTML = window._encodeHTML || doT.encodeHTMLSource(),samples = {'interpolation': { template:"<div>Hi {{=it.name}}!</div>\n<div>{{=it.age || ''}}</div>", data: { name:"Jake", age:31} },'evaluation': { template:"{{ for(var prop in it) { }}\n<div>{{=prop}}</div>\n{{ } }}", data: {name:"Jake", age:31, mother:"Kate", father:"John", interests:['basketball','hockey','photography'], contact:{email:"jake@xyz.com", phone:"999999999"} } },'partials': { template:"{{##def.snippet:\n<div>{{=it.name}}</div>{{#def.joke}}\n#}}\n\n{{#def.snippet}}", data: { name:"Jake", age:31}, def: {joke:"<div>{{=it.name}} who?</div>"} },'conditionals': { template:"{{? it.name }}\n<div>Oh, I love your name, {{=it.name}}!</div>\n{{?? it.age === 0}}\n<div>Guess nobody named you yet!</div>\n{{??}}\nYou are {{=it.age}} and still don't have a name?\n{{?}}", data: { name:"Jake", age:31} },'arrays': { template:"{{~it.array :value:index}}\n<div>{{=value}}!</div>\n{{~}}", data:{array: ["banana","apple","orange"]} },'encode': { template:"Visit {{!it.uri}}", data:{uri:"https://github.com/olado/doT"} }};var br = $('#samples .result'), bf = $('#samples .function'), bdef = $('#samples .defines'), tg = $('.templategroup'),bt = $('#samples .template'), bd = $('#samples .data'), bs = $('#sampletabs'), data = {}, def, fn;function onTemplate(tmpl) {var text, error;try {var tmpdef = $.extend({}, def);fn = text = doT.template(tmpl, undefined, tmpdef);} catch(e) {fn = undefined;error = text = "Template has an error: " + e;}bf.html(encodeHTML(text));br.html(error ? "Fix the template" : encodeHTML(fn(data)).replace(/\n/g,"<br/>"));}function newSample(s) {$('ul .active').removeClass("active");$("#x"+s).addClass("active");var sample = samples[s];data = $.extend({},sample.data);def = sample.def ? $.extend({},sample.def) : undefined;if (def) {bdef.val(JSON.stringify(def));tg.addClass("withdefs");} else {tg.removeClass("withdefs");bdef.val("");}bt.val(sample.template);bd.val(JSON.stringify(sample.data));onTemplate(sample.template);}bt.keyup(function() { onTemplate(this.value);});bdef.keyup(function() {var error;try {eval("def=("+ this.value +")");} catch(e) {def = undefined;error = "Defs error: " + e;}onTemplate(bt.val());});bd.keyup(function() {var error;try {eval("data=("+ this.value +")");} catch(e) {data = {};error = "Data error: " + e;}br.html(error ? "Fix the template" : encodeHTML(fn(data)).replace(/\n/g,"<br/>"));});$('#strip').change(function() {doT.templateSettings.strip=this.checked;onTemplate(bt.val());});bs.click(function(event) {newSample(event.target.id.substring(1));});var tmp='';for(var s in samples) {if (samples.hasOwnProperty(s)) {tmp+="<li id='x"+s+"'>"+s+"</li>";}}bs.html(tmp);newSample('interpolation');}());
+var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-31289343-1']);_gaq.push(['_trackPageview']);(function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
+</script>
+</html>
