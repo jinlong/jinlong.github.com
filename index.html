@@ -219,6 +219,238 @@
             
             
               
+                <a class="post-title-link" href="/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/" itemprop="url">
+                  CSS分层动画可以让元素沿弧形路径运动
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-14T22:48:56+08:00" content="2016-01-14">
+              2016-01-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/animation/" itemprop="url" rel="index">
+                    <span itemprop="name">animation</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://tobiasahlin.com/blog/curved-path-animations-in-css/">Moving along a curved path in CSS with layered animation</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+<p>译者注：部分代码示例在原文中可以看效果（作者写在博文里面了…），我偷懒把它做成Gif图了。</p>
+</blockquote>
+<p>CSS 的 animations （动画） 和 transitions（变换）擅于实现从点 A 到点 B 的直线运动，运动轨迹是直线路径。给一个元素添加了 <code>animation</code> 或者 <code>transition</code> 以后，无论你如何调整<a href="https://developer.mozilla.org/en/docs/Web/CSS/timing-function">贝塞尔曲线</a>，都无法让它沿着弧形路径运动。你可以通过自定义 timing function 属性，做出弹动的效果，但是它沿着 X 和 Y 轴相对移动的值永远是相同的。</p>
+<p>与其使用 JavaScript 实现外观自然的运动，不如尝试用这种简单的方式：分层动画，绕过已有的限制。通过使用两个或多个元素实现动画效果，我们可以更加细粒度地控制某个元素的路径，沿着 X 轴运动使用一种 timing function ，沿着 Y 轴运动使用另一种 timing function 。</p>
+<h1 id="问题所在">问题所在</h1><p><img src="/image/layered-anim/exp1.gif" alt="附图1"></p>
+<p>当我们深入探讨解决方案之前，看看到底问题在哪。CSS <code>animations</code> 和 <code>transitions</code> 限制我们只能沿直线路径运动。元素总是沿着点 A 到点 B 的最短路径运动，如果我们另辟蹊径，告诉 CSS 沿着“更好的路径”，而不是“最短路径”运动呢？</p>
+<p>用 CSS （开启硬件加速）实现两点之间的运动，最直截了当的方式是使用 <code>transform</code> 的 <code>translate</code> 在一定时间内移动某个元素。这就产生了直线运动。在 <code>@keyframes</code> 中，我们打算在 (0,0) 和 (100,-100) 间来回运动，见上图例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">keyframes</span> straightLine </span>&#123;</span><br><span class="line">  50% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate3D</span>(<span class="number">100px</span>, -<span class="number">100px</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class">.dot</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">animation</span>:<span class="value"> straightLine <span class="number">2.5s</span> infinite linear</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这些看起来并不难懂，但我们稍等片刻，思考一下我们需要的解决方案，拆分开来的动画，视觉上长什么样子呢。</p>
+<p><code>0%</code> 时，元素从 (0,0) 出发，<code>50%</code> 时，我们用了 <code>translate3D(100px, -100px, 0)</code> 把它移动到 (100,-100)，然后原路返回。换句话说，我们把元素向右移动了 <code>100px</code>，向上移动了 <code>100px</code>，两个方向联合作用使元素沿着一个角度运动。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2016/01/14/checkbox-trickery-with-css/" itemprop="url">
+                  复选框的 CSS 魔法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-14T21:54:07+08:00" content="2016-01-14">
+              2016-01-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/14/checkbox-trickery-with-css/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/14/checkbox-trickery-with-css/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://codersblock.com/blog/checkbox-trickery-with-css/">Checkbox Trickery with CSS</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>Checkbox 复选框相当好用，加对 CSS 魔法有奇效。此文旨在展示一些利用 checkbox 实现的有创意的东西，并且文中的例子<strong><em>没用 JavaScript</em></strong> 哟。</p>
+<h1 id="基本配方">基本配方</h1><p>从 HTML 着手。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"toggle"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"toggle"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此处无技巧可言。<code>&lt;label&gt;</code> 的 <code>for</code> 属性匹配 <code>&lt;input&gt;</code> 的 <code>id</code> 属性，因此点击 <code>&lt;label&gt;</code> 可以控制 <code>&lt;input&gt;</code> 复选框。这点尤其重要，因为下一步将隐藏 <code>&lt;input&gt;</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> -<span class="number">9999px</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>为什么不用 <code>display: none</code> ？因为屏幕阅读机和键盘 Tab 会忽略它。此方法让 <code>&lt;input&gt;</code> 保持在文档流中，但是让它离屏隐藏（超出屏幕可见范围达到隐藏）。</p>
+<p>隐藏 <code>&lt;input&gt;</code> 以后，我们更容易大展身手。我们仍需传达选中/未选两种状态，但是可以通过 <code>&lt;label&gt;</code> 完成。真正的派对开始啦。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> + <span class="tag">label</span> <span class="rules">&#123;</span><br><span class="line">    <span class="comment">/* 牛X闪闪的样式 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>我们使用 <code>:checked</code> 伪类， 和相邻兄弟元素选择器（<code>+</code>）的组合达到目的，当复选框选中时，找到紧随其后的 <code>&lt;label&gt;</code>元素，加上想要的样式。还可以利用 <code>&lt;label&gt;</code> 中的伪元素（ <code>::before</code> 和 <code>::after</code>）实现更有创意的想法。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> + <span class="tag">label</span><span class="pseudo">::before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="comment">/* 指示器的样式 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>来，看看实际效果吧。例子用到了以上提及的基本配方，把一个普普通通的复选框改造得当人眼前一亮。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/14/checkbox-trickery-with-css/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/" itemprop="url">
                   JavaScript 如何实现后台计划任务
                 </a>
@@ -1062,215 +1294,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2014/10/25/jshint-configuration/" itemprop="url">
-                  JSHint 配置浅析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-10-25T11:05:14+08:00" content="2014-10-25">
-              2014-10-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JSHint/" itemprop="url" rel="index">
-                    <span itemprop="name">JSHint</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/10/25/jshint-configuration/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/25/jshint-configuration/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p><a href="http://www.jshint.com/">JSHint</a>，发现错误和潜在问题的社区驱动的工具<br><a href="http://jslinterrors.com/">JSLint 错误解析</a></p>
-</blockquote>
-<h2 id="单独安装">单独安装</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="operator"><span class="keyword">install</span> jshint -<span class="keyword">g</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ jshint myfile<span class="class">.js</span></span><br><span class="line">myfile<span class="class">.js</span>: line <span class="number">10</span>, col <span class="number">39</span>, Octal literals are not allowed <span class="keyword">in</span> strict mode.</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> error</span><br></pre></td></tr></table></figure>
-<h2 id="编辑器和IDE插件">编辑器和IDE插件</h2><p><a href="https://github.com/victorporof/Sublime-JSHint">Sublime-JSHint</a> </p>
-<h3 id="安装">安装</h3><p><code>Ctrl+Shift+P</code> 或 <code>Cmd+Shift+P</code><br>输入 <code>install</code>，选择 <code>Package Control: Install Package</code><br>输入 <code>js gutter</code>，选择 <code>JSHint Gutter</code></p>
-<h3 id="使用方法：">使用方法：</h3><p>Tools -&gt; Command Palette (<code>Ctrl+Shift+P</code> 或者 <code>Cmd+Shift+P</code>) 然后输入 <code>jshint</code></p>
-<p>– 或者 –</p>
-<p><code>Ctrl+Shift+J</code> (或者 Mac 使用 <code>Cmd+Shift+J</code>)</p>
-<p>– 或者 –</p>
-<p>当前文件右键选择 JSHint -&gt; Lint Code</p>
-<p>– 或者 –</p>
-<p>打开 JavaScript 文件，菜单 View -&gt; Show Console，然后输入 <code>view.run_command(&quot;jshint&quot;</code>)</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/25/jshint-configuration/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2014/10/19/handlebars-docs/" itemprop="url">
-                  Handlebars 文档笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-10-19T22:30:55+08:00" content="2014-10-19">
-              2014-10-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/10/19/handlebars-docs/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/19/handlebars-docs/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="description">前段时间项目正好用到 Handlebars ，边研究文档边翻译了下，留个备份</span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/19/handlebars-docs/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1316,14 +1339,14 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
@@ -1415,7 +1438,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>

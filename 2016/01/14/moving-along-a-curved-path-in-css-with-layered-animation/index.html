@@ -1,0 +1,807 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="CSS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：Moving along a curved path in CSS with layered animation翻译：涂鸦码龙
+译者注：部分代码示例在原文中可以看效果（作者写在博文里面了…），我偷懒把它做成Gif图了。
+
+CSS 的 animations （动画） 和 transitions（变换）擅于实现从点 A 到点 B 的直线运动，运动轨迹是直线路径。给一个元素添加了 animatio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS分层动画可以让元素沿弧形路径运动">
+<meta property="og:url" content="http://jinlong.github.io/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：Moving along a curved path in CSS with layered animation翻译：涂鸦码龙
+译者注：部分代码示例在原文中可以看效果（作者写在博文里面了…），我偷懒把它做成Gif图了。
+
+CSS 的 animations （动画） 和 transitions（变换）擅于实现从点 A 到点 B 的直线运动，运动轨迹是直线路径。给一个元素添加了 animatio">
+<meta property="og:image" content="http://jinlong.github.io/image/layered-anim/exp1.gif">
+<meta property="og:image" content="http://jinlong.github.io/image/layered-anim/exp2.gif">
+<meta property="og:image" content="http://jinlong.github.io/image/layered-anim/exp3.gif">
+<meta property="og:image" content="http://jinlong.github.io/image/layered-anim/exp4.gif">
+<meta property="og:updated_time" content="2016-01-14T15:15:37.223Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS分层动画可以让元素沿弧形路径运动">
+<meta name="twitter:description" content="原文：Moving along a curved path in CSS with layered animation翻译：涂鸦码龙
+译者注：部分代码示例在原文中可以看效果（作者写在博文里面了…），我偷懒把它做成Gif图了。
+
+CSS 的 animations （动画） 和 transitions（变换）擅于实现从点 A 到点 B 的直线运动，运动轨迹是直线路径。给一个元素添加了 animatio">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> CSS分层动画可以让元素沿弧形路径运动 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS分层动画可以让元素沿弧形路径运动
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-14T22:48:56+08:00" content="2016-01-14">
+              2016-01-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/animation/" itemprop="url" rel="index">
+                    <span itemprop="name">animation</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：<a href="http://tobiasahlin.com/blog/curved-path-animations-in-css/" target="_blank" rel="external">Moving along a curved path in CSS with layered animation</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+<p>译者注：部分代码示例在原文中可以看效果（作者写在博文里面了…），我偷懒把它做成Gif图了。</p>
+</blockquote>
+<p>CSS 的 animations （动画） 和 transitions（变换）擅于实现从点 A 到点 B 的直线运动，运动轨迹是直线路径。给一个元素添加了 <code>animation</code> 或者 <code>transition</code> 以后，无论你如何调整<a href="https://developer.mozilla.org/en/docs/Web/CSS/timing-function" target="_blank" rel="external">贝塞尔曲线</a>，都无法让它沿着弧形路径运动。你可以通过自定义 timing function 属性，做出弹动的效果，但是它沿着 X 和 Y 轴相对移动的值永远是相同的。</p>
+<p>与其使用 JavaScript 实现外观自然的运动，不如尝试用这种简单的方式：分层动画，绕过已有的限制。通过使用两个或多个元素实现动画效果，我们可以更加细粒度地控制某个元素的路径，沿着 X 轴运动使用一种 timing function ，沿着 Y 轴运动使用另一种 timing function 。</p>
+<h1 id="问题所在">问题所在</h1><p><img src="/image/layered-anim/exp1.gif" alt="附图1"></p>
+<p>当我们深入探讨解决方案之前，看看到底问题在哪。CSS <code>animations</code> 和 <code>transitions</code> 限制我们只能沿直线路径运动。元素总是沿着点 A 到点 B 的最短路径运动，如果我们另辟蹊径，告诉 CSS 沿着“更好的路径”，而不是“最短路径”运动呢？</p>
+<p>用 CSS （开启硬件加速）实现两点之间的运动，最直截了当的方式是使用 <code>transform</code> 的 <code>translate</code> 在一定时间内移动某个元素。这就产生了直线运动。在 <code>@keyframes</code> 中，我们打算在 (0,0) 和 (100,-100) 间来回运动，见上图例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">keyframes</span> straightLine </span>&#123;</span><br><span class="line">  50% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate3D</span>(<span class="number">100px</span>, -<span class="number">100px</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class">.dot</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">animation</span>:<span class="value"> straightLine <span class="number">2.5s</span> infinite linear</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这些看起来并不难懂，但我们稍等片刻，思考一下我们需要的解决方案，拆分开来的动画，视觉上长什么样子呢。</p>
+<p><code>0%</code> 时，元素从 (0,0) 出发，<code>50%</code> 时，我们用了 <code>translate3D(100px, -100px, 0)</code> 把它移动到 (100,-100)，然后原路返回。换句话说，我们把元素向右移动了 <code>100px</code>，向上移动了 <code>100px</code>，两个方向联合作用使元素沿着一个角度运动。</p>
+<a id="more"></a>
+<p><img src="/image/layered-anim/exp2.gif" alt="附图2"></p>
+<h1 id="解决方案：每个轴执行自己的动画函数">解决方案：每个轴执行自己的动画函数</h1><p>那么，原先展示的例子中我们如何实现的弧形路径呢？为了让创建的路径不是直线，<strong><em>我们想让元素沿 X 轴和 Y 轴的运动速度不同步</em></strong>。</p>
+<p>先前例子中都用到了 <code>linear</code> 线性运动函数，如果我们给运动的元素包裹一个容器，我们可以为 X 轴应用一种动画函数，Y 轴应用另一种动画函数。以下例子，我们在 X 轴使用 <code>ease-in</code> ，Y 轴使用 <code>ease-out</code> 。</p>
+<p><img src="/image/layered-anim/exp3.gif" alt="附图3"></p>
+<h1 id="每个轴元素的具体实现">每个轴元素的具体实现</h1><p>不幸的是，我们不能只把 <code>transform</code> 动画简单叠加：因为只有最后声明的动画会执行。那么我们如何把两个动画效果联合起来呢？可以把一个元素放入另一个元素内部，给容器元素加一种动画，给里面的子元素添加另一种动画。</p>
+<p>在以上例子中，你已经看到一个点沿着弧形路径运动，看到两个独立的元素一起做动画，只不过容器元素是完全透明的。为了清晰地看到两个元素沿着弧形路径是如何相互作用的，我们给容器元素加个边框看看呗：</p>
+<p><img src="/image/layered-anim/exp4.gif" alt="附图4"></p>
+<p>那个点藏在带边框的盒子内部，跟随盒子一起沿 X 轴远动，同时它自己又在 Y 轴方向上下运动。去掉容器盒子的边框，我们就得到了弧形路径。与其在 HTML 中用两个元素，还不如用伪元素实现嘞。如果 HTML 是这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"dot"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们可以添加伪元素：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.dot</span> <span class="rules">&#123;</span><br><span class="line">  <span class="comment">/* 容器：沿 X 轴运动 */</span></span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class">.dot</span><span class="pseudo">::after</span> <span class="rules">&#123;</span><br><span class="line">  <span class="comment">/* 黑点儿，沿 Y 轴运动 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>然后，我们需要两块独立的动画代码：X 轴，Y 轴各一块。注意一处用了 <code>ease-in</code>，另一处用了 <code>ease-out</code>：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.dot</span> <span class="rules">&#123;</span><br><span class="line">  <span class="comment">/*省略 一些布局代码...*/</span></span><br><span class="line">  <span class="rule"><span class="attribute">animation</span>:<span class="value"> xAxis <span class="number">2.5s</span> infinite ease-in</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class">.dot</span><span class="pseudo">::after</span> <span class="rules">&#123;</span><br><span class="line">  <span class="comment">/* 渲染小黑点儿*/</span></span><br><span class="line">  <span class="rule"><span class="attribute">animation</span>:<span class="value"> yAxis <span class="number">2.5s</span> infinite ease-out</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="at_rule">@<span class="keyword">keyframes</span> xAxis </span>&#123;</span><br><span class="line">  50% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">animation-timing-function</span>:<span class="value"> ease-in</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateX</span>(<span class="number">100px</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="at_rule">@<span class="keyword">keyframes</span> yAxis </span>&#123;</span><br><span class="line">  50% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">animation-timing-function</span>:<span class="value"> ease-out</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(-<span class="number">100px</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>加上 WebKit 前缀，用一些自定义的贝塞尔曲线代替 <code>ease-in</code> 和 <code>ease-out</code>，我们就可以实现文章最开头展示的效果：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.demo-dot</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-animation</span>:<span class="value"> xAxis <span class="number">2.5s</span> infinite <span class="function">cubic-bezier</span>(<span class="number">0.02</span>, <span class="number">0.01</span>, <span class="number">0.21</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">animation</span>:<span class="value"> xAxis <span class="number">2.5s</span> infinite <span class="function">cubic-bezier</span>(<span class="number">0.02</span>, <span class="number">0.01</span>, <span class="number">0.21</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class">.demo-dot</span><span class="pseudo">::after</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">''</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">20px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">20px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">20px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-animation</span>:<span class="value"> yAxis <span class="number">2.5s</span> infinite <span class="function">cubic-bezier</span>(<span class="number">0.3</span>, <span class="number">0.27</span>, <span class="number">0.07</span>, <span class="number">1.64</span>)</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">animation</span>:<span class="value"> yAxis <span class="number">2.5s</span> infinite <span class="function">cubic-bezier</span>(<span class="number">0.3</span>, <span class="number">0.27</span>, <span class="number">0.07</span>, <span class="number">1.64</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="at_rule">@<span class="keyword">-webkit-keyframes</span> yAxis </span>&#123;</span><br><span class="line">  50% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-animation-timing-function</span>:<span class="value"> <span class="function">cubic-bezier</span>(<span class="number">0.02</span>, <span class="number">0.01</span>, <span class="number">0.21</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">animation-timing-function</span>:<span class="value"> <span class="function">cubic-bezier</span>(<span class="number">0.02</span>, <span class="number">0.01</span>, <span class="number">0.21</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(-<span class="number">100px</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(-<span class="number">100px</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="at_rule">@<span class="keyword">keyframes</span> yAxis </span>&#123;</span><br><span class="line">  50% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-animation-timing-function</span>:<span class="value"> <span class="function">cubic-bezier</span>(<span class="number">0.02</span>, <span class="number">0.01</span>, <span class="number">0.21</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">animation-timing-function</span>:<span class="value"> <span class="function">cubic-bezier</span>(<span class="number">0.02</span>, <span class="number">0.01</span>, <span class="number">0.21</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(-<span class="number">100px</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(-<span class="number">100px</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="at_rule">@<span class="keyword">-webkit-keyframes</span> xAxis </span>&#123;</span><br><span class="line">  50% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-animation-timing-function</span>:<span class="value"> <span class="function">cubic-bezier</span>(<span class="number">0.3</span>, <span class="number">0.27</span>, <span class="number">0.07</span>, <span class="number">1.64</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">animation-timing-function</span>:<span class="value"> <span class="function">cubic-bezier</span>(<span class="number">0.3</span>, <span class="number">0.27</span>, <span class="number">0.07</span>, <span class="number">1.64</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateX</span>(<span class="number">100px</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateX</span>(<span class="number">100px</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="at_rule">@<span class="keyword">keyframes</span> xAxis </span>&#123;</span><br><span class="line">  50% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-animation-timing-function</span>:<span class="value"> <span class="function">cubic-bezier</span>(<span class="number">0.3</span>, <span class="number">0.27</span>, <span class="number">0.07</span>, <span class="number">1.64</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">animation-timing-function</span>:<span class="value"> <span class="function">cubic-bezier</span>(<span class="number">0.3</span>, <span class="number">0.27</span>, <span class="number">0.07</span>, <span class="number">1.64</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateX</span>(<span class="number">100px</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateX</span>(<span class="number">100px</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下是文章起始处的例子：</p>
+<p><a class="jsbin-embed" href="http://jsbin.com/waqofexedu/1/embed?html,css,output" target="_blank" rel="external">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.9"></script></p>
+<p>你可能注意到我们在所有例子中都用了 <code>@keyframes</code> ，这纯粹是因为我们想展示黑点儿往返的两种状态。如果只想实现点 A 至点 B 的运动，使用 <code>transition</code> 属性做分层动画同样好用。</p>
+<p>如果有个绝对定位的元素，通过给 <code>left</code> 和 <code>bottom</code> 属性加特效，就可以实现弧形路径运动，单个元素就可以，不需要容器元素。为什么不这么做呢：它性能稍差一些，动画的每一帧都会引起重绘。使用带伪元素的分层动画，<code>translate</code> 属性又开了硬件加速，动画效果更好，性能也更高。</p>
+<blockquote>
+<p>译者自己搞了个绝对定位的例子：</p>
+</blockquote>
+<p><a class="jsbin-embed" href="http://jsbin.com/zobomaboko/1/embed?html,css,output" target="_blank" rel="external">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.9"></script>  </p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag">#CSS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/14/checkbox-trickery-with-css/" rel="next" title="复选框的 CSS 魔法">
+                <i class="fa fa-chevron-left"></i> 复选框的 CSS 魔法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/"
+     data-title="CSS分层动画可以让元素沿弧形路径运动"
+     data-content=""
+     data-url="http://jinlong.github.io/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/"
+           data-title="CSS分层动画可以让元素沿弧形路径运动" data-url="http://jinlong.github.io/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题所在"><span class="nav-number">1.</span> <span class="nav-text">问题所在</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案：每个轴执行自己的动画函数"><span class="nav-number">2.</span> <span class="nav-text">解决方案：每个轴执行自己的动画函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#每个轴元素的具体实现"><span class="nav-number">3.</span> <span class="nav-text">每个轴元素的具体实现</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

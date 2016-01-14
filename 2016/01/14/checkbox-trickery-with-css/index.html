@@ -1,0 +1,827 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="CSS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：Checkbox Trickery with CSS翻译：涂鸦码龙
+
+Checkbox 复选框相当好用，加对 CSS 魔法有奇效。此文旨在展示一些利用 checkbox 实现的有创意的东西，并且文中的例子没用 JavaScript 哟。
+基本配方从 HTML 着手。
+12&amp;lt;input id=&quot;toggle&quot; type=&quot;checkbox&quot;&amp;gt;&amp;lt;label for=&quot;toggl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="复选框的 CSS 魔法">
+<meta property="og:url" content="http://jinlong.github.io/2016/01/14/checkbox-trickery-with-css/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：Checkbox Trickery with CSS翻译：涂鸦码龙
+
+Checkbox 复选框相当好用，加对 CSS 魔法有奇效。此文旨在展示一些利用 checkbox 实现的有创意的东西，并且文中的例子没用 JavaScript 哟。
+基本配方从 HTML 着手。
+12&amp;lt;input id=&quot;toggle&quot; type=&quot;checkbox&quot;&amp;gt;&amp;lt;label for=&quot;toggl">
+<meta property="og:updated_time" content="2016-01-14T14:45:15.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="复选框的 CSS 魔法">
+<meta name="twitter:description" content="原文：Checkbox Trickery with CSS翻译：涂鸦码龙
+
+Checkbox 复选框相当好用，加对 CSS 魔法有奇效。此文旨在展示一些利用 checkbox 实现的有创意的东西，并且文中的例子没用 JavaScript 哟。
+基本配方从 HTML 着手。
+12&amp;lt;input id=&quot;toggle&quot; type=&quot;checkbox&quot;&amp;gt;&amp;lt;label for=&quot;toggl">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 复选框的 CSS 魔法 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                复选框的 CSS 魔法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-14T21:54:07+08:00" content="2016-01-14">
+              2016-01-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/14/checkbox-trickery-with-css/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/14/checkbox-trickery-with-css/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：<a href="http://codersblock.com/blog/checkbox-trickery-with-css/" target="_blank" rel="external">Checkbox Trickery with CSS</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>Checkbox 复选框相当好用，加对 CSS 魔法有奇效。此文旨在展示一些利用 checkbox 实现的有创意的东西，并且文中的例子<strong><em>没用 JavaScript</em></strong> 哟。</p>
+<h1 id="基本配方">基本配方</h1><p>从 HTML 着手。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"toggle"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"toggle"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此处无技巧可言。<code>&lt;label&gt;</code> 的 <code>for</code> 属性匹配 <code>&lt;input&gt;</code> 的 <code>id</code> 属性，因此点击 <code>&lt;label&gt;</code> 可以控制 <code>&lt;input&gt;</code> 复选框。这点尤其重要，因为下一步将隐藏 <code>&lt;input&gt;</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> -<span class="number">9999px</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>为什么不用 <code>display: none</code> ？因为屏幕阅读机和键盘 Tab 会忽略它。此方法让 <code>&lt;input&gt;</code> 保持在文档流中，但是让它离屏隐藏（超出屏幕可见范围达到隐藏）。</p>
+<p>隐藏 <code>&lt;input&gt;</code> 以后，我们更容易大展身手。我们仍需传达选中/未选两种状态，但是可以通过 <code>&lt;label&gt;</code> 完成。真正的派对开始啦。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> + <span class="tag">label</span> <span class="rules">&#123;</span><br><span class="line">    <span class="comment">/* 牛X闪闪的样式 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>我们使用 <code>:checked</code> 伪类， 和相邻兄弟元素选择器（<code>+</code>）的组合达到目的，当复选框选中时，找到紧随其后的 <code>&lt;label&gt;</code>元素，加上想要的样式。还可以利用 <code>&lt;label&gt;</code> 中的伪元素（ <code>::before</code> 和 <code>::after</code>）实现更有创意的想法。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> + <span class="tag">label</span><span class="pseudo">::before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="comment">/* 指示器的样式 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>来，看看实际效果吧。例子用到了以上提及的基本配方，把一个普普通通的复选框改造得当人眼前一亮。<br><a id="more"></a></p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="RPZZPe" data-default-tab="result" data-user="lonekorean" class="codepen">See the Pen <a href="http://codepen.io/lonekorean/pen/RPZZPe/" target="_blank" rel="external">Checkbox Trickery: Simple Toggle</a> by Will Boyd (<a href="http://codepen.io/lonekorean" target="_blank" rel="external">@lonekorean</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>最大的好处是，包含在 <code>&lt;form&gt;</code> 中的复选框的值仍然可以被提交。我们只改变了外观，并没有影响功能。 </p>
+<h1 id="隐藏/显示内容">隐藏/显示内容</h1><p>目前为止，我们都是给 <code>&lt;label&gt;</code> 加样式，我们可以更进一步。这个例子会根据用户的选择，动态地隐藏/显示表单的部分内容。</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="NqvvGK" data-default-tab="result" data-user="lonekorean" class="codepen">See the Pen <a href="http://codepen.io/lonekorean/pen/NqvvGK/" target="_blank" rel="external">Checkbox Trickery: Form Disclosure</a> by Will Boyd (<a href="http://codepen.io/lonekorean" target="_blank" rel="external">@lonekorean</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p><code>:checked</code> 伪类对单选按钮同样奏效，考虑到这一点，“How did you hear about us?”这块的 HTML 用到了单选按钮。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"how-friend"</span> <span class="attribute">name</span>=<span class="value">"how"</span> <span class="attribute">type</span>=<span class="value">"radio"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"how-friend"</span> <span class="attribute">class</span>=<span class="value">"side-label"</span>&gt;</span>From a friend<span class="tag">&lt;/<span class="title">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"how-internet"</span> <span class="attribute">name</span>=<span class="value">"how"</span> <span class="attribute">type</span>=<span class="value">"radio"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"how-internet"</span> <span class="attribute">class</span>=<span class="value">"side-label"</span>&gt;</span>Somewhere on the internet<span class="tag">&lt;/<span class="title">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"how-other"</span> <span class="attribute">name</span>=<span class="value">"how"</span> <span class="attribute">type</span>=<span class="value">"radio"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"how-other"</span> <span class="attribute">class</span>=<span class="value">"side-label"</span>&gt;</span>Other...<span class="tag">&lt;/<span class="title">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"how-other-disclosure"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"how-other-explain"</span> <span class="attribute">class</span>=<span class="value">"top-label"</span>&gt;</span>Please explain<span class="tag">&lt;/<span class="title">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">textarea</span> <span class="attribute">id</span>=<span class="value">"how-other-explain"</span>&gt;</span><span class="tag">&lt;/<span class="title">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>单选按钮指示器利用 <code>&lt;label&gt;</code> 内的 <code>::before</code> 伪元素（外部的圆环）和 <code>::after</code> 伪元素（内部的绿点）实现，当单选按钮选中 / 未选时显示 / 隐藏 <code>::after</code> 伪元素相当简单。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.side-label</span><span class="pseudo">::after</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> none</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 其它样式 */</span></span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> + <span class="class">.side-label</span><span class="pseudo">::after</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><code>&lt;div&gt;</code> 一直隐藏，直到“Other…”单选按钮选中时才显示。我使用了 <code>display: none</code> 隐藏 <code>&lt;div&gt;</code>，因为这次我确实想让屏幕阅读器和键盘 Tab 在内容隐藏时忽略它。当单选按钮选中时，利用 CSS 显示 <code>&lt;div&gt;</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#how-other</span><span class="pseudo">:checked</span> ~ <span class="class">.how-other-disclosure</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>之前我们一直使用相邻兄弟选择器（<code>+</code>），不过这次得用一般兄弟选择器（<code>~</code>）。它俩很相似，但是可以找到非相邻的兄弟元素，比如我们的 <code>&lt;div&gt;</code>。</p>
+<h1 id="树状文件夹">树状文件夹</h1><p>我们可以活用之前例子中的技巧，实现一个树状文件夹组件，同样具备隐藏 / 显示两种功能。</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="eNEEpB" data-default-tab="result" data-user="lonekorean" class="codepen">See the Pen <a href="http://codepen.io/lonekorean/pen/eNEEpB/" target="_blank" rel="external">Checkbox Trickery: Folder Tree</a> by Will Boyd (<a href="http://codepen.io/lonekorean" target="_blank" rel="external">@lonekorean</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>单个文件夹的 HTML 如下：<code>&lt;label&gt;</code> 是文件夹，两个 <code>&lt;a&gt;</code> 元素是文件夹里的文件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"n-1"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"n-1"</span>&gt;</span>Blue<span class="tag">&lt;/<span class="title">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"sub"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#link"</span>&gt;</span>Mana Leak<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#link"</span>&gt;</span>Time Warp<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a href="http://fortawesome.github.io/Font-Awesome/" target="_blank" rel="external">Font Awesome</a> 图标用于表示选中（打开）和未选（关闭）状态。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">label</span><span class="pseudo">::before</span>, <span class="tag">a</span><span class="pseudo">::before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">6px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> -<span class="number">25px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">font-family</span>:<span class="value"> <span class="string">'FontAwesome'</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">label</span><span class="pseudo">::before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">'\f07b'</span></span></span>; <span class="comment">/* closed folder */</span></span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> + <span class="tag">label</span><span class="pseudo">::before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">'\f07c'</span></span></span>; <span class="comment">/* open folder */</span></span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">a</span><span class="pseudo">::before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">'\f068'</span></span></span>; <span class="comment">/* dash */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>文件夹里的内容通过一般兄弟选择器（<code>~</code>）实现显示 / 隐藏。这就是 HTML 外面包裹额外 <code>&lt;div&gt;</code> 的原因，为了确保选择器能够选到元素，打开兄弟文件夹。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> ~ <span class="class">.sub</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>理所当然，文件夹可以嵌套。只需把另一个文件夹的 HTML 放入 <code>&lt;div class=&quot;sub&quot;&gt;</code> 即可。点击 “Multicolor”看看效果吧。</p>
+<p>最后，我们聊一下重置按钮。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"reset"</span> <span class="attribute">value</span>=<span class="value">"Collapse All"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>表单的重置按钮很少有人用，不过这里巧用了一下。点击重置按钮，所有复选框恢复成初始的未选中状态，关闭了所有文件夹。有意思吧。</p>
+<h1 id="Split_List（分隔列表）">Split List（分隔列表）</h1><p>这个例子依据已做或未做，把列表选项分成两部分。</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="xGLLwX" data-default-tab="result" data-user="lonekorean" class="codepen">See the Pen <a href="http://codepen.io/lonekorean/pen/xGLLwX/" target="_blank" rel="external">Checkbox Trickery: To-Do List</a> by Will Boyd (<a href="http://codepen.io/lonekorean" target="_blank" rel="external">@lonekorean</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>HTML 像这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"items"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"item1"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span> <span class="attribute">checked</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"item1"</span>&gt;</span>Create a to-do list<span class="tag">&lt;/<span class="title">label</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- more items --&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"done"</span> <span class="attribute">aria-hidden</span>=<span class="value">"true"</span>&gt;</span>Done<span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"undone"</span> <span class="attribute">aria-hidden</span>=<span class="value">"true"</span>&gt;</span>Not Done<span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>分隔列表是由 CSS flexbox 实现的，这是关键的 CSS。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.items</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">flex-direction</span>:<span class="value"> column</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class">.done</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">1</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> + <span class="tag">label</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">2</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class">.undone</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">3</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">label</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">4</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>CSS flexbox 可以使用 <code>order</code> 属性重排元素。当复选框选中的时候，<code>&lt;label&gt;</code> 的 order 值由 <code>4</code> 变为 <code>2</code>，列表选项就从 “Not Done” <code>&lt;h2&gt;</code> 下面移到了 “Done” <code>&lt;h2&gt;</code> 下面。</p>
+<p>不幸的是，键盘导航和<a href="http://sprungmarker.de/wp-content/uploads/css-a11y-group/css-a11y-flexbox.html" target="_blank" rel="external">许多屏幕阅读器</a> 会遵循元素在 DOM 中的顺序，即使它们被 CSS flexbox 做了视觉上的重排。这就导致 “Done”和“Not Done”的标题对于屏幕阅读器无用，这便是我给它们加了 <code>aria-hidden=&quot;true&quot;</code> 的原因 —— 被忽略总比引起混淆强。此外，通过键盘和屏幕阅读器完全可以控制分隔列表，正确显示列表项的状态（选中 / 未选）。</p>
+<p>如果你对“Done”和“Not Done”其后的计数实现感到好奇，它们用到了 CSS counters。想深入学习的话，可以看<a href="http://codersblock.com/blog/fun-times-with-css-counters/" target="_blank" rel="external">这篇文章</a>。</p>
+<h1 id="分组筛选">分组筛选</h1><p>压轴的例子展示了如何根据筛选条件，高亮显示交叉区域的数据。</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="YXxxyj" data-default-tab="result" data-user="lonekorean" class="codepen">See the Pen <a href="http://codepen.io/lonekorean/pen/YXxxyj/" target="_blank" rel="external">Checkbox Trickery: Group Filter</a> by Will Boyd (<a href="http://codepen.io/lonekorean" target="_blank" rel="external">@lonekorean</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>这是简短的 HTML 。注意一下 <code>data-teams</code> 属性是由空格分隔的列表，它们每一项恰恰与单选按钮的 <code>id</code> 属性一致。我就是这么把角色跟队伍匹配起来的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"original"</span> <span class="attribute">type</span>=<span class="value">"radio"</span> <span class="attribute">name</span>=<span class="value">"team"</span> <span class="attribute">checked</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"original"</span>&gt;</span>Original X-Men<span class="tag">&lt;/<span class="title">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 省略更多团队 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"characters"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">id</span>=<span class="value">"angel"</span> <span class="attribute">data-teams</span>=<span class="value">"original force factor hellfire"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">h2</span>&gt;</span>Angel<span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"ct-angel.png"</span> <span class="attribute">alt</span>=<span class="value">""</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 省略更多角色 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>关于可访问性，我使用了空的 <code>alt</code> 属性，因为角色的名字已显示在 <code>&lt;h2&gt;</code> 标签中了 —— 每个名字读两次也没有必要。此外，我没有真正的隐藏 <code>&lt;img&gt;</code> 元素（只是收缩和渐隐），屏幕阅读器可以轻易的跳过未高亮的角色。我仅仅需要隐藏 <code>&lt;h2&gt;</code> 。</p>
+<p>当选择团队的时候，高亮对应的角色，CSS 是这么实现的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#original</span><span class="pseudo">:checked</span> ~ <span class="class">.characters</span> <span class="attr_selector">[data-teams~="original"]</span> <span class="tag">h2</span>,</span><br><span class="line"><span class="id">#force</span><span class="pseudo">:checked</span> ~ <span class="class">.characters</span> <span class="attr_selector">[data-teams~="force"]</span> <span class="tag">h2</span>,</span><br><span class="line"><span class="id">#factor</span><span class="pseudo">:checked</span> ~ <span class="class">.characters</span> <span class="attr_selector">[data-teams~="factor"]</span> <span class="tag">h2</span>,</span><br><span class="line"><span class="id">#hellfire</span><span class="pseudo">:checked</span> ~ <span class="class">.characters</span> <span class="attr_selector">[data-teams~="hellfire"]</span> <span class="tag">h2</span> <span class="rules">&#123;</span><br><span class="line">    <span class="comment">/* styles to show character name */</span></span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="id">#original</span><span class="pseudo">:checked</span> ~ <span class="class">.characters</span> <span class="attr_selector">[data-teams~="original"]</span> <span class="tag">img</span>,</span><br><span class="line"><span class="id">#force</span><span class="pseudo">:checked</span> ~ <span class="class">.characters</span> <span class="attr_selector">[data-teams~="force"]</span> <span class="tag">img</span>,</span><br><span class="line"><span class="id">#factor</span><span class="pseudo">:checked</span> ~ <span class="class">.characters</span> <span class="attr_selector">[data-teams~="factor"]</span> <span class="tag">img</span>,</span><br><span class="line"><span class="id">#hellfire</span><span class="pseudo">:checked</span> ~ <span class="class">.characters</span> <span class="attr_selector">[data-teams~="hellfire"]</span> <span class="tag">img</span> <span class="rules">&#123;</span><br><span class="line">    <span class="comment">/* styles to show character avatar */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>我清楚这些选择器看起来有点吓人，不过也不赖。我们来仔细分析下例子的第一行（译者注：以 CSS 中最长的选择器开始算）。当 <code>id</code> 为 ‘original’ 的元素被选中时，找到角色元素里面 <code>data-teams</code> 属性包含 ‘original’ 的元素，然后找到它里面的 <code>&lt;h2&gt;</code> 。2-4行的 ‘force’, ‘factor’, 和 ‘hellfire’ 重复上一步。8-11行继续重复上一步，只不过把 <code>&lt;h2&gt;</code> 换成了 <code>&lt;img&gt;</code> 。</p>
+<h1 id="综述">综述</h1><p>我希望你跟我一样从这些例子中找到了一些乐趣。通过复选框去实现一些好玩的东西，对我而言非常有趣。我并没有排斥在适当的时候使用 JavaScript ，但是没用它也可以实现这么多东西，也是蛮开心的。谢谢阅读！</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag">#CSS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/" rel="next" title="JavaScript 如何实现后台计划任务">
+                <i class="fa fa-chevron-left"></i> JavaScript 如何实现后台计划任务
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/" rel="prev" title="CSS分层动画可以让元素沿弧形路径运动">
+                CSS分层动画可以让元素沿弧形路径运动 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/01/14/checkbox-trickery-with-css/"
+     data-title="复选框的 CSS 魔法"
+     data-content=""
+     data-url="http://jinlong.github.io/2016/01/14/checkbox-trickery-with-css/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/14/checkbox-trickery-with-css/"
+           data-title="复选框的 CSS 魔法" data-url="http://jinlong.github.io/2016/01/14/checkbox-trickery-with-css/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本配方"><span class="nav-number">1.</span> <span class="nav-text">基本配方</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隐藏/显示内容"><span class="nav-number">2.</span> <span class="nav-text">隐藏/显示内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树状文件夹"><span class="nav-number">3.</span> <span class="nav-text">树状文件夹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Split_List（分隔列表）"><span class="nav-number">4.</span> <span class="nav-text">Split List（分隔列表）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组筛选"><span class="nav-number">5.</span> <span class="nav-text">分组筛选</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">6.</span> <span class="nav-text">综述</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
