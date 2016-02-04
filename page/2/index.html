@@ -219,6 +219,123 @@
             
             
               
+                <a class="post-title-link" href="/2015/02/01/javascript-errors-and-how-to-fix-them/" itemprop="url">
+                  JavaScript 错误以及如何修复
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-02-01T22:09:27+08:00" content="2015-02-01">
+              2015-02-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/02/01/javascript-errors-and-how-to-fix-them/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/01/javascript-errors-and-how-to-fix-them/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文《<a href="http://davidwalsh.name/fix-javascript-errors">JavaScript Errors and How to Fix Them</a>》<br>作者：Jani Hartikainen<br>翻译：<a href="http://weibo.com/newwave">涂鸦码农</a></p>
+</blockquote>
+<p>JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？</p>
+<p>以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。</p>
+<h3 id="如何读懂错误？">如何读懂错误？</h3><p>首先，让我们快速看下错误信息的结构。理解结构有助于理解错误，如果遇到列表之外的错误会减少麻烦。</p>
+<p>Chrome 中典型的错误像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught <span class="built_in">TypeError</span>: <span class="literal">undefined</span> is not a <span class="function"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure>
+<p>错误的结构如下：</p>
+<ol>
+<li><p><strong>Uncaught TypeError：</strong>这部分信息通常不是很有用。<code>Uncaught</code> 表示错误没有被 <code>catch</code> 语句捕获，<code>TypeError</code> 是错误的名字。</p>
+</li>
+<li><p><strong>undefined is not a function:</strong> 这部分信息，你必须逐字阅读。比如这里表示代码尝试使用 <code>undefined</code> ，把它当做一个函数。</p>
+</li>
+</ol>
+<p>其它基于 webkit 的浏览器，比如 Safari ，给出的错误格式跟 Chrome 很类似。Firefox 也类似，但是不总包含第一部分，最新版本的 IE 也给出比 Chrome 简单的错误 - 但是在这里，简单并不总代表好。</p>
+<p>以下是真正的错误。</p>
+<h3 id="Uncaught_TypeError:_undefined_is_not_a_function">Uncaught TypeError: undefined is not a function</h3><p><strong>相关错误：</strong>number is not a function, object is not a function, string is not a function, Unhandled Error: ‘foo’ is not a function, Function Expected</p>
+<p>当尝试调用一个像方法的值时，这个值并不是一个方法。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">undefined</span>;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/02/01/javascript-errors-and-how-to-fix-them/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2014/10/25/jshint-configuration/" itemprop="url">
                   JSHint 配置浅析
                 </a>
@@ -1241,118 +1358,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/10/02/client-side-full-text-search-in-css/" itemprop="url">
-                  用 CSS 实现客户端全文搜索
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-10-02T17:04:00+08:00" content="2013-10-02">
-              2013-10-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index">
-                    <span itemprop="name">CSS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/CSS/全文搜索/" itemprop="url" rel="index">
-                    <span itemprop="name">全文搜索</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/10/02/client-side-full-text-search-in-css/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/10/02/client-side-full-text-search-in-css/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>前些天看到一篇文章《<a href="http://redotheweb.com/2013/05/15/client-side-full-text-search-in-css.html">Client-side full-text search in CSS</a>》，个人感觉思路比较巧，跟大家分享一下。</p>
-<p>总体思路：</p>
-<p>使用 <strong>data-</strong> 属性用于索引，带 <strong>CSS3 选择器</strong>的动态样式表用于检索，主要用 CSS 简单实现了客户端的全文搜索。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/10/02/client-side-full-text-search-in-css/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1398,21 +1403,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

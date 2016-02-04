@@ -219,6 +219,132 @@
             
             
               
+                <a class="post-title-link" href="/2013/06/05/the-design-of-code-organizing-javascript/" itemprop="url">
+                  代码设计：组织 JavaScript
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-06-05T17:02:00+08:00" content="2013-06-05">
+              2013-06-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jQuery/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/06/05/the-design-of-code-organizing-javascript/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/06/05/the-design-of-code-organizing-javascript/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://alistapart.com/article/the-design-of-code-organizing-javascript">The Design of Code: Organizing JavaScript</a><br>作者：<a href="http://alistapart.com/author/acolangelo">Anthony Colangelo</a><br>译者：<a href="http://weibo.com/newwave">@涂鸦码龙</a></p>
+</blockquote>
+<p>伟大的设计是一个产品应该关注和重视的点，这样才能造就一个可用的，好理解的，精美的用户界面。千万不要认为设计仅仅是设计师的事。</p>
+<p>代码里面有好多种设计，我不是指代码构建了用户界面——我是指代码的设计。</p>
+<p>精心设计的代码更易于维护，优化和扩展，能使开发者更高效。这意味着更多的注意力和精力可以花在构建伟大的事情上，每个人都很愉快——用户，开发者和利益相关者。</p>
+<p>有3个高级的，跟语言无关的点，对代码设计十分重要。</p>
+<ol>
+<li>系统架构——代码库的基础设计。控制各种组件的规则，例如模块（models），视图（views）和控制器（controllers），以及之间的相互作用。   </li>
+<li>可维护性——如何更好地改进和扩展代码？   </li>
+<li>复用性——应用组件如何复用？每个组件的实例如何简便地个性定制？   </li>
+</ol>
+<p>比较宽松的语言，特别是 JavaScript ，需要一些规矩才能写好——代码设计。JavaScript 环境非常宽松，随处扔些代码片段，就可能起作用。早点确立系统架构（然后遵守它！）对你的代码库提供制约，确保自始至终的一致性。</p>
+<p>我比较喜欢的一个方法由久经考验的软件设计模式组成——模块模式，可扩展的结构使它成为可靠的系统架构，和可维护的代码库。我喜欢在一个 jQuery 插件里面构建模块，有漂亮的复用性，提供强健的选项设置，暴露一些精心设计的 API。</p>
+<p>下面，我将逐步讲解如何精心设计你的代码，把它变成结构良好的组件，从而在项目中复用。</p>
+<h3 id="模块模式">模块模式</h3><p>已有许多设计模式，同样有许多相关资源。<a href="https://twitter.com/addyosmani">Addy Osmani</a> 写了本关于 JavaScript 设计模式的书《<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">令人惊奇的书（免费！）</a>》，我极力推荐给各个水平的开发者。</p>
+<p><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">模块模式</a> 是一个简单的结构基础，它可以让你的代码保持干净和条例清晰。一个“模块”就是个标准的包含方法和属性的对象字面量，简单是这个模式的最大亮点：甚至一些不熟悉传统的软件设计模式的人，一看就能立刻明白代码是如何工作的。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/06/05/the-design-of-code-organizing-javascript/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2013/05/22/opera-14-for-android-is-out/" itemprop="url">
                   安卓版 Opera 14 新在哪？
                 </a>
@@ -1312,127 +1438,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/03/23/git-command/" itemprop="url">
-                  git command
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-03-23T10:29:00+08:00" content="2013-03-23">
-              2013-03-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/原创/" itemprop="url" rel="index">
-                    <span itemprop="name">原创</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/原创/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/03/23/git-command/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/03/23/git-command/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>最近项目中用到了 <code>git branch</code> 和 <code>git submodule</code>，查阅了一些文章，总算有点头绪了，连同一些常用的 git 命令记录在此，以便查阅。</p>
-<h2 id="git_常用命令">git 常用命令</h2><ul>
-<li>远程仓库相关命令</li>
-</ul>
-<p>检出仓库：<code>$ git clone git://github.com/jquery/jquery.git</code>    </p>
-<p>查看远程仓库：<code>$ git remote -v</code>    </p>
-<p>添加远程仓库：<code>$ git remote add [name] [url]</code></p>
-<p>删除远程仓库：<code>$ git remote rm [name]</code>    </p>
-<p>修改远程仓库：<code>$ git remote set-url --push [name] [newUrl]</code>    </p>
-<p>拉取远程仓库：<code>$ git pull [remoteName] [localBranchName]</code>    </p>
-<p>推送远程仓库：<code>$ git push [remoteName] [localBranchName]</code>    </p>
-<p>初始化仓库：<code>git init</code><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/03/23/git-command/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1478,21 +1483,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

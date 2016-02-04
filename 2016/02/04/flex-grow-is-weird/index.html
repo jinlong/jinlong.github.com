@@ -1,0 +1,865 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="flexbox," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：‘flex-grow’ is weird. Or is it?翻译：涂鸦码龙
+
+当我刚接触 flex-grow 时，为了探寻它的工作原理，做了一个简单的例子。
+我以为理解的挺透彻了，但是当我把它应用到同事的网站上时，效果跟我想象的完全不同。无论怎么改，布局都无法像我的demo那样展示。这时我才意识到，我并没有完全掌握 flex-grow 。
+flex-grow 为何不正常在我深入剖析 fle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flex-grow 不易理解，难道不是吗?">
+<meta property="og:url" content="http://jinlong.github.io/2016/02/04/flex-grow-is-weird/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：‘flex-grow’ is weird. Or is it?翻译：涂鸦码龙
+
+当我刚接触 flex-grow 时，为了探寻它的工作原理，做了一个简单的例子。
+我以为理解的挺透彻了，但是当我把它应用到同事的网站上时，效果跟我想象的完全不同。无论怎么改，布局都无法像我的demo那样展示。这时我才意识到，我并没有完全掌握 flex-grow 。
+flex-grow 为何不正常在我深入剖析 fle">
+<meta property="og:image" content="http://jinlong.github.io/image/flex-grow-weird/pic1.png">
+<meta property="og:image" content="http://jinlong.github.io/image/flex-grow-weird/pic2.png">
+<meta property="og:image" content="http://jinlong.github.io/image/flex-grow-weird/pic3.png">
+<meta property="og:updated_time" content="2016-02-04T15:22:12.100Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flex-grow 不易理解，难道不是吗?">
+<meta name="twitter:description" content="原文：‘flex-grow’ is weird. Or is it?翻译：涂鸦码龙
+
+当我刚接触 flex-grow 时，为了探寻它的工作原理，做了一个简单的例子。
+我以为理解的挺透彻了，但是当我把它应用到同事的网站上时，效果跟我想象的完全不同。无论怎么改，布局都无法像我的demo那样展示。这时我才意识到，我并没有完全掌握 flex-grow 。
+flex-grow 为何不正常在我深入剖析 fle">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> flex-grow 不易理解，难道不是吗? | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                flex-grow 不易理解，难道不是吗?
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-02-04T22:40:39+08:00" content="2016-02-04">
+              2016-02-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/04/flex-grow-is-weird/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/flex-grow-is-weird/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：<a href="https://css-tricks.com/flex-grow-is-weird/" target="_blank" rel="external">‘flex-grow’ is weird. Or is it?</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>当我刚接触 <code>flex-grow</code> 时，为了探寻它的工作原理，做了一个<a href="http://codepen.io/matuzo/pen/zvXQyj" target="_blank" rel="external">简单的例子</a>。</p>
+<p>我以为理解的挺透彻了，但是当我把它应用到同事的网站上时，效果跟我想象的完全不同。无论怎么改，布局都无法像我的demo那样展示。这时我才意识到，我并没有完全掌握 <code>flex-grow</code> 。</p>
+<h1 id="flex-grow_为何不正常">flex-grow 为何不正常</h1><p>在我深入剖析 <code>flex-grow</code> 的功能之前，我想解释一下我起初犯了什么错。</p>
+<p>我认为所有 flex 元素的 <code>flex-grow</code> 如果设置为 <code>1</code> ，它们将一样宽。如果某一项的 <code>flex-grow</code> 设置为 <code>2</code> ，它将是其它元素的二倍宽。</p>
+<p>一切听起来顺理成章。我<a href="http://codepen.io/matuzo/pen/zvXQyj" target="_blank" rel="external">上面的例子</a> 貌似也印证了这点。父元素是900px宽，<code>flex-grow: 2</code> 的 section 元素计算后是600px宽，<code>flex-grow: 1</code> 的 aside 元素计算后是300px宽。</p>
+<p>如你所见，它在这个例子中展现的近乎完美，可是在真实的例子中却不尽人意，即使我们用了完全相同的 CSS。事实证明，问题不在 CSS，而在于内容（或者说缺乏内容）。我的测试用例只用了两个空元素，无法展示这个属性最重要的细节。</p>
+<h1 id="flex-grow_到底如何工作">flex-grow 到底如何工作</h1><p>啰嗦了半天，我终于要解释 <code>flex-grow</code> 没有尽如人意的原因了。</p>
+<p>为了阐明原因，我又搞了个<a href="http://codepen.io/matuzo/pen/ZQEWjg" target="_blank" rel="external">栗子</a> ，所有的设置跟<a href="http://codepen.io/matuzo/pen/zvXQyj" target="_blank" rel="external">第一个栗子</a> 完全一致，只不过 section 和 aside 元素不再是空的。看吧，两个元素的比例不再是 2 : 1，flex-grow 为 1 的元素的确比 flex-grow 为 2 的元素宽不少呐。</p>
+<a id="more"></a>
+<h2 id="解析">解析</h2><p>如果给父元素设置了 <code>display: flex;</code> ，子元素仅仅是水平排列，没有其它效果了。如果没有足够的空间，它们会收缩一些尺寸。另一方面，如果有足够的空间，它们也不会扩展，因为 Flexbox 希望我们自己定义扩展多少。<strong><em>flex-grow</em></strong> 恰恰用来定义剩余空间如何分配，每一项分享多大宽度。</p>
+<p>换言之：</p>
+<blockquote>
+<p>flex 容器为它的子元素分配剩余空间（它们的扩展系数是成比例的），从而填满整个容器，或者收缩元素（它们的收缩系数也是成比例的），从而阻止溢出。</p>
+</blockquote>
+<p><a href="https://drafts.csswg.org/css-flexbox/#flexibility" target="_blank" rel="external">https://drafts.csswg.org/css-flexbox/#flexibility</a></p>
+<h2 id="证明">证明</h2><p>如果我们可视化一把，概念就很清晰明了了。</p>
+<p>首先，我们给父元素设置了 <code>display: flex</code>，然后它的子元素成了 flex 元素，一个挨一个的横向排列。 </p>
+<p><img src="/image/flex-grow-weird/pic1.png" alt="附图1"></p>
+<p>下一步，我们要决定每个元素能获得多少剩余空间。先前的例子中，第一个元素获得了 2/3 的剩余空间（<code>flex-grow: 2</code>），第二个元素获得了 1/3 的剩余空间（<code>flex-grow: 1</code>）。想知道 flex-grow 总共的值是多少，看看剩余空间被分成了几份吧。</p>
+<p><img src="/image/flex-grow-weird/pic2.png" alt="附图2"></p>
+<p>最终我们得出了可分配的块数，根据 <code>flex-grow</code> 的值，每个元素可以获得适当的块数。</p>
+<p><img src="/image/flex-grow-weird/pic3.png" alt="附图3"></p>
+<h2 id="计算结果">计算结果</h2><p>理论和视觉展示都不错，让我们为<a href="http://codepen.io/matuzo/pen/ZQEWjg" target="_blank" rel="external">上面例子</a> 做点算术吧。</p>
+<p>我们需要4组数字：父容器宽度， section 和 aside 元素的初始宽度，以及 flex-grow 的总值。</p>
+<p>父容器宽：<strong>900px</strong><br>section 宽：<strong>99px</strong><br>aside 宽：<strong>623px</strong><br>flex-grow 总值：<strong>3</strong></p>
+<p><strong>1. 首先计算剩余空间</strong></p>
+<p>父容器宽减去每一个子元素的初始宽度。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">900</span> - <span class="number">99</span> - <span class="number">623</span> = <span class="number">178</span></span><br></pre></td></tr></table></figure>
+<p>父容器宽 - section 宽 - aside 宽 = 剩余空间</p>
+<p><strong>2. 然后计算 flex-grow 的1份是多宽</strong></p>
+<p>既然有了剩余空间，我们还需要确定把它切成几份。重要的是，我们不按元素的个数切分剩余空间，而是按 flex-grow 总值，所以这里是 3 （<code>flex-grow: 2</code> + <code>flex-grow: 1</code>）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">178</span> / <span class="number">3</span> = <span class="number">59.33</span></span><br></pre></td></tr></table></figure>
+<p>剩余空间 / flex-grow 总值 = “1份 flex-grow 的宽”</p>
+<p><strong>3. 最终所有的元素瓜分剩余空间</strong></p>
+<p>依据它们的 flex-grow 值，section 需要 2 份（2 <em> 59.33），aside 需要 1 份（1</em> 59.33）。这个数字再与每个元素的初始宽度相加。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">99</span> + (<span class="number">2</span> * <span class="number">59.33</span>) = <span class="number">217.66</span> (≈<span class="number">218</span>px)</span><br></pre></td></tr></table></figure>
+<p>初始 section 宽度 + （section 的 flex-grow 值 * “1 份 flex-grow 的宽”） = 新的宽度</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">623</span> + (<span class="number">1</span> * <span class="number">59.33</span>) = <span class="number">682.33</span> (≈<span class="number">682</span>px)</span><br></pre></td></tr></table></figure>
+<p>初始 aside 宽度 + （aside 的 flex-grow 值 * “1 份 flex-grow 的宽”） = 新的宽度</p>
+<p>so easy，不是吗？</p>
+<h1 id="好吧，那为什么第一个例子正常呢？">好吧，那为什么第一个例子正常呢？</h1><p>我们按已有的公式，算下<a href="http://codepen.io/matuzo/pen/zvXQyj" target="_blank" rel="external">第一个例子</a> 。</p>
+<p>父容器宽：<strong>900px</strong><br>section 宽：<strong>0px</strong><br>aside 宽：<strong>0px</strong><br>flex-grow 总值：<strong>3</strong></p>
+<p><strong>1. 计算剩余空间</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">900</span> - <span class="number">0</span> - <span class="number">0</span> = <span class="number">900</span></span><br></pre></td></tr></table></figure>
+<p><strong>2. 计算 flex-grow 的1份是多宽</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">900</span> / <span class="number">3</span> = <span class="number">300</span></span><br></pre></td></tr></table></figure>
+<p><strong>3. 分配剩余空间</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> + (<span class="number">2</span> * <span class="number">300</span>) = <span class="number">600</span>  </span><br><span class="line"><span class="number">0</span> + (<span class="number">1</span> * <span class="number">300</span>) = <span class="number">300</span></span><br></pre></td></tr></table></figure>
+<p>如果每个元素的宽是 0，剩余空间等于父容器的宽度，因此，看起来像是 <code>flex-grow</code> 按比例划分了父容器的宽度。</p>
+<h1 id="flex-grow_和_flex-basis">flex-grow 和 flex-basis</h1><p>快速回顾一下：剩余空间被 <code>flex-grow</code> 的总值划分，由此产生的商，乘以各自的 <code>flex-grow</code> 值，结果再加上每个元素的初始宽度。</p>
+<p>但是如果没有剩余空间或者不想依赖元素的初始宽度，我们可以设置它吗？还能用 <code>flex-grow</code> 吗？</p>
+<p>当然可以。有个 <code>flex-basis</code> 属性，它可以定义元素的初始宽度。如果 <code>flex-basis</code> 和 <code>flex-grow</code> 一起设置，宽度的计算方式得变一下。</p>
+<blockquote>
+<p><code>&lt;‘flex-basis’&gt;</code> ：按 flex 因子分配剩余空间之前，每个 flex 元素的最初主要尺寸。</p>
+</blockquote>
+<p><a href="https://drafts.csswg.org/css-flexbox/#valdef-flex-flex-basis" target="_blank" rel="external">https://drafts.csswg.org/css-flexbox/#valdef-flex-flex-basis</a> </p>
+<p>如果给某个元素设置了 <code>flex-basis</code> 属性，我们计算的时候就不能再用元素本身的初始宽度了，而要用 <code>flex-basis</code> 属性的值。</p>
+<p>我调整了一下<a href="http://codepen.io/matuzo/pen/GoRqOP" target="_blank" rel="external">先前的例子</a> ，给每个元素加了 <code>flex-basis</code> 属性。</p>
+<p>父容器宽：<strong>900px</strong><br>section 宽：<strong>400px</strong>（flex-basis 值）<br>aside 宽：<strong>200px</strong>（flex-basis 值）<br>flex-grow 总值：<strong>3</strong></p>
+<p><strong>1. 计算剩余空间</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">900</span> - <span class="number">400</span> - <span class="number">200</span> = <span class="number">300</span></span><br></pre></td></tr></table></figure>
+<p><strong>2. 计算 flex-grow 的1份是多宽</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">300</span> / <span class="number">3</span> = <span class="number">100</span></span><br></pre></td></tr></table></figure>
+<p><strong>3. 分配剩余空间</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">400</span> + (<span class="number">2</span> * <span class="number">100</span>) = <span class="number">600</span>  </span><br><span class="line"><span class="number">200</span> + (<span class="number">1</span> * <span class="number">100</span>) = <span class="number">300</span></span><br></pre></td></tr></table></figure>
+<p>仅仅是为了完整性，我才用到 px 值，用<a href="http://codepen.io/matuzo/pen/pgobag" target="_blank" rel="external">百分比的话当然也没问题</a> 。</p>
+<h1 id="与盒模型结合">与盒模型结合</h1><p>为了覆盖所有情况，如果我们加上 padding 和 margin 看看会发生什么，<a href="http://codepen.io/matuzo/pen/Qybgee" target="_blank" rel="external">啥也没发生</a>  ，第一步计算的时候，只要减去 margin 就好了。</p>
+<p>唯一需要注意的是，使用 <code>box-sizing</code> 的话， <code>flex-basis</code> 跟 <code>width</code> 属性表现相似。<a href="http://codepen.io/matuzo/pen/wMaeVO" target="_blank" rel="external">如果 box-sizing 属性改变</a>，计算结果也会变化。如果 <code>box-sizing</code> 设置为 <code>border-box</code> ，计算时只需用到 <code>flex-basis</code> 和 <code>margin</code> 值，因为 <code>padding</code> 已经包含到宽度里面了。</p>
+<h1 id="更多实用的例子">更多实用的例子</h1><p>好吧，算术是玩够了。我再展示一些项目中合理使用 <code>flex-grow</code> 的例子吧。</p>
+<h2 id="不限宽度：[_x_]%">不限宽度：[ x ]%</h2><p>实际应用中，剩余空间是自动分配的，如果想让子元素填满父容器的话，我们没必要再考虑宽度值。</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="QyWEBb" data-default-tab="result" data-user="matuzo" class="codepen">See the Pen <a href="http://codepen.io/matuzo/pen/QyWEBb/" target="_blank" rel="external">flex-grow</a> by Manuel Matuzovic (<a href="http://codepen.io/matuzo" target="_blank" rel="external">@matuzo</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="固定宽度的_“圣杯”_3列流式布局">固定宽度的 “圣杯” 3列流式布局</h2><p>固定加自适应宽度的混合布局，可以用浮动实现，但是既不简单直观，又不灵活。Flexbox 实现的话，加点儿 flex-grow 和 flex-basis 魔法，简直小菜一碟。</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="jbRjMG" data-default-tab="result" data-user="matuzo" class="codepen">See the Pen <a href="http://codepen.io/matuzo/pen/jbRjMG/" target="_blank" rel="external">Layout using fluid and fixed widths</a> by Manuel Matuzovic (<a href="http://codepen.io/matuzo" target="_blank" rel="external">@matuzo</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="使用任何元素填满剩余空间">使用任何元素填满剩余空间</h2><p>比如，一个 label 元素后面紧跟着输入框，想让输入框填满剩余空间，不再需要丑陋的 hacks 。</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="eJYdWV" data-default-tab="result" data-user="matuzo" class="codepen">See the Pen <a href="http://codepen.io/matuzo/pen/eJYdWV/" target="_blank" rel="external">Filling up the remaining space in a form</a> by Manuel Matuzovic (<a href="http://codepen.io/matuzo" target="_blank" rel="external">@matuzo</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>Philip Waltons 的 <a href="https://philipwalton.github.io/solved-by-flexbox/" target="_blank" rel="external">Solved by Flexbox</a> 一文可以找到更多示例。</p>
+<h1 id="听听标准规范怎么说">听听标准规范怎么说</h1><p>根据标准，使用 <code>flex</code> 的简写，比直接用 <code>flex-grow</code> 更好。</p>
+<blockquote>
+<p>Authors are encouraged to control flexibility using the flex shorthand rather than flex-grow directly, as the shorthand correctly resets any unspecified components to accommodate common uses.</p>
+</blockquote>
+<p><a href="https://drafts.csswg.org/css-flexbox/#flex-grow-property" target="_blank" rel="external">https://drafts.csswg.org/css-flexbox/#flex-grow-property</a> </p>
+<p>但是小心！如果仅仅使用 <code>flex: 1;</code> ，以上某些例子可能无法正常展示。</p>
+<p>我们的例子要用 <code>flex</code> 的话，应该这么定义：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex: <span class="number">2</span> <span class="number">1</span> <span class="keyword">auto</span>;  <span class="comment">/* (&lt;flex-grow&gt; | &lt;flex-shrink&gt; | &lt;flex-basis&gt;) */</span></span><br></pre></td></tr></table></figure>
+<h1 id="深入学习_Flexbox">深入学习 Flexbox</h1><p>如果你想深入学习 Flexbox，可以看看这些不错的资源：</p>
+<ul>
+<li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">A Complete Guide to Flexbox</a> by Chris Coyier</li>
+<li><a href="https://chriswrightdesign.com/experiments/flexbox-adventures/" target="_blank" rel="external">Flexbox adventures</a> by Chris Wright</li>
+<li><a href="http://flexboxfroggy.com/" target="_blank" rel="external">Flexbox Froggy</a> by Thomas Park</li>
+<li><a href="http://flexbox.io/" target="_blank" rel="external">What the Flexbox?</a> by Wes Bos</li>
+<li><a href="https://cvan.io/flexboxin5/" target="_blank" rel="external">flexboxin5</a> </li>
+<li><a href="http://madebymike.com.au/demos/flexbox-tester/" target="_blank" rel="external">Flexbox Tester</a> by Mike Riethmuller</li>
+</ul>
+<h1 id="总结经验教训">总结经验教训</h1><p><code>flex-grow</code> 不易理解吗？也不全是。我们只需理解它如何工作，它做了什么。如果一个元素设置 <code>flex-grow</code> 为 <code>3</code> ，并不代表它是 <code>flex-grow</code> 为 <code>1</code> 的元素的3倍大，准确含义是：它的初始宽度可以增加的像素值是另一个元素的3倍。</p>
+<p>我通过<a href="http://codepen.io/matuzo/pen/zvXQyj" target="_blank" rel="external">两个空元素</a> 测试 flex-grow ，得到的结论跟<a href="http://codepen.io/matuzo/pen/ZQEWjg" target="_blank" rel="external">真实情况</a> 完全不符。应该在尽可能真实的环境中验证新事物，这样才能得到最切合实际的结论。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/flexbox/" rel="tag">#flexbox</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/" rel="next" title="CSS分层动画可以让元素沿弧形路径运动">
+                <i class="fa fa-chevron-left"></i> CSS分层动画可以让元素沿弧形路径运动
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/02/04/flex-grow-is-weird/"
+     data-title="flex-grow 不易理解，难道不是吗?"
+     data-content=""
+     data-url="http://jinlong.github.io/2016/02/04/flex-grow-is-weird/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/04/flex-grow-is-weird/"
+           data-title="flex-grow 不易理解，难道不是吗?" data-url="http://jinlong.github.io/2016/02/04/flex-grow-is-weird/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flex-grow_为何不正常"><span class="nav-number">1.</span> <span class="nav-text">flex-grow 为何不正常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flex-grow_到底如何工作"><span class="nav-number">2.</span> <span class="nav-text">flex-grow 到底如何工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-number">2.1.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明"><span class="nav-number">2.2.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算结果"><span class="nav-number">2.3.</span> <span class="nav-text">计算结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#好吧，那为什么第一个例子正常呢？"><span class="nav-number">3.</span> <span class="nav-text">好吧，那为什么第一个例子正常呢？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flex-grow_和_flex-basis"><span class="nav-number">4.</span> <span class="nav-text">flex-grow 和 flex-basis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与盒模型结合"><span class="nav-number">5.</span> <span class="nav-text">与盒模型结合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更多实用的例子"><span class="nav-number">6.</span> <span class="nav-text">更多实用的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不限宽度：[_x_]%"><span class="nav-number">6.1.</span> <span class="nav-text">不限宽度：[ x ]%</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#固定宽度的_“圣杯”_3列流式布局"><span class="nav-number">6.2.</span> <span class="nav-text">固定宽度的 “圣杯” 3列流式布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用任何元素填满剩余空间"><span class="nav-number">6.3.</span> <span class="nav-text">使用任何元素填满剩余空间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#听听标准规范怎么说"><span class="nav-number">7.</span> <span class="nav-text">听听标准规范怎么说</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入学习_Flexbox"><span class="nav-number">8.</span> <span class="nav-text">深入学习 Flexbox</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结经验教训"><span class="nav-number">9.</span> <span class="nav-text">总结经验教训</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

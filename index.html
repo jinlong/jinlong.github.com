@@ -219,6 +219,114 @@
             
             
               
+                <a class="post-title-link" href="/2016/02/04/flex-grow-is-weird/" itemprop="url">
+                  flex-grow 不易理解，难道不是吗?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-02-04T22:40:39+08:00" content="2016-02-04">
+              2016-02-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/04/flex-grow-is-weird/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/flex-grow-is-weird/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="https://css-tricks.com/flex-grow-is-weird/">‘flex-grow’ is weird. Or is it?</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>当我刚接触 <code>flex-grow</code> 时，为了探寻它的工作原理，做了一个<a href="http://codepen.io/matuzo/pen/zvXQyj">简单的例子</a>。</p>
+<p>我以为理解的挺透彻了，但是当我把它应用到同事的网站上时，效果跟我想象的完全不同。无论怎么改，布局都无法像我的demo那样展示。这时我才意识到，我并没有完全掌握 <code>flex-grow</code> 。</p>
+<h1 id="flex-grow_为何不正常">flex-grow 为何不正常</h1><p>在我深入剖析 <code>flex-grow</code> 的功能之前，我想解释一下我起初犯了什么错。</p>
+<p>我认为所有 flex 元素的 <code>flex-grow</code> 如果设置为 <code>1</code> ，它们将一样宽。如果某一项的 <code>flex-grow</code> 设置为 <code>2</code> ，它将是其它元素的二倍宽。</p>
+<p>一切听起来顺理成章。我<a href="http://codepen.io/matuzo/pen/zvXQyj">上面的例子</a> 貌似也印证了这点。父元素是900px宽，<code>flex-grow: 2</code> 的 section 元素计算后是600px宽，<code>flex-grow: 1</code> 的 aside 元素计算后是300px宽。</p>
+<p>如你所见，它在这个例子中展现的近乎完美，可是在真实的例子中却不尽人意，即使我们用了完全相同的 CSS。事实证明，问题不在 CSS，而在于内容（或者说缺乏内容）。我的测试用例只用了两个空元素，无法展示这个属性最重要的细节。</p>
+<h1 id="flex-grow_到底如何工作">flex-grow 到底如何工作</h1><p>啰嗦了半天，我终于要解释 <code>flex-grow</code> 没有尽如人意的原因了。</p>
+<p>为了阐明原因，我又搞了个<a href="http://codepen.io/matuzo/pen/ZQEWjg">栗子</a> ，所有的设置跟<a href="http://codepen.io/matuzo/pen/zvXQyj">第一个栗子</a> 完全一致，只不过 section 和 aside 元素不再是空的。看吧，两个元素的比例不再是 2 : 1，flex-grow 为 1 的元素的确比 flex-grow 为 2 的元素宽不少呐。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/04/flex-grow-is-weird/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/" itemprop="url">
                   CSS分层动画可以让元素沿弧形路径运动
                 </a>
@@ -242,18 +350,6 @@
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/CSS/" itemprop="url" rel="index">
                     <span itemprop="name">CSS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/CSS/animation/" itemprop="url" rel="index">
-                    <span itemprop="name">animation</span>
                   </a>
                 </span>
 
@@ -1177,123 +1273,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2015/02/01/javascript-errors-and-how-to-fix-them/" itemprop="url">
-                  JavaScript 错误以及如何修复
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-02-01T22:09:27+08:00" content="2015-02-01">
-              2015-02-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/02/01/javascript-errors-and-how-to-fix-them/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/01/javascript-errors-and-how-to-fix-them/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文《<a href="http://davidwalsh.name/fix-javascript-errors">JavaScript Errors and How to Fix Them</a>》<br>作者：Jani Hartikainen<br>翻译：<a href="http://weibo.com/newwave">涂鸦码农</a></p>
-</blockquote>
-<p>JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？</p>
-<p>以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。</p>
-<h3 id="如何读懂错误？">如何读懂错误？</h3><p>首先，让我们快速看下错误信息的结构。理解结构有助于理解错误，如果遇到列表之外的错误会减少麻烦。</p>
-<p>Chrome 中典型的错误像这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught <span class="built_in">TypeError</span>: <span class="literal">undefined</span> is not a <span class="function"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure>
-<p>错误的结构如下：</p>
-<ol>
-<li><p><strong>Uncaught TypeError：</strong>这部分信息通常不是很有用。<code>Uncaught</code> 表示错误没有被 <code>catch</code> 语句捕获，<code>TypeError</code> 是错误的名字。</p>
-</li>
-<li><p><strong>undefined is not a function:</strong> 这部分信息，你必须逐字阅读。比如这里表示代码尝试使用 <code>undefined</code> ，把它当做一个函数。</p>
-</li>
-</ol>
-<p>其它基于 webkit 的浏览器，比如 Safari ，给出的错误格式跟 Chrome 很类似。Firefox 也类似，但是不总包含第一部分，最新版本的 IE 也给出比 Chrome 简单的错误 - 但是在这里，简单并不总代表好。</p>
-<p>以下是真正的错误。</p>
-<h3 id="Uncaught_TypeError:_undefined_is_not_a_function">Uncaught TypeError: undefined is not a function</h3><p><strong>相关错误：</strong>number is not a function, object is not a function, string is not a function, Unhandled Error: ‘foo’ is not a function, Function Expected</p>
-<p>当尝试调用一个像方法的值时，这个值并不是一个方法。比如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">undefined</span>;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/01/javascript-errors-and-how-to-fix-them/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1339,21 +1318,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
