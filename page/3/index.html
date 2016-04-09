@@ -219,6 +219,129 @@
             
             
               
+                <a class="post-title-link" href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/" itemprop="url">
+                  面向Node.js新手的7个技巧
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-10-17T17:38:00+08:00" content="2013-10-17">
+              2013-10-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/入门/" itemprop="url" rel="index">
+                    <span itemprop="name">入门</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/10/17/7-tips-for-a-node-dot-js-padawan/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="https://medium.com/tech-talk/e7c0b0e5ce3c">7 tips for a Node.js padawan</a><br>感谢 <a href="http://diwu.me/about/index.html">Di Wu</a> 同学，参考了他的译文《<a href="http://diwu.me/2013/09/24/7-tips-for-a-node-dot-js-padawan/">7 Tips for a Node.js Padawan</a>》，某些不妥的地方做了些许修改。</p>
+</blockquote>
+<h4 id="或许我刚入门时就想了解这些知识。">或许我刚入门时就想了解这些知识。</h4><p>Node.js 开发相当有趣，相当令人满足。它有3万5千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。</p>
+<p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
+<h2 id="技巧_1_：开发环境使用_nodemon，生产环境使用_pm2">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</h2><p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
+<p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon">Nodemon</a> 。运行以下命令安装它：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> nodemon</span></span><br></pre></td></tr></table></figure>
+<p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
+<p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
+<p><a href="https://github.com/Unitech/pm2">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
+<p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app<span class="class">.js</span> -<span class="tag">i</span> max</span><br></pre></td></tr></table></figure>
+<p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2013/10/02/client-side-full-text-search-in-css/" itemprop="url">
                   用 CSS 实现客户端全文搜索
                 </a>
@@ -1281,11 +1404,26 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2013-07-06T13:47:00+08:00" content="2013-07-06">
+            <time itemprop="dateCreated" datetime="2013-07-06T11:22:43+08:00" content="2013-07-06">
               2013-07-06
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -1319,136 +1457,20 @@
 <p>原文：<a href="http://designpepper.com/blog/drips/using-javascripts-tostring-method" target="_blank" rel="external">Using JavaScript’s ‘toString’ Method</a> （需翻墙）<br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
 <p>是否想知道为什么 <code>alert</code> 一个 JavaScript 对象，得到“[object Object]”文本？缘于 JavaScript 内置 <code>toString</code> 方法。</p>
-<p><strong>注意：例子有些地方用了 <code>alert</code> ，没用 <code>console.log</code> ，是为了绕开 console 对 Object 的特殊处理。</strong></p>
+<p><strong>注意：例子有些地方用了 alert ，没用 console.log ，是为了绕开 console 对 Object 的特殊处理。</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Alerts: '[object Object]'</span></span><br><span class="line">alert(&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "function() &#123;&#125;"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs:</span></span><br><span class="line"><span class="comment">// "Thu Oct 11 1962 00:00:00 GMT-0400 (Eastern Daylight Time)"</span></span><br><span class="line"><span class="comment">// May vary depending on your clock settings</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"October 11, 1962"</span>));</span><br></pre></td></tr></table></figure>
-<p>以上这些有什么共同点？每一个都提供字符串代表它们的值，但是内部的值差异很大。比如，内部的 Date 以毫秒衡量。</p>
-<p>这些对象如何提供字符串作代表？它们均有个 prototype 方法：<code>toString</code>，它会把内部的值转换成字符串。</p>
+<p>以上这些有什么共同点？每一个都提供字符串代表它们的值，但是内部的值差异很大。比如，内部的 <code>Date</code> 以毫秒衡量。</p>
+<p>这些对象如何提供字符串作代表？它们均有个 <code>prototype</code> 方法：<code>toString</code>，它会把内部的值转换成字符串。</p>
 <p>假如我们想创建一个新对象，让它返回字符串代表它的值，不用 <code>toString</code> 的话，代码像这样：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Color</span> (<span class="params">r, g, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.r = r;</span><br><span class="line">    <span class="keyword">this</span>.g = g;</span><br><span class="line">    <span class="keyword">this</span>.b = b;</span><br><span class="line">    <span class="keyword">this</span>.text = <span class="string">"rgb("</span> + r + <span class="string">", "</span> + g + <span class="string">", "</span> + b + <span class="string">")"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "rgb(255, 0, 0)"</span></span><br><span class="line">alert(red.text);</span><br></pre></td></tr></table></figure>
 <p>有几个问题，首先，<code>text</code> 属性跟实际的值不同步（如果改变r, g, b 的值）；其次，必须明确调用 <code>red.text</code> ，不能直接用 red 的值。</p>
 <p>用 <code>toString</code> 方法重写一下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Color</span> (<span class="params">r, g, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.r = r;</span><br><span class="line">    <span class="keyword">this</span>.g = g;</span><br><span class="line">    <span class="keyword">this</span>.b = b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Color.prototype.toString = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"rgb("</span> + <span class="keyword">this</span>.r + <span class="string">", "</span> +</span><br><span class="line">                    <span class="keyword">this</span>.g + <span class="string">", "</span> +</span><br><span class="line">                    <span class="keyword">this</span>.b + <span class="string">")"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Alerts: "rgb(255, 0, 0)"</span></span><br><span class="line">alert(red);</span><br></pre></td></tr></table></figure>
-<p>把要返回的字符串放到 prototype 的 <code>toString</code> 里面有两个好处：字符串始终与真正的值保持同步，我们可以随时取用字符串的值， JavaScript 解释器会隐含调用 <code>toString</code> 方法。比如：</p>
+<p>把要返回的字符串放到 <code>prototype</code> 的 <code>toString</code> 里面有两个好处：字符串始终与真正的值保持同步，我们可以随时取用字符串的值， JavaScript 解释器会隐含调用 <code>toString</code> 方法。比如：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"Red is: "</span> + red;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "Red is: rgb(255, 0, 0)"</span></span><br><span class="line"><span class="built_in">console</span>.log(message);</span><br></pre></td></tr></table></figure>
+
             
           </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/06/24/better-performance-with-requestanimationframe/" itemprop="url">
-                  requestAnimationFrame 性能更好
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-06-24T16:06:00+08:00" content="2013-06-24">
-              2013-06-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/requestAnimationFrame/" itemprop="url" rel="index">
-                    <span itemprop="name">requestAnimationFrame</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/requestAnimationFrame/game/" itemprop="url" rel="index">
-                    <span itemprop="name">game</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/06/24/better-performance-with-requestanimationframe/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/06/24/better-performance-with-requestanimationframe/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文：<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/">Better performance with requestAnimationFrame</a><br>作者：<a href="http://dev.opera.com/author/dropoutwannabe">Luz Caballero</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<h2 id="介绍">介绍</h2><p>本文讨论如何使用 <strong>requestAnimationFrame</strong> API 代替旧的 <code>setInterval / setTimeout</code> 方法，从而提高动画的性能。当然，我们会演示<a href="http://dev.opera.com/articles/view/better-performance-with-requestanimationframe/raf-demo.html">代码实例</a>。</p>
-<p>当前<a href="http://caniuse.com/requestanimationframe">几乎所有的主流浏览器都支持</a> requestAnimationFrame ，尽管有的还带前缀。Erik Möller 已经写了个 <a href="http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating">polyfill</a> ，加上这个应该可以支持所有浏览器啦。一言难尽，让我们从头说来…</p>
-<h2 id="老方法不太好">老方法不太好</h2><p>在表彰 <strong>requestAnimationFrame</strong> 之前，我们先看看用老方法是怎么实现动画的。我确定没必要提很久以前 Mozilla 第一个实现了 <code>mozRequestAnimationFrame</code> ，你可能已经用 <code>setTimeout</code> 和 <code>setInterval</code> 创建了动画。假定你已经熟悉这两个方法，我不再赘述。如果你想了解更多，可以看 John Resig 的精彩文章，深度解析 <a href="http://ejohn.org/blog/how-javascript-timers-work/">JavaScript 计时器如何工作</a> 。</p>
-<p>我并不是轻视这些老方法，它们的确有一些缺点。首先，当相应的浏览器窗口最小化，JavaScript 计时器在背景标签仍然持续运行。因此，浏览器继续运行看不见的动画，导致不必要的 CPU 和电池寿命的消耗。在移动设备尤其严重。</p>
-<p>其次，不仅计时器持续运行看不见的动画，而且当时间到了，仍会排队执行它们的回调函数。让我解释下为什么这样会出问题 —— 比如说由于某些原因，回调函数占用太多时间，比你设定的时间要长。一旦计时器时间到了，它将排队执行 “下一次” 回调函数，甚至前一个还没执行完。这一过程不断重复，很快排队了几乎无数的计时器代码，导致浏览器不堪重负。图1 说明这一情况。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/06/24/better-performance-with-requestanimationframe/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -1512,7 +1534,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1526,7 +1548,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

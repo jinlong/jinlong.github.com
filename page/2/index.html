@@ -219,6 +219,108 @@
             
             
               
+                <a class="post-title-link" href="/2015/05/21/eliminate-javascript-code-smells/" itemprop="url">
+                  去除 JavaScript 代码的怪味
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-05-21T23:06:21+08:00" content="2015-05-21">
+              2015-05-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/21/eliminate-javascript-code-smells/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/21/eliminate-javascript-code-smells/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：《<a href="http://elijahmanor.github.io/talks/js-smells/#/">ELIMINATE JAVASCRIPT CODE SMELLS</a>》<br>作者：<a href="http://elijahmanor.com">@elijahmanor</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码农</a></p>
+</blockquote>
+<h1 id="难闻的代码">难闻的代码</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> CONSONANTS = <span class="string">'bcdfghjklmnpqrstvwxyz'</span>;</span><br><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> VOWELS = <span class="string">'aeiou'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">englishToPigLatin</span>(<span class="params">english</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/* const */</span> <span class="keyword">var</span> SYLLABLE = <span class="string">'ay'</span>;</span><br><span class="line">  <span class="keyword">var</span> pigLatin = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (english !== <span class="literal">null</span> &amp;&amp; english.length &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">    (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> ||</span><br><span class="line">    CONSONANTS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> )) &#123;</span><br><span class="line">    <span class="keyword">if</span> (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">      pigLatin = english + SYLLABLE;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> preConsonants = <span class="string">''</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; english.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (CONSONANTS.indexOf(english[i]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">          preConsonants += english[i];</span><br><span class="line">          <span class="keyword">if</span> (preConsonants == <span class="string">'q'</span> &amp;&amp;</span><br><span class="line">            i+<span class="number">1</span> &lt; english.length &amp;&amp; english[i+<span class="number">1</span>] == <span class="string">'u'</span>) &#123;</span><br><span class="line">            preConsonants += <span class="string">'u'</span>;</span><br><span class="line">            i += <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="keyword">break</span>; &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      pigLatin = english.substring(i) + preConsonants + SYLLABLE;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> pigLatin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="为毛是这个味？">为毛是这个味？</h2>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/21/eliminate-javascript-code-smells/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2015/02/01/javascript-errors-and-how-to-fix-them/" itemprop="url">
                   JavaScript 错误以及如何修复
                 </a>
@@ -1235,129 +1337,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/" itemprop="url">
-                  面向Node.js新手的7个技巧
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-10-17T17:38:00+08:00" content="2013-10-17">
-              2013-10-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Node-js/入门/" itemprop="url" rel="index">
-                    <span itemprop="name">入门</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/10/17/7-tips-for-a-node-dot-js-padawan/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文：<a href="https://medium.com/tech-talk/e7c0b0e5ce3c">7 tips for a Node.js padawan</a><br>感谢 <a href="http://diwu.me/about/index.html">Di Wu</a> 同学，参考了他的译文《<a href="http://diwu.me/2013/09/24/7-tips-for-a-node-dot-js-padawan/">7 Tips for a Node.js Padawan</a>》，某些不妥的地方做了些许修改。</p>
-</blockquote>
-<h4 id="或许我刚入门时就想了解这些知识。">或许我刚入门时就想了解这些知识。</h4><p>Node.js 开发相当有趣，相当令人满足。它有3万5千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。</p>
-<p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
-<h2 id="技巧_1_：开发环境使用_nodemon，生产环境使用_pm2">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</h2><p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
-<p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon">Nodemon</a> 。运行以下命令安装它：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> nodemon</span></span><br></pre></td></tr></table></figure>
-<p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
-<p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
-<p><a href="https://github.com/Unitech/pm2">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
-<p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app<span class="class">.js</span> -<span class="tag">i</span> max</span><br></pre></td></tr></table></figure>
-<p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1403,7 +1382,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1417,7 +1396,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

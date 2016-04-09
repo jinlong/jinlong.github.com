@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2016-02-04T15:22:12.100Z</updated>
+  <updated>2016-04-09T04:51:22.000Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -15,11 +15,185 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[你好 ES2015]]></title>
+    <link href="http://jinlong.github.io/2016/04/09/Say-Hello-To-ES2015/"/>
+    <id>http://jinlong.github.io/2016/04/09/Say-Hello-To-ES2015/</id>
+    <published>2016-04-09T03:22:43.000Z</published>
+    <updated>2016-04-09T04:51:22.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>原文： <a href="https://tutor.mantrajs.com/say-hello-to-ES2015/introduction" target="_blank" rel="external">Say Hello To ES2015</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<h1 id="1-_介绍_ES2015">1. 介绍 ES2015</h1><p>ES2015 是新版的 JavaScript，Node.js 已经完全支持，浏览器端可以用 <a href="https://babeljs.io/" target="_blank" rel="external">Babel</a> 库编译。</p>
+<p>运行本文的示例代码，可以用 <a href="https://jsbin.com/defeba/edit?js,console" target="_blank" rel="external">JSBin 环境</a>，也可以结合原文中的测试题检测学习效果。</p>
+<h1 id="2-_使用_let_和_const">2. 使用 let 和 const</h1><p>ES2015 可以用 <code>const</code> 或 <code>let</code> 替换 <code>var</code> ，它们定义了块级作用域变量。</p>
+<p>示例代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> lc=<span class="number">0</span>; lc &lt; <span class="number">10</span>; lc++) &#123;</span><br><span class="line">  <span class="keyword">let</span> value = lc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">//抛出错误</span></span><br></pre></td></tr></table></figure>
+<p>变量 <code>value</code> 只能在 <code>for</code> 循环中使用。</p>
+<p><code>const</code> 跟 <code>let</code> 很像，但是它定义的变量值无法改变。</p>
+<p>示例代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;name: <span class="string">"Arunoda"</span>&#125;;</span><br><span class="line">user.name = <span class="string">"Susiripala"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(user.name);</span><br></pre></td></tr></table></figure>
+<p>改变的是变量 <code>user</code> 内部的属性，并没有改变 <code>user</code> 本身。</p>
+<p>许多人更喜欢用 <code>const</code> 代替 <code>let</code> 。</p>
+<h1 id="3-_使用箭头函数整理你的代码">3. 使用箭头函数整理你的代码</h1><p>熟悉的方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(<span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a * <span class="number">10</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<p>使用箭头函数以后：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(a =&gt; a * <span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<p>如果方法接受不止1个参数，可以这么写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyByIndex = numbers.map((a, i) =&gt; a * i);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyByIndex);</span><br></pre></td></tr></table></figure>
+<p>箭头函数返回一个对象的话，需要加圆括号：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(a =&gt; (&#123;res: a * <span class="number">10</span>&#125;));</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="4-_不再使用“self=this”">4. 不再使用“self=this”</h1><p>以前的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Clock</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.currentTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Clock.prototype.start = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        self.currentTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以用箭头函数代替 <code>self=this</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Clock</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.currentTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Clock.prototype.start = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    setInterval(() =&gt; &#123;</span><br><span class="line">        <span class="keyword">this</span>.currentTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>setInterval</code> 里面用了箭头函数，它携带了 <code>start</code> 方法的上下文<code>（this）</code>。</p>
+<p><strong>使用箭头函数要多加小心，并不是随处可用的，箭头函数会携带函数定义时的上下文。</strong></p>
+<p>正如这个例子：</p>
+<p><a class="jsbin-embed" href="https://jsbin.com/zuseqap/1/embed?js,console" target="_blank" rel="external">JS Bin on jsbin.com</a><script src="https://static.jsbin.com/js/embed.min.js?3.35.12"></script></p>
+<h1 id="5-_改良的对象字面量">5. 改良的对象字面量</h1><p>在对象里面定义一个方法，可以这么写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">    getName() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Arunoda'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(user.getName());</span><br></pre></td></tr></table></figure>
+<p>不必每次都写 <code>function</code> 关键字。</p>
+<p>这是最酷的特性，你会喜欢的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">'Arunoda'</span>;</span><br><span class="line"><span class="keyword">const</span> age = <span class="number">80</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = &#123;name, age&#125;;</span><br></pre></td></tr></table></figure>
+<p>瞅瞅多简单，并不用这么啰嗦：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">'Arunoda'</span>;</span><br><span class="line"><span class="keyword">const</span> age = <span class="number">80</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">    name: name,</span><br><span class="line">    age: age</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="6-_解构对象">6. 解构对象</h1><p>很容易地提取 <code>user</code> 对象的 <code>name</code> 和 <code>age</code> 字段：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">    name: <span class="string">'Arunoda'</span>,</span><br><span class="line">    age: <span class="number">80</span>,</span><br><span class="line">    city: <span class="string">'Colombo'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;name, age&#125; = user;</span><br><span class="line"><span class="built_in">console</span>.log(name, age);</span><br></pre></td></tr></table></figure>
+<p>对于函数相当有用，上代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printName</span>(<span class="params">&#123;name&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Name is: '</span> + name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">    name: <span class="string">'Arunoda'</span>,</span><br><span class="line">    age: <span class="number">80</span>,</span><br><span class="line">    city: <span class="string">'Colombo'</span></span><br><span class="line">&#125;;</span><br><span class="line">printName(user);</span><br></pre></td></tr></table></figure>
+<p>不仅简化了代码，而且可以自描述。看到函数第一行时，我们便会明白使用传入对象的哪个字段。</p>
+<p>可以定义传入对象的默认值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printUser</span>(<span class="params">&#123;name, age = 20&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Name is: '</span> + name + <span class="string">' Age: '</span> + age);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>像传入对象一样，同样可以从传入的数组中解构值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printUser</span>(<span class="params">[name, age = 20]</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Name is: '</span> + name + <span class="string">' Age: '</span> + age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printUser([<span class="string">"Arunoda"</span>, <span class="number">80</span>]);</span><br></pre></td></tr></table></figure>
+<h1 id="7-_前所未见的方式传递（spread）数组">7. 前所未见的方式传递（spread）数组</h1><p>以前的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumAndLog</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = sum(a, b);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Result is: '</span> + result);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sumAndLog(<span class="number">10</span>, <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<p>ES2015 代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumAndLog</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = sum(...args);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Result is: '</span> + result);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sumAndLog(<span class="number">10</span>, <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<p>在 <code>sumAndLog</code> 方法中使用 <code>spread</code> 操作符（<code>...</code>），可以很简单地把所有参数存入 <code>args</code> 变量，然后再用 <code>spread</code> 操作符把 <code>args</code> 传入 <code>sum</code> 方法。</p>
+<p>再看以下例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printTeam</span>(<span class="params">leader, ...others</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Leader: '</span> + leader + <span class="string">' - Others: '</span> + others);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printTeam(<span class="string">'Arunoda'</span>, <span class="string">'John'</span>, <span class="string">'Singh'</span>);</span><br><span class="line"><span class="comment">//输出结果："Leader: Arunoda - Others: John,Singh"</span></span><br></pre></td></tr></table></figure>
+<h1 id="8-_克隆、合并对象">8. 克隆、合并对象</h1><p>以往都是用 <a href="http://underscorejs.org/" target="_blank" rel="external">underscore</a> 或者 <a href="https://lodash.com/" target="_blank" rel="external">lodash</a>，克隆、合并对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user = &#123;name: <span class="string">"Arunoda"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> newUser = _.clone(user);</span><br><span class="line"><span class="keyword">var</span> withAge = _.extend(user, &#123;age: <span class="number">20</span>&#125;);</span><br><span class="line"><span class="keyword">var</span> newUserVersion = _.defaults(&#123;age: <span class="number">80</span>&#125;, user);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(newUser, withAge, newUserVersion);</span><br></pre></td></tr></table></figure>
+<p>ES2015 不需要任何工具库，轻松实现以上功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;name: <span class="string">"Arunoda"</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> newUser = &#123;...user&#125;;</span><br><span class="line"><span class="keyword">const</span> withAge = &#123;...user, age: <span class="number">20</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> newUserVersion = &#123;age: <span class="number">80</span>, ...user&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(newUser, withAge, newUserVersion);</span><br></pre></td></tr></table></figure>
+<p>看以下例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  name: <span class="string">'Arunoda'</span>,</span><br><span class="line">  emails: [<span class="string">'hello@arunoda.io'</span>]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> newUser = &#123;...user&#125;;</span><br><span class="line">newUser.emails.push(<span class="string">'mail@arunoda.io'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(user.emails);</span><br><span class="line"><span class="comment">//输出结果：["hello@arunoda.io", "mail@arunoda.io"]</span></span><br></pre></td></tr></table></figure>
+<p>尽管我们克隆了对象，但不是深度克隆，只克隆了顶层字段，emails 数组字段使用的仍是同一个。</p>
+<p><strong>往数组里添加元素</strong></p>
+<p>跟对象类似，我们同样可以克隆数组：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> marks = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>];</span><br><span class="line"><span class="keyword">const</span> newMarks = [...marks, <span class="number">40</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(marks, newMarks);</span><br></pre></td></tr></table></figure>
+<h1 id="9-_JavaScript_不变性（Immutability）">9. JavaScript 不变性（Immutability）</h1><p>这些日子，JavaScript 也兴起函数式编程的概念。因此，我们可以尝试写写纯函数。</p>
+<blockquote>
+<p>纯函数：一个函数接收一些值，并且返回一些值，但是通过参数接收到的值不会被改变。 同样的输入总是返回同样的值。<br>random() 就不是一个纯函数，任何可以修改全局状态的函数都不能称之为纯。</p>
+</blockquote>
+<p>用 <code>spread</code> 操作符可以轻松实现。</p>
+<p>用于对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addMarks</span>(<span class="params">user, marks</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    ...user,</span><br><span class="line">    marks</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = &#123;username: <span class="string">'arunoda'</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> userWithMarks = addMarks(user, <span class="number">80</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(user, userWithMarks);</span><br></pre></td></tr></table></figure>
+<p>用于数组：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addUser</span>(<span class="params">users, username</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> user = &#123;username&#125;;</span><br><span class="line">  <span class="keyword">return</span> [</span><br><span class="line">    ...users,</span><br><span class="line">    user</span><br><span class="line">  ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = &#123;username: <span class="string">'arunoda'</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> users = [user];</span><br><span class="line"><span class="keyword">const</span> newUsers = addUser(users, <span class="string">'john'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(users, newUsers);</span><br></pre></td></tr></table></figure>
+<h1 id="10-_以_Python_方式合并字符串">10. 以 Python 方式合并字符串</h1><p>合并字符串通常很烦，可以用 + 操作符，或者类似 <code>underscore</code> 的模板。</p>
+<p>ES2015 的模板字符串，非常简单，看例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">"Arunoda"</span>;</span><br><span class="line"><span class="keyword">const</span> welcome = <span class="string">`Hello <span class="subst">$&#123;name&#125;</span>, Good Morning!`</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(welcome);</span><br></pre></td></tr></table></figure>
+<p>注意 <strong>“`”</strong> 的使用。</p>
+<h2 id="多行字符串">多行字符串</h2><p>既然支持模板字符串，多行字符串也不在话下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> message = <span class="string">`</span><br><span class="line">  # Title</span><br><span class="line"></span><br><span class="line">  This is a multi line string as markdown.</span><br><span class="line">  It's pretty nice.</span><br><span class="line">`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(message);</span><br></pre></td></tr></table></figure>
+<p>没有模板字符串的话，是这个样子的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"\n  # Title\n\n  This is a multi line string as markdown.\n  It's pretty nice.\n"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(message);</span><br></pre></td></tr></table></figure>
+<h1 id="11-_像_Java_一样写_Class">11. 像 Java 一样写 Class</h1><p>JavaScript 并不是真正的面向对象语言，但是可以用函数和原型模拟类。ES2015 可以写真正原生的类了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line">  constructor(type, number) &#123;</span><br><span class="line">    <span class="keyword">this</span>.type = type;</span><br><span class="line">    <span class="keyword">this</span>.number = number;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  display() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`Number: <span class="subst">$&#123;this.number&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> v1 = <span class="keyword">new</span> Vehicle(<span class="string">'Car'</span>, <span class="string">'GH-2343'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(v1.display());</span><br></pre></td></tr></table></figure>
+<p>继承一个类：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line">  constructor(type, number) &#123;</span><br><span class="line">    <span class="keyword">this</span>.type = type;</span><br><span class="line">    <span class="keyword">this</span>.number = number;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  display() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`Number: <span class="subst">$&#123;this.number&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> <span class="keyword">extends</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line">  constructor(number) &#123;</span><br><span class="line">    <span class="keyword">super</span>(<span class="string">'Car'</span>, number);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  display() &#123;</span><br><span class="line">    <span class="keyword">const</span> value = <span class="keyword">super</span>.display();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`Car <span class="subst">$&#123;value&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> v1 = <span class="keyword">new</span> Car(<span class="string">'GH-2343'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(v1.display());</span><br></pre></td></tr></table></figure>
+<p>小汽车继承了车辆：</p>
+<ul>
+<li>在 Car constructor 内部调用了 <code>super constructor</code> （Vehicle 的 constructor）。</li>
+<li>Car 的 display() 方法内部，调用了 <code>super.display()</code> 。这里展示了子类如何继承方法。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line">  constructor(type, number) &#123;</span><br><span class="line">    <span class="keyword">this</span>.type = type;</span><br><span class="line">    <span class="keyword">this</span>.number = number;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  display() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`Number: <span class="subst">$&#123;this.number&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> <span class="keyword">extends</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line">  display() &#123;</span><br><span class="line">    <span class="keyword">const</span> value = <span class="keyword">super</span>.display();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`Car <span class="subst">$&#123;value&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> v1 = <span class="keyword">new</span> Car(<span class="string">'GH-2343'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(v1.display());</span><br></pre></td></tr></table></figure>
+<p>Car 类没有实现 constructor 的话，它会用 Vehicle 的 constructor 。</p>
+<h1 id="12-_ES2015_模块系统">12. ES2015 模块系统</h1><p>ES2015 的模块系统很像 CommonJS 模块系统（或者 Node.js 的模块系统），但是有一点主要的区别：</p>
+<blockquote>
+<p>所有的模块导入应该是静态的，无法在运行时导入模块。编译时间应该完成导入（或者最好在解释 JavaScript 期间完成）。<br>以下代码在 ES2015 模块里无法使用：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> router;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span> === <span class="string">'function'</span>) &#123;</span><br><span class="line">  router = <span class="keyword">import</span> <span class="string">'./client-router'</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  router = <span class="keyword">import</span> <span class="string">'./server-router'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="命名导出函数">命名导出函数</h2><p>定义一个简单的导出函数 <code>sum</code> ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后导入它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;sum&#125; <span class="keyword">from</span> <span class="string">'./lib/math'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> total = sum(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line"><span class="built_in">console</span>.log(total);</span><br></pre></td></tr></table></figure>
+<p>导入多个函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;sum, multiply&#125;</span><br></pre></td></tr></table></figure>
+<p>像函数一样，可以导出任何类型的变量，包括类。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> BASE = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> name = <span class="string">'Arunoda'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Vehicle</span> </span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="默认导出">默认导出</h2><p>有时需要导出一个独立的模块，叫做默认导出。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  constructor(type, number) &#123;</span><br><span class="line">    <span class="keyword">this</span>.type = type;</span><br><span class="line">    <span class="keyword">this</span>.number = number;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  display() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`Number: <span class="subst">$&#123;this.number&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以这么导入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vehicle <span class="keyword">from</span> <span class="string">'./lib/vehicle'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> v1 = <span class="keyword">new</span> Vehicle(<span class="string">'Car'</span>, <span class="string">'GH-3355'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(v1.display());</span><br></pre></td></tr></table></figure>
+<p>如果再导出一个 <code>print</code> 函数，这么写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vehicle, &#123;print&#125; <span class="keyword">from</span> <span class="string">'./lib/vehicle'</span>;</span><br></pre></td></tr></table></figure>
+<p>这便是我们如何在同一模块导入 “默认导出” 和 “命名导出” 的方式。</p>
+<p>重命名导入，一次导入所有命名导出，以及更多知识，参见 <a href="https://developer.mozilla.org/en/docs/web/javascript/reference/statements/import" target="_blank" rel="external">MDN 文档</a>。</p>
+<h1 id="13-_在实际的项目中使用_ES2015？">13. 在实际的项目中使用 ES2015？</h1><p>至今还没有浏览器完全实现 ES2015 的所有规范。因此，无法直接在浏览器里使用 ES2015 。</p>
+<p>那么我们该怎么做？</p>
+<p>欢迎来到 transpiling 的世界。</p>
+<p>现在可以按 ES2015 写代码，然后使用一个工具把它转换成 ES5，最有名的一个 transpiler 便是 <a href="https://babeljs.io/" target="_blank" rel="external">Babel</a>。</p>
+<p>设置 Babel 并没那么简单，需要一定的经验，这是一些新手包，拿去用吧。</p>
+<ul>
+<li>在 Node.js 中使用 <a href="https://github.com/kadirahq/node-base" target="_blank" rel="external">node-base</a> </li>
+<li>在 NPM 模块中使用 <a href="https://github.com/kadirahq/npm-base" target="_blank" rel="external">npm-base</a> </li>
+<li>在 React app 中使用 <a href="https://github.com/gaearon/react-hot-boilerplate" target="_blank" rel="external">react-hot-boilerplate</a></li>
+</ul>
+<blockquote>
+<p>此外，可以使用 <a href="https://www.meteor.com/" target="_blank" rel="external">Meteor</a>，默认支持 ES2015 了。</p>
+</blockquote>
+<h1 id="14-_深入研究_ES2015">14. 深入研究 ES2015</h1><p>深入研究，可以参考以下链接：</p>
+<ul>
+<li><a href="https://babeljs.io/docs/learn-es2015/" target="_blank" rel="external">Babel’s Learn ES2015 Guide</a></li>
+<li><a href="https://github.com/ericdouglas/ES6-Learning" target="_blank" rel="external">Massive List of ES2015 Learning Resources</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>原文： <a href="https://tutor.mantrajs.com/say-hello-to-ES2015/introduction">Say Hello To ES2015</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<h1 id="1-_介绍_ES2015">1. 介绍 ES2015</h1><p>ES2015 是新版的 JavaScript，Node.js 已经完全支持，浏览器端可以用 <a href="https://babeljs.io/">Babel</a> 库编译。</p>
+<p>运行本文的示例代码，可以用 <a href="https://jsbin.com/defeba/edit?js,console">JSBin 环境</a>，也可以结合原文中的测试题检测学习效果。</p>
+<h1 id="2-_使用_let_和_const">2. 使用 let 和 const</h1><p>ES2015 可以用 <code>const</code> 或 <code>let</code> 替换 <code>var</code> ，它们定义了块级作用域变量。</p>
+<p>示例代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> lc=<span class="number">0</span>; lc &lt; <span class="number">10</span>; lc++) &#123;</span><br><span class="line">  <span class="keyword">let</span> value = lc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">//抛出错误</span></span><br></pre></td></tr></table></figure>
+<p>变量 <code>value</code> 只能在 <code>for</code> 循环中使用。</p>
+<p><code>const</code> 跟 <code>let</code> 很像，但是它定义的变量值无法改变。</p>
+<p>示例代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;name: <span class="string">"Arunoda"</span>&#125;;</span><br><span class="line">user.name = <span class="string">"Susiripala"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(user.name);</span><br></pre></td></tr></table></figure>
+<p>改变的是变量 <code>user</code> 内部的属性，并没有改变 <code>user</code> 本身。</p>
+<p>许多人更喜欢用 <code>const</code> 代替 <code>let</code> 。</p>
+<h1 id="3-_使用箭头函数整理你的代码">3. 使用箭头函数整理你的代码</h1><p>熟悉的方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(<span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a * <span class="number">10</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<p>使用箭头函数以后：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(a =&gt; a * <span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<p>如果方法接受不止1个参数，可以这么写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyByIndex = numbers.map((a, i) =&gt; a * i);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyByIndex);</span><br></pre></td></tr></table></figure>
+<p>箭头函数返回一个对象的话，需要加圆括号：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(a =&gt; (&#123;res: a * <span class="number">10</span>&#125;));</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="ES2015" scheme="http://jinlong.github.io/tags/ES2015/"/>
+    
+      <category term="ES6" scheme="http://jinlong.github.io/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="http://jinlong.github.io/tags/JavaScript/"/>
+    
+      <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[flex-grow 不易理解，难道不是吗?]]></title>
     <link href="http://jinlong.github.io/2016/02/04/flex-grow-is-weird/"/>
     <id>http://jinlong.github.io/2016/02/04/flex-grow-is-weird/</id>
     <published>2016-02-04T14:40:39.000Z</published>
-    <updated>2016-02-04T15:22:12.100Z</updated>
+    <updated>2016-02-04T15:22:12.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="https://css-tricks.com/flex-grow-is-weird/" target="_blank" rel="external">‘flex-grow’ is weird. Or is it?</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
@@ -151,7 +325,7 @@
     <link href="http://jinlong.github.io/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/"/>
     <id>http://jinlong.github.io/2016/01/14/moving-along-a-curved-path-in-css-with-layered-animation/</id>
     <published>2016-01-14T14:48:56.000Z</published>
-    <updated>2016-02-04T14:42:48.343Z</updated>
+    <updated>2016-02-04T14:42:48.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://tobiasahlin.com/blog/curved-path-animations-in-css/" target="_blank" rel="external">Moving along a curved path in CSS with layered animation</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 <p>译者注：部分代码示例在原文中可以看效果（作者写在博文里面了…），我偷懒把它做成Gif图了。</p>
@@ -216,7 +390,7 @@
     <link href="http://jinlong.github.io/2016/01/14/checkbox-trickery-with-css/"/>
     <id>http://jinlong.github.io/2016/01/14/checkbox-trickery-with-css/</id>
     <published>2016-01-14T13:54:07.000Z</published>
-    <updated>2016-01-14T14:45:15.052Z</updated>
+    <updated>2016-01-14T14:45:14.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://codersblock.com/blog/checkbox-trickery-with-css/" target="_blank" rel="external">Checkbox Trickery with CSS</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
@@ -312,7 +486,7 @@
     <link href="http://jinlong.github.io/2015/12/14/how-to-schedule-background-tasks-in-javascript/"/>
     <id>http://jinlong.github.io/2015/12/14/how-to-schedule-background-tasks-in-javascript/</id>
     <published>2015-12-14T15:26:53.000Z</published>
-    <updated>2016-01-14T13:56:50.825Z</updated>
+    <updated>2016-01-14T13:56:50.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://www.sitepoint.com/how-to-schedule-background-tasks-in-javascript/" target="_blank" rel="external">How to Schedule Background Tasks in JavaScript</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
@@ -379,7 +553,7 @@
     <link href="http://jinlong.github.io/2015/12/14/negating-predicate-functions-in-javaScript/"/>
     <id>http://jinlong.github.io/2015/12/14/negating-predicate-functions-in-javaScript/</id>
     <published>2015-12-14T14:51:37.000Z</published>
-    <updated>2015-12-14T15:23:05.504Z</updated>
+    <updated>2015-12-14T15:23:04.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://adripofjavascript.com/blog/drips/negating-predicate-functions-in-javascript.html" target="_blank" rel="external">Negating Predicate Functions in JavaScript</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a>  </p>
 </blockquote>
@@ -426,7 +600,7 @@
     <link href="http://jinlong.github.io/2015/10/12/syncing-a-fork/"/>
     <id>http://jinlong.github.io/2015/10/12/syncing-a-fork/</id>
     <published>2015-10-12T05:00:18.000Z</published>
-    <updated>2015-10-29T05:18:03.346Z</updated>
+    <updated>2015-10-29T05:18:02.000Z</updated>
     <content type="html"><![CDATA[<p>原先一直有个疑惑， Github fork 出来的项目，我已经做了部分修改，由于某些原因，无法提交 Pull Request，可是想把原项目的最近更新代码合并进来怎么办？google 了一下才茅塞顿开，年纪大了，这里记录一下吧。</p>
 <p>两种方式：</p>
 <ol>
@@ -481,7 +655,7 @@
     <link href="http://jinlong.github.io/2015/09/30/what-forces-layout-reflow/"/>
     <id>http://jinlong.github.io/2015/09/30/what-forces-layout-reflow/</id>
     <published>2015-09-30T04:23:38.000Z</published>
-    <updated>2015-10-29T04:52:38.862Z</updated>
+    <updated>2015-10-29T04:52:38.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a" target="_blank" rel="external">What forces layout / reflow</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 <p>注：本文只摘取了自己认为重要的知识点，并没有逐字逐句翻译</p>
@@ -615,7 +789,7 @@
     <link href="http://jinlong.github.io/2015/08/31/secrets-of-awesome-javascript-api-design/"/>
     <id>http://jinlong.github.io/2015/08/31/secrets-of-awesome-javascript-api-design/</id>
     <published>2015-08-31T13:45:36.000Z</published>
-    <updated>2015-10-29T03:08:21.952Z</updated>
+    <updated>2015-10-29T03:08:20.000Z</updated>
     <content type="html"><![CDATA[<p>前段时间组织优化我们的原生模块 API（iOS、Android 模块封装成 JavaScript 接口），于是学习了几篇 JavaScript API 设计的文章，尽管是旧文，但受益匪浅，这里记录一下。</p>
 <hr>
 <p>好的 API 设计：在自描述的同时，达到抽象的目标。</p>
@@ -719,7 +893,7 @@
     <link href="http://jinlong.github.io/2015/05/24/css-retina-hairlines/"/>
     <id>http://jinlong.github.io/2015/05/24/css-retina-hairlines/</id>
     <published>2015-05-24T10:02:35.000Z</published>
-    <updated>2015-10-29T03:07:55.358Z</updated>
+    <updated>2015-10-29T03:07:54.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>前些日子总被人问起 iOS Retina 屏，设置 1px 边框，实际显示 2px，如何解决？<br>原来一直没在意，源于自己根本不是像素眼……<br>今天仔细瞅了瞅原生实现的边框和CSS设置的边框，确实差距不小……</p>
 </blockquote>
@@ -800,7 +974,7 @@
     <link href="http://jinlong.github.io/2015/05/21/eliminate-javascript-code-smells/"/>
     <id>http://jinlong.github.io/2015/05/21/eliminate-javascript-code-smells/</id>
     <published>2015-05-21T15:06:21.000Z</published>
-    <updated>2015-10-29T03:07:37.122Z</updated>
+    <updated>2015-10-29T03:07:36.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：《<a href="http://elijahmanor.github.io/talks/js-smells/#/" target="_blank" rel="external">ELIMINATE JAVASCRIPT CODE SMELLS</a>》<br>作者：<a href="http://elijahmanor.com" target="_blank" rel="external">@elijahmanor</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码农</a></p>
 </blockquote>
@@ -1053,7 +1227,7 @@
     <link href="http://jinlong.github.io/2015/02/01/javascript-errors-and-how-to-fix-them/"/>
     <id>http://jinlong.github.io/2015/02/01/javascript-errors-and-how-to-fix-them/</id>
     <published>2015-02-01T14:09:27.000Z</published>
-    <updated>2015-10-29T03:00:25.323Z</updated>
+    <updated>2015-10-29T03:00:24.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文《<a href="http://davidwalsh.name/fix-javascript-errors" target="_blank" rel="external">JavaScript Errors and How to Fix Them</a>》<br>作者：Jani Hartikainen<br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码农</a></p>
 </blockquote>
@@ -1163,7 +1337,7 @@
     <link href="http://jinlong.github.io/2014/10/25/jshint-configuration/"/>
     <id>http://jinlong.github.io/2014/10/25/jshint-configuration/</id>
     <published>2014-10-25T03:05:14.000Z</published>
-    <updated>2015-10-29T03:00:06.619Z</updated>
+    <updated>2015-10-29T03:00:06.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p><a href="http://www.jshint.com/" target="_blank" rel="external">JSHint</a>，发现错误和潜在问题的社区驱动的工具<br><a href="http://jslinterrors.com/" target="_blank" rel="external">JSLint 错误解析</a></p>
 </blockquote>
@@ -1247,7 +1421,7 @@
     <link href="http://jinlong.github.io/2014/10/19/handlebars-docs/"/>
     <id>http://jinlong.github.io/2014/10/19/handlebars-docs/</id>
     <published>2014-10-19T14:30:55.000Z</published>
-    <updated>2015-10-29T02:59:49.699Z</updated>
+    <updated>2015-10-29T02:59:48.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>官方文档：<a href="http://handlebarsjs.com/" target="_blank" rel="external">http://handlebarsjs.com/</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
@@ -1378,7 +1552,7 @@
     <link href="http://jinlong.github.io/2014/01/07/introduction-to-express/"/>
     <id>http://jinlong.github.io/2014/01/07/introduction-to-express/</id>
     <published>2014-01-07T08:19:00.000Z</published>
-    <updated>2015-10-29T02:55:35.993Z</updated>
+    <updated>2015-10-29T02:55:34.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-express/" target="_blank" rel="external">Introduction to Express</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
@@ -1481,7 +1655,7 @@
     <link href="http://jinlong.github.io/2013/12/22/grunt-for-fe/"/>
     <id>http://jinlong.github.io/2013/12/22/grunt-for-fe/</id>
     <published>2013-12-22T15:42:00.000Z</published>
-    <updated>2015-10-29T02:54:27.874Z</updated>
+    <updated>2015-10-29T02:54:26.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://24ways.org/2013/grunt-is-not-weird-and-hard/" target="_blank" rel="external">Grunt for People Who Think Things Like Grunt are Weird and Hard</a><br>此篇笔记包含了个人的理解，只记录了文章的要点，并没有逐句翻译，如有不妥望指正。</p>
 </blockquote>
@@ -1604,7 +1778,7 @@
     <link href="http://jinlong.github.io/2013/12/22/grunt-getting-started/"/>
     <id>http://jinlong.github.io/2013/12/22/grunt-getting-started/</id>
     <published>2013-12-22T09:03:00.000Z</published>
-    <updated>2015-10-29T02:55:01.401Z</updated>
+    <updated>2015-10-29T02:55:00.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文： <a href="http://gruntjs.com/getting-started" target="_blank" rel="external">Getting started</a></p>
 </blockquote>
@@ -1703,7 +1877,7 @@
     <link href="http://jinlong.github.io/2013/11/25/javascript-best-practices/"/>
     <id>http://jinlong.github.io/2013/11/25/javascript-best-practices/</id>
     <published>2013-11-25T05:12:00.000Z</published>
-    <updated>2015-10-29T02:53:26.044Z</updated>
+    <updated>2015-10-29T02:53:26.000Z</updated>
     <content type="html"><![CDATA[<p>本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 <a href="http://www.slideshare.net/cheilmann/javascript-best-practices-1041724" target="_blank" rel="external">PPT</a> （需翻墙）</p>
 <blockquote>
 <p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/" target="_blank" rel="external">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/" target="_blank" rel="external">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
@@ -1830,7 +2004,7 @@
     <link href="http://jinlong.github.io/2013/11/25/smart-transitions-in-user-experience-design/"/>
     <id>http://jinlong.github.io/2013/11/25/smart-transitions-in-user-experience-design/</id>
     <published>2013-11-25T03:55:00.000Z</published>
-    <updated>2015-10-29T02:54:08.506Z</updated>
+    <updated>2015-10-29T02:54:08.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="http://uxdesign.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/" target="_blank" rel="external">Smart Transitions In User Experience Design</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 </blockquote>
@@ -1919,7 +2093,7 @@
     <link href="http://jinlong.github.io/2013/10/20/ten-years-of-sliding-doors-of-css/"/>
     <id>http://jinlong.github.io/2013/10/20/ten-years-of-sliding-doors-of-css/</id>
     <published>2013-10-20T10:24:00.000Z</published>
-    <updated>2014-10-25T02:21:14.315Z</updated>
+    <updated>2014-10-25T02:21:14.000Z</updated>
     <content type="html"><![CDATA[<p><img src="/images/post/css-sliding-door/sliding_doors.png"></p>
 <blockquote>
 <p>看到这篇文章，真是让我心潮澎湃，仿佛看到刚接触前端的我，拿着本《<a href="http://www.amazon.cn/CSS%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6-%E6%B8%A9%E8%B0%A6/dp/B00139O3TG/ref=sr_1_1?ie=UTF8&amp;qid=1382869723&amp;sr=8-1&amp;keywords=css%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6" target="_blank" rel="external">CSS设计彻底研究</a>》慢慢的啃。当时看到前人发明的 CSS 滑动门，真是觉得相当惊艳，转眼间，这个技术距今已有10年。</p>
@@ -1944,99 +2118,6 @@
       <category term="CSS" scheme="http://jinlong.github.io/categories/CSS/"/>
     
       <category term="滑动门" scheme="http://jinlong.github.io/categories/CSS/%E6%BB%91%E5%8A%A8%E9%97%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[面向Node.js新手的7个技巧]]></title>
-    <link href="http://jinlong.github.io/2013/10/17/7-tips-for-a-node-dot-js-padawan/"/>
-    <id>http://jinlong.github.io/2013/10/17/7-tips-for-a-node-dot-js-padawan/</id>
-    <published>2013-10-17T09:38:00.000Z</published>
-    <updated>2015-10-29T02:48:03.223Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>原文：<a href="https://medium.com/tech-talk/e7c0b0e5ce3c" target="_blank" rel="external">7 tips for a Node.js padawan</a><br>感谢 <a href="http://diwu.me/about/index.html" target="_blank" rel="external">Di Wu</a> 同学，参考了他的译文《<a href="http://diwu.me/2013/09/24/7-tips-for-a-node-dot-js-padawan/" target="_blank" rel="external">7 Tips for a Node.js Padawan</a>》，某些不妥的地方做了些许修改。</p>
-</blockquote>
-<h4 id="或许我刚入门时就想了解这些知识。">或许我刚入门时就想了解这些知识。</h4><p>Node.js 开发相当有趣，相当令人满足。它有3万5千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。</p>
-<p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
-<h2 id="技巧_1_：开发环境使用_nodemon，生产环境使用_pm2">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</h2><p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
-<p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon" target="_blank" rel="external">Nodemon</a> 。运行以下命令安装它：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> nodemon</span></span><br></pre></td></tr></table></figure>
-<p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
-<p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
-<p><a href="https://github.com/Unitech/pm2" target="_blank" rel="external">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
-<p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app<span class="class">.js</span> -<span class="tag">i</span> max</span><br></pre></td></tr></table></figure>
-<p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br><a id="more"></a></p>
-<h2 id="技巧_2_：Async_或者_Q">技巧 2 ：Async 或者 Q</h2><p>越早写 node.js 应用，越会尽早领略回调地狱之痛。如果你没见过，这有一个例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">register</span>(<span class="params">name, password, cb</span>)</span>&#123;</span><br><span class="line">  checkIfNameExists(name, <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(err)&#123;</span><br><span class="line">    <span class="keyword">return</span> cb(“error”);</span><br><span class="line">   &#125;</span><br><span class="line">   checkIfPasswordGood(password, <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">     <span class="keyword">return</span> cb(“error”);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    createAccount(name,password, <span class="function"><span class="keyword">function</span>(<span class="params">err,result</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      <span class="keyword">return</span> cb(“error”);</span><br><span class="line">     &#125;</span><br><span class="line">     createBlog(name, <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span>&#123;</span><br><span class="line">      sendEmail(name, <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span>&#123;</span><br><span class="line">       callback(result);</span><br><span class="line">      &#125;);</span><br><span class="line">     &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">   &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不怎么美的神奇代码的确存在，但你如何避免呢？</p>
-<p>一种简单的方式是用 <code>events</code> ，我个人不建议这么做，它违背了一个函数的观点，可以用 <code>events</code> 调用只有一个用途的私有方法。</p>
-<p>所以怎么做呢？有两个相互竞争的库：<code>async.js</code> 和 <code>Q</code> ，它们均可以避免回调地狱出现。</p>
-<p><a href="https://github.com/caolan/async" target="_blank" rel="external">Async.js</a> 或者 “async”可以轻松执行连续或者平行的函数，不需要一层一层的嵌套。</p>
-<p>下面是 Async 支持的模式，readme 有记录。想了解 async 支持的所有模式，看看它们的代码仓库。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">async.map([‘file1',’file2',’file3'], fs.stat, function(err, results)&#123;</span><br><span class="line">  // results is now an array of stats for each file</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">async.filter([‘file1',’file2',’file3'], fs.exists, function(results)&#123;</span><br><span class="line">// results now equals an array of the existing files</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">async.parallel([</span><br><span class="line">  function()&#123; … &#125;,</span><br><span class="line">  function()&#123; … &#125;</span><br><span class="line">  ], callback);</span><br><span class="line"> </span><br><span class="line">async.series([</span><br><span class="line">  function()&#123; … &#125;,</span><br><span class="line">  function()&#123; … &#125;</span><br><span class="line">  ]);</span><br><span class="line"> </span><br><span class="line">async.waterfall([</span><br><span class="line">  function(callback)&#123;</span><br><span class="line">   callback(null, ‘one’, ‘two’);</span><br><span class="line">  &#125;,</span><br><span class="line">  function(arg1, arg2, callback)&#123;</span><br><span class="line">   callback(null, ‘three’);</span><br><span class="line">  &#125;,</span><br><span class="line">  function(arg1, callback)&#123;</span><br><span class="line">// arg1 now equals ‘three’</span><br><span class="line">callback(null, ‘done’);</span><br><span class="line">&#125;</span><br><span class="line">], function (err, result) &#123;</span><br><span class="line">// result now equals ‘done’</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>如果我们用 async 的 <code>waterfall</code> 来修改之前的例子，代码将更加易读，再也不会涉及死亡金字塔了。</p>
-<p>另一个很好的库是 <a href="https://github.com/kriskowal/q" target="_blank" rel="external">Q</a> ，这个库用到了 promises 的概念。Promise 是一个含有‘promise’方法的返回对象，他提供了一个最终返回值，非常优雅的将 javascripts 的异步特性和 node.js 紧密联系起来。</p>
-<p>从 Q 的代码仓库页拿来的例子。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">promiseMeSomething()</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">reason</span>) </span>&#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>promise me 函数立刻返回一个对象，调用 <code>then</code> 将返回传入 value 值的函数。它也带一个回调函数，处理未能返回值的情况。</p>
-<p>用非常整洁的方式避免了回调地狱。如果重写原来的例子，当 <code>then</code> 执行的时候才调用每个函数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Q.fcall(checkIfNameExists)</span><br><span class="line">.then(checkIfPasswordIsGood)</span><br><span class="line">.then(createAccount)</span><br><span class="line">.then(createBlog)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line"><span class="comment">// Do something with the result</span></span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line"><span class="comment">// Handle any error from all above steps</span></span><br><span class="line">&#125;)</span><br><span class="line">.done();</span><br></pre></td></tr></table></figure>
-<p>如前面所说，我不喜欢创建单一目标函数。取而代之，用 “then”传递函数，仅传递一个匿名函数，当然选择权在你手中。</p>
-<p>总之，当你掉入回调地狱时，是该关注下 async.js 或者 Q 了。</p>
-<blockquote>
-<p>“我个人喜好？一直是 Q！”</p>
-</blockquote>
-<h2 id="技巧_3_：轻松调试_Node-js_应用">技巧 3 ：轻松调试 Node.js 应用</h2><p>如果你从一个 IDE 重度集成的语言比如 java 或者 C# 转来调试 Node.js，你一定会感到很困扰。大多数新的 node 开发者采用 “flow”调试模式，你最好的帮手是 <code>console.log</code> 。</p>
-<p>但是肯定有更便利的调试方式，Node.js 内置了一个调试器你可以叫它 node debug，不过我更喜欢的 <code>node-inspector</code> 。</p>
-<p>它们的 github 仓库提到“Node Inspector 是使用了 Blink 开发工具的 node.js 调试工具界面（先前的 WebKit Web Inspector）。”</p>
-<p>简而言之，无论你选择哪个编辑器和 chrome web tools ，node-inspector 都可以调试你的应用。多爽啊。</p>
-<p>Node Inspector 可以做一些真正酷的东西，比如实时代码修改，单步调试，作用域注入和一堆很酷的功能。</p>
-<p>它涉及到一些设置，可以按照<a href="https://github.com/node-inspector/node-inspector" target="_blank" rel="external">这里</a> 的说明做。</p>
-<h2 id="技巧_4_：Nodefly">技巧 4 ：Nodefly</h2><p>一旦你的应用正常运行，你可能会问自己，如何监控它的性能，如何通过分析确保它以最佳速度运行呢。最简单的回答是使用非常棒的 Nodefly 服务。</p>
-<p>通过一行简单的代码，Nodefly 开始监控应用程序的内存泄露， 测量 redis 用了多久，mongo 查询和一堆其他很酷的东西。</p>
-<p><a href="http://www.nodefly.com/" target="_blank" rel="external">http://www.nodefly.com/</a></p>
-<h2 id="技巧_5_：用_NPM_管理模块">技巧 5 ：用 NPM 管理模块</h2><p>node 最寻常的事情之一是通过 NPM 安装程序包。Node 有个神奇的包管理器，它会安装 package.json 清单文件里指定的模块。可是初学者都会遇到一件事情，package.json 文件中所有使用的模块如何保持最新。</p>
-<p>总是打开 package.json 更新已安装模块的依赖属性似乎很痛苦，很多人不知道 npm 可以帮你做这些！</p>
-<p>简单运行 npm install — save module_name ，npm 将自动更新带有正确模块和版本号的 package.json </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> —<span class="keyword">save</span> module_name</span></span><br></pre></td></tr></table></figure>
-<h2 id="技巧_6_：不要提交_node_modules_文件夹">技巧 6 ：不要提交 node_modules 文件夹</h2><p>我们一直谈论模块和 npm ，还有人不知道不该提交 <code>node_modules</code> 文件夹，最大的原因是没有必要提交。当别人检出你的代码，他们可以用 npm 安装所需模块。</p>
-<p>你也许会说提交 node_modules 文件夹无伤大雅，但是如果检出你代码的人用跟你不同的操作系统呢，通过 npm 安装的模块是编译过的？你的应用会崩溃，检出你代码的人完全不知道为什么！</p>
-<p>举例来说，当你安装过 bcrypt 和 sentimental 模块后，它们在主机上是编译过的，因为它们的原始组件是用 C 写的。</p>
-<p>最优的作法是把 node_modules 文件夹加到 .gitignore 里，避免提交它。</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .gitignore node_modules/*</span></span><br></pre></td></tr></table></figure>
-<h2 id="技巧_7_：不要忘记_return">技巧 7 ：不要忘记 return</h2><p>刚入门的 node 开发者通常容易犯个错误，callback 回调函数后面忘加 return 。虽然有时候没什么影响，多数情况你会遇到奇怪的问题，callback 回调执行了两次。</p>
-<p>看个简单的例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">do</span>(<span class="params">err,result, callback</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(err)&#123;</span><br><span class="line">callback(“error”);</span><br><span class="line">&#125;</span><br><span class="line">callback(“good”);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>乍一看，没什么问题。如果有错误，把 “error”传入 callback，没错则传递“good”。但是调用 callback 以后并没有停止执行，会接着调用 callback(“good”) 。</p>
-<p>在复杂的代码中，加上 return 会节约数小时的调试时间。</p>
-<hr>
-<p>Node.js 是个很赞的开发平台，如果你谨记这 7 条技巧，开发，调试和部署到生产环境时，可以节省不少时间，防止头发尽早变灰白。</p>
-<p>需要 Node.js 咨询？联系 <a href="http://www.dynamatik.com/" target="_blank" rel="external">Dynamatik</a> 吧。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>原文：<a href="https://medium.com/tech-talk/e7c0b0e5ce3c">7 tips for a Node.js padawan</a><br>感谢 <a href="http://diwu.me/about/index.html">Di Wu</a> 同学，参考了他的译文《<a href="http://diwu.me/2013/09/24/7-tips-for-a-node-dot-js-padawan/">7 Tips for a Node.js Padawan</a>》，某些不妥的地方做了些许修改。</p>
-</blockquote>
-<h4 id="或许我刚入门时就想了解这些知识。">或许我刚入门时就想了解这些知识。</h4><p>Node.js 开发相当有趣，相当令人满足。它有3万5千多个模块供君选择，总体而言，用 node 开发一个实际应用非常简单，并且扩展起来伸缩自如。</p>
-<p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
-<h2 id="技巧_1_：开发环境使用_nodemon，生产环境使用_pm2">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</h2><p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
-<p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon">Nodemon</a> 。运行以下命令安装它：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> nodemon</span></span><br></pre></td></tr></table></figure>
-<p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
-<p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
-<p><a href="https://github.com/Unitech/pm2">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
-<p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app<span class="class">.js</span> -<span class="tag">i</span> max</span><br></pre></td></tr></table></figure>
-<p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br>]]>
-    
-    </summary>
-    
-      <category term="Node.js" scheme="http://jinlong.github.io/tags/Node-js/"/>
-    
-      <category term="Node.js" scheme="http://jinlong.github.io/categories/Node-js/"/>
-    
-      <category term="入门" scheme="http://jinlong.github.io/categories/Node-js/%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   

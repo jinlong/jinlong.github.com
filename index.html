@@ -219,6 +219,125 @@
             
             
               
+                <a class="post-title-link" href="/2016/04/09/Say-Hello-To-ES2015/" itemprop="url">
+                  你好 ES2015
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-04-09T11:22:43+08:00" content="2016-04-09">
+              2016-04-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/09/Say-Hello-To-ES2015/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/09/Say-Hello-To-ES2015/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文： <a href="https://tutor.mantrajs.com/say-hello-to-ES2015/introduction">Say Hello To ES2015</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<h1 id="1-_介绍_ES2015">1. 介绍 ES2015</h1><p>ES2015 是新版的 JavaScript，Node.js 已经完全支持，浏览器端可以用 <a href="https://babeljs.io/">Babel</a> 库编译。</p>
+<p>运行本文的示例代码，可以用 <a href="https://jsbin.com/defeba/edit?js,console">JSBin 环境</a>，也可以结合原文中的测试题检测学习效果。</p>
+<h1 id="2-_使用_let_和_const">2. 使用 let 和 const</h1><p>ES2015 可以用 <code>const</code> 或 <code>let</code> 替换 <code>var</code> ，它们定义了块级作用域变量。</p>
+<p>示例代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> lc=<span class="number">0</span>; lc &lt; <span class="number">10</span>; lc++) &#123;</span><br><span class="line">  <span class="keyword">let</span> value = lc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">//抛出错误</span></span><br></pre></td></tr></table></figure>
+<p>变量 <code>value</code> 只能在 <code>for</code> 循环中使用。</p>
+<p><code>const</code> 跟 <code>let</code> 很像，但是它定义的变量值无法改变。</p>
+<p>示例代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;name: <span class="string">"Arunoda"</span>&#125;;</span><br><span class="line">user.name = <span class="string">"Susiripala"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(user.name);</span><br></pre></td></tr></table></figure>
+<p>改变的是变量 <code>user</code> 内部的属性，并没有改变 <code>user</code> 本身。</p>
+<p>许多人更喜欢用 <code>const</code> 代替 <code>let</code> 。</p>
+<h1 id="3-_使用箭头函数整理你的代码">3. 使用箭头函数整理你的代码</h1><p>熟悉的方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(<span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a * <span class="number">10</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<p>使用箭头函数以后：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(a =&gt; a * <span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<p>如果方法接受不止1个参数，可以这么写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyByIndex = numbers.map((a, i) =&gt; a * i);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyByIndex);</span><br></pre></td></tr></table></figure>
+<p>箭头函数返回一个对象的话，需要加圆括号：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(a =&gt; (&#123;res: a * <span class="number">10</span>&#125;));</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/09/Say-Hello-To-ES2015/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2016/02/04/flex-grow-is-weird/" itemprop="url">
                   flex-grow 不易理解，难道不是吗?
                 </a>
@@ -1171,108 +1290,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2015/05/21/eliminate-javascript-code-smells/" itemprop="url">
-                  去除 JavaScript 代码的怪味
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-05-21T23:06:21+08:00" content="2015-05-21">
-              2015-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/05/21/eliminate-javascript-code-smells/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/21/eliminate-javascript-code-smells/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文：《<a href="http://elijahmanor.github.io/talks/js-smells/#/">ELIMINATE JAVASCRIPT CODE SMELLS</a>》<br>作者：<a href="http://elijahmanor.com">@elijahmanor</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码农</a></p>
-</blockquote>
-<h1 id="难闻的代码">难闻的代码</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> CONSONANTS = <span class="string">'bcdfghjklmnpqrstvwxyz'</span>;</span><br><span class="line"><span class="comment">/* const */</span> <span class="keyword">var</span> VOWELS = <span class="string">'aeiou'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">englishToPigLatin</span>(<span class="params">english</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/* const */</span> <span class="keyword">var</span> SYLLABLE = <span class="string">'ay'</span>;</span><br><span class="line">  <span class="keyword">var</span> pigLatin = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (english !== <span class="literal">null</span> &amp;&amp; english.length &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">    (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> ||</span><br><span class="line">    CONSONANTS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span> )) &#123;</span><br><span class="line">    <span class="keyword">if</span> (VOWELS.indexOf(english[<span class="number">0</span>]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">      pigLatin = english + SYLLABLE;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> preConsonants = <span class="string">''</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; english.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (CONSONANTS.indexOf(english[i]) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">          preConsonants += english[i];</span><br><span class="line">          <span class="keyword">if</span> (preConsonants == <span class="string">'q'</span> &amp;&amp;</span><br><span class="line">            i+<span class="number">1</span> &lt; english.length &amp;&amp; english[i+<span class="number">1</span>] == <span class="string">'u'</span>) &#123;</span><br><span class="line">            preConsonants += <span class="string">'u'</span>;</span><br><span class="line">            i += <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="keyword">break</span>; &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      pigLatin = english.substring(i) + preConsonants + SYLLABLE;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> pigLatin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="为毛是这个味？">为毛是这个味？</h2>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/21/eliminate-javascript-code-smells/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1318,7 +1335,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1332,7 +1349,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
