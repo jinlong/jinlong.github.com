@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2016-04-09T04:59:20.000Z</updated>
+  <updated>2016-04-24T15:03:12.000Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -13,6 +13,144 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[实例解析防抖动（Debouncing）和节流阀（Throttling）]]></title>
+    <link href="http://jinlong.github.io/2016/04/24/Debouncing-and-Throttling-Explained-Through-Examples/"/>
+    <id>http://jinlong.github.io/2016/04/24/Debouncing-and-Throttling-Explained-Through-Examples/</id>
+    <published>2016-04-24T14:30:00.000Z</published>
+    <updated>2016-04-24T15:03:12.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>原文：<a href="https://css-tricks.com/debouncing-throttling-explained-examples/" target="_blank" rel="external">Debouncing and Throttling Explained Through Examples</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>防抖（<strong>Debounce</strong>）和节流（<strong>throttle</strong>）都是用来控制某个函数在一定时间内执行多少次的技巧，两者相似而又不同。</p>
+<p>当我们给 DOM 绑定事件的时候，加了防抖和节流的函数变得特别有用。为什么呢？因为我们在事件和函数执行之间加了一个控制层。记住，我们是无法控制 DOM 事件触发频率的。</p>
+<p>看下滚动事件的例子：</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="PZOZgB" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/PZOZgB/" target="_blank" rel="external">Scroll events counter</a> by Corbacho (<a href="http://codepen.io/dcorb" target="_blank" rel="external">@dcorb</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>当使用触控板，滚动滚轮，或者拖拽滚动条的时候，一秒可以轻松触发30次事件。经我的测试，在智能手机上，慢慢滚动一下，一秒可以触发事件100次之多。这么高的执行频率，你的滚动回调函数压力大吗？</p>
+<p>早在2011年，Twitter 网站抛出了一个问题：向下滚动 Twitter 信息流的时候，变得很慢，很迟钝。John Resig 发表了<a href="http://ejohn.org/blog/learning-from-twitter" target="_blank" rel="external">一篇博客解释这个问题</a>，文中解释到直接给 <code>scroll</code> 事件关联昂贵的函数，是多么糟糕的主意。</p>
+<p>John（5年前）建议的解决方案是，在 <code>onScroll</code> 事件外部，每 250ms 循环执行一次。简单的技巧，避免了影响用户体验。</p>
+<p>现如今，有一些稍微高端的方式处理事件。我来结合用例介绍下 Debounce，Throttle 和 requestAnimationFrame 吧。</p>
+<a id="more"></a>
+<h1 id="防抖动（Debounce）">防抖动（Debounce）</h1><p>防抖技术可以把多个顺序地调用合并成一次。</p>
+<p><img src="/image/debounce-throttle/p1.png" alt="附图1"></p>
+<p>假想一下，你在电梯中，门快要关了，突然有人准备上来。电梯并没有改变楼层，而是再次打开梯门。电梯延迟了改变楼层的功能，但是优化了资源。</p>
+<p>在顶部按钮上点击或移动鼠标试一下：</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="KVxGqN" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/KVxGqN/" target="_blank" rel="external">Debounce. Trailing</a> by Corbacho (<a href="http://codepen.io/dcorb" target="_blank" rel="external">@dcorb</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>你可以看到连续快速的事件是如何被一个 debounce 事件替代的。但是如果事件触发的时间间隔过长，debounce 则不会生效。</p>
+<h2 id="前缘（或者“immediate”）">前缘（或者“immediate”）</h2><p>你会发现，直到事件停止快速执行以后，debounce 事件才会触发相应功能。为何不立即触发呢？那样的话就跟原本的非 debounce 处理无异了。</p>
+<p>直到两次快速调用之间的停顿结束，事件才会再次触发。</p>
+<p>这是带 <code>leading</code> 标记的例子：</p>
+<p><img src="/image/debounce-throttle/p2.png" alt="附图1"><br><em>前缘 debounce 的例子</em></p>
+<p>在 underscore.js 中，选项叫 <code>immediate</code> ，而不是 <code>leading</code>：</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="GZWqNV" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/GZWqNV/" target="_blank" rel="external">Debounce. Leading</a> by Corbacho (<a href="http://codepen.io/dcorb" target="_blank" rel="external">@dcorb</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="Debounce_实现">Debounce 实现</h2><p>我首次看到 debounce 的 JavaScript 实现是在 2009 年的 <a href="http://unscriptable.com/2009/03/20/debouncing-javascript-methods/" target="_blank" rel="external">John Hann 的博文</a>。</p>
+<p>不久后，Ben Alman 做了个 <a href="http://benalman.com/projects/jquery-throttle-debounce-plugin/" target="_blank" rel="external">jQuery 插件</a>（不再维护），一年后 Jeremy Ashkenas 把它<a href="https://github.com/jashkenas/underscore/commit/9e3e067f5025dbe5e93ed784f93b233882ca0ffe" target="_blank" rel="external">加入了 underscore.js</a>。而后加入了 Lodash 。</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="YwNwgy" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/YwNwgy/" target="_blank" rel="external">New example</a> by Corbacho (<a href="http://codepen.io/dcorb" target="_blank" rel="external">@dcorb</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>Lodash 给 <code>_.debounce</code> 和 <code>_.throttle</code> 添加了<a href="https://lodash.com/docs#debounce" target="_blank" rel="external">不少特性</a>。之前的 <code>immediate</code> 被 <code>leading</code>（最前面） 和 <code>trailing</code>（最后面） 选项取代。你可以选一种，或者都选，默认只有 <code>trailing</code> 启用。</p>
+<p>新的 <code>maxWait</code> 选项（仅 Lodash 有）本文未提及，但是也很有用。事实上，throttle 方法是用 <code>_.debounce</code> 加 <code>maxWait</code> 实现的，你可以看 <a href="https://github.com/lodash/lodash/blob/4.7.0/lodash.js#L9840" target="_blank" rel="external">lodash 源码</a>。</p>
+<h2 id="Debounce_实例">Debounce 实例</h2><p><strong>调整大小的例子</strong></p>
+<p>调整桌面浏览器窗口大小的时候，会触发很多次 <code>resize</code> 事件。</p>
+<p>看下面 demo：</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="XXPjpd" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/XXPjpd/" target="_blank" rel="external">Debounce Resize Event Example</a> by Corbacho (<a href="http://codepen.io/dcorb" target="_blank" rel="external">@dcorb</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>如你所见，我们为 resize 事件使用了默认的 <code>trailing</code> 选项，因为我们只关心用户停止调整大小后的最终值。</p>
+<p><strong>基于 AJAX 请求的自动完成功能，通过 keypress 触发</strong></p>
+<p>为什么用户还在输入的时候，每隔50ms就向服务器发送一次 AJAX 请求？<code>_.debounce</code> 可以帮忙，当用户停止输入的时候，再发送请求。</p>
+<p>此处也不需要 <code>leading</code> 标记，我们想等最后一个字符输完。</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="mVGVOL" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/mVGVOL/" target="_blank" rel="external">Debouncing keystrokes Example</a> by Corbacho (<a href="http://codepen.io/dcorb" target="_blank" rel="external">@dcorb</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>相似的使用场景还有，直到用户输完，才验证输入的正确性，显示错误信息。</p>
+<h1 id="如何使用_debounce_和_throttle_以及常见的坑">如何使用 debounce 和 throttle 以及常见的坑</h1><p>自己造一个 debounce / throttle 的轮子看起来多么诱人，或者随便找个博文复制过来。<strong>我是建议直接使用 underscore 或 Lodash</strong> 。如果仅需要 <code>_.debounce</code> 和 <code>_.throttle</code> 方法，可以使用 Lodash 的自定义构建工具，生成一个 2KB 的压缩库。使用以下的简单命令即可：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i -<span class="keyword">g</span> lodash-<span class="keyword">cli</span></span><br><span class="line">lodash-<span class="keyword">cli</span> <span class="keyword">include</span>=debounce,throttle</span><br></pre></td></tr></table></figure>
+<p>常见的坑是，不止一次地调用 <code>_.debounce</code> 方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   _.debounce(doSomething, <span class="number">300</span>); </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, _.debounce(doSomething, <span class="number">200</span>));</span><br></pre></td></tr></table></figure>
+<p>debounce 方法保存到一个变量以后，就可以用它的私有方法 <code>debounced_version.cancel()</code>，lodash 和 underscore.js 都有效。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> debounced_version = _.debounce(doSomething, <span class="number">200</span>);</span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, debounced_version);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果需要的话</span></span><br><span class="line">debounced_version.cancel();</span><br></pre></td></tr></table></figure>
+<h1 id="Throttle（节流阀）">Throttle（节流阀）</h1><p>使用 _.throttle 的时候，只允许一个函数在 X 毫秒内执行一次。</p>
+<p>跟 debounce 主要的不同在于，throttle 保证 X 毫秒内至少执行一次。</p>
+<h2 id="节流阀实例">节流阀实例</h2><p><strong>无限滚动</strong></p>
+<p>用户向下滚动无限滚动页面，需要检查滚动位置距底部多远，如果邻近底部了，我们可以发 AJAX 请求获取更多的数据插入到页面中。</p>
+<p>我们心爱的 <code>_.debounce</code> 就不适用了，只有当用户停止滚动的时候它才会触发。只要用户滚动至邻近底部时，我们就想获取内容。</p>
+<p>使用 <code>_.throttle</code> 可以保证我们不断检查距离底部有多远。</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="eJLMxa" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/eJLMxa/" target="_blank" rel="external">Infinite scrolling throttled</a> by Corbacho (<a href="http://codepen.io/dcorb" target="_blank" rel="external">@dcorb</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h1 id="requestAnimationFrame（rAF）">requestAnimationFrame（rAF）</h1><p><code>requestAnimationFrame</code> 是另一种限速执行的方式。</p>
+<p>跟 <code>_.throttle(dosomething, 16)</code> 等价。它是高保真的，如果追求更好的精确度的话，可以用浏览器原生的 API 。</p>
+<p>可以使用 rAF API 替换 throttle 方法，考虑一下优缺点：</p>
+<h2 id="优点">优点</h2><ul>
+<li>动画保持 60fps（每一帧 16 ms），浏览器内部决定渲染的最佳时机</li>
+<li>简洁标准的 API，后期维护成本低</li>
+</ul>
+<h2 id="缺点">缺点</h2><ul>
+<li>动画的开始/取消需要开发者自己控制，不像 ‘.debounce’ 或 ‘.throttle’由函数内部处理。</li>
+<li>浏览器标签未激活时，一切都不会执行。</li>
+<li>尽管所有的现代浏览器<a href="http://caniuse.com/#feat=requestanimationframe" target="_blank" rel="external">都支持 rAF</a>  ，IE9，Opera Mini 和 老的 Android 还是<a href="http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/" target="_blank" rel="external">需要打补丁</a>。</li>
+<li>Node.js 不支持，无法在服务器端用于文件系统事件。</li>
+</ul>
+<p>根据经验，如果 JavaScript 方法需要绘制或者直接改变属性，我会选择 <code>requestAnimationFrame</code>，只要涉及到重新计算元素位置，就可以使用它。</p>
+<p>涉及到 AJAX 请求，添加/移除 class （可以触发 CSS 动画），我会选择 <code>_.debounce</code> 或者 <code>_.throttle</code> ，可以设置更低的执行频率（例子中的200ms 换成16ms）。</p>
+<h2 id="rAF_实例">rAF 实例</h2><p>灵感来自于 <a href="http://www.html5rocks.com/en/tutorials/speed/animations/" target="_blank" rel="external">Paul Lewis 的文章</a>，我将用 requestAnimationFrame 控制 scroll 。</p>
+<p>16ms 的 <code>_.throttle</code> 拿来做对比，性能相仿，用于更复杂的场景时，rAF 可能效果更佳。</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="pgOKKw" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/pgOKKw/" target="_blank" rel="external">Scroll comparison requestAnimationFrame vs throttle</a> by Corbacho (<a href="http://codepen.io/dcorb" target="_blank" rel="external">@dcorb</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>headroom.js 是个更<a href="https://github.com/WickyNilliams/headroom.js/blob/3282c23bc69b14f21bfbaf66704fa37b58e3241d/src/Debouncer.js" target="_blank" rel="external">高级的例子</a>。</p>
+<h1 id="结论">结论</h1><p>使用 debounce，throttle 和 <code>requestAnimationFrame</code> 都可以优化事件处理，三者各不相同，又相辅相成。</p>
+<p>总之：</p>
+<ul>
+<li><p><strong>debounce</strong>：把触发非常频繁的事件（比如按键）合并成一次执行。</p>
+</li>
+<li><p><strong>throttle</strong>：保证每 X 毫秒恒定的执行次数，比如每200ms检查下滚动位置，并触发 CSS 动画。</p>
+</li>
+<li><p><strong>requestAnimationFrame</strong>：可替代 throttle ，函数需要重新计算和渲染屏幕上的元素时，想保证动画或变化的平滑性，可以用它。注意：IE9 不支持。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>原文：<a href="https://css-tricks.com/debouncing-throttling-explained-examples/">Debouncing and Throttling Explained Through Examples</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>防抖（<strong>Debounce</strong>）和节流（<strong>throttle</strong>）都是用来控制某个函数在一定时间内执行多少次的技巧，两者相似而又不同。</p>
+<p>当我们给 DOM 绑定事件的时候，加了防抖和节流的函数变得特别有用。为什么呢？因为我们在事件和函数执行之间加了一个控制层。记住，我们是无法控制 DOM 事件触发频率的。</p>
+<p>看下滚动事件的例子：</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="PZOZgB" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/PZOZgB/">Scroll events counter</a> by Corbacho (<a href="http://codepen.io/dcorb">@dcorb</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>当使用触控板，滚动滚轮，或者拖拽滚动条的时候，一秒可以轻松触发30次事件。经我的测试，在智能手机上，慢慢滚动一下，一秒可以触发事件100次之多。这么高的执行频率，你的滚动回调函数压力大吗？</p>
+<p>早在2011年，Twitter 网站抛出了一个问题：向下滚动 Twitter 信息流的时候，变得很慢，很迟钝。John Resig 发表了<a href="http://ejohn.org/blog/learning-from-twitter">一篇博客解释这个问题</a>，文中解释到直接给 <code>scroll</code> 事件关联昂贵的函数，是多么糟糕的主意。</p>
+<p>John（5年前）建议的解决方案是，在 <code>onScroll</code> 事件外部，每 250ms 循环执行一次。简单的技巧，避免了影响用户体验。</p>
+<p>现如今，有一些稍微高端的方式处理事件。我来结合用例介绍下 Debounce，Throttle 和 requestAnimationFrame 吧。</p>]]>
+    
+    </summary>
+    
+      <category term="Debounce" scheme="http://jinlong.github.io/tags/Debounce/"/>
+    
+      <category term="Throttle" scheme="http://jinlong.github.io/tags/Throttle/"/>
+    
+      <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[你好 ES2015]]></title>
@@ -2084,39 +2222,6 @@
       <category term="用户体验" scheme="http://jinlong.github.io/categories/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/"/>
     
       <category term="交互设计" scheme="http://jinlong.github.io/categories/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[CSS 滑动门十年纪念]]></title>
-    <link href="http://jinlong.github.io/2013/10/20/ten-years-of-sliding-doors-of-css/"/>
-    <id>http://jinlong.github.io/2013/10/20/ten-years-of-sliding-doors-of-css/</id>
-    <published>2013-10-20T10:24:00.000Z</published>
-    <updated>2014-10-25T02:21:14.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="/images/post/css-sliding-door/sliding_doors.png"></p>
-<blockquote>
-<p>看到这篇文章，真是让我心潮澎湃，仿佛看到刚接触前端的我，拿着本《<a href="http://www.amazon.cn/CSS%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6-%E6%B8%A9%E8%B0%A6/dp/B00139O3TG/ref=sr_1_1?ie=UTF8&amp;qid=1382869723&amp;sr=8-1&amp;keywords=css%E8%AE%BE%E8%AE%A1%E5%BD%BB%E5%BA%95%E7%A0%94%E7%A9%B6" target="_blank" rel="external">CSS设计彻底研究</a>》慢慢的啃。当时看到前人发明的 CSS 滑动门，真是觉得相当惊艳，转眼间，这个技术距今已有10年。</p>
-</blockquote>
-<p>正是十年前的 2003年10月20日，<a href="http://alistapart.com/ Doug Bowman http://twitter.com/stop" target="_blank" rel="external">A List Apart</a> 的文章《<a href="http://alistapart.com/article/slidingdoors" target="_blank" rel="external">CSS 滑动门</a>》。</p>
-<p>A List Apart 现在提醒读者“尽管它曾经辉煌，但此文不再代表当今的最佳实践”。的确是这样，但是让这个周年纪念悄悄过去心有不甘。</p>
-<p>可能许多人没有从事 web 工作，他们或许想知道为什么一篇如何把无序列表修饰成标签的文章怎么会如此重要，因为我们现在可以使用支持更好的 CSS 属性达到同样的效果。</p>
-<p>我们可以在单个元素使用多背景图片，而不是给列表项和锚点同时应用图片。我们可以使用圆角，多个内部盒子阴影（box shadow）创建时髦的 3d 标签。如果我们打算牺牲一点浏览器兼容性，甚至可以使用 CSS 渐变 。</p>
-<p>但是在 Doug 之前，毫不夸张地说，没有人想出如何用 CSS 制作圆角标签。这是 A List Apart 一系列开创性文章的伊始，它不仅打破了 CSS 的限制，而且改变了 web ，被众人熟知。如果你还没读过<a href="http://alistapart.com/article/slidingdoors" target="_blank" rel="external">滑动门的文章</a>以及<a href="http://alistapart.com/article/slidingdoors2" target="_blank" rel="external">后续文章</a>，现在可以品味下了。</p>
-<p>怀旧之情？是的，今天的我们是多么幸运，拥有成熟的 CSS 和浏览器兼容性，那些只是 2003 年时的梦想。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="/images/post/css-sliding-door/sliding_doors.png"></p>
-<blockquote>
-<p>看到这篇文章，真是让我心潮澎湃，仿佛看到刚接触前端的我，拿着本《<a href="http://www.amazo]]>
-    </summary>
-    
-      <category term="CSS" scheme="http://jinlong.github.io/tags/CSS/"/>
-    
-      <category term="滑动门" scheme="http://jinlong.github.io/tags/%E6%BB%91%E5%8A%A8%E9%97%A8/"/>
-    
-      <category term="CSS" scheme="http://jinlong.github.io/categories/CSS/"/>
-    
-      <category term="滑动门" scheme="http://jinlong.github.io/categories/CSS/%E6%BB%91%E5%8A%A8%E9%97%A8/"/>
     
   </entry>
   

@@ -219,6 +219,117 @@
             
             
               
+                <a class="post-title-link" href="/2016/04/24/Debouncing-and-Throttling-Explained-Through-Examples/" itemprop="url">
+                  实例解析防抖动（Debouncing）和节流阀（Throttling）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-04-24T22:30:00+08:00" content="2016-04-24">
+              2016-04-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/24/Debouncing-and-Throttling-Explained-Through-Examples/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/24/Debouncing-and-Throttling-Explained-Through-Examples/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="https://css-tricks.com/debouncing-throttling-explained-examples/">Debouncing and Throttling Explained Through Examples</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>防抖（<strong>Debounce</strong>）和节流（<strong>throttle</strong>）都是用来控制某个函数在一定时间内执行多少次的技巧，两者相似而又不同。</p>
+<p>当我们给 DOM 绑定事件的时候，加了防抖和节流的函数变得特别有用。为什么呢？因为我们在事件和函数执行之间加了一个控制层。记住，我们是无法控制 DOM 事件触发频率的。</p>
+<p>看下滚动事件的例子：</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="PZOZgB" data-default-tab="result" data-user="dcorb" class="codepen">See the Pen <a href="http://codepen.io/dcorb/pen/PZOZgB/">Scroll events counter</a> by Corbacho (<a href="http://codepen.io/dcorb">@dcorb</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>当使用触控板，滚动滚轮，或者拖拽滚动条的时候，一秒可以轻松触发30次事件。经我的测试，在智能手机上，慢慢滚动一下，一秒可以触发事件100次之多。这么高的执行频率，你的滚动回调函数压力大吗？</p>
+<p>早在2011年，Twitter 网站抛出了一个问题：向下滚动 Twitter 信息流的时候，变得很慢，很迟钝。John Resig 发表了<a href="http://ejohn.org/blog/learning-from-twitter">一篇博客解释这个问题</a>，文中解释到直接给 <code>scroll</code> 事件关联昂贵的函数，是多么糟糕的主意。</p>
+<p>John（5年前）建议的解决方案是，在 <code>onScroll</code> 事件外部，每 250ms 循环执行一次。简单的技巧，避免了影响用户体验。</p>
+<p>现如今，有一些稍微高端的方式处理事件。我来结合用例介绍下 Debounce，Throttle 和 requestAnimationFrame 吧。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/24/Debouncing-and-Throttling-Explained-Through-Examples/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2016/04/09/Say-Hello-To-ES2015/" itemprop="url">
                   你好 ES2015
                 </a>
@@ -1188,108 +1299,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2015/05/24/css-retina-hairlines/" itemprop="url">
-                  Retina屏的移动设备如何实现真正1px的线？
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-05-24T18:02:35+08:00" content="2015-05-24">
-              2015-05-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index">
-                    <span itemprop="name">CSS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/05/24/css-retina-hairlines/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/24/css-retina-hairlines/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>前些日子总被人问起 iOS Retina 屏，设置 1px 边框，实际显示 2px，如何解决？<br>原来一直没在意，源于自己根本不是像素眼……<br>今天仔细瞅了瞅原生实现的边框和CSS设置的边框，确实差距不小……</p>
-</blockquote>
-<p>上图是原生实现，下图是 CSS 边框，手机上对比更加明显<br><img src="/image/css-retina-1px/native.jpg" /><img src="/image/css-retina-1px/css.jpg" /></p>
-<p>然后，如何解决呢？搜遍整个谷歌，发现好多人早已开始研究解决方案了。到底有哪些方案，到底好不好用呢？试过才知道，把我试过的结论记录一下。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/24/css-retina-hairlines/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1335,7 +1344,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1349,7 +1358,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
