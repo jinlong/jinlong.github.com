@@ -219,6 +219,230 @@
             
             
               
+                <a class="post-title-link" href="/2013/11/25/javascript-best-practices/" itemprop="url">
+                  Javascript 最佳实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-11-25T13:12:00+08:00" content="2013-11-25">
+              2013-11-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/11/25/javascript-best-practices/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/11/25/javascript-best-practices/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 <a href="http://www.slideshare.net/cheilmann/javascript-best-practices-1041724">PPT</a> （需翻墙）</p>
+<blockquote>
+<p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<h2 id="Make_it_Understandable（更易理解）">Make it Understandable（更易理解）</h2><p>变量和函数选择容易理解，较短的单词命名。</p>
+<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>## 避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> labels = &#123;</span><br><span class="line">   <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">   <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">   <span class="string">'contact'</span>:<span class="string">'contact'</span> </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   current = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   show();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/11/25/javascript-best-practices/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/11/25/smart-transitions-in-user-experience-design/" itemprop="url">
+                  用户体验设计中的巧妙过渡
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-11-25T11:55:00+08:00" content="2013-11-25">
+              2013-11-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/用户体验/" itemprop="url" rel="index">
+                    <span itemprop="name">用户体验</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/用户体验/交互设计/" itemprop="url" rel="index">
+                    <span itemprop="name">交互设计</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/11/25/smart-transitions-in-user-experience-design/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/11/25/smart-transitions-in-user-experience-design/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://uxdesign.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/">Smart Transitions In User Experience Design</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>一些网站不仅在内容，可用性，设计，功能等方面，让人耳目一新；交互设计细节和动画更是与众不同。我们将分享一些模型的经验，分析一下这些简单的模式为什么效果很好。</p>
+<p>当我们设计数码产品时，我们一般使用 Photoshop 和 Sketch 此类软件。大多数有数年行业经验的人显然明白设计不仅仅是视觉传达。尽管如此，有些人还是继续做静态设计。<a href="http://www.nytimes.com/2003/11/30/magazine/30IPOD.html?pagewanted=all">Steve Jobs 如此描述设计</a>：</p>
+<blockquote>
+<p>“It’s not just what it looks like and feels like. Design is how it works.“<br>“设计不仅仅是看起来和感受到的样子。设计是如何工作。”</p>
+</blockquote>
+<p>我们对于产品的体验和印象来源于诸多因素的集合，交互扮演一个根基的角色。我们无法想象用户界面是静态设计，随后再添加交互魔法。相反，我们需要在早期加入交互特性，把它当成天然的组成部分。</p>
+<p>让我们看看一些巧妙的交互，它们是一些微妙的动画，优雅地改善了用户体验。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/11/25/smart-transitions-in-user-experience-design/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2013/10/20/ten-years-of-sliding-doors-of-css/" itemprop="url">
                   CSS 滑动门十年纪念
                 </a>
@@ -1226,276 +1450,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/07/23/porting-chrome-extension-to-opera/" itemprop="url">
-                  移植 Chrome 扩展至 Opera
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-07-23T17:23:00+08:00" content="2013-07-23">
-              2013-07-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Opera-Extensions/" itemprop="url" rel="index">
-                    <span itemprop="name">Opera Extensions</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Opera-Extensions/Chrome-Extensions/" itemprop="url" rel="index">
-                    <span itemprop="name">Chrome Extensions</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Opera-Extensions/Chrome-Extensions/Firebug/" itemprop="url" rel="index">
-                    <span itemprop="name">Firebug</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/07/23/porting-chrome-extension-to-opera/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/23/porting-chrome-extension-to-opera/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><strong>准备工作：</strong></p>
-<p>下载：<a href="https://getfirebug.com/firebuglite">firebuglite 源码</a>   </p>
-<p>我下载的<a href="https://getfirebug.com/releases/lite/latest/firebug-lite.tar.tgz">稳定版</a></p>
-<p>解压源码，找到 <code>firebug-lite/build/chrome-extension</code> 目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来……</p>
-<p>我感觉原因可能是：</p>
-<ol>
-<li><a href="http://dev.opera.com/extension-docs/">Opera extension API</a> 暂时没有 <a href="https://developer.chrome.com/extensions/api_index.html">Chrome extension API</a> 支持的多</li>
-<li>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新</li>
-</ol>
-<p>下面记录移植过程的一些要点：</p>
-<p>地址栏输入 <code>opera:opera://extensions</code> 或者 “<strong>Ctrl + Shift + E</strong>`”打开扩展页，右上角点击“<strong>开发者模式</strong>”；</p>
-<p>点击“<strong>载入解压后的扩展…</strong>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；</p>
-<p>哈，第一个报错来了：</p>
-<p><img src="/images/post/firebuglite/1.png" /></p>
-<p>意思是说“<code>manifest_version</code>”值必须是 2 ，不能有引号，解释参见<a href="http://dev.opera.com/extension-docs/manifest.html#manifest_version">这里</a> 。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/07/23/porting-chrome-extension-to-opera/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/07/08/centering-percentage-widthheight-elements/" itemprop="url">
-                  居中百分比宽高的元素
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-07-08T13:47:00+08:00" content="2013-07-08">
-              2013-07-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index">
-                    <span itemprop="name">CSS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/CSS/居中/" itemprop="url" rel="index">
-                    <span itemprop="name">居中</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/CSS/居中/translate/" itemprop="url" rel="index">
-                    <span itemprop="name">translate</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/07/08/centering-percentage-widthheight-elements/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/08/centering-percentage-widthheight-elements/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>原文：<a href="http://css-tricks.com/centering-percentage-widthheight-elements/" target="_blank" rel="external">Centering Percentage Width/Height Elements</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
-<p>如果知道该元素确切的宽高，居中它比较容易，可以<a href="http://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/" target="_blank" rel="external">参考此文</a> ，<code>top</code> 和 <code>left</code> 设成 50%，负 <code>margin</code> 分别设置该元素宽，高的一半。如果明确知道该元素的宽高，用此法居中很容易，如果它的宽高是百分比呢？</p>
-</blockquote>
-<p>你可能认为负的百分比 margin 可以搞定，它适用于水平的 margin，但是 margin 基于宽度（垂直 margin 也是）（译者注：margin 是百分比的话，跟此元素的包含块的宽度有关，<a href="http://www.w3.org/TR/CSS2/box.html#margin-properties" target="_blank" rel="external">见规范</a>），因此当你用负的 top margin 时，失败了。</p>
-<p>有个<a href="http://css-tricks.com/centering-in-the-unknown/" target="_blank" rel="external">小技巧</a> ，用一个“ghost”伪元素（看不见的伪元素）和 <code>inline-block</code> / <code>vertical-align</code> 可以搞定居中，非常巧妙。但是这个方法要求待居中的元素是 <code>inline-block</code>，不是一个真正通用的方案。可能你想居中一个模态窗口，受小屏幕 / 响应式设计所限，你很可能会把对话框设计成百分比宽度（或者其它未知情况，比如仅有 <code>max-width</code> 最大宽度。）</p>
-<p>有一种方案！Mary Lou 在 Codrops 用到的，她的文章 / 示例：<a href="http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/" target="_blank" rel="external">漂亮的模态窗口效果</a> 。</p>
-<p>不能用负的 margin ，可以用负的 <code>translate()</code> 代替。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.center</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span><br><span class="line">  不是 =(</span><br><span class="line">  margin-left: -25%;</span><br><span class="line">  margin-top: -25%;</span><br><span class="line">  */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* </span><br><span class="line">  而是!</span><br><span class="line">  */</span></span><br><span class="line">  <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span><br><span class="line">  甚至不要定义 </span><br><span class="line">  比如：Height 可以缺省!</span><br><span class="line">  */</span></span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">40%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>加上所有需要的前缀。</p>
-<p>最终效果实例：</p>
-<p><pre class="codepen" data-height="300" data-type="result" data-href="BvdgL" data-user="chriscoyier" data-safe="false"><code></code><a href="http://codepen.io/chriscoyier/pen/BvdgL" target="_blank" rel="external">Check out this Pen!</a></pre></p>
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1541,21 +1495,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

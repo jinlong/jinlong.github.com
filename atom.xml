@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2016-04-24T15:03:12.000Z</updated>
+  <updated>2016-05-23T10:08:43.000Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -13,6 +13,195 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[针对易读性的背景滤镜兼容方案（CSS filter 兼容方案）]]></title>
+    <link href="http://jinlong.github.io/2016/05/15/Filtered-background-with-fallback-for-legibility/"/>
+    <id>http://jinlong.github.io/2016/05/15/Filtered-background-with-fallback-for-legibility/</id>
+    <published>2016-05-15T13:47:29.000Z</published>
+    <updated>2016-05-23T10:08:43.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>原文：<a href="http://codepen.io/tigt/post/blurred-background-image-with-fallback" target="_blank" rel="external">Filtered background with fallback for legibility</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>你知道现在有多火吗？用这种很大的，高质量的，支持 Retina 屏的<a href="https://www.google.com/search?q=blurred+background+web&amp;tbm=isch" target="_blank" rel="external">模糊的 JPEG 图片作为 header 背景</a> :</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="RaprZK" data-default-tab="css,result" data-user="tigt" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/tigt/pen/RaprZK/" target="_blank" rel="external">Web site header, circa 2016</a> by Taylor Hunt (<a href="http://codepen.io/tigt" target="_blank" rel="external">@tigt</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>潜在的问题是如果浏览器不支持滤镜 filter，<a href="https://www.nngroup.com/articles/text-over-images/" target="_blank" rel="external">文字将不可读</a>  。这违背了可访问性的原则，再完美的视觉也无济于事。</p>
+<a id="more"></a>
+<p><img src="/image/Filtered-background/p1.png" alt="附图1"><br>支持和不支持 filter 的效果对比</p>
+<p>因此呢，你需要提前准备好处理模糊的图片，可是设计师偏要你实现动态模糊呢，图片不固定，跟 Apple 的效果一样一样的，咋办？如果是用户上传的图片又咋办？嗯，你需要一台图片处理服务器，听起来成本很高。</p>
+<p>我碰巧想到一个妙招，让不支持 <code>filter</code> 的浏览器用颜色图层代替，方案并不完美，但是具有高可读性：</p>
+<p><img src="/image/Filtered-background/p2.png" alt="附图2"><br>不支持 filter 的效果</p>
+<h1 id="基本实现">基本实现</h1><p>我用伪元素作为背景，因为给元素加 <code>filter</code> 比<a href="http://caniuse.com/css-filter-function" target="_blank" rel="external">单纯给背景加 filter</a> <a href="http://caniuse.com/css-filters" target="_blank" rel="external">兼容性更好</a>  。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.backdrop</span> <span class="rules">&#123; <span class="rule"><span class="attribute">position</span>:<span class="value"> relative </span></span></span>&#125;</span><br><span class="line"><span class="class">.backdrop</span><span class="pseudo">::after</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 铺满整个父元素 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 放到父元素内容的下层 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">z-index</span>:<span class="value"> -<span class="number">2</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 像父元素一样展示背景 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#222</span> <span class="function">url</span>(<span class="string">"inspirational-landscape-and/or-laughing-with-salad.jpg"</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h1 id="加特效">加特效</h1><p>此时，设计师发话了，让背景图模糊一下，再来个轻微变暗效果就更好了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 不要忘记前缀，Safari &gt;9.1 和所有 Chrome 仍然需要 -webkit- */</span></span><br><span class="line"><span class="tag">filter</span>: <span class="tag">blur</span>(4<span class="tag">px</span>) <span class="tag">brightness</span>(75%);</span><br></pre></td></tr></table></figure>
+<p>这么做还远远不够，不支持 <code>filter</code> 的浏览器将严重影响阅读。</p>
+<h1 id="上妙招">上妙招</h1><p>是否听过 <code>filter</code> 有 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter#opacity%28%29_2" target="_blank" rel="external">opacity() 效果</a>  ？对比广泛支持的 <code>opacity</code> 属性，它显得有点鸡肋，但是它的存在才使得兼容方案得以实现：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.backdrop</span><span class="pseudo">::before</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 把它放到其它伪元素的上面，但是仍在父元素内容的下面 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">z-index</span>:<span class="value"> -<span class="number">1</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 让遮罩层足够的暗，无论什么背景都可以看清楚上面的文字 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="function">rbgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>, <span class="number">0.5</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 使用滤镜完全隐藏它？？ */</span></span><br><span class="line">  <span class="rule"><span class="attribute">filter</span>:<span class="value"> <span class="function">opacity</span>(<span class="number">0%</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>如果支持 filter 滤镜，带图片的伪元素是模糊的，微微变暗的，这一黑色的遮罩层是完全透明的。如果不支持滤镜呢，显示效果并不完美，但是不会阻碍任何人阅读上面的文字。</p>
+<p>CodePen 的例子在此，希望你喜欢：</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="bpqpMP" data-default-tab="css,result" data-user="tigt" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/tigt/pen/bpqpMP/" target="_blank" rel="external">Filtered background with fallback for legibility</a> by Taylor Hunt (<a href="http://codepen.io/tigt" target="_blank" rel="external">@tigt</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>其它 filter 滤镜的使用或许也能受此启发，我把它放到了我的锦囊里。</p>
+<h1 id="何不用_@supports_代替？">何不用 @supports 代替？</h1><p>浏览器对 CSS 特性检测（<code>@supports</code>）的<a href="http://caniuse.com/#feat=css-featurequeries" target="_blank" rel="external">支持程度跟 filter 保持一致</a> ，替换以后代码更加清晰明了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">supports</span> (filter: <span class="function">blur</span>(<span class="number">4px</span>) <span class="function">brightness</span>(<span class="number">75%</span>)) or (-webkit-filter: <span class="function">blur</span>(<span class="number">4px</span>) <span class="function">brightness</span>(<span class="number">75%</span>)) </span>&#123;</span><br><span class="line">  <span class="comment">/* 浏览器支持 filter 的话... */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你完全可以这么写，全看个人喜好。我查阅了 CanIUse 的使用数据，有一些环境仍不支持 <code>@supports</code> ：</p>
+<ul>
+<li>Chrome 18–27</li>
+<li>Safari 8.x</li>
+<li>UC Browser 9.9（撰写本文时）</li>
+</ul>
+<p>直到<strong><em>2016年5月</em></strong>，以上浏览器的联合使用份额是 ≈ 美国 3.6%、世界范围 10.5%（感谢大洋彼岸 UC 的盛行）。这些数字会随着时间流逝逐渐减少，到那时，如果想写更加清晰的 CSS 就推荐使用 <code>@supports</code> 了。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>原文：<a href="http://codepen.io/tigt/post/blurred-background-image-with-fallback">Filtered background with fallback for legibility</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>你知道现在有多火吗？用这种很大的，高质量的，支持 Retina 屏的<a href="https://www.google.com/search?q=blurred+background+web&amp;tbm=isch">模糊的 JPEG 图片作为 header 背景</a> :</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="RaprZK" data-default-tab="css,result" data-user="tigt" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/tigt/pen/RaprZK/">Web site header, circa 2016</a> by Taylor Hunt (<a href="http://codepen.io/tigt">@tigt</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>潜在的问题是如果浏览器不支持滤镜 filter，<a href="https://www.nngroup.com/articles/text-over-images/">文字将不可读</a>  。这违背了可访问性的原则，再完美的视觉也无济于事。</p>]]>
+    
+    </summary>
+    
+      <category term="CSS3" scheme="http://jinlong.github.io/tags/CSS3/"/>
+    
+      <category term="CSS3" scheme="http://jinlong.github.io/categories/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[4类 JavaScript 内存泄露及如何避免]]></title>
+    <link href="http://jinlong.github.io/2016/05/01/4-Types-of-Memory-Leaks-in-JavaScript-and-How-to-Get-Rid-Of-Them/"/>
+    <id>http://jinlong.github.io/2016/05/01/4-Types-of-Memory-Leaks-in-JavaScript-and-How-to-Get-Rid-Of-Them/</id>
+    <published>2016-05-01T13:16:27.000Z</published>
+    <updated>2016-05-23T09:41:29.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>原文：<a href="https://auth0.com/blog/2016/01/26/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/" target="_blank" rel="external">4 Types of Memory Leaks in JavaScript and How to Get Rid Of Them</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+<p>译者注：本文并没有逐字逐句的翻译，而是把我认为重要的信息做了翻译。如果您的英文熟练，可以直接阅读原文。</p>
+</blockquote>
+<p>本文将探索常见的客户端 JavaScript 内存泄露，以及如何使用 Chrome 开发工具发现问题。</p>
+<h1 id="简介">简介</h1><p>内存泄露是每个开发者最终都要面对的问题，它是许多问题的根源：反应迟缓，崩溃，高延迟，以及其他应用问题。</p>
+<h2 id="什么是内存泄露？">什么是内存泄露？</h2><p>本质上，内存泄露可以定义为：应用程序不再需要占用内存的时候，由于某些原因，内存没有被操作系统或可用内存池回收。编程语言管理内存的方式各不相同。只有开发者最清楚哪些内存不需要了，操作系统可以回收。一些编程语言提供了语言特性，可以帮助开发者做此类事情。另一些则寄希望于开发者对内存是否需要清晰明了。</p>
+<h2 id="JavaScript_内存管理">JavaScript 内存管理</h2><p>JavaScript 是一种垃圾回收语言。垃圾回收语言通过周期性地检查先前分配的内存是否可达，帮助开发者管理内存。换言之，垃圾回收语言减轻了“内存仍可用”及“内存仍可达”的问题。两者的区别是微妙而重要的：仅有开发者了解哪些内存在将来仍会使用，而不可达内存通过算法确定和标记，适时被操作系统回收。</p>
+<h1 id="JavaScript_内存泄露">JavaScript 内存泄露</h1><p>垃圾回收语言的内存泄露主因是不需要的引用。理解它之前，还需了解垃圾回收语言如何辨别内存的可达与不可达。</p>
+<h2 id="Mark-and-sweep">Mark-and-sweep</h2><p>大部分垃圾回收语言用的算法称之为 Mark-and-sweep 。算法由以下几步组成：</p>
+<ol>
+<li>垃圾回收器创建了一个“roots”列表。Roots 通常是代码中全局变量的引用。JavaScript  中，“window” 对象是一个全局变量，被当作 root 。window 对象总是存在，因此垃圾回收器可以检查它和它的所有子对象是否存在（即不是垃圾）；</li>
+<li>所有的 roots 被检查和标记为激活（即不是垃圾）。所有的子对象也被递归地检查。从 root 开始的所有对象如果是可达的，它就不被当作垃圾。</li>
+<li>所有未被标记的内存会被当做垃圾，收集器现在可以释放内存，归还给操作系统了。</li>
+</ol>
+<p>现代的垃圾回收器改良了算法，但是本质是相同的：可达内存被标记，其余的被当作垃圾回收。</p>
+<p>不需要的引用是指开发者明知内存引用不再需要，却由于某些原因，它仍被留在激活的 root 树中。在 JavaScript 中，不需要的引用是保留在代码中的变量，它不再需要，却指向一块本该被释放的内存。有些人认为这是开发者的错误。</p>
+<p>为了理解 JavaScript 中最常见的内存泄露，我们需要了解哪种方式的引用容易被遗忘。</p>
+<a id="more"></a>
+<h1 id="三种类型的常见_JavaScript_内存泄露">三种类型的常见 JavaScript 内存泄露</h1><h2 id="1：意外的全局变量">1：意外的全局变量</h2><p>JavaScript 处理未定义变量的方式比较宽松：未定义的变量会在全局对象创建一个新变量。在浏览器中，全局对象是 <code>window</code> 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">    bar = <span class="string">"this is a hidden global variable"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>真相是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.bar = <span class="string">"this is an explicit global variable"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数 <code>foo</code> 内部忘记使用 <code>var</code> ，意外创建了一个全局变量。此例泄露了一个简单的字符串，无伤大雅，但是有更糟的情况。</p>
+<p>另一种意外的全局变量可能由 <code>this</code> 创建：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.variable = <span class="string">"potential accidental global"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Foo 调用自己，this 指向了全局对象（window）</span></span><br><span class="line"><span class="comment">// 而不是 undefined</span></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在 JavaScript 文件头部加上 <code>&#39;use strict&#39;</code>，可以避免此类错误发生。启用严格模式解析 JavaScript ，避免意外的全局变量。</p>
+</blockquote>
+<p><strong>全局变量注意事项</strong></p>
+<p>尽管我们讨论了一些意外的全局变量，但是仍有一些明确的全局变量产生的垃圾。它们被定义为不可回收（除非定义为空或重新分配）。尤其当全局变量用于临时存储和处理大量信息时，需要多加小心。如果必须使用全局变量存储大量数据时，确保用完以后把它设置为 null 或者重新定义。与全局变量相关的增加内存消耗的一个主因是缓存。缓存数据是为了重用，缓存必须有一个大小上限才有用。高内存消耗导致缓存突破上限，因为缓存内容无法被回收。</p>
+<h2 id="2：被遗忘的计时器或回调函数">2：被遗忘的计时器或回调函数</h2><p>在 JavaScript 中使用 <code>setInterval</code> 非常平常。一段常见的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someResource = getData();</span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> node = <span class="built_in">document</span>.getElementById(<span class="string">'Node'</span>);</span><br><span class="line">    <span class="keyword">if</span>(node) &#123;</span><br><span class="line">        <span class="comment">// 处理 node 和 someResource</span></span><br><span class="line">        node.innerHTML = <span class="built_in">JSON</span>.stringify(someResource));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>此例说明了什么：与节点或数据关联的计时器不再需要，<code>node</code> 对象可以删除，整个回调函数也不需要了。可是，计时器回调函数仍然没被回收（计时器停止才会被回收）。同时，<code>someResource</code> 如果存储了大量的数据，也是无法被回收的。</p>
+<p>对于观察者的例子，一旦它们不再需要（或者关联的对象变成不可达），明确地移除它们非常重要。老的 IE 6 是无法处理循环引用的。如今，即使没有明确移除它们，一旦观察者对象变成不可达，大部分浏览器是可以回收观察者处理函数的。</p>
+<p>观察者代码示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onClick</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    element.innerHTML = <span class="string">'text'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>, onClick);</span><br></pre></td></tr></table></figure>
+<p><strong>对象观察者和循环引用注意事项</strong></p>
+<p>老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄露。如今，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法，已经可以正确检测和处理循环引用了。换言之，回收节点内存时，不必非要调用 <code>removeEventListener</code> 了。</p>
+<h2 id="3：脱离_DOM_的引用">3：脱离 DOM 的引用</h2><p>有时，保存 DOM 节点内部数据结构很有用。假如你想快速更新表格的几行内容，把每一行 DOM 存成字典（JSON 键值对）或者数组很有意义。此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。将来你决定删除这些行时，需要把两个引用都清除。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elements = &#123;</span><br><span class="line">    button: <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>),</span><br><span class="line">    image: <span class="built_in">document</span>.getElementById(<span class="string">'image'</span>),</span><br><span class="line">    text: <span class="built_in">document</span>.getElementById(<span class="string">'text'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doStuff</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    image.src = <span class="string">'http://some.url/image'</span>;</span><br><span class="line">    button.click();</span><br><span class="line">    <span class="built_in">console</span>.log(text.innerHTML);</span><br><span class="line">    <span class="comment">// 更多逻辑</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 按钮是 body 的后代元素</span></span><br><span class="line">    <span class="built_in">document</span>.body.removeChild(<span class="built_in">document</span>.getElementById(<span class="string">'button'</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 此时，仍旧存在一个全局的 #button 的引用</span></span><br><span class="line">    <span class="comment">// elements 字典。button 元素仍旧在内存中，不能被 GC 回收。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此外还要考虑 DOM 树内部或子节点的引用问题。假如你的 JavaScript 代码中保存了表格某一个 <code>&lt;td&gt;</code> 的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的 <code>&lt;td&gt;</code> 以外的其它节点。实际情况并非如此：此 <code>&lt;td&gt;</code> 是表格的子节点，子元素与父元素是引用关系。由于代码保留了 <code>&lt;td&gt;</code> 的引用，导致整个表格仍待在内存中。保存 DOM 元素引用的时候，要小心谨慎。</p>
+<h2 id="4：闭包">4：闭包</h2><p>闭包是 JavaScript 开发的一个关键方面：匿名函数可以访问父级作用域的变量。</p>
+<p>代码示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> theThing = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> replaceThing = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> originalThing = theThing;</span><br><span class="line">  <span class="keyword">var</span> unused = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (originalThing)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"hi"</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  theThing = &#123;</span><br><span class="line">    longStr: <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1000000</span>).join(<span class="string">'*'</span>),</span><br><span class="line">    someMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(someMessage);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">setInterval(replaceThing, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>代码片段做了一件事情：每次调用 <code>replaceThing</code> <code>，theThing</code> 得到一个包含一个大数组和一个新闭包（<code>someMethod</code>）的新对象。同时，变量 <code>unused</code> 是一个引用 <code>originalThing</code> 的闭包（先前的 <code>replaceThing</code> 又调用了 <code>theThing</code> ）。思绪混乱了吗？最重要的事情是，闭包的作用域一旦创建，它们有同样的父级作用域，作用域是共享的。<code>someMethod</code> 可以通过 <code>theThing</code> 使用，<code>someMethod</code> 与 <code>unused</code> 分享闭包作用域，尽管 <code>unused</code> 从未使用，它引用的 <code>originalThing</code> 迫使它保留在内存中（防止被回收）。当这段代码反复运行，就会看到内存占用不断上升，垃圾回收器（GC）并无法降低内存占用。本质上，闭包的链表已经创建，每一个闭包作用域携带一个指向大数组的间接的引用，造成严重的内存泄露。</p>
+<blockquote>
+<p><a href="http://info.meteor.com/blog/an-interesting-kind-of-javascript-memory-leak" target="_blank" rel="external">Meteor 的博文</a> 解释了如何修复此种问题。在 <code>replaceThing</code> 的最后添加 <code>originalThing = null</code> 。</p>
+</blockquote>
+<h1 id="Chrome_内存剖析工具概览">Chrome 内存剖析工具概览</h1><p>Chrome 提供了一套很棒的检测 JavaScript 内存占用的工具。与内存相关的两个重要的工具：<code>timeline</code> 和 <code>profiles</code>。</p>
+<h2 id="Timeline">Timeline</h2><p><img src="/image/4-Types-of-Memory-Leaks/p1.png" alt="附图1"></p>
+<p>timeline 可以检测代码中不需要的内存。在此截图中，我们可以看到潜在的泄露对象稳定的增长，数据采集快结束时，内存占用明显高于采集初期，Node（节点）的总量也很高。种种迹象表明，代码中存在 DOM 节点泄露的情况。</p>
+<h2 id="Profiles">Profiles</h2><p><img src="/image/4-Types-of-Memory-Leaks/p2.png" alt="附图2"></p>
+<p>Profiles 是你可以花费大量时间关注的工具，它可以保存快照，对比 JavaScript 代码内存使用的不同快照，也可以记录时间分配。每一次结果包含不同类型的列表，与内存泄露相关的有 summary（概要） 列表和 comparison（对照） 列表。</p>
+<p>summary（概要） 列表展示了不同类型对象的分配及合计大小：shallow size（特定类型的所有对象的总大小），retained size（shallow size 加上其它与此关联的对象大小）。它还提供了一个概念，一个对象与关联的 GC root 的距离。</p>
+<p>对比不同的快照的 comparison list 可以发现内存泄露。</p>
+<h1 id="实例：使用_Chrome_发现内存泄露">实例：使用 Chrome 发现内存泄露</h1><p>实质上有两种类型的泄露：周期性的内存增长导致的泄露，以及偶现的内存泄露。显而易见，周期性的内存泄露很容易发现；偶现的泄露比较棘手，一般容易被忽视，偶尔发生一次可能被认为是优化问题，周期性发生的则被认为是必须解决的 bug。</p>
+<p>以 <a href="https://developer.chrome.com/devtools/docs/demos/memory/example1" target="_blank" rel="external">Chrome 文档</a>中的代码为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createSomeNodes</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> div,</span><br><span class="line">        i = <span class="number">100</span>,</span><br><span class="line">        frag = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">        div.appendChild(<span class="built_in">document</span>.createTextNode(i + <span class="string">" - "</span>+ <span class="keyword">new</span> <span class="built_in">Date</span>().toTimeString()));</span><br><span class="line">        frag.appendChild(div);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"nodes"</span>).appendChild(frag);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">grow</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    x.push(<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1000000</span>).join(<span class="string">'x'</span>));</span><br><span class="line">    createSomeNodes();</span><br><span class="line">    setTimeout(grow,<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当 <code>grow</code> 执行的时候，开始创建 div 节点并插入到 DOM 中，并且给全局变量分配一个巨大的数组。通过以上提到的工具可以检测到内存稳定上升。</p>
+<h2 id="找出周期性增长的内存">找出周期性增长的内存</h2><p>timeline 标签擅长做这些。在 Chrome 中<a href="https://developer.chrome.com/devtools/docs/demos/memory/example1" target="_blank" rel="external">打开例子</a>，打开 Dev Tools ，切换到 timeline，勾选 memory 并点击记录按钮，然后点击页面上的 <code>The Button</code> 按钮。过一阵停止记录看结果：</p>
+<p><img src="/image/4-Types-of-Memory-Leaks/p3.png" alt="附图3"></p>
+<p>两种迹象显示出现了内存泄露，图中的 Nodes（绿线）和 JS heap（蓝线）。Nodes 稳定增长，并未下降，这是个显著的信号。</p>
+<p>JS heap 的内存占用也是稳定增长。由于垃圾收集器的影响，并不那么容易发现。图中显示内存占用忽涨忽跌，实际上每一次下跌之后，JS heap 的大小都比原先大了。换言之，尽管垃圾收集器不断的收集内存，内存还是周期性的泄露了。</p>
+<p>确定存在内存泄露之后，我们找找根源所在。</p>
+<h2 id="保存两个快照">保存两个快照</h2><p>切换到 Chrome Dev Tools 的 profiles 标签，刷新页面，等页面刷新完成之后，点击 Take Heap Snapshot 保存快照作为基准。而后再次点击 <code>The Button</code> 按钮，等数秒以后，保存第二个快照。</p>
+<p><img src="/image/4-Types-of-Memory-Leaks/p4.png" alt="附图4"></p>
+<p>筛选菜单选择 Summary，右侧选择 Objects allocated between Snapshot 1 and Snapshot 2，或者筛选菜单选择 Comparison ，然后可以看到一个对比列表。</p>
+<p>此例很容易找到内存泄露，看下  <code>(string)</code> 的 <code>Size Delta</code> Constructor，8MB，58个新对象。新对象被分配，但是没有释放，占用了8MB。</p>
+<p>如果展开  <code>(string)</code>  Constructor，会看到许多单独的内存分配。选择某一个单独的分配，下面的 retainers 会吸引我们的注意。</p>
+<p><img src="/image/4-Types-of-Memory-Leaks/p5.png" alt="附图5"></p>
+<p>我们已选择的分配是数组的一部分，数组关联到 <code>window</code> 对象的 <code>x</code> 变量。这里展示了从巨大对象到无法回收的 root（<code>window</code>）的完整路径。我们已经找到了潜在的泄露以及它的出处。</p>
+<p>我们的例子还算简单，只泄露了少量的 DOM 节点，利用以上提到的快照很容易发现。对于更大型的网站，Chrome 还提供了 Record Heap Allocations 功能。</p>
+<h2 id="Record_heap_allocations_找内存泄露">Record heap allocations 找内存泄露</h2><p>回到 Chrome Dev Tools 的 profiles 标签，点击 Record Heap Allocations。工具运行的时候，注意顶部的蓝条，代表了内存分配，每一秒有大量的内存分配。运行几秒以后停止。</p>
+<p><img src="/image/4-Types-of-Memory-Leaks/p6.png" alt="附图6"></p>
+<p>上图中可以看到工具的杀手锏：选择某一条时间线，可以看到这个时间段的内存分配情况。尽可能选择接近峰值的时间线，下面的列表仅显示了三种 constructor：其一是泄露最严重的<code>（string）</code>，下一个是关联的 DOM 分配，最后一个是 <code>Text</code> constructor（DOM 叶子节点包含的文本）。</p>
+<p>从列表中选择一个 <code>HTMLDivElement</code> constructor，然后选择 <code>Allocation stack</code>。</p>
+<p><img src="/image/4-Types-of-Memory-Leaks/p7.png" alt="附图7"></p>
+<p>现在知道元素被分配到哪里了吧（<code>grow</code> -&gt; <code>createSomeNodes</code>），仔细观察一下图中的时间线，发现 <code>HTMLDivElement</code> constructor 调用了许多次，意味着内存一直被占用，无法被 GC 回收，我们知道了这些对象被分配的确切位置（<code>createSomeNodes</code>）。回到代码本身，探讨下如何修复内存泄露吧。</p>
+<h2 id="另一个有用的特性">另一个有用的特性</h2><p>在 heap allocations 的结果区域，选择 Allocation。</p>
+<p><img src="/image/4-Types-of-Memory-Leaks/p8.png" alt="附图8"></p>
+<p>这个视图呈现了内存分配相关的功能列表，我们立刻看到了 <code>grow</code> 和 <code>createSomeNodes</code>。当选择 <code>grow</code> 时，看看相关的 object constructor，清楚地看到 <code>(string)</code>, <code>HTMLDivElement</code> 和 <code>Text</code> 泄露了。</p>
+<p>结合以上提到的工具，可以轻松找到内存泄露。</p>
+<h1 id="延伸阅读">延伸阅读</h1><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management" target="_blank" rel="external">Memory Management - Mozilla Developer Network</a></li>
+<li><a href="http://javascript.crockford.com/memory/leak.html" target="_blank" rel="external">JScript Memory Leaks - Douglas Crockford (old, in relation to Internet Explorer 6 leaks)</a></li>
+<li><a href="https://developer.chrome.com/devtools/docs/javascript-memory-profiling" target="_blank" rel="external">JavaScript Memory Profiling - Chrome Developer Docs</a></li>
+<li><a href="https://developers.google.com/web/tools/chrome-devtools/profile/memory-problems/memory-diagnosis" target="_blank" rel="external">Memory Diagnosis - Google Developers</a></li>
+<li><a href="http://info.meteor.com/blog/an-interesting-kind-of-javascript-memory-leak" target="_blank" rel="external">An Interesting Kind of JavaScript Memory Leak - Meteor blog</a></li>
+<li><a href="http://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html" target="_blank" rel="external">Grokking V8 closures</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>原文：<a href="https://auth0.com/blog/2016/01/26/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/">4 Types of Memory Leaks in JavaScript and How to Get Rid Of Them</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+<p>译者注：本文并没有逐字逐句的翻译，而是把我认为重要的信息做了翻译。如果您的英文熟练，可以直接阅读原文。</p>
+</blockquote>
+<p>本文将探索常见的客户端 JavaScript 内存泄露，以及如何使用 Chrome 开发工具发现问题。</p>
+<h1 id="简介">简介</h1><p>内存泄露是每个开发者最终都要面对的问题，它是许多问题的根源：反应迟缓，崩溃，高延迟，以及其他应用问题。</p>
+<h2 id="什么是内存泄露？">什么是内存泄露？</h2><p>本质上，内存泄露可以定义为：应用程序不再需要占用内存的时候，由于某些原因，内存没有被操作系统或可用内存池回收。编程语言管理内存的方式各不相同。只有开发者最清楚哪些内存不需要了，操作系统可以回收。一些编程语言提供了语言特性，可以帮助开发者做此类事情。另一些则寄希望于开发者对内存是否需要清晰明了。</p>
+<h2 id="JavaScript_内存管理">JavaScript 内存管理</h2><p>JavaScript 是一种垃圾回收语言。垃圾回收语言通过周期性地检查先前分配的内存是否可达，帮助开发者管理内存。换言之，垃圾回收语言减轻了“内存仍可用”及“内存仍可达”的问题。两者的区别是微妙而重要的：仅有开发者了解哪些内存在将来仍会使用，而不可达内存通过算法确定和标记，适时被操作系统回收。</p>
+<h1 id="JavaScript_内存泄露">JavaScript 内存泄露</h1><p>垃圾回收语言的内存泄露主因是不需要的引用。理解它之前，还需了解垃圾回收语言如何辨别内存的可达与不可达。</p>
+<h2 id="Mark-and-sweep">Mark-and-sweep</h2><p>大部分垃圾回收语言用的算法称之为 Mark-and-sweep 。算法由以下几步组成：</p>
+<ol>
+<li>垃圾回收器创建了一个“roots”列表。Roots 通常是代码中全局变量的引用。JavaScript  中，“window” 对象是一个全局变量，被当作 root 。window 对象总是存在，因此垃圾回收器可以检查它和它的所有子对象是否存在（即不是垃圾）；</li>
+<li>所有的 roots 被检查和标记为激活（即不是垃圾）。所有的子对象也被递归地检查。从 root 开始的所有对象如果是可达的，它就不被当作垃圾。</li>
+<li>所有未被标记的内存会被当做垃圾，收集器现在可以释放内存，归还给操作系统了。</li>
+</ol>
+<p>现代的垃圾回收器改良了算法，但是本质是相同的：可达内存被标记，其余的被当作垃圾回收。</p>
+<p>不需要的引用是指开发者明知内存引用不再需要，却由于某些原因，它仍被留在激活的 root 树中。在 JavaScript 中，不需要的引用是保留在代码中的变量，它不再需要，却指向一块本该被释放的内存。有些人认为这是开发者的错误。</p>
+<p>为了理解 JavaScript 中最常见的内存泄露，我们需要了解哪种方式的引用容易被遗忘。</p>]]>
+    
+    </summary>
+    
+      <category term="内存泄露" scheme="http://jinlong.github.io/tags/%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/"/>
+    
+      <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[实例解析防抖动（Debouncing）和节流阀（Throttling）]]></title>
@@ -2006,222 +2195,6 @@
       <category term="Grunt" scheme="http://jinlong.github.io/categories/Grunt/"/>
     
       <category term="Nodejs" scheme="http://jinlong.github.io/categories/Grunt/Nodejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Javascript 最佳实践]]></title>
-    <link href="http://jinlong.github.io/2013/11/25/javascript-best-practices/"/>
-    <id>http://jinlong.github.io/2013/11/25/javascript-best-practices/</id>
-    <published>2013-11-25T05:12:00.000Z</published>
-    <updated>2015-10-29T02:53:26.000Z</updated>
-    <content type="html"><![CDATA[<p>本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 <a href="http://www.slideshare.net/cheilmann/javascript-best-practices-1041724" target="_blank" rel="external">PPT</a> （需翻墙）</p>
-<blockquote>
-<p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/" target="_blank" rel="external">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/" target="_blank" rel="external">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
-</blockquote>
-<h2 id="Make_it_Understandable（更易理解）">Make it Understandable（更易理解）</h2><p>变量和函数选择容易理解，较短的单词命名。</p>
-<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>## 避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> labels = &#123;</span><br><span class="line">   <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">   <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">   <span class="string">'contact'</span>:<span class="string">'contact'</span> </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   current = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   show();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p><strong>对象字面量：</strong>所有东西都被包含起来，但是通过对象名字可以访问。</p>
-<div style="color:#c01d1d"><strong>问题：</strong>重复的模块名称导致代码庞大恼人。</div>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">demo = &#123;</span><br><span class="line">   current:<span class="literal">null</span>,</span><br><span class="line">   labels:&#123;</span><br><span class="line">      <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">      <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">      <span class="string">'contact'</span>:<span class="string">'contact'</span></span><br><span class="line">   &#125;,</span><br><span class="line">   init:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;,</span><br><span class="line">   show:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      demo.current = <span class="number">1</span>;</span><br><span class="line">   &#125;,</span><br><span class="line">   hide:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      demo.show();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>模块模式：</strong>你需要指定哪些是全局的，哪些不是 —— 转换两者语法。</p>
-<div style="color:#c01d1d"><strong>问题：</strong>重复的模块名称，内部函数的不同语法。</div>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> labels = &#123;</span><br><span class="line">      <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">      <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">      <span class="string">'contact'</span>:<span class="string">'contact'</span></span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      current:<span class="literal">null</span>,</span><br><span class="line">      init:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      &#125;,</span><br><span class="line">      show:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="built_in">module</span>.current = <span class="number">1</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      hide:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="built_in">module</span>.show();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
-<div style="color:#5ead12"><br><strong>Revealing Module Pattern（揭示模块模式）：</strong>暴露的全局变量和局部变量，保持语法一致。<br></div>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line">   <span class="keyword">var</span> labels = &#123;</span><br><span class="line">      <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">      <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">      <span class="string">'contact'</span>:<span class="string">'contact'</span></span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">var</span> init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">var</span> show = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      current = <span class="number">1</span>;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">var</span> hide = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      show();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span>&#123;init:init, show:show, current:current&#125;</span><br><span class="line">&#125;();</span><br><span class="line"><span class="built_in">module</span>.init();</span><br></pre></td></tr></table></figure>
-<h2 id="坚持一种严格的编码风格">坚持一种严格的编码风格</h2><p>浏览器是非常宽容的 JavaScript 解析器。但是，当你转换到另一个环境，或者移交给另一个开发者时，松懈的代码风格对自己很不利。Valid code is secure code（有效的代码是安全的代码）。</p>
-<p><strong>验证你的代码：</strong><a href="http://www.jslint.com/" target="_blank" rel="external">http://www.jslint.com/</a></p>
-<h2 id="需要注释，不要过分注释">需要注释，不要过分注释</h2><blockquote>
-<p>“Good code explains itself （好的代码会自我解释）”是傲慢的神话。</p>
-</blockquote>
-<p>需要的时候加上注释 —— 但是不要长篇大论。</p>
-<p>避免用单行注释 //。/&#42; &#42;/ 更安全，当删除换行符时不会导致出错。</p>
-<p>如果你使用注释调试，这是个不错的小技巧：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">/*</span><br><span class="line">   var init = function()&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   var show = function()&#123;</span><br><span class="line">      current = 1;</span><br><span class="line">   &#125;;</span><br><span class="line">   var hide = function()&#123;</span><br><span class="line">      show();</span><br><span class="line">   &#125;</span><br><span class="line">// */</span></span><br><span class="line">   <span class="keyword">return</span>&#123;init:init, show:show, current:current&#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
-<p>HTML 或 JavaScript 里的注释不应该给最终用户看到。理解 <strong>Development code is not live code （开发代码不是线上代码）</strong>。</p>
-<h2 id="避免与其它技术混用">避免与其它技术混用</h2><p>JavaScript 擅长计算，转换，访问外部资源（Ajax）和定义界面的交互行为（事件处理）。别的事情应该让别的技术完成。</p>
-<p>例如：</p>
-<div style="color:#c01d1d">当所有带“mandatory”class 的区域是空时，用红色边框标注一下。</div>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="built_in">document</span>.getElementById(<span class="string">'mainform'</span>);</span><br><span class="line"><span class="keyword">var</span> inputs = f.getElementsByTagName(<span class="string">'input'</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,j=inputs.length;i&lt;j;i++)&#123;</span><br><span class="line">   <span class="keyword">if</span>(inputs[i].className === <span class="string">'mandatory'</span> &amp;&amp; inputs.value === <span class="string">''</span>)&#123;</span><br><span class="line">      inputs[i].style.borderColor = <span class="string">'#f00'</span>;</span><br><span class="line">      inputs[i].style.borderStyle = <span class="string">'solid'</span>;</span><br><span class="line">      inputs[i].style.borderWidth = <span class="string">'1px'</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div style="color:#c01d1d">… 两个月下来：所有的样式必须遵循新公司的风格指南，不允许有边框，错误应该有个警示图标。怎么办呢？</div><br><br><br><div style="color:#5ead12">我们不必通过改变 JavaScript 代码来改变外观和感觉。</div>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="built_in">document</span>.getElementById(<span class="string">'mainform'</span>);</span><br><span class="line"><span class="keyword">var</span> inputs = f.getElementsByTagName(<span class="string">'input'</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,j=inputs.length;i&lt;j;i++)&#123;</span><br><span class="line">   <span class="keyword">if</span>(inputs[i].className === <span class="string">'mandatory'</span> &amp;&amp; inputs.value === <span class="string">''</span>)&#123;</span><br><span class="line">      inputs[i].className+=<span class="string">' error'</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div><br>使用 CSS 继承可以避免循环许多元素。<br></div>
-
-<h2 id="使用简洁的写法">使用简洁的写法</h2><p><strong>一旦你习惯简洁写法，代码会更清爽，更易读。</strong></p>
-<p>这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lunch = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">lunch[<span class="number">0</span>]=<span class="string">'Dosa'</span>;</span><br><span class="line">lunch[<span class="number">1</span>]=<span class="string">'Roti'</span>;</span><br><span class="line">lunch[<span class="number">2</span>]=<span class="string">'Rice'</span>;</span><br><span class="line">lunch[<span class="number">3</span>]=<span class="string">'what the heck is this?'</span>;</span><br></pre></td></tr></table></figure></p>
-<p>等价于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lunch = [</span><br><span class="line">   <span class="string">'Dosa'</span>,</span><br><span class="line">   <span class="string">'Roti'</span>,</span><br><span class="line">   <span class="string">'Rice'</span>,</span><br><span class="line">   <span class="string">'what the heck is this?'</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
-<p>这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(v)&#123;</span><br><span class="line">   <span class="keyword">var</span> x = v;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="keyword">var</span> x =<span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>等价于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = v || <span class="number">10</span>;</span><br></pre></td></tr></table></figure></p>
-<p>这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> direction;</span><br><span class="line"><span class="keyword">if</span>(x &gt; <span class="number">100</span>)&#123;</span><br><span class="line">   direction = <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   direction = -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>等价于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> direction = (x &gt; <span class="number">100</span>) ? <span class="number">1</span> : -<span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
-<h2 id="模块化">模块化</h2><p><strong>保持代码的模块化和专业化</strong></p>
-<p>我们很容易写一个函数做所有事，可是当扩展功能时，发现好几个函数做同样的事情。</p>
-<p>为了避免此事，确保写较小的，通用辅助函数，完成一个特定的任务，而不是所有的方法。</p>
-<p>再后来，你可以使用 revealing module pattern（揭示模块模式）暴露一些方法，创建一套 API 扩展主要功能。</p>
-<p>好的代码应该易于扩展，不需要重写核心。</p>
-<h2 id="渐进增强">渐进增强</h2><p><strong>避免创建许多 JavaScript 依赖代码</strong></p>
-<p>DOM 操作又慢又昂贵。</p>
-<p>当禁用 JavaScript 时，依赖 JavaScript 的元素要仍然可用。</p>
-<h2 id="允许配置和转化">允许配置和转化</h2><p><strong>代码也许会变，代码结构不应该是松散的。</strong></p>
-<p>包括标签，CSS 类，ID 和默认配置。</p>
-<p>把这些放进一个配置对象，保持公开，我们很容易维护，并且可以自由定制。</p>
-<p>例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">carousel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> config = &#123;</span><br><span class="line">      CSS:&#123;</span><br><span class="line">         classes:&#123;</span><br><span class="line">            current:<span class="string">'current'</span>,</span><br><span class="line">            scrollContainer:<span class="string">'scroll'</span></span><br><span class="line">         &#125;,</span><br><span class="line">         IDs:&#123;</span><br><span class="line">            maincontainer:<span class="string">'carousel'</span></span><br><span class="line">         &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      labels:&#123;</span><br><span class="line">         previous:<span class="string">'back'</span>,</span><br><span class="line">         next:<span class="string">'next'</span>,</span><br><span class="line">         auto:<span class="string">'play'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      settings:&#123;</span><br><span class="line">         amount:<span class="number">5</span>,</span><br><span class="line">         skin:<span class="string">'blue'</span>,</span><br><span class="line">         autoplay:<span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">highlight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">return</span> &#123;config:config,init:init&#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
-<h2 id="避免严重嵌套">避免严重嵌套</h2><p><strong>多层嵌套的代码很不易读。</strong></p>
-<p>循环嵌套循环是个坏主意，需要小心几个迭代器变量（i, j, k, l, m…）。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderProfiles</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> out = <span class="built_in">document</span>.getElementById(<span class="string">'profiles'</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;o.members.length;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> ul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">      <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">      li.appendChild(<span class="built_in">document</span>.createTextNode(o.members[i].name));</span><br><span class="line">      <span class="keyword">var</span> nestedul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;o.members[i].data.length;j++)&#123;</span><br><span class="line">         <span class="keyword">var</span> datali = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">         datali.appendChild(</span><br><span class="line">            <span class="built_in">document</span>.createTextNode(</span><br><span class="line">               o.members[i].data[j].label + <span class="string">' '</span> +</span><br><span class="line">               o.members[i].data[j].value</span><br><span class="line">            )</span><br><span class="line">         );</span><br><span class="line">         nestedul.appendChild(detali);</span><br><span class="line">      &#125;</span><br><span class="line">      li.appendChild(nestedul);</span><br><span class="line">   &#125;</span><br><span class="line">   out.appendChild(ul);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用专门的工具方法避免重度的循环嵌套。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderProfiles</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> out = <span class="built_in">document</span>.getElementById(<span class="string">'profiles'</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;o.members.length;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> ul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">      <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">      li.appendChild(<span class="built_in">document</span>.createTextNode(data.members[i].name));</span><br><span class="line">      li.appendChild(addMemberData(o.members[i]));</span><br><span class="line">   &#125;</span><br><span class="line">   out.appendChild(ul);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addMemberData</span>(<span class="params">member</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> ul = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;member.data.length;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">      li.appendChild(</span><br><span class="line">         <span class="built_in">document</span>.createTextNode(</span><br><span class="line">            member.data[i].label + <span class="string">' '</span> +</span><br><span class="line">            member.data[i].value</span><br><span class="line">         )</span><br><span class="line">      );</span><br><span class="line">   &#125;</span><br><span class="line">   ul.appendChild(li);</span><br><span class="line">   <span class="keyword">return</span> ul;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="优化循环">优化循环</h2><p><strong>JavaScript 循环可能非常慢。</strong></p>
-<p>不要让 JavaScript 每次迭代都读取数组的长度，用变量保存长度的值。</p>
-<p>不好：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> names = [<span class="string">'George'</span>,</span><br><span class="line"><span class="string">'Ringo'</span>,</span><br><span class="line"><span class="string">'Paul'</span>,</span><br><span class="line"><span class="string">'John'</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;names.length;i++)&#123;</span><br><span class="line">   doSomethingWith(names[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>好：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> names = [<span class="string">'George'</span>,</span><br><span class="line"><span class="string">'Ringo'</span>,</span><br><span class="line"><span class="string">'Paul'</span>,</span><br><span class="line"><span class="string">'John'</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,j=names.length;i&lt;j;i++)&#123;</span><br><span class="line">  doSomethingWith(names[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<div>重度计算代码放到循环外边，包括正则表达式，首要的是 DOM 操作。</div>
-
-<p>你可以在循环里创建 DOM 节点，但是避免插入文档对象。</p>
-<h2 id="DOM_访问最小化">DOM 访问最小化</h2><p><strong>如果可以避免，不要访问 DOM。</strong></p>
-<p><strong>原因：</strong>比较慢，有各种各样的浏览器问题</p>
-<p><strong>解决方案：</strong>编写或使用一个辅助方法，批量把数据集转换成 HTML 。</p>
-<p>所有的数据在一个方法中处理，最后把结果一次性加入到 DOM 中去。</p>
-<h2 id="不要屈服于浏览器的奇怪表现">不要屈服于浏览器的奇怪表现</h2><p><strong>依赖浏览器稀奇古怪的行为，不如希望它一切正常。</strong></p>
-<p>避免使用一些奇技淫巧，分析问题的根源。</p>
-<p>很多时候，你会发现你需要额外的功能，是因为你的界面规划不好。</p>
-<h2 id="不要信任任何数据">不要信任任何数据</h2><p><strong>好的代码不会信任收到的任何数据。</strong></p>
-<ul>
-<li>不要相信 HTML 文档<br>任何用户都可以干预它，比如通过 Firebug 。</li>
-<li>不要相信你的函数接收的数据格式永远正确。<br>用 typeof 测试，然后再处理它。</li>
-<li>不要预期 DOM 中的元素是可用的。<br>改变它们之前测试一下，确保它们如你的预期。</li>
-<li>不要妄图使用 JavaScript 保护一些东西。<br>JavaScript 代码很容易被破解 :)</li>
-</ul>
-<h2 id="通过_JavaScript_添加功能，而不是添加内容">通过 JavaScript 添加功能，而不是添加内容</h2><p>如果你发现 JavaScript 里面有过多的 HTML ，你可能做错了什么。</p>
-<p>创建使用 DOM 不是很方便，一般用 <strong>innerHTML</strong> ，这样很难追踪 HTML 的代码质量。</p>
-<p>如果的确有大量的界面，可以通过 Ajax 加载静态的 HTML 文档界面。</p>
-<p>这种方式 HTML 好维护，并且支持定制。</p>
-<h2 id="站在巨人的肩膀上">站在巨人的肩膀上</h2><p><strong>JavaScript 很有趣，不过针对所有浏览器写 JavaScript 不那么有趣… 所以从一个好框架入手。</strong></p>
-<p>JavaScript 框架专门用于堵浏览器的漏洞，让浏览器行为和你的代码更符合预期。</p>
-<p>好的框架帮助你写代码，帮你节省了一些支持主流浏览器的开销。</p>
-<h2 id="开发代码不等于线上代码">开发代码不等于线上代码</h2><p><strong>线上代码为机器所写，开发环境代码为人而写。</strong></p>
-<ul>
-<li>构建流程包含核对，最小化和优化代码。</li>
-<li>不要过早优化。</li>
-<li>如果我们减少了编码时间，可以有更多时间完善向机器码的转换。</li>
-</ul>
-<blockquote>
-<p>参考资料：<br><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/" target="_blank" rel="external">Learning JavaScript Design Patterns</a> </p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 <a href="http://www.slideshare.net/cheilmann/javascript-best-practices-1041724">PPT</a> （需翻墙）</p>
-<blockquote>
-<p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<h2 id="Make_it_Understandable（更易理解）">Make it Understandable（更易理解）</h2><p>变量和函数选择容易理解，较短的单词命名。</p>
-<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>## 避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> labels = &#123;</span><br><span class="line">   <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">   <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">   <span class="string">'contact'</span>:<span class="string">'contact'</span> </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   current = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   show();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]>
-    
-    </summary>
-    
-      <category term="Javascript" scheme="http://jinlong.github.io/tags/Javascript/"/>
-    
-      <category term="Javascript" scheme="http://jinlong.github.io/categories/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[用户体验设计中的巧妙过渡]]></title>
-    <link href="http://jinlong.github.io/2013/11/25/smart-transitions-in-user-experience-design/"/>
-    <id>http://jinlong.github.io/2013/11/25/smart-transitions-in-user-experience-design/</id>
-    <published>2013-11-25T03:55:00.000Z</published>
-    <updated>2015-10-29T02:54:08.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>原文：<a href="http://uxdesign.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/" target="_blank" rel="external">Smart Transitions In User Experience Design</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
-</blockquote>
-<p>一些网站不仅在内容，可用性，设计，功能等方面，让人耳目一新；交互设计细节和动画更是与众不同。我们将分享一些模型的经验，分析一下这些简单的模式为什么效果很好。</p>
-<p>当我们设计数码产品时，我们一般使用 Photoshop 和 Sketch 此类软件。大多数有数年行业经验的人显然明白设计不仅仅是视觉传达。尽管如此，有些人还是继续做静态设计。<a href="http://www.nytimes.com/2003/11/30/magazine/30IPOD.html?pagewanted=all" target="_blank" rel="external">Steve Jobs 如此描述设计</a>：</p>
-<blockquote>
-<p>“It’s not just what it looks like and feels like. Design is how it works.“<br>“设计不仅仅是看起来和感受到的样子。设计是如何工作。”</p>
-</blockquote>
-<p>我们对于产品的体验和印象来源于诸多因素的集合，交互扮演一个根基的角色。我们无法想象用户界面是静态设计，随后再添加交互魔法。相反，我们需要在早期加入交互特性，把它当成天然的组成部分。</p>
-<p>让我们看看一些巧妙的交互，它们是一些微妙的动画，优雅地改善了用户体验。<br><a id="more"></a></p>
-<h2 id="动画滚动">动画滚动</h2><p>超链接总是褒贬不一，当点击一个链接时，可以生硬地跳转，结果是<strong>丢失上下文</strong>。</p>
-<p>对网站而言，特别是长网站，加一个线性滚动动画，可以改善用户体验：</p>
-<p><img src="/images/post/smart-transitions/ScrollingAnimated.gif"></p>
-<p>对比下面看看：</p>
-<p><img src="/images/post/smart-transitions/ScrollingNoAnimation.gif"></p>
-<p>对比下默认行为和动画行为，跳过内容不再是无意识的行为；它是一个决定。实际上，《<a href="http://hopelies.com/" target="_blank" rel="external">Hope Lies at 24 Frames Per Second</a>》此文中的菜单按钮没有任何动画，它花了我1分多钟才明白确切发生了什么。</p>
-<p><strong>要点：</strong>界面的突然变化用户很难适应，总是告知他们发生了什么。</p>
-<h2 id="有状态的切换">有状态的切换</h2><p>让我们看看另一个例子：切换菜单。用户点击“+”号增加内容或展开元素。通过旋转 45 度，加号变成了叉号，叉号大家广泛理解为“关闭”：</p>
-<p><img src="/images/post/smart-transitions/Stateful-toggle.gif"></p>
-<p>简单的变换完全改变了图标的意义。这个小细节比让用户猜测接下来发生什么，以及理解图标是什么意思容易多了。这个切换对用户非常友好。此外，加号旋转总是跟内容保持一个方向，加强了信息的流动。</p>
-<p><strong>要点：</strong>让网站元素的每个状态都可理解。</p>
-<h2 id="渐进呈现表单和评论">渐进呈现表单和评论</h2><p>许多博客和新闻网站的评论表单不是很友好，当你准备发表评论时，你只想输入评论而不是干别的，典型的问题是，它会询问你各种其它的事情，好烦人呐。</p>
-<p>为了激发用户的评论热情，我们可以<strong>仅显示最重要的元素：评论框</strong>。当用户点击输入区域时，展开相应的表单。真实世界渐进展现的例子，可以看纽约时报的 beta 网站：</p>
-<p><img src="/images/post/smart-transitions/NY-Times.gif"></p>
-<p>你可以更进一步，当评论框获得焦点时展开表单。这么做有个问题，交互设计的基本原则提到：<strong>an action should always happen close to where the interaction occurs （一个行为总是发生在离交互点最近的地方）</strong>（关注焦点附近）。我们可以再进一步，给评论框添加动画引导用户：</p>
-<p><img src="/images/post/smart-transitions/ExpandingComments.gif"></p>
-<p>你还可以把评论框固定在顶部，在下面展开相应内容，显示附加字段。</p>
-<p>如你所见，这么做减少了混乱，令评论表单更吸引人。</p>
-<p>更好的做法是，当用户到达页面底部时自动加载评论。我们应该避免强迫用户去点击，除非有更好的理由。</p>
-<p><strong>要点：</strong>渐进展现为了减少 UI 组件的呈现，用户需要它们时再显示出来。</p>
-<h2 id="Pull_To_Refresh_（拉动刷新）">Pull To Refresh （拉动刷新）</h2><p>最令人激动的交互之一是伴随着 iPhone 出现， Loren Brichter 倡导的 “拉动刷新”。用户可以更新可卷动的时序型内容。你可以在 Twitter 的应用中看到此效果。</p>
-<p><img src="/images/post/smart-transitions/Twitter.gif"></p>
-<p>为什么效果这么好？在拉动刷新出现之前，用户必须点击浏览器的刷新按钮加载更多内容。把用户发现更多内容的愿望和刷新行为联系起来，明确的点击行为变得好古板。</p>
-<p><strong>要点：</strong>连接意图和行为，体验变得更加无缝。</p>
-<h2 id="Sticky_Labels_（粘性标签）">Sticky Labels （粘性标签）</h2><p>粘性标签是另一个微妙而实用的组合，它把用户界面与有意义的过渡结合起来。看看 <a href="http://edenspiekermann.com/projects" target="_blank" rel="external">Edenspiekermann’s use of this technique</a> 的运用。</p>
-<p><img src="/images/post/smart-transitions/Sticky-Label.gif"></p>
-<p>项目标签一直固定在内容的左侧，直到下一个项目出现。这个效果类似 iOS 地址本，它为较长区域提供了上下文。过渡效果不仅增加了方向感，而且提供了基于上下文的描述。</p>
-<p><strong>要点：</strong>长区域中添加了有价值信息的摘要或者标题可以使用粘性标签。</p>
-<h2 id="Affordance_Transition_（自解释的过渡效果）">Affordance Transition （自解释的过渡效果）</h2><p>自解释的概念源于认知心理学，指一个对象的特征，它用于引导用户。</p>
-<p>在用户界面设计的上下文，EU 网站的<a href="http://ec.europa.eu/regional_policy/archive/country/commu/docevent/26112008/5_doulgerof_glossary.pdf" target="_blank" rel="external">可用性词汇</a>（PDF）中如此定义自解释性：</p>
-<blockquote>
-<p>“An affordance is a desirable property of a user interface — software which naturally leads people to take the correct steps to accomplish their goals.”<br>“自解释性是用户界面令人满意的特性 —— 软件很自然地引导用户，通过正确的步骤达到预期的目标。”</p>
-</blockquote>
-<p>Ridges（棱线）常常用于提高自解释性。按钮周围的棱线暗示按钮是可操作的。这种用户体验技术被 iOS 上的相机应用广泛推广。</p>
-<p><img src="/images/post/smart-transitions/iOS_Lockscreen-500-final.jpg"></p>
-<p>iOS 6 的锁屏旁边的相机图标，暗示可以拖动。Apple 在 iOS 7里移除了它，显然是因为用户习惯让它看起来更像一个独立的图标。后来是怎么做的：当你拖动按钮，锁屏弹起，相机出现在下面。这是一项将用户指向功能的很好的技术。</p>
-<p><strong>要点：</strong>在界面上，给予元素高度自解释性，它会把用户指向功能。</p>
-<h2 id="Context-Based_Hiding（基于上下文隐藏）">Context-Based Hiding（基于上下文隐藏）</h2><p>iOS 上的 Google Chrome 启动后有个基于上下文隐藏功能，见下图：</p>
-<p><img src="/images/post/smart-transitions/CBH.gif"></p>
-<p>基本理念是当用户向下滚动页面，浏览器导航面板自动隐藏。当用户再次向上滚动页面，控制面板出现。这种方法不仅改善了上下文体验（专注于内容本身），而且增加了屏幕可用空间。屏幕空间在移动设备尤为重要。</p>
-<p>首先假设<strong>用户将一直浏览关注的内容</strong>。当他们停止浏览，上下文可能改变；因此，导航面板需要重新出现。这一技术节省屏幕空间的同时，检查某种假设是否超出了你的测试用例。</p>
-<p>iOS 处理的更好，当到达页面的底部时，控制面板再次出现。这是一个动态整合用户需求的绝佳的例子。</p>
-<p><strong>要点：</strong>使用基于上下文的隐藏功能提高用户关注度，节省屏幕空间。</p>
-<h2 id="Focus_Transition（焦点过渡）">Focus Transition（焦点过渡）</h2><p>当通过键盘导航时，用户按下 Tab 键，常常搞不清焦点移动到哪里了。通过动画指引他们到达页面指定位置。过渡是微妙的，但在指引用户方面影响巨大。</p>
-<p><strong>要点：</strong>为用户指明方向，不管他们如何导航。</p>
-<h2 id="总之">总之</h2><p>这几个例子仅仅是九牛一毛罢了，本文要点不是秀一些最新最酷的交互技术，而是强调如何通过轻微的交互细节大大提高用户体验。</p>
-<p>如果我们想设计出更好的数字产品，我们需要挑战当前的信念，看看何种交互模式更能方便用户的使用。我没说要重复造轮子，但是不要停止探索。因此，走出你的安乐窝，保持探索，勇于尝试。</p>
-<p>如果你喜欢本文，可以在 Twitter 上<a href="http://www.twitter.com/webchaeschtli" target="_blank" rel="external">关注我</a> ，或者到瑞士请我一块瑞士巧克力。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>原文：<a href="http://uxdesign.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/">Smart Transitions In User Experience Design</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<p>一些网站不仅在内容，可用性，设计，功能等方面，让人耳目一新；交互设计细节和动画更是与众不同。我们将分享一些模型的经验，分析一下这些简单的模式为什么效果很好。</p>
-<p>当我们设计数码产品时，我们一般使用 Photoshop 和 Sketch 此类软件。大多数有数年行业经验的人显然明白设计不仅仅是视觉传达。尽管如此，有些人还是继续做静态设计。<a href="http://www.nytimes.com/2003/11/30/magazine/30IPOD.html?pagewanted=all">Steve Jobs 如此描述设计</a>：</p>
-<blockquote>
-<p>“It’s not just what it looks like and feels like. Design is how it works.“<br>“设计不仅仅是看起来和感受到的样子。设计是如何工作。”</p>
-</blockquote>
-<p>我们对于产品的体验和印象来源于诸多因素的集合，交互扮演一个根基的角色。我们无法想象用户界面是静态设计，随后再添加交互魔法。相反，我们需要在早期加入交互特性，把它当成天然的组成部分。</p>
-<p>让我们看看一些巧妙的交互，它们是一些微妙的动画，优雅地改善了用户体验。<br>]]>
-    
-    </summary>
-    
-      <category term="交互设计" scheme="http://jinlong.github.io/tags/%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1/"/>
-    
-      <category term="用户体验" scheme="http://jinlong.github.io/tags/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/"/>
-    
-      <category term="用户体验" scheme="http://jinlong.github.io/categories/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/"/>
-    
-      <category term="交互设计" scheme="http://jinlong.github.io/categories/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1/"/>
     
   </entry>
   

@@ -219,6 +219,276 @@
             
             
               
+                <a class="post-title-link" href="/2013/07/23/porting-chrome-extension-to-opera/" itemprop="url">
+                  移植 Chrome 扩展至 Opera
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-07-23T17:23:00+08:00" content="2013-07-23">
+              2013-07-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Opera-Extensions/" itemprop="url" rel="index">
+                    <span itemprop="name">Opera Extensions</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Opera-Extensions/Chrome-Extensions/" itemprop="url" rel="index">
+                    <span itemprop="name">Chrome Extensions</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Opera-Extensions/Chrome-Extensions/Firebug/" itemprop="url" rel="index">
+                    <span itemprop="name">Firebug</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/07/23/porting-chrome-extension-to-opera/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/23/porting-chrome-extension-to-opera/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><strong>准备工作：</strong></p>
+<p>下载：<a href="https://getfirebug.com/firebuglite">firebuglite 源码</a>   </p>
+<p>我下载的<a href="https://getfirebug.com/releases/lite/latest/firebug-lite.tar.tgz">稳定版</a></p>
+<p>解压源码，找到 <code>firebug-lite/build/chrome-extension</code> 目录，这就是 Chrome 的 firebug-lite 扩展啦。按照常理呢，Chrome 和 Opera 15+ 内核一致，扩展应该直接通用，结果一试，bug 百出啊，跑不起来……</p>
+<p>我感觉原因可能是：</p>
+<ol>
+<li><a href="http://dev.opera.com/extension-docs/">Opera extension API</a> 暂时没有 <a href="https://developer.chrome.com/extensions/api_index.html">Chrome extension API</a> 支持的多</li>
+<li>firebug-lite 的 Chrome 扩展开发的比较早，有些 API 已更新</li>
+</ol>
+<p>下面记录移植过程的一些要点：</p>
+<p>地址栏输入 <code>opera:opera://extensions</code> 或者 “<strong>Ctrl + Shift + E</strong>`”打开扩展页，右上角点击“<strong>开发者模式</strong>”；</p>
+<p>点击“<strong>载入解压后的扩展…</strong>”，选择刚刚下载的 Chrome 扩展（firebug-lite/build/chrome-extension ）；</p>
+<p>哈，第一个报错来了：</p>
+<p><img src="/images/post/firebuglite/1.png" /></p>
+<p>意思是说“<code>manifest_version</code>”值必须是 2 ，不能有引号，解释参见<a href="http://dev.opera.com/extension-docs/manifest.html#manifest_version">这里</a> 。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/07/23/porting-chrome-extension-to-opera/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2013/07/08/centering-percentage-widthheight-elements/" itemprop="url">
+                  居中百分比宽高的元素
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-07-08T13:47:00+08:00" content="2013-07-08">
+              2013-07-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/居中/" itemprop="url" rel="index">
+                    <span itemprop="name">居中</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/居中/translate/" itemprop="url" rel="index">
+                    <span itemprop="name">translate</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/07/08/centering-percentage-widthheight-elements/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/08/centering-percentage-widthheight-elements/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>原文：<a href="http://css-tricks.com/centering-percentage-widthheight-elements/" target="_blank" rel="external">Centering Percentage Width/Height Elements</a><br>译者：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+<p>如果知道该元素确切的宽高，居中它比较容易，可以<a href="http://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/" target="_blank" rel="external">参考此文</a> ，<code>top</code> 和 <code>left</code> 设成 50%，负 <code>margin</code> 分别设置该元素宽，高的一半。如果明确知道该元素的宽高，用此法居中很容易，如果它的宽高是百分比呢？</p>
+</blockquote>
+<p>你可能认为负的百分比 margin 可以搞定，它适用于水平的 margin，但是 margin 基于宽度（垂直 margin 也是）（译者注：margin 是百分比的话，跟此元素的包含块的宽度有关，<a href="http://www.w3.org/TR/CSS2/box.html#margin-properties" target="_blank" rel="external">见规范</a>），因此当你用负的 top margin 时，失败了。</p>
+<p>有个<a href="http://css-tricks.com/centering-in-the-unknown/" target="_blank" rel="external">小技巧</a> ，用一个“ghost”伪元素（看不见的伪元素）和 <code>inline-block</code> / <code>vertical-align</code> 可以搞定居中，非常巧妙。但是这个方法要求待居中的元素是 <code>inline-block</code>，不是一个真正通用的方案。可能你想居中一个模态窗口，受小屏幕 / 响应式设计所限，你很可能会把对话框设计成百分比宽度（或者其它未知情况，比如仅有 <code>max-width</code> 最大宽度。）</p>
+<p>有一种方案！Mary Lou 在 Codrops 用到的，她的文章 / 示例：<a href="http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/" target="_blank" rel="external">漂亮的模态窗口效果</a> 。</p>
+<p>不能用负的 margin ，可以用负的 <code>translate()</code> 代替。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.center</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span><br><span class="line">  不是 =(</span><br><span class="line">  margin-left: -25%;</span><br><span class="line">  margin-top: -25%;</span><br><span class="line">  */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* </span><br><span class="line">  而是!</span><br><span class="line">  */</span></span><br><span class="line">  <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span><br><span class="line">  甚至不要定义 </span><br><span class="line">  比如：Height 可以缺省!</span><br><span class="line">  */</span></span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">40%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>加上所有需要的前缀。</p>
+<p>最终效果实例：</p>
+<p><pre class="codepen" data-height="300" data-type="result" data-href="BvdgL" data-user="chriscoyier" data-safe="false"><code></code><a href="http://codepen.io/chriscoyier/pen/BvdgL" target="_blank" rel="external">Check out this Pen!</a></pre></p>
+<script async src="http://codepen.io/assets/embed/ei.js"></script>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2013/07/06/using-javascripts-tostring-method/" itemprop="url">
                   使用 JavaScript 的 toString 方法
                 </a>
@@ -1154,286 +1424,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/04/21/blink/" itemprop="url">
-                  Blink
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-04-21T20:48:00+08:00" content="2013-04-21">
-              2013-04-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Blink/" itemprop="url" rel="index">
-                    <span itemprop="name">Blink</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Blink/WebKit/" itemprop="url" rel="index">
-                    <span itemprop="name">WebKit</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Blink/WebKit/翻译/" itemprop="url" rel="index">
-                    <span itemprop="name">翻译</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/04/21/blink/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/04/21/blink/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原作者：<a href="http://www.quirksmode.org/about/">Peter-Paul Koch(PPK)</a><br>原文链接：<a href="http://www.quirksmode.org/blog/archives/2013/04/blink.html">Blink</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<p>Google 为 Chrome 和 Opera  <a href="http://blog.chromium.org/2013/04/blink-rendering-engine-for-chromium.html">创建了</a> 新的渲染引擎 Blink。其中有没有天大的秘密，影响又是怎样的呢？</p>
-<p>这儿有一些值得关注的 Blink 资源，我把它作为综述：</p>
-<ul>
-<li><a href="http://www.chromium.org/blink">Blink 主页</a> 和 <a href="http://www.chromium.org/blink/developer-faq">开发者常见问题</a> 。 </li>
-<li><a href="http://www.chromestatus.com/features">Chromium 特性仪表盘</a>，在这里你可以看到那些正要添加的新特性。可用的接口升级；当前还不是很易读。 </li>
-<li><a href="http://infrequently.org/2013/04/probably-wrong/">Alex Russell</a> 关于 Blink 的文章 。 </li>
-<li><a href="https://plus.google.com/116237864387312784020/posts/d62jMDKXcLb">Jake Archibald</a> 关于 Blink 的文章 。 </li>
-<li><a href="http://www.brucelawson.co.uk/2013/hello-blink/">Bruce Lawson</a> 关于 Opera 采用 Blink 的文章。</li>
-</ul>
-<p>除了这些之外，<a href="http://peter.sh/">Peter Beverloo</a> 非常热心地通过电子邮件发了我一些信息。</p>
-<h2 id="Blink_是什么？">Blink 是什么？</h2><p>Blink 是一个新的渲染引擎，这意味着它对 CSS 和 JavaScript 的解析将与 WebKit （Gecko 或者 Trident） 有所不同。它将驱动所有使用 Chromium 的浏览器（Google 的开源浏览器）。</p>
-<p>Blink 已成为 WebKit 的分支，这意味着当前它跟 WebKit 几乎一样。不过，WebKit 本身不是一个单一的实体；正如我<a href="http://www.quirksmode.org/compatibility.html">原先的研究成果</a> ，一款基于 WebKit 的浏览器对 CSS 和 JavaScript 的支持并不完全一致。如今，Blink 作为一种 WebKit 不足为奇。</p>
-<p>将来这些会改变，从现在开始，WebKit 和 Blink 将带着不同的目标和不同的支持特性分道扬镳。当前 Blink 和 WebKit 的代码共享存在可行性，但是，久而久之，两者差异越来越大时，共享变得不那么容易。</p>
-<p>因此，Blink 已成为一个 WebKit  版本，久而久之，它会像其它分支一样，离 WebKit 越来越远，越来越远……<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/04/21/blink/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/04/20/advanced-cross-browser-flexbox/" itemprop="url">
-                  跨浏览器弹性布局进阶教程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-04-20T16:22:00+08:00" content="2013-04-20">
-              2013-04-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/flexbox/" itemprop="url" rel="index">
-                    <span itemprop="name">flexbox</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/flexbox/弹性布局/" itemprop="url" rel="index">
-                    <span itemprop="name">弹性布局</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/flexbox/弹性布局/CSS3/" itemprop="url" rel="index">
-                    <span itemprop="name">CSS3</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/flexbox/弹性布局/CSS3/翻译/" itemprop="url" rel="index">
-                    <span itemprop="name">翻译</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/04/20/advanced-cross-browser-flexbox/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/04/20/advanced-cross-browser-flexbox/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>原文作者：<a href="http://dev.opera.com/author/chrismills" target="_blank" rel="external">Chris Mills</a><br>原文链接：<a href="http://dev.opera.com/articles/view/advanced-cross-browser-flexbox/" target="_blank" rel="external">Advanced cross-browser flexbox</a><br>翻译：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
-</blockquote>
-<h2 id="引言">引言</h2><p><a href="http://www.w3.org/TR/css3-flexbox/" target="_blank" rel="external">CSS3 弹性布局模块</a> —— 短命名叫 Flexbox —— 为我们的 web 开发带来了许多能量和令人兴奋的畅想空间，我们可以快速轻松地搭建复杂的网站布局，摒弃一些我们惯常使用的不合理的 hacks 和 补丁。我的文章 《<a href="http://dev.oupeng.com/articles/flexbox-basics" target="_blank" rel="external">伸缩布局 — 打开布局天堂之门？</a>》讲述了一些 Flexbox 的基础，本文将是进阶教程，我会带大家看一些高级点的例子，使用 Modernizr 为那些参差不齐的 flexbox 支持情况提供不同的样式，以便提供当前可用的最优的跨浏览器方案。</p>
-<h2 id="看下面例子">看下面例子</h2><p>我为文章做的例子如图1：</p>
-<p><img src="/images/post/figure1.jpg"></p>
-<p><strong><em>图1：最终布局例子的截图</em></strong></p>
-<p>实例包含多层 flexbox 容器，比较急切的话可以先<a href="http://dev.opera.com/static/articles/2013/flexbox-case-study/flexbox-modernizr.html" target="_blank" rel="external">看看最终效果</a>，然后继续探索代码细节。  </p>
-<p>您对此篇文章感兴趣的话，欢迎到我们的<a href="http://dev.oupeng.com/articles/advanced-cross-browser-flexbox" target="_blank" rel="external">欧朋技术博客</a>看全文，这里没有复制全文，见谅见谅~</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1479,21 +1469,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

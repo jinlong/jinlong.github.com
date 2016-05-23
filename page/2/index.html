@@ -219,6 +219,225 @@
             
             
               
+                <a class="post-title-link" href="/2015/09/30/what-forces-layout-reflow/" itemprop="url">
+                  是什么导致重排（layout / reflow）？
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-09-30T12:23:38+08:00" content="2015-09-30">
+              2015-09-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/30/what-forces-layout-reflow/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/30/what-forces-layout-reflow/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a">What forces layout / reflow</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+<p>注：本文只摘取了自己认为重要的知识点，并没有逐字逐句翻译</p>
+</blockquote>
+<p>当在 JavaScript 中调用（requested/called）以下所有属性或方法时，浏览器将会同步地计算样式和布局。重排（也有叫 reflow 或 <a href="http://www.kellegous.com/j/2013/01/26/layout-performance/">layout thrashing</a> 的），通常是性能瓶颈。</p>
+<h1 id="元素">元素</h1><h2 id="盒子计算">盒子计算</h2><ul>
+<li>elem.offsetLeft, elem.offsetTop, elem.offsetWidth, elem.offsetHeight, elem.offsetParent</li>
+<li>elem.clientLeft, elem.clientTop, elem.clientWidth, elem.clientHeight</li>
+<li>elem.getClientRects(), elem.getBoundingClientRect()</li>
+</ul>
+<h2 id="滚动相关">滚动相关</h2><ul>
+<li>elem.scrollBy(), elem.scrollTo()</li>
+<li>elem.scrollIntoView(), elem.scrollIntoViewIfNeeded()</li>
+<li>elem.scrollWidth, elem.scrollHeight</li>
+<li>elem.scrollLeft, elem.scrollTop，设置它们的值，同样会影响</li>
+</ul>
+<h2 id="获得焦点">获得焦点</h2><ul>
+<li>elem.focus() 可以引起两次重排（<a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/dom/Element.cpp&amp;q=updateLayoutIgnorePendingStylesheets%20-f:out%20-f:test&amp;sq=package:chromium&amp;l=2369&amp;ct=rc&amp;cd=4&amp;dr=C">源码在此</a>）</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/09/30/what-forces-layout-reflow/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2015/08/31/secrets-of-awesome-javascript-api-design/" itemprop="url">
+                  JavaScript API 设计原则
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-08-31T21:45:36+08:00" content="2015-08-31">
+              2015-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/31/secrets-of-awesome-javascript-api-design/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/31/secrets-of-awesome-javascript-api-design/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>前段时间组织优化我们的原生模块 API（iOS、Android 模块封装成 JavaScript 接口），于是学习了几篇 JavaScript API 设计的文章，尽管是旧文，但受益匪浅，这里记录一下。</p>
+<hr>
+<p>好的 API 设计：在自描述的同时，达到抽象的目标。</p>
+<p>设计良好的 API ，开发者可以快速上手，没必要经常抱着手册和文档，也没必要频繁光顾技术支持社区。</p>
+<h1 id="流畅的接口">流畅的接口</h1><p><strong><a href="https://en.wikipedia.org/wiki/Method_chaining">方法链</a>：流畅易读，更易理解</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//常见的 API 调用方式：改变一些颜色，添加事件监听</span></span><br><span class="line"><span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"foobar"</span>);</span><br><span class="line">elem.style.background = <span class="string">"red"</span>;</span><br><span class="line">elem.style.color = <span class="string">"green"</span>;</span><br><span class="line">elem.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">"hello world!"</span>);</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//（设想的）方法链 API</span></span><br><span class="line">DOMHelper.getElementById(<span class="string">'foobar'</span>)</span><br><span class="line">  .setStyle(<span class="string">"background"</span>, <span class="string">"red"</span>)</span><br><span class="line">  .setStyle(<span class="string">"color"</span>, <span class="string">"green"</span>)</span><br><span class="line">  .addEvent(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"hello world"</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/31/secrets-of-awesome-javascript-api-design/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2015/05/24/css-retina-hairlines/" itemprop="url">
                   Retina屏的移动设备如何实现真正1px的线？
                 </a>
@@ -1096,230 +1315,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/11/25/javascript-best-practices/" itemprop="url">
-                  Javascript 最佳实践
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-11-25T13:12:00+08:00" content="2013-11-25">
-              2013-11-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">Javascript</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/11/25/javascript-best-practices/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/11/25/javascript-best-practices/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>本篇指南分两部分，翻译自 Mozilla 的 Web 布道师 Christian Heilmann 的 <a href="http://www.slideshare.net/cheilmann/javascript-best-practices-1041724">PPT</a> （需翻墙）</p>
-<blockquote>
-<p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<h2 id="Make_it_Understandable（更易理解）">Make it Understandable（更易理解）</h2><p>变量和函数选择容易理解，较短的单词命名。</p>
-<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>## 避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> labels = &#123;</span><br><span class="line">   <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">   <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">   <span class="string">'contact'</span>:<span class="string">'contact'</span> </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   current = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   show();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/11/25/javascript-best-practices/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/11/25/smart-transitions-in-user-experience-design/" itemprop="url">
-                  用户体验设计中的巧妙过渡
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-11-25T11:55:00+08:00" content="2013-11-25">
-              2013-11-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/用户体验/" itemprop="url" rel="index">
-                    <span itemprop="name">用户体验</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/用户体验/交互设计/" itemprop="url" rel="index">
-                    <span itemprop="name">交互设计</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/11/25/smart-transitions-in-user-experience-design/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/11/25/smart-transitions-in-user-experience-design/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文：<a href="http://uxdesign.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/">Smart Transitions In User Experience Design</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<p>一些网站不仅在内容，可用性，设计，功能等方面，让人耳目一新；交互设计细节和动画更是与众不同。我们将分享一些模型的经验，分析一下这些简单的模式为什么效果很好。</p>
-<p>当我们设计数码产品时，我们一般使用 Photoshop 和 Sketch 此类软件。大多数有数年行业经验的人显然明白设计不仅仅是视觉传达。尽管如此，有些人还是继续做静态设计。<a href="http://www.nytimes.com/2003/11/30/magazine/30IPOD.html?pagewanted=all">Steve Jobs 如此描述设计</a>：</p>
-<blockquote>
-<p>“It’s not just what it looks like and feels like. Design is how it works.“<br>“设计不仅仅是看起来和感受到的样子。设计是如何工作。”</p>
-</blockquote>
-<p>我们对于产品的体验和印象来源于诸多因素的集合，交互扮演一个根基的角色。我们无法想象用户界面是静态设计，随后再添加交互魔法。相反，我们需要在早期加入交互特性，把它当成天然的组成部分。</p>
-<p>让我们看看一些巧妙的交互，它们是一些微妙的动画，优雅地改善了用户体验。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/11/25/smart-transitions-in-user-experience-design/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1365,21 +1360,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
