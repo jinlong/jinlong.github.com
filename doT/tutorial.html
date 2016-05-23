@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>doT.js - Tutorial for the fastest + concise javascript template engine</title>
+	<style>
+body{background-color:#DDD;margin:0;padding:0;width:100%;height:100%;font-family:sans-serif;font-weight:normal;font-size:28px;color:#444}a{text-decoration:none;border:none;outline:none;color:#36C}ul{line-height:1.4em}li{margin-bottom:10px}li span{color:#888;font-size:.7em;font-weight:200}#presentation{position:absolute;min-height:98%;width:98%;top:1%;left:1%;margin:0;padding:0;border-radius:12px;-moz-border-radius:12px;background-color:white}#content{margin:0;min-height:90%;overflow:hidden}.footer{position:absolute;margin:0;padding:0;bottom:0;right:0;overflow:auto}#page{position:absolute;margin:0;padding:0;right:10px;bottom:8px;color:#aaa;text-align:left;font-size:.6em}#currentpage{color:#666}.company{position:absolute;margin:0;padding:0;right:50%;bottom:8px;color:#333;text-align:right}.section{display:none;padding:20px}.section.active{display:block}.section h1{border-radius:12px 12px 0 0;-moz-border-radius:12px 12px 0 0;background-color:#f4f4f4;border-bottom:3px solid #fa8072;margin:-20px -20px 34px -20px;padding:30px 20px 10px;font-size:1.2em;color:#333}.section h2,.section h3,.section h4,.section p{font-weight:normal;margin-top:10px;margin-bottom:10px;font-size:1em}#intro{text-align:center}#intro h1{padding:40px;background:transparent;color:#708090;font-size:2em;margin:50px 0 20px;border:none;text-shadow:3px 3px 3px rgba(0,0,0,0.2)}#intro h2{font-size:1em;color:#555;font-weight:200;margin-bottom:30px}#intro h3{color:#333;font-size:1em;font-weight:bold;margin-top:60px;margin-bottom:30px}#intro a{font-size:1em;display:block;color:#777;font-weight:200;text-decoration:none}#intro .bebedo{margin-top:30px;color:red;font-weight:normal}code{width:100%;font-size:1em;overflow:hidden;color:#000}code pre{margin:0}.button{display:none;float:right;margin:6px;min-width:10px;text-decoration:none;padding:4px 8px 4px 8px;-moz-border-radius:6px;border-radius:6px;-moz-user-select:none;-webkit-user-select:none;cursor:pointer;background-color:#e0e3ea;background:-webkit-gradient(linear,0% 0,0% 100%,from(#f9f3ef),to(#e0e3ea),color-stop(.4,#e0e3ea));background:-moz-linear-gradient(0% 0 270deg,#f9f3ef,#e0e3ea,#e0e3ea 100%);color:#000;text-shadow:rgba(255,255,255,1.0) 1px 2px 1px}.button:hover{background-color:#2558f9;background:-webkit-gradient(linear,0% 0,0% 100%,from(#2558f9),to(#0e3269),color-stop(.3,#15429b),color-stop(.3,#073792));background:-moz-linear-gradient(0% 0 270deg,#2558f9,#15429b,#0e3269 100%);color:#fff;text-shadow:rgba(0,0,128,1.0) -1px -1px 1px}.property{display:inline-block;width:75px;font-weight:bold}.description{margin-left:75px;margin-top:-1.3em}.break{clear:both;height:40px}ul.squares,ul.notes{list-style:none;padding:0;margin:0}ul.squares li{float:left;padding:20px;margin:20px;background:#f4f4f4;box-shadow:0 2px 2px rgba(0,0,0,0.4)}ul.squares.crooked li{margin:30px}ul.squares.crooked li:nth-child(even){-webkit-transform:rotate(16deg);-moz-transform:rotate(16deg)}ul.squares.crooked li:nth-child(odd){-webkit-transform:rotate(-16deg);-moz-transform:rotate(-16deg)}ul.squares.crooked li:nth-child(3n){-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg)}ul.notes li,.note{padding:20px;margin:20px;overflow:hidden;background:#f4f4f4;box-shadow:0 2px 2px rgba(0,0,0,0.4)}.note{background:lightyellow;margin:30px 20px}.center{text-align:center;margin-top:20%;font-size:2em;display:block}.hcenter{text-align:center;display:block}#samples{font-size:.6em;color:#000}@media all and (max-width:400px){.section{display:block;border-radius:12px;-moz-border-radius:12px;background-color:white;margin:0 0 10px 0;padding:6px}.section h1{margin:-6px -6px 0 -6px}#content{height:auto}ul.squares li{margin:10px}#presentation{border:none;background-color:transparent;height:auto}body{font-size:.8em}.footer{display:none}.company{margin-top:10px;right:10px}#page{display:none}#samples{font-size:1em}}#landscape{text-align:center}.smaller{font-size:.8em}h4{margin:4px 0;font-weight:400;font-size:20px}textarea{border:1px solid lightgrey;outline:none;font-size:1em;width:96%;height:210px;padding:10px;text-align:left}.templategroup,.datagroup,.functiongroup,.resultgroup{width:48%;margin:4px 2% 4px 0;float:left;min-width:300px}.function,.result{background:#DDD;height:212px;padding:10px;font-size:1em;overflow-y:auto}.definegroup{display:none}.templategroup.withdefs .definegroup{display:block}.templategroup.withdefs .template{height:90px}textarea.defines{height:60px}.stripgroup{padding-top:8px;width:220px;float:left}code{font-weight:bold}#sampletabs{line-height:1em;list-style:none;margin:0;padding:0}#sampletabs li{float:left;margin:4px;padding:4px 8px;background:#DDD;cursor:pointer}#sampletabs li.active{background:#fa8072;color:#FFF}.data,.result{height:160px}@media all and (max-width:740px){.templategroup,.datagroup,.functiongroup,.resultgroup{width:100%;margin-right:0}pre{overflow-x:scroll}}
+</style>
+</head>
+<body>
+	<div id="presentation">
+
+		<div id="content">
+
+			<div class="section active" id="intro">
+				<h1>doT.js</h1>
+				<h2>The fastest + concise javascript template engine<br/>
+					for node.js and browsers</h2>
+				<a href="https://github.com/olado/doT">https://github.com/olado/doT</a>
+				<h3>by Laura Doktorova, MIT Licence</h3>
+				<a href="http://twitter.com/olado">@olado</a>
+				<a class="bebedo" href="http://bebedo.com">http://bebedo.com</a>
+			</div>
+
+			<div class="section" id="why">
+				<h1>Templates are everywhere!</h1>
+				<ul class='squares'>
+				<li>Servers</li>
+				<li>Clients</li>
+				<li>HTML</li><li>SVG</li><li>Emails</li><li>CSS</li>
+				<li>JavaScript!</li>
+				<li>e.t.c.</li>
+				<li>e.t.c.</li>
+				<li>e.t.c.</li>
+				</ul>
+				<div class="break"></div>
+			</div>
+
+   			<div class="section" id="landscape">
+				<h1>A lot of JavaScript templates now</h1>
+				<ul class="squares crooked">
+				<li>doT.js</li>
+				<li>mustache.js</li>
+				<li>jQote2.js</li>
+				<li>underscore.js</li>
+				<li>hogan.js</li>
+				<li>jade.js</li>
+				<li>dust.js</li>
+				<li>less.js</li>
+				<li>jsRender.js</li>
+				<li>etc.</li>
+				<li>etc.</li>
+				<li>etc.</li>
+				</ul>
+				<div class="break"></div>
+				<a href="http://garann.github.com/template-chooser/">Visit template chooser by Garann to help you choose</a>
+			</div>
+
+			<div class="section" id="features">
+				<h1>... choose doT.js! :)</h1>
+				<ul>
+					<li>no dependencies
+					</li><li>120 loc, 1.3K minified and gzipped
+					</li><li>extremely fast
+					</li><li>use it as logic-less or with logic, it is up to you
+					</li><li>custom delimiters
+					</li><li>composited
+					</li><li>control whitespace - strip or preserve
+					</li><li>works on any text <span>just make sure your text format does not conflict with default delimiters. If it does, change delimiters</span>
+					</li>
+				</ul>
+
+			</div>
+
+			<div class="section" id="how">
+				<h1>How doT.js works</h1>
+				<ul class="notes">
+					<li>Compiles template into a JavaScript function</li>
+					<li>Produced functions have no dependencies on doT - you can precompile your templates and ship JavaScript without doT.</li>
+				</ul>
+			</div>
+
+			<div class="section" id="whyspeedmatters">
+				<h1>Why use a fast engine?</h1>
+				<ul class="notes">
+					<li>Shopping bill paradox - small numbers add up</li>
+					<li>Do not want to slow down Node.js event loop</li>
+					<li>Why not?</li>
+				</ul>
+			</div>
+
+			<div class="section" id="tools">
+				<h1>How to measure performance?</h1>
+				<ul class="notes hcenter">
+					<li>JSPerf is your friend!</li>
+					<li>(JSLitmus too)</li>
+				</ul>
+			</div>
+
+			<div class="section" id="benchmarking">
+				<h1>Templates: performance benchmarking</h1>
+				<p>Some things to pay attention to when looking at benchmarks:</p>
+				<ul>
+					<li>compilation speed</li>
+					<li>caching</li>
+					<li>render speed</li>
+					<li>updating the DOM (if on client)</li>
+					<li>size and complexity of the template</li>
+				</ul>
+				<a href="http://jsperf.com/dom-vs-innerhtml-based-templating/413">JSPerf benchmarks</a>
+			</div>
+
+			<div class="section" id="whyfast">
+				<h1>Why is doT.js fast?</h1>
+				<ul class="notes">
+					<li>Does not use <code>with</code> statement</li>
+					<li>Does not use <code>push/join</code>, instead uses string concatenation</li>
+					<li>Trims all excess from the generated function</li>
+					<li>Statically compiles partials</li>
+					<li>Fast routine for HTML encoding</li>
+				</ul>
+			</div>
+
+			<div class="section" id="tags">
+				<h1>Default tags</h1>
+				<ul class="squares">
+					<li>
+				 <code>{{ }}</code> runtime evaluation
+					</li><li>
+				 <code>{{= }}</code> runtime interpolation
+					</li><li>
+					<code>{{# }}</code> compile-time evaluation
+					</li><li>
+					<code>{{## #}}</code> inline subtemplates
+					</li><li>
+					 <code>{{? }}</code> conditionals
+					</li><li>
+					<code>{{~ }}</code> array iterators
+					</li><li>
+					 <code>{{! }}</code> encoding
+					</li></ul>
+				<div class="break"></div>
+			</div>
+
+			<div class="section" id="playground">
+				<!--<h1>doT.js playground</h1>-->
+				<div id="samples">
+					<ul id="sampletabs"></ul>
+					<div class="stripgroup">
+						<input id="strip" type="checkbox" checked="checked"/>
+						<label for="strip">Strip whitespaces</label>
+					</div>
+					<div style="clear:both;height:10px"></div>
+					<div class="templategroup">
+						<h4>Template</h4>
+						<textarea autocomplete="off" class="template"></textarea>
+						<div class="definegroup">
+							<h4>Compile-time defines (def)</h4>
+							<textarea autocomplete="off" class="defines"></textarea>
+						</div>
+					</div>
+					<div class="functiongroup">
+						<h4>doT.template compiles it into</h4>
+						<div class="function">
+						</div>
+					</div>
+					<div style="clear:both"></div>
+					<div class="datagroup">
+						<h4>Data</h4>
+						<textarea autocomplete="off" class="data"></textarea>
+					</div>
+					<div class="resultgroup">
+						<h4>Result</h4>
+						<div class="result">
+					</div>
+					</div>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+
+			<div class="section" id="basics">
+				<h1>Basics</h1>
+				<ul class="notes">
+					<li>
+						<h3>1. Compile template function</h3>
+						<code>var template = doT.template("&lt;h1&gt;Hi {{=it.foo}}!&lt;/h1&gt;");</code>
+					</li><li>
+						<h3>2. Use template function as many times as you like</h3>
+						<code>var resultText = template({foo: 'there'});</code>
+					</li>
+				</ul>
+			</div>
+
+			<div class="section" id="config">
+				<h1>Settings</h1>
+<code><pre>doT.templateSettings = {
+  evaluate:    /\{\{([\s\S]+?)\}\}/g,
+  interpolate: /\{\{=([\s\S]+?)\}\}/g,
+  encode:      /\{\{!([\s\S]+?)\}\}/g,
+  use:         /\{\{#([\s\S]+?)\}\}/g,
+  define:      /\{\{##\s*([\w\.$]+)\s*(\:|=)([\s\S]+?)#\}\}/g,
+  conditional: /\{\{\?(\?)?\s*([\s\S]*?)\s*\}\}/g,
+  iterate:     /\{\{~\s*(?:\}\}|([\s\S]+?)\s*\:\s*([\w$]+)\s*(?:\:\s*([\w$]+))?\s*\}\})/g,
+  varname: 'it',
+  strip: true,
+  append: true,
+  selfcontained: false
+}
+</pre></code>
+			</div>
+
+			<div class="section" id="compile">
+				<h1>Compilation function</h1>
+				<ul class="notes">
+					<li>
+						<p>Call this function to compile your template into a function.</p>
+						<code> doT.template(template, settings, def) </code>
+					</li>
+					<li style="background:#DDD">
+						<p>For express compatibility there is also</p>
+						<code> doT.compile(template, def) </code>
+					</li>
+				</ul>
+				<div class="note">where <code>def</code> is a dictionary of defines and subtemplates to use</div>
+			</div>
+
+
+			<div class="section" id="composing">
+				<h1>Compositing with inline templates</h1>
+				<ul class="notes">
+					<li>
+						<p>1. Define inline subtemplates</p>
+						<code><pre>{{##def.myinlinepiece:
+    Hi {{=it.name}}!
+    {{#def.content || ''}}
+#}}</pre></code>
+					</li>
+					<li>
+						<p>2. Use it anywhere as many times as you want</p>
+						<code>{{#def.myinlinepiece}}</code>
+					</li>
+				</ul>
+				<p class="note hcenter">This is illustrated in <a href="#playground">the playground</a></p>
+			</div>
+
+			<div class="section" id="externaltemplates">
+				<h1>Compositing with external subtemplates</h1>
+				<p>Some examples of external templates:<p>
+				<ul>
+					<li>local files</li>
+					<li>remote resources</li>
+					<li>DOM nodes</li>
+				</ul>
+			</div>
+
+			<div class="section" id="externaltemplateshow">
+				<h1>How: compositing with external subtemplates</h1>
+				<ul class="notes">
+					<li><p>Use you favourite methods to obtain the template text and add to the dictionary object</p>
+		<code><pre>var def = {
+    header: $('header_t').html(),
+    footer: $('footer_t').html()
+}</pre></code>
+					<p>Pass this object as <code>def</code> parameter when compiling your templates</p>
+	</li>
+				</ul>
+				<div class="note">Alternatevely, you could use a global dictionary instead of def parameter</div>
+			</div>
+
+			<div class="section" id="onemorething">
+				<h1>You can also do this</h1>
+				<ul class="notes">
+					<li>{{ function gradient(from, to) { }}
+					<code style="font-weight:normal;font-size:0.6em;"><pre>
+background: {{=from}};
+background:-webkit-gradient(linear, left top, left bottom, from({{=from}}), to({{=to}}));
+background:-moz-linear-gradient(top, {{=from}}, {{=to}});
+...
+</pre></code>
+{{ } }}</li>
+<li><code><pre>.note {
+    {{ gradient("#FFFCD1","#FFF9B1"); }}
+}</pre></code>
+					</li>
+				</ul>
+			</div>
+
+
+			<div class="section" id="disclaimer">
+				<h1>Disclaimers</h1>
+				<ul style="font-size:0.7em">
+					<li>{{~}} iterator does not support object iteration</li>
+					<li>Compile time 'use' does not prevent infinite recursion, relies on developer to make sure they have a stop</li>
+					<li>Defines are assigned once and there is no #undef-like operation</li>
+				</ul>
+			</div>
+
+			<div class="section" id="github">
+				<h1>Fork doT.js on github</h1>
+				<a class="center" href="https://github.com/olado/doT">https://github.com/olado/doT</a>
+			</div>
+
+
+		</div><!--content-->
+
+		<div id="page">
+			<span id="currentpage">1</span> / <span id="totalpages"></span>
+		</div>
+
+	</div><!--presentation-->
+</body>
+
+<script type="text/javascript" src="doT.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="http://bestiejs.github.com/json3/lib/json3.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+(function(){window._slides=function(){function c(a,b){b=b||h;if(a===undefined){if(!b)return i;a=true}else b=a?b.nextSibling:b.previousSibling;if(b)for(var o=/(\s|^)section(\s|$)/;b&&(!b.className||!b.className.match(o));)b=a?b.nextSibling:b.previousSibling;return b}function d(a){if(typeof a==="string"&&a)a=document.getElementById(a);if(a=a||c()){var b=h;h=a;a.className="section active";if(e)e.style.display=c(true,a)?"block":"none";if(f)f.style.display=c(false,a)?"block":"none";if(b&&a!==b)b.className=
+"section";if(a.id){if(g)g.innerHTML=a.getAttribute("data-page")||a.id;location.hash=a.id;j=location.hash}}}function k(a){a=a||window.event;var b=a.target||a.srcElement;if(!/INPUT|SELECT|TEXTAREA/.test(b.nodeType==1?b.nodeName.toUpperCase():""))switch(a.keyCode){case 39:case 38:case 78:case 32:d(c(true));return true;case 37:case 40:case 80:d(c(false));return true}}function l(){location.hash&&location.hash!=j&&d(window.location.hash&&window.location.hash.length&&document.getElementById(window.location.hash.substring(1)))}
+function m(){e=document.getElementById("next");f=document.getElementById("prev");g=document.getElementById("currentpage");if(document.querySelectorAll){for(var a=document.querySelectorAll(".section"),b=0;b<a.length;b++)a[b].setAttribute("data-page",b+1);i=a[0];if(b=document.getElementById("totalpages"))b.innerHTML=a.length}else{if(g)g.parentNode.style.display="none";a=document.getElementById("content");i=a.firstChild?c(undefined,a.firstChild):undefined}h=c();d(window.location.hash&&window.location.hash.length&&
+document.getElementById(window.location.hash.substring(1)));if(e)e.onclick=function(){d(c(true))};if(f)f.onclick=function(){d(c(false))};if(!n){n=true;if(window.addEventListener){window.addEventListener("keydown",k,false);window.addEventListener("hashchange",l,false)}else{document.onkeydown=k;window.onhashchange=l}}}var h,j,n,e,f,g,i;document.getElementById("presentation")&&m();return{init:m,slide:d}}()})();
+ (function() {var encodeHTML = window._encodeHTML || doT.encodeHTMLSource();samples = {'interpolation': { template:"<div>Hi {{=it.name}}!</div>\n<div>{{=it.age || ''}}</div>", data: { name:"Jake", age:31} },'evaluation': { template:"{{ for(var prop in it) { }}\n<div>{{=prop}}</div>\n{{ } }}", data: {name:"Jake", age:31, mother:"Kate", father:"John", interests:['basketball','hockey','photography'], contact:{email:"jake@xyz.com", phone:"999999999"} } },'partials': { template:"{{##def.snippet:\n<div>{{=it.name}}</div>{{#def.joke}}\n#}}\n\n{{#def.snippet}}", data: { name:"Jake", age:31}, def: {joke:"<div>{{=it.name}} who?</div>"} },'conditionals': { template:"{{? it.name }}\n<div>Oh, I love your name, {{=it.name}}!</div>\n{{?? it.age === 0}}\n<div>Guess nobody named you yet!</div>\n{{??}}\nYou are {{=it.age}} and still don't have a name?\n{{?}}", data: { name:"Jake", age:31} },'arrays': { template:"{{~it.array :value:index}}\n<div>{{=value}}!</div>\n{{~}}", data:{array: ["banana","apple","orange"]} },'encode': { template:"Visit {{!it.uri}}", data:{uri:"http://bebedo.com/?keywords=Yoga"} }};var br = $('#samples .result'), bf = $('#samples .function'), bdef = $('#samples .defines'), tg = $('.templategroup'),bt = $('#samples .template'), bd = $('#samples .data'), bs = $('#sampletabs'), data = {}, def, fn;function onTemplate(tmpl) {var text, error;try {var tmpdef = $.extend({}, def);fn = text = doT.template(tmpl, undefined, tmpdef);} catch(e) {fn = undefined;error = text = "Template has an error: " + e;}bf.html(encodeHTML(text));br.html(error ? "Fix the template" : encodeHTML(fn(data)).replace(/\n/g,"<br/>"));}function newSample(s) {$('ul .active').removeClass("active");$("#x"+s).addClass("active");var sample = samples[s];data = $.extend({},sample.data);def = sample.def ? $.extend({},sample.def) : undefined;if (def) {bdef.val(JSON.stringify(def));tg.addClass("withdefs");} else {tg.removeClass("withdefs");bdef.val("");}bt.val(sample.template);bd.val(JSON.stringify(sample.data));onTemplate(sample.template);}bt.keyup(function() { onTemplate(this.value);});bdef.keyup(function() {var error;try {eval("def=("+ this.value +")");} catch(e) {def = undefined;error = "Defs error: " + e;}onTemplate(bt.val());});bd.keyup(function() {var error;try {eval("data=("+ this.value +")");} catch(e) {data = {};error = "Data error: " + e;}br.html(error ? "Fix the template" : encodeHTML(fn(data)).replace(/\n/g,"<br/>"));});$('#strip').change(function() {doT.templateSettings.strip=this.checked;onTemplate(bt.val());});bs.click(function(event) {newSample(event.target.id.substring(1));});var tmp='';for(var s in samples) {if (samples.hasOwnProperty(s)) {tmp+="<li id='x"+s+"'>"+s+"</li>";}}bs.html(tmp);newSample('interpolation');}());
+</script>
+</html>
