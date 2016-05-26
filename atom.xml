@@ -78,20 +78,20 @@
   </entry>
   
   <entry>
-    <title><![CDATA[4类 JavaScript 内存泄露及如何避免]]></title>
+    <title><![CDATA[4类 JavaScript 内存泄漏及如何避免]]></title>
     <link href="http://jinlong.github.io/2016/05/01/4-Types-of-Memory-Leaks-in-JavaScript-and-How-to-Get-Rid-Of-Them/"/>
     <id>http://jinlong.github.io/2016/05/01/4-Types-of-Memory-Leaks-in-JavaScript-and-How-to-Get-Rid-Of-Them/</id>
     <published>2016-05-01T13:16:27.000Z</published>
-    <updated>2016-05-23T09:41:29.000Z</updated>
+    <updated>2016-05-26T02:08:11.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>原文：<a href="https://auth0.com/blog/2016/01/26/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/" target="_blank" rel="external">4 Types of Memory Leaks in JavaScript and How to Get Rid Of Them</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
 <p>译者注：本文并没有逐字逐句的翻译，而是把我认为重要的信息做了翻译。如果您的英文熟练，可以直接阅读原文。</p>
 </blockquote>
-<p>本文将探索常见的客户端 JavaScript 内存泄露，以及如何使用 Chrome 开发工具发现问题。</p>
-<h1 id="简介">简介</h1><p>内存泄露是每个开发者最终都要面对的问题，它是许多问题的根源：反应迟缓，崩溃，高延迟，以及其他应用问题。</p>
-<h2 id="什么是内存泄露？">什么是内存泄露？</h2><p>本质上，内存泄露可以定义为：应用程序不再需要占用内存的时候，由于某些原因，内存没有被操作系统或可用内存池回收。编程语言管理内存的方式各不相同。只有开发者最清楚哪些内存不需要了，操作系统可以回收。一些编程语言提供了语言特性，可以帮助开发者做此类事情。另一些则寄希望于开发者对内存是否需要清晰明了。</p>
+<p>本文将探索常见的客户端 JavaScript 内存泄漏，以及如何使用 Chrome 开发工具发现问题。</p>
+<h1 id="简介">简介</h1><p>内存泄漏是每个开发者最终都要面对的问题，它是许多问题的根源：反应迟缓，崩溃，高延迟，以及其他应用问题。</p>
+<h2 id="什么是内存泄漏？">什么是内存泄漏？</h2><p>本质上，内存泄漏可以定义为：应用程序不再需要占用内存的时候，由于某些原因，内存没有被操作系统或可用内存池回收。编程语言管理内存的方式各不相同。只有开发者最清楚哪些内存不需要了，操作系统可以回收。一些编程语言提供了语言特性，可以帮助开发者做此类事情。另一些则寄希望于开发者对内存是否需要清晰明了。</p>
 <h2 id="JavaScript_内存管理">JavaScript 内存管理</h2><p>JavaScript 是一种垃圾回收语言。垃圾回收语言通过周期性地检查先前分配的内存是否可达，帮助开发者管理内存。换言之，垃圾回收语言减轻了“内存仍可用”及“内存仍可达”的问题。两者的区别是微妙而重要的：仅有开发者了解哪些内存在将来仍会使用，而不可达内存通过算法确定和标记，适时被操作系统回收。</p>
-<h1 id="JavaScript_内存泄露">JavaScript 内存泄露</h1><p>垃圾回收语言的内存泄露主因是不需要的引用。理解它之前，还需了解垃圾回收语言如何辨别内存的可达与不可达。</p>
+<h1 id="JavaScript_内存泄漏">JavaScript 内存泄漏</h1><p>垃圾回收语言的内存泄漏主因是不需要的引用。理解它之前，还需了解垃圾回收语言如何辨别内存的可达与不可达。</p>
 <h2 id="Mark-and-sweep">Mark-and-sweep</h2><p>大部分垃圾回收语言用的算法称之为 Mark-and-sweep 。算法由以下几步组成：</p>
 <ol>
 <li>垃圾回收器创建了一个“roots”列表。Roots 通常是代码中全局变量的引用。JavaScript  中，“window” 对象是一个全局变量，被当作 root 。window 对象总是存在，因此垃圾回收器可以检查它和它的所有子对象是否存在（即不是垃圾）；</li>
@@ -100,13 +100,13 @@
 </ol>
 <p>现代的垃圾回收器改良了算法，但是本质是相同的：可达内存被标记，其余的被当作垃圾回收。</p>
 <p>不需要的引用是指开发者明知内存引用不再需要，却由于某些原因，它仍被留在激活的 root 树中。在 JavaScript 中，不需要的引用是保留在代码中的变量，它不再需要，却指向一块本该被释放的内存。有些人认为这是开发者的错误。</p>
-<p>为了理解 JavaScript 中最常见的内存泄露，我们需要了解哪种方式的引用容易被遗忘。</p>
+<p>为了理解 JavaScript 中最常见的内存泄漏，我们需要了解哪种方式的引用容易被遗忘。</p>
 <a id="more"></a>
-<h1 id="三种类型的常见_JavaScript_内存泄露">三种类型的常见 JavaScript 内存泄露</h1><h2 id="1：意外的全局变量">1：意外的全局变量</h2><p>JavaScript 处理未定义变量的方式比较宽松：未定义的变量会在全局对象创建一个新变量。在浏览器中，全局对象是 <code>window</code> 。</p>
+<h1 id="三种类型的常见_JavaScript_内存泄漏">三种类型的常见 JavaScript 内存泄漏</h1><h2 id="1：意外的全局变量">1：意外的全局变量</h2><p>JavaScript 处理未定义变量的方式比较宽松：未定义的变量会在全局对象创建一个新变量。在浏览器中，全局对象是 <code>window</code> 。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">    bar = <span class="string">"this is a hidden global variable"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>真相是：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.bar = <span class="string">"this is an explicit global variable"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>函数 <code>foo</code> 内部忘记使用 <code>var</code> ，意外创建了一个全局变量。此例泄露了一个简单的字符串，无伤大雅，但是有更糟的情况。</p>
+<p>函数 <code>foo</code> 内部忘记使用 <code>var</code> ，意外创建了一个全局变量。此例泄漏了一个简单的字符串，无伤大雅，但是有更糟的情况。</p>
 <p>另一种意外的全局变量可能由 <code>this</code> 创建：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.variable = <span class="string">"potential accidental global"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Foo 调用自己，this 指向了全局对象（window）</span></span><br><span class="line"><span class="comment">// 而不是 undefined</span></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -121,51 +121,51 @@
 <p>观察者代码示例：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onClick</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    element.innerHTML = <span class="string">'text'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>, onClick);</span><br></pre></td></tr></table></figure>
 <p><strong>对象观察者和循环引用注意事项</strong></p>
-<p>老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄露。如今，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法，已经可以正确检测和处理循环引用了。换言之，回收节点内存时，不必非要调用 <code>removeEventListener</code> 了。</p>
+<p>老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄漏。如今，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法，已经可以正确检测和处理循环引用了。换言之，回收节点内存时，不必非要调用 <code>removeEventListener</code> 了。</p>
 <h2 id="3：脱离_DOM_的引用">3：脱离 DOM 的引用</h2><p>有时，保存 DOM 节点内部数据结构很有用。假如你想快速更新表格的几行内容，把每一行 DOM 存成字典（JSON 键值对）或者数组很有意义。此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。将来你决定删除这些行时，需要把两个引用都清除。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elements = &#123;</span><br><span class="line">    button: <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>),</span><br><span class="line">    image: <span class="built_in">document</span>.getElementById(<span class="string">'image'</span>),</span><br><span class="line">    text: <span class="built_in">document</span>.getElementById(<span class="string">'text'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doStuff</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    image.src = <span class="string">'http://some.url/image'</span>;</span><br><span class="line">    button.click();</span><br><span class="line">    <span class="built_in">console</span>.log(text.innerHTML);</span><br><span class="line">    <span class="comment">// 更多逻辑</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 按钮是 body 的后代元素</span></span><br><span class="line">    <span class="built_in">document</span>.body.removeChild(<span class="built_in">document</span>.getElementById(<span class="string">'button'</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 此时，仍旧存在一个全局的 #button 的引用</span></span><br><span class="line">    <span class="comment">// elements 字典。button 元素仍旧在内存中，不能被 GC 回收。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>此外还要考虑 DOM 树内部或子节点的引用问题。假如你的 JavaScript 代码中保存了表格某一个 <code>&lt;td&gt;</code> 的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的 <code>&lt;td&gt;</code> 以外的其它节点。实际情况并非如此：此 <code>&lt;td&gt;</code> 是表格的子节点，子元素与父元素是引用关系。由于代码保留了 <code>&lt;td&gt;</code> 的引用，导致整个表格仍待在内存中。保存 DOM 元素引用的时候，要小心谨慎。</p>
 <h2 id="4：闭包">4：闭包</h2><p>闭包是 JavaScript 开发的一个关键方面：匿名函数可以访问父级作用域的变量。</p>
 <p>代码示例：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> theThing = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> replaceThing = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> originalThing = theThing;</span><br><span class="line">  <span class="keyword">var</span> unused = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (originalThing)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"hi"</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  theThing = &#123;</span><br><span class="line">    longStr: <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1000000</span>).join(<span class="string">'*'</span>),</span><br><span class="line">    someMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(someMessage);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">setInterval(replaceThing, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-<p>代码片段做了一件事情：每次调用 <code>replaceThing</code> <code>，theThing</code> 得到一个包含一个大数组和一个新闭包（<code>someMethod</code>）的新对象。同时，变量 <code>unused</code> 是一个引用 <code>originalThing</code> 的闭包（先前的 <code>replaceThing</code> 又调用了 <code>theThing</code> ）。思绪混乱了吗？最重要的事情是，闭包的作用域一旦创建，它们有同样的父级作用域，作用域是共享的。<code>someMethod</code> 可以通过 <code>theThing</code> 使用，<code>someMethod</code> 与 <code>unused</code> 分享闭包作用域，尽管 <code>unused</code> 从未使用，它引用的 <code>originalThing</code> 迫使它保留在内存中（防止被回收）。当这段代码反复运行，就会看到内存占用不断上升，垃圾回收器（GC）并无法降低内存占用。本质上，闭包的链表已经创建，每一个闭包作用域携带一个指向大数组的间接的引用，造成严重的内存泄露。</p>
+<p>代码片段做了一件事情：每次调用 <code>replaceThing</code> <code>，theThing</code> 得到一个包含一个大数组和一个新闭包（<code>someMethod</code>）的新对象。同时，变量 <code>unused</code> 是一个引用 <code>originalThing</code> 的闭包（先前的 <code>replaceThing</code> 又调用了 <code>theThing</code> ）。思绪混乱了吗？最重要的事情是，闭包的作用域一旦创建，它们有同样的父级作用域，作用域是共享的。<code>someMethod</code> 可以通过 <code>theThing</code> 使用，<code>someMethod</code> 与 <code>unused</code> 分享闭包作用域，尽管 <code>unused</code> 从未使用，它引用的 <code>originalThing</code> 迫使它保留在内存中（防止被回收）。当这段代码反复运行，就会看到内存占用不断上升，垃圾回收器（GC）并无法降低内存占用。本质上，闭包的链表已经创建，每一个闭包作用域携带一个指向大数组的间接的引用，造成严重的内存泄漏。</p>
 <blockquote>
 <p><a href="http://info.meteor.com/blog/an-interesting-kind-of-javascript-memory-leak" target="_blank" rel="external">Meteor 的博文</a> 解释了如何修复此种问题。在 <code>replaceThing</code> 的最后添加 <code>originalThing = null</code> 。</p>
 </blockquote>
 <h1 id="Chrome_内存剖析工具概览">Chrome 内存剖析工具概览</h1><p>Chrome 提供了一套很棒的检测 JavaScript 内存占用的工具。与内存相关的两个重要的工具：<code>timeline</code> 和 <code>profiles</code>。</p>
 <h2 id="Timeline">Timeline</h2><p><img src="/image/4-Types-of-Memory-Leaks/p1.png" alt="附图1"></p>
-<p>timeline 可以检测代码中不需要的内存。在此截图中，我们可以看到潜在的泄露对象稳定的增长，数据采集快结束时，内存占用明显高于采集初期，Node（节点）的总量也很高。种种迹象表明，代码中存在 DOM 节点泄露的情况。</p>
+<p>timeline 可以检测代码中不需要的内存。在此截图中，我们可以看到潜在的泄漏对象稳定的增长，数据采集快结束时，内存占用明显高于采集初期，Node（节点）的总量也很高。种种迹象表明，代码中存在 DOM 节点泄漏的情况。</p>
 <h2 id="Profiles">Profiles</h2><p><img src="/image/4-Types-of-Memory-Leaks/p2.png" alt="附图2"></p>
-<p>Profiles 是你可以花费大量时间关注的工具，它可以保存快照，对比 JavaScript 代码内存使用的不同快照，也可以记录时间分配。每一次结果包含不同类型的列表，与内存泄露相关的有 summary（概要） 列表和 comparison（对照） 列表。</p>
+<p>Profiles 是你可以花费大量时间关注的工具，它可以保存快照，对比 JavaScript 代码内存使用的不同快照，也可以记录时间分配。每一次结果包含不同类型的列表，与内存泄漏相关的有 summary（概要） 列表和 comparison（对照） 列表。</p>
 <p>summary（概要） 列表展示了不同类型对象的分配及合计大小：shallow size（特定类型的所有对象的总大小），retained size（shallow size 加上其它与此关联的对象大小）。它还提供了一个概念，一个对象与关联的 GC root 的距离。</p>
-<p>对比不同的快照的 comparison list 可以发现内存泄露。</p>
-<h1 id="实例：使用_Chrome_发现内存泄露">实例：使用 Chrome 发现内存泄露</h1><p>实质上有两种类型的泄露：周期性的内存增长导致的泄露，以及偶现的内存泄露。显而易见，周期性的内存泄露很容易发现；偶现的泄露比较棘手，一般容易被忽视，偶尔发生一次可能被认为是优化问题，周期性发生的则被认为是必须解决的 bug。</p>
+<p>对比不同的快照的 comparison list 可以发现内存泄漏。</p>
+<h1 id="实例：使用_Chrome_发现内存泄漏">实例：使用 Chrome 发现内存泄漏</h1><p>实质上有两种类型的泄漏：周期性的内存增长导致的泄漏，以及偶现的内存泄漏。显而易见，周期性的内存泄漏很容易发现；偶现的泄漏比较棘手，一般容易被忽视，偶尔发生一次可能被认为是优化问题，周期性发生的则被认为是必须解决的 bug。</p>
 <p>以 <a href="https://developer.chrome.com/devtools/docs/demos/memory/example1" target="_blank" rel="external">Chrome 文档</a>中的代码为例：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createSomeNodes</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> div,</span><br><span class="line">        i = <span class="number">100</span>,</span><br><span class="line">        frag = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">        div.appendChild(<span class="built_in">document</span>.createTextNode(i + <span class="string">" - "</span>+ <span class="keyword">new</span> <span class="built_in">Date</span>().toTimeString()));</span><br><span class="line">        frag.appendChild(div);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"nodes"</span>).appendChild(frag);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">grow</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    x.push(<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1000000</span>).join(<span class="string">'x'</span>));</span><br><span class="line">    createSomeNodes();</span><br><span class="line">    setTimeout(grow,<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当 <code>grow</code> 执行的时候，开始创建 div 节点并插入到 DOM 中，并且给全局变量分配一个巨大的数组。通过以上提到的工具可以检测到内存稳定上升。</p>
 <h2 id="找出周期性增长的内存">找出周期性增长的内存</h2><p>timeline 标签擅长做这些。在 Chrome 中<a href="https://developer.chrome.com/devtools/docs/demos/memory/example1" target="_blank" rel="external">打开例子</a>，打开 Dev Tools ，切换到 timeline，勾选 memory 并点击记录按钮，然后点击页面上的 <code>The Button</code> 按钮。过一阵停止记录看结果：</p>
 <p><img src="/image/4-Types-of-Memory-Leaks/p3.png" alt="附图3"></p>
-<p>两种迹象显示出现了内存泄露，图中的 Nodes（绿线）和 JS heap（蓝线）。Nodes 稳定增长，并未下降，这是个显著的信号。</p>
-<p>JS heap 的内存占用也是稳定增长。由于垃圾收集器的影响，并不那么容易发现。图中显示内存占用忽涨忽跌，实际上每一次下跌之后，JS heap 的大小都比原先大了。换言之，尽管垃圾收集器不断的收集内存，内存还是周期性的泄露了。</p>
-<p>确定存在内存泄露之后，我们找找根源所在。</p>
+<p>两种迹象显示出现了内存泄漏，图中的 Nodes（绿线）和 JS heap（蓝线）。Nodes 稳定增长，并未下降，这是个显著的信号。</p>
+<p>JS heap 的内存占用也是稳定增长。由于垃圾收集器的影响，并不那么容易发现。图中显示内存占用忽涨忽跌，实际上每一次下跌之后，JS heap 的大小都比原先大了。换言之，尽管垃圾收集器不断的收集内存，内存还是周期性的泄漏了。</p>
+<p>确定存在内存泄漏之后，我们找找根源所在。</p>
 <h2 id="保存两个快照">保存两个快照</h2><p>切换到 Chrome Dev Tools 的 profiles 标签，刷新页面，等页面刷新完成之后，点击 Take Heap Snapshot 保存快照作为基准。而后再次点击 <code>The Button</code> 按钮，等数秒以后，保存第二个快照。</p>
 <p><img src="/image/4-Types-of-Memory-Leaks/p4.png" alt="附图4"></p>
 <p>筛选菜单选择 Summary，右侧选择 Objects allocated between Snapshot 1 and Snapshot 2，或者筛选菜单选择 Comparison ，然后可以看到一个对比列表。</p>
-<p>此例很容易找到内存泄露，看下  <code>(string)</code> 的 <code>Size Delta</code> Constructor，8MB，58个新对象。新对象被分配，但是没有释放，占用了8MB。</p>
+<p>此例很容易找到内存泄漏，看下  <code>(string)</code> 的 <code>Size Delta</code> Constructor，8MB，58个新对象。新对象被分配，但是没有释放，占用了8MB。</p>
 <p>如果展开  <code>(string)</code>  Constructor，会看到许多单独的内存分配。选择某一个单独的分配，下面的 retainers 会吸引我们的注意。</p>
 <p><img src="/image/4-Types-of-Memory-Leaks/p5.png" alt="附图5"></p>
-<p>我们已选择的分配是数组的一部分，数组关联到 <code>window</code> 对象的 <code>x</code> 变量。这里展示了从巨大对象到无法回收的 root（<code>window</code>）的完整路径。我们已经找到了潜在的泄露以及它的出处。</p>
-<p>我们的例子还算简单，只泄露了少量的 DOM 节点，利用以上提到的快照很容易发现。对于更大型的网站，Chrome 还提供了 Record Heap Allocations 功能。</p>
-<h2 id="Record_heap_allocations_找内存泄露">Record heap allocations 找内存泄露</h2><p>回到 Chrome Dev Tools 的 profiles 标签，点击 Record Heap Allocations。工具运行的时候，注意顶部的蓝条，代表了内存分配，每一秒有大量的内存分配。运行几秒以后停止。</p>
+<p>我们已选择的分配是数组的一部分，数组关联到 <code>window</code> 对象的 <code>x</code> 变量。这里展示了从巨大对象到无法回收的 root（<code>window</code>）的完整路径。我们已经找到了潜在的泄漏以及它的出处。</p>
+<p>我们的例子还算简单，只泄漏了少量的 DOM 节点，利用以上提到的快照很容易发现。对于更大型的网站，Chrome 还提供了 Record Heap Allocations 功能。</p>
+<h2 id="Record_heap_allocations_找内存泄漏">Record heap allocations 找内存泄漏</h2><p>回到 Chrome Dev Tools 的 profiles 标签，点击 Record Heap Allocations。工具运行的时候，注意顶部的蓝条，代表了内存分配，每一秒有大量的内存分配。运行几秒以后停止。</p>
 <p><img src="/image/4-Types-of-Memory-Leaks/p6.png" alt="附图6"></p>
-<p>上图中可以看到工具的杀手锏：选择某一条时间线，可以看到这个时间段的内存分配情况。尽可能选择接近峰值的时间线，下面的列表仅显示了三种 constructor：其一是泄露最严重的<code>（string）</code>，下一个是关联的 DOM 分配，最后一个是 <code>Text</code> constructor（DOM 叶子节点包含的文本）。</p>
+<p>上图中可以看到工具的杀手锏：选择某一条时间线，可以看到这个时间段的内存分配情况。尽可能选择接近峰值的时间线，下面的列表仅显示了三种 constructor：其一是泄漏最严重的<code>（string）</code>，下一个是关联的 DOM 分配，最后一个是 <code>Text</code> constructor（DOM 叶子节点包含的文本）。</p>
 <p>从列表中选择一个 <code>HTMLDivElement</code> constructor，然后选择 <code>Allocation stack</code>。</p>
 <p><img src="/image/4-Types-of-Memory-Leaks/p7.png" alt="附图7"></p>
-<p>现在知道元素被分配到哪里了吧（<code>grow</code> -&gt; <code>createSomeNodes</code>），仔细观察一下图中的时间线，发现 <code>HTMLDivElement</code> constructor 调用了许多次，意味着内存一直被占用，无法被 GC 回收，我们知道了这些对象被分配的确切位置（<code>createSomeNodes</code>）。回到代码本身，探讨下如何修复内存泄露吧。</p>
+<p>现在知道元素被分配到哪里了吧（<code>grow</code> -&gt; <code>createSomeNodes</code>），仔细观察一下图中的时间线，发现 <code>HTMLDivElement</code> constructor 调用了许多次，意味着内存一直被占用，无法被 GC 回收，我们知道了这些对象被分配的确切位置（<code>createSomeNodes</code>）。回到代码本身，探讨下如何修复内存泄漏吧。</p>
 <h2 id="另一个有用的特性">另一个有用的特性</h2><p>在 heap allocations 的结果区域，选择 Allocation。</p>
 <p><img src="/image/4-Types-of-Memory-Leaks/p8.png" alt="附图8"></p>
-<p>这个视图呈现了内存分配相关的功能列表，我们立刻看到了 <code>grow</code> 和 <code>createSomeNodes</code>。当选择 <code>grow</code> 时，看看相关的 object constructor，清楚地看到 <code>(string)</code>, <code>HTMLDivElement</code> 和 <code>Text</code> 泄露了。</p>
-<p>结合以上提到的工具，可以轻松找到内存泄露。</p>
+<p>这个视图呈现了内存分配相关的功能列表，我们立刻看到了 <code>grow</code> 和 <code>createSomeNodes</code>。当选择 <code>grow</code> 时，看看相关的 object constructor，清楚地看到 <code>(string)</code>, <code>HTMLDivElement</code> 和 <code>Text</code> 泄漏了。</p>
+<p>结合以上提到的工具，可以轻松找到内存泄漏。</p>
 <h1 id="延伸阅读">延伸阅读</h1><ul>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management" target="_blank" rel="external">Memory Management - Mozilla Developer Network</a></li>
 <li><a href="http://javascript.crockford.com/memory/leak.html" target="_blank" rel="external">JScript Memory Leaks - Douglas Crockford (old, in relation to Internet Explorer 6 leaks)</a></li>
@@ -180,11 +180,11 @@
 <p>原文：<a href="https://auth0.com/blog/2016/01/26/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/">4 Types of Memory Leaks in JavaScript and How to Get Rid Of Them</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
 <p>译者注：本文并没有逐字逐句的翻译，而是把我认为重要的信息做了翻译。如果您的英文熟练，可以直接阅读原文。</p>
 </blockquote>
-<p>本文将探索常见的客户端 JavaScript 内存泄露，以及如何使用 Chrome 开发工具发现问题。</p>
-<h1 id="简介">简介</h1><p>内存泄露是每个开发者最终都要面对的问题，它是许多问题的根源：反应迟缓，崩溃，高延迟，以及其他应用问题。</p>
-<h2 id="什么是内存泄露？">什么是内存泄露？</h2><p>本质上，内存泄露可以定义为：应用程序不再需要占用内存的时候，由于某些原因，内存没有被操作系统或可用内存池回收。编程语言管理内存的方式各不相同。只有开发者最清楚哪些内存不需要了，操作系统可以回收。一些编程语言提供了语言特性，可以帮助开发者做此类事情。另一些则寄希望于开发者对内存是否需要清晰明了。</p>
+<p>本文将探索常见的客户端 JavaScript 内存泄漏，以及如何使用 Chrome 开发工具发现问题。</p>
+<h1 id="简介">简介</h1><p>内存泄漏是每个开发者最终都要面对的问题，它是许多问题的根源：反应迟缓，崩溃，高延迟，以及其他应用问题。</p>
+<h2 id="什么是内存泄漏？">什么是内存泄漏？</h2><p>本质上，内存泄漏可以定义为：应用程序不再需要占用内存的时候，由于某些原因，内存没有被操作系统或可用内存池回收。编程语言管理内存的方式各不相同。只有开发者最清楚哪些内存不需要了，操作系统可以回收。一些编程语言提供了语言特性，可以帮助开发者做此类事情。另一些则寄希望于开发者对内存是否需要清晰明了。</p>
 <h2 id="JavaScript_内存管理">JavaScript 内存管理</h2><p>JavaScript 是一种垃圾回收语言。垃圾回收语言通过周期性地检查先前分配的内存是否可达，帮助开发者管理内存。换言之，垃圾回收语言减轻了“内存仍可用”及“内存仍可达”的问题。两者的区别是微妙而重要的：仅有开发者了解哪些内存在将来仍会使用，而不可达内存通过算法确定和标记，适时被操作系统回收。</p>
-<h1 id="JavaScript_内存泄露">JavaScript 内存泄露</h1><p>垃圾回收语言的内存泄露主因是不需要的引用。理解它之前，还需了解垃圾回收语言如何辨别内存的可达与不可达。</p>
+<h1 id="JavaScript_内存泄漏">JavaScript 内存泄漏</h1><p>垃圾回收语言的内存泄漏主因是不需要的引用。理解它之前，还需了解垃圾回收语言如何辨别内存的可达与不可达。</p>
 <h2 id="Mark-and-sweep">Mark-and-sweep</h2><p>大部分垃圾回收语言用的算法称之为 Mark-and-sweep 。算法由以下几步组成：</p>
 <ol>
 <li>垃圾回收器创建了一个“roots”列表。Roots 通常是代码中全局变量的引用。JavaScript  中，“window” 对象是一个全局变量，被当作 root 。window 对象总是存在，因此垃圾回收器可以检查它和它的所有子对象是否存在（即不是垃圾）；</li>
@@ -193,11 +193,11 @@
 </ol>
 <p>现代的垃圾回收器改良了算法，但是本质是相同的：可达内存被标记，其余的被当作垃圾回收。</p>
 <p>不需要的引用是指开发者明知内存引用不再需要，却由于某些原因，它仍被留在激活的 root 树中。在 JavaScript 中，不需要的引用是保留在代码中的变量，它不再需要，却指向一块本该被释放的内存。有些人认为这是开发者的错误。</p>
-<p>为了理解 JavaScript 中最常见的内存泄露，我们需要了解哪种方式的引用容易被遗忘。</p>]]>
+<p>为了理解 JavaScript 中最常见的内存泄漏，我们需要了解哪种方式的引用容易被遗忘。</p>]]>
     
     </summary>
     
-      <category term="内存泄露" scheme="http://jinlong.github.io/tags/%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/"/>
+      <category term="内存泄漏" scheme="http://jinlong.github.io/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/"/>
     
       <category term="JavaScript" scheme="http://jinlong.github.io/categories/JavaScript/"/>
     
