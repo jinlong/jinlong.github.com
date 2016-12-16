@@ -43,7 +43,7 @@
 
 
 
-  <meta name="keywords" content="HTML5,Safari,iOS7," />
+  <meta name="keywords" content="iOS7,Safari,HTML5," />
 
 
 
@@ -63,14 +63,14 @@
 
 <meta name="description" content="原文：Safari on iOS 7 and HTML5: problems, changes and new APIs译者：涂鸦码龙感谢 CSS魔法 指正翻译问题
 
-这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，bug 最多的 Safari 版本嘛。文本">
+这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，bug 最多的 Safari 版本嘛。文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS 7 的 Safari 和 HTML5：问题，变化和新 API">
 <meta property="og:url" content="http://jinlong.github.io/2013/09/23/safari-ios7-html5-problems-apis-review/index.html">
 <meta property="og:site_name" content="Alon's Blog">
 <meta property="og:description" content="原文：Safari on iOS 7 and HTML5: problems, changes and new APIs译者：涂鸦码龙感谢 CSS魔法 指正翻译问题
 
-这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，bug 最多的 Safari 版本嘛。文本">
+这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，bug 最多的 Safari 版本嘛。文">
 <meta property="og:image" content="http://jinlong.github.io/images/post/ios7/safari.png">
 <meta property="og:image" content="http://jinlong.github.io/images/post/ios7/tint.png">
 <meta property="og:image" content="http://jinlong.github.io/images/post/ios7/fullscreen2.png">
@@ -93,7 +93,8 @@
 <meta name="twitter:title" content="iOS 7 的 Safari 和 HTML5：问题，变化和新 API">
 <meta name="twitter:description" content="原文：Safari on iOS 7 and HTML5: problems, changes and new APIs译者：涂鸦码龙感谢 CSS魔法 指正翻译问题
 
-这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，bug 最多的 Safari 版本嘛。文本">
+这些天 Apple 已经推出了 iOS 7 以及 iPhone 5S 和 iPhone 5C 。Apple 面向 web 开发者仅仅发布了 10% 的所需信息，我可以说这是自 1.0 以来，bug 最多的 Safari 版本嘛。文">
+<meta name="twitter:image" content="http://jinlong.github.io/images/post/ios7/safari.png">
 
 
 
@@ -338,7 +339,7 @@
 <p>Safari ，像其它原生应用一样，在用户界面和体验方面已经迎来大幅更新。这些变化会影响用户与网站的交互，以及 webapp 的反应。</p>
 <h3 id="工具栏色彩">工具栏色彩</h3><p>Safari 的工具栏已经着色（iPhone 上的 URL 条和底部工具条），颜色基于：<br>a) 加载页面时的背景色<br>b) 当滚动页面时，工具条后面的当前主色</p>
 <p>如果你想“hack”初始颜色，与 body 背景不同，并不需要往 HTML 里面加无用的东西（比如新容器），仅需使用下面的 CSS hack:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">body</span> <span class="rules">&#123;</span><br><span class="line"><span class="rule"><span class="attribute">background-color</span>:<span class="value"> blue</span></span>; <span class="comment">/* 用于着色 */</span></span><br><span class="line"><span class="rule"><span class="attribute">background-image</span>:<span class="value"> <span class="function">linear-gradient</span>(to bottom, green <span class="number">0%</span>, green <span class="number">100%</span>)</span></span>; <span class="comment">/* 用于 body */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line"><span class="attribute">background-color</span>: blue; <span class="comment">/* 用于着色 */</span></div><div class="line"><span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to bottom, green 0%, green 100%); <span class="comment">/* 用于 body */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>我们定义了背景色和背景图像；内容将用图像（本例是渐变，也可以是 data URI 1px 图像）。以下例子，前两个用了同样的颜色（仅用背景），最后一个工具栏颜色和 body 颜色不同。<br><img src="/images/post/ios7/tint.png"></p>
 <h3 id="全屏和_HTML_5_应用、游戏的大问题">全屏和 HTML 5 应用、游戏的大问题</h3><p>如今 iPhone 和 iPod touch 上的网页浏览总是全屏。当用户在垂直模式（portrait ）滚动页面时，底部工具栏将消失，URL 栏变成一个小的半透明的条出现在顶部。水平模式（landscape），用户滚动页面底部工具栏和主域名栏同时消失，变成完整的全屏模式。</p>
 <p>工具栏和完整的 URL 栏将再次出现：<br>1) 用户轻击页面顶部，或者<br>2) 用户把页面滚回顶部</p>
@@ -389,7 +390,7 @@
 <li>iPad 视网膜屏: <strong>152x152</strong></li>
 </ul>
 <p>我们需要记住所有非视网膜屏的 iPhone-因子设备无法使用 iOS 7 。如果我们没提供新的图标尺寸，设备还会用 iOS 6 相关的图标。如果我们想覆盖所有可能的 iOS 图标，使用下面的代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 非视网膜 iPhone 低于 iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon57.png"</span> <span class="attribute">sizes</span>=<span class="value">"57x57"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 非视网膜 iPad 低于 iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon72.png"</span> <span class="attribute">sizes</span>=<span class="value">"72x72"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 非视网膜 iPad iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon76.png"</span> <span class="attribute">sizes</span>=<span class="value">"76x76"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 视网膜 iPhone 低于 iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon114.png"</span> <span class="attribute">sizes</span>=<span class="value">"114x114"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 视网膜 iPhone iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon120.png"</span> <span class="attribute">sizes</span>=<span class="value">"120x120"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 视网膜 iPad 低于 iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon144.png"</span> <span class="attribute">sizes</span>=<span class="value">"144x144"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 视网膜 iPad iOS 7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"icon152.png"</span> <span class="attribute">sizes</span>=<span class="value">"152x152"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 非视网膜 iPhone 低于 iOS 7 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="string">"icon57.png"</span> <span class="attr">sizes</span>=<span class="string">"57x57"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 非视网膜 iPad 低于 iOS 7 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="string">"icon72.png"</span> <span class="attr">sizes</span>=<span class="string">"72x72"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 非视网膜 iPad iOS 7 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="string">"icon76.png"</span> <span class="attr">sizes</span>=<span class="string">"76x76"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 视网膜 iPhone 低于 iOS 7 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="string">"icon114.png"</span> <span class="attr">sizes</span>=<span class="string">"114x114"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 视网膜 iPhone iOS 7 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="string">"icon120.png"</span> <span class="attr">sizes</span>=<span class="string">"120x120"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 视网膜 iPad 低于 iOS 7 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="string">"icon144.png"</span> <span class="attr">sizes</span>=<span class="string">"144x144"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 视网膜 iPad iOS 7 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="string">"icon152.png"</span> <span class="attr">sizes</span>=<span class="string">"152x152"</span>&gt;</span></div></pre></td></tr></table></figure>
 <h3 id="书签和收藏夹">书签和收藏夹</h3><p>书签也用了新图标（看下面左侧的图），貌似无法修改这些图标和文字。</p>
 <p>当你点击地址栏时出现收藏夹（下面右侧图），看起来像是用了 <strong>apple-touch-icon</strong> link ，但是没有遵循任何尺寸原则，并且我发现了怪异现象，比如一些带正确的 link 元素的网站，收藏夹却不显示图标。XXXX</p>
 <p><img src="/images/post/ios7/favorites2.png"></p>
@@ -400,17 +401,17 @@
 <p>对于所有可能的轨道类型（<code>kind</code> 属性），仅支持 captions（解说字幕） 和 subtitles（字幕），我们必须在 <code>srclang</code> 属性以 <a href="http://en.wikipedia.org/wiki/ISO_639-1" target="_blank" rel="external">ISO 格式</a> （比如 English 是 en）定义语言。当用户可以听到声音但不理解语言时，字幕非常有用。当用户无法听到声音时，解说字幕很有用，它包含了当前发生情况的额外信息（比如背景音乐正在播放）。</p>
 <p><img src="/images/post/ios7/cc2ch.png"></p>
 <p>定义轨道的 <code>label</code> 属性毫无价值，因为 iOS 忽视它，如果 kind 值使用 captions 代替 subtitles ，菜单中带有可选的 CC 后缀的语言名取代了 label。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">video</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"myvideo.mp4"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">track</span> <span class="attribute">kind</span>=<span class="value">"captions"</span> <span class="attribute">src</span>=<span class="value">"my-captions-en.vtt"</span> <span class="attribute">srclang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">track</span> <span class="attribute">kind</span>=<span class="value">"subtitles"</span> <span class="attribute">src</span>=<span class="value">"my-captions-fr.vtt"</span> <span class="attribute">srclang</span>=<span class="value">"fr"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"myvideo.mp4"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">track</span> <span class="attr">kind</span>=<span class="string">"captions"</span> <span class="attr">src</span>=<span class="string">"my-captions-en.vtt"</span> <span class="attr">srclang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">track</span> <span class="attr">kind</span>=<span class="string">"subtitles"</span> <span class="attr">src</span>=<span class="string">"my-captions-fr.vtt"</span> <span class="attr">srclang</span>=<span class="string">"fr"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>可以通过 JavaScript API 访问轨道，我们可以遍历所有轨道文件。这点可能仅对 iPad 有用，在 iPad 上，我们可以在 web canvas 里真正嵌入一段视频，iPhone 上永远是全屏模式。</p>
 <p>track 元素遵循跨域策略，默认情况，视频和轨道必须是同源。使用 JavaScript 可以探测 track 是否可用，用到 webkitHasClosedCaptions ：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasCC = <span class="built_in">document</span>.querySelector(<span class="string">"video"</span>).webkitHasClosedCaptions;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> hasCC = <span class="built_in">document</span>.querySelector(<span class="string">"video"</span>).webkitHasClosedCaptions;</div></pre></td></tr></table></figure>
 <p>还可以通过 <code>webkitClosedCaptionsVisible</code> （布尔属性）改变每个 video 元素的 captions （解说字幕）的可见性。</p>
 <p>字幕样式</p>
 <p>iOS 7 支持新的 <strong>::cue</strong> 伪元素，我们仅可以改变 text-shadow, opacity 和 outline。所有其它属性比如颜色和字体样式不支持。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pseudo">::cue</span> <span class="rules">&#123; <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0.8</span> </span></span></span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-pseudo">::cue</span> &#123; <span class="attribute">opacity</span>: <span class="number">0.8</span> &#125;</div></pre></td></tr></table></figure>
 <p>更多关于 <a href="http://www.html5rocks.com/en/tutorials/track/basics/" target="_blank" rel="external">Track 元素和 API</a> （记住 Safari 并非支持所有 API）。</p>
 <h3 id="PROGRESS_和_OUTPUT_元素">PROGRESS 和 OUTPUT 元素</h3><p>已支持 <code>&lt;progress&gt;</code> 元素，基于 max 和 value 创建进度条。如同其它浏览器，不支持模糊进度，当我们知道明确的进度值时才适用。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;progress <span class="built_in">max</span>=<span class="string">"100"</span> <span class="built_in">value</span>=<span class="string">"40"</span>&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;progress <span class="built_in">max</span>=<span class="string">"100"</span> <span class="built_in">value</span>=<span class="string">"40"</span>&gt;</div></pre></td></tr></table></figure>
 <p>已支持 <code>&lt;output&gt;</code> 元素，没感觉有什么特别 :) 。</p>
 <p>貌似支持 <code>&lt;meter&gt;</code> ，所有内容会被忽略，我感觉有 bug 。</p>
 <h3 id="移除：datetime_input_type">移除：datetime input type</h3><p>追随 Google Chrome ，iOS Safari <strong>不再支持 datetime 的 input 类型</strong>，它将退化成 text 。这个类型将被标准废弃，标准赞成使用两个 input ， date 和 time 达到同样的目的。问题是 datetime 兼容 iOS 5.0 至 iOS 6.1 ；如果使用它要多加小心！</p>
@@ -420,7 +421,7 @@
 <p>“如果你正在使用 input type=’datetime’ ，你应该马上采取行动，因为它被渲染成 text 类型。”</p>
 </blockquote>
 <h3 id="无缝_iframe">无缝 iframe</h3><p>在 iOS 7 上，新的布尔属性 <code>seamless</code> 用于创建无边界的 iframe 。iframe 将没有滚动条，默认情况，它会取到内部内容的高度，作为 DOM 中其它块级元素的使用空间。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">seamless</span> <span class="attribute">src</span>=<span class="value">"mypage.html"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">seamless</span> <span class="attr">src</span>=<span class="string">"mypage.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="HTML5_JavaScript_API">HTML5 JavaScript API</h2><p>先以坏新闻开头：<strong>未支持 WebGL，FullScreen，WebRTC， getUserMedia 或者 IndexedDB</strong> 。</p>
 <p>可用的新 API ：   </p>
 <ul>
@@ -454,8 +455,8 @@
 <p>WebSpeech API 可以让网站记录和转录音频，还可以把文字合成到声音中，使用操作系统内部声音播放。</p>
 <p>iOS Safari 仅包含合成 API（文字到语音），没有从麦克风听音频的 API 。使用 <code>speechSynthesis.getVoices()</code> ，你可以在一个真实设备，查询所有不同语言的可用声音，它返回 36 种声音（有时刷新页面返回 0，感觉像 bug ）。在英语方面，使用 <code>en-US</code> 是女声，使用 <code>en-GB</code> 是男声。在语音识别方面我不是专家，但是感觉声音 API 不同于 Siri ，iOS 7 的 Siri 听起来更自然。</p>
 <p>让 JavaScript 通过你的网站开口说话，可以使用默认语言的快捷版，或者定义不同的属性像以下例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">speechSynthesis.speak(<span class="keyword">new</span> SpeechSynthesisUtterance(<span class="string">"Hello, this is my voice on a webpage"</span>));</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> speech = <span class="keyword">new</span> SpeechSynthesisUtterance();</span><br><span class="line">speech.text = <span class="string">"Hello"</span>;</span><br><span class="line">speech.volume = <span class="number">1</span>; <span class="comment">// 0 to 1</span></span><br><span class="line">speech.rate = <span class="number">1</span>; <span class="comment">// 0.1 to 9</span></span><br><span class="line">speech.pitch = <span class="number">1</span>; <span class="comment">// 0 to 2, 1=normal</span></span><br><span class="line">speech.lang = <span class="string">"en-US"</span>;</span><br><span class="line">speechSynthesis.speak(speech);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">speechSynthesis.speak(<span class="keyword">new</span> SpeechSynthesisUtterance(<span class="string">"Hello, this is my voice on a webpage"</span>));</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> speech = <span class="keyword">new</span> SpeechSynthesisUtterance();</div><div class="line">speech.text = <span class="string">"Hello"</span>;</div><div class="line">speech.volume = <span class="number">1</span>; <span class="comment">// 0 to 1</span></div><div class="line">speech.rate = <span class="number">1</span>; <span class="comment">// 0.1 to 9</span></div><div class="line">speech.pitch = <span class="number">1</span>; <span class="comment">// 0 to 2, 1=normal</span></div><div class="line">speech.lang = <span class="string">"en-US"</span>;</div><div class="line">speechSynthesis.speak(speech);</div></pre></td></tr></table></figure>
 <p>通过 <code>SpeechSynthesisUtterance</code> 对象可以绑定一些事件，比如 start 和 end ，但是不要在事件内部用 alert ，你的 Safari 将未响应（不要问我为什么）。</p>
 <p>可以说出来的字符串可以是无格式的文本，标准也支持 <a href="http://www.w3.org/TR/speech-synthesis/" target="_blank" rel="external">SSML 格式（语音合成标记语言）</a>  的 XML 文档，iOS Safari 仅阅读 XML :) 。</p>
 <p>记住 <strong>Speech 合成 API 仅作用于用户明确的行为</strong>，比如点击一个按钮，因此你不能在 onload 或者基于时间坐标发起语音。用 iOS 7 设备试试这个<a href="http://mobilexweb.com/ts/api/speech.html" target="_blank" rel="external">在线 demo</a> 。</p>
@@ -480,7 +481,7 @@
 </ul>
 <h3 id="Sticky_定位">Sticky 定位</h3><p>Sticky 定位是新的实验特性，可以在视口中固定一个元素，当它的父容器移出可视区域时消失（通常在滚动操作后触发）。它像是混合定位：当 static 定位元素移出视口时变成 position: fixed 。如果有多个 sticky 元素，它们会聚集到同一区域（定义同样位置属性的话），当滚动到类似原生 UITableView 部分时，可以做个不错的效果。</p>
 <p>9月19日更新：<a href="https://twitter.com/zachleat/status/362588551847755776" target="_blank" rel="external">一些报告</a> 显示这一特性在 6.1 就可用了（但是在社区没有找到资料，因此我在这提一下）。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h1</span> <span class="rules">&#123; <span class="rule"><span class="attribute">position</span>:<span class="value"> -webkit-sticky</span></span>;   <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">10px</span></span></span>; &#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h1</span> &#123; <span class="attribute">position</span>: -webkit-sticky;   <span class="attribute">top</span>: <span class="number">10px</span>; &#125;</div></pre></td></tr></table></figure>
 <p>你可以试试这个 <a href="http://html5-demos.appspot.com/static/css/sticky.html" target="_blank" rel="external">demo</a> 。<br><img src="/images/post/ios7/sticky1.png"></p>
 <h3 id="CSS_Regions">CSS Regions</h3><p><a href="http://dev.w3.org/csswg/css-regions/" target="_blank" rel="external">CSS Regions</a> 规范是 Adobe 提的，我们可以创建类似杂志设计，通过不同的容器排版内容。由于屏幕尺寸的性质，针对 iPad 网站和 webapp，我们将使用新的流原理。</p>
 <p>在 iOS 上，选择不同区域的内容是不允许的。CSS Exclusions 可以定义区域的形状，通常情况下，它和 CSS Regions 是好伙伴，但它还不可用。</p>
@@ -488,7 +489,7 @@
 <h3 id="CSS_Grid_Layout">CSS Grid Layout</h3><p><a href="http://dev.w3.org/csswg/css-grid/" target="_blank" rel="external">CSS Grid Layout</a> 是 W3C 的新布局规范（由微软提出，IE 10 已经实现）。所有新的 CSS 属性（-webkit-grid-X）都可用，但我无法使用 display: grid 或者 display: -webkit-grid 。我不确定是否有其它方式启用它，或者它未完全实现。</p>
 <h3 id="CSS_FlexBox">CSS FlexBox</h3><p>CSS FlexBox 的最终规范出来了，水平/垂直定位元素时，我们可以不用浮动和清除浮动了。使用时我们应该给容器加个 <strong>display: -webkit-flex</strong>，然后应用不同的属性。</p>
 <h3 id="动态字体">动态字体</h3><p>iOS 7 支持动态字体这种新字体类型，用于调整粗细，字间距和行距，基于当前字体提升易读性。我们可以把此新特性用于 HTML，使用新的 <strong>-apple-</strong> 前缀（也许因为 webkit 将来不打算使用前缀？）。有一长串的常量，比如 -apple-system-headline1，-apple-system-body 和 -apple-system-caption1 。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h1</span> <span class="rules">&#123; <span class="rule"><span class="attribute">font</span>:<span class="value"> -apple-system-headline1 </span></span></span>&#125;</span><br><span class="line"><span class="tag">p</span> <span class="rules">&#123; <span class="rule"><span class="attribute">font</span>:<span class="value"> -apple-system-body </span></span></span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h1</span> &#123; <span class="attribute">font</span>: -apple-system-headline1 &#125;</div><div class="line"><span class="selector-tag">p</span> &#123; <span class="attribute">font</span>: -apple-system-body &#125;</div></pre></td></tr></table></figure>
 <h3 id="其它_CSS_改进">其它 CSS 改进</h3><p>media queries 的 <strong>resolution</strong> 属性还是没支持，有些新东西，比如可以查询 <strong>min-color-index</strong> 和 <strong>max-color-index</strong> ，虽然没什么用吧 :) </p>
 <p>还有一些次要更新，包括：</p>
 <ul>
@@ -524,7 +525,7 @@
 <p>幸运的是 iPhone 5 的主屏 webapp 没 bug ，它们是 letterboxing 应用（它被发现后的一年）。我们不再需要视口 hack 解决方案了。</p>
 <h2 id="原生_webapp_开发">原生 webapp 开发</h2><p>如果你开发 hybrid 混合（原生 webapp ）应用，比如 Apache Cordova (PhoneGap) 应用，有一些消息告诉你。首先，还没有 Nitro 引擎。</p>
 <h3 id="Paginate_（随意翻阅）模式">Paginate （随意翻阅）模式</h3><p>当在原生应用中，使用 UIWebView 实现丰富内容时，或者对于原生 webapp （hybrid），我们可以为了电子书阅读体验使用 <strong>Paginate</strong> （随意翻阅）特性，避免出现垂直滚动条（类似 Windows 8 应用体验）。如果应用显示动态加载内容，这一特性是完美的，我们不能预先优化分页。有不同的 Objective-C 属性配置分页过程。要启用它，需要这么做：</p>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myWebView.paginationMode = UIWebPaginationModeLeftToRight<span class="comment">;</span></span><br><span class="line">myWebView.paginationBreakingMode = UIWebPaginationBreakingModePage<span class="comment">;</span></span><br><span class="line">myWebView.gapBetweenPages = 50<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myWebView.paginationMode = UIWebPaginationModeLeftToRight<span class="comment">;</span></div><div class="line">myWebView.paginationBreakingMode = UIWebPaginationBreakingModePage<span class="comment">;</span></div><div class="line">myWebView.gapBetweenPages = <span class="number">50</span><span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>这些属性将把 web view 里的 HTML 文档转换成分页模式（分成水平方向页面）。</p>
 <h3 id="其它改进">其它改进</h3><ul>
 <li>对于原生开发（不一定使用 Web View），iOS SDK 现在包含了 JavaScript 运行时：JavaScript Core 框架，把 Objective-C 包装成标准的 JavaScript  对象。我们可以用这个框架运行 JavaScript 代码，解析 JSON 。 </li>
@@ -551,11 +552,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HTML5/" rel="tag">#HTML5</a>
+            <a href="/tags/iOS7/" rel="tag">#iOS7</a>
           
             <a href="/tags/Safari/" rel="tag">#Safari</a>
           
-            <a href="/tags/iOS7/" rel="tag">#iOS7</a>
+            <a href="/tags/HTML5/" rel="tag">#HTML5</a>
           
         </div>
       
@@ -665,21 +666,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

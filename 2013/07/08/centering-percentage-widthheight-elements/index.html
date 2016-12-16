@@ -43,7 +43,7 @@
 
 
 
-  <meta name="keywords" content="CSS,translate,居中," />
+  <meta name="keywords" content="CSS,居中,translate," />
 
 
 
@@ -314,7 +314,7 @@
 <p>有个<a href="http://css-tricks.com/centering-in-the-unknown/" target="_blank" rel="external">小技巧</a> ，用一个“ghost”伪元素（看不见的伪元素）和 <code>inline-block</code> / <code>vertical-align</code> 可以搞定居中，非常巧妙。但是这个方法要求待居中的元素是 <code>inline-block</code>，不是一个真正通用的方案。可能你想居中一个模态窗口，受小屏幕 / 响应式设计所限，你很可能会把对话框设计成百分比宽度（或者其它未知情况，比如仅有 <code>max-width</code> 最大宽度。）</p>
 <p>有一种方案！Mary Lou 在 Codrops 用到的，她的文章 / 示例：<a href="http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/" target="_blank" rel="external">漂亮的模态窗口效果</a> 。</p>
 <p>不能用负的 margin ，可以用负的 <code>translate()</code> 代替。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.center</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span><br><span class="line">  不是 =(</span><br><span class="line">  margin-left: -25%;</span><br><span class="line">  margin-top: -25%;</span><br><span class="line">  */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* </span><br><span class="line">  而是!</span><br><span class="line">  */</span></span><br><span class="line">  <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span><br><span class="line">  甚至不要定义 </span><br><span class="line">  比如：Height 可以缺省!</span><br><span class="line">  */</span></span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">40%</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.center</span> &#123;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</div><div class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</div><div class="line"></div><div class="line">  <span class="comment">/*</span></div><div class="line">  不是 =(</div><div class="line">  margin-left: -25%;</div><div class="line">  margin-top: -25%;</div><div class="line">  */</div><div class="line"></div><div class="line">  <span class="comment">/* </span></div><div class="line">  而是!</div><div class="line">  */</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%, -50%);</div><div class="line"></div><div class="line">  <span class="comment">/*</span></div><div class="line">  甚至不要定义 </div><div class="line">  比如：Height 可以缺省!</div><div class="line">  */</div><div class="line">  <span class="attribute">width</span>: <span class="number">40%</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">50%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>加上所有需要的前缀。</p>
 <p>最终效果实例：</p>
 <p><pre class="codepen" data-height="300" data-type="result" data-href="BvdgL" data-user="chriscoyier" data-safe="false"><code></code><a href="http://codepen.io/chriscoyier/pen/BvdgL" target="_blank" rel="external">Check out this Pen!</a></pre></p>
@@ -329,9 +329,9 @@
           
             <a href="/tags/CSS/" rel="tag">#CSS</a>
           
-            <a href="/tags/translate/" rel="tag">#translate</a>
-          
             <a href="/tags/居中/" rel="tag">#居中</a>
+          
+            <a href="/tags/translate/" rel="tag">#translate</a>
           
         </div>
       
@@ -441,21 +441,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

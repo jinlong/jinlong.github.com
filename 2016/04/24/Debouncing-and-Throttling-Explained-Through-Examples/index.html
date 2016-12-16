@@ -82,6 +82,7 @@
 
 防抖（Debounce）和节流（throttle）都是用来控制某个函数在一定时间内执行多少次的技巧，两者相似而又不同。
 当我们给 DOM 绑定事件的时候，加了防抖和节流的函数变得特别有用。为什么呢？因为我们在事件和函数执行之间加了一个控制层。记住，我们是无法控制 DOM">
+<meta name="twitter:image" content="http://jinlong.github.io/image/debounce-throttle/p1.png">
 
 
 
@@ -342,11 +343,11 @@
 
 <p>相似的使用场景还有，直到用户输完，才验证输入的正确性，显示错误信息。</p>
 <h1 id="如何使用_debounce_和_throttle_以及常见的坑">如何使用 debounce 和 throttle 以及常见的坑</h1><p>自己造一个 debounce / throttle 的轮子看起来多么诱人，或者随便找个博文复制过来。<strong>我是建议直接使用 underscore 或 Lodash</strong> 。如果仅需要 <code>_.debounce</code> 和 <code>_.throttle</code> 方法，可以使用 Lodash 的自定义构建工具，生成一个 2KB 的压缩库。使用以下的简单命令即可：</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i -<span class="keyword">g</span> lodash-<span class="keyword">cli</span></span><br><span class="line">lodash-<span class="keyword">cli</span> <span class="keyword">include</span>=debounce,throttle</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm i -<span class="keyword">g</span> lodash-<span class="keyword">cli</span></div><div class="line">lodash-<span class="keyword">cli</span> <span class="keyword">include</span>=debounce,throttle</div></pre></td></tr></table></figure>
 <p>常见的坑是，不止一次地调用 <code>_.debounce</code> 方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   _.debounce(doSomething, <span class="number">300</span>); </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, _.debounce(doSomething, <span class="number">200</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 错误</span></div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   _.debounce(doSomething, <span class="number">300</span>); </div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 正确</span></div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, _.debounce(doSomething, <span class="number">200</span>));</div></pre></td></tr></table></figure>
 <p>debounce 方法保存到一个变量以后，就可以用它的私有方法 <code>debounced_version.cancel()</code>，lodash 和 underscore.js 都有效。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> debounced_version = _.debounce(doSomething, <span class="number">200</span>);</span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, debounced_version);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果需要的话</span></span><br><span class="line">debounced_version.cancel();</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> debounced_version = _.debounce(doSomething, <span class="number">200</span>);</div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, debounced_version);</div><div class="line"></div><div class="line"><span class="comment">// 如果需要的话</span></div><div class="line">debounced_version.cancel();</div></pre></td></tr></table></figure>
 <h1 id="Throttle（节流阀）">Throttle（节流阀）</h1><p>使用 _.throttle 的时候，只允许一个函数在 X 毫秒内执行一次。</p>
 <p>跟 debounce 主要的不同在于，throttle 保证 X 毫秒内至少执行一次。</p>
 <h2 id="节流阀实例">节流阀实例</h2><p><strong>无限滚动</strong></p>
@@ -509,21 +510,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

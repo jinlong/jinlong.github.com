@@ -65,7 +65,7 @@
 
 JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？
 以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。
-如何读">
+如何">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 错误以及如何修复">
 <meta property="og:url" content="http://jinlong.github.io/2015/02/01/javascript-errors-and-how-to-fix-them/index.html">
@@ -74,7 +74,7 @@ JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其
 
 JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？
 以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。
-如何读">
+如何">
 <meta property="og:updated_time" content="2015-10-29T03:00:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 错误以及如何修复">
@@ -82,7 +82,7 @@ JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其
 
 JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其次给出的行号不总有帮助。有个查找错误含义，及修复措施的列表，是不是很有用？
 以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。
-如何读">
+如何">
 
 
 
@@ -292,7 +292,7 @@ JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其
 <p>以下是奇怪的 JavaScript 错误列表。同样的错误，不同的浏览器会给出不同的消息，因此有一些不同的例子。</p>
 <h3 id="如何读懂错误？">如何读懂错误？</h3><p>首先，让我们快速看下错误信息的结构。理解结构有助于理解错误，如果遇到列表之外的错误会减少麻烦。</p>
 <p>Chrome 中典型的错误像这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught <span class="built_in">TypeError</span>: <span class="literal">undefined</span> is not a <span class="function"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Uncaught <span class="built_in">TypeError</span>: <span class="literal">undefined</span> is not a <span class="function"><span class="keyword">function</span></span></div></pre></td></tr></table></figure>
 <p>错误的结构如下：</p>
 <ol>
 <li><p><strong>Uncaught TypeError：</strong>这部分信息通常不是很有用。<code>Uncaught</code> 表示错误没有被 <code>catch</code> 语句捕获，<code>TypeError</code> 是错误的名字。</p>
@@ -304,22 +304,22 @@ JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其
 <p>以下是真正的错误。</p>
 <h3 id="Uncaught_TypeError:_undefined_is_not_a_function">Uncaught TypeError: undefined is not a function</h3><p><strong>相关错误：</strong>number is not a function, object is not a function, string is not a function, Unhandled Error: ‘foo’ is not a function, Function Expected</p>
 <p>当尝试调用一个像方法的值时，这个值并不是一个方法。比如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">undefined</span>;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="literal">undefined</span>;</div><div class="line">foo();</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>如果你尝试调用一个对象的方法时，你输错了名字，这个典型的错误很容易发生。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="built_in">document</span>.getElementByID(<span class="string">'foo'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="built_in">document</span>.getElementByID(<span class="string">'foo'</span>);</div></pre></td></tr></table></figure>
 <p>由于对象的属性不存在，默认是 <code>undefined</code> ，以上代码将导致这个错误。</p>
 <p>尝试调用一个像方法的数字，“number is not a function” 错误出现。</p>
 <p><strong>如何修复错误：</strong>确保方法名正确。这个错误的行号将指出正确的位置。</p>
 <h3 id="Uncaught_ReferenceError:_Invalid_left-hand_side_in_assignment">Uncaught ReferenceError: Invalid left-hand side in assignment</h3><p><strong>相关错误：</strong>Uncaught exception: ReferenceError: Cannot assign to ‘functionCall()’, Uncaught exception: ReferenceError: Cannot assign to ‘this’</p>
 <p>尝试给不能赋值的东西赋值，引起这个错误。</p>
 <p>这个错误最常见的例子出现在 if 语句使用：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(doSomething() = <span class="string">'somevalue'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(doSomething() = <span class="string">'somevalue'</span>)</div></pre></td></tr></table></figure>
 <p>此例中，程序员意外地使用了单个等号，而不是双等号。“left-hand side in assignment” 提及了等号左手边的部分，因此你可以看到以上例子，左手边包含不能赋值的东西，导致这个错误。</p>
 <p><strong>如何修复错误：</strong>确保没有给函数结果赋值，或者给 <code>this</code> 关键字赋值。</p>
 <h3 id="Uncaught_TypeError:_Converting_circular_structure_to_JSON">Uncaught TypeError: Converting circular structure to JSON</h3><p><strong>相关错误：</strong>Uncaught exception: TypeError: JSON.stringify: Not an acyclic Object, TypeError: cyclic object value, Circular reference in value argument not supported</p>
 <p>把循环引用的对象，传给 <code>JSON.stringify</code> 总会引起错误。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123; &#125;;</span><br><span class="line"><span class="keyword">var</span> b = &#123; a: a &#125;;</span><br><span class="line">a.b = b;</span><br><span class="line"><span class="built_in">JSON</span>.stringify(a);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = &#123; &#125;;</div><div class="line"><span class="keyword">var</span> b = &#123; <span class="attr">a</span>: a &#125;;</div><div class="line">a.b = b;</div><div class="line"><span class="built_in">JSON</span>.stringify(a);</div></pre></td></tr></table></figure>
 <p>由于以上的 <code>a</code> 和 <code>b</code> 循环引用彼此，结果对象无法转换成 JSON。</p>
 <p><strong>如何修复错误：</strong>移除任何想转换成 JSON 的对象中的循环引用。</p>
 <h3 id="Unexpected_token_;">Unexpected token ;</h3><p><strong>相关错误：</strong>Expected ), missing ) after argument list</p>
@@ -336,11 +336,11 @@ JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其
 <p><strong>如何修复错误：</strong>确保所有的字符串都有结束的引号。</p>
 <h3 id="Uncaught_TypeError:_Cannot_read_property_‘foo’_of_null,_Uncaught_TypeError:_Cannot_read_property_‘foo’_of_undefined">Uncaught TypeError: Cannot read property ‘foo’ of null, Uncaught TypeError: Cannot read property ‘foo’ of undefined</h3><p><strong>相关错误：</strong>TypeError: someVal is null, Unable to get property ‘foo’ of undefined or null reference</p>
 <p>尝试读取 <code>null</code> 或者 <code>undefined</code> ，把它当成了对象。例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someVal = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.log(someVal.foo);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> someVal = <span class="literal">null</span>;</div><div class="line"><span class="built_in">console</span>.log(someVal.foo);</div></pre></td></tr></table></figure>
 <p><strong>如何修复错误：</strong>通常由于拼写错误导致。检查错误指出的行号附近使用的变量名是否正确。</p>
 <h3 id="Uncaught_TypeError:_Cannot_set_property_‘foo’_of_null,_Uncaught_TypeError:_Cannot_set_property_‘foo’_of_undefined">Uncaught TypeError: Cannot set property ‘foo’ of null, Uncaught TypeError: Cannot set property ‘foo’ of undefined</h3><p><strong>相关错误：</strong>TypeError: someVal is undefined, Unable to set property ‘foo’ of undefined or null reference</p>
 <p>尝试写入 <strong>null</strong> 或者 <strong>undefined</strong> ，把它当成了一个对象。例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someVal = <span class="literal">null</span>;</span><br><span class="line">someVal.foo = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> someVal = <span class="literal">null</span>;</div><div class="line">someVal.foo = <span class="number">1</span>;</div></pre></td></tr></table></figure>
 <p><strong>如何修复错误：</strong>也是由于拼写错误所致。检查错误指出的行号附近的变量名。</p>
 <h3 id="Uncaught_RangeError:_Maximum_call_stack_size_exceeded">Uncaught RangeError: Maximum call stack size exceeded</h3><p><strong>相关错误：</strong>Related errors: Uncaught exception: RangeError: Maximum recursion depth exceeded, too much recursion, Stack overflow</p>
 <p>通常由程序逻辑 bug 引起，导致函数的无限递归调用。</p>
@@ -353,7 +353,7 @@ JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其
 <p><strong>如何修复：</strong>确保请求的 URL 是正确的，它遵循<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">同源策略</a> 。最好的方法是从代码中找到错误信息指出的 URL 。</p>
 <h3 id="InvalidStateError:_An_attempt_was_made_to_use_an_object_that_is_not,_or_is_no_longer,_usable">InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable</h3><p><strong>相关错误：</strong>InvalidStateError, DOMException code 11</p>
 <p>代码调用的方法在当前状态无法调用。通常由 <code>XMLHttpRequest</code> 引起，在方法准备完毕之前调用它会引起错误。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.setRequestHeader(<span class="string">'Some-Header'</span>, <span class="string">'val'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.setRequestHeader(<span class="string">'Some-Header'</span>, <span class="string">'val'</span>);</div></pre></td></tr></table></figure>
 <p>这时就会出错，因为 <code>setRequestHeader</code> 方法只能在 <code>xhr.open</code> 方法之后调用。</p>
 <p><strong>如何修复：</strong>查看错误指出的行号，确保代码运行的时机正确，或者在它（例如 <strong>xhr.open</strong><br>）之前添加了不必要的调用</p>
 <h3 id="结论">结论</h3><p>我看过不少无用的 JavaScript 错误，比如 PHP 中声名狼藉的异常 <code>Expected T_PAAMAYIM_NEKUDOTAYIM</code> 。抛出更熟悉的错误才更有意义。现代浏览器不再抛出完全无用的错误，才会更有帮助。</p>
@@ -476,21 +476,21 @@ JavaScript 调试是一场噩梦：首先给出的错误非常难以理解，其
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

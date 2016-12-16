@@ -219,6 +219,131 @@
             
             
               
+                <a class="post-title-link" href="/2013/12/22/grunt-getting-started/" itemprop="url">
+                  Grunt 入门笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-12-22T17:03:00+08:00" content="2013-12-22">
+              2013-12-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Grunt/" itemprop="url" rel="index">
+                    <span itemprop="name">Grunt</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Grunt/Nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">Nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/12/22/grunt-getting-started/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/12/22/grunt-getting-started/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文： <a href="http://gruntjs.com/getting-started">Getting started</a></p>
+</blockquote>
+<h2 id="安装_CLI">安装 CLI</h2><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g grunt-<span class="keyword">cli</span></div></pre></td></tr></table></figure>
+<p>可以在任何路径运行 <code>grunt</code> 命令</p>
+<p>通过 <code>Gruntfile</code> 文件运行某一版本 grunt ，允许多版本共存</p>
+<h2 id="CLI_如何工作">CLI 如何工作</h2><p>每次运行 grunt ，它会使用 node 的 <code>require()</code> 查找本地安装的 grunt 。基于此原因，你可以在项目的任何子目录运行它。</p>
+<p>找到了本地安装的 Grunt ，CLI 加载本地安装的 Grunt 库，应用 <code>Gruntfile</code> 里的配置，执行预期的任务。</p>
+<p>想理解真正奥秘，可以<a href="https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt">读源码</a>，它非常短。</p>
+<h2 id="运行已存在的_Grunt_项目">运行已存在的 Grunt 项目</h2><p>假设  Grunt CLI 已安装，项目已通过 <code>package.json</code> 和 <code>Gruntfile</code> 配置好，使用 Grunt 非常简单：</p>
+<ol>
+<li>切换到项目的根目录   </li>
+<li>通过 <code>npm install</code> 安装项目依赖   </li>
+<li>通过 <code>grunt</code> 命令运行 Grunt </li>
+</ol>
+<p><code>grunt --help</code> 可以罗列已安装的 Grunt 任务列表，但是最好从项目文档开始。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/12/22/grunt-getting-started/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2013/11/25/javascript-best-practices/" itemprop="url">
                   Javascript 最佳实践
                 </a>
@@ -282,9 +407,9 @@
 <p>原文：<br><a href="http://www.thinkful.com/learn/javascript-best-practices-1/">Javascript BEST PRACTICES PART 1</a><br><a href="http://www.thinkful.com/learn/javascript-best-practices-2/">Javascript BEST PRACTICES PART 2</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
 </blockquote>
 <h2 id="Make_it_Understandable（更易理解）">Make it Understandable（更易理解）</h2><p>变量和函数选择容易理解，较短的单词命名。</p>
-<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">x1</span> fe2 xbqne</span><br></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span></span><br><span class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span><br></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>## 避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
+<div style="color:#c01d1d">不好的变量名：</div><br><figure class="highlight llvm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">x</span><span class="number">1</span> fe<span class="number">2</span> xbqne</div></pre></td></tr></table></figure><br><br><br><div style="color:#c01d1d">也不好的变量名：</div><br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">incrementerForMainLoopWhichSpansFromTenToTwenty</div><div class="line">createNewMemberIfAgeOverTwentyOneAndMoonIsFull</span></div></pre></td></tr></table></figure><br><br>避免用变量或函数名描述一个值。<br><br><div style="color:#c01d1d">在有的国家也许讲不通：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">isOverEighteen</span><span class="params">()</span></span></div></pre></td></tr></table></figure><br><br><br><div style="color:#5ead12">工作良好：</div><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">isLegalAge</span><span class="params">()</span></span></div></pre></td></tr></table></figure><br><br>Your code is a story - make your storyline easy to follow!<br>你的代码是一则故事 - 让故事情节更容易投入。<br><br>## 避免全局变量<br><br>全局变量是魔鬼<br><br><strong>原因：</strong>其它后面的 JavaScript 代码随时会覆盖你的代码。<br><br><strong>变通方案：</strong>使用闭包和模块模式<br><br><div style="color:#c01d1d"><br>    <strong>问题：</strong>所有全局变量都可以被访问；访问不受控制，页面任何东西都可以被覆盖。</div>
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> current = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> labels = &#123;</span><br><span class="line">   <span class="string">'home'</span>:<span class="string">'home'</span>,</span><br><span class="line">   <span class="string">'articles'</span>:<span class="string">'articles'</span>,</span><br><span class="line">   <span class="string">'contact'</span>:<span class="string">'contact'</span> </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   current = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   show();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> current = <span class="literal">null</span>;</div><div class="line"><span class="keyword">var</span> labels = &#123;</div><div class="line">   <span class="string">'home'</span>:<span class="string">'home'</span>,</div><div class="line">   <span class="string">'articles'</span>:<span class="string">'articles'</span>,</div><div class="line">   <span class="string">'contact'</span>:<span class="string">'contact'</span> </div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   current = <span class="number">1</span>;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   show();</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2013/11/25/javascript-best-practices/#more" rel="contents">
               阅读全文 &raquo;
@@ -639,12 +764,12 @@
 <p>可是对于刚接触 Node.js 开发的同学，免不了遇到一些挫折。在这篇简短的文章中，我提到了一些学习 Node.js 时遇到的问题。</p>
 <h2 id="技巧_1_：开发环境使用_nodemon，生产环境使用_pm2">技巧 1 ：开发环境使用 nodemon，生产环境使用 pm2</h2><p>当你着手 Node.js  开发时，最突出的问题之一是，必须一次又一次的运行 <code>node [file].js</code> 。我开始学 node 时，这点相当令我抓狂。尤其是每次修改一点东西，都要 <code>control + C</code> 。</p>
 <p>幸运的是我发现了一个非常棒的工具 <a href="https://github.com/remy/nodemon">Nodemon</a> 。运行以下命令安装它：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> nodemon</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> -g nodemon</div></pre></td></tr></table></figure>
 <p>Nodemon 了不起呀，一旦全局安装了它，你可以通过 <code>nodemon [file].js</code> 运行 node.js 脚本。nodemon 会监控你的代码，以及所有依赖代码的变化。如此开发 Node.js ，开发效率瞬间提高。</p>
 <p>生产环境呢？除非你用了 Heroku，Nodejitsu 或者其它不错的 Node.js 托管服务，否则你可以试试 EC2 或者其它的云服务，通过它们运行你的 Node.js 应用。如何保证 Node.js 应用一直运行呢？</p>
 <p><a href="https://github.com/Unitech/pm2">PM2</a> 像 nodemon ，用于在生产环境运行 node 应用。它会监控你的 app 变化并重新部署它们，不同之处在于，如果 PM2 遇到事故，它将立刻重启你的 node.js 应用。</p>
 <p>当你的应用需要多核处理的时候，凸显出了 PM2 的优势。PM2 内部集成的“负载均衡”让你轻松指定 Node 应用运行几个实例。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app<span class="class">.js</span> -<span class="tag">i</span> max</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start app<span class="selector-class">.js</span> -<span class="selector-tag">i</span> max</div></pre></td></tr></table></figure>
 <p><strong>-i</strong> 参数用来指定运行多少个实例，此例中 PM2 使用了一个常量 <strong>max</strong> 自动扩展你的 app 运转到最大核数，不要忘记 Node 平时只运行在单核上！<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2013/10/17/7-tips-for-a-node-dot-js-padawan/#more" rel="contents">
@@ -990,10 +1115,10 @@
       
         
           <p>直入主题，JavaScript 中的变量和函数提升，有时还是容易错的，记录一下。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ReferenceError: noSuchVariable is not defined</span></span><br><span class="line"><span class="built_in">console</span>.log(noSuchVariable);</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Outputs: undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(declaredLater);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> declaredLater = <span class="string">"Now it's defined!"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "Now it's defined!"</span></span><br><span class="line"><span class="built_in">console</span>.log(declaredLater);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ReferenceError: noSuchVariable is not defined</span></div><div class="line"><span class="built_in">console</span>.log(noSuchVariable);</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Outputs: undefined</span></div><div class="line"><span class="built_in">console</span>.log(declaredLater);</div><div class="line"></div><div class="line"><span class="keyword">var</span> declaredLater = <span class="string">"Now it's defined!"</span>;</div><div class="line"></div><div class="line"><span class="comment">// Outputs: "Now it's defined!"</span></div><div class="line"><span class="built_in">console</span>.log(declaredLater);</div></pre></td></tr></table></figure>
 <p>JavaScript 解释器“前瞻性”查找所有变量定义，把它们“提升”到函数顶部。等价于：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> declaredLater;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(declaredLater);</span><br><span class="line"></span><br><span class="line">declaredLater = <span class="string">"Now it's defined!"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "Now it's defined!"</span></span><br><span class="line"><span class="built_in">console</span>.log(declaredLater);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> declaredLater;</div><div class="line"></div><div class="line"><span class="comment">// Outputs: undefined</span></div><div class="line"><span class="built_in">console</span>.log(declaredLater);</div><div class="line"></div><div class="line">declaredLater = <span class="string">"Now it's defined!"</span>;</div><div class="line"></div><div class="line"><span class="comment">// Outputs: "Now it's defined!"</span></div><div class="line"><span class="built_in">console</span>.log(declaredLater);</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2013/09/11/var-and-fun-hoisting/#more" rel="contents">
               阅读全文 &raquo;
@@ -1318,117 +1443,14 @@
 <h2 id="vertical-align:middle">vertical-align:middle</h2><p>垂直居中 inline 文字，inline 元素，配合 <code>display:table</code> ，<code>display:table-cell</code>，有奇效。</p>
 <h2 id="line-height">line-height</h2><p>与 height 联手，垂直居中文字</p>
 <h2 id="margin:auto">margin:auto</h2><p>示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css"></span><br><span class="line">  <span class="id">#ex2_container</span> <span class="rules">&#123; <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200px</span></span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; &#125;</span></span><br><span class="line">  <span class="id">#ex2_content</span> <span class="rules">&#123; <span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0px</span> auto</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">display</span>:<span class="value">table</span></span>; &#125;</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex2_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></div><div class="line">  <span class="selector-id">#ex2_container</span> &#123; <span class="attribute">width</span>:<span class="number">200px</span>; <span class="attribute">background-color</span>:yellow; &#125;</div><div class="line">  <span class="selector-id">#ex2_content</span> &#123; <span class="attribute">margin</span>:<span class="number">0px</span> auto; <span class="attribute">background-color</span>:gray; <span class="attribute">color</span>:white; <span class="attribute">display</span>:table; &#125;</div><div class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ex2_container"</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ex2_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="hacks,_hacks（小技巧）">hacks, hacks（小技巧）</h2><p>有许多 <a href="http://blog.themeforest.net/tutorials/vertical-centering-with-css/">hacks</a> ，负 margin，<a href="http://css-tricks.com/centering-in-the-unknown/">影子元素</a> ::before 等。如果你的内容不是固定大小的话，它们大部分是很脆弱的。</p>
 <h2 id="translate(-50%,-50%)">translate(-50%,-50%)</h2><p>用 position 加 translate<br>translate(-50%,-50%) 比较奇特，百分比计算不是以父元素为基准，而是以自己为基准。</p>
 <p>参考文章：<a href="http://jinlong.github.io/blog/2013/07/08/centering-percentage-widthheight-elements/">居中百分比宽高的元素</a></p>
-<p>示例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css"></span><br><span class="line">  <span class="id">#ex3_container</span> <span class="rules">&#123; <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200px</span></span></span>; <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">yellow</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>; &#125;</span></span><br><span class="line">  <span class="id">#ex3_content</span> <span class="rules">&#123; <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50%</span></span></span>; <span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">50%</span></span></span>; <span class="rule"><span class="attribute">transform</span>:<span class="value"><span class="function">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>)</span></span>; <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"><span class="function">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>)</span></span>; <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>; <span class="rule"><span class="attribute">color</span>:<span class="value">white</span></span>; <span class="rule"><span class="attribute">position</span>:<span class="value">absolute</span></span>; &#125;</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_container"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"ex3_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></div><div class="line">  <span class="selector-id">#ex3_container</span> &#123; <span class="attribute">width</span>:<span class="number">200px</span>; <span class="attribute">height</span>:<span class="number">200px</span>; <span class="attribute">background-color</span>:yellow; <span class="attribute">position</span>:relative; &#125;</div><div class="line">  <span class="selector-id">#ex3_content</span> &#123; <span class="attribute">left</span>:<span class="number">50%</span>; <span class="attribute">top</span>:<span class="number">50%</span>; <span class="attribute">transform</span>:<span class="built_in">translate</span>(-50%,-50%); <span class="attribute">-webkit-transform</span>:<span class="built_in">translate</span>(-50%,-50%); <span class="attribute">background-color</span>:gray; <span class="attribute">color</span>:white; <span class="attribute">position</span>:absolute; &#125;</div><div class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ex3_container"</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ex3_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>这个技巧相当嚣张，同样适用于没固定大小的内容，<code>min-width</code>，<code>max-height</code>，<code>overflow:scroll</code> 等。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2013/08/13/centering-all-the-directions/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/08/13/javascript-promises/" itemprop="url">
-                  JavaScript Promises
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-08-13T13:13:00+08:00" content="2013-08-13">
-              2013-08-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/08/13/javascript-promises/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/08/13/javascript-promises/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文：<a href="http://wildermuth.com/2013/8/3/JavaScript_Promises">JavaScript Promises</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<p>不，我不是要谈论 JavaScript 会解决一切问题的承诺。我甚至也不相信这点;) 我想谈谈几个JavaScript 库（包括 <a href="http://angularjs.org/">AngularJS</a>，<a href="http://jquery.com/">jQuery</a>，<a href="http://dojotoolkit.org/">Dojo</a> 和 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br229773.aspx">WinJS</a>）用到的约定对象（promise object）的概念。</p>
-<p>promise 是处理异步操作的模式。问题是当你开始一个异步操作，操作完成时需要执行一些代码。异步代码非常普遍，大部分的库已经找到了解决方案，传入回调函数。但是，每个库的作法很少有共性。让我们看看 jQuery 的例子：</p>
-<iframe width="100%" height="300" src="http://jsfiddle.net/cuXqF/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/08/13/javascript-promises/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1495,21 +1517,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

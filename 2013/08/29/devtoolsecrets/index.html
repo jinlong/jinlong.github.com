@@ -43,7 +43,7 @@
 
 
 
-  <meta name="keywords" content="Debug,开发工具,浏览器," />
+  <meta name="keywords" content="Debug,浏览器,开发工具," />
 
 
 
@@ -155,6 +155,7 @@ Assert
 重新运行命令
 任意 Tab 打开控制台
 改变框架焦点">
+<meta name="twitter:image" content="http://jinlong.github.io/images/post/devtoolsecrets/c.png">
 
 
 
@@ -495,7 +496,7 @@ Assert
 <h3 id="Log,_Info,_Debug,_Warn,_Error">Log, Info, Debug, Warn, Error</h3><p>不必用 alert 时，console.log() 是个极其有用的输出调试工具；</p>
 <p>console.log() 是 printf 风格，因此你可以这么做：<code>console.log(&quot;%s is %d years old.&quot;, &quot;Bob&quot;, 42)</code>。</p>
 <p>可以用 <code>console.info()</code> 输出提示信息；<code>console.debug()</code> 输出调试信息；<code>console.warn()</code> 输出警示信息；<code>console.error()</code> 输出错误信息。</p>
-<p>你还可以用 %c 模式，把第二个变量作为样式格式参数。例如：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console<span class="class">.log</span>("%cThis is green <span class="value">text</span> on <span class="tag">a</span> yellow <span class="attribute">background</span>.", "<span class="attribute">color</span><span class="value">:green;</span> <span class="attribute">background-color</span><span class="value">:yellow<span class="string">");</span></span></span><br></pre></td></tr></table></figure></p>
+<p>你还可以用 %c 模式，把第二个变量作为样式格式参数。例如：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console<span class="selector-class">.log</span>("%cThis is green text on <span class="selector-tag">a</span> yellow <span class="attribute">background</span>.", "<span class="attribute">color</span>:green; <span class="attribute">background-color</span>:yellow<span class="string">");</span></div></pre></td></tr></table></figure></p>
 <p>Firebug 只不过显示的图标不同，消息的背景色是一致的。</p>
 <p>根据  MDN 的消息，他们不赞成使用 console.debug() ，因此没有图标标识，赞成用 console.log() 代替。</p>
 <p>Chrome 和 Safari（nightly）用 info 时不显示图标，用 debug 时显示蓝图标；用 warn 时显示黄图标；用 error 时显示红图标。</p>
@@ -507,7 +508,7 @@ Assert
 <p>如果元素的数量不匹配，表格将显示 <code>undefined</code> 表示没有数据。</p>
 <p>自定义列名，属性名必须在对象中指定元素。自定义（<code>index</code>）的值，可以给每个属性命名。</p>
 <p>第二个可选的变量允许你明确指定哪一列要输出。</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.table(&#123;</span><br><span class="line">	<span class="string">"London"</span>:&#123;<span class="string">population:</span><span class="number">8173194</span>, <span class="string">country:</span><span class="string">"UK"</span>, <span class="string">elevation:</span><span class="string">"24m"</span>&#125;,</span><br><span class="line">	<span class="string">"New York"</span>:&#123;<span class="string">population:</span><span class="number">8336697</span>, <span class="string">country:</span><span class="string">"USA"</span>, <span class="string">elevation:</span><span class="string">"10m"</span>&#125;&#125;,</span><br><span class="line">	[<span class="string">"population"</span>, <span class="string">"country"</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">console.table(&#123;</div><div class="line">	<span class="string">"London"</span>:&#123;<span class="string">population:</span><span class="number">8173194</span>, <span class="string">country:</span><span class="string">"UK"</span>, <span class="string">elevation:</span><span class="string">"24m"</span>&#125;,</div><div class="line">	<span class="string">"New York"</span>:&#123;<span class="string">population:</span><span class="number">8336697</span>, <span class="string">country:</span><span class="string">"USA"</span>, <span class="string">elevation:</span><span class="string">"10m"</span>&#125;&#125;,</div><div class="line">	[<span class="string">"population"</span>, <span class="string">"country"</span>])</div></pre></td></tr></table></figure>
 <p>结果如下：</p>
 <p><img src="/images/post/devtoolsecrets/chrome-table-custom-headings.png"></p>
 <p><div id="assert"></div></p>
@@ -590,9 +591,9 @@ Assert
 <h3 id="拖拽重排元素">拖拽重排元素</h3><p>在 Chrome 和 Safari 里，，“Elements”标签下，可以拖拽重排元素顺序。简单点击拖动元素即可，目标位置会出现一条线。</p>
 <p><div id="sass"></div></p>
 <h3 id="使用_SASS_Source_Maps">使用 SASS Source Maps</h3><p>使用 CSS 预处理器有许多优势，但是在浏览器开发工具中修改比较困难。例如，当你再次运行 SASS 时， 在开发工具中保存的编译后CSS 可能被覆盖，不太理想。SASS 3.3 以上（可以安装使用‘sass gem install sass –pre’），为 SASS 文件创建映射很容易，你可以很容易的保存修改。</p>
-<p>首先，为 SASS watch 命令增加 <code>--sourcemap</code> ，像这样：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sass --watch scss/devtoolsecrets<span class="class">.scss</span>:css/devtoolsecrets<span class="class">.min</span><span class="class">.css</span> --style compressed --sourcemap</span><br></pre></td></tr></table></figure></p>
+<p>首先，为 SASS watch 命令增加 <code>--sourcemap</code> ，像这样：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sass --watch scss/devtoolsecrets<span class="selector-class">.scss</span>:css/devtoolsecrets<span class="selector-class">.min</span><span class="selector-class">.css</span> --style compressed --sourcemap</div></pre></td></tr></table></figure></p>
 <p>然后在 SASS 文件底部添加映射文件的名字（sourceMappingURL）：</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<span class="keyword">*</span>@ sourceMappingURL=devtoolsecrets.css.map <span class="keyword">*</span>/</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*@ sourceMappingURL=devtoolsecrets.css.map */</span></div></pre></td></tr></table></figure>
 <p>然后，你需要启用“Experiments 实验”。地址栏输入 <strong>chrome://flags</strong> 启用“启用开发者工具实验”选项，点击页面底部“马上重启”按钮应用改变。在 Chrome 开发工具的右下角，点击齿轮按钮打开“设置”面板。</p>
 <p>点击“General 常规”标签，激活“Enable Source Maps 启用 Source Maps”。点击“Experiments 实验”标签，检查“Support for SASS 支持 SASS ”选项。</p>
 <p>重启浏览器，你可以直接查看 SASS 文件的行号了。</p>
@@ -617,8 +618,8 @@ Assert
 <h3 id="检查断点的作用域">检查断点的作用域</h3><p>在 Chrome ，Javascript 在断点处暂停时，你可以查看当前作用域的所有变量和对象，既可以悬浮查看，也可以通过控制台查看。</p>
 <p>Firebug 有同样的选项，但是需要在 DOM 菜单选择“show closures”。<br>如果断点设置恰当，这个强大的属性让你很容易查看闭包里的变量。</p>
 <p>Firebug 有额外的功能，无需在断点停止，即可访问隐藏的闭包变量。看此例：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123; </span><br><span class="line">	<span class="keyword">this</span>.introduce = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"Hello, my name is %s"</span>, name); </span><br><span class="line">	&#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">// create an instance of Person: var someone = new Person("Arthur"); </span></span><br><span class="line"><span class="comment">// we call a closure! someone.introduce(); </span></span><br><span class="line"><span class="comment">// prints "Hello, my name is Arthur"</span></span><br></pre></td></tr></table></figure>
-<p>代码访问以下闭包变量：<br><strong>closure.%variable</strong><br>以上例子，你将用这个表达式访问 name：<br><strong>someone.introduce.%name // ==&gt; “Arthur”</strong><br>注意你也可以改变值：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">someone.introduce.%name = <span class="string">"Trillian"</span>; someone.introduce(); <span class="regexp">//</span> prints <span class="string">"Hello, my name is Trillian"</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123; </div><div class="line">	<span class="keyword">this</span>.introduce = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"Hello, my name is %s"</span>, name); </div><div class="line">	&#125; </div><div class="line">&#125; </div><div class="line"><span class="comment">// create an instance of Person: var someone = new Person("Arthur"); </span></div><div class="line"><span class="comment">// we call a closure! someone.introduce(); </span></div><div class="line"><span class="comment">// prints "Hello, my name is Arthur"</span></div></pre></td></tr></table></figure>
+<p>代码访问以下闭包变量：<br><strong>closure.%variable</strong><br>以上例子，你将用这个表达式访问 name：<br><strong>someone.introduce.%name // ==&gt; “Arthur”</strong><br>注意你也可以改变值：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">someone.introduce.%name = <span class="string">"Trillian"</span>; someone.introduce(); <span class="regexp">//</span> prints <span class="string">"Hello, my name is Trillian"</span></div></pre></td></tr></table></figure></p>
 <p>Firebug 中，需要 JavaScript 的地方，同样的语法都会生效，例如监控面板和条件断点。</p>
 <p><div id="inspectVal"></div></p>
 <h3 id="监控值">监控值</h3><p>在“脚本”标签的右上角，监控变量相当容易，只有输入变量名，“监控”将让它的值保持更新。</p>
@@ -631,9 +632,9 @@ Assert
 <h3 id="使用_JavaScript_Source_Maps">使用 JavaScript Source Maps</h3><p>当我们部署代码到生产环境时，比较明智的是压缩代码减少加载时间。压缩去除了无用的字符（比如注释），空行和空格。可是压缩后很难调试，无法单步调试，代码不易读。JavaScript source maps 调试压缩后 JavaScript 文件非常有用，它提供一个映射关联到未压缩文件。</p>
 <p>创建 JavaScript source maps ，下载  <a href="https://code.google.com/p/closure-compiler/" target="_blank" rel="external">Google Closure Compiler</a> ，它帮你生成 .map 文件。</p>
 <p>运行带 Source Map 属性的 Closure Compiler ：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar compiler<span class="class">.jar</span> --js common<span class="class">.js</span> --create_source_map ./common<span class="class">.js</span><span class="class">.map</span> --source_map_format=V3 --js_output_file common<span class="class">.min</span><span class="class">.js</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar compiler<span class="selector-class">.jar</span> --js common<span class="selector-class">.js</span> --create_source_map ./common<span class="selector-class">.js</span><span class="selector-class">.map</span> --source_map_format=V3 --js_output_file common<span class="selector-class">.min</span><span class="selector-class">.js</span></div></pre></td></tr></table></figure>
 <p>在压缩后的 JS 文件底部加上映射文件的名字： sourceMappingURL </p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//@ sourceMappingURL=common.js.map</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//@ sourceMappingURL=common.js.map</span></div></pre></td></tr></table></figure>
 <p>在 Chrome 开发工具，，“Settings 设置”菜单 -&gt; “General 常规”标签，激活“Enable Source Maps 启用 Source Maps ”。</p>
 <p>现在，当你调试 JavaScript 时，可以用未压缩的版本查找问题所在。</p>
 <p><div id="useragent"></div></p>
@@ -738,9 +739,9 @@ Assert
           
             <a href="/tags/Debug/" rel="tag">#Debug</a>
           
-            <a href="/tags/开发工具/" rel="tag">#开发工具</a>
-          
             <a href="/tags/浏览器/" rel="tag">#浏览器</a>
+          
+            <a href="/tags/开发工具/" rel="tag">#开发工具</a>
           
         </div>
       
@@ -850,21 +851,21 @@ Assert
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

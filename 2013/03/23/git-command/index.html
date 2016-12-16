@@ -43,7 +43,7 @@
 
 
 
-  <meta name="keywords" content="Git,原创," />
+  <meta name="keywords" content="原创,Git," />
 
 
 
@@ -315,23 +315,23 @@ git 常用命令
 <p>拉取远程仓库：<code>$ git pull [remoteName] [localBranchName]</code>    </p>
 <p>推送远程仓库：<code>$ git push [remoteName] [localBranchName]</code>    </p>
 <p>初始化仓库：<code>git init</code><br><a id="more"></a><br>配置信息：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user<span class="class">.name</span> <span class="string">"jinlongz"</span> </span><br><span class="line">git config --global user<span class="class">.email</span> jinlongz@gmail.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user<span class="selector-class">.name</span> <span class="string">"jinlongz"</span> </div><div class="line">git config --global user<span class="selector-class">.email</span> jinlongz@gmail.com</div></pre></td></tr></table></figure>
 <p>查看本地修改与服务器的差异：<code>git status</code>    </p>
 <p>将这些差异文件添加，这样就可以提交了 <code>git add .</code>    </p>
 <p>提交更改到服务器：<code>git commit –m “这里是注释”</code></p>
-<p>如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，如下：<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="keyword">push</span> origin <span class="keyword">test</span>:master         // 提交本地<span class="keyword">test</span>分支作为远程的master分支</span><br><span class="line">$ git <span class="keyword">push</span> origin <span class="keyword">test</span>:<span class="keyword">test</span>              // 提交本地<span class="keyword">test</span>分支作为远程的<span class="keyword">test</span>分支</span><br></pre></td></tr></table></figure></p>
+<p>如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，如下：<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="keyword">push</span> origin <span class="keyword">test</span>:master         // 提交本地<span class="keyword">test</span>分支作为远程的master分支</div><div class="line">$ git <span class="keyword">push</span> origin <span class="keyword">test</span>:<span class="keyword">test</span>              // 提交本地<span class="keyword">test</span>分支作为远程的<span class="keyword">test</span>分支</div></pre></td></tr></table></figure></p>
 <ul>
 <li>使用 git rebase 避免无谓的 merge</li>
 </ul>
-<p>用 <code>git rebase</code> 代替 <code>git merge</code><br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase <span class="string">[remote name]</span> <span class="string">[branch name]</span></span><br></pre></td></tr></table></figure></p>
-<p>或<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> checkout mywork</span><br><span class="line">git rebase origin</span><br></pre></td></tr></table></figure></p>
-<p>在rebase的过程中，也许会出现冲突。在这种情况，Git会停止rebase并会让你去解决冲突；在解决完冲突后，用<code>git add</code>命令去更新这些内容的索引, 然后，你无需执行 git commit,只要执行:<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --<span class="keyword">continue</span></span><br></pre></td></tr></table></figure></p>
-<p>这样 git 会继续rebase。<br>在任何时候，你可以用<code>--abort</code>参数来终止rebase的行动，并且”mywork”分支会回到rebase开始前的状态。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase <span class="comment">--abort</span></span><br></pre></td></tr></table></figure></p>
+<p>用 <code>git rebase</code> 代替 <code>git merge</code><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">git</span> <span class="selector-tag">pull</span> <span class="selector-tag">--rebase</span> <span class="selector-attr">[remote name]</span> <span class="selector-attr">[branch name]</span></div></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git checkout mywork</span></div><div class="line">git rebase origin</div></pre></td></tr></table></figure></p>
+<p>在rebase的过程中，也许会出现冲突。在这种情况，Git会停止rebase并会让你去解决冲突；在解决完冲突后，用<code>git add</code>命令去更新这些内容的索引, 然后，你无需执行 git commit,只要执行:<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase --<span class="keyword">continue</span></div></pre></td></tr></table></figure></p>
+<p>这样 git 会继续rebase。<br>在任何时候，你可以用<code>--abort</code>参数来终止rebase的行动，并且”mywork”分支会回到rebase开始前的状态。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase <span class="comment">--abort</span></div></pre></td></tr></table></figure></p>
 <h2 id="git_submodule_子模块">git submodule 子模块</h2><p>Git submodule 可以轻易地将别人的 git 项目挂入你目前 git 项目的任何位置</p>
 <ul>
 <li>git submodule add</li>
 </ul>
-<p>使用 <code>git submodule add [仓库位置] [欲放置的位置]</code> 增加一个新的子模块：<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git submodule <span class="keyword">add</span> git@github.com:josephj/javascript-<span class="keyword">platform</span>-yui.git <span class="keyword">static</span>/<span class="keyword">platform</span></span><br></pre></td></tr></table></figure></p>
+<p>使用 <code>git submodule add [仓库位置] [欲放置的位置]</code> 增加一个新的子模块：<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git submodule <span class="keyword">add</span> git@github.com:josephj/javascript-<span class="keyword">platform</span>-yui.git <span class="keyword">static</span>/<span class="keyword">platform</span></div></pre></td></tr></table></figure></p>
 <p><strong><em>需要注意</em></strong> [欲放置的位置] 不能以 / 结尾（会造成修改不生效），也不能已经是现有的路径（不能顺利 Clone）。</p>
 <ul>
 <li>git submodule status </li>
@@ -347,29 +347,29 @@ git 常用命令
 <p>更新子模块的内容</p>
 <h2 id="git_branch_分支操作">git branch 分支操作</h2><ul>
 <li><p>新建本地分支</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> branch testing	<span class="comment">#创建testing分支</span></span><br><span class="line">git checkout testing <span class="comment">#切换至testing分支</span></span><br><span class="line">git checkout -b iss53 <span class="comment">#创建并切换至iss53分支。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">branch </span>testing	<span class="comment">#创建testing分支</span></div><div class="line">git checkout testing <span class="comment">#切换至testing分支</span></div><div class="line">git checkout -<span class="keyword">b </span>iss53 <span class="comment">#创建并切换至iss53分支。</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>创建跟踪分支</p>
 </li>
 </ul>
 <p>方法一：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -<span class="tag">b</span> [本地分支名] [远程名]/[分支名]</span><br><span class="line">git checkout -<span class="tag">b</span> serverfix origin/serverfix</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout -<span class="selector-tag">b</span> [本地分支名] [远程名]/[分支名]</div><div class="line">git checkout -<span class="selector-tag">b</span> serverfix origin/serverfix</div></pre></td></tr></table></figure>
 <p>方法二：（适用1.6.2以上版本Git）</p>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout --track <span class="string">[远程名]</span>/<span class="string">[分支名]</span> </span><br><span class="line">git checkout --track origin/serverfix</span><br></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout --<span class="built_in">track</span> [远程名]/[分支名] </div><div class="line">git checkout --<span class="built_in">track</span> <span class="built_in">origin</span>/serverfix</div></pre></td></tr></table></figure>
 <ul>
 <li>查看分支</li>
 </ul>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">git</span> <span class="keyword">branch </span>#列出所有分支，星号<span class="string">"*"</span>表示当前所在分支。</span><br><span class="line"><span class="label">git</span> <span class="keyword">branch </span>-a #列出本地和远程分支，红色为远程分支</span><br><span class="line"><span class="label">git</span> <span class="keyword">branch </span>-v #查看各分支最后一次提交信息</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">branch </span><span class="comment">#列出所有分支，星号"*"表示当前所在分支。</span></div><div class="line">git <span class="keyword">branch </span>-a <span class="comment">#列出本地和远程分支，红色为远程分支</span></div><div class="line">git <span class="keyword">branch </span>-v <span class="comment">#查看各分支最后一次提交信息</span></div></pre></td></tr></table></figure>
 <ul>
 <li>远程分支跟本地分支的关系</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> remote show origin</span><br></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote <span class="built_in">show</span> <span class="built_in">origin</span></div></pre></td></tr></table></figure>
 <ul>
 <li>更新远程跟踪分支到本地分支</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> fetch origin</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git fetch origin</span></div></pre></td></tr></table></figure>
 <ul>
-<li>删除分支：<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d <span class="string">[name]</span></span><br></pre></td></tr></table></figure>
+<li>删除分支：<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -d <span class="string">[name]</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>-d 选项只能删除已经参与了合并的分支，对于未有合并的分支是无法删除的。如果想强制删除一个分支，可以使用 -D 选项</p>
@@ -377,37 +377,37 @@ git 常用命令
 <li>推送本地分支</li>
 </ul>
 <p>方法一：</p>
-<p>语法：git push (远程仓库名) (本地分支名)<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">git</span> <span class="keyword">push </span>origin serverfix</span><br></pre></td></tr></table></figure></p>
+<p>语法：git push (远程仓库名) (本地分支名)<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> serverfix</div></pre></td></tr></table></figure></p>
 <p>方法二：（可自定义远程分支名）</p>
-<p>语法：git push (远程仓库名) (本地分支名):(远程分支名)<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">git</span> <span class="keyword">push </span>origin serverfix:serferfix</span><br></pre></td></tr></table></figure></p>
+<p>语法：git push (远程仓库名) (本地分支名):(远程分支名)<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> serverfix:serferfix</div></pre></td></tr></table></figure></p>
 <ul>
 <li>合并本地分支</li>
 </ul>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="keyword">master</span> <span class="title">#首先切换到主分支</span><br><span class="line">git</span> merge hotfix  <span class="comment">#测试完毕后，合并hotfix分支</span></span><br><span class="line">git branch -d hotfix <span class="comment">#删除已合并的hotfix分支</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git checkout <span class="keyword">master</span> <span class="title">#首先切换到主分支</span></div><div class="line">git merge hotfix  <span class="comment">#测试完毕后，合并hotfix分支</span></div><div class="line">git branch -d hotfix <span class="comment">#删除已合并的hotfix分支</span></div></pre></td></tr></table></figure>
 <ul>
 <li>解决合并冲突</li>
 </ul>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status <span class="preprocessor">#合并失败的文件以<span class="string">"unmerged"</span>标出</span></span><br><span class="line">git add . <span class="preprocessor">#标记冲突已解决，并暂存文件</span></span><br><span class="line">git mergetool <span class="preprocessor">#Git默认图形化冲突解决工具</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git status <span class="comment">#合并失败的文件以"unmerged"标出</span></div><div class="line">git <span class="keyword">add</span><span class="bash"> . <span class="comment">#标记冲突已解决，并暂存文件</span></span></div><div class="line">git mergetool <span class="comment">#Git默认图形化冲突解决工具</span></div></pre></td></tr></table></figure>
 <ul>
 <li>合并远程分支</li>
 </ul>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">merge</span> origin/serverfix <span class="comment">#origin/master格式：远程仓库/分支名，合并远程分支serverfix到当前分支</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">merge</span> origin/serverfix <span class="comment">#origin/master格式：远程仓库/分支名，合并远程分支serverfix到当前分支</span></div></pre></td></tr></table></figure>
 <ul>
 <li>查看已和当前分支合并的分支</li>
 </ul>
-<p>可用<code>git branch -d [name]</code> 删掉未标星号的分支，因为已经合并了。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch <span class="comment">--merged</span></span><br></pre></td></tr></table></figure></p>
+<p>可用<code>git branch -d [name]</code> 删掉未标星号的分支，因为已经合并了。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch <span class="comment">--merged</span></div></pre></td></tr></table></figure></p>
 <ul>
 <li>查看未和当前分支合并的分支</li>
 </ul>
-<p>强制删除未合并的分支<code>git branch -D [name]</code><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> branch --<span class="built_in">no</span>-merged</span><br></pre></td></tr></table></figure></p>
+<p>强制删除未合并的分支<code>git branch -D [name]</code><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git</span> branch --<span class="literal">no</span>-merged</div></pre></td></tr></table></figure></p>
 <ul>
 <li>删除远程分支</li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">git</span> <span class="tag">push</span> <span class="attr_selector">[远程仓库名]</span> :<span class="attr_selector">[远程分支]</span> #注意区别：<span class="tag">git</span> <span class="tag">push</span> <span class="attr_selector">[远程名]</span> <span class="attr_selector">[本地分支]</span>:<span class="attr_selector">[远程分支]</span></span><br><span class="line"><span class="tag">git</span> <span class="tag">push</span> <span class="tag">origin</span> <span class="pseudo">:serverfix</span>　#删除远程分支</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">git</span> <span class="selector-tag">push</span> <span class="selector-attr">[远程仓库名]</span> :<span class="selector-attr">[远程分支]</span> #注意区别：<span class="selector-tag">git</span> <span class="selector-tag">push</span> <span class="selector-attr">[远程名]</span> <span class="selector-attr">[本地分支]</span>:<span class="selector-attr">[远程分支]</span></div><div class="line"><span class="selector-tag">git</span> <span class="selector-tag">push</span> <span class="selector-tag">origin</span> <span class="selector-pseudo">:serverfix</span>　#删除远程分支</div></pre></td></tr></table></figure>
 <ul>
 <li>衍合所在分支</li>
 </ul>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout experiment <span class="comment">#切换到需要衍合的分支</span></span><br><span class="line">git rebase <span class="keyword">master</span> <span class="title">#衍合experiment</span>分支到主分支</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout experiment <span class="comment">#切换到需要衍合的分支</span></div><div class="line">git rebase <span class="keyword">master</span> <span class="title">#衍合experiment</span>分支到主分支</div></pre></td></tr></table></figure>
 <blockquote>
 <p><a href="http://josephjiang.com/entry.php?id=342" target="_blank" rel="external">Git Submodule 的認識與正確使用！</a><br><a href="http://gitbook.liuhui998.com/index.html" target="_blank" rel="external">Git Community Book 中文版</a></p>
 </blockquote>
@@ -419,9 +419,9 @@ git 常用命令
       
         <div class="post-tags">
           
-            <a href="/tags/Git/" rel="tag">#Git</a>
-          
             <a href="/tags/原创/" rel="tag">#原创</a>
+          
+            <a href="/tags/Git/" rel="tag">#Git</a>
           
         </div>
       
@@ -531,21 +531,21 @@ git 常用命令
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -64,7 +64,7 @@
 <meta name="description" content="原文：Using JavaScript’s ‘toString’ Method （需翻墙）译者：涂鸦码龙
 
 是否想知道为什么 alert 一个 JavaScript 对象，得到“[object Object]”文本？缘于 JavaScript 内置 toString 方法。
-注意：例子有些地方用了 alert ，没用 console.log ，是为了绕开 console 对 Object 的特殊处">
+注意：例子有些地方用了 alert ，没用 console.log ，是为了绕开 console 对 Object 的特殊">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 JavaScript 的 toString 方法">
 <meta property="og:url" content="http://jinlong.github.io/2013/07/06/using-javascripts-tostring-method/index.html">
@@ -72,14 +72,14 @@
 <meta property="og:description" content="原文：Using JavaScript’s ‘toString’ Method （需翻墙）译者：涂鸦码龙
 
 是否想知道为什么 alert 一个 JavaScript 对象，得到“[object Object]”文本？缘于 JavaScript 内置 toString 方法。
-注意：例子有些地方用了 alert ，没用 console.log ，是为了绕开 console 对 Object 的特殊处">
+注意：例子有些地方用了 alert ，没用 console.log ，是为了绕开 console 对 Object 的特殊">
 <meta property="og:updated_time" content="2016-04-09T04:50:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 JavaScript 的 toString 方法">
 <meta name="twitter:description" content="原文：Using JavaScript’s ‘toString’ Method （需翻墙）译者：涂鸦码龙
 
 是否想知道为什么 alert 一个 JavaScript 对象，得到“[object Object]”文本？缘于 JavaScript 内置 toString 方法。
-注意：例子有些地方用了 alert ，没用 console.log ，是为了绕开 console 对 Object 的特殊处">
+注意：例子有些地方用了 alert ，没用 console.log ，是为了绕开 console 对 Object 的特殊">
 
 
 
@@ -287,16 +287,16 @@
 </blockquote>
 <p>是否想知道为什么 <code>alert</code> 一个 JavaScript 对象，得到“[object Object]”文本？缘于 JavaScript 内置 <code>toString</code> 方法。</p>
 <p><strong>注意：例子有些地方用了 alert ，没用 console.log ，是为了绕开 console 对 Object 的特殊处理。</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Alerts: '[object Object]'</span></span><br><span class="line">alert(&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "function() &#123;&#125;"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs:</span></span><br><span class="line"><span class="comment">// "Thu Oct 11 1962 00:00:00 GMT-0400 (Eastern Daylight Time)"</span></span><br><span class="line"><span class="comment">// May vary depending on your clock settings</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"October 11, 1962"</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Alerts: '[object Object]'</span></div><div class="line">alert(&#123;&#125;);</div><div class="line"></div><div class="line"><span class="comment">// Outputs: "function() &#123;&#125;"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;);</div><div class="line"></div><div class="line"><span class="comment">// Outputs:</span></div><div class="line"><span class="comment">// "Thu Oct 11 1962 00:00:00 GMT-0400 (Eastern Daylight Time)"</span></div><div class="line"><span class="comment">// May vary depending on your clock settings</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"October 11, 1962"</span>));</div></pre></td></tr></table></figure>
 <p>以上这些有什么共同点？每一个都提供字符串代表它们的值，但是内部的值差异很大。比如，内部的 <code>Date</code> 以毫秒衡量。</p>
 <p>这些对象如何提供字符串作代表？它们均有个 <code>prototype</code> 方法：<code>toString</code>，它会把内部的值转换成字符串。</p>
 <p>假如我们想创建一个新对象，让它返回字符串代表它的值，不用 <code>toString</code> 的话，代码像这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Color</span> (<span class="params">r, g, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.r = r;</span><br><span class="line">    <span class="keyword">this</span>.g = g;</span><br><span class="line">    <span class="keyword">this</span>.b = b;</span><br><span class="line">    <span class="keyword">this</span>.text = <span class="string">"rgb("</span> + r + <span class="string">", "</span> + g + <span class="string">", "</span> + b + <span class="string">")"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "rgb(255, 0, 0)"</span></span><br><span class="line">alert(red.text);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Color</span> (<span class="params">r, g, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.r = r;</div><div class="line">    <span class="keyword">this</span>.g = g;</div><div class="line">    <span class="keyword">this</span>.b = b;</div><div class="line">    <span class="keyword">this</span>.text = <span class="string">"rgb("</span> + r + <span class="string">", "</span> + g + <span class="string">", "</span> + b + <span class="string">")"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="comment">// Outputs: "rgb(255, 0, 0)"</span></div><div class="line">alert(red.text);</div></pre></td></tr></table></figure>
 <p>有几个问题，首先，<code>text</code> 属性跟实际的值不同步（如果改变r, g, b 的值）；其次，必须明确调用 <code>red.text</code> ，不能直接用 red 的值。</p>
 <p>用 <code>toString</code> 方法重写一下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Color</span> (<span class="params">r, g, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.r = r;</span><br><span class="line">    <span class="keyword">this</span>.g = g;</span><br><span class="line">    <span class="keyword">this</span>.b = b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Color.prototype.toString = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"rgb("</span> + <span class="keyword">this</span>.r + <span class="string">", "</span> +</span><br><span class="line">                    <span class="keyword">this</span>.g + <span class="string">", "</span> +</span><br><span class="line">                    <span class="keyword">this</span>.b + <span class="string">")"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Alerts: "rgb(255, 0, 0)"</span></span><br><span class="line">alert(red);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Color</span> (<span class="params">r, g, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.r = r;</div><div class="line">    <span class="keyword">this</span>.g = g;</div><div class="line">    <span class="keyword">this</span>.b = b;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Color.prototype.toString = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"rgb("</span> + <span class="keyword">this</span>.r + <span class="string">", "</span> +</div><div class="line">                    <span class="keyword">this</span>.g + <span class="string">", "</span> +</div><div class="line">                    <span class="keyword">this</span>.b + <span class="string">")"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> red = <span class="keyword">new</span> Color(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="comment">// Alerts: "rgb(255, 0, 0)"</span></div><div class="line">alert(red);</div></pre></td></tr></table></figure>
 <p>把要返回的字符串放到 <code>prototype</code> 的 <code>toString</code> 里面有两个好处：字符串始终与真正的值保持同步，我们可以随时取用字符串的值， JavaScript 解释器会隐含调用 <code>toString</code> 方法。比如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"Red is: "</span> + red;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: "Red is: rgb(255, 0, 0)"</span></span><br><span class="line"><span class="built_in">console</span>.log(message);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message = <span class="string">"Red is: "</span> + red;</div><div class="line"></div><div class="line"><span class="comment">// Outputs: "Red is: rgb(255, 0, 0)"</span></div><div class="line"><span class="built_in">console</span>.log(message);</div></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -415,21 +415,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

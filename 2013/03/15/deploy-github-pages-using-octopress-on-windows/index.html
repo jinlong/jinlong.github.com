@@ -43,7 +43,7 @@
 
 
 
-  <meta name="keywords" content="Github Pages,Octopress," />
+  <meta name="keywords" content="Octopress,Github Pages," />
 
 
 
@@ -312,43 +312,43 @@
 <li>使用 <a href="http://octopress.org/docs/setup/rbenv" target="_blank" rel="external">rbenv</a> 或 <a href="http://octopress.org/docs/setup/rvm" target="_blank" rel="external">RVM</a> 安装 Ruby 1.9.3<br>这俩儿货我均搞不定，总是磕磕绊绊不顺利，最终发现了一个简单的套件 <a href="http://railsinstaller.org/" target="_blank" rel="external">RailsInstaller</a>  。这个相当爽啊，包含：Ruby 1.9.3-p125，Bundler 1.0.18，Git 1.7.6，DevKit等工具，虽然有的用不着，但比起配置 Ruby 和一些插件痛快多了。<a id="more"></a>
 <h2 id="安装_Octopress">安装 Octopress</h2></li>
 </ol>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>://github.com/imathis/octopress.git octopress </span><br><span class="line">cd octopress <span class="comment"># 如果你用的RVM，将被问到是否信任.rvmrc 文件（答 yes）</span></span><br><span class="line">ruby --<span class="operator">version</span> <span class="comment"># 应该显示 Ruby 1.9.3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">git</span>://github.com/imathis/octopress.git octopress </div><div class="line">cd octopress <span class="comment"># 如果你用的RVM，将被问到是否信任.rvmrc 文件（答 yes）</span></div><div class="line">ruby --<span class="keyword">version</span> <span class="comment"># 应该显示 Ruby 1.9.3</span></div></pre></td></tr></table></figure>
 <p>安装相关组件</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">gem</span> install <span class="keyword">bundler</span><br><span class="line"></span><span class="label">rbenv</span> rehash    # 如果你用的 rbenv，rehash 用来运行 <span class="keyword">bundle </span>命令</span><br><span class="line"><span class="keyword">bundle </span>install</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gem <span class="keyword">install </span><span class="keyword">bundler</span></div><div class="line">rbenv rehash    <span class="comment"># 如果你用的 rbenv，rehash 用来运行 bundle 命令</span></div><div class="line"><span class="keyword">bundle </span><span class="keyword">install</span></div></pre></td></tr></table></figure>
 <p>安装 Octopress 默认主题</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rake <span class="keyword">install</span></div></pre></td></tr></table></figure>
 <h2 id="部署到_Github_Pages">部署到 Github Pages</h2><p>新建 Github 仓库，一定要用你的用户名或组织名，例如：<code>username.github.com</code> 或 <code>organization.github.com</code>。你的博客将会<br>提交到 <code>http://username.github.com</code> 主分支，通过简单配置 Octopress 可以帮你做这些。</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rake</span> setup_github_pages</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rake</span> setup_github_pages</div></pre></td></tr></table></figure>
 <ol>
 <li>会问你的 Github 仓库 url ，填上（例如：<code>git@github.com:jinlong/jinlong.github.com.git</code>）</li>
 <li>等命令跑完，会提示有个主分支放在了 _deploy 目录下等待部署</li>
 </ol>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake <span class="keyword">ge</span><span class="label">nerate</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rake <span class="keyword">generate</span></div></pre></td></tr></table></figure>
 <p>以上命令将生成你的博客，把生成的文件复制到 <code>_deploy</code> 目录</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rake</span> watch</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rake watch</span></div></pre></td></tr></table></figure>
 <p>这个货莫要乱试啊，要命啊，啥也没改一预览就 Auto-regeneration 自动编译，自动编译停不下来啊（Ctrl-C 不管用( ⊙ o ⊙ )啊！），我是被坑过了，不信试试。   </p>
 <p>反正翻了整个 Google 没找到停止 <code>rake watch</code> ，停止 Auto-regeneration 的办法，无奈之下，自己瞎改代码吧。   </p>
 <p>我发现 Rakefile 配置文件有这 <code>jekyll --auto</code>：  </p>
 <p>执行 <code>rake preview</code> 任务的时候也会带 <code>jekyll --auto</code>，斗胆把 <code>--auto</code>去了一试，果然又回到手动 generate 了，哈哈~~（改之前此文件备个份吧，万一哪天出岔子）</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rake</span> preview</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rake preview</span></div></pre></td></tr></table></figure>
 <p>浏览器访问 <a href="http://127.0.0.1:4000（http://localhost:4000" target="_blank" rel="external">http://127.0.0.1:4000（http://localhost:4000</a> ）本地可预览调试页面</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rake</span> deploy</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rake deploy</span></div></pre></td></tr></table></figure>
 <p>将 <code>_deploy</code>  的文件加到 git 里，并提交到主分支。过几秒你会收到<br>Github 邮件说你的提交已经收到将发布你的站点（第一次创建）。</p>
 <p>别忘了提交源码到 github。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git <span class="operator"><span class="keyword">commit</span> -<span class="keyword">m</span> <span class="string">'your message'</span></span><br><span class="line">git push origin <span class="keyword">source</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">add</span><span class="bash"> .</span></div><div class="line">git commit -m <span class="string">'your message'</span></div><div class="line">git push origin source</div></pre></td></tr></table></figure>
 <h2 id="配置_Octopress">配置 Octopress</h2><p>一般需要改 <code>Rakefile</code> 和 <code>_config.yml</code> 文件</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_config.yml       <span class="preprocessor"># 主要配置(Jekyll 的设置)</span></span><br><span class="line">Rakefile          <span class="preprocessor"># 部署配置</span></span><br><span class="line">config.rb         <span class="preprocessor"># Compass 配置</span></span><br><span class="line">config.ru         <span class="preprocessor"># Rack 配置</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">_<span class="built_in">config</span>.yml       <span class="comment"># 主要配置(Jekyll 的设置)</span></div><div class="line">Rakefile          <span class="comment"># 部署配置</span></div><div class="line"><span class="built_in">config</span>.rb         <span class="comment"># Compass 配置</span></div><div class="line"><span class="built_in">config</span>.ru         <span class="comment"># Rack 配置</span></div></pre></td></tr></table></figure>
 <p><em>主要配置</em>（<code>_config.yml</code>）</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">url:</span>                <span class="preprocessor"># 博客地址</span></span><br><span class="line"><span class="label">title:</span>              <span class="preprocessor"># 大标题</span></span><br><span class="line"><span class="label">subtitle:</span>           <span class="preprocessor"># 子标题</span></span><br><span class="line"><span class="label">author:</span>             <span class="preprocessor"># 你的名字</span></span><br><span class="line"><span class="label">simple_search:</span>      <span class="preprocessor"># 搜索引擎</span></span><br><span class="line"><span class="label">description:</span>        <span class="preprocessor"># 站点的 meta 描述</span></span><br><span class="line"><span class="label">date_format:</span>        <span class="preprocessor"># 日期格式，默认 Ruby 日期格式</span></span><br><span class="line"><span class="label">subscribe_rss:</span>      <span class="preprocessor"># RSS 订阅，默认 /atom.xml</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">url:</span>                <span class="meta"># 博客地址</span></div><div class="line"><span class="symbol">title:</span>              <span class="meta"># 大标题</span></div><div class="line"><span class="symbol">subtitle:</span>           <span class="meta"># 子标题</span></div><div class="line"><span class="symbol">author:</span>             <span class="meta"># 你的名字</span></div><div class="line"><span class="symbol">simple_search:</span>      <span class="meta"># 搜索引擎</span></div><div class="line"><span class="symbol">description:</span>        <span class="meta"># 站点的 meta 描述</span></div><div class="line"><span class="symbol">date_format:</span>        <span class="meta"># 日期格式，默认 Ruby 日期格式</span></div><div class="line"><span class="symbol">subscribe_rss:</span>      <span class="meta"># RSS 订阅，默认 /atom.xml</span></div></pre></td></tr></table></figure>
 <p><em>Jekyll &amp; 插件</em></p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">root:</span>               <span class="preprocessor"># 相对地址</span></span><br><span class="line"><span class="label">permalink:</span>          <span class="preprocessor"># 文章的链接结构</span></span><br><span class="line"><span class="label">source:</span>             <span class="preprocessor"># 资源文件目录</span></span><br><span class="line"><span class="label">destination:</span>        <span class="preprocessor"># 生成的站点文件目录</span></span><br><span class="line"><span class="label">plugins:</span>            <span class="preprocessor"># Jekyll 插件目录</span></span><br><span class="line"><span class="label">code_dir:</span>           <span class="preprocessor"># 引入的代码插件目录</span></span><br><span class="line"><span class="label">category_dir:</span>       <span class="preprocessor"># 生成的博客分类页</span></span><br><span class="line"><span class="label">excerpt_link:</span>		<span class="preprocessor"># 继续阅读，在文章里使用&amp;lt;!-- more --&amp;gt; 显示文章摘录</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">root:</span>               <span class="meta"># 相对地址</span></div><div class="line"><span class="symbol">permalink:</span>          <span class="meta"># 文章的链接结构</span></div><div class="line"><span class="symbol">source:</span>             <span class="meta"># 资源文件目录</span></div><div class="line"><span class="symbol">destination:</span>        <span class="meta"># 生成的站点文件目录</span></div><div class="line"><span class="symbol">plugins:</span>            <span class="meta"># Jekyll 插件目录</span></div><div class="line"><span class="symbol">code_dir:</span>           <span class="meta"># 引入的代码插件目录</span></div><div class="line"><span class="symbol">category_dir:</span>       <span class="meta"># 生成的博客分类页</span></div><div class="line"><span class="symbol">excerpt_link:</span>		<span class="meta"># 继续阅读，在文章里使用&amp;lt;!-- more --&amp;gt; 显示文章摘录</span></div></pre></td></tr></table></figure>
 <p>淘宝提供了 RubyGems 的国内镜像站点，这样我可以修改下载的 Octopress 目录下的 Gemfile 文件，把第一行改成</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> <span class="string">"http://ruby.taobao.org/"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> <span class="string">"http://ruby.taobao.org/"</span></div></pre></td></tr></table></figure>
 <p>不能使用中文，字符集不兼容</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">echo <span class="string">'export LC_ALL=zh_CN.UTF-8'</span> <span class="prompt">&gt;&gt; </span>.bash_profile</span><br><span class="line">echo <span class="string">'export LANG=zh_CN.UTF-8'</span> <span class="prompt">&gt;&gt; </span>.bash_profile</span><br></pre></td></tr></table></figure>
-<p>切记运行下面命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd ~</div><div class="line">echo <span class="string">'export LC_ALL=zh_CN.UTF-8'</span> <span class="meta">&gt;&gt; </span>.bash_profile</div><div class="line">echo <span class="string">'export LANG=zh_CN.UTF-8'</span> <span class="meta">&gt;&gt; </span>.bash_profile</div></pre></td></tr></table></figure>
+<p>切记运行下面命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> ~/.bash_profile</div></pre></td></tr></table></figure></p>
 <h2 id="写博客">写博客</h2><p>博客都放在 <code>source/_posts</code>目录，根据 <code>YYYY-MM-DD-post-title.markdown</code> 格式命名，日期决定博客排序。</p>
-<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake <span class="keyword">new</span><span class="number">_p</span>ost[<span class="string">"title"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rake <span class="keyword">new</span><span class="type">_post</span>[<span class="string">"title"</span>]</div></pre></td></tr></table></figure>
 <p><em>参考文章：</em></p>
 <blockquote>
 <p><a href="http://www.xiaoche.me/blog/2012/01/18/install-octopress/" target="_blank" rel="external">从零开始在github上安装octopress</a><br><a href="Octopress http://sinosmond.github.com/blog/2012/03/12/install-and-deploy-octopress-to-github-on-windows7-from-scratch/">在 Windows7 下从头开始安装部署</a><br><a href="http://yanping.me/cn/blog/2011/12/26/octopress-on-windows/" target="_blank" rel="external">Windows下安装Octopress</a><br><a href="http://clark1231.iteye.com/blog/1553939" target="_blank" rel="external">像hackers一样写博客(二)：Octopress设置与增加微博的侧边栏</a></p>
@@ -361,9 +361,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Github-Pages/" rel="tag">#Github Pages</a>
-          
             <a href="/tags/Octopress/" rel="tag">#Octopress</a>
+          
+            <a href="/tags/Github-Pages/" rel="tag">#Github Pages</a>
           
         </div>
       
@@ -473,21 +473,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

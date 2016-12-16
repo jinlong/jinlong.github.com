@@ -65,7 +65,7 @@
 
 当我刚接触 flex-grow 时，为了探寻它的工作原理，做了一个简单的例子。
 我以为理解的挺透彻了，但是当我把它应用到同事的网站上时，效果跟我想象的完全不同。无论怎么改，布局都无法像我的demo那样展示。这时我才意识到，我并没有完全掌握 flex-grow 。
-flex-grow 为何不正常在我深入剖析 fle">
+flex-grow 为何不正常在我深入剖析 fl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="flex-grow 不易理解，难道不是吗?">
 <meta property="og:url" content="http://jinlong.github.io/2016/02/04/flex-grow-is-weird/index.html">
@@ -74,7 +74,7 @@ flex-grow 为何不正常在我深入剖析 fle">
 
 当我刚接触 flex-grow 时，为了探寻它的工作原理，做了一个简单的例子。
 我以为理解的挺透彻了，但是当我把它应用到同事的网站上时，效果跟我想象的完全不同。无论怎么改，布局都无法像我的demo那样展示。这时我才意识到，我并没有完全掌握 flex-grow 。
-flex-grow 为何不正常在我深入剖析 fle">
+flex-grow 为何不正常在我深入剖析 fl">
 <meta property="og:image" content="http://jinlong.github.io/image/flex-grow-weird/pic1.png">
 <meta property="og:image" content="http://jinlong.github.io/image/flex-grow-weird/pic2.png">
 <meta property="og:image" content="http://jinlong.github.io/image/flex-grow-weird/pic3.png">
@@ -85,7 +85,8 @@ flex-grow 为何不正常在我深入剖析 fle">
 
 当我刚接触 flex-grow 时，为了探寻它的工作原理，做了一个简单的例子。
 我以为理解的挺透彻了，但是当我把它应用到同事的网站上时，效果跟我想象的完全不同。无论怎么改，布局都无法像我的demo那样展示。这时我才意识到，我并没有完全掌握 flex-grow 。
-flex-grow 为何不正常在我深入剖析 fle">
+flex-grow 为何不正常在我深入剖析 fl">
+<meta name="twitter:image" content="http://jinlong.github.io/image/flex-grow-weird/pic1.png">
 
 
 
@@ -318,27 +319,27 @@ flex-grow 为何不正常在我深入剖析 fle">
 <p>父容器宽：<strong>900px</strong><br>section 宽：<strong>99px</strong><br>aside 宽：<strong>623px</strong><br>flex-grow 总值：<strong>3</strong></p>
 <p><strong>1. 首先计算剩余空间</strong></p>
 <p>父容器宽减去每一个子元素的初始宽度。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">900</span> - <span class="number">99</span> - <span class="number">623</span> = <span class="number">178</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">900 </span>- <span class="number">99</span> - <span class="number">623</span> = <span class="number">178</span></div></pre></td></tr></table></figure>
 <p>父容器宽 - section 宽 - aside 宽 = 剩余空间</p>
 <p><strong>2. 然后计算 flex-grow 的1份是多宽</strong></p>
 <p>既然有了剩余空间，我们还需要确定把它切成几份。重要的是，我们不按元素的个数切分剩余空间，而是按 flex-grow 总值，所以这里是 3 （<code>flex-grow: 2</code> + <code>flex-grow: 1</code>）</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">178</span> / <span class="number">3</span> = <span class="number">59.33</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">178 </span>/ <span class="number">3</span> = <span class="number">59.33</span></div></pre></td></tr></table></figure>
 <p>剩余空间 / flex-grow 总值 = “1份 flex-grow 的宽”</p>
 <p><strong>3. 最终所有的元素瓜分剩余空间</strong></p>
 <p>依据它们的 flex-grow 值，section 需要 2 份（2 <em> 59.33），aside 需要 1 份（1</em> 59.33）。这个数字再与每个元素的初始宽度相加。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">99</span> + (<span class="number">2</span> * <span class="number">59.33</span>) = <span class="number">217.66</span> (≈<span class="number">218</span>px)</span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">99 </span>+ (<span class="number">2</span> * <span class="number">59.33</span>) = <span class="number">217.66</span> (≈<span class="number">218</span>px)</div></pre></td></tr></table></figure>
 <p>初始 section 宽度 + （section 的 flex-grow 值 * “1 份 flex-grow 的宽”） = 新的宽度</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">623</span> + (<span class="number">1</span> * <span class="number">59.33</span>) = <span class="number">682.33</span> (≈<span class="number">682</span>px)</span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">623 </span>+ (<span class="number">1</span> * <span class="number">59.33</span>) = <span class="number">682.33</span> (≈<span class="number">682</span>px)</div></pre></td></tr></table></figure>
 <p>初始 aside 宽度 + （aside 的 flex-grow 值 * “1 份 flex-grow 的宽”） = 新的宽度</p>
 <p>so easy，不是吗？</p>
 <h1 id="好吧，那为什么第一个例子正常呢？">好吧，那为什么第一个例子正常呢？</h1><p>我们按已有的公式，算下<a href="http://codepen.io/matuzo/pen/zvXQyj" target="_blank" rel="external">第一个例子</a> 。</p>
 <p>父容器宽：<strong>900px</strong><br>section 宽：<strong>0px</strong><br>aside 宽：<strong>0px</strong><br>flex-grow 总值：<strong>3</strong></p>
 <p><strong>1. 计算剩余空间</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">900</span> - <span class="number">0</span> - <span class="number">0</span> = <span class="number">900</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">900 </span>- <span class="number">0</span> - <span class="number">0</span> = <span class="number">900</span></div></pre></td></tr></table></figure>
 <p><strong>2. 计算 flex-grow 的1份是多宽</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">900</span> / <span class="number">3</span> = <span class="number">300</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">900 </span>/ <span class="number">3</span> = <span class="number">300</span></div></pre></td></tr></table></figure>
 <p><strong>3. 分配剩余空间</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> + (<span class="number">2</span> * <span class="number">300</span>) = <span class="number">600</span>  </span><br><span class="line"><span class="number">0</span> + (<span class="number">1</span> * <span class="number">300</span>) = <span class="number">300</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">0 </span>+ (<span class="number">2</span> * <span class="number">300</span>) = <span class="number">600</span>  </div><div class="line"><span class="symbol">0 </span>+ (<span class="number">1</span> * <span class="number">300</span>) = <span class="number">300</span></div></pre></td></tr></table></figure>
 <p>如果每个元素的宽是 0，剩余空间等于父容器的宽度，因此，看起来像是 <code>flex-grow</code> 按比例划分了父容器的宽度。</p>
 <h1 id="flex-grow_和_flex-basis">flex-grow 和 flex-basis</h1><p>快速回顾一下：剩余空间被 <code>flex-grow</code> 的总值划分，由此产生的商，乘以各自的 <code>flex-grow</code> 值，结果再加上每个元素的初始宽度。</p>
 <p>但是如果没有剩余空间或者不想依赖元素的初始宽度，我们可以设置它吗？还能用 <code>flex-grow</code> 吗？</p>
@@ -351,11 +352,11 @@ flex-grow 为何不正常在我深入剖析 fle">
 <p>我调整了一下<a href="http://codepen.io/matuzo/pen/GoRqOP" target="_blank" rel="external">先前的例子</a> ，给每个元素加了 <code>flex-basis</code> 属性。</p>
 <p>父容器宽：<strong>900px</strong><br>section 宽：<strong>400px</strong>（flex-basis 值）<br>aside 宽：<strong>200px</strong>（flex-basis 值）<br>flex-grow 总值：<strong>3</strong></p>
 <p><strong>1. 计算剩余空间</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">900</span> - <span class="number">400</span> - <span class="number">200</span> = <span class="number">300</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">900 </span>- <span class="number">400</span> - <span class="number">200</span> = <span class="number">300</span></div></pre></td></tr></table></figure>
 <p><strong>2. 计算 flex-grow 的1份是多宽</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">300</span> / <span class="number">3</span> = <span class="number">100</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">300 </span>/ <span class="number">3</span> = <span class="number">100</span></div></pre></td></tr></table></figure>
 <p><strong>3. 分配剩余空间</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">400</span> + (<span class="number">2</span> * <span class="number">100</span>) = <span class="number">600</span>  </span><br><span class="line"><span class="number">200</span> + (<span class="number">1</span> * <span class="number">100</span>) = <span class="number">300</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">400 </span>+ (<span class="number">2</span> * <span class="number">100</span>) = <span class="number">600</span>  </div><div class="line"><span class="symbol">200 </span>+ (<span class="number">1</span> * <span class="number">100</span>) = <span class="number">300</span></div></pre></td></tr></table></figure>
 <p>仅仅是为了完整性，我才用到 px 值，用<a href="http://codepen.io/matuzo/pen/pgobag" target="_blank" rel="external">百分比的话当然也没问题</a> 。</p>
 <h1 id="与盒模型结合">与盒模型结合</h1><p>为了覆盖所有情况，如果我们加上 padding 和 margin 看看会发生什么，<a href="http://codepen.io/matuzo/pen/Qybgee" target="_blank" rel="external">啥也没发生</a>  ，第一步计算的时候，只要减去 margin 就好了。</p>
 <p>唯一需要注意的是，使用 <code>box-sizing</code> 的话， <code>flex-basis</code> 跟 <code>width</code> 属性表现相似。<a href="http://codepen.io/matuzo/pen/wMaeVO" target="_blank" rel="external">如果 box-sizing 属性改变</a>，计算结果也会变化。如果 <code>box-sizing</code> 设置为 <code>border-box</code> ，计算时只需用到 <code>flex-basis</code> 和 <code>margin</code> 值，因为 <code>padding</code> 已经包含到宽度里面了。</p>
@@ -380,7 +381,7 @@ flex-grow 为何不正常在我深入剖析 fle">
 <p><a href="https://drafts.csswg.org/css-flexbox/#flex-grow-property" target="_blank" rel="external">https://drafts.csswg.org/css-flexbox/#flex-grow-property</a> </p>
 <p>但是小心！如果仅仅使用 <code>flex: 1;</code> ，以上某些例子可能无法正常展示。</p>
 <p>我们的例子要用 <code>flex</code> 的话，应该这么定义：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex: <span class="number">2</span> <span class="number">1</span> <span class="keyword">auto</span>;  <span class="comment">/* (&lt;flex-grow&gt; | &lt;flex-shrink&gt; | &lt;flex-basis&gt;) */</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flex: 2 1 auto;  /* (<span class="tag">&lt;<span class="name">flex-grow</span>&gt;</span> | <span class="tag">&lt;<span class="name">flex-shrink</span>&gt;</span> | <span class="tag">&lt;<span class="name">flex-basis</span>&gt;</span>) */</div></pre></td></tr></table></figure>
 <h1 id="深入学习_Flexbox">深入学习 Flexbox</h1><p>如果你想深入学习 Flexbox，可以看看这些不错的资源：</p>
 <ul>
 <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">A Complete Guide to Flexbox</a> by Chris Coyier</li>
@@ -510,21 +511,21 @@ flex-grow 为何不正常在我深入剖析 fle">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -66,7 +66,7 @@
 单独安装1$ npm install jshint -g
 1234$ jshint myfile.jsmyfile.js: line 10, col 39, Octal literals are not allowed in strict mode.1 error
 编辑器和IDE插件Sublime-JSHint 
-安装Ctr">
+安装Ct">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSHint 配置浅析">
 <meta property="og:url" content="http://jinlong.github.io/2014/10/25/jshint-configuration/index.html">
@@ -76,7 +76,7 @@
 单独安装1$ npm install jshint -g
 1234$ jshint myfile.jsmyfile.js: line 10, col 39, Octal literals are not allowed in strict mode.1 error
 编辑器和IDE插件Sublime-JSHint 
-安装Ctr">
+安装Ct">
 <meta property="og:updated_time" content="2015-10-29T03:00:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSHint 配置浅析">
@@ -85,7 +85,7 @@
 单独安装1$ npm install jshint -g
 1234$ jshint myfile.jsmyfile.js: line 10, col 39, Octal literals are not allowed in strict mode.1 error
 编辑器和IDE插件Sublime-JSHint 
-安装Ctr">
+安装Ct">
 
 
 
@@ -291,8 +291,8 @@
         <span itemprop="articleBody"><blockquote>
 <p><a href="http://www.jshint.com/" target="_blank" rel="external">JSHint</a>，发现错误和潜在问题的社区驱动的工具<br><a href="http://jslinterrors.com/" target="_blank" rel="external">JSLint 错误解析</a></p>
 </blockquote>
-<h2 id="单独安装">单独安装</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="operator"><span class="keyword">install</span> jshint -<span class="keyword">g</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ jshint myfile<span class="class">.js</span></span><br><span class="line">myfile<span class="class">.js</span>: line <span class="number">10</span>, col <span class="number">39</span>, Octal literals are not allowed <span class="keyword">in</span> strict mode.</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> error</span><br></pre></td></tr></table></figure>
+<h2 id="单独安装">单独安装</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm <span class="keyword">install </span><span class="keyword">jshint </span>-g</div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ jshint myfile<span class="selector-class">.js</span></div><div class="line">myfile<span class="selector-class">.js</span>: line <span class="number">10</span>, col <span class="number">39</span>, Octal literals are not allowed <span class="keyword">in</span> strict mode.</div><div class="line"></div><div class="line"><span class="number">1</span> error</div></pre></td></tr></table></figure>
 <h2 id="编辑器和IDE插件">编辑器和IDE插件</h2><p><a href="https://github.com/victorporof/Sublime-JSHint" target="_blank" rel="external">Sublime-JSHint</a> </p>
 <h3 id="安装">安装</h3><p><code>Ctrl+Shift+P</code> 或 <code>Cmd+Shift+P</code><br>输入 <code>install</code>，选择 <code>Package Control: Install Package</code><br>输入 <code>js gutter</code>，选择 <code>JSHint Gutter</code></p>
 <h3 id="使用方法：">使用方法：</h3><p>Tools -&gt; Command Palette (<code>Ctrl+Shift+P</code> 或者 <code>Cmd+Shift+P</code>) 然后输入 <code>jshint</code></p>
@@ -304,43 +304,43 @@
 <p>打开 JavaScript 文件，菜单 View -&gt; Show Console，然后输入 <code>view.run_command(&quot;jshint&quot;</code>)</p>
 <a id="more"></a>
 <h3 id="编辑，加载或保存时自动检查">编辑，加载或保存时自动检查</h3><p>右键 -&gt; JSHint -&gt; Set Plugin Options</p>
-<p>三项设置为 <code>true</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"lint_on_edit"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"lint_on_load"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"lint_on_save"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>三项设置为 <code>true</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"lint_on_edit"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="string">"lint_on_load"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="string">"lint_on_save"</span>: <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="三种配置方式：">三种配置方式：</h2><p>通过 <code>--config</code> 标记手动配置</p>
 <p>使用 <strong>.jshintrc</strong> 文件</p>
 <p>配置放到项目的 <strong>package.json</strong> 文件里面， <strong>jshintConfig</strong> 下面</p>
 <p><a href="http://www.jshint.com/docs/options/" target="_blank" rel="external">自定义 <strong>.jshintrc</strong> 配置文件</a></p>
-<h2 id="JSHint_设置">JSHint 设置</h2><h3 id="强制选项">强制选项</h3><p>禁用位运算符，位运算符在 JavaScript 中使用较少，经常是把 &amp;&amp; 错输成 &amp;<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">bitwise:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>循环或者条件语句必须使用花括号包围<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">curly:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>强制使用三等号<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">eqeqeq:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>兼容低级浏览器 IE 6/7/8/9<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">es3:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>禁止重写原生对象的原型，比如 <code>Array</code>，<code>Date</code><br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">freeze:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>代码缩进<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">indent:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>禁止定义之前使用变量，忽略 <code>function</code> 函数声明<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">latedef:</span> <span class="string">"nofunc"</span></span><br></pre></td></tr></table></figure></p>
-<p>构造器函数首字母大写<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">newcap:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>禁止使用 <code>arguments.caller</code> 和 <code>arguments.callee</code>，未来会被弃用， ECMAScript 5 禁止使用 <code>arguments.callee</code><br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">noarg:</span><span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>为 <code>true</code> 时，禁止单引号和双引号混用<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"quotmark"</span>: <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
-<p>变量未定义<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"undef"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>变量未使用<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"unused"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>严格模式<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">strict:</span><span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>最多参数个数<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">maxparams</span>: <span class="string">4</span></span><br></pre></td></tr></table></figure></p>
-<p>最大嵌套深度<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">maxdepth</span>: <span class="string">4</span></span><br></pre></td></tr></table></figure></p>
-<p>复杂度检测<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">maxcomplexity:</span><span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>最大行数<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">maxlen</span>: <span class="string">600</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="宽松选项">宽松选项</h3><p>控制“缺少分号”的警告<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"asi"</span>: <span class="literal">true</span></span><br><span class="line"><span class="string">"boss"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>忽略 <code>debugger</code><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"debug"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>控制 <code>eval</code> 使用警告<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"evil"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>检查一行代码最后声明后面的分号是否遗漏<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"lastsemic"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>检查不安全的折行，忽略逗号在最前面的编程风格<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"laxcomma"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>检查循环内嵌套 <code>function</code><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"loopfunc"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>检查多行字符串<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"multistr"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>检查无效的 <code>typeof</code> 操作符值<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"notypeof"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p><code>person[&#39;name&#39;]</code> vs. <code>person.name</code><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"sub"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p><code>new function () { ... }</code> 和 <code>new Object</code>;<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"supernew"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>在非构造器函数中使用 <code>this</code><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"validthis"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="JSHint_设置">JSHint 设置</h2><h3 id="强制选项">强制选项</h3><p>禁用位运算符，位运算符在 JavaScript 中使用较少，经常是把 &amp;&amp; 错输成 &amp;<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">bitwise:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>循环或者条件语句必须使用花括号包围<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">curly:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>强制使用三等号<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">eqeqeq:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>兼容低级浏览器 IE 6/7/8/9<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">es3:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>禁止重写原生对象的原型，比如 <code>Array</code>，<code>Date</code><br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">freeze:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>代码缩进<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">indent:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>禁止定义之前使用变量，忽略 <code>function</code> 函数声明<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">latedef:</span> <span class="string">"nofunc"</span></div></pre></td></tr></table></figure></p>
+<p>构造器函数首字母大写<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span><span class="type">cap</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>禁止使用 <code>arguments.caller</code> 和 <code>arguments.callee</code>，未来会被弃用， ECMAScript 5 禁止使用 <code>arguments.callee</code><br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">noarg:</span><span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>为 <code>true</code> 时，禁止单引号和双引号混用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"quotmark"</span>: <span class="literal">false</span></div></pre></td></tr></table></figure></p>
+<p>变量未定义<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"undef"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>变量未使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"unused"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>严格模式<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">strict:</span><span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>最多参数个数<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">maxparams:</span> <span class="number">4</span></div></pre></td></tr></table></figure></p>
+<p>最大嵌套深度<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">maxdepth:</span> <span class="number">4</span></div></pre></td></tr></table></figure></p>
+<p>复杂度检测<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">maxcomplexity:</span><span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>最大行数<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">maxlen:</span> <span class="number">600</span></div></pre></td></tr></table></figure></p>
+<h3 id="宽松选项">宽松选项</h3><p>控制“缺少分号”的警告<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"asi"</span>: <span class="literal">true</span></div><div class="line"><span class="string">"boss"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>忽略 <code>debugger</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"debug"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>控制 <code>eval</code> 使用警告<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"evil"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>检查一行代码最后声明后面的分号是否遗漏<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"lastsemic"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>检查不安全的折行，忽略逗号在最前面的编程风格<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"laxcomma"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>检查循环内嵌套 <code>function</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"loopfunc"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>检查多行字符串<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"multistr"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>检查无效的 <code>typeof</code> 操作符值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"notypeof"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p><code>person[&#39;name&#39;]</code> vs. <code>person.name</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"sub"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p><code>new function () { ... }</code> 和 <code>new Object</code>;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"supernew"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>在非构造器函数中使用 <code>this</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"validthis"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
 <h3 id="环境">环境</h3><p>预定义一些全局变量</p>
-<p>预定义全局变量 <code>document</code>，<code>navigator</code>，<code>FileReader</code> 等<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"browser"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>定义用于调试的全局变量：<code>console</code>，<code>alert</code><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"devel"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>定义全局变量<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"jquery"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">"node"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>预定义全局变量 <code>document</code>，<code>navigator</code>，<code>FileReader</code> 等<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"browser"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>定义用于调试的全局变量：<code>console</code>，<code>alert</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"devel"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>定义全局变量<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"jquery"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="string">"node"</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
 </span>
       
     </div>
@@ -459,21 +459,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

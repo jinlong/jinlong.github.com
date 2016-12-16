@@ -88,6 +88,7 @@
 
 项目 fetch 到本地，通过命令行的方式 merge
 懒人方法，只用  Github ，不用命令行">
+<meta name="twitter:image" content="http://jinlong.github.io/image/sync-a-fork/1.jpg">
 
 
 
@@ -298,18 +299,18 @@
 </ol>
 <a id="more"></a>
 <h1 id="项目_fetch_到本地，通过命令行的方式_merge">项目 fetch 到本地，通过命令行的方式 merge</h1><p>提示：跟上游仓库同步代码之前，必须配置过 remote，<a href="https://help.github.com/articles/configuring-a-remote-for-a-fork/" target="_blank" rel="external">指向上游仓库</a> 。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">add</span> upstream http<span class="variable">s:</span>//github.<span class="keyword">com</span>/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote <span class="built_in">add</span> upstream http<span class="variable">s:</span>//github.<span class="keyword">com</span>/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git</div></pre></td></tr></table></figure>
 <ol>
 <li>打开命令行工具</li>
 <li>切换当前工作路径至你的本地工程</li>
 <li><p>从上游仓库获取到分支，及相关的提交信息，它们将被保存在本地的 <code>upstream/master</code> 分支</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git fetch upstream</span><br><span class="line"><span class="preprocessor"># remote: Counting objects: <span class="number">75</span>, done.</span></span><br><span class="line"><span class="preprocessor"># remote: Compressing objects: <span class="number">100</span>% (<span class="number">53</span>/<span class="number">53</span>), done.</span></span><br><span class="line"><span class="preprocessor"># remote: Total <span class="number">62</span> (delta <span class="number">27</span>), reused <span class="number">44</span> (delta <span class="number">9</span>)</span></span><br><span class="line"><span class="preprocessor"># Unpacking objects: <span class="number">100</span>% (<span class="number">62</span>/<span class="number">62</span>), done.</span></span><br><span class="line"><span class="preprocessor"># From https:<span class="comment">//github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY</span></span></span><br><span class="line"><span class="preprocessor">#  * [new branch]      master     -&gt; upstream/master</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git fetch upstream</div><div class="line"><span class="meta"># remote: Counting objects: 75, done.</span></div><div class="line"><span class="meta"># remote: Compressing objects: 100% (53/53), done.</span></div><div class="line"><span class="meta"># remote: Total 62 (delta 27), reused 44 (delta 9)</span></div><div class="line"><span class="meta"># Unpacking objects: 100% (62/62), done.</span></div><div class="line"><span class="meta"># From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY</span></div><div class="line"><span class="meta">#  * [new branch]      master     -&gt; upstream/master</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>切换到本地的 <code>master</code> 分支</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="keyword">master</span></span><br><span class="line"><span class="title"># Switched</span> to branch '<span class="literal">master</span>'</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout <span class="keyword">master</span></div><div class="line"><span class="title"># Switched</span> to branch '<span class="literal">master</span>'</div></pre></td></tr></table></figure>
 </li>
 <li><p>把 <code>upstream/master</code> 分支合并到本地的 <code>master</code> 分支，本地的 <code>master</code> 分支便跟上游仓库保持同步了，并且没有丢失你本地的修改。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git merge upstream/master</span><br><span class="line"><span class="preprocessor"># Updating a422352.<span class="number">.5</span>fdff0f</span></span><br><span class="line"><span class="preprocessor"># Fast-forward</span></span><br><span class="line"><span class="preprocessor">#  README                    |    <span class="number">9</span> -------</span></span><br><span class="line"><span class="preprocessor">#  README.md                 |    <span class="number">7</span> ++++++</span></span><br><span class="line"><span class="preprocessor">#  <span class="number">2</span> files changed, <span class="number">7</span> insertions(+), <span class="number">9</span> deletions(-)</span></span><br><span class="line"><span class="preprocessor">#  delete mode <span class="number">100644</span> README</span></span><br><span class="line"><span class="preprocessor">#  create mode <span class="number">100644</span> README.md</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git merge upstream/master</div><div class="line"><span class="meta"># Updating a422352..5fdff0f</span></div><div class="line"><span class="meta"># Fast-forward</span></div><div class="line"><span class="meta">#  README                    |    9 -------</span></div><div class="line"><span class="meta">#  README.md                 |    7 ++++++</span></div><div class="line"><span class="meta">#  2 files changed, 7 insertions(+), 9 deletions(-)</span></div><div class="line"><span class="meta">#  delete mode 100644 README</span></div><div class="line"><span class="meta">#  create mode 100644 README.md</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>提示：同步后的代码仅仅是保存在本地仓库，记得 <code>push</code> 到 Github 哟。</p>
@@ -440,21 +441,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

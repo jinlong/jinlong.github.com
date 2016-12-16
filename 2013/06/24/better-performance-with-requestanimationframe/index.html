@@ -64,7 +64,7 @@
 <meta name="description" content="原文：Better performance with requestAnimationFrame作者：Luz Caballero译者：涂鸦码龙
 
 介绍本文讨论如何使用 requestAnimationFrame API 代替旧的 setInterval / setTimeout 方法，从而提高动画的性能。当然，我们会演示代码实例。
-当前几乎所有的主流浏览器都支持 requestAnimationF">
+当前几乎所有的主流浏览器都支持 requestAnimation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="requestAnimationFrame 性能更好">
 <meta property="og:url" content="http://jinlong.github.io/2013/06/24/better-performance-with-requestanimationframe/index.html">
@@ -72,7 +72,7 @@
 <meta property="og:description" content="原文：Better performance with requestAnimationFrame作者：Luz Caballero译者：涂鸦码龙
 
 介绍本文讨论如何使用 requestAnimationFrame API 代替旧的 setInterval / setTimeout 方法，从而提高动画的性能。当然，我们会演示代码实例。
-当前几乎所有的主流浏览器都支持 requestAnimationF">
+当前几乎所有的主流浏览器都支持 requestAnimation">
 <meta property="og:image" content="http://jinlong.github.io/images/post/req/figure1.png">
 <meta property="og:image" content="http://jinlong.github.io/images/post/req/figure2.png">
 <meta property="og:updated_time" content="2015-10-29T02:36:50.000Z">
@@ -81,7 +81,8 @@
 <meta name="twitter:description" content="原文：Better performance with requestAnimationFrame作者：Luz Caballero译者：涂鸦码龙
 
 介绍本文讨论如何使用 requestAnimationFrame API 代替旧的 setInterval / setTimeout 方法，从而提高动画的性能。当然，我们会演示代码实例。
-当前几乎所有的主流浏览器都支持 requestAnimationF">
+当前几乎所有的主流浏览器都支持 requestAnimation">
+<meta name="twitter:image" content="http://jinlong.github.io/images/post/req/figure1.png">
 
 
 
@@ -337,7 +338,7 @@
 </ul>
 <p>为了确保你的代码万无一失，应该使用 <a href="http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating" target="_blank" rel="external">Erik Möller’s polyfill</a> （它提供了健全的跨浏览器支持），这是在 <a href="http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/" target="_blank" rel="external">Paul Irish 的这篇文章</a> 的代码基础上改进而来的。</p>
 <p>这是我们的青蛙实例中处理动画的简单代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> requestId = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> animationStartTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params">time</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> frog = <span class="built_in">document</span>.getElementById(<span class="string">"animated"</span>);</span><br><span class="line">  frog.style.left = (<span class="number">50</span> + (time - animationStartTime)/<span class="number">10</span> % <span class="number">300</span>) + <span class="string">"px"</span>;</span><br><span class="line">  frog.style.top = (<span class="number">185</span> - <span class="number">10</span> * ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) + ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) * ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) ) + <span class="string">"px"</span>;</span><br><span class="line">  <span class="keyword">var</span> t = (time - animationStartTime)/<span class="number">10</span> % <span class="number">100</span>;</span><br><span class="line">  frog.style.backgroundPosition = - <span class="built_in">Math</span>.floor(t / (<span class="number">100</span>/<span class="number">2</span>)) * <span class="number">60</span>+ <span class="string">"px"</span>;</span><br><span class="line">  requestId = <span class="built_in">window</span>.requestAnimationFrame(animate);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  animationStartTime = <span class="built_in">window</span>.performance.now();</span><br><span class="line">  requestId = <span class="built_in">window</span>.requestAnimationFrame(animate);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (requestId)</span><br><span class="line">    <span class="built_in">window</span>.cancelAnimationFrame(requestId);</span><br><span class="line">  requestId = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> requestId = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> animationStartTime = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params">time</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> frog = <span class="built_in">document</span>.getElementById(<span class="string">"animated"</span>);</div><div class="line">  frog.style.left = (<span class="number">50</span> + (time - animationStartTime)/<span class="number">10</span> % <span class="number">300</span>) + <span class="string">"px"</span>;</div><div class="line">  frog.style.top = (<span class="number">185</span> - <span class="number">10</span> * ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) + ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) * ((time - animationStartTime)/<span class="number">100</span> % <span class="number">10</span>) ) + <span class="string">"px"</span>;</div><div class="line">  <span class="keyword">var</span> t = (time - animationStartTime)/<span class="number">10</span> % <span class="number">100</span>;</div><div class="line">  frog.style.backgroundPosition = - <span class="built_in">Math</span>.floor(t / (<span class="number">100</span>/<span class="number">2</span>)) * <span class="number">60</span>+ <span class="string">"px"</span>;</div><div class="line">  requestId = <span class="built_in">window</span>.requestAnimationFrame(animate);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  animationStartTime = <span class="built_in">window</span>.performance.now();</div><div class="line">  requestId = <span class="built_in">window</span>.requestAnimationFrame(animate);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">stop</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (requestId)</div><div class="line">    <span class="built_in">window</span>.cancelAnimationFrame(requestId);</div><div class="line">  requestId = <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>requestAnimationFrame</strong> 方法告诉浏览器，基于脚本的动画需要重新取样，需要往 <strong>animation frame request callback list（动画帧请求回调列表）</strong>插入一个 <strong>callback</strong> （回调函数）。这些保存的回调函数的 <strong>id</strong> 列表正等待执行。调用 requestAnimationFrame 返回 <strong>id</strong>（requestId），用来识别队列中的回调函数。 id 可以通过 <code>cancelAnimationFrame(id)</code> 取消回调函数。</p>
 <p><strong>requestAnimationFrame</strong> 方法作为它的参数的回调方法，用来绘制动画（<code>animate</code>）的新帧。当接到动画更新请求（<code>time</code>）时，回调函数收到一个 <strong>timestamp</strong> （时间戳）参数。</p>
 <p>时间戳是调用 <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#dom-performance-now" target="_blank" rel="external">Performance 接口的 now 方法</a> 的执行结果（译者注：<a href="http://caniuse.com/#search=performance" target="_blank" rel="external">Performance 支持情况</a>）。你需要确保任何其它想拿来比较的时间测量单位也是 <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#sec-DOMHighResTimeStamp" target="_blank" rel="external">DOMHighResTimeStamp</a> —— 以上例子我们调用 <code>window.performance.now</code>，把它的结果存在 <code>animationStartTime</code> 变量中。在动画函数（<code>animate</code>）中，我们在每一帧都用开始时间跟当前时间（<code>time</code>）做比较，计算每个青蛙实例的位置。</p>
@@ -465,21 +466,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

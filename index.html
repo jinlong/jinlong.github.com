@@ -219,6 +219,112 @@
             
             
               
+                <a class="post-title-link" href="/2016/12/16/react-native-component-communication/" itemprop="url">
+                  React Native 的组件通信方式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-12-16T13:11:24+08:00" content="2016-12-16">
+              2016-12-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/16/react-native-component-communication/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/16/react-native-component-communication/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>题外话，说几句我对 React 与 React Native 关系的理解：</p>
+<ul>
+<li>React 主要用于浏览器端实现一些 UI 组件，也可用于服务端渲染。React 可以使用 HTML 提供的标签，也可封装自定义的组件，React 也提供直接操作 DOM 的方法；</li>
+<li>React Native 主要用于实现客户端应用（App）的 UI 组件，它只能使用 Facebook 封装的 Native 组件，或者自己封装的 Native 组件。开发中主要借助 JavaScript，基本告别 HTML 和 CSS 了，不过优点是可以用 ES6。</li>
+</ul>
+<hr>
+<p>言归正传，正文开始</p>
+<p>之前没搞过 React ，直接开撸的 React Native，使用过程也是各种踩坑填坑，磕磕绊绊，这里简单总结一下我用过的组件通信的几种方式吧。</p>
+<h1 id="React_最基础的_props_和_state">React 最基础的 props 和 state</h1><h2 id="组件内部用_state">组件内部用 state</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.state = &#123;</div><div class="line">        <span class="attr">isOnline</span>: <span class="literal">true</span>	<span class="comment">//组件 state</span></div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line">render() &#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.state.isOnline)&#123;</div><div class="line">        <span class="comment">//...剩余代码</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">//...剩余代码</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/16/react-native-component-communication/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2016/05/15/Filtered-background-with-fallback-for-legibility/" itemprop="url">
                   针对易读性的背景滤镜兼容方案（CSS filter 兼容方案）
                 </a>
@@ -616,21 +722,21 @@
 <p>运行本文的示例代码，可以用 <a href="https://jsbin.com/defeba/edit?js,console">JSBin 环境</a>，也可以结合原文中的测试题检测学习效果。</p>
 <h1 id="使用_let_和_const">使用 let 和 const</h1><p>ES2015 可以用 <code>const</code> 或 <code>let</code> 替换 <code>var</code> ，它们定义了块级作用域变量。</p>
 <p>示例代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> lc=<span class="number">0</span>; lc &lt; <span class="number">10</span>; lc++) &#123;</span><br><span class="line">  <span class="keyword">let</span> value = lc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">//抛出错误</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> lc=<span class="number">0</span>; lc &lt; <span class="number">10</span>; lc++) &#123;</div><div class="line">  <span class="keyword">let</span> value = lc;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(value); <span class="comment">//抛出错误</span></div></pre></td></tr></table></figure>
 <p>变量 <code>value</code> 只能在 <code>for</code> 循环中使用。</p>
 <p><code>const</code> 跟 <code>let</code> 很像，但是它定义的变量值无法改变。</p>
 <p>示例代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;name: <span class="string">"Arunoda"</span>&#125;;</span><br><span class="line">user.name = <span class="string">"Susiripala"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(user.name);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> user = &#123;<span class="attr">name</span>: <span class="string">"Arunoda"</span>&#125;;</div><div class="line">user.name = <span class="string">"Susiripala"</span>;</div><div class="line"><span class="built_in">console</span>.log(user.name);</div></pre></td></tr></table></figure>
 <p>改变的是变量 <code>user</code> 内部的属性，并没有改变 <code>user</code> 本身。</p>
 <p>许多人更喜欢用 <code>const</code> 代替 <code>let</code> 。</p>
 <h1 id="使用箭头函数整理你的代码">使用箭头函数整理你的代码</h1><p>熟悉的方式：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(<span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a * <span class="number">10</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</div><div class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(<span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a * <span class="number">10</span>;</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(multiplyBy10);</div></pre></td></tr></table></figure>
 <p>使用箭头函数以后：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(a =&gt; a * <span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</div><div class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(<span class="function"><span class="params">a</span> =&gt;</span> a * <span class="number">10</span>);</div><div class="line"><span class="built_in">console</span>.log(multiplyBy10);</div></pre></td></tr></table></figure>
 <p>如果方法接受不止1个参数，可以这么写：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyByIndex = numbers.map((a, i) =&gt; a * i);</span><br><span class="line"><span class="built_in">console</span>.log(multiplyByIndex);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</div><div class="line"><span class="keyword">const</span> multiplyByIndex = numbers.map(<span class="function">(<span class="params">a, i</span>) =&gt;</span> a * i);</div><div class="line"><span class="built_in">console</span>.log(multiplyByIndex);</div></pre></td></tr></table></figure>
 <p>箭头函数返回一个对象的话，需要加圆括号：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</span><br><span class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(a =&gt; (&#123;res: a * <span class="number">10</span>&#125;));</span><br><span class="line"><span class="built_in">console</span>.log(multiplyBy10);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">50</span>];</div><div class="line"><span class="keyword">const</span> multiplyBy10 = numbers.map(<span class="function"><span class="params">a</span> =&gt;</span> (&#123;<span class="attr">res</span>: a * <span class="number">10</span>&#125;));</div><div class="line"><span class="built_in">console</span>.log(multiplyBy10);</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/09/Say-Hello-To-ES2015/#more" rel="contents">
               阅读全文 &raquo;
@@ -845,7 +951,7 @@
 <h1 id="问题所在">问题所在</h1><p><img src="/image/layered-anim/exp1.gif" alt="附图1"></p>
 <p>当我们深入探讨解决方案之前，看看到底问题在哪。CSS <code>animations</code> 和 <code>transitions</code> 限制我们只能沿直线路径运动。元素总是沿着点 A 到点 B 的最短路径运动，如果我们另辟蹊径，告诉 CSS 沿着“更好的路径”，而不是“最短路径”运动呢？</p>
 <p>用 CSS （开启硬件加速）实现两点之间的运动，最直截了当的方式是使用 <code>transform</code> 的 <code>translate</code> 在一定时间内移动某个元素。这就产生了直线运动。在 <code>@keyframes</code> 中，我们打算在 (0,0) 和 (100,-100) 间来回运动，见上图例子：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">keyframes</span> straightLine </span>&#123;</span><br><span class="line">  50% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate3D</span>(<span class="number">100px</span>, -<span class="number">100px</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class">.dot</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">animation</span>:<span class="value"> straightLine <span class="number">2.5s</span> infinite linear</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">keyframes</span> straightLine &#123;</div><div class="line">  50% &#123;</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">translate3D</span>(100px, -100px, 0);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.dot</span> &#123;</div><div class="line">  <span class="attribute">animation</span>: straightLine <span class="number">2.5s</span> infinite linear;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这些看起来并不难懂，但我们稍等片刻，思考一下我们需要的解决方案，拆分开来的动画，视觉上长什么样子呢。</p>
 <p><code>0%</code> 时，元素从 (0,0) 出发，<code>50%</code> 时，我们用了 <code>translate3D(100px, -100px, 0)</code> 把它移动到 (100,-100)，然后原路返回。换句话说，我们把元素向右移动了 <code>100px</code>，向上移动了 <code>100px</code>，两个方向联合作用使元素沿着一个角度运动。</p>
           <div class="post-more-link text-center">
@@ -950,14 +1056,14 @@
 </blockquote>
 <p>Checkbox 复选框相当好用，加对 CSS 魔法有奇效。此文旨在展示一些利用 checkbox 实现的有创意的东西，并且文中的例子<strong><em>没用 JavaScript</em></strong> 哟。</p>
 <h1 id="基本配方">基本配方</h1><p>从 HTML 着手。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"toggle"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"toggle"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"toggle"</span> <span class="attr">type</span>=<span class="string">"checkbox"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"toggle"</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>此处无技巧可言。<code>&lt;label&gt;</code> 的 <code>for</code> 属性匹配 <code>&lt;input&gt;</code> 的 <code>id</code> 属性，因此点击 <code>&lt;label&gt;</code> 可以控制 <code>&lt;input&gt;</code> 复选框。这点尤其重要，因为下一步将隐藏 <code>&lt;input&gt;</code>。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> -<span class="number">9999px</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span> &#123;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">left</span>: -<span class="number">9999px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>为什么不用 <code>display: none</code> ？因为屏幕阅读机和键盘 Tab 会忽略它。此方法让 <code>&lt;input&gt;</code> 保持在文档流中，但是让它离屏隐藏（超出屏幕可见范围达到隐藏）。</p>
 <p>隐藏 <code>&lt;input&gt;</code> 以后，我们更容易大展身手。我们仍需传达选中/未选两种状态，但是可以通过 <code>&lt;label&gt;</code> 完成。真正的派对开始啦。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> + <span class="tag">label</span> <span class="rules">&#123;</span><br><span class="line">    <span class="comment">/* 牛X闪闪的样式 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:checked</span> + <span class="selector-tag">label</span> &#123;</div><div class="line">    <span class="comment">/* 牛X闪闪的样式 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>我们使用 <code>:checked</code> 伪类， 和相邻兄弟元素选择器（<code>+</code>）的组合达到目的，当复选框选中时，找到紧随其后的 <code>&lt;label&gt;</code>元素，加上想要的样式。还可以利用 <code>&lt;label&gt;</code> 中的伪元素（ <code>::before</code> 和 <code>::after</code>）实现更有创意的想法。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">input</span><span class="pseudo">:checked</span> + <span class="tag">label</span><span class="pseudo">::before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="comment">/* 指示器的样式 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:checked</span> + <span class="selector-tag">label</span><span class="selector-pseudo">::before</span> &#123;</div><div class="line">    <span class="comment">/* 指示器的样式 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>来，看看实际效果吧。例子用到了以上提及的基本配方，把一个普普通通的复选框改造得当人眼前一亮。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/01/14/checkbox-trickery-with-css/#more" rel="contents">
@@ -1172,114 +1278,11 @@
 </blockquote>
 <p>如果你从没听过这个概念，那么至少用过谓语函数。谓语本质上是一个函数，根据它的参数，可以判断返回结果是 <code>true</code> 或者 <code>false</code>。一般都以“isX”命名，比如 <code>isEven</code> 或者 <code>isNumber</code>。</p>
 <p>假如我们有个程序，需要处理漫画书里的英雄和坏蛋，以下面的简单对象为例：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> superman = &#123;</span><br><span class="line">    name: <span class="string">"Superman"</span>,</span><br><span class="line">    strength: <span class="string">"Super"</span>,</span><br><span class="line">    heroism: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> superman = &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">"Superman"</span>,</div><div class="line">    <span class="attr">strength</span>: <span class="string">"Super"</span>,</div><div class="line">    <span class="attr">heroism</span>: <span class="literal">true</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>程序中难免会用到一些谓语，像这些：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSuperStrong</span> (<span class="params">character</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> character.strength === <span class="string">"Super"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNotSuperStrong</span> (<span class="params">character</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> character.strength !== <span class="string">"Super"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isHeroic</span> (<span class="params">character</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> character.heroism === <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNotHeroic</span> (<span class="params">character</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> character.heroism !== <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: false</span></span><br><span class="line"><span class="built_in">console</span>.log(isNotSuperStrong(superman));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Outputs: false</span></span><br><span class="line"><span class="built_in">console</span>.log(isNotHeroic(superman));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSuperStrong</span> (<span class="params">character</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> character.strength === <span class="string">"Super"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNotSuperStrong</span> (<span class="params">character</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> character.strength !== <span class="string">"Super"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isHeroic</span> (<span class="params">character</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> character.heroism === <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNotHeroic</span> (<span class="params">character</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> character.heroism !== <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Outputs: false</span></div><div class="line"><span class="built_in">console</span>.log(isNotSuperStrong(superman));</div><div class="line"></div><div class="line"><span class="comment">// Outputs: false</span></div><div class="line"><span class="built_in">console</span>.log(isNotHeroic(superman));</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/12/14/negating-predicate-functions-in-javaScript/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2015/10/12/syncing-a-fork/" itemprop="url">
-                  如何同步 Github fork 出来的分支
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-10-12T13:00:18+08:00" content="2015-10-12">
-              2015-10-12
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/github/" itemprop="url" rel="index">
-                    <span itemprop="name">github</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/12/syncing-a-fork/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/12/syncing-a-fork/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>原先一直有个疑惑， Github fork 出来的项目，我已经做了部分修改，由于某些原因，无法提交 Pull Request，可是想把原项目的最近更新代码合并进来怎么办？google 了一下才茅塞顿开，年纪大了，这里记录一下吧。</p>
-<p>两种方式：</p>
-<ol>
-<li>项目 fetch 到本地，通过命令行的方式 merge</li>
-<li>懒人方法，只用  Github ，不用命令行</li>
-</ol>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/12/syncing-a-fork/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1346,21 +1349,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

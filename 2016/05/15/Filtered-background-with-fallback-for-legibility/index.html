@@ -68,7 +68,7 @@ See the Pen Web site header, circa 2016 by Taylor Hunt (@tigt) on CodePen.
 
 
 
-潜在">
+潜">
 <meta property="og:type" content="article">
 <meta property="og:title" content="针对易读性的背景滤镜兼容方案（CSS filter 兼容方案）">
 <meta property="og:url" content="http://jinlong.github.io/2016/05/15/Filtered-background-with-fallback-for-legibility/index.html">
@@ -80,7 +80,7 @@ See the Pen Web site header, circa 2016 by Taylor Hunt (@tigt) on CodePen.
 
 
 
-潜在">
+潜">
 <meta property="og:image" content="http://jinlong.github.io/image/Filtered-background/p1.png">
 <meta property="og:image" content="http://jinlong.github.io/image/Filtered-background/p2.png">
 <meta property="og:updated_time" content="2016-05-23T10:08:43.000Z">
@@ -93,7 +93,8 @@ See the Pen Web site header, circa 2016 by Taylor Hunt (@tigt) on CodePen.
 
 
 
-潜在">
+潜">
+<meta name="twitter:image" content="http://jinlong.github.io/image/Filtered-background/p1.png">
 
 
 
@@ -311,12 +312,12 @@ See the Pen Web site header, circa 2016 by Taylor Hunt (@tigt) on CodePen.
 <p>我碰巧想到一个妙招，让不支持 <code>filter</code> 的浏览器用颜色图层代替，方案并不完美，但是具有高可读性：</p>
 <p><img src="/image/Filtered-background/p2.png" alt="附图2"><br>不支持 filter 的效果</p>
 <h1 id="基本实现">基本实现</h1><p>我用伪元素作为背景，因为给元素加 <code>filter</code> 比<a href="http://caniuse.com/css-filter-function" target="_blank" rel="external">单纯给背景加 filter</a> <a href="http://caniuse.com/css-filters" target="_blank" rel="external">兼容性更好</a>  。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.backdrop</span> <span class="rules">&#123; <span class="rule"><span class="attribute">position</span>:<span class="value"> relative </span></span></span>&#125;</span><br><span class="line"><span class="class">.backdrop</span><span class="pseudo">::after</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 铺满整个父元素 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 放到父元素内容的下层 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">z-index</span>:<span class="value"> -<span class="number">2</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 像父元素一样展示背景 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#222</span> <span class="function">url</span>(<span class="string">"inspirational-landscape-and/or-laughing-with-salad.jpg"</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.backdrop</span> &#123; <span class="attribute">position</span>: relative &#125;</div><div class="line"><span class="selector-class">.backdrop</span><span class="selector-pseudo">::after</span> &#123;</div><div class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line"></div><div class="line">  <span class="comment">/* 铺满整个父元素 */</span></div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">top</span>: <span class="number">0</span>; <span class="attribute">right</span>: <span class="number">0</span>; <span class="attribute">bottom</span>: <span class="number">0</span>; <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line"></div><div class="line">  <span class="comment">/* 放到父元素内容的下层 */</span></div><div class="line">  <span class="attribute">z-index</span>: -<span class="number">2</span>;</div><div class="line"></div><div class="line">  <span class="comment">/* 像父元素一样展示背景 */</span></div><div class="line">  <span class="attribute">background</span>: <span class="number">#222</span> <span class="built_in">url</span>(<span class="string">"inspirational-landscape-and/or-laughing-with-salad.jpg"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="加特效">加特效</h1><p>此时，设计师发话了，让背景图模糊一下，再来个轻微变暗效果就更好了。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 不要忘记前缀，Safari &gt;9.1 和所有 Chrome 仍然需要 -webkit- */</span></span><br><span class="line"><span class="tag">filter</span>: <span class="tag">blur</span>(4<span class="tag">px</span>) <span class="tag">brightness</span>(75%);</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 不要忘记前缀，Safari &gt;9.1 和所有 Chrome 仍然需要 -webkit- */</span></div><div class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">blur</span>(4<span class="selector-tag">px</span>) <span class="selector-tag">brightness</span>(75%);</div></pre></td></tr></table></figure>
 <p>这么做还远远不够，不支持 <code>filter</code> 的浏览器将严重影响阅读。</p>
 <h1 id="上妙招">上妙招</h1><p>是否听过 <code>filter</code> 有 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter#opacity%28%29_2" target="_blank" rel="external">opacity() 效果</a>  ？对比广泛支持的 <code>opacity</code> 属性，它显得有点鸡肋，但是它的存在才使得兼容方案得以实现：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.backdrop</span><span class="pseudo">::before</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>; <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 把它放到其它伪元素的上面，但是仍在父元素内容的下面 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">z-index</span>:<span class="value"> -<span class="number">1</span></span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 让遮罩层足够的暗，无论什么背景都可以看清楚上面的文字 */</span></span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="function">rbgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>, <span class="number">0.5</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 使用滤镜完全隐藏它？？ */</span></span><br><span class="line">  <span class="rule"><span class="attribute">filter</span>:<span class="value"> <span class="function">opacity</span>(<span class="number">0%</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.backdrop</span><span class="selector-pseudo">::before</span> &#123;</div><div class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">top</span>: <span class="number">0</span>; <span class="attribute">right</span>: <span class="number">0</span>; <span class="attribute">bottom</span>: <span class="number">0</span>; <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line"></div><div class="line">  <span class="comment">/* 把它放到其它伪元素的上面，但是仍在父元素内容的下面 */</span></div><div class="line">  <span class="attribute">z-index</span>: -<span class="number">1</span>;</div><div class="line"></div><div class="line">  <span class="comment">/* 让遮罩层足够的暗，无论什么背景都可以看清楚上面的文字 */</span></div><div class="line">  <span class="attribute">background</span>: <span class="built_in">rbgba</span>(0,0,0, 0.5);</div><div class="line"></div><div class="line">  <span class="comment">/* 使用滤镜完全隐藏它？？ */</span></div><div class="line">  <span class="attribute">filter</span>: <span class="built_in">opacity</span>(0%);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果支持 filter 滤镜，带图片的伪元素是模糊的，微微变暗的，这一黑色的遮罩层是完全透明的。如果不支持滤镜呢，显示效果并不完美，但是不会阻碍任何人阅读上面的文字。</p>
 <p>CodePen 的例子在此，希望你喜欢：</p>
 <p data-height="265" data-theme-id="0" data-slug-hash="bpqpMP" data-default-tab="css,result" data-user="tigt" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/tigt/pen/bpqpMP/" target="_blank" rel="external">Filtered background with fallback for legibility</a> by Taylor Hunt (<a href="http://codepen.io/tigt" target="_blank" rel="external">@tigt</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p>
@@ -325,7 +326,7 @@ See the Pen Web site header, circa 2016 by Taylor Hunt (@tigt) on CodePen.
 
 <p>其它 filter 滤镜的使用或许也能受此启发，我把它放到了我的锦囊里。</p>
 <h1 id="何不用_@supports_代替？">何不用 @supports 代替？</h1><p>浏览器对 CSS 特性检测（<code>@supports</code>）的<a href="http://caniuse.com/#feat=css-featurequeries" target="_blank" rel="external">支持程度跟 filter 保持一致</a> ，替换以后代码更加清晰明了：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">supports</span> (filter: <span class="function">blur</span>(<span class="number">4px</span>) <span class="function">brightness</span>(<span class="number">75%</span>)) or (-webkit-filter: <span class="function">blur</span>(<span class="number">4px</span>) <span class="function">brightness</span>(<span class="number">75%</span>)) </span>&#123;</span><br><span class="line">  <span class="comment">/* 浏览器支持 filter 的话... */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">supports</span> (filter: blur(<span class="number">4px</span>) brightness(<span class="number">75%</span>)) or (-webkit-filter: blur(<span class="number">4px</span>) brightness(<span class="number">75%</span>)) &#123;</div><div class="line">  <span class="comment">/* 浏览器支持 filter 的话... */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>你完全可以这么写，全看个人喜好。我查阅了 CanIUse 的使用数据，有一些环境仍不支持 <code>@supports</code> ：</p>
 <ul>
 <li>Chrome 18–27</li>
@@ -357,6 +358,10 @@ See the Pen Web site header, circa 2016 by Taylor Hunt (@tigt) on CodePen.
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/16/react-native-component-communication/" rel="prev" title="React Native 的组件通信方式">
+                React Native 的组件通信方式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -447,21 +452,21 @@ See the Pen Web site header, circa 2016 by Taylor Hunt (@tigt) on CodePen.
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
