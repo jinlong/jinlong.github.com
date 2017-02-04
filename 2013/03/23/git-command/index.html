@@ -323,7 +323,7 @@ git 常用命令
 <ul>
 <li>使用 git rebase 避免无谓的 merge</li>
 </ul>
-<p>用 <code>git rebase</code> 代替 <code>git merge</code><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">git</span> <span class="selector-tag">pull</span> <span class="selector-tag">--rebase</span> <span class="selector-attr">[remote name]</span> <span class="selector-attr">[branch name]</span></div></pre></td></tr></table></figure></p>
+<p>用 <code>git rebase</code> 代替 <code>git merge</code><br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull --rebase <span class="string">[remote name]</span> <span class="string">[branch name]</span></div></pre></td></tr></table></figure></p>
 <p>或<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git checkout mywork</span></div><div class="line">git rebase origin</div></pre></td></tr></table></figure></p>
 <p>在rebase的过程中，也许会出现冲突。在这种情况，Git会停止rebase并会让你去解决冲突；在解决完冲突后，用<code>git add</code>命令去更新这些内容的索引, 然后，你无需执行 git commit,只要执行:<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase --<span class="keyword">continue</span></div></pre></td></tr></table></figure></p>
 <p>这样 git 会继续rebase。<br>在任何时候，你可以用<code>--abort</code>参数来终止rebase的行动，并且”mywork”分支会回到rebase开始前的状态。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase <span class="comment">--abort</span></div></pre></td></tr></table></figure></p>
@@ -531,7 +531,7 @@ git 常用命令
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -545,7 +545,7 @@ git 常用命令
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -643,7 +643,7 @@ git 常用命令
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>

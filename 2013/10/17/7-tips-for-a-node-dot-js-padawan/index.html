@@ -345,7 +345,7 @@
 <p>你也许会说提交 node_modules 文件夹无伤大雅，但是如果检出你代码的人用跟你不同的操作系统呢，通过 npm 安装的模块是编译过的？你的应用会崩溃，检出你代码的人完全不知道为什么！</p>
 <p>举例来说，当你安装过 bcrypt 和 sentimental 模块后，它们在主机上是编译过的，因为它们的原始组件是用 C 写的。</p>
 <p>最优的作法是把 node_modules 文件夹加到 .gitignore 里，避免提交它。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// .gitignore node_modules/*</span></div></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// .gitignore node_modules/*</span></div></pre></td></tr></table></figure>
 <h2 id="技巧_7_：不要忘记_return">技巧 7 ：不要忘记 return</h2><p>刚入门的 node 开发者通常容易犯个错误，callback 回调函数后面忘加 return 。虽然有时候没什么影响，多数情况你会遇到奇怪的问题，callback 回调执行了两次。</p>
 <p>看个简单的例子：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">do</span>(<span class="params">err,result, callback</span>)</span>&#123;</div><div class="line"><span class="keyword">if</span>(err)&#123;</div><div class="line">callback(“error”);</div><div class="line">&#125;</div><div class="line">callback(“good”);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -472,7 +472,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -486,7 +486,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -584,7 +584,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>

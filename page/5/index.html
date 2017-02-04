@@ -219,6 +219,125 @@
             
             
               
+                <a class="post-title-link" href="/2013/05/03/angularjs-tutorial2/" itemprop="url">
+                  AngularJS 新手指南2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-05-03T13:42:00+08:00" content="2013-05-03">
+              2013-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
+                    <span itemprop="name">AngularJS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/05/03/angularjs-tutorial2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/03/angularjs-tutorial2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="过滤">过滤</h2><p><strong><em>Controller</em></strong></p>
+<p>没作任何变化</p>
+<p><strong><em>Template</em></strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container-fluid"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row-fluid"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"span2"</span>&gt;</span></div><div class="line">Search: <span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">"query"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"span10"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"phones"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"phone in phones | filter:query"</span>&gt;</span></div><div class="line">      \&#123;\&#123;phone.name&#125;&#125;</div><div class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>\&#123;\&#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>加个标准的 &lt;input&gt; 标签，使用 Angular 的 <a href="http://docs.angularjs.org/api/ng.filter:filter">$filter</a> 函数为 <a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ngRepeat</a> 指令处理输入内容。</p>
+<p>原理说明如下：</p>
+<ul>
+<li><p>数据绑定：Angular 的核心特色之一。页面加载时，Angular 把输入框的名字和数据模型的同名变量绑定，保持两者同步。<br>用户在输入框输入内容（取名 query），立即作为手机列表的过滤器（<code>phone in phones | filter:query</code>）</p>
+</li>
+<li><p>过滤器（filter ）的使用：<a href="http://docs.angularjs.org/api/ng.filter:filter">filter</a> 函数利用 query 值创建一个匹配 <code>query</code> 结果的新数组。<br>ngRepeat 自动更新视图，通过过滤器改变手机的数量。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/05/03/angularjs-tutorial2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2013/05/02/angularjs-tutorial1/" itemprop="url">
                   AngularJS 新手指南1
                 </a>
@@ -1378,7 +1497,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1392,7 +1511,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -1477,7 +1596,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>

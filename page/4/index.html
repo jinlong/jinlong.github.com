@@ -219,6 +219,139 @@
             
             
               
+                <a class="post-title-link" href="/2013/08/13/centering-all-the-directions/" itemprop="url">
+                  CSS 居中大全
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-08-13T18:00:00+08:00" content="2013-08-13">
+              2013-08-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/水平居中/" itemprop="url" rel="index">
+                    <span itemprop="name">水平居中</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/水平居中/垂直居中/" itemprop="url" rel="index">
+                    <span itemprop="name">垂直居中</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/08/13/centering-all-the-directions/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/08/13/centering-all-the-directions/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>我看最近微博流行 CSS 居中技术，老外码农争相写相关的文章，一篇赛一篇的长啊，我把几篇归纳总结了一下，算是笔记。<br>孔乙己曾说：“茴香豆的回字有四种写法”，万一哪天有个面试官问你：“居中一共有几种写法”呢，哈哈，先备着吧~~<br>各种方法各有利弊，大家自己权衡吧，至少在需要居中时多个思路。</p>
+<h2 id="&lt;center&gt;">&lt;center&gt;</h2><p>不建议用了。</p>
+<h2 id="text-align:center">text-align:center</h2><p>在父容器里水平居中 inline 文字，或 inline 元素</p>
+<h2 id="vertical-align:middle">vertical-align:middle</h2><p>垂直居中 inline 文字，inline 元素，配合 <code>display:table</code> ，<code>display:table-cell</code>，有奇效。</p>
+<h2 id="line-height">line-height</h2><p>与 height 联手，垂直居中文字</p>
+<h2 id="margin:auto">margin:auto</h2><p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></div><div class="line">  <span class="selector-id">#ex2_container</span> &#123; <span class="attribute">width</span>:<span class="number">200px</span>; <span class="attribute">background-color</span>:yellow; &#125;</div><div class="line">  <span class="selector-id">#ex2_content</span> &#123; <span class="attribute">margin</span>:<span class="number">0px</span> auto; <span class="attribute">background-color</span>:gray; <span class="attribute">color</span>:white; <span class="attribute">display</span>:table; &#125;</div><div class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ex2_container"</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ex2_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="hacks,_hacks（小技巧）">hacks, hacks（小技巧）</h2><p>有许多 <a href="http://blog.themeforest.net/tutorials/vertical-centering-with-css/">hacks</a> ，负 margin，<a href="http://css-tricks.com/centering-in-the-unknown/">影子元素</a> ::before 等。如果你的内容不是固定大小的话，它们大部分是很脆弱的。</p>
+<h2 id="translate(-50%,-50%)">translate(-50%,-50%)</h2><p>用 position 加 translate<br>translate(-50%,-50%) 比较奇特，百分比计算不是以父元素为基准，而是以自己为基准。</p>
+<p>参考文章：<a href="http://jinlong.github.io/blog/2013/07/08/centering-percentage-widthheight-elements/">居中百分比宽高的元素</a></p>
+<p>示例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></div><div class="line">  <span class="selector-id">#ex3_container</span> &#123; <span class="attribute">width</span>:<span class="number">200px</span>; <span class="attribute">height</span>:<span class="number">200px</span>; <span class="attribute">background-color</span>:yellow; <span class="attribute">position</span>:relative; &#125;</div><div class="line">  <span class="selector-id">#ex3_content</span> &#123; <span class="attribute">left</span>:<span class="number">50%</span>; <span class="attribute">top</span>:<span class="number">50%</span>; <span class="attribute">transform</span>:<span class="built_in">translate</span>(-50%,-50%); <span class="attribute">-webkit-transform</span>:<span class="built_in">translate</span>(-50%,-50%); <span class="attribute">background-color</span>:gray; <span class="attribute">color</span>:white; <span class="attribute">position</span>:absolute; &#125;</div><div class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ex3_container"</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ex3_content"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这个技巧相当嚣张，同样适用于没固定大小的内容，<code>min-width</code>，<code>max-height</code>，<code>overflow:scroll</code> 等。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/08/13/centering-all-the-directions/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2013/08/13/javascript-promises/" itemprop="url">
                   JavaScript Promises
                 </a>
@@ -1278,125 +1411,6 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/05/03/angularjs-tutorial2/" itemprop="url">
-                  AngularJS 新手指南2
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-05-03T13:42:00+08:00" content="2013-05-03">
-              2013-05-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
-                    <span itemprop="name">AngularJS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
-                    <span itemprop="name">翻译</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/05/03/angularjs-tutorial2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/03/angularjs-tutorial2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="过滤">过滤</h2><p><strong><em>Controller</em></strong></p>
-<p>没作任何变化</p>
-<p><strong><em>Template</em></strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container-fluid"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row-fluid"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"span2"</span>&gt;</span></div><div class="line">Search: <span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">"query"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"span10"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"phones"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"phone in phones | filter:query"</span>&gt;</span></div><div class="line">      \&#123;\&#123;phone.name&#125;&#125;</div><div class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>\&#123;\&#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>加个标准的 &lt;input&gt; 标签，使用 Angular 的 <a href="http://docs.angularjs.org/api/ng.filter:filter">$filter</a> 函数为 <a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ngRepeat</a> 指令处理输入内容。</p>
-<p>原理说明如下：</p>
-<ul>
-<li><p>数据绑定：Angular 的核心特色之一。页面加载时，Angular 把输入框的名字和数据模型的同名变量绑定，保持两者同步。<br>用户在输入框输入内容（取名 query），立即作为手机列表的过滤器（<code>phone in phones | filter:query</code>）</p>
-</li>
-<li><p>过滤器（filter ）的使用：<a href="http://docs.angularjs.org/api/ng.filter:filter">filter</a> 函数利用 query 值创建一个匹配 <code>query</code> 结果的新数组。<br>ngRepeat 自动更新视图，通过过滤器改变手机的数量。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/05/03/angularjs-tutorial2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1442,7 +1456,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1456,7 +1470,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -1541,7 +1555,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>

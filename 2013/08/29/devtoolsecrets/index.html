@@ -593,7 +593,7 @@ Assert
 <h3 id="使用_SASS_Source_Maps">使用 SASS Source Maps</h3><p>使用 CSS 预处理器有许多优势，但是在浏览器开发工具中修改比较困难。例如，当你再次运行 SASS 时， 在开发工具中保存的编译后CSS 可能被覆盖，不太理想。SASS 3.3 以上（可以安装使用‘sass gem install sass –pre’），为 SASS 文件创建映射很容易，你可以很容易的保存修改。</p>
 <p>首先，为 SASS watch 命令增加 <code>--sourcemap</code> ，像这样：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sass --watch scss/devtoolsecrets<span class="selector-class">.scss</span>:css/devtoolsecrets<span class="selector-class">.min</span><span class="selector-class">.css</span> --style compressed --sourcemap</div></pre></td></tr></table></figure></p>
 <p>然后在 SASS 文件底部添加映射文件的名字（sourceMappingURL）：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*@ sourceMappingURL=devtoolsecrets.css.map */</span></div></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*@ sourceMappingURL=devtoolsecrets.css.map */</span></div></pre></td></tr></table></figure>
 <p>然后，你需要启用“Experiments 实验”。地址栏输入 <strong>chrome://flags</strong> 启用“启用开发者工具实验”选项，点击页面底部“马上重启”按钮应用改变。在 Chrome 开发工具的右下角，点击齿轮按钮打开“设置”面板。</p>
 <p>点击“General 常规”标签，激活“Enable Source Maps 启用 Source Maps”。点击“Experiments 实验”标签，检查“Support for SASS 支持 SASS ”选项。</p>
 <p>重启浏览器，你可以直接查看 SASS 文件的行号了。</p>
@@ -634,7 +634,7 @@ Assert
 <p>运行带 Source Map 属性的 Closure Compiler ：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar compiler<span class="selector-class">.jar</span> --js common<span class="selector-class">.js</span> --create_source_map ./common<span class="selector-class">.js</span><span class="selector-class">.map</span> --source_map_format=V3 --js_output_file common<span class="selector-class">.min</span><span class="selector-class">.js</span></div></pre></td></tr></table></figure>
 <p>在压缩后的 JS 文件底部加上映射文件的名字： sourceMappingURL </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//@ sourceMappingURL=common.js.map</span></div></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//@ sourceMappingURL=common.js.map</span></div></pre></td></tr></table></figure>
 <p>在 Chrome 开发工具，，“Settings 设置”菜单 -&gt; “General 常规”标签，激活“Enable Source Maps 启用 Source Maps ”。</p>
 <p>现在，当你调试 JavaScript 时，可以用未压缩的版本查找问题所在。</p>
 <p><div id="useragent"></div></p>
@@ -851,7 +851,7 @@ Assert
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -865,7 +865,7 @@ Assert
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -963,7 +963,7 @@ Assert
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>

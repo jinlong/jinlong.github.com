@@ -43,7 +43,7 @@
 
 
 
-  <meta name="keywords" content="AngularJS,翻译," />
+  <meta name="keywords" content="翻译,AngularJS," />
 
 
 
@@ -322,7 +322,7 @@ Template
 <p><a href="http://docs.angularjs.org/api/ng.directive:ngBind" target="_blank" rel="external">ngBind</a>  或 <a href="http://docs.angularjs.org/api/ng.directive:ngBindTemplate" target="_blank" rel="external">ngBindTemplate</a> 命令，与双大括号等价的写法：</p>
 <figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">title</span> <span class="attr">ng-bind-template</span>=<span class="string">"Google Phone Gallery: \</span></span></span><span class="template-variable">&#123;\&#123;query&#125;</span><span class="xml"><span class="tag"><span class="string">&#125;"</span>&gt;</span>Google Phone Gallery<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></div></pre></td></tr></table></figure>
 <h2 id="双向数据绑定">双向数据绑定</h2><p>模版增加了下拉菜单：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Search: <span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">"query"</span>&gt;</span></span></div><div class="line">Sort by:</div><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">ng-model</span>=<span class="string">"orderProp"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"name"</span>&gt;</span>Alphabetical<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"age"</span>&gt;</span>Newest<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"phones"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"phone in phones | filter:query | orderBy:orderProp"</span>&gt;</span></div><div class="line">    &amp;#123;&amp;#123;phone.name&#125;&#125;</div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Search: <span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">"query"</span>&gt;</span></div><div class="line">Sort by:</div><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">ng-model</span>=<span class="string">"orderProp"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"name"</span>&gt;</span>Alphabetical<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"age"</span>&gt;</span>Newest<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"phones"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"phone in phones | filter:query | orderBy:orderProp"</span>&gt;</span></div><div class="line">    &amp;#123;&amp;#123;phone.name&#125;&#125;</div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>添加了 &lt;select&gt; 元素，命名 orderProp。</p>
 <p><img src="/images/post/tutorial_04.png"></p>
 <p>我们把 <a href="http://docs.angularjs.org/api/ng.filter:orderBy" target="_blank" rel="external">orderBy</a> 跟过滤器关联起来，进一步筛选信息。orderBy 把输入信息拷贝，重新排序并返回。</p>
@@ -377,9 +377,9 @@ Template
       
         <div class="post-tags">
           
-            <a href="/tags/AngularJS/" rel="tag">#AngularJS</a>
-          
             <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+            <a href="/tags/AngularJS/" rel="tag">#AngularJS</a>
           
         </div>
       
@@ -489,7 +489,7 @@ Template
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -503,7 +503,7 @@ Template
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -601,7 +601,7 @@ Template
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>

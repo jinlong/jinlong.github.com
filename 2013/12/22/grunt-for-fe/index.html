@@ -331,7 +331,7 @@ Grunt 可以帮前端工程师做什么：
 <h2 id="合并文件">合并文件</h2><p>安装合并文件插件 <a href="https://github.com/gruntjs/grunt-contrib-concat" target="_blank" rel="external">grunt-contrib-concat</a> </p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> grunt-contrib-<span class="keyword">concat</span> <span class="comment">--save-dev</span></div></pre></td></tr></table></figure>
 <p>package.json 会为” devDependencies“属性自动添加新的依赖，多了这一行：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"grunt-contrib-concat"</span>: <span class="string">"~0.3.0"</span></div></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"grunt-contrib-concat"</span>: <span class="string">"~0.3.0"</span></div></pre></td></tr></table></figure>
 <p>配置 <strong>Gruntfile.js</strong> 配置文件</p>
 <p>格式如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 1. 所有配置文件 </span></div><div class="line">    grunt.initConfig(&#123;</div><div class="line">        <span class="attr">pkg</span>: grunt.file.readJSON(<span class="string">'package.json'</span>),</div><div class="line"></div><div class="line">        <span class="attr">concat</span>: &#123;</div><div class="line">            <span class="comment">// 2.  合并文件的配置项</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">// 3. 加载使用的插件</span></div><div class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-concat'</span>);</div><div class="line"></div><div class="line">    <span class="comment">// 4. 默认任务</span></div><div class="line">    grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'concat'</span>]);</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <p>合并文件的插件配置<a href="https://github.com/gruntjs/grunt-contrib-concat#usage-examples" target="_blank" rel="external">实例</a>： </p>
@@ -513,7 +513,7 @@ Grunt 可以帮前端工程师做什么：
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -527,7 +527,7 @@ Grunt 可以帮前端工程师做什么：
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -625,7 +625,7 @@ Grunt 可以帮前端工程师做什么：
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>
