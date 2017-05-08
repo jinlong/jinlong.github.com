@@ -219,6 +219,123 @@
             
             
               
+                <a class="post-title-link" href="/2017/05/08/optimising-the-front-end-for-the-browser/" itemprop="url">
+                  浏览器前端优化
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2017-05-08T20:33:31+08:00" content="2017-05-08">
+              2017-05-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端优化/" itemprop="url" rel="index">
+                    <span itemprop="name">前端优化</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/08/optimising-the-front-end-for-the-browser/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/08/optimising-the-front-end-for-the-browser/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="https://hackernoon.com/optimising-the-front-end-for-the-browser-f2f51a29c572">Optimising the front end for the browser</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>优化关乎速度和满意度。</p>
+<ul>
+<li>从用户体验（UX）角度，我们希望前端网页可以快速加载</li>
+<li><p>从开发体验（DX）角度，我们希望前端是快速，简洁，规范的</p>
+<h1 id="浏览器都做了什么">浏览器都做了什么</h1></li>
+</ul>
+<p>我们希望浏览器打开一个简单的网页</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>The "Click the button" page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"styles.css"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">      Click the button.</div><div class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></div><div class="line">      var button = document.querySelector("button");</div><div class="line">      button.style.fontWeight = "bold";</div><div class="line">      button.addEventListener("click", function () &#123;</div><div class="line">        alert("Well done.");</div><div class="line">      &#125;);</div><div class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="浏览器如何渲染网页">浏览器如何渲染网页</h2><ol>
+<li>使用 HTML 创建文档对象模型（<strong>DOM</strong>）</li>
+<li>使用 CSS 创建 CSS 对象模型（<strong>CSSOM</strong>）</li>
+<li>基于 DOM 和 CSSOM 执行脚本（<strong>Scripts</strong>）</li>
+<li>合并 DOM 和 CSSOM 形成渲染树（<strong>Render Tree</strong>）</li>
+<li>使用渲染树布局（<strong>Layout</strong>）所有元素</li>
+<li>渲染（<strong>Paint</strong>）所有元素</li>
+</ol>
+<p><img src="/image/browser-fe-optimizing/p1.png" alt="附图"></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/08/optimising-the-front-end-for-the-browser/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2017/02/04/javascript-array-methods-mutating-vs-non-mutating/" itemprop="url">
                   JavaScript 数组方法对比
                 </a>
@@ -1196,122 +1313,11 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/" itemprop="url">
-                  JavaScript 如何实现后台计划任务
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-14T23:26:53+08:00" content="2015-12-14">
-              2015-12-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">Javascript</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/14/how-to-schedule-background-tasks-in-javascript/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文：<a href="http://www.sitepoint.com/how-to-schedule-background-tasks-in-javascript/">How to Schedule Background Tasks in JavaScript</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<p>即使忘了 JavaScript 的一切知识，也不会忘记：它是阻塞的。</p>
-<p>想象一下，你的浏览器里住着一个魔法小精灵，负责浏览器的正常运转。不论渲染 HTML，响应菜单命令，屏幕渲染，处理鼠标点击，或者执行 JavaScript 函数，所有事情都归一个小精灵处理。它哪忙得过来，一次只能处理一件事情。如果同时丢给它一堆任务，它会列一个长长的待办列表，按顺序完成它们。</p>
-<p>人们常常希望初始化组件和事件处理的 JavaScript 可以尽快被执行。可是，有些不太重要的后台任务不会直接影响用户体验，比如：</p>
-<ul>
-<li>记录统计数据</li>
-<li>发送数据到社交网络（或添加‘分享’按钮）</li>
-<li>预加载内容</li>
-<li>预处理或预渲染 HTML</li>
-</ul>
-<p>他们对时序要求不严格，但是为了让页面仍然响应，直到用户滚动页面或者与内容交互时才被执行。</p>
-<p>选择之一是 <a href="http://www.sitepoint.com/javascript-threading-html5-web-workers/">Web Workers</a> ，它可以在独立的线程同时执行代码。用于预加载和预处理再好不过，但是你没有权限直接访问或更新 DOM。你可以在自己的代码中避开这点，但是无法保证第三方脚本比如 Google Analytics 永远不需要这个。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1352,21 +1358,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-count">62</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

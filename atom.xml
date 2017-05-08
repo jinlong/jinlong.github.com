@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一边翻译一边学习---涂鸦码龙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jinlong.github.io/"/>
-  <updated>2017-02-04T09:29:35.000Z</updated>
+  <updated>2017-05-08T07:01:31.000Z</updated>
   <id>http://jinlong.github.io/</id>
   
   <author>
@@ -13,6 +13,216 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[浏览器前端优化]]></title>
+    <link href="http://jinlong.github.io/2017/05/08/optimising-the-front-end-for-the-browser/"/>
+    <id>http://jinlong.github.io/2017/05/08/optimising-the-front-end-for-the-browser/</id>
+    <published>2017-05-08T12:33:31.000Z</published>
+    <updated>2017-05-08T07:01:31.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>原文：<a href="https://hackernoon.com/optimising-the-front-end-for-the-browser-f2f51a29c572" target="_blank" rel="external">Optimising the front end for the browser</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>优化关乎速度和满意度。</p>
+<ul>
+<li>从用户体验（UX）角度，我们希望前端网页可以快速加载</li>
+<li><p>从开发体验（DX）角度，我们希望前端是快速，简洁，规范的</p>
+<h1 id="浏览器都做了什么">浏览器都做了什么</h1></li>
+</ul>
+<p>我们希望浏览器打开一个简单的网页</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>The "Click the button" page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"styles.css"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">      Click the button.</div><div class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">      var button = document.querySelector("button");</div><div class="line">      button.style.fontWeight = "bold";</div><div class="line">      button.addEventListener("click", function () &#123;</div><div class="line">        alert("Well done.");</div><div class="line">      &#125;);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="浏览器如何渲染网页">浏览器如何渲染网页</h2><ol>
+<li>使用 HTML 创建文档对象模型（<strong>DOM</strong>）</li>
+<li>使用 CSS 创建 CSS 对象模型（<strong>CSSOM</strong>）</li>
+<li>基于 DOM 和 CSSOM 执行脚本（<strong>Scripts</strong>）</li>
+<li>合并 DOM 和 CSSOM 形成渲染树（<strong>Render Tree</strong>）</li>
+<li>使用渲染树布局（<strong>Layout</strong>）所有元素</li>
+<li>渲染（<strong>Paint</strong>）所有元素</li>
+</ol>
+<p><img src="/image/browser-fe-optimizing/p1.png" alt="附图"></p>
+<a id="more"></a>
+<h1 id="步骤一_—_HTML">步骤一 — HTML</h1><p>浏览器从上到下读取标签，把他们分解成节点，从而创建 DOM 。</p>
+<p><img src="/image/browser-fe-optimizing/p2.png" alt="附图"></p>
+<h2 id="HTML_加载优化策略">HTML 加载优化策略</h2><ul>
+<li>样式在顶部，脚本在底部</li>
+</ul>
+<p>总体思路是尽可能早的加载样式，尽可能晚的加载脚本。原因是脚本执行之前，需要 HTML 和 CSS 解析完成，因此，样式尽可能的往顶部放，当底部脚本开始执行之前，样式有足够的时间完成计算。</p>
+<p>进一步讲讲如何优化</p>
+<ul>
+<li>最小化和压缩</li>
+</ul>
+<p>方法可用于所有内容，包括 HTML，CSS，JavaScript，图片和其它资源。</p>
+<p>最小化是移除所有多余的字符，包括空格，注释，多余的分号，等等。</p>
+<p>压缩比如 GZip，大大压缩下载文件的大小</p>
+<p>两种方法都用的情况下，资源加载量减少了 80% 到 90%。比如：<a href="https://css-tricks.com/the-difference-between-minification-and-gzipping/#article-header-id-2" target="_blank" rel="external">bootstrap 节省了 87% 的流量</a>。</p>
+<ul>
+<li>无障碍</li>
+</ul>
+<p>不会提升页面的下载速度，但会大大提升残障人士的满意度。给元素加上 <code>aria</code> 标签，图片提供 <code>alt</code> 文本，<a href="http://www.clarissapeterson.com/2012/11/html5-accessibility/" target="_blank" rel="external">HTML 5 无障碍参见</a>。</p>
+<p>使用诸如 <a href="http://wave.webaim.org/" target="_blank" rel="external">WAVE</a> 的工具鉴别哪些地方可以提高可访问性。</p>
+<h1 id="步骤二_—_CSS">步骤二 — CSS</h1><p>当浏览器发现任何与节点相关的样式时，比如：外部，内部，或行内样式，立即停止<strong>渲染</strong> DOM ，并利用这些节点创建 CSSOM。这就是 CSS “<strong>渲染阻塞</strong>“ 的由来。这里是不同类型样式的<a href="https://vineetgupta22.wordpress.com/2011/07/09/inline-vs-internal-vs-external-css/" target="_blank" rel="external">优缺点</a>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//外部样式</div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"styles.css"</span>&gt;</span></div><div class="line"></div><div class="line">// 内部样式</div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">  h1 &#123;</div><div class="line">    font-size: 18px;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"></div><div class="line">// 行内样式</div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">style</span>=<span class="string">"background-color: blue;"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>CSSOM 节点创建与 DOM 节点创建类似，随后，两者合并如下：</p>
+<p><img src="/image/browser-fe-optimizing/p3.png" alt="附图"></p>
+<p>CSSOM 的构建会阻塞页面的渲染，因此我们想尽早加载样式，</p>
+<h2 id="CSS_加载优化策略">CSS 加载优化策略</h2><ul>
+<li>使用 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" rel="external">media 属性</a></li>
+</ul>
+<p>media 属性指定加载样式的条件，比如：符合最大或最小分辨率？还是面向屏幕阅读器？</p>
+<ul>
+<li>延迟加载 CSS</li>
+</ul>
+<p>有些样式，比如：首屏以下的，或者不那么重要的，可以等待首屏最有价值的内容渲染完成再加载，可以使用脚本等待页面加载，然后再插入样式。</p>
+<p>这有两个栗子：<a href="https://jakearchibald.com/2016/link-in-body/" target="_blank" rel="external">The future of loading CSS</a>，<a href="https://www.giftofspeed.com/defer-loading-css/" target="_blank" rel="external">Defer load CSS</a></p>
+<ul>
+<li>只加载需要的样式</li>
+</ul>
+<p>使用 <a href="https://github.com/giakki/uncss" target="_blank" rel="external">uncss</a> 类似的工具，尽量移除不需要的样式。</p>
+<h1 id="步骤三_—_JavaScript">步骤三 — JavaScript</h1><p>浏览器不断构建 DOM / CSSOM 节点，直到发现外部或者行内的脚本。</p>
+<p>由于脚本可能需要访问或操作之前的 HTML 或样式，我们必须等待它们构建完成。</p>
+<p>因此浏览器必须停止<strong>解析</strong>节点，完成构建 CSSOM，执行脚本，然后再继续。这就是 JavaScript 被称作“<strong>解析器阻塞</strong>”的原因。</p>
+<p>脚本只能等到先前的 CSS 节点构建完成。</p>
+<p><img src="/image/browser-fe-optimizing/p4.png" alt="附图"></p>
+<h2 id="JavaScript_加载优化策略">JavaScript 加载优化策略</h2><ul>
+<li>异步加载脚本</li>
+</ul>
+<p>脚本添加 <code>async</code> 属性，可以通知浏览器不要阻塞其余页面的加载，下载脚本处于较低的优先级。一旦下载完成，就可以执行。</p>
+<p><img src="/image/browser-fe-optimizing/p5.png" alt="附图"></p>
+<p><code>async</code> 适用于不影响 DOM 或 CSSOM 的脚本，对一些跟我们的代码无关的，不影响用户体验的外部脚本尤其适用，比如：分析统计脚本。</p>
+<ul>
+<li>延迟加载脚本</li>
+</ul>
+<p><code>defer</code> 跟 <code>async</code> 非常相似，不会阻塞页面加载，但会等到 HTML 完成解析后再执行。</p>
+<p><img src="/image/browser-fe-optimizing/p6.png" alt="附图"></p>
+<p>使用 defer 策略的 <a href="https://varvy.com/pagespeed/defer-loading-javascript.html" target="_blank" rel="external">另一个好选择</a>，或者也可以使用 <code>addEventListener</code>，了解更多，参加<a href="http://stackoverflow.com/questions/588040/window-onload-vs-document-onload" target="_blank" rel="external">这里</a>。</p>
+<p>不幸的是 <code>async</code> 和 <code>defer</code> 对于行内的脚本不起作用，浏览器默认会编译执行它们。</p>
+<ul>
+<li>操作之前克隆节点</li>
+</ul>
+<p>多次操作 DOM 时可以尝试，首先克隆整个 DOM 节点更加高效，操作克隆后的节点，然后替换先前的节点，避免了多次重绘，降低了 CPU 和内存消耗，同时也避免了不必要的页面闪烁。</p>
+<p>需要注意，克隆的时候并没有克隆事件监听。</p>
+<ul>
+<li>Preload/Prefetch/Prerender/Preconnect</li>
+</ul>
+<p>这些新属性并不是所有的浏览器都支持。了解详情可以看这里：<a href="https://css-tricks.com/prefetching-preloading-prebrowsing/" target="_blank" rel="external">Prefetching, preloading, prebrowsing</a></p>
+<h1 id="步骤四_—_渲染树（Render_Tree）">步骤四 — 渲染树（Render Tree）</h1><p>一旦所有节点已被解析，DOM 和 CSSOM 准备合并，浏览器便会构建渲染树。如果我们把节点想象成单词，那么对象模型就是句子，渲染树便是整个页面。</p>
+<p><img src="/image/browser-fe-optimizing/p7.png" alt="附图"></p>
+<h1 id="步骤五_—_布局（Layout）">步骤五 — 布局（Layout）</h1><p>布局阶段需要确定页面上所有元素的大小和位置。</p>
+<p><img src="/image/browser-fe-optimizing/p8.png" alt="附图"></p>
+<h1 id="步骤六_—_渲染（Paint）">步骤六 — 渲染（Paint）</h1><p>最终的渲染阶段，会真正地光栅化屏幕上的像素，把页面呈现给用户。</p>
+<p><img src="/image/browser-fe-optimizing/p9.png" alt="附图"></p>
+<p>整个过程耗时1秒或十分之一秒，我们的任务是让它更快。</p>
+<p>如果 JavaScript 事件改变了页面的某部分，便会引起渲染树的重绘，并且迫使布局（Layout）和渲染（Paint）过程再次进行。</p>
+<h1 id="浏览器如何发起网络请求">浏览器如何发起网络请求</h1><p>当浏览器请求一个 URL，服务端会响应一些 HTML。</p>
+<p>我们需要认识一个新术语，关键渲染路径（Critical Rendering Path (CRP)），就是浏览器渲染页面的步骤数，如下图。</p>
+<p><img src="/image/browser-fe-optimizing/p10.png" alt="附图"></p>
+<h2 id="关键路径长度">关键路径长度</h2><p>关键渲染路径的度量标准是路径长度。最理想的关键路径长度是1。</p>
+<p>如果页面包含一些内部样式和 JavaScript ，关键路径发生以下改变。</p>
+<p><img src="/image/browser-fe-optimizing/p11.png" alt="附图"></p>
+<p>新增两步，<strong>构建 CSSOM</strong>和<strong>执行脚本</strong>，因为我们的 HTML 有内部样式和脚本需要计算。由于没有外部请求，我们的关键路径长度没变。</p>
+<p>但是注意，我们的 HTML 大小增加到了 2kb，某些地方还是受了影响。</p>
+<h2 id="关键字节数">关键字节数</h2><p>三个度量标准之二出现了，关键字节数，它用来衡量渲染页面需要传送多少字节数。</p>
+<p>如果你认为不需要外部资源，就大错特错了，外部资源可以被缓存。</p>
+<p>我们使用一个外部 CSS 文件，一个外部 JavaScript 文件，和一个外部带 <code>async</code> 属性的 JavaScript 文件。关键路径图如下：</p>
+<p><img src="/image/browser-fe-optimizing/p12.png" alt="附图"></p>
+<p>浏览器请求页面，构建 DOM，发现外部资源后开始下载，CSS 和 JavaScript 有较高的优先级，其它资源次之。</p>
+<p><code>styles.css</code> 和 <code>app.js</code> 通过另一个关键路径获取。暂时不获取 <code>analytics.js</code> ，因为加了 <code>async</code> 属性，浏览器将用另一个线程下载它，它处于较低优先级，不会阻塞页面渲染，也不影响关键路径。</p>
+<h2 id="关键文件">关键文件</h2><p>最后一个度量标准是关键文件，浏览器渲染页面需要下载的文件总量。以上例子，HTML 文件，CSS 和 JavaScript 文件算关键文件，<code>async</code> 的脚本不算。当然是文件越少越好。</p>
+<h2 id="回到关键路径长度">回到关键路径长度</h2><p>以上例子就是最长的渲染路径吗？我认为渲染页面时，我们仅需要下载 HTML，CSS 和 JavaScript 文件，仅通过两次服务器往返就做到了。</p>
+<h2 id="HTTP1_文件限制">HTTP1 文件限制</h2><p>我们浏览器的 HTTP1 协议，在同一个域名，同一次，允许下载的文件数有最大限制，范围从 2（老旧的浏览器）到 6（Edge，Chrome）。</p>
+<p>各种浏览器请求文件的最大并发数，参见<a href="http://sgdev-blog.blogspot.co.uk/2014/01/maximum-concurrent-connection-to-same.html" target="_blank" rel="external">Maximum concurrent connections to the same domain for browsers</a>。</p>
+<p>通过把一些资源存放到影子域名，可以绕过这个限制，以达到最佳优化效果。</p>
+<p><strong>注意</strong>：不要把关键的 CSS 放到根域名之外的其他域名，有些场景下会对 DNS 查找和延迟起反作用。</p>
+<h2 id="HTTP2">HTTP2</h2><p>如果网站使用了 HTTP2，并且用户的浏览器也兼容，则可以完全避开这个下载限制。</p>
+<p><a href="https://tools.keycdn.com/http2-test" target="_blank" rel="external">这里</a>有个 HTTP2 测试网站。</p>
+<h2 id="TCP_往返限制">TCP 往返限制</h2><p>每一次服务器往返可以传送的最大数据量是 14kb，包括所有 HTML，CSS 和脚本的网络请求。</p>
+<p>如果我们的 HTML，或者积累的资源请求超过 14kb时，需要多做一次服务器往返。</p>
+<h2 id="大魔法师">大魔法师</h2><p>我们整个 HTML 页面可以很好的压缩， GZip 可以压缩到 2kb，远低于 14kb 的限制，因此，一次服务器往返就可以搞定。</p>
+<p><img src="/image/browser-fe-optimizing/p13.png" alt="附图"></p>
+<p><code>关键路径度量: 长度 1，文件数 1，字节数 2kb</code></p>
+<p>浏览器发现外部资源（CSS 和 JavaScript）时，发起请求开始下载它们。首要下载的 CSS 文件是 14kb，达到了往返传输的最大限制，因此增加了一条关键路径。</p>
+<p><img src="/image/browser-fe-optimizing/p14.png" alt="附图"></p>
+<p><code>关键路径度量: 长度 2，文件数 2，字节数 16kb</code></p>
+<p>余下的资源低于 14kb，但是总共有 7 个资源，由于网站未启用 HTTP2，我们的 Chrome，每一次往返仅可以下载 6 个文件。</p>
+<p><img src="/image/browser-fe-optimizing/p15.png" alt="附图"></p>
+<p><code>关键路径度量: 长度 3，文件数 8，字节数 28kb</code></p>
+<p>下载完最终文件，并开始渲染 DOM。</p>
+<p><img src="/image/browser-fe-optimizing/p16.png" alt="附图"></p>
+<p><code>关键路径度量: 长度 4，文件数 9，字节数 30kb</code></p>
+<p>基于以上的信息和知识，发起每个连接时，就可以准确地预估页面的性能了。</p>
+<h2 id="浏览器网络优化策略">浏览器网络优化策略</h2><ul>
+<li>Pagespeed Insights</li>
+</ul>
+<p>使用 <a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">Insights</a> 鉴别性能问题，Chrome DevTools 也有个 <code>audit</code> 标签。</p>
+<ul>
+<li>充分利用 Chrome 开发者工具</li>
+</ul>
+<p><a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing" target="_blank" rel="external">这篇文章</a> 值得一读，帮你理解网络资源</p>
+<ul>
+<li>在优质的环境里开发，在艰苦的环境里测试</li>
+</ul>
+<p>开发时大可使用 1Tb SSD，32G 内存的 Macbook Pro ，但是性能测试时还是要到 Chrome 的 <code>network</code> 标签下模拟低带宽的情形，从而获取有价值的信息。</p>
+<ul>
+<li>合并资源/文件</li>
+</ul>
+<p>基本上，每接收到一个外部 CSS 和 JavaScript 文件，浏览器都会构建 CSSOM，执行脚本。尽管几个文件可以在一次往返中传送，但也浪费了浏览器的宝贵时间和资源，最好还是合并文件，减少不必要的加载。</p>
+<ul>
+<li>首屏内容使用内部样式</li>
+</ul>
+<p>内部 CSS 和 JavaScript 不需要请求外部资源，相反，外部资源又可以被缓存，并保持 DOM 轻量，两者没有非黑即白。</p>
+<p>但是一个非常好的论点是首屏关键内容使用内部样式，可以避免请求额外的资源，节省时间做最有意义的渲染。</p>
+<ul>
+<li><p>最小化/压缩图片</p>
+</li>
+<li><p>延迟加载图片</p>
+</li>
+<li><p>异步记载字体</p>
+</li>
+<li><p>是否真正需要 JavaScript / CSS?</p>
+</li>
+</ul>
+<p>原生 HTML 元素可以实现的行为是否用了脚本？是否有样式或者图标可以行内创建的，不需要内部/外部资源？比如：<a href="https://css-tricks.com/using-svg/#article-header-id-7" target="_blank" rel="external">行内 SVG</a>。</p>
+<ul>
+<li>CDN</li>
+</ul>
+<p>可以利用 CDN（内容分发网络）存储资源，它会从离用户最近，延迟最低的位置分发到用户设备，加载时间更快。</p>
+<p><strong>延伸阅读</strong></p>
+<ul>
+<li><a href="https://developers.google.com/web/fundamentals/performance/" target="_blank" rel="external">Google 的优化文档</a></li>
+<li><a href="https://hpbn.co/" target="_blank" rel="external">高性能浏览器网络</a></li>
+</ul>
+<h1 id="综述">综述</h1><p>关键渲染路径是最重要的，它使得网站优化有规律可循。需要关注3个指标：</p>
+<p>1—关键字节数<br>2—关键文件数<br>3—关键路径长度</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>原文：<a href="https://hackernoon.com/optimising-the-front-end-for-the-browser-f2f51a29c572">Optimising the front end for the browser</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>优化关乎速度和满意度。</p>
+<ul>
+<li>从用户体验（UX）角度，我们希望前端网页可以快速加载</li>
+<li><p>从开发体验（DX）角度，我们希望前端是快速，简洁，规范的</p>
+<h1 id="浏览器都做了什么">浏览器都做了什么</h1></li>
+</ul>
+<p>我们希望浏览器打开一个简单的网页</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>The "Click the button" page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"styles.css"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">      Click the button.</div><div class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></div><div class="line">      var button = document.querySelector("button");</div><div class="line">      button.style.fontWeight = "bold";</div><div class="line">      button.addEventListener("click", function () &#123;</div><div class="line">        alert("Well done.");</div><div class="line">      &#125;);</div><div class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="浏览器如何渲染网页">浏览器如何渲染网页</h2><ol>
+<li>使用 HTML 创建文档对象模型（<strong>DOM</strong>）</li>
+<li>使用 CSS 创建 CSS 对象模型（<strong>CSSOM</strong>）</li>
+<li>基于 DOM 和 CSSOM 执行脚本（<strong>Scripts</strong>）</li>
+<li>合并 DOM 和 CSSOM 形成渲染树（<strong>Render Tree</strong>）</li>
+<li>使用渲染树布局（<strong>Layout</strong>）所有元素</li>
+<li>渲染（<strong>Paint</strong>）所有元素</li>
+</ol>
+<p><img src="/image/browser-fe-optimizing/p1.png" alt="附图"></p>]]>
+    
+    </summary>
+    
+      <category term="前端优化" scheme="http://jinlong.github.io/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="前端优化" scheme="http://jinlong.github.io/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[JavaScript 数组方法对比]]></title>
@@ -1992,109 +2202,6 @@
       <category term="Handlebars" scheme="http://jinlong.github.io/tags/Handlebars/"/>
     
       <category term="Node.js" scheme="http://jinlong.github.io/categories/Node-js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Express 入门]]></title>
-    <link href="http://jinlong.github.io/2014/01/07/introduction-to-express/"/>
-    <id>http://jinlong.github.io/2014/01/07/introduction-to-express/</id>
-    <published>2014-01-07T08:19:00.000Z</published>
-    <updated>2015-10-29T02:55:34.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>原文：<a href="http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-express/" target="_blank" rel="external">Introduction to Express</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
-</blockquote>
-<h2 id="安装">安装</h2><p>package.json 中手动添加 Express 依赖</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   <span class="string">"name"</span>: <span class="string">"demo1"</span>,</div><div class="line">   <span class="string">"description"</span>: <span class="string">"First Express app"</span>,</div><div class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">   <span class="string">"dependencies"</span>: &#123;</div><div class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>相同的目录运行：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span></div></pre></td></tr></table></figure>
-<p>命令行安装 Express 直接运行：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> -g express</div></pre></td></tr></table></figure>
-<p>安装完后可以用 express 在命令行生成应用。</p>
-<p>添加 app.js 文件，写个最简单的应用，创建一个 Express 实例，开始监听特定的端口 ：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"> </div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
-<p>运行 <code>node app</code> 没发生任何事情。</p>
-<a id="more"></a>
-<h2 id="定义路由">定义路由</h2><p>我们给应用添加一些简单的路由，Express 可以响应各种 HTTP 请求：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Regular HTTP get</span></div><div class="line">app.get(some url, <span class="keyword">do</span> something);</div><div class="line"> </div><div class="line"><span class="comment">//Some other page</span></div><div class="line">app.get(some other url, <span class="keyword">do</span> something <span class="keyword">else</span>);</div><div class="line"> </div><div class="line"><span class="comment">//I can respond to a form post</span></div><div class="line">app.post(some url, <span class="keyword">do</span> more stuff);</div></pre></td></tr></table></figure>
-<p>我们写个真实的例子，给应用添加主页：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</div><div class="line">   response.send(<span class="string">"This would be some HTML"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>注意 Express 为 response 对象添加了 <code>send()</code> 方法，一些模板代码可以处理响应。重启应用，访问 <a href="http://localhost:3000/" target="_blank" rel="external">http://localhost:3000/</a> 看看。</p>
-<p><strong>request.send()</strong> API 智能处理不同类型的数据，假如你想为网站添加简单的基于 JSON 的 API ，Express 可以把返回结果转换成 JSON 并设置适当的响应头。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/api'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</div><div class="line">   response.send(&#123;<span class="attr">name</span>:<span class="string">"Raymond"</span>,<span class="attr">age</span>:<span class="number">40</span>&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>可想而知，添加更多的路由，并处理所需的响应，就可以构建一个应用。<br><!--more--></p>
-<h2 id="通用的博客应用">通用的博客应用</h2><p>跳过 package.json 文件，因为除了 name 属性不一样，其它项都一样。来看 app.js 。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"> </div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   res.sendfile(<span class="string">'./views/index.html'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">app.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   res.sendfile(<span class="string">'./views/about.html'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">app.get(<span class="string">'/article'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   res.sendfile(<span class="string">'./views/article.html'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
-<p>我们把 <strong>send</strong> 换成了 <strong>sendfile</strong> 。与其把大段的 HTML 字符串放到 app.js 文件里，不如增加三个路由，主页，关于页，文章页。</p>
-<h3 id="添加_HTML">添加 HTML</h3><p>主页：</p>
-<p><a href="https://gist.github.com/jinlong/8297190#file-home-html" target="_blank" rel="external">HTML 代码</a></p>
-<p>这里并没什么特别的，Express 将返回纯静态的 HTML 。关于页和文章页只不过把 title 和 h1 值改了。</p>
-<h3 id="由静态到动态">由静态到动态</h3><p>Express 支持各种模板引擎，express 命令行可以添加对 Jade，EJS，JSHTML 和 Hogan 的支持。根据 Express 文档，任何模版引擎只要符合特定的签名就可以生效。推荐从 <a href="https://github.com/visionmedia/consolidate.js" target="_blank" rel="external">consolidate.js</a> 库（模版引擎集合）里面查找喜欢的模版引擎。</p>
-<p>我是 <a href="http://handlebarsjs.com/" target="_blank" rel="external">Handlebars</a> 的超级粉，我的许多客户端应用都用它，服务器端自然也少不了它。要用 Handlebars 还需要安装包装库 <a href="https://github.com/donpark/hbs" target="_blank" rel="external">hbs</a> 。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   <span class="string">"name"</span>: <span class="string">"blog2"</span>,</div><div class="line">   <span class="string">"description"</span>: <span class="string">"Blog app"</span>,</div><div class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">   <span class="string">"dependencies"</span>: &#123;</div><div class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span>,</div><div class="line">      <span class="string">"hbs"</span>:<span class="string">"*"</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后更新 app.js 使用此引擎：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"> </div><div class="line"><span class="keyword">var</span> hbs = <span class="built_in">require</span>(<span class="string">'hbs'</span>);</div><div class="line"> </div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'html'</span>);</div><div class="line">app.engine(<span class="string">'html'</span>, hbs.__express);</div><div class="line"> </div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   res.render(<span class="string">'index'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">app.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   res.render(<span class="string">'about'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">app.get(<span class="string">'/article'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   res.render(<span class="string">'article'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
-<p>为了使用 Handlebars ，我们通过 require 把 HBS 包装库引入，然后让 Express 使用它。<br>默认情况下，Handlebars 会解析包含了特定引擎扩展的文件，这里是 <code>something.hbs</code> 。但也可以使用 “<code>view engine</code>”指令告诉 Express 动态解析 HTML 文件。这样我的编辑器可以提供良好的代码校验和语法高亮。通过 <code>app.engine</code> 真正加载引擎。</p>
-<p>最终路由用了新的 <code>render</code> 方法，Express 默认使用 views 文件夹，因此我们可以省略。由于 Express 记住了我们要解析的扩展名，所以它也可以省略。<code>res.render(&#39;something&#39;)</code> 实际等于告诉 Express 查找 <code>views/something.html</code> 。Express 基于模板引擎规则解析它，并返回到浏览器。</p>
-<h3 id="主页显示博客条目">主页显示博客条目</h3><p>我们可以连接到 MySQL 或者 Mongo，这里我们创建一个静态的数据集，取名 blog.js ，它提供获取一组条目和获取一个条目功能。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> entries = [</div><div class="line">&#123;<span class="string">"id"</span>:<span class="number">1</span>, <span class="string">"title"</span>:<span class="string">"Hello World!"</span>, <span class="string">"body"</span>:<span class="string">"This is the body of my blog entry. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/2/2013"</span>&#125;,</div><div class="line">&#123;<span class="string">"id"</span>:<span class="number">2</span>, <span class="string">"title"</span>:<span class="string">"Eggs for Breakfast"</span>, <span class="string">"body"</span>:<span class="string">"Today I had eggs for breakfast. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/3/2013"</span>&#125;,</div><div class="line">&#123;<span class="string">"id"</span>:<span class="number">3</span>, <span class="string">"title"</span>:<span class="string">"Beer is Good"</span>, <span class="string">"body"</span>:<span class="string">"News Flash! Beer is awesome!"</span>, <span class="string">"published"</span>:<span class="string">"6/4/2013"</span>&#125;,</div><div class="line">&#123;<span class="string">"id"</span>:<span class="number">4</span>, <span class="string">"title"</span>:<span class="string">"Mean People Suck"</span>, <span class="string">"body"</span>:<span class="string">"People who are mean aren't nice or fun to hang around."</span>, <span class="string">"published"</span>:<span class="string">"6/5/2013"</span>&#125;,</div><div class="line">&#123;<span class="string">"id"</span>:<span class="number">5</span>, <span class="string">"title"</span>:<span class="string">"I'm Leaving Technology X and You Care"</span>, <span class="string">"body"</span>:<span class="string">"Let me write some link bait about why I'm not using a particular technology anymore."</span>, <span class="string">"published"</span>:<span class="string">"6/10/2013"</span>&#125;,</div><div class="line">&#123;<span class="string">"id"</span>:<span class="number">6</span>, <span class="string">"title"</span>:<span class="string">"Help My Kickstarter"</span>, <span class="string">"body"</span>:<span class="string">"I want a new XBox One. Please fund my Kickstarter."</span>, <span class="string">"published"</span>:<span class="string">"6/12/2013"</span>&#125;];</div><div class="line">exports.getBlogEntries = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="keyword">return</span> entries;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">exports.getBlogEntry = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; entries.length; i++) &#123;</div><div class="line">      <span class="keyword">if</span>(entries[i].id == id) <span class="keyword">return</span> entries[i];</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们还可以提供添加，编辑和删除，这里到此为止。再更新下 app.js ：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"> </div><div class="line"><span class="keyword">var</span> hbs = <span class="built_in">require</span>(<span class="string">'hbs'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> blogEngine = <span class="built_in">require</span>(<span class="string">'./blog'</span>);</div><div class="line"> </div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'html'</span>);</div><div class="line">app.engine(<span class="string">'html'</span>, hbs.__express);</div><div class="line">app.use(express.bodyParser());</div><div class="line"> </div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   res.render(<span class="string">'index'</span>,&#123;<span class="attr">title</span>:<span class="string">"My Blog"</span>, <span class="attr">entries</span>:blogEngine.getBlogEntries()&#125;);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">app.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   res.render(<span class="string">'about'</span>, &#123;<span class="attr">title</span>:<span class="string">"About Me"</span>&#125;);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">app.get(<span class="string">'/article/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   <span class="keyword">var</span> entry = blogEngine.getBlogEntry(req.params.id);</div><div class="line">   res.render(<span class="string">'article'</span>,&#123;<span class="attr">title</span>:entry.title, <span class="attr">blog</span>:entry&#125;);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
-<p>我们用 <code>require</code> 引入数据集，如此可以调用它得到条目。</p>
-<p>在主页，我们给 <code>render</code> API 传两个参数，参数是一个对象，包含 <code>title</code> 和 <code>entries</code> 属性。title 的值时字符串，但是 entries 调用 <code>blogEngine</code> API 。我们传的任何数据将对模版生效，主页模版需要调整。</p>
-<p><a href="https://gist.github.com/jinlong/8297190#file-home-tpl-html" target="_blank" rel="external">主页模版代码</a></p>
-<p>即使你从没用过 Handlebars ，仍旧能猜到这里的含义。<code>#each</code> 指令将循环一个数组，&#123;&#123;&#125;&#125; 表示从博客条目列表取到的参数。</p>
-<h3 id="创建一个布局">创建一个布局</h3><p>你肯定关心剩下的 HTML 怎么改，Express 用了模版引擎会自动支持布局。这意味着我可以创建通用的网站设计布局，Express 将利用它构造特定的页面。按照约定，它取名 <code>layout.something</code> ，“something”是你使用的特定扩展。我们用了 HTML ，它就是 <code>layout.html</code> 。</p>
-<p><a href="https://gist.github.com/jinlong/8297190#file-layout-html" target="_blank" rel="external">layout.html 代码</a></p>
-<p>关于页面没什么亮点，我们跳过，下面看文章路由。URL 现在包含了标记 <code>:id</code> ，Express 可以创建动态的 URL ，用于对应请求参数。我们定义的链接像这样：<br><code>/article/</code></p>
-<p>理论上，每一个博客条目需要一个路由，但是创建一个抽象的路由匹配这些请求效果更好。 <code>bodyParser</code> （这一特性来源于 Connect 框架，的确对我很有帮助，它不仅支持查询字符串，而且支持表单主体，几乎每个 Express 应用都会用到它。）</p>
-<h3 id="显示个别文章">显示个别文章</h3><p>由于 URL 结尾包含动态值，我们可以把它传给 <code>blogEngine</code> 对象，用得到的结果作为视图的变量。</p>
-<p><a href="https://gist.github.com/jinlong/8297190#file-article-html" target="_blank" rel="external">article.html 文件</a></p>
-<p>现在我们创建了一个真正动态，但是难看的应用，这是新主页：</p>
-<p><img src="/images/post/exp-blog/express-blog3-home.jpg"></p>
-<p>这是特定的博客条目：</p>
-<p><img src="/images/post/exp-blog/express-blog3-article.jpg"></p>
-<h2 id="润色！">润色！</h2><p>我们加点基本的样式，让应用变好看点。Express 提供了简洁的方式添加图像，JavaScript 库和样式表之类的静态资源，简单定义一个静态文件夹，任何请求将从这个文件夹查找文件。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.use(express.static(<span class="string">'public'</span>));</div></pre></td></tr></table></figure>
-<p>此时，如果请求 /foo.css，public 文件夹存在 foo.css 文件，将返回它。我把 <a href="http://twitter.github.io/bootstrap/" target="_blank" rel="external">Bootstrap</a> 和 jQuery 副本放到了 public 文件夹。</p>
-<p>然后在我的 layout.html ，我可以引用这些资源。这是链接 bootstrap.css 的例子：</p>
-<p><a href="https://gist.github.com/jinlong/8297190#file-layout1-html" target="_blank" rel="external">代码实例</a></p>
-<p>Express 将自动检查 public 文件夹，可以有多个静态文件夹，甚至可以自定义 URL 前缀。最终效果是极好的。</p>
-<p>主页：</p>
-<p><img src="/images/post/exp-blog/express-blog4-home.jpg"></p>
-<p>文章页：</p>
-<p><img src="/images/post/exp-blog/express-blog4-article.jpg"></p>
-<h2 id="进阶？">进阶？</h2><p>延伸阅读：</p>
-<ul>
-<li><a href="http://expressjs.com/" target="_blank" rel="external">Express homepage</a>    </li>
-<li><a href="https://groups.google.com/forum/?fromgroups#!forum/express-js" target="_blank" rel="external">Google group</a>   </li>
-<li><a href="https://github.com/visionmedia/express/tree/master/examples" target="_blank" rel="external">Express 实例</a></li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>原文：<a href="http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-express/">Introduction to Express</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<h2 id="安装">安装</h2><p>package.json 中手动添加 Express 依赖</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   <span class="string">"name"</span>: <span class="string">"demo1"</span>,</div><div class="line">   <span class="string">"description"</span>: <span class="string">"First Express app"</span>,</div><div class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">   <span class="string">"dependencies"</span>: &#123;</div><div class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>相同的目录运行：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span></div></pre></td></tr></table></figure>
-<p>命令行安装 Express 直接运行：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> -g express</div></pre></td></tr></table></figure>
-<p>安装完后可以用 express 在命令行生成应用。</p>
-<p>添加 app.js 文件，写个最简单的应用，创建一个 Express 实例，开始监听特定的端口 ：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"> </div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
-<p>运行 <code>node app</code> 没发生任何事情。</p>]]>
-    
-    </summary>
-    
-      <category term="Node.js" scheme="http://jinlong.github.io/tags/Node-js/"/>
-    
-      <category term="Express" scheme="http://jinlong.github.io/tags/Express/"/>
-    
-      <category term="Node.js" scheme="http://jinlong.github.io/categories/Node-js/"/>
-    
-      <category term="Express" scheme="http://jinlong.github.io/categories/Node-js/Express/"/>
     
   </entry>
   

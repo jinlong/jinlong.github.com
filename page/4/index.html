@@ -219,6 +219,203 @@
             
             
               
+                <a class="post-title-link" href="/2013/08/29/devtoolsecrets/" itemprop="url">
+                  浏览器开发工具的秘密
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2013-08-29T11:32:00+08:00" content="2013-08-29">
+              2013-08-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Debug/" itemprop="url" rel="index">
+                    <span itemprop="name">Debug</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Debug/浏览器/" itemprop="url" rel="index">
+                    <span itemprop="name">浏览器</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Debug/浏览器/开发工具/" itemprop="url" rel="index">
+                    <span itemprop="name">开发工具</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/08/29/devtoolsecrets/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/08/29/devtoolsecrets/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>源网站：<a href="http://devtoolsecrets.com/">Secrets of the Browser Developer Tools</a><br>译者：<a href="http://weibo.com/newwave">涂鸦码农</a></p>
+</blockquote>
+<h2 id="目录">目录</h2><ul>
+<li>常规<ol>
+<li><a href="#findDevTools">找到开发工具</a></li>
+<li><a href="#latest">用最新的开发版</a></li>
+<li><a href="#dockTools">移动开发工具位置</a></li>
+<li><a href="#debugRWD">开发工具调试响应式设计</a></li>
+<li><a href="#shortcut">学习快捷键</a></li>
+</ol>
+</li>
+<li>Console 控制台<ol>
+<li><a href="#console">Log, Info, Debug, Warn, Error</a></li>
+<li><a href="#consoleTable">输出数据表格</a></li>
+<li><a href="#assert">Assert</a> </li>
+<li><a href="#timer">使用控制台定时器</a></li>
+<li><a href="#persistent">持久控制台</a></li>
+<li><a href="#rerun">重新运行命令</a></li>
+<li><a href="#openConsole">任意 Tab 打开控制台</a></li>
+<li><a href="#focusFrame">改变框架焦点</a></li>
+<li><a href="#reference">引用当前和前一个元素</a></li>
+<li><a href="#eval">最终求值表达式</a></li>
+</ol>
+</li>
+<li>检查<ol>
+<li><a href="#breadcrumb">通过面包屑导航 DOM</a></li>
+<li><a href="#searchDom">搜索 DOM 节点</a></li>
+<li><a href="#fonts">检查字体</a></li>
+<li><a href="#viewRWD">浏览你的响应式网站</a></li>
+<li><a href="#3Dview">3D 视图</a></li>
+</ol>
+</li>
+<li>编辑<ol>
+<li><a href="#changeVal">改变 CSS 值</a></li>
+<li><a href="#changeSta">改变 :active， :hover， :focus， :visited 状态样式</a></li>
+<li><a href="#dragEl">拖拽重排元素</a></li>
+<li><a href="#sass">使用 SASS Source Maps</a></li>
+</ol>
+</li>
+<li>调试<ol>
+<li><a href="#debugger">用 debugger; 调试</a></li>
+<li><a href="#conditional">条件断点</a></li>
+<li><a href="#domBreakpoint">DOM 断点</a></li>
+<li><a href="#xhr">XHR 断点</a></li>
+<li><a href="#breakpointScope">检查断点的作用域</a> </li>
+<li><a href="#inspectVal">监控值</a></li>
+<li><a href="#minimize">调试压缩后的 JavaScript</a> </li>
+<li><a href="#sourceMap">使用 JavaScript Source Maps</a></li>
+<li><a href="#useragent">模拟User Agent</a></li>
+<li><a href="#emulateTouch">模拟触控设备</a></li>
+<li><a href="#geo">覆盖地理位置</a></li>
+<li><a href="#orientation">重写设备方向</a></li>
+<li><a href="#canvasDebug">调试 Canvas 元素</a></li>
+<li><a href="#snippet">运行代码片段</a></li>
+</ol>
+</li>
+<li>性能<ol>
+<li><a href="#disableCache">禁用浏览器缓存</a></li>
+<li><a href="#networkBottleneck">排序网络请求找到瓶颈</a></li>
+<li><a href="#harFile">网络时间轴导出为 HAR 文件</a></li>
+<li><a href="#loadEvent">检查 DOMContentLoad 和 Load 事件</a></li>
+<li><a href="#resendXHR">重发送 XHR 请求</a></li>
+<li><a href="#fps">测量渲染性能和 FPS</a></li>
+</ol>
+</li>
+<li>移动端<ol>
+<li><a href="#devIOS">开发工具调试 IOS</a> </li>
+<li><a href="#devAndroid">开发工具调试 Android</a> </li>
+</ol>
+</li>
+<li>扩展<ol>
+<li><a href="#geoPlugin">覆盖地理位置</a></li>
+</ol>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/08/29/devtoolsecrets/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2013/08/13/centering-all-the-directions/" itemprop="url">
                   CSS 居中大全
                 </a>
@@ -1294,128 +1491,11 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2013/05/03/angularjs-tutorial3/" itemprop="url">
-                  AngularJS 新手指南3
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-05-03T15:58:00+08:00" content="2013-05-03">
-              2013-05-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/AngularJS/" itemprop="url" rel="index">
-                    <span itemprop="name">AngularJS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/AngularJS/翻译/" itemprop="url" rel="index">
-                    <span itemprop="name">翻译</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/05/03/angularjs-tutorial3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/05/03/angularjs-tutorial3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="模版链接和图片">模版链接和图片</h2><p><strong><em>数据</em></strong></p>
-<p>注意 phones.json 文件包含了唯一的 Id 和图像 url，url 指向 <code>app/img/phones/</code> 路径：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">&#123;</div><div class="line">  <span class="string">"id"</span>: <span class="string">"motorola-defy-with-motoblur"</span>,</div><div class="line">  <span class="string">"imageUrl"</span>: <span class="string">"img/phones/motorola-defy-with-motoblur.0.jpg"</span>,</div><div class="line">  <span class="string">"name"</span>: <span class="string">"Motorola DEFY\u2122 with MOTOBLUR\u2122"</span>,</div><div class="line">&#125;,</div><div class="line">]</div></pre></td></tr></table></figure>
-<p><strong><em>模版</em></strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"phones"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"phone in phones | filter:query | orderBy:orderProp"</span> <span class="attr">class</span>=<span class="string">"thumbnail"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#/phones/\&#123;\&#123;phone.id&#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"thumb"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">ng-src</span>=<span class="string">"\&#123;\&#123;phone.imageUrl&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#/phones/\&#123;\&#123;phone.id&#125;&#125;"</span>&gt;</span>\&#123;\&#123;phone.name&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>\&#123;\&#123;phone.snippet&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>image 标签用了 <a href="http://docs.angularjs.org/api/ng.directive:ngSrc">ngSrc</a>  指令，这一指令阻止浏览器按字面意思对待 angular &#123;&#123;表达式}}，阻止它请求一个无效的 url <a href="http://localhost:8000/app/&#123;&#123;phone.imageUrl}}。使用">http://localhost:8000/app/&#123;&#123;phone.imageUrl}}。使用</a> ngSrc 指令阻止浏览器发起无效的 http 请求。</p>
-<p><strong><em>实验</em></strong></p>
-<p>把 ngSrc 换成 src 属性，用 Firebug 之类的工具查看服务器访问日志，确认应用发起了无关的请求 /app/%7B%7Bphone.imageUrl%7D%7D (或 /app/&#123;&#123;phone.imageUrl}})。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/05/03/angularjs-tutorial3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1456,21 +1536,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-count">62</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

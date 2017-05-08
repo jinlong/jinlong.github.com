@@ -1,0 +1,963 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译" />
+
+
+
+
+  <meta name="keywords" content="前端优化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alon's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：Optimising the front end for the browser笔记：涂鸦码龙
+
+优化关乎速度和满意度。
+
+从用户体验（UX）角度，我们希望前端网页可以快速加载
+从开发体验（DX）角度，我们希望前端是快速，简洁，规范的
+浏览器都做了什么
+
+我们希望浏览器打开一个简单的网页
+123456789101112131415161718192021222324&amp;lt;!DOCTYPE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器前端优化">
+<meta property="og:url" content="http://jinlong.github.io/2017/05/08/optimising-the-front-end-for-the-browser/index.html">
+<meta property="og:site_name" content="Alon's Blog">
+<meta property="og:description" content="原文：Optimising the front end for the browser笔记：涂鸦码龙
+
+优化关乎速度和满意度。
+
+从用户体验（UX）角度，我们希望前端网页可以快速加载
+从开发体验（DX）角度，我们希望前端是快速，简洁，规范的
+浏览器都做了什么
+
+我们希望浏览器打开一个简单的网页
+123456789101112131415161718192021222324&amp;lt;!DOCTYPE">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p1.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p2.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p3.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p4.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p5.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p6.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p7.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p8.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p9.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p10.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p11.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p12.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p13.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p14.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p15.png">
+<meta property="og:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p16.png">
+<meta property="og:updated_time" content="2017-05-08T07:01:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器前端优化">
+<meta name="twitter:description" content="原文：Optimising the front end for the browser笔记：涂鸦码龙
+
+优化关乎速度和满意度。
+
+从用户体验（UX）角度，我们希望前端网页可以快速加载
+从开发体验（DX）角度，我们希望前端是快速，简洁，规范的
+浏览器都做了什么
+
+我们希望浏览器打开一个简单的网页
+123456789101112131415161718192021222324&amp;lt;!DOCTYPE">
+<meta name="twitter:image" content="http://jinlong.github.io/image/browser-fe-optimizing/p1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 浏览器前端优化 | Alon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2bd777ce3d5910b5c44deb753c24f3e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Alon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一边翻译一边学习---涂鸦码龙</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                浏览器前端优化
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2017-05-08T20:33:31+08:00" content="2017-05-08">
+              2017-05-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端优化/" itemprop="url" rel="index">
+                    <span itemprop="name">前端优化</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/08/optimising-the-front-end-for-the-browser/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/08/optimising-the-front-end-for-the-browser/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>原文：<a href="https://hackernoon.com/optimising-the-front-end-for-the-browser-f2f51a29c572" target="_blank" rel="external">Optimising the front end for the browser</a><br>笔记：<a href="http://weibo.com/newwave" target="_blank" rel="external">涂鸦码龙</a></p>
+</blockquote>
+<p>优化关乎速度和满意度。</p>
+<ul>
+<li>从用户体验（UX）角度，我们希望前端网页可以快速加载</li>
+<li><p>从开发体验（DX）角度，我们希望前端是快速，简洁，规范的</p>
+<h1 id="浏览器都做了什么">浏览器都做了什么</h1></li>
+</ul>
+<p>我们希望浏览器打开一个简单的网页</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>The "Click the button" page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"styles.css"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">      Click the button.</div><div class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">      var button = document.querySelector("button");</div><div class="line">      button.style.fontWeight = "bold";</div><div class="line">      button.addEventListener("click", function () &#123;</div><div class="line">        alert("Well done.");</div><div class="line">      &#125;);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="浏览器如何渲染网页">浏览器如何渲染网页</h2><ol>
+<li>使用 HTML 创建文档对象模型（<strong>DOM</strong>）</li>
+<li>使用 CSS 创建 CSS 对象模型（<strong>CSSOM</strong>）</li>
+<li>基于 DOM 和 CSSOM 执行脚本（<strong>Scripts</strong>）</li>
+<li>合并 DOM 和 CSSOM 形成渲染树（<strong>Render Tree</strong>）</li>
+<li>使用渲染树布局（<strong>Layout</strong>）所有元素</li>
+<li>渲染（<strong>Paint</strong>）所有元素</li>
+</ol>
+<p><img src="/image/browser-fe-optimizing/p1.png" alt="附图"></p>
+<a id="more"></a>
+<h1 id="步骤一_—_HTML">步骤一 — HTML</h1><p>浏览器从上到下读取标签，把他们分解成节点，从而创建 DOM 。</p>
+<p><img src="/image/browser-fe-optimizing/p2.png" alt="附图"></p>
+<h2 id="HTML_加载优化策略">HTML 加载优化策略</h2><ul>
+<li>样式在顶部，脚本在底部</li>
+</ul>
+<p>总体思路是尽可能早的加载样式，尽可能晚的加载脚本。原因是脚本执行之前，需要 HTML 和 CSS 解析完成，因此，样式尽可能的往顶部放，当底部脚本开始执行之前，样式有足够的时间完成计算。</p>
+<p>进一步讲讲如何优化</p>
+<ul>
+<li>最小化和压缩</li>
+</ul>
+<p>方法可用于所有内容，包括 HTML，CSS，JavaScript，图片和其它资源。</p>
+<p>最小化是移除所有多余的字符，包括空格，注释，多余的分号，等等。</p>
+<p>压缩比如 GZip，大大压缩下载文件的大小</p>
+<p>两种方法都用的情况下，资源加载量减少了 80% 到 90%。比如：<a href="https://css-tricks.com/the-difference-between-minification-and-gzipping/#article-header-id-2" target="_blank" rel="external">bootstrap 节省了 87% 的流量</a>。</p>
+<ul>
+<li>无障碍</li>
+</ul>
+<p>不会提升页面的下载速度，但会大大提升残障人士的满意度。给元素加上 <code>aria</code> 标签，图片提供 <code>alt</code> 文本，<a href="http://www.clarissapeterson.com/2012/11/html5-accessibility/" target="_blank" rel="external">HTML 5 无障碍参见</a>。</p>
+<p>使用诸如 <a href="http://wave.webaim.org/" target="_blank" rel="external">WAVE</a> 的工具鉴别哪些地方可以提高可访问性。</p>
+<h1 id="步骤二_—_CSS">步骤二 — CSS</h1><p>当浏览器发现任何与节点相关的样式时，比如：外部，内部，或行内样式，立即停止<strong>渲染</strong> DOM ，并利用这些节点创建 CSSOM。这就是 CSS “<strong>渲染阻塞</strong>“ 的由来。这里是不同类型样式的<a href="https://vineetgupta22.wordpress.com/2011/07/09/inline-vs-internal-vs-external-css/" target="_blank" rel="external">优缺点</a>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//外部样式</div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"styles.css"</span>&gt;</span></div><div class="line"></div><div class="line">// 内部样式</div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">  h1 &#123;</div><div class="line">    font-size: 18px;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"></div><div class="line">// 行内样式</div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">style</span>=<span class="string">"background-color: blue;"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>CSSOM 节点创建与 DOM 节点创建类似，随后，两者合并如下：</p>
+<p><img src="/image/browser-fe-optimizing/p3.png" alt="附图"></p>
+<p>CSSOM 的构建会阻塞页面的渲染，因此我们想尽早加载样式，</p>
+<h2 id="CSS_加载优化策略">CSS 加载优化策略</h2><ul>
+<li>使用 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" rel="external">media 属性</a></li>
+</ul>
+<p>media 属性指定加载样式的条件，比如：符合最大或最小分辨率？还是面向屏幕阅读器？</p>
+<ul>
+<li>延迟加载 CSS</li>
+</ul>
+<p>有些样式，比如：首屏以下的，或者不那么重要的，可以等待首屏最有价值的内容渲染完成再加载，可以使用脚本等待页面加载，然后再插入样式。</p>
+<p>这有两个栗子：<a href="https://jakearchibald.com/2016/link-in-body/" target="_blank" rel="external">The future of loading CSS</a>，<a href="https://www.giftofspeed.com/defer-loading-css/" target="_blank" rel="external">Defer load CSS</a></p>
+<ul>
+<li>只加载需要的样式</li>
+</ul>
+<p>使用 <a href="https://github.com/giakki/uncss" target="_blank" rel="external">uncss</a> 类似的工具，尽量移除不需要的样式。</p>
+<h1 id="步骤三_—_JavaScript">步骤三 — JavaScript</h1><p>浏览器不断构建 DOM / CSSOM 节点，直到发现外部或者行内的脚本。</p>
+<p>由于脚本可能需要访问或操作之前的 HTML 或样式，我们必须等待它们构建完成。</p>
+<p>因此浏览器必须停止<strong>解析</strong>节点，完成构建 CSSOM，执行脚本，然后再继续。这就是 JavaScript 被称作“<strong>解析器阻塞</strong>”的原因。</p>
+<p>脚本只能等到先前的 CSS 节点构建完成。</p>
+<p><img src="/image/browser-fe-optimizing/p4.png" alt="附图"></p>
+<h2 id="JavaScript_加载优化策略">JavaScript 加载优化策略</h2><ul>
+<li>异步加载脚本</li>
+</ul>
+<p>脚本添加 <code>async</code> 属性，可以通知浏览器不要阻塞其余页面的加载，下载脚本处于较低的优先级。一旦下载完成，就可以执行。</p>
+<p><img src="/image/browser-fe-optimizing/p5.png" alt="附图"></p>
+<p><code>async</code> 适用于不影响 DOM 或 CSSOM 的脚本，对一些跟我们的代码无关的，不影响用户体验的外部脚本尤其适用，比如：分析统计脚本。</p>
+<ul>
+<li>延迟加载脚本</li>
+</ul>
+<p><code>defer</code> 跟 <code>async</code> 非常相似，不会阻塞页面加载，但会等到 HTML 完成解析后再执行。</p>
+<p><img src="/image/browser-fe-optimizing/p6.png" alt="附图"></p>
+<p>使用 defer 策略的 <a href="https://varvy.com/pagespeed/defer-loading-javascript.html" target="_blank" rel="external">另一个好选择</a>，或者也可以使用 <code>addEventListener</code>，了解更多，参加<a href="http://stackoverflow.com/questions/588040/window-onload-vs-document-onload" target="_blank" rel="external">这里</a>。</p>
+<p>不幸的是 <code>async</code> 和 <code>defer</code> 对于行内的脚本不起作用，浏览器默认会编译执行它们。</p>
+<ul>
+<li>操作之前克隆节点</li>
+</ul>
+<p>多次操作 DOM 时可以尝试，首先克隆整个 DOM 节点更加高效，操作克隆后的节点，然后替换先前的节点，避免了多次重绘，降低了 CPU 和内存消耗，同时也避免了不必要的页面闪烁。</p>
+<p>需要注意，克隆的时候并没有克隆事件监听。</p>
+<ul>
+<li>Preload/Prefetch/Prerender/Preconnect</li>
+</ul>
+<p>这些新属性并不是所有的浏览器都支持。了解详情可以看这里：<a href="https://css-tricks.com/prefetching-preloading-prebrowsing/" target="_blank" rel="external">Prefetching, preloading, prebrowsing</a></p>
+<h1 id="步骤四_—_渲染树（Render_Tree）">步骤四 — 渲染树（Render Tree）</h1><p>一旦所有节点已被解析，DOM 和 CSSOM 准备合并，浏览器便会构建渲染树。如果我们把节点想象成单词，那么对象模型就是句子，渲染树便是整个页面。</p>
+<p><img src="/image/browser-fe-optimizing/p7.png" alt="附图"></p>
+<h1 id="步骤五_—_布局（Layout）">步骤五 — 布局（Layout）</h1><p>布局阶段需要确定页面上所有元素的大小和位置。</p>
+<p><img src="/image/browser-fe-optimizing/p8.png" alt="附图"></p>
+<h1 id="步骤六_—_渲染（Paint）">步骤六 — 渲染（Paint）</h1><p>最终的渲染阶段，会真正地光栅化屏幕上的像素，把页面呈现给用户。</p>
+<p><img src="/image/browser-fe-optimizing/p9.png" alt="附图"></p>
+<p>整个过程耗时1秒或十分之一秒，我们的任务是让它更快。</p>
+<p>如果 JavaScript 事件改变了页面的某部分，便会引起渲染树的重绘，并且迫使布局（Layout）和渲染（Paint）过程再次进行。</p>
+<h1 id="浏览器如何发起网络请求">浏览器如何发起网络请求</h1><p>当浏览器请求一个 URL，服务端会响应一些 HTML。</p>
+<p>我们需要认识一个新术语，关键渲染路径（Critical Rendering Path (CRP)），就是浏览器渲染页面的步骤数，如下图。</p>
+<p><img src="/image/browser-fe-optimizing/p10.png" alt="附图"></p>
+<h2 id="关键路径长度">关键路径长度</h2><p>关键渲染路径的度量标准是路径长度。最理想的关键路径长度是1。</p>
+<p>如果页面包含一些内部样式和 JavaScript ，关键路径发生以下改变。</p>
+<p><img src="/image/browser-fe-optimizing/p11.png" alt="附图"></p>
+<p>新增两步，<strong>构建 CSSOM</strong>和<strong>执行脚本</strong>，因为我们的 HTML 有内部样式和脚本需要计算。由于没有外部请求，我们的关键路径长度没变。</p>
+<p>但是注意，我们的 HTML 大小增加到了 2kb，某些地方还是受了影响。</p>
+<h2 id="关键字节数">关键字节数</h2><p>三个度量标准之二出现了，关键字节数，它用来衡量渲染页面需要传送多少字节数。</p>
+<p>如果你认为不需要外部资源，就大错特错了，外部资源可以被缓存。</p>
+<p>我们使用一个外部 CSS 文件，一个外部 JavaScript 文件，和一个外部带 <code>async</code> 属性的 JavaScript 文件。关键路径图如下：</p>
+<p><img src="/image/browser-fe-optimizing/p12.png" alt="附图"></p>
+<p>浏览器请求页面，构建 DOM，发现外部资源后开始下载，CSS 和 JavaScript 有较高的优先级，其它资源次之。</p>
+<p><code>styles.css</code> 和 <code>app.js</code> 通过另一个关键路径获取。暂时不获取 <code>analytics.js</code> ，因为加了 <code>async</code> 属性，浏览器将用另一个线程下载它，它处于较低优先级，不会阻塞页面渲染，也不影响关键路径。</p>
+<h2 id="关键文件">关键文件</h2><p>最后一个度量标准是关键文件，浏览器渲染页面需要下载的文件总量。以上例子，HTML 文件，CSS 和 JavaScript 文件算关键文件，<code>async</code> 的脚本不算。当然是文件越少越好。</p>
+<h2 id="回到关键路径长度">回到关键路径长度</h2><p>以上例子就是最长的渲染路径吗？我认为渲染页面时，我们仅需要下载 HTML，CSS 和 JavaScript 文件，仅通过两次服务器往返就做到了。</p>
+<h2 id="HTTP1_文件限制">HTTP1 文件限制</h2><p>我们浏览器的 HTTP1 协议，在同一个域名，同一次，允许下载的文件数有最大限制，范围从 2（老旧的浏览器）到 6（Edge，Chrome）。</p>
+<p>各种浏览器请求文件的最大并发数，参见<a href="http://sgdev-blog.blogspot.co.uk/2014/01/maximum-concurrent-connection-to-same.html" target="_blank" rel="external">Maximum concurrent connections to the same domain for browsers</a>。</p>
+<p>通过把一些资源存放到影子域名，可以绕过这个限制，以达到最佳优化效果。</p>
+<p><strong>注意</strong>：不要把关键的 CSS 放到根域名之外的其他域名，有些场景下会对 DNS 查找和延迟起反作用。</p>
+<h2 id="HTTP2">HTTP2</h2><p>如果网站使用了 HTTP2，并且用户的浏览器也兼容，则可以完全避开这个下载限制。</p>
+<p><a href="https://tools.keycdn.com/http2-test" target="_blank" rel="external">这里</a>有个 HTTP2 测试网站。</p>
+<h2 id="TCP_往返限制">TCP 往返限制</h2><p>每一次服务器往返可以传送的最大数据量是 14kb，包括所有 HTML，CSS 和脚本的网络请求。</p>
+<p>如果我们的 HTML，或者积累的资源请求超过 14kb时，需要多做一次服务器往返。</p>
+<h2 id="大魔法师">大魔法师</h2><p>我们整个 HTML 页面可以很好的压缩， GZip 可以压缩到 2kb，远低于 14kb 的限制，因此，一次服务器往返就可以搞定。</p>
+<p><img src="/image/browser-fe-optimizing/p13.png" alt="附图"></p>
+<p><code>关键路径度量: 长度 1，文件数 1，字节数 2kb</code></p>
+<p>浏览器发现外部资源（CSS 和 JavaScript）时，发起请求开始下载它们。首要下载的 CSS 文件是 14kb，达到了往返传输的最大限制，因此增加了一条关键路径。</p>
+<p><img src="/image/browser-fe-optimizing/p14.png" alt="附图"></p>
+<p><code>关键路径度量: 长度 2，文件数 2，字节数 16kb</code></p>
+<p>余下的资源低于 14kb，但是总共有 7 个资源，由于网站未启用 HTTP2，我们的 Chrome，每一次往返仅可以下载 6 个文件。</p>
+<p><img src="/image/browser-fe-optimizing/p15.png" alt="附图"></p>
+<p><code>关键路径度量: 长度 3，文件数 8，字节数 28kb</code></p>
+<p>下载完最终文件，并开始渲染 DOM。</p>
+<p><img src="/image/browser-fe-optimizing/p16.png" alt="附图"></p>
+<p><code>关键路径度量: 长度 4，文件数 9，字节数 30kb</code></p>
+<p>基于以上的信息和知识，发起每个连接时，就可以准确地预估页面的性能了。</p>
+<h2 id="浏览器网络优化策略">浏览器网络优化策略</h2><ul>
+<li>Pagespeed Insights</li>
+</ul>
+<p>使用 <a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">Insights</a> 鉴别性能问题，Chrome DevTools 也有个 <code>audit</code> 标签。</p>
+<ul>
+<li>充分利用 Chrome 开发者工具</li>
+</ul>
+<p><a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing" target="_blank" rel="external">这篇文章</a> 值得一读，帮你理解网络资源</p>
+<ul>
+<li>在优质的环境里开发，在艰苦的环境里测试</li>
+</ul>
+<p>开发时大可使用 1Tb SSD，32G 内存的 Macbook Pro ，但是性能测试时还是要到 Chrome 的 <code>network</code> 标签下模拟低带宽的情形，从而获取有价值的信息。</p>
+<ul>
+<li>合并资源/文件</li>
+</ul>
+<p>基本上，每接收到一个外部 CSS 和 JavaScript 文件，浏览器都会构建 CSSOM，执行脚本。尽管几个文件可以在一次往返中传送，但也浪费了浏览器的宝贵时间和资源，最好还是合并文件，减少不必要的加载。</p>
+<ul>
+<li>首屏内容使用内部样式</li>
+</ul>
+<p>内部 CSS 和 JavaScript 不需要请求外部资源，相反，外部资源又可以被缓存，并保持 DOM 轻量，两者没有非黑即白。</p>
+<p>但是一个非常好的论点是首屏关键内容使用内部样式，可以避免请求额外的资源，节省时间做最有意义的渲染。</p>
+<ul>
+<li><p>最小化/压缩图片</p>
+</li>
+<li><p>延迟加载图片</p>
+</li>
+<li><p>异步记载字体</p>
+</li>
+<li><p>是否真正需要 JavaScript / CSS?</p>
+</li>
+</ul>
+<p>原生 HTML 元素可以实现的行为是否用了脚本？是否有样式或者图标可以行内创建的，不需要内部/外部资源？比如：<a href="https://css-tricks.com/using-svg/#article-header-id-7" target="_blank" rel="external">行内 SVG</a>。</p>
+<ul>
+<li>CDN</li>
+</ul>
+<p>可以利用 CDN（内容分发网络）存储资源，它会从离用户最近，延迟最低的位置分发到用户设备，加载时间更快。</p>
+<p><strong>延伸阅读</strong></p>
+<ul>
+<li><a href="https://developers.google.com/web/fundamentals/performance/" target="_blank" rel="external">Google 的优化文档</a></li>
+<li><a href="https://hpbn.co/" target="_blank" rel="external">高性能浏览器网络</a></li>
+</ul>
+<h1 id="综述">综述</h1><p>关键渲染路径是最重要的，它使得网站优化有规律可循。需要关注3个指标：</p>
+<p>1—关键字节数<br>2—关键文件数<br>3—关键路径长度</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端优化/" rel="tag">#前端优化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/04/javascript-array-methods-mutating-vs-non-mutating/" rel="next" title="JavaScript 数组方法对比">
+                <i class="fa fa-chevron-left"></i> JavaScript 数组方法对比
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/05/08/optimising-the-front-end-for-the-browser/"
+     data-title="浏览器前端优化"
+     data-content=""
+     data-url="http://jinlong.github.io/2017/05/08/optimising-the-front-end-for-the-browser/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/08/optimising-the-front-end-for-the-browser/"
+           data-title="浏览器前端优化" data-url="http://jinlong.github.io/2017/05/08/optimising-the-front-end-for-the-browser/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Alon Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Alon Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">忙时码代码，无事乱涂鸦---涂鸦码龙 | ECMAScript | JavaScript | CSS3 | HTML5 | Node.js | Mobile Web | 前端技术积累，技术文章翻译</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinlong" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlong.github.io/doT/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> doT.js
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/newwave" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://jinlongz.lofter.com/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Lofter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zhangjinlong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器都做了什么"><span class="nav-number">1.</span> <span class="nav-text">浏览器都做了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器如何渲染网页"><span class="nav-number">1.1.</span> <span class="nav-text">浏览器如何渲染网页</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤一_—_HTML"><span class="nav-number">2.</span> <span class="nav-text">步骤一 — HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML_加载优化策略"><span class="nav-number">2.1.</span> <span class="nav-text">HTML 加载优化策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤二_—_CSS"><span class="nav-number">3.</span> <span class="nav-text">步骤二 — CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS_加载优化策略"><span class="nav-number">3.1.</span> <span class="nav-text">CSS 加载优化策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤三_—_JavaScript"><span class="nav-number">4.</span> <span class="nav-text">步骤三 — JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript_加载优化策略"><span class="nav-number">4.1.</span> <span class="nav-text">JavaScript 加载优化策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤四_—_渲染树（Render_Tree）"><span class="nav-number">5.</span> <span class="nav-text">步骤四 — 渲染树（Render Tree）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤五_—_布局（Layout）"><span class="nav-number">6.</span> <span class="nav-text">步骤五 — 布局（Layout）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤六_—_渲染（Paint）"><span class="nav-number">7.</span> <span class="nav-text">步骤六 — 渲染（Paint）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器如何发起网络请求"><span class="nav-number">8.</span> <span class="nav-text">浏览器如何发起网络请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键路径长度"><span class="nav-number">8.1.</span> <span class="nav-text">关键路径长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键字节数"><span class="nav-number">8.2.</span> <span class="nav-text">关键字节数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键文件"><span class="nav-number">8.3.</span> <span class="nav-text">关键文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回到关键路径长度"><span class="nav-number">8.4.</span> <span class="nav-text">回到关键路径长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP1_文件限制"><span class="nav-number">8.5.</span> <span class="nav-text">HTTP1 文件限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP2"><span class="nav-number">8.6.</span> <span class="nav-text">HTTP2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP_往返限制"><span class="nav-number">8.7.</span> <span class="nav-text">TCP 往返限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大魔法师"><span class="nav-number">8.8.</span> <span class="nav-text">大魔法师</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器网络优化策略"><span class="nav-number">8.9.</span> <span class="nav-text">浏览器网络优化策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">9.</span> <span class="nav-text">综述</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alon Zhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jinlong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

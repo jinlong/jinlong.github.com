@@ -219,6 +219,117 @@
             
             
               
+                <a class="post-title-link" href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/" itemprop="url">
+                  JavaScript 如何实现后台计划任务
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-14T23:26:53+08:00" content="2015-12-14">
+              2015-12-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/14/how-to-schedule-background-tasks-in-javascript/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://www.sitepoint.com/how-to-schedule-background-tasks-in-javascript/">How to Schedule Background Tasks in JavaScript</a><br>翻译：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
+</blockquote>
+<p>即使忘了 JavaScript 的一切知识，也不会忘记：它是阻塞的。</p>
+<p>想象一下，你的浏览器里住着一个魔法小精灵，负责浏览器的正常运转。不论渲染 HTML，响应菜单命令，屏幕渲染，处理鼠标点击，或者执行 JavaScript 函数，所有事情都归一个小精灵处理。它哪忙得过来，一次只能处理一件事情。如果同时丢给它一堆任务，它会列一个长长的待办列表，按顺序完成它们。</p>
+<p>人们常常希望初始化组件和事件处理的 JavaScript 可以尽快被执行。可是，有些不太重要的后台任务不会直接影响用户体验，比如：</p>
+<ul>
+<li>记录统计数据</li>
+<li>发送数据到社交网络（或添加‘分享’按钮）</li>
+<li>预加载内容</li>
+<li>预处理或预渲染 HTML</li>
+</ul>
+<p>他们对时序要求不严格，但是为了让页面仍然响应，直到用户滚动页面或者与内容交互时才被执行。</p>
+<p>选择之一是 <a href="http://www.sitepoint.com/javascript-threading-html5-web-workers/">Web Workers</a> ，它可以在独立的线程同时执行代码。用于预加载和预处理再好不过，但是你没有权限直接访问或更新 DOM。你可以在自己的代码中避开这点，但是无法保证第三方脚本比如 Google Analytics 永远不需要这个。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/14/how-to-schedule-background-tasks-in-javascript/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
                 <a class="post-title-link" href="/2015/12/14/negating-predicate-functions-in-javaScript/" itemprop="url">
                   JavaScript 否定谓语函数
                 </a>
@@ -1160,133 +1271,11 @@
 
 
     
-      
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                <a class="post-title-link" href="/2014/01/07/introduction-to-express/" itemprop="url">
-                  Express 入门
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-01-07T16:19:00+08:00" content="2014-01-07">
-              2014-01-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Node-js/Express/" itemprop="url" rel="index">
-                    <span itemprop="name">Express</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/01/07/introduction-to-express/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/07/introduction-to-express/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文：<a href="http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-express/">Introduction to Express</a><br>笔记：<a href="http://weibo.com/newwave">涂鸦码龙</a></p>
-</blockquote>
-<h2 id="安装">安装</h2><p>package.json 中手动添加 Express 依赖</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   <span class="string">"name"</span>: <span class="string">"demo1"</span>,</div><div class="line">   <span class="string">"description"</span>: <span class="string">"First Express app"</span>,</div><div class="line">   <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">   <span class="string">"dependencies"</span>: &#123;</div><div class="line">      <span class="string">"express"</span>: <span class="string">"3.x"</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>相同的目录运行：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span></div></pre></td></tr></table></figure>
-<p>命令行安装 Express 直接运行：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> -g express</div></pre></td></tr></table></figure>
-<p>安装完后可以用 express 在命令行生成应用。</p>
-<p>添加 app.js 文件，写个最简单的应用，创建一个 Express 实例，开始监听特定的端口 ：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"> </div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
-<p>运行 <code>node app</code> 没发生任何事情。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/01/07/introduction-to-express/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1327,21 +1316,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-count">62</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
